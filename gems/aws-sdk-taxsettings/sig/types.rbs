@@ -1,0 +1,369 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::TaxSettings
+  module Types
+
+    class AccountDetails
+      attr_accessor account_id: ::String
+      attr_accessor account_meta_data: Types::AccountMetaData
+      attr_accessor tax_inheritance_details: Types::TaxInheritanceDetails
+      attr_accessor tax_registration: Types::TaxRegistrationWithJurisdiction
+      SENSITIVE: [:account_meta_data, :tax_registration]
+    end
+
+    class AccountMetaData
+      attr_accessor account_name: ::String
+      attr_accessor address: Types::Address
+      attr_accessor address_role_map: ::Hash[("TaxAddress" | "BillingAddress" | "ContactAddress"), Types::Jurisdiction]
+      attr_accessor address_type: ("TaxAddress" | "BillingAddress" | "ContactAddress")
+      attr_accessor seller: ::String
+      SENSITIVE: []
+    end
+
+    class AdditionalInfoRequest
+      attr_accessor canada_additional_info: Types::CanadaAdditionalInfo
+      attr_accessor estonia_additional_info: Types::EstoniaAdditionalInfo
+      attr_accessor georgia_additional_info: Types::GeorgiaAdditionalInfo
+      attr_accessor israel_additional_info: Types::IsraelAdditionalInfo
+      attr_accessor italy_additional_info: Types::ItalyAdditionalInfo
+      attr_accessor kenya_additional_info: Types::KenyaAdditionalInfo
+      attr_accessor malaysia_additional_info: Types::MalaysiaAdditionalInfo
+      attr_accessor poland_additional_info: Types::PolandAdditionalInfo
+      attr_accessor romania_additional_info: Types::RomaniaAdditionalInfo
+      attr_accessor saudi_arabia_additional_info: Types::SaudiArabiaAdditionalInfo
+      attr_accessor south_korea_additional_info: Types::SouthKoreaAdditionalInfo
+      attr_accessor spain_additional_info: Types::SpainAdditionalInfo
+      attr_accessor turkey_additional_info: Types::TurkeyAdditionalInfo
+      attr_accessor ukraine_additional_info: Types::UkraineAdditionalInfo
+      SENSITIVE: []
+    end
+
+    class AdditionalInfoResponse
+      attr_accessor brazil_additional_info: Types::BrazilAdditionalInfo
+      attr_accessor canada_additional_info: Types::CanadaAdditionalInfo
+      attr_accessor estonia_additional_info: Types::EstoniaAdditionalInfo
+      attr_accessor georgia_additional_info: Types::GeorgiaAdditionalInfo
+      attr_accessor india_additional_info: Types::IndiaAdditionalInfo
+      attr_accessor israel_additional_info: Types::IsraelAdditionalInfo
+      attr_accessor italy_additional_info: Types::ItalyAdditionalInfo
+      attr_accessor kenya_additional_info: Types::KenyaAdditionalInfo
+      attr_accessor malaysia_additional_info: Types::MalaysiaAdditionalInfo
+      attr_accessor poland_additional_info: Types::PolandAdditionalInfo
+      attr_accessor romania_additional_info: Types::RomaniaAdditionalInfo
+      attr_accessor saudi_arabia_additional_info: Types::SaudiArabiaAdditionalInfo
+      attr_accessor south_korea_additional_info: Types::SouthKoreaAdditionalInfo
+      attr_accessor spain_additional_info: Types::SpainAdditionalInfo
+      attr_accessor turkey_additional_info: Types::TurkeyAdditionalInfo
+      attr_accessor ukraine_additional_info: Types::UkraineAdditionalInfo
+      SENSITIVE: []
+    end
+
+    class Address
+      attr_accessor address_line_1: ::String
+      attr_accessor address_line_2: ::String
+      attr_accessor address_line_3: ::String
+      attr_accessor city: ::String
+      attr_accessor country_code: ::String
+      attr_accessor district_or_county: ::String
+      attr_accessor postal_code: ::String
+      attr_accessor state_or_region: ::String
+      SENSITIVE: []
+    end
+
+    class BatchDeleteTaxRegistrationError
+      attr_accessor account_id: ::String
+      attr_accessor code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: [:message]
+    end
+
+    class BatchDeleteTaxRegistrationRequest
+      attr_accessor account_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BatchDeleteTaxRegistrationResponse
+      attr_accessor errors: ::Array[Types::BatchDeleteTaxRegistrationError]
+      SENSITIVE: []
+    end
+
+    class BatchPutTaxRegistrationError
+      attr_accessor account_id: ::String
+      attr_accessor code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: [:message]
+    end
+
+    class BatchPutTaxRegistrationRequest
+      attr_accessor account_ids: ::Array[::String]
+      attr_accessor tax_registration_entry: Types::TaxRegistrationEntry
+      SENSITIVE: [:tax_registration_entry]
+    end
+
+    class BatchPutTaxRegistrationResponse
+      attr_accessor errors: ::Array[Types::BatchPutTaxRegistrationError]
+      attr_accessor status: ("Verified" | "Pending" | "Deleted" | "Rejected")
+      SENSITIVE: []
+    end
+
+    class BrazilAdditionalInfo
+      attr_accessor ccm_code: ::String
+      attr_accessor legal_nature_code: ::String
+      SENSITIVE: []
+    end
+
+    class CanadaAdditionalInfo
+      attr_accessor canada_quebec_sales_tax_number: ::String
+      attr_accessor canada_retail_sales_tax_number: ::String
+      attr_accessor is_reseller_account: bool
+      attr_accessor provincial_sales_tax_id: ::String
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor error_code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: [:message]
+    end
+
+    class DeleteTaxRegistrationRequest
+      attr_accessor account_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteTaxRegistrationResponse < Aws::EmptyStructure
+    end
+
+    class DestinationS3Location
+      attr_accessor bucket: ::String
+      attr_accessor prefix: ::String
+      SENSITIVE: []
+    end
+
+    class EstoniaAdditionalInfo
+      attr_accessor registry_commercial_code: ::String
+      SENSITIVE: []
+    end
+
+    class GeorgiaAdditionalInfo
+      attr_accessor person_type: ("Legal Person" | "Physical Person" | "Business")
+      SENSITIVE: []
+    end
+
+    class GetTaxRegistrationDocumentRequest
+      attr_accessor destination_s3_location: Types::DestinationS3Location
+      attr_accessor tax_document_metadata: Types::TaxDocumentMetadata
+      SENSITIVE: []
+    end
+
+    class GetTaxRegistrationDocumentResponse
+      attr_accessor destination_file_path: ::String
+      SENSITIVE: []
+    end
+
+    class GetTaxRegistrationRequest
+      attr_accessor account_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetTaxRegistrationResponse
+      attr_accessor tax_registration: Types::TaxRegistration
+      SENSITIVE: [:tax_registration]
+    end
+
+    class IndiaAdditionalInfo
+      attr_accessor pan: ::String
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor error_code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: [:message]
+    end
+
+    class IsraelAdditionalInfo
+      attr_accessor customer_type: ("Business" | "Individual")
+      attr_accessor dealer_type: ("Authorized" | "Non-authorized")
+      SENSITIVE: []
+    end
+
+    class ItalyAdditionalInfo
+      attr_accessor cig_number: ::String
+      attr_accessor cup_number: ::String
+      attr_accessor sdi_account_id: ::String
+      attr_accessor tax_code: ::String
+      SENSITIVE: []
+    end
+
+    class Jurisdiction
+      attr_accessor country_code: ::String
+      attr_accessor state_or_region: ::String
+      SENSITIVE: []
+    end
+
+    class KenyaAdditionalInfo
+      attr_accessor person_type: ("Legal Person" | "Physical Person" | "Business")
+      SENSITIVE: []
+    end
+
+    class ListTaxRegistrationsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTaxRegistrationsResponse
+      attr_accessor account_details: ::Array[Types::AccountDetails]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class MalaysiaAdditionalInfo
+      attr_accessor service_tax_codes: ::Array[("Consultancy" | "Digital Service And Electronic Medium" | "IT Services" | "Training Or Coaching")]
+      SENSITIVE: []
+    end
+
+    class PolandAdditionalInfo
+      attr_accessor individual_registration_number: ::String
+      attr_accessor is_group_vat_enabled: bool
+      SENSITIVE: []
+    end
+
+    class PutTaxRegistrationRequest
+      attr_accessor account_id: ::String
+      attr_accessor tax_registration_entry: Types::TaxRegistrationEntry
+      SENSITIVE: [:tax_registration_entry]
+    end
+
+    class PutTaxRegistrationResponse
+      attr_accessor status: ("Verified" | "Pending" | "Deleted" | "Rejected")
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor error_code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: [:message]
+    end
+
+    class RomaniaAdditionalInfo
+      attr_accessor tax_registration_number_type: ("TaxRegistrationNumber" | "LocalRegistrationNumber")
+      SENSITIVE: []
+    end
+
+    class SaudiArabiaAdditionalInfo
+      attr_accessor tax_registration_number_type: ("TaxRegistrationNumber" | "TaxIdentificationNumber" | "CommercialRegistrationNumber")
+      SENSITIVE: []
+    end
+
+    class SourceS3Location
+      attr_accessor bucket: ::String
+      attr_accessor key: ::String
+      SENSITIVE: []
+    end
+
+    class SouthKoreaAdditionalInfo
+      attr_accessor business_representative_name: ::String
+      attr_accessor item_of_business: ::String
+      attr_accessor line_of_business: ::String
+      SENSITIVE: []
+    end
+
+    class SpainAdditionalInfo
+      attr_accessor registration_type: ("Intra-EU" | "Local")
+      SENSITIVE: []
+    end
+
+    class TaxDocumentMetadata
+      attr_accessor tax_document_access_token: ::String
+      attr_accessor tax_document_name: ::String
+      SENSITIVE: []
+    end
+
+    class TaxInheritanceDetails
+      attr_accessor inheritance_obtained_reason: ::String
+      attr_accessor parent_entity_id: ::String
+      SENSITIVE: []
+    end
+
+    class TaxRegistration
+      attr_accessor additional_tax_information: Types::AdditionalInfoResponse
+      attr_accessor certified_email_id: ::String
+      attr_accessor legal_address: Types::Address
+      attr_accessor legal_name: ::String
+      attr_accessor registration_id: ::String
+      attr_accessor registration_type: ("VAT" | "GST" | "CPF" | "CNPJ" | "SST")
+      attr_accessor sector: ("Business" | "Individual" | "Government")
+      attr_accessor status: ("Verified" | "Pending" | "Deleted" | "Rejected")
+      attr_accessor tax_document_metadatas: ::Array[Types::TaxDocumentMetadata]
+      SENSITIVE: []
+    end
+
+    class TaxRegistrationDocument
+      attr_accessor s3_location: Types::SourceS3Location
+      SENSITIVE: []
+    end
+
+    class TaxRegistrationEntry
+      attr_accessor additional_tax_information: Types::AdditionalInfoRequest
+      attr_accessor certified_email_id: ::String
+      attr_accessor legal_address: Types::Address
+      attr_accessor legal_name: ::String
+      attr_accessor registration_id: ::String
+      attr_accessor registration_type: ("VAT" | "GST" | "CPF" | "CNPJ" | "SST")
+      attr_accessor sector: ("Business" | "Individual" | "Government")
+      attr_accessor verification_details: Types::VerificationDetails
+      SENSITIVE: []
+    end
+
+    class TaxRegistrationWithJurisdiction
+      attr_accessor additional_tax_information: Types::AdditionalInfoResponse
+      attr_accessor certified_email_id: ::String
+      attr_accessor jurisdiction: Types::Jurisdiction
+      attr_accessor legal_name: ::String
+      attr_accessor registration_id: ::String
+      attr_accessor registration_type: ("VAT" | "GST" | "CPF" | "CNPJ" | "SST")
+      attr_accessor sector: ("Business" | "Individual" | "Government")
+      attr_accessor status: ("Verified" | "Pending" | "Deleted" | "Rejected")
+      attr_accessor tax_document_metadatas: ::Array[Types::TaxDocumentMetadata]
+      SENSITIVE: []
+    end
+
+    class TurkeyAdditionalInfo
+      attr_accessor industries: ("CirculatingOrg" | "ProfessionalOrg" | "Banks" | "Insurance" | "PensionAndBenefitFunds" | "DevelopmentAgencies")
+      attr_accessor kep_email_id: ::String
+      attr_accessor secondary_tax_id: ::String
+      attr_accessor tax_office: ::String
+      SENSITIVE: []
+    end
+
+    class UkraineAdditionalInfo
+      attr_accessor ukraine_trn_type: ("Business" | "Individual")
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor error_code: ("MalformedToken" | "ExpiredToken" | "InvalidToken" | "FieldValidationFailed" | "MissingInput")
+      attr_accessor field_list: ::Array[Types::ValidationExceptionField]
+      attr_accessor message: ::String
+      SENSITIVE: [:message]
+    end
+
+    class ValidationExceptionField
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class VerificationDetails
+      attr_accessor date_of_birth: ::String
+      attr_accessor tax_registration_documents: ::Array[Types::TaxRegistrationDocument]
+      SENSITIVE: []
+    end
+  end
+end

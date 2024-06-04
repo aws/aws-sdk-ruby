@@ -371,6 +371,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-support', '~> 1')
   spec.add_dependency('aws-sdk-supportapp', '~> 1')
   spec.add_dependency('aws-sdk-synthetics', '~> 1')
+  spec.add_dependency('aws-sdk-taxsettings', '~> 1')
   spec.add_dependency('aws-sdk-textract', '~> 1')
   spec.add_dependency('aws-sdk-timestreaminfluxdb', '~> 1')
   spec.add_dependency('aws-sdk-timestreamquery', '~> 1')

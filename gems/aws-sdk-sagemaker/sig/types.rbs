@@ -694,6 +694,12 @@ module Aws::SageMaker
       SENSITIVE: []
     end
 
+    class ClusterInstancePlacement
+      attr_accessor availability_zone: ::String
+      attr_accessor availability_zone_id: ::String
+      SENSITIVE: []
+    end
+
     class ClusterInstanceStatusDetails
       attr_accessor status: ("Running" | "Failure" | "Pending" | "ShuttingDown" | "SystemUpdating")
       attr_accessor message: ::String
@@ -714,6 +720,9 @@ module Aws::SageMaker
       attr_accessor launch_time: ::Time
       attr_accessor life_cycle_config: Types::ClusterLifeCycleConfig
       attr_accessor threads_per_core: ::Integer
+      attr_accessor private_primary_ip: ::String
+      attr_accessor private_dns_hostname: ::String
+      attr_accessor placement: Types::ClusterInstancePlacement
       SENSITIVE: []
     end
 

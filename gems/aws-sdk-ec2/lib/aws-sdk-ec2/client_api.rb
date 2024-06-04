@@ -15716,6 +15716,7 @@ module Aws::EC2
         "apiVersion" => "2016-11-15",
         "endpointPrefix" => "ec2",
         "protocol" => "ec2",
+        "protocols" => ["query"],
         "serviceAbbreviation" => "Amazon EC2",
         "serviceFullName" => "Amazon Elastic Compute Cloud",
         "serviceId" => "EC2",

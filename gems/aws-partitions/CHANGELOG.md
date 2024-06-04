@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.939.0 (2024-06-04)
+------------------
+
+* Feature - Added support for enumerating regions for  `Aws::TaxSettings`.
+
 1.938.0 (2024-06-03)
 ------------------
 

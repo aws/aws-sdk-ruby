@@ -250,12 +250,15 @@ module Aws::SageMaker
     ClientSecret = Shapes::StringShape.new(name: 'ClientSecret')
     ClientToken = Shapes::StringShape.new(name: 'ClientToken')
     ClusterArn = Shapes::StringShape.new(name: 'ClusterArn')
+    ClusterAvailabilityZone = Shapes::StringShape.new(name: 'ClusterAvailabilityZone')
+    ClusterAvailabilityZoneId = Shapes::StringShape.new(name: 'ClusterAvailabilityZoneId')
     ClusterInstanceCount = Shapes::IntegerShape.new(name: 'ClusterInstanceCount')
     ClusterInstanceGroupDetails = Shapes::StructureShape.new(name: 'ClusterInstanceGroupDetails')
     ClusterInstanceGroupDetailsList = Shapes::ListShape.new(name: 'ClusterInstanceGroupDetailsList')
     ClusterInstanceGroupName = Shapes::StringShape.new(name: 'ClusterInstanceGroupName')
     ClusterInstanceGroupSpecification = Shapes::StructureShape.new(name: 'ClusterInstanceGroupSpecification')
     ClusterInstanceGroupSpecifications = Shapes::ListShape.new(name: 'ClusterInstanceGroupSpecifications')
+    ClusterInstancePlacement = Shapes::StructureShape.new(name: 'ClusterInstancePlacement')
     ClusterInstanceStatus = Shapes::StringShape.new(name: 'ClusterInstanceStatus')
     ClusterInstanceStatusDetails = Shapes::StructureShape.new(name: 'ClusterInstanceStatusDetails')
     ClusterInstanceType = Shapes::StringShape.new(name: 'ClusterInstanceType')
@@ -268,6 +271,8 @@ module Aws::SageMaker
     ClusterNodeSummaries = Shapes::ListShape.new(name: 'ClusterNodeSummaries')
     ClusterNodeSummary = Shapes::StructureShape.new(name: 'ClusterNodeSummary')
     ClusterNonNegativeInstanceCount = Shapes::IntegerShape.new(name: 'ClusterNonNegativeInstanceCount')
+    ClusterPrivateDnsHostname = Shapes::StringShape.new(name: 'ClusterPrivateDnsHostname')
+    ClusterPrivatePrimaryIp = Shapes::StringShape.new(name: 'ClusterPrivatePrimaryIp')
     ClusterSortBy = Shapes::StringShape.new(name: 'ClusterSortBy')
     ClusterStatus = Shapes::StringShape.new(name: 'ClusterStatus')
     ClusterSummaries = Shapes::ListShape.new(name: 'ClusterSummaries')
@@ -2846,6 +2851,10 @@ module Aws::SageMaker
 
     ClusterInstanceGroupSpecifications.member = Shapes::ShapeRef.new(shape: ClusterInstanceGroupSpecification)
 
+    ClusterInstancePlacement.add_member(:availability_zone, Shapes::ShapeRef.new(shape: ClusterAvailabilityZone, location_name: "AvailabilityZone"))
+    ClusterInstancePlacement.add_member(:availability_zone_id, Shapes::ShapeRef.new(shape: ClusterAvailabilityZoneId, location_name: "AvailabilityZoneId"))
+    ClusterInstancePlacement.struct_class = Types::ClusterInstancePlacement
+
     ClusterInstanceStatusDetails.add_member(:status, Shapes::ShapeRef.new(shape: ClusterInstanceStatus, required: true, location_name: "Status"))
     ClusterInstanceStatusDetails.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     ClusterInstanceStatusDetails.struct_class = Types::ClusterInstanceStatusDetails
@@ -2861,6 +2870,9 @@ module Aws::SageMaker
     ClusterNodeDetails.add_member(:launch_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LaunchTime"))
     ClusterNodeDetails.add_member(:life_cycle_config, Shapes::ShapeRef.new(shape: ClusterLifeCycleConfig, location_name: "LifeCycleConfig"))
     ClusterNodeDetails.add_member(:threads_per_core, Shapes::ShapeRef.new(shape: ClusterThreadsPerCore, location_name: "ThreadsPerCore"))
+    ClusterNodeDetails.add_member(:private_primary_ip, Shapes::ShapeRef.new(shape: ClusterPrivatePrimaryIp, location_name: "PrivatePrimaryIp"))
+    ClusterNodeDetails.add_member(:private_dns_hostname, Shapes::ShapeRef.new(shape: ClusterPrivateDnsHostname, location_name: "PrivateDnsHostname"))
+    ClusterNodeDetails.add_member(:placement, Shapes::ShapeRef.new(shape: ClusterInstancePlacement, location_name: "Placement"))
     ClusterNodeDetails.struct_class = Types::ClusterNodeDetails
 
     ClusterNodeSummaries.member = Shapes::ShapeRef.new(shape: ClusterNodeSummary)
@@ -9974,6 +9986,7 @@ module Aws::SageMaker
 
       api.metadata = {
         "apiVersion" => "2017-07-24",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "api.sagemaker",
         "jsonVersion" => "1.1",
         "protocol" => "json",

@@ -364,6 +364,7 @@ module Aws
   autoload :Support, 'aws-sdk-support'
   autoload :SupportApp, 'aws-sdk-supportapp'
   autoload :Synthetics, 'aws-sdk-synthetics'
+  autoload :TaxSettings, 'aws-sdk-taxsettings'
   autoload :Textract, 'aws-sdk-textract'
   autoload :TimestreamInfluxDB, 'aws-sdk-timestreaminfluxdb'
   autoload :TimestreamQuery, 'aws-sdk-timestreamquery'

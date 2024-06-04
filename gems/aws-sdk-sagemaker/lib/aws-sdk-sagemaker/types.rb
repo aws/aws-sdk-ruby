@@ -4089,6 +4089,29 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # Specifies the placement details for the node in the SageMaker HyperPod
+    # cluster, including the Availability Zone and the unique identifier
+    # (ID) of the Availability Zone.
+    #
+    # @!attribute [rw] availability_zone
+    #   The Availability Zone where the node in the SageMaker HyperPod
+    #   cluster is launched.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone_id
+    #   The unique identifier (ID) of the Availability Zone where the node
+    #   in the SageMaker HyperPod cluster is launched.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ClusterInstancePlacement AWS API Documentation
+    #
+    class ClusterInstancePlacement < Struct.new(
+      :availability_zone,
+      :availability_zone_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Details of an instance in a SageMaker HyperPod cluster.
     #
     # @!attribute [rw] status
@@ -4170,6 +4193,19 @@ module Aws::SageMaker
     #   `CreateCluster`.
     #   @return [Integer]
     #
+    # @!attribute [rw] private_primary_ip
+    #   The private primary IP address of the SageMaker HyperPod cluster
+    #   node.
+    #   @return [String]
+    #
+    # @!attribute [rw] private_dns_hostname
+    #   The private DNS hostname of the SageMaker HyperPod cluster node.
+    #   @return [String]
+    #
+    # @!attribute [rw] placement
+    #   The placement details of the SageMaker HyperPod cluster node.
+    #   @return [Types::ClusterInstancePlacement]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ClusterNodeDetails AWS API Documentation
     #
     class ClusterNodeDetails < Struct.new(
@@ -4179,7 +4215,10 @@ module Aws::SageMaker
       :instance_type,
       :launch_time,
       :life_cycle_config,
-      :threads_per_core)
+      :threads_per_core,
+      :private_primary_ip,
+      :private_dns_hostname,
+      :placement)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12132,11 +12171,11 @@ module Aws::SageMaker
 
     # @!attribute [rw] cluster_name
     #   The string name or the Amazon Resource Name (ARN) of the SageMaker
-    #   HyperPod cluster in which the instance is.
+    #   HyperPod cluster in which the node is.
     #   @return [String]
     #
     # @!attribute [rw] node_id
-    #   The ID of the instance.
+    #   The ID of the SageMaker HyperPod cluster node.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeClusterNodeRequest AWS API Documentation
@@ -12149,7 +12188,7 @@ module Aws::SageMaker
     end
 
     # @!attribute [rw] node_details
-    #   The details of the instance.
+    #   The details of the SageMaker HyperPod cluster node.
     #   @return [Types::ClusterNodeDetails]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeClusterNodeResponse AWS API Documentation

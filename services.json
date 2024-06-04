@@ -1175,6 +1175,9 @@
   "Synthetics": {
     "models": "synthetics/2017-10-11"
   },
+  "TaxSettings": {
+    "models": "taxsettings/2018-05-10"
+  },
   "Textract": {
     "models": "textract/2018-06-27"
   },

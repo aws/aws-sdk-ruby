@@ -601,6 +601,7 @@ module Aws
             'Support' => 'support',
             'SupportApp' => 'supportapp',
             'Synthetics' => 'synthetics',
+            'TaxSettings' => 'tax',
             'Textract' => 'textract',
             'TimestreamInfluxDB' => 'timestream-influxdb',
             'TimestreamQuery' => 'query.timestream',

@@ -14,11 +14,10 @@ module Aws::Pipes
     # task, and whether a public IP address is to be used. This structure is
     # relevant only for ECS tasks that use the `awsvpc` network mode.
     #
-    # @!attribute [rw] assign_public_ip
-    #   Specifies whether the task's elastic network interface receives a
-    #   public IP address. You can specify `ENABLED` only when `LaunchType`
-    #   in `EcsParameters` is set to `FARGATE`.
-    #   @return [String]
+    # @!attribute [rw] subnets
+    #   Specifies the subnets associated with the task. These subnets must
+    #   all be in the same VPC. You can specify as many as 16 subnets.
+    #   @return [Array<String>]
     #
     # @!attribute [rw] security_groups
     #   Specifies the security groups associated with the task. These
@@ -27,17 +26,18 @@ module Aws::Pipes
     #   default security group for the VPC is used.
     #   @return [Array<String>]
     #
-    # @!attribute [rw] subnets
-    #   Specifies the subnets associated with the task. These subnets must
-    #   all be in the same VPC. You can specify as many as 16 subnets.
-    #   @return [Array<String>]
+    # @!attribute [rw] assign_public_ip
+    #   Specifies whether the task's elastic network interface receives a
+    #   public IP address. You can specify `ENABLED` only when `LaunchType`
+    #   in `EcsParameters` is set to `FARGATE`.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pipes-2015-10-07/AwsVpcConfiguration AWS API Documentation
     #
     class AwsVpcConfiguration < Struct.new(
-      :assign_public_ip,
+      :subnets,
       :security_groups,
-      :subnets)
+      :assign_public_ip)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -357,13 +357,6 @@ module Aws::Pipes
     #
     # [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CapacityProviderStrategyItem.html
     #
-    # @!attribute [rw] base
-    #   The base value designates how many tasks, at a minimum, to run on
-    #   the specified capacity provider. Only one capacity provider in a
-    #   capacity provider strategy can have a base defined. If no value is
-    #   specified, the default value of 0 is used.
-    #   @return [Integer]
-    #
     # @!attribute [rw] capacity_provider
     #   The short name of the capacity provider.
     #   @return [String]
@@ -375,12 +368,19 @@ module Aws::Pipes
     #   base value, if defined, is satisfied.
     #   @return [Integer]
     #
+    # @!attribute [rw] base
+    #   The base value designates how many tasks, at a minimum, to run on
+    #   the specified capacity provider. Only one capacity provider in a
+    #   capacity provider strategy can have a base defined. If no value is
+    #   specified, the default value of 0 is used.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pipes-2015-10-07/CapacityProviderStrategyItem AWS API Documentation
     #
     class CapacityProviderStrategyItem < Struct.new(
-      :base,
       :capacity_provider,
-      :weight)
+      :weight,
+      :base)
       SENSITIVE = [:capacity_provider]
       include Aws::Structure
     end
@@ -440,32 +440,16 @@ module Aws::Pipes
       include Aws::Structure
     end
 
+    # @!attribute [rw] name
+    #   The name of the pipe.
+    #   @return [String]
+    #
     # @!attribute [rw] description
     #   A description of the pipe.
     #   @return [String]
     #
     # @!attribute [rw] desired_state
     #   The state the pipe should be in.
-    #   @return [String]
-    #
-    # @!attribute [rw] enrichment
-    #   The ARN of the enrichment resource.
-    #   @return [String]
-    #
-    # @!attribute [rw] enrichment_parameters
-    #   The parameters required to set up enrichment on your pipe.
-    #   @return [Types::PipeEnrichmentParameters]
-    #
-    # @!attribute [rw] log_configuration
-    #   The logging configuration settings for the pipe.
-    #   @return [Types::PipeLogConfigurationParameters]
-    #
-    # @!attribute [rw] name
-    #   The name of the pipe.
-    #   @return [String]
-    #
-    # @!attribute [rw] role_arn
-    #   The ARN of the role that allows the pipe to send data to the target.
     #   @return [String]
     #
     # @!attribute [rw] source
@@ -476,9 +460,13 @@ module Aws::Pipes
     #   The parameters required to set up a source for your pipe.
     #   @return [Types::PipeSourceParameters]
     #
-    # @!attribute [rw] tags
-    #   The list of key-value pairs to associate with the pipe.
-    #   @return [Hash<String,String>]
+    # @!attribute [rw] enrichment
+    #   The ARN of the enrichment resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] enrichment_parameters
+    #   The parameters required to set up enrichment on your pipe.
+    #   @return [Types::PipeEnrichmentParameters]
     #
     # @!attribute [rw] target
     #   The ARN of the target resource.
@@ -496,21 +484,33 @@ module Aws::Pipes
     #   [1]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes-event-target.html
     #   @return [Types::PipeTargetParameters]
     #
+    # @!attribute [rw] role_arn
+    #   The ARN of the role that allows the pipe to send data to the target.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The list of key-value pairs to associate with the pipe.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] log_configuration
+    #   The logging configuration settings for the pipe.
+    #   @return [Types::PipeLogConfigurationParameters]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pipes-2015-10-07/CreatePipeRequest AWS API Documentation
     #
     class CreatePipeRequest < Struct.new(
+      :name,
       :description,
       :desired_state,
-      :enrichment,
-      :enrichment_parameters,
-      :log_configuration,
-      :name,
-      :role_arn,
       :source,
       :source_parameters,
-      :tags,
+      :enrichment,
+      :enrichment_parameters,
       :target,
-      :target_parameters)
+      :target_parameters,
+      :role_arn,
+      :tags,
+      :log_configuration)
       SENSITIVE = [:description]
       include Aws::Structure
     end
@@ -519,17 +519,21 @@ module Aws::Pipes
     #   The ARN of the pipe.
     #   @return [String]
     #
-    # @!attribute [rw] creation_time
-    #   The time the pipe was created.
-    #   @return [Time]
-    #
-    # @!attribute [rw] current_state
-    #   The state the pipe is in.
+    # @!attribute [rw] name
+    #   The name of the pipe.
     #   @return [String]
     #
     # @!attribute [rw] desired_state
     #   The state the pipe should be in.
     #   @return [String]
+    #
+    # @!attribute [rw] current_state
+    #   The state the pipe is in.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The time the pipe was created.
+    #   @return [Time]
     #
     # @!attribute [rw] last_modified_time
     #   When the pipe was last updated, in [ISO-8601 format][1]
@@ -540,19 +544,15 @@ module Aws::Pipes
     #   [1]: https://www.w3.org/TR/NOTE-datetime
     #   @return [Time]
     #
-    # @!attribute [rw] name
-    #   The name of the pipe.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pipes-2015-10-07/CreatePipeResponse AWS API Documentation
     #
     class CreatePipeResponse < Struct.new(
       :arn,
-      :creation_time,
-      :current_state,
+      :name,
       :desired_state,
-      :last_modified_time,
-      :name)
+      :current_state,
+      :creation_time,
+      :last_modified_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -591,17 +591,21 @@ module Aws::Pipes
     #   The ARN of the pipe.
     #   @return [String]
     #
-    # @!attribute [rw] creation_time
-    #   The time the pipe was created.
-    #   @return [Time]
-    #
-    # @!attribute [rw] current_state
-    #   The state the pipe is in.
+    # @!attribute [rw] name
+    #   The name of the pipe.
     #   @return [String]
     #
     # @!attribute [rw] desired_state
     #   The state the pipe should be in.
     #   @return [String]
+    #
+    # @!attribute [rw] current_state
+    #   The state the pipe is in.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The time the pipe was created.
+    #   @return [Time]
     #
     # @!attribute [rw] last_modified_time
     #   When the pipe was last updated, in [ISO-8601 format][1]
@@ -612,19 +616,15 @@ module Aws::Pipes
     #   [1]: https://www.w3.org/TR/NOTE-datetime
     #   @return [Time]
     #
-    # @!attribute [rw] name
-    #   The name of the pipe.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pipes-2015-10-07/DeletePipeResponse AWS API Documentation
     #
     class DeletePipeResponse < Struct.new(
       :arn,
-      :creation_time,
-      :current_state,
+      :name,
       :desired_state,
-      :last_modified_time,
-      :name)
+      :current_state,
+      :creation_time,
+      :last_modified_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -645,12 +645,8 @@ module Aws::Pipes
     #   The ARN of the pipe.
     #   @return [String]
     #
-    # @!attribute [rw] creation_time
-    #   The time the pipe was created.
-    #   @return [Time]
-    #
-    # @!attribute [rw] current_state
-    #   The state the pipe is in.
+    # @!attribute [rw] name
+    #   The name of the pipe.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -661,33 +657,12 @@ module Aws::Pipes
     #   The state the pipe should be in.
     #   @return [String]
     #
-    # @!attribute [rw] enrichment
-    #   The ARN of the enrichment resource.
+    # @!attribute [rw] current_state
+    #   The state the pipe is in.
     #   @return [String]
     #
-    # @!attribute [rw] enrichment_parameters
-    #   The parameters required to set up enrichment on your pipe.
-    #   @return [Types::PipeEnrichmentParameters]
-    #
-    # @!attribute [rw] last_modified_time
-    #   When the pipe was last updated, in [ISO-8601 format][1]
-    #   (YYYY-MM-DDThh:mm:ss.sTZD).
-    #
-    #
-    #
-    #   [1]: https://www.w3.org/TR/NOTE-datetime
-    #   @return [Time]
-    #
-    # @!attribute [rw] log_configuration
-    #   The logging configuration settings for the pipe.
-    #   @return [Types::PipeLogConfiguration]
-    #
-    # @!attribute [rw] name
-    #   The name of the pipe.
-    #   @return [String]
-    #
-    # @!attribute [rw] role_arn
-    #   The ARN of the role that allows the pipe to send data to the target.
+    # @!attribute [rw] state_reason
+    #   The reason the pipe is in its current state.
     #   @return [String]
     #
     # @!attribute [rw] source
@@ -698,13 +673,13 @@ module Aws::Pipes
     #   The parameters required to set up a source for your pipe.
     #   @return [Types::PipeSourceParameters]
     #
-    # @!attribute [rw] state_reason
-    #   The reason the pipe is in its current state.
+    # @!attribute [rw] enrichment
+    #   The ARN of the enrichment resource.
     #   @return [String]
     #
-    # @!attribute [rw] tags
-    #   The list of key-value pairs to associate with the pipe.
-    #   @return [Hash<String,String>]
+    # @!attribute [rw] enrichment_parameters
+    #   The parameters required to set up enrichment on your pipe.
+    #   @return [Types::PipeEnrichmentParameters]
     #
     # @!attribute [rw] target
     #   The ARN of the target resource.
@@ -722,27 +697,86 @@ module Aws::Pipes
     #   [1]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes-event-target.html
     #   @return [Types::PipeTargetParameters]
     #
+    # @!attribute [rw] role_arn
+    #   The ARN of the role that allows the pipe to send data to the target.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The list of key-value pairs to associate with the pipe.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] creation_time
+    #   The time the pipe was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time
+    #   When the pipe was last updated, in [ISO-8601 format][1]
+    #   (YYYY-MM-DDThh:mm:ss.sTZD).
+    #
+    #
+    #
+    #   [1]: https://www.w3.org/TR/NOTE-datetime
+    #   @return [Time]
+    #
+    # @!attribute [rw] log_configuration
+    #   The logging configuration settings for the pipe.
+    #   @return [Types::PipeLogConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pipes-2015-10-07/DescribePipeResponse AWS API Documentation
     #
     class DescribePipeResponse < Struct.new(
       :arn,
-      :creation_time,
-      :current_state,
+      :name,
       :description,
       :desired_state,
-      :enrichment,
-      :enrichment_parameters,
-      :last_modified_time,
-      :log_configuration,
-      :name,
-      :role_arn,
+      :current_state,
+      :state_reason,
       :source,
       :source_parameters,
-      :state_reason,
-      :tags,
+      :enrichment,
+      :enrichment_parameters,
       :target,
-      :target_parameters)
+      :target_parameters,
+      :role_arn,
+      :tags,
+      :creation_time,
+      :last_modified_time,
+      :log_configuration)
       SENSITIVE = [:description]
+      include Aws::Structure
+    end
+
+    # Maps source data to a dimension in the target Timestream for
+    # LiveAnalytics table.
+    #
+    # For more information, see [Amazon Timestream for LiveAnalytics
+    # concepts][1]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/timestream/latest/developerguide/concepts.html
+    #
+    # @!attribute [rw] dimension_value
+    #   Dynamic path to the dimension value in the source event.
+    #   @return [String]
+    #
+    # @!attribute [rw] dimension_value_type
+    #   The data type of the dimension for the time-series data.
+    #   @return [String]
+    #
+    # @!attribute [rw] dimension_name
+    #   The metadata attributes of the time series. For example, the name
+    #   and Availability Zone of an Amazon EC2 instance or the name of the
+    #   manufacturer of a wind turbine are dimensions.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pipes-2015-10-07/DimensionMapping AWS API Documentation
+    #
+    class DimensionMapping < Struct.new(
+      :dimension_value,
+      :dimension_value_type,
+      :dimension_name)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1095,12 +1129,11 @@ module Aws::Pipes
       include Aws::Structure
     end
 
-    # The Amazon Kinesis Data Firehose logging configuration settings for
-    # the pipe.
+    # The Amazon Data Firehose logging configuration settings for the pipe.
     #
     # @!attribute [rw] delivery_stream_arn
-    #   The Amazon Resource Name (ARN) of the Kinesis Data Firehose delivery
-    #   stream to which EventBridge delivers the pipe log records.
+    #   The Amazon Resource Name (ARN) of the Firehose delivery stream to
+    #   which EventBridge delivers the pipe log records.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pipes-2015-10-07/FirehoseLogDestination AWS API Documentation
@@ -1111,13 +1144,11 @@ module Aws::Pipes
       include Aws::Structure
     end
 
-    # The Amazon Kinesis Data Firehose logging configuration settings for
-    # the pipe.
+    # The Amazon Data Firehose logging configuration settings for the pipe.
     #
     # @!attribute [rw] delivery_stream_arn
-    #   Specifies the Amazon Resource Name (ARN) of the Kinesis Data
-    #   Firehose delivery stream to which EventBridge delivers the pipe log
-    #   records.
+    #   Specifies the Amazon Resource Name (ARN) of the Firehose delivery
+    #   stream to which EventBridge delivers the pipe log records.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pipes-2015-10-07/FirehoseLogDestinationParameters AWS API Documentation
@@ -1147,31 +1178,18 @@ module Aws::Pipes
       include Aws::Structure
     end
 
-    # @!attribute [rw] current_state
-    #   The state the pipe is in.
-    #   @return [String]
-    #
-    # @!attribute [rw] desired_state
-    #   The state the pipe should be in.
-    #   @return [String]
-    #
-    # @!attribute [rw] limit
-    #   The maximum number of pipes to include in the response.
-    #   @return [Integer]
-    #
     # @!attribute [rw] name_prefix
     #   A value that will return a subset of the pipes associated with this
     #   account. For example, `"NamePrefix": "ABC"` will return all
     #   endpoints with "ABC" in the name.
     #   @return [String]
     #
-    # @!attribute [rw] next_token
-    #   If `nextToken` is returned, there are more results available. The
-    #   value of `nextToken` is a unique pagination token for each page.
-    #   Make the call again using the returned token to retrieve the next
-    #   page. Keep all other arguments unchanged. Each pagination token
-    #   expires after 24 hours. Using an expired pagination token will
-    #   return an HTTP 400 InvalidToken error.
+    # @!attribute [rw] desired_state
+    #   The state the pipe should be in.
+    #   @return [String]
+    #
+    # @!attribute [rw] current_state
+    #   The state the pipe is in.
     #   @return [String]
     #
     # @!attribute [rw] source_prefix
@@ -1182,20 +1200,6 @@ module Aws::Pipes
     #   The prefix matching the pipe target.
     #   @return [String]
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/pipes-2015-10-07/ListPipesRequest AWS API Documentation
-    #
-    class ListPipesRequest < Struct.new(
-      :current_state,
-      :desired_state,
-      :limit,
-      :name_prefix,
-      :next_token,
-      :source_prefix,
-      :target_prefix)
-      SENSITIVE = [:next_token]
-      include Aws::Structure
-    end
-
     # @!attribute [rw] next_token
     #   If `nextToken` is returned, there are more results available. The
     #   value of `nextToken` is a unique pagination token for each page.
@@ -1205,15 +1209,42 @@ module Aws::Pipes
     #   return an HTTP 400 InvalidToken error.
     #   @return [String]
     #
+    # @!attribute [rw] limit
+    #   The maximum number of pipes to include in the response.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pipes-2015-10-07/ListPipesRequest AWS API Documentation
+    #
+    class ListPipesRequest < Struct.new(
+      :name_prefix,
+      :desired_state,
+      :current_state,
+      :source_prefix,
+      :target_prefix,
+      :next_token,
+      :limit)
+      SENSITIVE = [:next_token]
+      include Aws::Structure
+    end
+
     # @!attribute [rw] pipes
     #   The pipes returned by the call.
     #   @return [Array<Types::Pipe>]
     #
+    # @!attribute [rw] next_token
+    #   If `nextToken` is returned, there are more results available. The
+    #   value of `nextToken` is a unique pagination token for each page.
+    #   Make the call again using the returned token to retrieve the next
+    #   page. Keep all other arguments unchanged. Each pagination token
+    #   expires after 24 hours. Using an expired pagination token will
+    #   return an HTTP 400 InvalidToken error.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pipes-2015-10-07/ListPipesResponse AWS API Documentation
     #
     class ListPipesResponse < Struct.new(
-      :next_token,
-      :pipes)
+      :pipes,
+      :next_token)
       SENSITIVE = [:next_token]
       include Aws::Structure
     end
@@ -1271,27 +1302,80 @@ module Aws::Pipes
     #
     # @note MSKAccessCredentials is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of MSKAccessCredentials corresponding to the set member.
     #
-    # @!attribute [rw] client_certificate_tls_auth
+    # @!attribute [rw] sasl_scram_512_auth
     #   The ARN of the Secrets Manager secret.
     #   @return [String]
     #
-    # @!attribute [rw] sasl_scram_512_auth
+    # @!attribute [rw] client_certificate_tls_auth
     #   The ARN of the Secrets Manager secret.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pipes-2015-10-07/MSKAccessCredentials AWS API Documentation
     #
     class MSKAccessCredentials < Struct.new(
-      :client_certificate_tls_auth,
       :sasl_scram_512_auth,
+      :client_certificate_tls_auth,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
       include Aws::Structure::Union
 
-      class ClientCertificateTlsAuth < MSKAccessCredentials; end
       class SaslScram512Auth < MSKAccessCredentials; end
+      class ClientCertificateTlsAuth < MSKAccessCredentials; end
       class Unknown < MSKAccessCredentials; end
+    end
+
+    # A mapping of a source event data field to a measure in a Timestream
+    # for LiveAnalytics record.
+    #
+    # @!attribute [rw] measure_value
+    #   Dynamic path to the measurement attribute in the source event.
+    #   @return [String]
+    #
+    # @!attribute [rw] measure_value_type
+    #   Data type of the measurement attribute in the source event.
+    #   @return [String]
+    #
+    # @!attribute [rw] multi_measure_attribute_name
+    #   Target measure name to be used.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pipes-2015-10-07/MultiMeasureAttributeMapping AWS API Documentation
+    #
+    class MultiMeasureAttributeMapping < Struct.new(
+      :measure_value,
+      :measure_value_type,
+      :multi_measure_attribute_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Maps multiple measures from the source event to the same Timestream
+    # for LiveAnalytics record.
+    #
+    # For more information, see [Amazon Timestream for LiveAnalytics
+    # concepts][1]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/timestream/latest/developerguide/concepts.html
+    #
+    # @!attribute [rw] multi_measure_name
+    #   The name of the multiple measurements per record (multi-measure).
+    #   @return [String]
+    #
+    # @!attribute [rw] multi_measure_attribute_mappings
+    #   Mappings that represent multiple source event fields mapped to
+    #   measures in the same Timestream for LiveAnalytics record.
+    #   @return [Array<Types::MultiMeasureAttributeMapping>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pipes-2015-10-07/MultiMeasureMapping AWS API Documentation
+    #
+    class MultiMeasureMapping < Struct.new(
+      :multi_measure_name,
+      :multi_measure_attribute_mappings)
+      SENSITIVE = []
+      include Aws::Structure
     end
 
     # This structure specifies the network configuration for an Amazon ECS
@@ -1329,25 +1413,29 @@ module Aws::Pipes
     # event sources to targets and reduces the need for specialized
     # knowledge and integration code.
     #
-    # @!attribute [rw] arn
-    #   The ARN of the pipe.
+    # @!attribute [rw] name
+    #   The name of the pipe.
     #   @return [String]
     #
-    # @!attribute [rw] creation_time
-    #   The time the pipe was created.
-    #   @return [Time]
-    #
-    # @!attribute [rw] current_state
-    #   The state the pipe is in.
+    # @!attribute [rw] arn
+    #   The ARN of the pipe.
     #   @return [String]
     #
     # @!attribute [rw] desired_state
     #   The state the pipe should be in.
     #   @return [String]
     #
-    # @!attribute [rw] enrichment
-    #   The ARN of the enrichment resource.
+    # @!attribute [rw] current_state
+    #   The state the pipe is in.
     #   @return [String]
+    #
+    # @!attribute [rw] state_reason
+    #   The reason the pipe is in its current state.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The time the pipe was created.
+    #   @return [Time]
     #
     # @!attribute [rw] last_modified_time
     #   When the pipe was last updated, in [ISO-8601 format][1]
@@ -1358,35 +1446,31 @@ module Aws::Pipes
     #   [1]: https://www.w3.org/TR/NOTE-datetime
     #   @return [Time]
     #
-    # @!attribute [rw] name
-    #   The name of the pipe.
-    #   @return [String]
-    #
     # @!attribute [rw] source
     #   The ARN of the source resource.
-    #   @return [String]
-    #
-    # @!attribute [rw] state_reason
-    #   The reason the pipe is in its current state.
     #   @return [String]
     #
     # @!attribute [rw] target
     #   The ARN of the target resource.
     #   @return [String]
     #
+    # @!attribute [rw] enrichment
+    #   The ARN of the enrichment resource.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pipes-2015-10-07/Pipe AWS API Documentation
     #
     class Pipe < Struct.new(
-      :arn,
-      :creation_time,
-      :current_state,
-      :desired_state,
-      :enrichment,
-      :last_modified_time,
       :name,
-      :source,
+      :arn,
+      :desired_state,
+      :current_state,
       :state_reason,
-      :target)
+      :creation_time,
+      :last_modified_time,
+      :source,
+      :target,
+      :enrichment)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1396,15 +1480,15 @@ module Aws::Pipes
     # these are merged with any InvocationParameters specified on the
     # Connection, with any values from the Connection taking precedence.
     #
-    # @!attribute [rw] header_parameters
-    #   The headers that need to be sent as part of request invoking the API
-    #   Gateway REST API or EventBridge ApiDestination.
-    #   @return [Hash<String,String>]
-    #
     # @!attribute [rw] path_parameter_values
     #   The path parameter values to be used to populate API Gateway REST
     #   API or EventBridge ApiDestination path wildcards ("*").
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] header_parameters
+    #   The headers that need to be sent as part of request invoking the API
+    #   Gateway REST API or EventBridge ApiDestination.
+    #   @return [Hash<String,String>]
     #
     # @!attribute [rw] query_string_parameters
     #   The query string keys/values that need to be sent as part of request
@@ -1414,27 +1498,14 @@ module Aws::Pipes
     # @see http://docs.aws.amazon.com/goto/WebAPI/pipes-2015-10-07/PipeEnrichmentHttpParameters AWS API Documentation
     #
     class PipeEnrichmentHttpParameters < Struct.new(
-      :header_parameters,
       :path_parameter_values,
+      :header_parameters,
       :query_string_parameters)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # The parameters required to set up enrichment on your pipe.
-    #
-    # @!attribute [rw] http_parameters
-    #   Contains the HTTP parameters to use when the target is a API Gateway
-    #   REST endpoint or EventBridge ApiDestination.
-    #
-    #   If you specify an API Gateway REST API or EventBridge ApiDestination
-    #   as a target, you can use this parameter to specify headers, path
-    #   parameters, and query string keys/values as part of your target
-    #   invoking request. If you're using ApiDestinations, the
-    #   corresponding Connection can also have these values configured. In
-    #   case of any conflicting keys, values from the Connection take
-    #   precedence.
-    #   @return [Types::PipeEnrichmentHttpParameters]
     #
     # @!attribute [rw] input_template
     #   Valid JSON text passed to the enrichment. In this case, nothing from
@@ -1449,26 +1520,48 @@ module Aws::Pipes
     #   [1]: http://www.rfc-editor.org/rfc/rfc7159.txt
     #   @return [String]
     #
+    # @!attribute [rw] http_parameters
+    #   Contains the HTTP parameters to use when the target is a API Gateway
+    #   REST endpoint or EventBridge ApiDestination.
+    #
+    #   If you specify an API Gateway REST API or EventBridge ApiDestination
+    #   as a target, you can use this parameter to specify headers, path
+    #   parameters, and query string keys/values as part of your target
+    #   invoking request. If you're using ApiDestinations, the
+    #   corresponding Connection can also have these values configured. In
+    #   case of any conflicting keys, values from the Connection take
+    #   precedence.
+    #   @return [Types::PipeEnrichmentHttpParameters]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pipes-2015-10-07/PipeEnrichmentParameters AWS API Documentation
     #
     class PipeEnrichmentParameters < Struct.new(
-      :http_parameters,
-      :input_template)
+      :input_template,
+      :http_parameters)
       SENSITIVE = [:input_template]
       include Aws::Structure
     end
 
     # The logging configuration settings for the pipe.
     #
+    # @!attribute [rw] s3_log_destination
+    #   The Amazon S3 logging configuration settings for the pipe.
+    #   @return [Types::S3LogDestination]
+    #
+    # @!attribute [rw] firehose_log_destination
+    #   The Amazon Data Firehose logging configuration settings for the
+    #   pipe.
+    #   @return [Types::FirehoseLogDestination]
+    #
     # @!attribute [rw] cloudwatch_logs_log_destination
     #   The Amazon CloudWatch Logs logging configuration settings for the
     #   pipe.
     #   @return [Types::CloudwatchLogsLogDestination]
     #
-    # @!attribute [rw] firehose_log_destination
-    #   The Amazon Kinesis Data Firehose logging configuration settings for
-    #   the pipe.
-    #   @return [Types::FirehoseLogDestination]
+    # @!attribute [rw] level
+    #   The level of logging detail to include. This applies to all log
+    #   destinations for the pipe.
+    #   @return [String]
     #
     # @!attribute [rw] include_execution_data
     #   Whether the execution data (specifically, the `payload`,
@@ -1485,23 +1578,14 @@ module Aws::Pipes
     #   [1]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes-logs.html#eb-pipes-logs-execution-data
     #   @return [Array<String>]
     #
-    # @!attribute [rw] level
-    #   The level of logging detail to include. This applies to all log
-    #   destinations for the pipe.
-    #   @return [String]
-    #
-    # @!attribute [rw] s3_log_destination
-    #   The Amazon S3 logging configuration settings for the pipe.
-    #   @return [Types::S3LogDestination]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pipes-2015-10-07/PipeLogConfiguration AWS API Documentation
     #
     class PipeLogConfiguration < Struct.new(
-      :cloudwatch_logs_log_destination,
+      :s3_log_destination,
       :firehose_log_destination,
-      :include_execution_data,
+      :cloudwatch_logs_log_destination,
       :level,
-      :s3_log_destination)
+      :include_execution_data)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1517,44 +1601,30 @@ module Aws::Pipes
     # EventBridge sets that field to its system-default value during the
     # update.
     #
-    # For example, suppose when you created the pipe you specified a Kinesis
-    # Data Firehose stream log destination. You then update the pipe to add
-    # an Amazon S3 log destination. In addition to specifying the
+    # For example, suppose when you created the pipe you specified a
+    # Firehose stream log destination. You then update the pipe to add an
+    # Amazon S3 log destination. In addition to specifying the
     # `S3LogDestinationParameters` for the new log destination, you must
     # also specify the fields in the `FirehoseLogDestinationParameters`
-    # object in order to retain the Kinesis Data Firehose stream log
-    # destination.
+    # object in order to retain the Firehose stream log destination.
     #
     # For more information on generating pipe log records, see [Log
     # EventBridge Pipes](eventbridge/latest/userguide/eb-pipes-logs.html) in
     # the *Amazon EventBridge User Guide*.
     #
+    # @!attribute [rw] s3_log_destination
+    #   The Amazon S3 logging configuration settings for the pipe.
+    #   @return [Types::S3LogDestinationParameters]
+    #
+    # @!attribute [rw] firehose_log_destination
+    #   The Amazon Data Firehose logging configuration settings for the
+    #   pipe.
+    #   @return [Types::FirehoseLogDestinationParameters]
+    #
     # @!attribute [rw] cloudwatch_logs_log_destination
     #   The Amazon CloudWatch Logs logging configuration settings for the
     #   pipe.
     #   @return [Types::CloudwatchLogsLogDestinationParameters]
-    #
-    # @!attribute [rw] firehose_log_destination
-    #   The Amazon Kinesis Data Firehose logging configuration settings for
-    #   the pipe.
-    #   @return [Types::FirehoseLogDestinationParameters]
-    #
-    # @!attribute [rw] include_execution_data
-    #   Specify `ON` to include the execution data (specifically, the
-    #   `payload` and `awsRequest` fields) in the log messages for this
-    #   pipe.
-    #
-    #   This applies to all log destinations for the pipe.
-    #
-    #   For more information, see [Including execution data in logs][1] in
-    #   the *Amazon EventBridge User Guide*.
-    #
-    #   The default is `OFF`.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes-logs.html#eb-pipes-logs-execution-data
-    #   @return [Array<String>]
     #
     # @!attribute [rw] level
     #   The level of logging detail to include. This applies to all log
@@ -1568,47 +1638,60 @@ module Aws::Pipes
     #   [1]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes-logs.html#eb-pipes-logs-level
     #   @return [String]
     #
-    # @!attribute [rw] s3_log_destination
-    #   The Amazon S3 logging configuration settings for the pipe.
-    #   @return [Types::S3LogDestinationParameters]
+    # @!attribute [rw] include_execution_data
+    #   Specify `ALL` to include the execution data (specifically, the
+    #   `payload`, `awsRequest`, and `awsResponse` fields) in the log
+    #   messages for this pipe.
+    #
+    #   This applies to all log destinations for the pipe.
+    #
+    #   For more information, see [Including execution data in logs][1] in
+    #   the *Amazon EventBridge User Guide*.
+    #
+    #   By default, execution data is not included.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes-logs.html#eb-pipes-logs-execution-data
+    #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pipes-2015-10-07/PipeLogConfigurationParameters AWS API Documentation
     #
     class PipeLogConfigurationParameters < Struct.new(
-      :cloudwatch_logs_log_destination,
+      :s3_log_destination,
       :firehose_log_destination,
-      :include_execution_data,
+      :cloudwatch_logs_log_destination,
       :level,
-      :s3_log_destination)
+      :include_execution_data)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # The parameters for using an Active MQ broker as a source.
     #
-    # @!attribute [rw] batch_size
-    #   The maximum number of records to include in each batch.
-    #   @return [Integer]
-    #
     # @!attribute [rw] credentials
     #   The credentials needed to access the resource.
     #   @return [Types::MQBrokerAccessCredentials]
-    #
-    # @!attribute [rw] maximum_batching_window_in_seconds
-    #   The maximum length of a time to wait for events.
-    #   @return [Integer]
     #
     # @!attribute [rw] queue_name
     #   The name of the destination queue to consume.
     #   @return [String]
     #
+    # @!attribute [rw] batch_size
+    #   The maximum number of records to include in each batch.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] maximum_batching_window_in_seconds
+    #   The maximum length of a time to wait for events.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pipes-2015-10-07/PipeSourceActiveMQBrokerParameters AWS API Documentation
     #
     class PipeSourceActiveMQBrokerParameters < Struct.new(
-      :batch_size,
       :credentials,
-      :maximum_batching_window_in_seconds,
-      :queue_name)
+      :queue_name,
+      :batch_size,
+      :maximum_batching_window_in_seconds)
       SENSITIVE = [:queue_name]
       include Aws::Structure
     end
@@ -1622,6 +1705,13 @@ module Aws::Pipes
     # @!attribute [rw] dead_letter_config
     #   Define the target queue to send dead-letter queue events to.
     #   @return [Types::DeadLetterConfig]
+    #
+    # @!attribute [rw] on_partial_batch_item_failure
+    #   (Streams only) Define how to handle item process failures.
+    #   `AUTOMATIC_BISECT` halves each batch and retry each half until all
+    #   the records are processed or there is one failed message left in the
+    #   batch.
+    #   @return [String]
     #
     # @!attribute [rw] maximum_batching_window_in_seconds
     #   The maximum length of a time to wait for events.
@@ -1642,13 +1732,6 @@ module Aws::Pipes
     #   event source.
     #   @return [Integer]
     #
-    # @!attribute [rw] on_partial_batch_item_failure
-    #   (Streams only) Define how to handle item process failures.
-    #   `AUTOMATIC_BISECT` halves each batch and retry each half until all
-    #   the records are processed or there is one failed message left in the
-    #   batch.
-    #   @return [String]
-    #
     # @!attribute [rw] parallelization_factor
     #   (Streams only) The number of batches to process concurrently from
     #   each shard. The default value is 1.
@@ -1663,10 +1746,10 @@ module Aws::Pipes
     class PipeSourceDynamoDBStreamParameters < Struct.new(
       :batch_size,
       :dead_letter_config,
+      :on_partial_batch_item_failure,
       :maximum_batching_window_in_seconds,
       :maximum_record_age_in_seconds,
       :maximum_retry_attempts,
-      :on_partial_batch_item_failure,
       :parallelization_factor,
       :starting_position)
       SENSITIVE = []
@@ -1683,6 +1766,13 @@ module Aws::Pipes
     #   Define the target queue to send dead-letter queue events to.
     #   @return [Types::DeadLetterConfig]
     #
+    # @!attribute [rw] on_partial_batch_item_failure
+    #   (Streams only) Define how to handle item process failures.
+    #   `AUTOMATIC_BISECT` halves each batch and retry each half until all
+    #   the records are processed or there is one failed message left in the
+    #   batch.
+    #   @return [String]
+    #
     # @!attribute [rw] maximum_batching_window_in_seconds
     #   The maximum length of a time to wait for events.
     #   @return [Integer]
@@ -1701,13 +1791,6 @@ module Aws::Pipes
     #   EventBridge retries failed records until the record expires in the
     #   event source.
     #   @return [Integer]
-    #
-    # @!attribute [rw] on_partial_batch_item_failure
-    #   (Streams only) Define how to handle item process failures.
-    #   `AUTOMATIC_BISECT` halves each batch and retry each half until all
-    #   the records are processed or there is one failed message left in the
-    #   batch.
-    #   @return [String]
     #
     # @!attribute [rw] parallelization_factor
     #   (Streams only) The number of batches to process concurrently from
@@ -1728,10 +1811,10 @@ module Aws::Pipes
     class PipeSourceKinesisStreamParameters < Struct.new(
       :batch_size,
       :dead_letter_config,
+      :on_partial_batch_item_failure,
       :maximum_batching_window_in_seconds,
       :maximum_record_age_in_seconds,
       :maximum_retry_attempts,
-      :on_partial_batch_item_failure,
       :parallelization_factor,
       :starting_position,
       :starting_position_timestamp)
@@ -1741,8 +1824,20 @@ module Aws::Pipes
 
     # The parameters for using an MSK stream as a source.
     #
+    # @!attribute [rw] topic_name
+    #   The name of the topic that the pipe will read from.
+    #   @return [String]
+    #
+    # @!attribute [rw] starting_position
+    #   (Streams only) The position in a stream from which to start reading.
+    #   @return [String]
+    #
     # @!attribute [rw] batch_size
     #   The maximum number of records to include in each batch.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] maximum_batching_window_in_seconds
+    #   The maximum length of a time to wait for events.
     #   @return [Integer]
     #
     # @!attribute [rw] consumer_group_id
@@ -1753,40 +1848,20 @@ module Aws::Pipes
     #   The credentials needed to access the resource.
     #   @return [Types::MSKAccessCredentials]
     #
-    # @!attribute [rw] maximum_batching_window_in_seconds
-    #   The maximum length of a time to wait for events.
-    #   @return [Integer]
-    #
-    # @!attribute [rw] starting_position
-    #   (Streams only) The position in a stream from which to start reading.
-    #   @return [String]
-    #
-    # @!attribute [rw] topic_name
-    #   The name of the topic that the pipe will read from.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pipes-2015-10-07/PipeSourceManagedStreamingKafkaParameters AWS API Documentation
     #
     class PipeSourceManagedStreamingKafkaParameters < Struct.new(
-      :batch_size,
-      :consumer_group_id,
-      :credentials,
-      :maximum_batching_window_in_seconds,
+      :topic_name,
       :starting_position,
-      :topic_name)
-      SENSITIVE = [:consumer_group_id, :topic_name]
+      :batch_size,
+      :maximum_batching_window_in_seconds,
+      :consumer_group_id,
+      :credentials)
+      SENSITIVE = [:topic_name, :consumer_group_id]
       include Aws::Structure
     end
 
     # The parameters required to set up a source for your pipe.
-    #
-    # @!attribute [rw] active_mq_broker_parameters
-    #   The parameters for using an Active MQ broker as a source.
-    #   @return [Types::PipeSourceActiveMQBrokerParameters]
-    #
-    # @!attribute [rw] dynamo_db_stream_parameters
-    #   The parameters for using a DynamoDB stream as a source.
-    #   @return [Types::PipeSourceDynamoDBStreamParameters]
     #
     # @!attribute [rw] filter_criteria
     #   The collection of event patterns used to filter events.
@@ -1806,51 +1881,65 @@ module Aws::Pipes
     #   The parameters for using a Kinesis stream as a source.
     #   @return [Types::PipeSourceKinesisStreamParameters]
     #
-    # @!attribute [rw] managed_streaming_kafka_parameters
-    #   The parameters for using an MSK stream as a source.
-    #   @return [Types::PipeSourceManagedStreamingKafkaParameters]
-    #
-    # @!attribute [rw] rabbit_mq_broker_parameters
-    #   The parameters for using a Rabbit MQ broker as a source.
-    #   @return [Types::PipeSourceRabbitMQBrokerParameters]
-    #
-    # @!attribute [rw] self_managed_kafka_parameters
-    #   The parameters for using a self-managed Apache Kafka stream as a
-    #   source.
-    #   @return [Types::PipeSourceSelfManagedKafkaParameters]
+    # @!attribute [rw] dynamo_db_stream_parameters
+    #   The parameters for using a DynamoDB stream as a source.
+    #   @return [Types::PipeSourceDynamoDBStreamParameters]
     #
     # @!attribute [rw] sqs_queue_parameters
     #   The parameters for using a Amazon SQS stream as a source.
     #   @return [Types::PipeSourceSqsQueueParameters]
     #
+    # @!attribute [rw] active_mq_broker_parameters
+    #   The parameters for using an Active MQ broker as a source.
+    #   @return [Types::PipeSourceActiveMQBrokerParameters]
+    #
+    # @!attribute [rw] rabbit_mq_broker_parameters
+    #   The parameters for using a Rabbit MQ broker as a source.
+    #   @return [Types::PipeSourceRabbitMQBrokerParameters]
+    #
+    # @!attribute [rw] managed_streaming_kafka_parameters
+    #   The parameters for using an MSK stream as a source.
+    #   @return [Types::PipeSourceManagedStreamingKafkaParameters]
+    #
+    # @!attribute [rw] self_managed_kafka_parameters
+    #   The parameters for using a self-managed Apache Kafka stream as a
+    #   source.
+    #
+    #   A *self managed* cluster refers to any Apache Kafka cluster not
+    #   hosted by Amazon Web Services. This includes both clusters you
+    #   manage yourself, as well as those hosted by a third-party provider,
+    #   such as [Confluent Cloud][1], [CloudKarafka][2], or [Redpanda][3].
+    #   For more information, see [Apache Kafka streams as a source][4] in
+    #   the *Amazon EventBridge User Guide*.
+    #
+    #
+    #
+    #   [1]: https://www.confluent.io/
+    #   [2]: https://www.cloudkarafka.com/
+    #   [3]: https://redpanda.com/
+    #   [4]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes-kafka.html
+    #   @return [Types::PipeSourceSelfManagedKafkaParameters]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pipes-2015-10-07/PipeSourceParameters AWS API Documentation
     #
     class PipeSourceParameters < Struct.new(
-      :active_mq_broker_parameters,
-      :dynamo_db_stream_parameters,
       :filter_criteria,
       :kinesis_stream_parameters,
-      :managed_streaming_kafka_parameters,
+      :dynamo_db_stream_parameters,
+      :sqs_queue_parameters,
+      :active_mq_broker_parameters,
       :rabbit_mq_broker_parameters,
-      :self_managed_kafka_parameters,
-      :sqs_queue_parameters)
+      :managed_streaming_kafka_parameters,
+      :self_managed_kafka_parameters)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # The parameters for using a Rabbit MQ broker as a source.
     #
-    # @!attribute [rw] batch_size
-    #   The maximum number of records to include in each batch.
-    #   @return [Integer]
-    #
     # @!attribute [rw] credentials
     #   The credentials needed to access the resource.
     #   @return [Types::MQBrokerAccessCredentials]
-    #
-    # @!attribute [rw] maximum_batching_window_in_seconds
-    #   The maximum length of a time to wait for events.
-    #   @return [Integer]
     #
     # @!attribute [rw] queue_name
     #   The name of the destination queue to consume.
@@ -1860,14 +1949,22 @@ module Aws::Pipes
     #   The name of the virtual host associated with the source broker.
     #   @return [String]
     #
+    # @!attribute [rw] batch_size
+    #   The maximum number of records to include in each batch.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] maximum_batching_window_in_seconds
+    #   The maximum length of a time to wait for events.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pipes-2015-10-07/PipeSourceRabbitMQBrokerParameters AWS API Documentation
     #
     class PipeSourceRabbitMQBrokerParameters < Struct.new(
-      :batch_size,
       :credentials,
-      :maximum_batching_window_in_seconds,
       :queue_name,
-      :virtual_host)
+      :virtual_host,
+      :batch_size,
+      :maximum_batching_window_in_seconds)
       SENSITIVE = [:queue_name, :virtual_host]
       include Aws::Structure
     end
@@ -1875,12 +1972,38 @@ module Aws::Pipes
     # The parameters for using a self-managed Apache Kafka stream as a
     # source.
     #
+    # A *self managed* cluster refers to any Apache Kafka cluster not hosted
+    # by Amazon Web Services. This includes both clusters you manage
+    # yourself, as well as those hosted by a third-party provider, such as
+    # [Confluent Cloud][1], [CloudKarafka][2], or [Redpanda][3]. For more
+    # information, see [Apache Kafka streams as a source][4] in the *Amazon
+    # EventBridge User Guide*.
+    #
+    #
+    #
+    # [1]: https://www.confluent.io/
+    # [2]: https://www.cloudkarafka.com/
+    # [3]: https://redpanda.com/
+    # [4]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes-kafka.html
+    #
+    # @!attribute [rw] topic_name
+    #   The name of the topic that the pipe will read from.
+    #   @return [String]
+    #
+    # @!attribute [rw] starting_position
+    #   (Streams only) The position in a stream from which to start reading.
+    #   @return [String]
+    #
     # @!attribute [rw] additional_bootstrap_servers
     #   An array of server URLs.
     #   @return [Array<String>]
     #
     # @!attribute [rw] batch_size
     #   The maximum number of records to include in each batch.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] maximum_batching_window_in_seconds
+    #   The maximum length of a time to wait for events.
     #   @return [Integer]
     #
     # @!attribute [rw] consumer_group_id
@@ -1891,20 +2014,8 @@ module Aws::Pipes
     #   The credentials needed to access the resource.
     #   @return [Types::SelfManagedKafkaAccessConfigurationCredentials]
     #
-    # @!attribute [rw] maximum_batching_window_in_seconds
-    #   The maximum length of a time to wait for events.
-    #   @return [Integer]
-    #
     # @!attribute [rw] server_root_ca_certificate
     #   The ARN of the Secrets Manager secret used for certification.
-    #   @return [String]
-    #
-    # @!attribute [rw] starting_position
-    #   (Streams only) The position in a stream from which to start reading.
-    #   @return [String]
-    #
-    # @!attribute [rw] topic_name
-    #   The name of the topic that the pipe will read from.
     #   @return [String]
     #
     # @!attribute [rw] vpc
@@ -1915,16 +2026,16 @@ module Aws::Pipes
     # @see http://docs.aws.amazon.com/goto/WebAPI/pipes-2015-10-07/PipeSourceSelfManagedKafkaParameters AWS API Documentation
     #
     class PipeSourceSelfManagedKafkaParameters < Struct.new(
+      :topic_name,
+      :starting_position,
       :additional_bootstrap_servers,
       :batch_size,
+      :maximum_batching_window_in_seconds,
       :consumer_group_id,
       :credentials,
-      :maximum_batching_window_in_seconds,
       :server_root_ca_certificate,
-      :starting_position,
-      :topic_name,
       :vpc)
-      SENSITIVE = [:consumer_group_id, :topic_name]
+      SENSITIVE = [:topic_name, :consumer_group_id]
       include Aws::Structure
     end
 
@@ -1949,12 +2060,31 @@ module Aws::Pipes
 
     # The parameters for using an Batch job as a target.
     #
+    # @!attribute [rw] job_definition
+    #   The job definition used by this job. This value can be one of
+    #   `name`, `name:revision`, or the Amazon Resource Name (ARN) for the
+    #   job definition. If name is specified without a revision then the
+    #   latest active revision is used.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_name
+    #   The name of the job. It can be up to 128 letters long. The first
+    #   character must be alphanumeric, can contain uppercase and lowercase
+    #   letters, numbers, hyphens (-), and underscores (\_).
+    #   @return [String]
+    #
     # @!attribute [rw] array_properties
     #   The array properties for the submitted job, such as the size of the
     #   array. The array size can be between 2 and 10,000. If you specify
     #   array properties for a job, it becomes an array job. This parameter
     #   is used only if the target is an Batch job.
     #   @return [Types::BatchArrayProperties]
+    #
+    # @!attribute [rw] retry_strategy
+    #   The retry strategy to use for failed jobs. When a retry strategy is
+    #   specified here, it overrides the retry strategy defined in the job
+    #   definition.
+    #   @return [Types::BatchRetryStrategy]
     #
     # @!attribute [rw] container_overrides
     #   The overrides that are sent to a container.
@@ -1970,19 +2100,6 @@ module Aws::Pipes
     #   child of each dependency to complete before it can begin.
     #   @return [Array<Types::BatchJobDependency>]
     #
-    # @!attribute [rw] job_definition
-    #   The job definition used by this job. This value can be one of
-    #   `name`, `name:revision`, or the Amazon Resource Name (ARN) for the
-    #   job definition. If name is specified without a revision then the
-    #   latest active revision is used.
-    #   @return [String]
-    #
-    # @!attribute [rw] job_name
-    #   The name of the job. It can be up to 128 letters long. The first
-    #   character must be alphanumeric, can contain uppercase and lowercase
-    #   letters, numbers, hyphens (-), and underscores (\_).
-    #   @return [String]
-    #
     # @!attribute [rw] parameters
     #   Additional parameters passed to the job that replace parameter
     #   substitution placeholders that are set in the job definition.
@@ -1991,22 +2108,16 @@ module Aws::Pipes
     #   job definition.
     #   @return [Hash<String,String>]
     #
-    # @!attribute [rw] retry_strategy
-    #   The retry strategy to use for failed jobs. When a retry strategy is
-    #   specified here, it overrides the retry strategy defined in the job
-    #   definition.
-    #   @return [Types::BatchRetryStrategy]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pipes-2015-10-07/PipeTargetBatchJobParameters AWS API Documentation
     #
     class PipeTargetBatchJobParameters < Struct.new(
-      :array_properties,
-      :container_overrides,
-      :depends_on,
       :job_definition,
       :job_name,
-      :parameters,
-      :retry_strategy)
+      :array_properties,
+      :retry_strategy,
+      :container_overrides,
+      :depends_on,
+      :parameters)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2033,35 +2144,15 @@ module Aws::Pipes
 
     # The parameters for using an Amazon ECS task as a target.
     #
-    # @!attribute [rw] capacity_provider_strategy
-    #   The capacity provider strategy to use for the task.
-    #
-    #   If a `capacityProviderStrategy` is specified, the `launchType`
-    #   parameter must be omitted. If no `capacityProviderStrategy` or
-    #   launchType is specified, the `defaultCapacityProviderStrategy` for
-    #   the cluster is used.
-    #   @return [Array<Types::CapacityProviderStrategyItem>]
-    #
-    # @!attribute [rw] enable_ecs_managed_tags
-    #   Specifies whether to enable Amazon ECS managed tags for the task.
-    #   For more information, see [Tagging Your Amazon ECS Resources][1] in
-    #   the Amazon Elastic Container Service Developer Guide.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html
-    #   @return [Boolean]
-    #
-    # @!attribute [rw] enable_execute_command
-    #   Whether or not to enable the execute command functionality for the
-    #   containers in this task. If true, this enables execute command
-    #   functionality on all containers in the task.
-    #   @return [Boolean]
-    #
-    # @!attribute [rw] group
-    #   Specifies an Amazon ECS task group for the task. The maximum length
-    #   is 255 characters.
+    # @!attribute [rw] task_definition_arn
+    #   The ARN of the task definition to use if the event target is an
+    #   Amazon ECS task.
     #   @return [String]
+    #
+    # @!attribute [rw] task_count
+    #   The number of tasks to create based on `TaskDefinition`. The default
+    #   is 1.
+    #   @return [Integer]
     #
     # @!attribute [rw] launch_type
     #   Specifies the launch type on which your task is running. The launch
@@ -2087,21 +2178,6 @@ module Aws::Pipes
     #   not use the `awsvpc` network mode, the task fails.
     #   @return [Types::NetworkConfiguration]
     #
-    # @!attribute [rw] overrides
-    #   The overrides that are associated with a task.
-    #   @return [Types::EcsTaskOverride]
-    #
-    # @!attribute [rw] placement_constraints
-    #   An array of placement constraint objects to use for the task. You
-    #   can specify up to 10 constraints per task (including constraints in
-    #   the task definition and those specified at runtime).
-    #   @return [Array<Types::PlacementConstraint>]
-    #
-    # @!attribute [rw] placement_strategy
-    #   The placement strategy objects to use for the task. You can specify
-    #   a maximum of five strategy rules per task.
-    #   @return [Array<Types::PlacementStrategy>]
-    #
     # @!attribute [rw] platform_version
     #   Specifies the platform version for the task. Specify only the
     #   numeric portion of the platform version, such as `1.1.0`.
@@ -2116,6 +2192,47 @@ module Aws::Pipes
     #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html
     #   @return [String]
     #
+    # @!attribute [rw] group
+    #   Specifies an Amazon ECS task group for the task. The maximum length
+    #   is 255 characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] capacity_provider_strategy
+    #   The capacity provider strategy to use for the task.
+    #
+    #   If a `capacityProviderStrategy` is specified, the `launchType`
+    #   parameter must be omitted. If no `capacityProviderStrategy` or
+    #   launchType is specified, the `defaultCapacityProviderStrategy` for
+    #   the cluster is used.
+    #   @return [Array<Types::CapacityProviderStrategyItem>]
+    #
+    # @!attribute [rw] enable_ecs_managed_tags
+    #   Specifies whether to enable Amazon ECS managed tags for the task.
+    #   For more information, see [Tagging Your Amazon ECS Resources][1] in
+    #   the Amazon Elastic Container Service Developer Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] enable_execute_command
+    #   Whether or not to enable the execute command functionality for the
+    #   containers in this task. If true, this enables execute command
+    #   functionality on all containers in the task.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] placement_constraints
+    #   An array of placement constraint objects to use for the task. You
+    #   can specify up to 10 constraints per task (including constraints in
+    #   the task definition and those specified at runtime).
+    #   @return [Array<Types::PlacementConstraint>]
+    #
+    # @!attribute [rw] placement_strategy
+    #   The placement strategy objects to use for the task. You can specify
+    #   a maximum of five strategy rules per task.
+    #   @return [Array<Types::PlacementStrategy>]
+    #
     # @!attribute [rw] propagate_tags
     #   Specifies whether to propagate the tags from the task definition to
     #   the task. If no value is specified, the tags are not propagated.
@@ -2128,6 +2245,10 @@ module Aws::Pipes
     #   The reference ID to use for the task.
     #   @return [String]
     #
+    # @!attribute [rw] overrides
+    #   The overrides that are associated with a task.
+    #   @return [Types::EcsTaskOverride]
+    #
     # @!attribute [rw] tags
     #   The metadata that you apply to the task to help you categorize and
     #   organize them. Each tag consists of a key and an optional value,
@@ -2139,44 +2260,29 @@ module Aws::Pipes
     #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_RunTask.html#ECS-RunTask-request-tags
     #   @return [Array<Types::Tag>]
     #
-    # @!attribute [rw] task_count
-    #   The number of tasks to create based on `TaskDefinition`. The default
-    #   is 1.
-    #   @return [Integer]
-    #
-    # @!attribute [rw] task_definition_arn
-    #   The ARN of the task definition to use if the event target is an
-    #   Amazon ECS task.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pipes-2015-10-07/PipeTargetEcsTaskParameters AWS API Documentation
     #
     class PipeTargetEcsTaskParameters < Struct.new(
+      :task_definition_arn,
+      :task_count,
+      :launch_type,
+      :network_configuration,
+      :platform_version,
+      :group,
       :capacity_provider_strategy,
       :enable_ecs_managed_tags,
       :enable_execute_command,
-      :group,
-      :launch_type,
-      :network_configuration,
-      :overrides,
       :placement_constraints,
       :placement_strategy,
-      :platform_version,
       :propagate_tags,
       :reference_id,
-      :tags,
-      :task_count,
-      :task_definition_arn)
+      :overrides,
+      :tags)
       SENSITIVE = [:reference_id]
       include Aws::Structure
     end
 
     # The parameters for using an EventBridge event bus as a target.
-    #
-    # @!attribute [rw] detail_type
-    #   A free-form string, with a maximum of 128 characters, used to decide
-    #   what fields to expect in the event detail.
-    #   @return [String]
     #
     # @!attribute [rw] endpoint_id
     #   The URL subdomain of the endpoint. For example, if the URL for
@@ -2184,15 +2290,20 @@ module Aws::Pipes
     #   the EndpointId is `abcde.veo`.
     #   @return [String]
     #
+    # @!attribute [rw] detail_type
+    #   A free-form string, with a maximum of 128 characters, used to decide
+    #   what fields to expect in the event detail.
+    #   @return [String]
+    #
+    # @!attribute [rw] source
+    #   The source of the event.
+    #   @return [String]
+    #
     # @!attribute [rw] resources
     #   Amazon Web Services resources, identified by Amazon Resource Name
     #   (ARN), which the event primarily concerns. Any number, including
     #   zero, may be present.
     #   @return [Array<String>]
-    #
-    # @!attribute [rw] source
-    #   The source of the event.
-    #   @return [String]
     #
     # @!attribute [rw] time
     #   The time stamp of the event, per [RFC3339][1]. If no time stamp is
@@ -2207,27 +2318,27 @@ module Aws::Pipes
     # @see http://docs.aws.amazon.com/goto/WebAPI/pipes-2015-10-07/PipeTargetEventBridgeEventBusParameters AWS API Documentation
     #
     class PipeTargetEventBridgeEventBusParameters < Struct.new(
-      :detail_type,
       :endpoint_id,
-      :resources,
+      :detail_type,
       :source,
+      :resources,
       :time)
-      SENSITIVE = [:detail_type, :endpoint_id, :source]
+      SENSITIVE = [:endpoint_id, :detail_type, :source]
       include Aws::Structure
     end
 
     # These are custom parameter to be used when the target is an API
     # Gateway REST APIs or EventBridge ApiDestinations.
     #
-    # @!attribute [rw] header_parameters
-    #   The headers that need to be sent as part of request invoking the API
-    #   Gateway REST API or EventBridge ApiDestination.
-    #   @return [Hash<String,String>]
-    #
     # @!attribute [rw] path_parameter_values
     #   The path parameter values to be used to populate API Gateway REST
     #   API or EventBridge ApiDestination path wildcards ("*").
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] header_parameters
+    #   The headers that need to be sent as part of request invoking the API
+    #   Gateway REST API or EventBridge ApiDestination.
+    #   @return [Hash<String,String>]
     #
     # @!attribute [rw] query_string_parameters
     #   The query string keys/values that need to be sent as part of request
@@ -2237,8 +2348,8 @@ module Aws::Pipes
     # @see http://docs.aws.amazon.com/goto/WebAPI/pipes-2015-10-07/PipeTargetHttpParameters AWS API Documentation
     #
     class PipeTargetHttpParameters < Struct.new(
-      :header_parameters,
       :path_parameter_values,
+      :header_parameters,
       :query_string_parameters)
       SENSITIVE = []
       include Aws::Structure
@@ -2307,27 +2418,6 @@ module Aws::Pipes
     #
     # [1]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes-event-target.html
     #
-    # @!attribute [rw] batch_job_parameters
-    #   The parameters for using an Batch job as a target.
-    #   @return [Types::PipeTargetBatchJobParameters]
-    #
-    # @!attribute [rw] cloud_watch_logs_parameters
-    #   The parameters for using an CloudWatch Logs log stream as a target.
-    #   @return [Types::PipeTargetCloudWatchLogsParameters]
-    #
-    # @!attribute [rw] ecs_task_parameters
-    #   The parameters for using an Amazon ECS task as a target.
-    #   @return [Types::PipeTargetEcsTaskParameters]
-    #
-    # @!attribute [rw] event_bridge_event_bus_parameters
-    #   The parameters for using an EventBridge event bus as a target.
-    #   @return [Types::PipeTargetEventBridgeEventBusParameters]
-    #
-    # @!attribute [rw] http_parameters
-    #   These are custom parameter to be used when the target is an API
-    #   Gateway REST APIs or EventBridge ApiDestinations.
-    #   @return [Types::PipeTargetHttpParameters]
-    #
     # @!attribute [rw] input_template
     #   Valid JSON text passed to the target. In this case, nothing from the
     #   event itself is passed to the target. For more information, see [The
@@ -2340,13 +2430,34 @@ module Aws::Pipes
     #   [1]: http://www.rfc-editor.org/rfc/rfc7159.txt
     #   @return [String]
     #
+    # @!attribute [rw] lambda_function_parameters
+    #   The parameters for using a Lambda function as a target.
+    #   @return [Types::PipeTargetLambdaFunctionParameters]
+    #
+    # @!attribute [rw] step_function_state_machine_parameters
+    #   The parameters for using a Step Functions state machine as a target.
+    #   @return [Types::PipeTargetStateMachineParameters]
+    #
     # @!attribute [rw] kinesis_stream_parameters
     #   The parameters for using a Kinesis stream as a target.
     #   @return [Types::PipeTargetKinesisStreamParameters]
     #
-    # @!attribute [rw] lambda_function_parameters
-    #   The parameters for using a Lambda function as a target.
-    #   @return [Types::PipeTargetLambdaFunctionParameters]
+    # @!attribute [rw] ecs_task_parameters
+    #   The parameters for using an Amazon ECS task as a target.
+    #   @return [Types::PipeTargetEcsTaskParameters]
+    #
+    # @!attribute [rw] batch_job_parameters
+    #   The parameters for using an Batch job as a target.
+    #   @return [Types::PipeTargetBatchJobParameters]
+    #
+    # @!attribute [rw] sqs_queue_parameters
+    #   The parameters for using a Amazon SQS stream as a target.
+    #   @return [Types::PipeTargetSqsQueueParameters]
+    #
+    # @!attribute [rw] http_parameters
+    #   These are custom parameter to be used when the target is an API
+    #   Gateway REST APIs or EventBridge ApiDestinations.
+    #   @return [Types::PipeTargetHttpParameters]
     #
     # @!attribute [rw] redshift_data_parameters
     #   These are custom parameters to be used when the target is a Amazon
@@ -2358,29 +2469,35 @@ module Aws::Pipes
     #   The parameters for using a SageMaker pipeline as a target.
     #   @return [Types::PipeTargetSageMakerPipelineParameters]
     #
-    # @!attribute [rw] sqs_queue_parameters
-    #   The parameters for using a Amazon SQS stream as a target.
-    #   @return [Types::PipeTargetSqsQueueParameters]
+    # @!attribute [rw] event_bridge_event_bus_parameters
+    #   The parameters for using an EventBridge event bus as a target.
+    #   @return [Types::PipeTargetEventBridgeEventBusParameters]
     #
-    # @!attribute [rw] step_function_state_machine_parameters
-    #   The parameters for using a Step Functions state machine as a target.
-    #   @return [Types::PipeTargetStateMachineParameters]
+    # @!attribute [rw] cloud_watch_logs_parameters
+    #   The parameters for using an CloudWatch Logs log stream as a target.
+    #   @return [Types::PipeTargetCloudWatchLogsParameters]
+    #
+    # @!attribute [rw] timestream_parameters
+    #   The parameters for using a Timestream for LiveAnalytics table as a
+    #   target.
+    #   @return [Types::PipeTargetTimestreamParameters]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pipes-2015-10-07/PipeTargetParameters AWS API Documentation
     #
     class PipeTargetParameters < Struct.new(
-      :batch_job_parameters,
-      :cloud_watch_logs_parameters,
-      :ecs_task_parameters,
-      :event_bridge_event_bus_parameters,
-      :http_parameters,
       :input_template,
-      :kinesis_stream_parameters,
       :lambda_function_parameters,
+      :step_function_state_machine_parameters,
+      :kinesis_stream_parameters,
+      :ecs_task_parameters,
+      :batch_job_parameters,
+      :sqs_queue_parameters,
+      :http_parameters,
       :redshift_data_parameters,
       :sage_maker_pipeline_parameters,
-      :sqs_queue_parameters,
-      :step_function_state_machine_parameters)
+      :event_bridge_event_bus_parameters,
+      :cloud_watch_logs_parameters,
+      :timestream_parameters)
       SENSITIVE = [:input_template]
       include Aws::Structure
     end
@@ -2388,6 +2505,11 @@ module Aws::Pipes
     # These are custom parameters to be used when the target is a Amazon
     # Redshift cluster to invoke the Amazon Redshift Data API
     # BatchExecuteStatement.
+    #
+    # @!attribute [rw] secret_manager_arn
+    #   The name or ARN of the secret that enables access to the database.
+    #   Required when authenticating using Secrets Manager.
+    #   @return [String]
     #
     # @!attribute [rw] database
     #   The name of the database. Required when authenticating using
@@ -2399,15 +2521,6 @@ module Aws::Pipes
     #   credentials.
     #   @return [String]
     #
-    # @!attribute [rw] secret_manager_arn
-    #   The name or ARN of the secret that enables access to the database.
-    #   Required when authenticating using Secrets Manager.
-    #   @return [String]
-    #
-    # @!attribute [rw] sqls
-    #   The SQL statement text to run.
-    #   @return [Array<String>]
-    #
     # @!attribute [rw] statement_name
     #   The name of the SQL statement. You can name the SQL statement when
     #   you create it to identify the query.
@@ -2418,15 +2531,19 @@ module Aws::Pipes
     #   statement runs.
     #   @return [Boolean]
     #
+    # @!attribute [rw] sqls
+    #   The SQL statement text to run.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pipes-2015-10-07/PipeTargetRedshiftDataParameters AWS API Documentation
     #
     class PipeTargetRedshiftDataParameters < Struct.new(
+      :secret_manager_arn,
       :database,
       :db_user,
-      :secret_manager_arn,
-      :sqls,
       :statement_name,
-      :with_event)
+      :with_event,
+      :sqls)
       SENSITIVE = [:database, :db_user, :statement_name]
       include Aws::Structure
     end
@@ -2448,22 +2565,22 @@ module Aws::Pipes
 
     # The parameters for using a Amazon SQS stream as a target.
     #
+    # @!attribute [rw] message_group_id
+    #   The FIFO message group ID to use as the target.
+    #   @return [String]
+    #
     # @!attribute [rw] message_deduplication_id
     #   This parameter applies only to FIFO (first-in-first-out) queues.
     #
     #   The token used for deduplication of sent messages.
     #   @return [String]
     #
-    # @!attribute [rw] message_group_id
-    #   The FIFO message group ID to use as the target.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pipes-2015-10-07/PipeTargetSqsQueueParameters AWS API Documentation
     #
     class PipeTargetSqsQueueParameters < Struct.new(
-      :message_deduplication_id,
-      :message_group_id)
-      SENSITIVE = [:message_deduplication_id, :message_group_id]
+      :message_group_id,
+      :message_deduplication_id)
+      SENSITIVE = [:message_group_id, :message_deduplication_id]
       include Aws::Structure
     end
 
@@ -2503,6 +2620,94 @@ module Aws::Pipes
       include Aws::Structure
     end
 
+    # The parameters for using a Timestream for LiveAnalytics table as a
+    # target.
+    #
+    # @!attribute [rw] time_value
+    #   Dynamic path to the source data field that represents the time value
+    #   for your data.
+    #   @return [String]
+    #
+    # @!attribute [rw] epoch_time_unit
+    #   The granularity of the time units used. Default is `MILLISECONDS`.
+    #
+    #   Required if `TimeFieldType` is specified as `EPOCH`.
+    #   @return [String]
+    #
+    # @!attribute [rw] time_field_type
+    #   The type of time value used.
+    #
+    #   The default is `EPOCH`.
+    #   @return [String]
+    #
+    # @!attribute [rw] timestamp_format
+    #   How to format the timestamps. For example,
+    #   `YYYY-MM-DDThh:mm:ss.sssTZD`.
+    #
+    #   Required if `TimeFieldType` is specified as `TIMESTAMP_FORMAT`.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_value
+    #   64 bit version value or source data field that represents the
+    #   version value for your data.
+    #
+    #   Write requests with a higher version number will update the existing
+    #   measure values of the record and version. In cases where the measure
+    #   value is the same, the version will still be updated.
+    #
+    #   Default value is 1.
+    #
+    #   Timestream for LiveAnalytics does not support updating partial
+    #   measure values in a record.
+    #
+    #   Write requests for duplicate data with a higher version number will
+    #   update the existing measure value and version. In cases where the
+    #   measure value is the same, `Version` will still be updated. Default
+    #   value is `1`.
+    #
+    #   <note markdown="1"> `Version` must be `1` or greater, or you will receive a
+    #   `ValidationException` error.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] dimension_mappings
+    #   Map source data to dimensions in the target Timestream for
+    #   LiveAnalytics table.
+    #
+    #   For more information, see [Amazon Timestream for LiveAnalytics
+    #   concepts][1]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/timestream/latest/developerguide/concepts.html
+    #   @return [Array<Types::DimensionMapping>]
+    #
+    # @!attribute [rw] single_measure_mappings
+    #   Mappings of single source data fields to individual records in the
+    #   specified Timestream for LiveAnalytics table.
+    #   @return [Array<Types::SingleMeasureMapping>]
+    #
+    # @!attribute [rw] multi_measure_mappings
+    #   Maps multiple measures from the source event to the same record in
+    #   the specified Timestream for LiveAnalytics table.
+    #   @return [Array<Types::MultiMeasureMapping>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pipes-2015-10-07/PipeTargetTimestreamParameters AWS API Documentation
+    #
+    class PipeTargetTimestreamParameters < Struct.new(
+      :time_value,
+      :epoch_time_unit,
+      :time_field_type,
+      :timestamp_format,
+      :version_value,
+      :dimension_mappings,
+      :single_measure_mappings,
+      :multi_measure_mappings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An object representing a constraint on task placement. To learn more,
     # see [Task Placement Constraints][1] in the Amazon Elastic Container
     # Service Developer Guide.
@@ -2510,6 +2715,13 @@ module Aws::Pipes
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-constraints.html
+    #
+    # @!attribute [rw] type
+    #   The type of constraint. Use distinctInstance to ensure that each
+    #   task in a particular group is running on a different container
+    #   instance. Use memberOf to restrict the selection to a group of valid
+    #   candidates.
+    #   @return [String]
     #
     # @!attribute [rw] expression
     #   A cluster query language expression to apply to the constraint. You
@@ -2522,18 +2734,11 @@ module Aws::Pipes
     #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/cluster-query-language.html
     #   @return [String]
     #
-    # @!attribute [rw] type
-    #   The type of constraint. Use distinctInstance to ensure that each
-    #   task in a particular group is running on a different container
-    #   instance. Use memberOf to restrict the selection to a group of valid
-    #   candidates.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pipes-2015-10-07/PlacementConstraint AWS API Documentation
     #
     class PlacementConstraint < Struct.new(
-      :expression,
-      :type)
+      :type,
+      :expression)
       SENSITIVE = [:expression]
       include Aws::Structure
     end
@@ -2546,16 +2751,6 @@ module Aws::Pipes
     #
     # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-strategies.html
     #
-    # @!attribute [rw] field
-    #   The field to apply the placement strategy against. For the spread
-    #   placement strategy, valid values are instanceId (or host, which has
-    #   the same effect), or any platform or custom attribute that is
-    #   applied to a container instance, such as
-    #   attribute:ecs.availability-zone. For the binpack placement strategy,
-    #   valid values are cpu and memory. For the random placement strategy,
-    #   this field is not used.
-    #   @return [String]
-    #
     # @!attribute [rw] type
     #   The type of placement strategy. The random placement strategy
     #   randomly places tasks on available candidates. The spread placement
@@ -2567,11 +2762,21 @@ module Aws::Pipes
     #   least amount of remaining memory (but still enough to run the task).
     #   @return [String]
     #
+    # @!attribute [rw] field
+    #   The field to apply the placement strategy against. For the spread
+    #   placement strategy, valid values are instanceId (or host, which has
+    #   the same effect), or any platform or custom attribute that is
+    #   applied to a container instance, such as
+    #   attribute:ecs.availability-zone. For the binpack placement strategy,
+    #   valid values are cpu and memory. For the random placement strategy,
+    #   this field is not used.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pipes-2015-10-07/PlacementStrategy AWS API Documentation
     #
     class PlacementStrategy < Struct.new(
-      :field,
-      :type)
+      :type,
+      :field)
       SENSITIVE = [:field]
       include Aws::Structure
     end
@@ -2581,6 +2786,17 @@ module Aws::Pipes
     # @!attribute [rw] bucket_name
     #   The name of the Amazon S3 bucket to which EventBridge delivers the
     #   log records for the pipe.
+    #   @return [String]
+    #
+    # @!attribute [rw] prefix
+    #   The prefix text with which to begin Amazon S3 log object names.
+    #
+    #   For more information, see [Organizing objects using prefixes][1] in
+    #   the *Amazon Simple Storage Service User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-prefixes.html
     #   @return [String]
     #
     # @!attribute [rw] bucket_owner
@@ -2602,24 +2818,13 @@ module Aws::Pipes
     #   [1]: https://www.w3.org/TR/WD-logfile
     #   @return [String]
     #
-    # @!attribute [rw] prefix
-    #   The prefix text with which to begin Amazon S3 log object names.
-    #
-    #   For more information, see [Organizing objects using prefixes][1] in
-    #   the *Amazon Simple Storage Service User Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-prefixes.html
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pipes-2015-10-07/S3LogDestination AWS API Documentation
     #
     class S3LogDestination < Struct.new(
       :bucket_name,
+      :prefix,
       :bucket_owner,
-      :output_format,
-      :prefix)
+      :output_format)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2709,7 +2914,7 @@ module Aws::Pipes
     #   The ARN of the Secrets Manager secret.
     #   @return [String]
     #
-    # @!attribute [rw] client_certificate_tls_auth
+    # @!attribute [rw] sasl_scram_512_auth
     #   The ARN of the Secrets Manager secret.
     #   @return [String]
     #
@@ -2717,7 +2922,7 @@ module Aws::Pipes
     #   The ARN of the Secrets Manager secret.
     #   @return [String]
     #
-    # @!attribute [rw] sasl_scram_512_auth
+    # @!attribute [rw] client_certificate_tls_auth
     #   The ARN of the Secrets Manager secret.
     #   @return [String]
     #
@@ -2725,23 +2930,28 @@ module Aws::Pipes
     #
     class SelfManagedKafkaAccessConfigurationCredentials < Struct.new(
       :basic_auth,
-      :client_certificate_tls_auth,
-      :sasl_scram_256_auth,
       :sasl_scram_512_auth,
+      :sasl_scram_256_auth,
+      :client_certificate_tls_auth,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
       include Aws::Structure::Union
 
       class BasicAuth < SelfManagedKafkaAccessConfigurationCredentials; end
-      class ClientCertificateTlsAuth < SelfManagedKafkaAccessConfigurationCredentials; end
-      class SaslScram256Auth < SelfManagedKafkaAccessConfigurationCredentials; end
       class SaslScram512Auth < SelfManagedKafkaAccessConfigurationCredentials; end
+      class SaslScram256Auth < SelfManagedKafkaAccessConfigurationCredentials; end
+      class ClientCertificateTlsAuth < SelfManagedKafkaAccessConfigurationCredentials; end
       class Unknown < SelfManagedKafkaAccessConfigurationCredentials; end
     end
 
     # This structure specifies the VPC subnets and security groups for the
     # stream, and whether a public IP address is to be used.
+    #
+    # @!attribute [rw] subnets
+    #   Specifies the subnets associated with the stream. These subnets must
+    #   all be in the same VPC. You can specify as many as 16 subnets.
+    #   @return [Array<String>]
     #
     # @!attribute [rw] security_group
     #   Specifies the security groups associated with the stream. These
@@ -2750,16 +2960,11 @@ module Aws::Pipes
     #   default security group for the VPC is used.
     #   @return [Array<String>]
     #
-    # @!attribute [rw] subnets
-    #   Specifies the subnets associated with the stream. These subnets must
-    #   all be in the same VPC. You can specify as many as 16 subnets.
-    #   @return [Array<String>]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pipes-2015-10-07/SelfManagedKafkaAccessConfigurationVpc AWS API Documentation
     #
     class SelfManagedKafkaAccessConfigurationVpc < Struct.new(
-      :security_group,
-      :subnets)
+      :subnets,
+      :security_group)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2767,10 +2972,6 @@ module Aws::Pipes
     # A quota has been exceeded.
     #
     # @!attribute [rw] message
-    #   @return [String]
-    #
-    # @!attribute [rw] quota_code
-    #   The identifier of the quota that caused the exception.
     #   @return [String]
     #
     # @!attribute [rw] resource_id
@@ -2785,14 +2986,52 @@ module Aws::Pipes
     #   The identifier of the service that caused the exception.
     #   @return [String]
     #
+    # @!attribute [rw] quota_code
+    #   The identifier of the quota that caused the exception.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pipes-2015-10-07/ServiceQuotaExceededException AWS API Documentation
     #
     class ServiceQuotaExceededException < Struct.new(
       :message,
-      :quota_code,
       :resource_id,
       :resource_type,
-      :service_code)
+      :service_code,
+      :quota_code)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Maps a single source data field to a single record in the specified
+    # Timestream for LiveAnalytics table.
+    #
+    # For more information, see [Amazon Timestream for LiveAnalytics
+    # concepts][1]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/timestream/latest/developerguide/concepts.html
+    #
+    # @!attribute [rw] measure_value
+    #   Dynamic path of the source field to map to the measure in the
+    #   record.
+    #   @return [String]
+    #
+    # @!attribute [rw] measure_value_type
+    #   Data type of the source field.
+    #   @return [String]
+    #
+    # @!attribute [rw] measure_name
+    #   Target measure name for the measurement attribute in the Timestream
+    #   table.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pipes-2015-10-07/SingleMeasureMapping AWS API Documentation
+    #
+    class SingleMeasureMapping < Struct.new(
+      :measure_value,
+      :measure_value_type,
+      :measure_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2813,17 +3052,21 @@ module Aws::Pipes
     #   The ARN of the pipe.
     #   @return [String]
     #
-    # @!attribute [rw] creation_time
-    #   The time the pipe was created.
-    #   @return [Time]
-    #
-    # @!attribute [rw] current_state
-    #   The state the pipe is in.
+    # @!attribute [rw] name
+    #   The name of the pipe.
     #   @return [String]
     #
     # @!attribute [rw] desired_state
     #   The state the pipe should be in.
     #   @return [String]
+    #
+    # @!attribute [rw] current_state
+    #   The state the pipe is in.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The time the pipe was created.
+    #   @return [Time]
     #
     # @!attribute [rw] last_modified_time
     #   When the pipe was last updated, in [ISO-8601 format][1]
@@ -2834,19 +3077,15 @@ module Aws::Pipes
     #   [1]: https://www.w3.org/TR/NOTE-datetime
     #   @return [Time]
     #
-    # @!attribute [rw] name
-    #   The name of the pipe.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pipes-2015-10-07/StartPipeResponse AWS API Documentation
     #
     class StartPipeResponse < Struct.new(
       :arn,
-      :creation_time,
-      :current_state,
+      :name,
       :desired_state,
-      :last_modified_time,
-      :name)
+      :current_state,
+      :creation_time,
+      :last_modified_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2867,17 +3106,21 @@ module Aws::Pipes
     #   The ARN of the pipe.
     #   @return [String]
     #
-    # @!attribute [rw] creation_time
-    #   The time the pipe was created.
-    #   @return [Time]
-    #
-    # @!attribute [rw] current_state
-    #   The state the pipe is in.
+    # @!attribute [rw] name
+    #   The name of the pipe.
     #   @return [String]
     #
     # @!attribute [rw] desired_state
     #   The state the pipe should be in.
     #   @return [String]
+    #
+    # @!attribute [rw] current_state
+    #   The state the pipe is in.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The time the pipe was created.
+    #   @return [Time]
     #
     # @!attribute [rw] last_modified_time
     #   When the pipe was last updated, in [ISO-8601 format][1]
@@ -2888,19 +3131,15 @@ module Aws::Pipes
     #   [1]: https://www.w3.org/TR/NOTE-datetime
     #   @return [Time]
     #
-    # @!attribute [rw] name
-    #   The name of the pipe.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pipes-2015-10-07/StopPipeResponse AWS API Documentation
     #
     class StopPipeResponse < Struct.new(
       :arn,
-      :creation_time,
-      :current_state,
+      :name,
       :desired_state,
-      :last_modified_time,
-      :name)
+      :current_state,
+      :creation_time,
+      :last_modified_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2952,6 +3191,10 @@ module Aws::Pipes
     # @!attribute [rw] message
     #   @return [String]
     #
+    # @!attribute [rw] service_code
+    #   The identifier of the service that caused the exception.
+    #   @return [String]
+    #
     # @!attribute [rw] quota_code
     #   The identifier of the quota that caused the exception.
     #   @return [String]
@@ -2961,17 +3204,13 @@ module Aws::Pipes
     #   the exception.
     #   @return [Integer]
     #
-    # @!attribute [rw] service_code
-    #   The identifier of the service that caused the exception.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pipes-2015-10-07/ThrottlingException AWS API Documentation
     #
     class ThrottlingException < Struct.new(
       :message,
+      :service_code,
       :quota_code,
-      :retry_after_seconds,
-      :service_code)
+      :retry_after_seconds)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2997,6 +3236,10 @@ module Aws::Pipes
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
+    # @!attribute [rw] name
+    #   The name of the pipe.
+    #   @return [String]
+    #
     # @!attribute [rw] description
     #   A description of the pipe.
     #   @return [String]
@@ -3005,6 +3248,10 @@ module Aws::Pipes
     #   The state the pipe should be in.
     #   @return [String]
     #
+    # @!attribute [rw] source_parameters
+    #   The parameters required to set up a source for your pipe.
+    #   @return [Types::UpdatePipeSourceParameters]
+    #
     # @!attribute [rw] enrichment
     #   The ARN of the enrichment resource.
     #   @return [String]
@@ -3012,22 +3259,6 @@ module Aws::Pipes
     # @!attribute [rw] enrichment_parameters
     #   The parameters required to set up enrichment on your pipe.
     #   @return [Types::PipeEnrichmentParameters]
-    #
-    # @!attribute [rw] log_configuration
-    #   The logging configuration settings for the pipe.
-    #   @return [Types::PipeLogConfigurationParameters]
-    #
-    # @!attribute [rw] name
-    #   The name of the pipe.
-    #   @return [String]
-    #
-    # @!attribute [rw] role_arn
-    #   The ARN of the role that allows the pipe to send data to the target.
-    #   @return [String]
-    #
-    # @!attribute [rw] source_parameters
-    #   The parameters required to set up a source for your pipe.
-    #   @return [Types::UpdatePipeSourceParameters]
     #
     # @!attribute [rw] target
     #   The ARN of the target resource.
@@ -3045,19 +3276,27 @@ module Aws::Pipes
     #   [1]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes-event-target.html
     #   @return [Types::PipeTargetParameters]
     #
+    # @!attribute [rw] role_arn
+    #   The ARN of the role that allows the pipe to send data to the target.
+    #   @return [String]
+    #
+    # @!attribute [rw] log_configuration
+    #   The logging configuration settings for the pipe.
+    #   @return [Types::PipeLogConfigurationParameters]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pipes-2015-10-07/UpdatePipeRequest AWS API Documentation
     #
     class UpdatePipeRequest < Struct.new(
+      :name,
       :description,
       :desired_state,
+      :source_parameters,
       :enrichment,
       :enrichment_parameters,
-      :log_configuration,
-      :name,
-      :role_arn,
-      :source_parameters,
       :target,
-      :target_parameters)
+      :target_parameters,
+      :role_arn,
+      :log_configuration)
       SENSITIVE = [:description]
       include Aws::Structure
     end
@@ -3066,17 +3305,21 @@ module Aws::Pipes
     #   The ARN of the pipe.
     #   @return [String]
     #
-    # @!attribute [rw] creation_time
-    #   The time the pipe was created.
-    #   @return [Time]
-    #
-    # @!attribute [rw] current_state
-    #   The state the pipe is in.
+    # @!attribute [rw] name
+    #   The name of the pipe.
     #   @return [String]
     #
     # @!attribute [rw] desired_state
     #   The state the pipe should be in.
     #   @return [String]
+    #
+    # @!attribute [rw] current_state
+    #   The state the pipe is in.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The time the pipe was created.
+    #   @return [Time]
     #
     # @!attribute [rw] last_modified_time
     #   When the pipe was last updated, in [ISO-8601 format][1]
@@ -3087,32 +3330,28 @@ module Aws::Pipes
     #   [1]: https://www.w3.org/TR/NOTE-datetime
     #   @return [Time]
     #
-    # @!attribute [rw] name
-    #   The name of the pipe.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pipes-2015-10-07/UpdatePipeResponse AWS API Documentation
     #
     class UpdatePipeResponse < Struct.new(
       :arn,
-      :creation_time,
-      :current_state,
+      :name,
       :desired_state,
-      :last_modified_time,
-      :name)
+      :current_state,
+      :creation_time,
+      :last_modified_time)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # The parameters for using an Active MQ broker as a source.
     #
-    # @!attribute [rw] batch_size
-    #   The maximum number of records to include in each batch.
-    #   @return [Integer]
-    #
     # @!attribute [rw] credentials
     #   The credentials needed to access the resource.
     #   @return [Types::MQBrokerAccessCredentials]
+    #
+    # @!attribute [rw] batch_size
+    #   The maximum number of records to include in each batch.
+    #   @return [Integer]
     #
     # @!attribute [rw] maximum_batching_window_in_seconds
     #   The maximum length of a time to wait for events.
@@ -3121,8 +3360,8 @@ module Aws::Pipes
     # @see http://docs.aws.amazon.com/goto/WebAPI/pipes-2015-10-07/UpdatePipeSourceActiveMQBrokerParameters AWS API Documentation
     #
     class UpdatePipeSourceActiveMQBrokerParameters < Struct.new(
-      :batch_size,
       :credentials,
+      :batch_size,
       :maximum_batching_window_in_seconds)
       SENSITIVE = []
       include Aws::Structure
@@ -3138,6 +3377,13 @@ module Aws::Pipes
     #   Define the target queue to send dead-letter queue events to.
     #   @return [Types::DeadLetterConfig]
     #
+    # @!attribute [rw] on_partial_batch_item_failure
+    #   (Streams only) Define how to handle item process failures.
+    #   `AUTOMATIC_BISECT` halves each batch and retry each half until all
+    #   the records are processed or there is one failed message left in the
+    #   batch.
+    #   @return [String]
+    #
     # @!attribute [rw] maximum_batching_window_in_seconds
     #   The maximum length of a time to wait for events.
     #   @return [Integer]
@@ -3157,13 +3403,6 @@ module Aws::Pipes
     #   event source.
     #   @return [Integer]
     #
-    # @!attribute [rw] on_partial_batch_item_failure
-    #   (Streams only) Define how to handle item process failures.
-    #   `AUTOMATIC_BISECT` halves each batch and retry each half until all
-    #   the records are processed or there is one failed message left in the
-    #   batch.
-    #   @return [String]
-    #
     # @!attribute [rw] parallelization_factor
     #   (Streams only) The number of batches to process concurrently from
     #   each shard. The default value is 1.
@@ -3174,10 +3413,10 @@ module Aws::Pipes
     class UpdatePipeSourceDynamoDBStreamParameters < Struct.new(
       :batch_size,
       :dead_letter_config,
+      :on_partial_batch_item_failure,
       :maximum_batching_window_in_seconds,
       :maximum_record_age_in_seconds,
       :maximum_retry_attempts,
-      :on_partial_batch_item_failure,
       :parallelization_factor)
       SENSITIVE = []
       include Aws::Structure
@@ -3193,6 +3432,13 @@ module Aws::Pipes
     #   Define the target queue to send dead-letter queue events to.
     #   @return [Types::DeadLetterConfig]
     #
+    # @!attribute [rw] on_partial_batch_item_failure
+    #   (Streams only) Define how to handle item process failures.
+    #   `AUTOMATIC_BISECT` halves each batch and retry each half until all
+    #   the records are processed or there is one failed message left in the
+    #   batch.
+    #   @return [String]
+    #
     # @!attribute [rw] maximum_batching_window_in_seconds
     #   The maximum length of a time to wait for events.
     #   @return [Integer]
@@ -3212,13 +3458,6 @@ module Aws::Pipes
     #   event source.
     #   @return [Integer]
     #
-    # @!attribute [rw] on_partial_batch_item_failure
-    #   (Streams only) Define how to handle item process failures.
-    #   `AUTOMATIC_BISECT` halves each batch and retry each half until all
-    #   the records are processed or there is one failed message left in the
-    #   batch.
-    #   @return [String]
-    #
     # @!attribute [rw] parallelization_factor
     #   (Streams only) The number of batches to process concurrently from
     #   each shard. The default value is 1.
@@ -3229,10 +3468,10 @@ module Aws::Pipes
     class UpdatePipeSourceKinesisStreamParameters < Struct.new(
       :batch_size,
       :dead_letter_config,
+      :on_partial_batch_item_failure,
       :maximum_batching_window_in_seconds,
       :maximum_record_age_in_seconds,
       :maximum_retry_attempts,
-      :on_partial_batch_item_failure,
       :parallelization_factor)
       SENSITIVE = []
       include Aws::Structure
@@ -3264,14 +3503,6 @@ module Aws::Pipes
 
     # The parameters required to set up a source for your pipe.
     #
-    # @!attribute [rw] active_mq_broker_parameters
-    #   The parameters for using an Active MQ broker as a source.
-    #   @return [Types::UpdatePipeSourceActiveMQBrokerParameters]
-    #
-    # @!attribute [rw] dynamo_db_stream_parameters
-    #   The parameters for using a DynamoDB stream as a source.
-    #   @return [Types::UpdatePipeSourceDynamoDBStreamParameters]
-    #
     # @!attribute [rw] filter_criteria
     #   The collection of event patterns used to filter events.
     #
@@ -3290,47 +3521,69 @@ module Aws::Pipes
     #   The parameters for using a Kinesis stream as a source.
     #   @return [Types::UpdatePipeSourceKinesisStreamParameters]
     #
-    # @!attribute [rw] managed_streaming_kafka_parameters
-    #   The parameters for using an MSK stream as a source.
-    #   @return [Types::UpdatePipeSourceManagedStreamingKafkaParameters]
-    #
-    # @!attribute [rw] rabbit_mq_broker_parameters
-    #   The parameters for using a Rabbit MQ broker as a source.
-    #   @return [Types::UpdatePipeSourceRabbitMQBrokerParameters]
-    #
-    # @!attribute [rw] self_managed_kafka_parameters
-    #   The parameters for using a self-managed Apache Kafka stream as a
-    #   source.
-    #   @return [Types::UpdatePipeSourceSelfManagedKafkaParameters]
+    # @!attribute [rw] dynamo_db_stream_parameters
+    #   The parameters for using a DynamoDB stream as a source.
+    #   @return [Types::UpdatePipeSourceDynamoDBStreamParameters]
     #
     # @!attribute [rw] sqs_queue_parameters
     #   The parameters for using a Amazon SQS stream as a source.
     #   @return [Types::UpdatePipeSourceSqsQueueParameters]
     #
+    # @!attribute [rw] active_mq_broker_parameters
+    #   The parameters for using an Active MQ broker as a source.
+    #   @return [Types::UpdatePipeSourceActiveMQBrokerParameters]
+    #
+    # @!attribute [rw] rabbit_mq_broker_parameters
+    #   The parameters for using a Rabbit MQ broker as a source.
+    #   @return [Types::UpdatePipeSourceRabbitMQBrokerParameters]
+    #
+    # @!attribute [rw] managed_streaming_kafka_parameters
+    #   The parameters for using an MSK stream as a source.
+    #   @return [Types::UpdatePipeSourceManagedStreamingKafkaParameters]
+    #
+    # @!attribute [rw] self_managed_kafka_parameters
+    #   The parameters for using a self-managed Apache Kafka stream as a
+    #   source.
+    #
+    #   A *self managed* cluster refers to any Apache Kafka cluster not
+    #   hosted by Amazon Web Services. This includes both clusters you
+    #   manage yourself, as well as those hosted by a third-party provider,
+    #   such as [Confluent Cloud][1], [CloudKarafka][2], or [Redpanda][3].
+    #   For more information, see [Apache Kafka streams as a source][4] in
+    #   the *Amazon EventBridge User Guide*.
+    #
+    #
+    #
+    #   [1]: https://www.confluent.io/
+    #   [2]: https://www.cloudkarafka.com/
+    #   [3]: https://redpanda.com/
+    #   [4]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes-kafka.html
+    #   @return [Types::UpdatePipeSourceSelfManagedKafkaParameters]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pipes-2015-10-07/UpdatePipeSourceParameters AWS API Documentation
     #
     class UpdatePipeSourceParameters < Struct.new(
-      :active_mq_broker_parameters,
-      :dynamo_db_stream_parameters,
       :filter_criteria,
       :kinesis_stream_parameters,
-      :managed_streaming_kafka_parameters,
+      :dynamo_db_stream_parameters,
+      :sqs_queue_parameters,
+      :active_mq_broker_parameters,
       :rabbit_mq_broker_parameters,
-      :self_managed_kafka_parameters,
-      :sqs_queue_parameters)
+      :managed_streaming_kafka_parameters,
+      :self_managed_kafka_parameters)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # The parameters for using a Rabbit MQ broker as a source.
     #
-    # @!attribute [rw] batch_size
-    #   The maximum number of records to include in each batch.
-    #   @return [Integer]
-    #
     # @!attribute [rw] credentials
     #   The credentials needed to access the resource.
     #   @return [Types::MQBrokerAccessCredentials]
+    #
+    # @!attribute [rw] batch_size
+    #   The maximum number of records to include in each batch.
+    #   @return [Integer]
     #
     # @!attribute [rw] maximum_batching_window_in_seconds
     #   The maximum length of a time to wait for events.
@@ -3339,8 +3592,8 @@ module Aws::Pipes
     # @see http://docs.aws.amazon.com/goto/WebAPI/pipes-2015-10-07/UpdatePipeSourceRabbitMQBrokerParameters AWS API Documentation
     #
     class UpdatePipeSourceRabbitMQBrokerParameters < Struct.new(
-      :batch_size,
       :credentials,
+      :batch_size,
       :maximum_batching_window_in_seconds)
       SENSITIVE = []
       include Aws::Structure
@@ -3349,17 +3602,31 @@ module Aws::Pipes
     # The parameters for using a self-managed Apache Kafka stream as a
     # source.
     #
+    # A *self managed* cluster refers to any Apache Kafka cluster not hosted
+    # by Amazon Web Services. This includes both clusters you manage
+    # yourself, as well as those hosted by a third-party provider, such as
+    # [Confluent Cloud][1], [CloudKarafka][2], or [Redpanda][3]. For more
+    # information, see [Apache Kafka streams as a source][4] in the *Amazon
+    # EventBridge User Guide*.
+    #
+    #
+    #
+    # [1]: https://www.confluent.io/
+    # [2]: https://www.cloudkarafka.com/
+    # [3]: https://redpanda.com/
+    # [4]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes-kafka.html
+    #
     # @!attribute [rw] batch_size
     #   The maximum number of records to include in each batch.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] maximum_batching_window_in_seconds
+    #   The maximum length of a time to wait for events.
     #   @return [Integer]
     #
     # @!attribute [rw] credentials
     #   The credentials needed to access the resource.
     #   @return [Types::SelfManagedKafkaAccessConfigurationCredentials]
-    #
-    # @!attribute [rw] maximum_batching_window_in_seconds
-    #   The maximum length of a time to wait for events.
-    #   @return [Integer]
     #
     # @!attribute [rw] server_root_ca_certificate
     #   The ARN of the Secrets Manager secret used for certification.
@@ -3374,8 +3641,8 @@ module Aws::Pipes
     #
     class UpdatePipeSourceSelfManagedKafkaParameters < Struct.new(
       :batch_size,
-      :credentials,
       :maximum_batching_window_in_seconds,
+      :credentials,
       :server_root_ca_certificate,
       :vpc)
       SENSITIVE = []
@@ -3404,19 +3671,19 @@ module Aws::Pipes
     # Indicates that an error has occurred while performing a validate
     # operation.
     #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
     # @!attribute [rw] field_list
     #   The list of fields for which validation failed and the corresponding
     #   failure messages.
     #   @return [Array<Types::ValidationExceptionField>]
     #
-    # @!attribute [rw] message
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pipes-2015-10-07/ValidationException AWS API Documentation
     #
     class ValidationException < Struct.new(
-      :field_list,
-      :message)
+      :message,
+      :field_list)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3424,19 +3691,19 @@ module Aws::Pipes
     # Indicates that an error has occurred while performing a validate
     # operation.
     #
-    # @!attribute [rw] message
-    #   The message of the exception.
-    #   @return [String]
-    #
     # @!attribute [rw] name
     #   The name of the exception.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The message of the exception.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pipes-2015-10-07/ValidationExceptionField AWS API Documentation
     #
     class ValidationExceptionField < Struct.new(
-      :message,
-      :name)
+      :name,
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end

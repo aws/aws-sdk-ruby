@@ -11440,15 +11440,15 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
-    # Retrieves information of an instance (also called a *node*
+    # Retrieves information of a node (also called a *instance*
     # interchangeably) of a SageMaker HyperPod cluster.
     #
     # @option params [required, String] :cluster_name
     #   The string name or the Amazon Resource Name (ARN) of the SageMaker
-    #   HyperPod cluster in which the instance is.
+    #   HyperPod cluster in which the node is.
     #
     # @option params [required, String] :node_id
-    #   The ID of the instance.
+    #   The ID of the SageMaker HyperPod cluster node.
     #
     # @return [Types::DescribeClusterNodeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -11472,6 +11472,10 @@ module Aws::SageMaker
     #   resp.node_details.life_cycle_config.source_s3_uri #=> String
     #   resp.node_details.life_cycle_config.on_create #=> String
     #   resp.node_details.threads_per_core #=> Integer
+    #   resp.node_details.private_primary_ip #=> String
+    #   resp.node_details.private_dns_hostname #=> String
+    #   resp.node_details.placement.availability_zone #=> String
+    #   resp.node_details.placement.availability_zone_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeClusterNode AWS API Documentation
     #
@@ -26437,7 +26441,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.243.0'
+      context[:gem_version] = '1.244.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

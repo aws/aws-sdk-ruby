@@ -9,9 +9,9 @@ module Aws::Pipes
   module Types
 
     class AwsVpcConfiguration
-      attr_accessor assign_public_ip: ("ENABLED" | "DISABLED")
-      attr_accessor security_groups: ::Array[::String]
       attr_accessor subnets: ::Array[::String]
+      attr_accessor security_groups: ::Array[::String]
+      attr_accessor assign_public_ip: ("ENABLED" | "DISABLED")
       SENSITIVE: []
     end
 
@@ -52,9 +52,9 @@ module Aws::Pipes
     end
 
     class CapacityProviderStrategyItem
-      attr_accessor base: ::Integer
       attr_accessor capacity_provider: ::String
       attr_accessor weight: ::Integer
+      attr_accessor base: ::Integer
       SENSITIVE: [:capacity_provider]
     end
 
@@ -76,28 +76,28 @@ module Aws::Pipes
     end
 
     class CreatePipeRequest
+      attr_accessor name: ::String
       attr_accessor description: ::String
       attr_accessor desired_state: ("RUNNING" | "STOPPED")
-      attr_accessor enrichment: ::String
-      attr_accessor enrichment_parameters: Types::PipeEnrichmentParameters
-      attr_accessor log_configuration: Types::PipeLogConfigurationParameters
-      attr_accessor name: ::String
-      attr_accessor role_arn: ::String
       attr_accessor source: ::String
       attr_accessor source_parameters: Types::PipeSourceParameters
-      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor enrichment: ::String
+      attr_accessor enrichment_parameters: Types::PipeEnrichmentParameters
       attr_accessor target: ::String
       attr_accessor target_parameters: Types::PipeTargetParameters
+      attr_accessor role_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor log_configuration: Types::PipeLogConfigurationParameters
       SENSITIVE: [:description]
     end
 
     class CreatePipeResponse
       attr_accessor arn: ::String
-      attr_accessor creation_time: ::Time
-      attr_accessor current_state: ("RUNNING" | "STOPPED" | "CREATING" | "UPDATING" | "DELETING" | "STARTING" | "STOPPING" | "CREATE_FAILED" | "UPDATE_FAILED" | "START_FAILED" | "STOP_FAILED" | "DELETE_FAILED" | "CREATE_ROLLBACK_FAILED" | "DELETE_ROLLBACK_FAILED" | "UPDATE_ROLLBACK_FAILED")
-      attr_accessor desired_state: ("RUNNING" | "STOPPED")
-      attr_accessor last_modified_time: ::Time
       attr_accessor name: ::String
+      attr_accessor desired_state: ("RUNNING" | "STOPPED")
+      attr_accessor current_state: ("RUNNING" | "STOPPED" | "CREATING" | "UPDATING" | "DELETING" | "STARTING" | "STOPPING" | "CREATE_FAILED" | "UPDATE_FAILED" | "START_FAILED" | "STOP_FAILED" | "DELETE_FAILED" | "CREATE_ROLLBACK_FAILED" | "DELETE_ROLLBACK_FAILED" | "UPDATE_ROLLBACK_FAILED")
+      attr_accessor creation_time: ::Time
+      attr_accessor last_modified_time: ::Time
       SENSITIVE: []
     end
 
@@ -113,11 +113,11 @@ module Aws::Pipes
 
     class DeletePipeResponse
       attr_accessor arn: ::String
-      attr_accessor creation_time: ::Time
-      attr_accessor current_state: ("RUNNING" | "STOPPED" | "CREATING" | "UPDATING" | "DELETING" | "STARTING" | "STOPPING" | "CREATE_FAILED" | "UPDATE_FAILED" | "START_FAILED" | "STOP_FAILED" | "DELETE_FAILED" | "CREATE_ROLLBACK_FAILED" | "DELETE_ROLLBACK_FAILED" | "UPDATE_ROLLBACK_FAILED")
-      attr_accessor desired_state: ("RUNNING" | "STOPPED" | "DELETED")
-      attr_accessor last_modified_time: ::Time
       attr_accessor name: ::String
+      attr_accessor desired_state: ("RUNNING" | "STOPPED" | "DELETED")
+      attr_accessor current_state: ("RUNNING" | "STOPPED" | "CREATING" | "UPDATING" | "DELETING" | "STARTING" | "STOPPING" | "CREATE_FAILED" | "UPDATE_FAILED" | "START_FAILED" | "STOP_FAILED" | "DELETE_FAILED" | "CREATE_ROLLBACK_FAILED" | "DELETE_ROLLBACK_FAILED" | "UPDATE_ROLLBACK_FAILED")
+      attr_accessor creation_time: ::Time
+      attr_accessor last_modified_time: ::Time
       SENSITIVE: []
     end
 
@@ -128,23 +128,30 @@ module Aws::Pipes
 
     class DescribePipeResponse
       attr_accessor arn: ::String
-      attr_accessor creation_time: ::Time
-      attr_accessor current_state: ("RUNNING" | "STOPPED" | "CREATING" | "UPDATING" | "DELETING" | "STARTING" | "STOPPING" | "CREATE_FAILED" | "UPDATE_FAILED" | "START_FAILED" | "STOP_FAILED" | "DELETE_FAILED" | "CREATE_ROLLBACK_FAILED" | "DELETE_ROLLBACK_FAILED" | "UPDATE_ROLLBACK_FAILED")
+      attr_accessor name: ::String
       attr_accessor description: ::String
       attr_accessor desired_state: ("RUNNING" | "STOPPED" | "DELETED")
-      attr_accessor enrichment: ::String
-      attr_accessor enrichment_parameters: Types::PipeEnrichmentParameters
-      attr_accessor last_modified_time: ::Time
-      attr_accessor log_configuration: Types::PipeLogConfiguration
-      attr_accessor name: ::String
-      attr_accessor role_arn: ::String
+      attr_accessor current_state: ("RUNNING" | "STOPPED" | "CREATING" | "UPDATING" | "DELETING" | "STARTING" | "STOPPING" | "CREATE_FAILED" | "UPDATE_FAILED" | "START_FAILED" | "STOP_FAILED" | "DELETE_FAILED" | "CREATE_ROLLBACK_FAILED" | "DELETE_ROLLBACK_FAILED" | "UPDATE_ROLLBACK_FAILED")
+      attr_accessor state_reason: ::String
       attr_accessor source: ::String
       attr_accessor source_parameters: Types::PipeSourceParameters
-      attr_accessor state_reason: ::String
-      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor enrichment: ::String
+      attr_accessor enrichment_parameters: Types::PipeEnrichmentParameters
       attr_accessor target: ::String
       attr_accessor target_parameters: Types::PipeTargetParameters
+      attr_accessor role_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor creation_time: ::Time
+      attr_accessor last_modified_time: ::Time
+      attr_accessor log_configuration: Types::PipeLogConfiguration
       SENSITIVE: [:description]
+    end
+
+    class DimensionMapping
+      attr_accessor dimension_value: ::String
+      attr_accessor dimension_value_type: ("VARCHAR")
+      attr_accessor dimension_name: ::String
+      SENSITIVE: []
     end
 
     class EcsContainerOverride
@@ -226,19 +233,19 @@ module Aws::Pipes
     end
 
     class ListPipesRequest
-      attr_accessor current_state: ("RUNNING" | "STOPPED" | "CREATING" | "UPDATING" | "DELETING" | "STARTING" | "STOPPING" | "CREATE_FAILED" | "UPDATE_FAILED" | "START_FAILED" | "STOP_FAILED" | "DELETE_FAILED" | "CREATE_ROLLBACK_FAILED" | "DELETE_ROLLBACK_FAILED" | "UPDATE_ROLLBACK_FAILED")
-      attr_accessor desired_state: ("RUNNING" | "STOPPED")
-      attr_accessor limit: ::Integer
       attr_accessor name_prefix: ::String
-      attr_accessor next_token: ::String
+      attr_accessor desired_state: ("RUNNING" | "STOPPED")
+      attr_accessor current_state: ("RUNNING" | "STOPPED" | "CREATING" | "UPDATING" | "DELETING" | "STARTING" | "STOPPING" | "CREATE_FAILED" | "UPDATE_FAILED" | "START_FAILED" | "STOP_FAILED" | "DELETE_FAILED" | "CREATE_ROLLBACK_FAILED" | "DELETE_ROLLBACK_FAILED" | "UPDATE_ROLLBACK_FAILED")
       attr_accessor source_prefix: ::String
       attr_accessor target_prefix: ::String
+      attr_accessor next_token: ::String
+      attr_accessor limit: ::Integer
       SENSITIVE: [:next_token]
     end
 
     class ListPipesResponse
-      attr_accessor next_token: ::String
       attr_accessor pipes: ::Array[Types::Pipe]
+      attr_accessor next_token: ::String
       SENSITIVE: [:next_token]
     end
 
@@ -264,17 +271,30 @@ module Aws::Pipes
     end
 
     class MSKAccessCredentials
-      attr_accessor client_certificate_tls_auth: ::String
       attr_accessor sasl_scram_512_auth: ::String
+      attr_accessor client_certificate_tls_auth: ::String
       attr_accessor unknown: untyped
       SENSITIVE: []
 
-      class ClientCertificateTlsAuth < MSKAccessCredentials
-      end
       class SaslScram512Auth < MSKAccessCredentials
+      end
+      class ClientCertificateTlsAuth < MSKAccessCredentials
       end
       class Unknown < MSKAccessCredentials
       end
+    end
+
+    class MultiMeasureAttributeMapping
+      attr_accessor measure_value: ::String
+      attr_accessor measure_value_type: ("DOUBLE" | "BIGINT" | "VARCHAR" | "BOOLEAN" | "TIMESTAMP")
+      attr_accessor multi_measure_attribute_name: ::String
+      SENSITIVE: []
+    end
+
+    class MultiMeasureMapping
+      attr_accessor multi_measure_name: ::String
+      attr_accessor multi_measure_attribute_mappings: ::Array[Types::MultiMeasureAttributeMapping]
+      SENSITIVE: []
     end
 
     class NetworkConfiguration
@@ -288,65 +308,65 @@ module Aws::Pipes
     end
 
     class Pipe
-      attr_accessor arn: ::String
-      attr_accessor creation_time: ::Time
-      attr_accessor current_state: ("RUNNING" | "STOPPED" | "CREATING" | "UPDATING" | "DELETING" | "STARTING" | "STOPPING" | "CREATE_FAILED" | "UPDATE_FAILED" | "START_FAILED" | "STOP_FAILED" | "DELETE_FAILED" | "CREATE_ROLLBACK_FAILED" | "DELETE_ROLLBACK_FAILED" | "UPDATE_ROLLBACK_FAILED")
-      attr_accessor desired_state: ("RUNNING" | "STOPPED")
-      attr_accessor enrichment: ::String
-      attr_accessor last_modified_time: ::Time
       attr_accessor name: ::String
-      attr_accessor source: ::String
+      attr_accessor arn: ::String
+      attr_accessor desired_state: ("RUNNING" | "STOPPED")
+      attr_accessor current_state: ("RUNNING" | "STOPPED" | "CREATING" | "UPDATING" | "DELETING" | "STARTING" | "STOPPING" | "CREATE_FAILED" | "UPDATE_FAILED" | "START_FAILED" | "STOP_FAILED" | "DELETE_FAILED" | "CREATE_ROLLBACK_FAILED" | "DELETE_ROLLBACK_FAILED" | "UPDATE_ROLLBACK_FAILED")
       attr_accessor state_reason: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor last_modified_time: ::Time
+      attr_accessor source: ::String
       attr_accessor target: ::String
+      attr_accessor enrichment: ::String
       SENSITIVE: []
     end
 
     class PipeEnrichmentHttpParameters
-      attr_accessor header_parameters: ::Hash[::String, ::String]
       attr_accessor path_parameter_values: ::Array[::String]
+      attr_accessor header_parameters: ::Hash[::String, ::String]
       attr_accessor query_string_parameters: ::Hash[::String, ::String]
       SENSITIVE: []
     end
 
     class PipeEnrichmentParameters
-      attr_accessor http_parameters: Types::PipeEnrichmentHttpParameters
       attr_accessor input_template: ::String
+      attr_accessor http_parameters: Types::PipeEnrichmentHttpParameters
       SENSITIVE: [:input_template]
     end
 
     class PipeLogConfiguration
-      attr_accessor cloudwatch_logs_log_destination: Types::CloudwatchLogsLogDestination
-      attr_accessor firehose_log_destination: Types::FirehoseLogDestination
-      attr_accessor include_execution_data: ::Array[("ALL")]
-      attr_accessor level: ("OFF" | "ERROR" | "INFO" | "TRACE")
       attr_accessor s3_log_destination: Types::S3LogDestination
+      attr_accessor firehose_log_destination: Types::FirehoseLogDestination
+      attr_accessor cloudwatch_logs_log_destination: Types::CloudwatchLogsLogDestination
+      attr_accessor level: ("OFF" | "ERROR" | "INFO" | "TRACE")
+      attr_accessor include_execution_data: ::Array[("ALL")]
       SENSITIVE: []
     end
 
     class PipeLogConfigurationParameters
-      attr_accessor cloudwatch_logs_log_destination: Types::CloudwatchLogsLogDestinationParameters
-      attr_accessor firehose_log_destination: Types::FirehoseLogDestinationParameters
-      attr_accessor include_execution_data: ::Array[("ALL")]
-      attr_accessor level: ("OFF" | "ERROR" | "INFO" | "TRACE")
       attr_accessor s3_log_destination: Types::S3LogDestinationParameters
+      attr_accessor firehose_log_destination: Types::FirehoseLogDestinationParameters
+      attr_accessor cloudwatch_logs_log_destination: Types::CloudwatchLogsLogDestinationParameters
+      attr_accessor level: ("OFF" | "ERROR" | "INFO" | "TRACE")
+      attr_accessor include_execution_data: ::Array[("ALL")]
       SENSITIVE: []
     end
 
     class PipeSourceActiveMQBrokerParameters
-      attr_accessor batch_size: ::Integer
       attr_accessor credentials: Types::MQBrokerAccessCredentials
-      attr_accessor maximum_batching_window_in_seconds: ::Integer
       attr_accessor queue_name: ::String
+      attr_accessor batch_size: ::Integer
+      attr_accessor maximum_batching_window_in_seconds: ::Integer
       SENSITIVE: [:queue_name]
     end
 
     class PipeSourceDynamoDBStreamParameters
       attr_accessor batch_size: ::Integer
       attr_accessor dead_letter_config: Types::DeadLetterConfig
+      attr_accessor on_partial_batch_item_failure: ("AUTOMATIC_BISECT")
       attr_accessor maximum_batching_window_in_seconds: ::Integer
       attr_accessor maximum_record_age_in_seconds: ::Integer
       attr_accessor maximum_retry_attempts: ::Integer
-      attr_accessor on_partial_batch_item_failure: ("AUTOMATIC_BISECT")
       attr_accessor parallelization_factor: ::Integer
       attr_accessor starting_position: ("TRIM_HORIZON" | "LATEST")
       SENSITIVE: []
@@ -355,10 +375,10 @@ module Aws::Pipes
     class PipeSourceKinesisStreamParameters
       attr_accessor batch_size: ::Integer
       attr_accessor dead_letter_config: Types::DeadLetterConfig
+      attr_accessor on_partial_batch_item_failure: ("AUTOMATIC_BISECT")
       attr_accessor maximum_batching_window_in_seconds: ::Integer
       attr_accessor maximum_record_age_in_seconds: ::Integer
       attr_accessor maximum_retry_attempts: ::Integer
-      attr_accessor on_partial_batch_item_failure: ("AUTOMATIC_BISECT")
       attr_accessor parallelization_factor: ::Integer
       attr_accessor starting_position: ("TRIM_HORIZON" | "LATEST" | "AT_TIMESTAMP")
       attr_accessor starting_position_timestamp: ::Time
@@ -366,47 +386,47 @@ module Aws::Pipes
     end
 
     class PipeSourceManagedStreamingKafkaParameters
+      attr_accessor topic_name: ::String
+      attr_accessor starting_position: ("TRIM_HORIZON" | "LATEST")
       attr_accessor batch_size: ::Integer
+      attr_accessor maximum_batching_window_in_seconds: ::Integer
       attr_accessor consumer_group_id: ::String
       attr_accessor credentials: Types::MSKAccessCredentials
-      attr_accessor maximum_batching_window_in_seconds: ::Integer
-      attr_accessor starting_position: ("TRIM_HORIZON" | "LATEST")
-      attr_accessor topic_name: ::String
-      SENSITIVE: [:consumer_group_id, :topic_name]
+      SENSITIVE: [:topic_name, :consumer_group_id]
     end
 
     class PipeSourceParameters
-      attr_accessor active_mq_broker_parameters: Types::PipeSourceActiveMQBrokerParameters
-      attr_accessor dynamo_db_stream_parameters: Types::PipeSourceDynamoDBStreamParameters
       attr_accessor filter_criteria: Types::FilterCriteria
       attr_accessor kinesis_stream_parameters: Types::PipeSourceKinesisStreamParameters
-      attr_accessor managed_streaming_kafka_parameters: Types::PipeSourceManagedStreamingKafkaParameters
-      attr_accessor rabbit_mq_broker_parameters: Types::PipeSourceRabbitMQBrokerParameters
-      attr_accessor self_managed_kafka_parameters: Types::PipeSourceSelfManagedKafkaParameters
+      attr_accessor dynamo_db_stream_parameters: Types::PipeSourceDynamoDBStreamParameters
       attr_accessor sqs_queue_parameters: Types::PipeSourceSqsQueueParameters
+      attr_accessor active_mq_broker_parameters: Types::PipeSourceActiveMQBrokerParameters
+      attr_accessor rabbit_mq_broker_parameters: Types::PipeSourceRabbitMQBrokerParameters
+      attr_accessor managed_streaming_kafka_parameters: Types::PipeSourceManagedStreamingKafkaParameters
+      attr_accessor self_managed_kafka_parameters: Types::PipeSourceSelfManagedKafkaParameters
       SENSITIVE: []
     end
 
     class PipeSourceRabbitMQBrokerParameters
-      attr_accessor batch_size: ::Integer
       attr_accessor credentials: Types::MQBrokerAccessCredentials
-      attr_accessor maximum_batching_window_in_seconds: ::Integer
       attr_accessor queue_name: ::String
       attr_accessor virtual_host: ::String
+      attr_accessor batch_size: ::Integer
+      attr_accessor maximum_batching_window_in_seconds: ::Integer
       SENSITIVE: [:queue_name, :virtual_host]
     end
 
     class PipeSourceSelfManagedKafkaParameters
+      attr_accessor topic_name: ::String
+      attr_accessor starting_position: ("TRIM_HORIZON" | "LATEST")
       attr_accessor additional_bootstrap_servers: ::Array[::String]
       attr_accessor batch_size: ::Integer
+      attr_accessor maximum_batching_window_in_seconds: ::Integer
       attr_accessor consumer_group_id: ::String
       attr_accessor credentials: Types::SelfManagedKafkaAccessConfigurationCredentials
-      attr_accessor maximum_batching_window_in_seconds: ::Integer
       attr_accessor server_root_ca_certificate: ::String
-      attr_accessor starting_position: ("TRIM_HORIZON" | "LATEST")
-      attr_accessor topic_name: ::String
       attr_accessor vpc: Types::SelfManagedKafkaAccessConfigurationVpc
-      SENSITIVE: [:consumer_group_id, :topic_name]
+      SENSITIVE: [:topic_name, :consumer_group_id]
     end
 
     class PipeSourceSqsQueueParameters
@@ -416,13 +436,13 @@ module Aws::Pipes
     end
 
     class PipeTargetBatchJobParameters
-      attr_accessor array_properties: Types::BatchArrayProperties
-      attr_accessor container_overrides: Types::BatchContainerOverrides
-      attr_accessor depends_on: ::Array[Types::BatchJobDependency]
       attr_accessor job_definition: ::String
       attr_accessor job_name: ::String
-      attr_accessor parameters: ::Hash[::String, ::String]
+      attr_accessor array_properties: Types::BatchArrayProperties
       attr_accessor retry_strategy: Types::BatchRetryStrategy
+      attr_accessor container_overrides: Types::BatchContainerOverrides
+      attr_accessor depends_on: ::Array[Types::BatchJobDependency]
+      attr_accessor parameters: ::Hash[::String, ::String]
       SENSITIVE: []
     end
 
@@ -433,36 +453,36 @@ module Aws::Pipes
     end
 
     class PipeTargetEcsTaskParameters
+      attr_accessor task_definition_arn: ::String
+      attr_accessor task_count: ::Integer
+      attr_accessor launch_type: ("EC2" | "FARGATE" | "EXTERNAL")
+      attr_accessor network_configuration: Types::NetworkConfiguration
+      attr_accessor platform_version: ::String
+      attr_accessor group: ::String
       attr_accessor capacity_provider_strategy: ::Array[Types::CapacityProviderStrategyItem]
       attr_accessor enable_ecs_managed_tags: bool
       attr_accessor enable_execute_command: bool
-      attr_accessor group: ::String
-      attr_accessor launch_type: ("EC2" | "FARGATE" | "EXTERNAL")
-      attr_accessor network_configuration: Types::NetworkConfiguration
-      attr_accessor overrides: Types::EcsTaskOverride
       attr_accessor placement_constraints: ::Array[Types::PlacementConstraint]
       attr_accessor placement_strategy: ::Array[Types::PlacementStrategy]
-      attr_accessor platform_version: ::String
       attr_accessor propagate_tags: ("TASK_DEFINITION")
       attr_accessor reference_id: ::String
+      attr_accessor overrides: Types::EcsTaskOverride
       attr_accessor tags: ::Array[Types::Tag]
-      attr_accessor task_count: ::Integer
-      attr_accessor task_definition_arn: ::String
       SENSITIVE: [:reference_id]
     end
 
     class PipeTargetEventBridgeEventBusParameters
-      attr_accessor detail_type: ::String
       attr_accessor endpoint_id: ::String
-      attr_accessor resources: ::Array[::String]
+      attr_accessor detail_type: ::String
       attr_accessor source: ::String
+      attr_accessor resources: ::Array[::String]
       attr_accessor time: ::String
-      SENSITIVE: [:detail_type, :endpoint_id, :source]
+      SENSITIVE: [:endpoint_id, :detail_type, :source]
     end
 
     class PipeTargetHttpParameters
-      attr_accessor header_parameters: ::Hash[::String, ::String]
       attr_accessor path_parameter_values: ::Array[::String]
+      attr_accessor header_parameters: ::Hash[::String, ::String]
       attr_accessor query_string_parameters: ::Hash[::String, ::String]
       SENSITIVE: []
     end
@@ -478,28 +498,29 @@ module Aws::Pipes
     end
 
     class PipeTargetParameters
-      attr_accessor batch_job_parameters: Types::PipeTargetBatchJobParameters
-      attr_accessor cloud_watch_logs_parameters: Types::PipeTargetCloudWatchLogsParameters
-      attr_accessor ecs_task_parameters: Types::PipeTargetEcsTaskParameters
-      attr_accessor event_bridge_event_bus_parameters: Types::PipeTargetEventBridgeEventBusParameters
-      attr_accessor http_parameters: Types::PipeTargetHttpParameters
       attr_accessor input_template: ::String
-      attr_accessor kinesis_stream_parameters: Types::PipeTargetKinesisStreamParameters
       attr_accessor lambda_function_parameters: Types::PipeTargetLambdaFunctionParameters
+      attr_accessor step_function_state_machine_parameters: Types::PipeTargetStateMachineParameters
+      attr_accessor kinesis_stream_parameters: Types::PipeTargetKinesisStreamParameters
+      attr_accessor ecs_task_parameters: Types::PipeTargetEcsTaskParameters
+      attr_accessor batch_job_parameters: Types::PipeTargetBatchJobParameters
+      attr_accessor sqs_queue_parameters: Types::PipeTargetSqsQueueParameters
+      attr_accessor http_parameters: Types::PipeTargetHttpParameters
       attr_accessor redshift_data_parameters: Types::PipeTargetRedshiftDataParameters
       attr_accessor sage_maker_pipeline_parameters: Types::PipeTargetSageMakerPipelineParameters
-      attr_accessor sqs_queue_parameters: Types::PipeTargetSqsQueueParameters
-      attr_accessor step_function_state_machine_parameters: Types::PipeTargetStateMachineParameters
+      attr_accessor event_bridge_event_bus_parameters: Types::PipeTargetEventBridgeEventBusParameters
+      attr_accessor cloud_watch_logs_parameters: Types::PipeTargetCloudWatchLogsParameters
+      attr_accessor timestream_parameters: Types::PipeTargetTimestreamParameters
       SENSITIVE: [:input_template]
     end
 
     class PipeTargetRedshiftDataParameters
+      attr_accessor secret_manager_arn: ::String
       attr_accessor database: ::String
       attr_accessor db_user: ::String
-      attr_accessor secret_manager_arn: ::String
-      attr_accessor sqls: ::Array[::String]
       attr_accessor statement_name: ::String
       attr_accessor with_event: bool
+      attr_accessor sqls: ::Array[::String]
       SENSITIVE: [:database, :db_user, :statement_name]
     end
 
@@ -509,9 +530,9 @@ module Aws::Pipes
     end
 
     class PipeTargetSqsQueueParameters
-      attr_accessor message_deduplication_id: ::String
       attr_accessor message_group_id: ::String
-      SENSITIVE: [:message_deduplication_id, :message_group_id]
+      attr_accessor message_deduplication_id: ::String
+      SENSITIVE: [:message_group_id, :message_deduplication_id]
     end
 
     class PipeTargetStateMachineParameters
@@ -519,23 +540,35 @@ module Aws::Pipes
       SENSITIVE: []
     end
 
+    class PipeTargetTimestreamParameters
+      attr_accessor time_value: ::String
+      attr_accessor epoch_time_unit: ("MILLISECONDS" | "SECONDS" | "MICROSECONDS" | "NANOSECONDS")
+      attr_accessor time_field_type: ("EPOCH" | "TIMESTAMP_FORMAT")
+      attr_accessor timestamp_format: ::String
+      attr_accessor version_value: ::String
+      attr_accessor dimension_mappings: ::Array[Types::DimensionMapping]
+      attr_accessor single_measure_mappings: ::Array[Types::SingleMeasureMapping]
+      attr_accessor multi_measure_mappings: ::Array[Types::MultiMeasureMapping]
+      SENSITIVE: []
+    end
+
     class PlacementConstraint
-      attr_accessor expression: ::String
       attr_accessor type: ("distinctInstance" | "memberOf")
+      attr_accessor expression: ::String
       SENSITIVE: [:expression]
     end
 
     class PlacementStrategy
-      attr_accessor field: ::String
       attr_accessor type: ("random" | "spread" | "binpack")
+      attr_accessor field: ::String
       SENSITIVE: [:field]
     end
 
     class S3LogDestination
       attr_accessor bucket_name: ::String
+      attr_accessor prefix: ::String
       attr_accessor bucket_owner: ::String
       attr_accessor output_format: ("json" | "plain" | "w3c")
-      attr_accessor prefix: ::String
       SENSITIVE: []
     end
 
@@ -555,36 +588,43 @@ module Aws::Pipes
 
     class SelfManagedKafkaAccessConfigurationCredentials
       attr_accessor basic_auth: ::String
-      attr_accessor client_certificate_tls_auth: ::String
-      attr_accessor sasl_scram_256_auth: ::String
       attr_accessor sasl_scram_512_auth: ::String
+      attr_accessor sasl_scram_256_auth: ::String
+      attr_accessor client_certificate_tls_auth: ::String
       attr_accessor unknown: untyped
       SENSITIVE: []
 
       class BasicAuth < SelfManagedKafkaAccessConfigurationCredentials
       end
-      class ClientCertificateTlsAuth < SelfManagedKafkaAccessConfigurationCredentials
+      class SaslScram512Auth < SelfManagedKafkaAccessConfigurationCredentials
       end
       class SaslScram256Auth < SelfManagedKafkaAccessConfigurationCredentials
       end
-      class SaslScram512Auth < SelfManagedKafkaAccessConfigurationCredentials
+      class ClientCertificateTlsAuth < SelfManagedKafkaAccessConfigurationCredentials
       end
       class Unknown < SelfManagedKafkaAccessConfigurationCredentials
       end
     end
 
     class SelfManagedKafkaAccessConfigurationVpc
-      attr_accessor security_group: ::Array[::String]
       attr_accessor subnets: ::Array[::String]
+      attr_accessor security_group: ::Array[::String]
       SENSITIVE: []
     end
 
     class ServiceQuotaExceededException
       attr_accessor message: ::String
-      attr_accessor quota_code: ::String
       attr_accessor resource_id: ::String
       attr_accessor resource_type: ::String
       attr_accessor service_code: ::String
+      attr_accessor quota_code: ::String
+      SENSITIVE: []
+    end
+
+    class SingleMeasureMapping
+      attr_accessor measure_value: ::String
+      attr_accessor measure_value_type: ("DOUBLE" | "BIGINT" | "VARCHAR" | "BOOLEAN" | "TIMESTAMP")
+      attr_accessor measure_name: ::String
       SENSITIVE: []
     end
 
@@ -595,11 +635,11 @@ module Aws::Pipes
 
     class StartPipeResponse
       attr_accessor arn: ::String
-      attr_accessor creation_time: ::Time
-      attr_accessor current_state: ("RUNNING" | "STOPPED" | "CREATING" | "UPDATING" | "DELETING" | "STARTING" | "STOPPING" | "CREATE_FAILED" | "UPDATE_FAILED" | "START_FAILED" | "STOP_FAILED" | "DELETE_FAILED" | "CREATE_ROLLBACK_FAILED" | "DELETE_ROLLBACK_FAILED" | "UPDATE_ROLLBACK_FAILED")
-      attr_accessor desired_state: ("RUNNING" | "STOPPED")
-      attr_accessor last_modified_time: ::Time
       attr_accessor name: ::String
+      attr_accessor desired_state: ("RUNNING" | "STOPPED")
+      attr_accessor current_state: ("RUNNING" | "STOPPED" | "CREATING" | "UPDATING" | "DELETING" | "STARTING" | "STOPPING" | "CREATE_FAILED" | "UPDATE_FAILED" | "START_FAILED" | "STOP_FAILED" | "DELETE_FAILED" | "CREATE_ROLLBACK_FAILED" | "DELETE_ROLLBACK_FAILED" | "UPDATE_ROLLBACK_FAILED")
+      attr_accessor creation_time: ::Time
+      attr_accessor last_modified_time: ::Time
       SENSITIVE: []
     end
 
@@ -610,11 +650,11 @@ module Aws::Pipes
 
     class StopPipeResponse
       attr_accessor arn: ::String
-      attr_accessor creation_time: ::Time
-      attr_accessor current_state: ("RUNNING" | "STOPPED" | "CREATING" | "UPDATING" | "DELETING" | "STARTING" | "STOPPING" | "CREATE_FAILED" | "UPDATE_FAILED" | "START_FAILED" | "STOP_FAILED" | "DELETE_FAILED" | "CREATE_ROLLBACK_FAILED" | "DELETE_ROLLBACK_FAILED" | "UPDATE_ROLLBACK_FAILED")
-      attr_accessor desired_state: ("RUNNING" | "STOPPED")
-      attr_accessor last_modified_time: ::Time
       attr_accessor name: ::String
+      attr_accessor desired_state: ("RUNNING" | "STOPPED")
+      attr_accessor current_state: ("RUNNING" | "STOPPED" | "CREATING" | "UPDATING" | "DELETING" | "STARTING" | "STOPPING" | "CREATE_FAILED" | "UPDATE_FAILED" | "START_FAILED" | "STOP_FAILED" | "DELETE_FAILED" | "CREATE_ROLLBACK_FAILED" | "DELETE_ROLLBACK_FAILED" | "UPDATE_ROLLBACK_FAILED")
+      attr_accessor creation_time: ::Time
+      attr_accessor last_modified_time: ::Time
       SENSITIVE: []
     end
 
@@ -635,9 +675,9 @@ module Aws::Pipes
 
     class ThrottlingException
       attr_accessor message: ::String
+      attr_accessor service_code: ::String
       attr_accessor quota_code: ::String
       attr_accessor retry_after_seconds: ::Integer
-      attr_accessor service_code: ::String
       SENSITIVE: []
     end
 
@@ -651,32 +691,32 @@ module Aws::Pipes
     end
 
     class UpdatePipeRequest
+      attr_accessor name: ::String
       attr_accessor description: ::String
       attr_accessor desired_state: ("RUNNING" | "STOPPED")
+      attr_accessor source_parameters: Types::UpdatePipeSourceParameters
       attr_accessor enrichment: ::String
       attr_accessor enrichment_parameters: Types::PipeEnrichmentParameters
-      attr_accessor log_configuration: Types::PipeLogConfigurationParameters
-      attr_accessor name: ::String
-      attr_accessor role_arn: ::String
-      attr_accessor source_parameters: Types::UpdatePipeSourceParameters
       attr_accessor target: ::String
       attr_accessor target_parameters: Types::PipeTargetParameters
+      attr_accessor role_arn: ::String
+      attr_accessor log_configuration: Types::PipeLogConfigurationParameters
       SENSITIVE: [:description]
     end
 
     class UpdatePipeResponse
       attr_accessor arn: ::String
-      attr_accessor creation_time: ::Time
-      attr_accessor current_state: ("RUNNING" | "STOPPED" | "CREATING" | "UPDATING" | "DELETING" | "STARTING" | "STOPPING" | "CREATE_FAILED" | "UPDATE_FAILED" | "START_FAILED" | "STOP_FAILED" | "DELETE_FAILED" | "CREATE_ROLLBACK_FAILED" | "DELETE_ROLLBACK_FAILED" | "UPDATE_ROLLBACK_FAILED")
-      attr_accessor desired_state: ("RUNNING" | "STOPPED")
-      attr_accessor last_modified_time: ::Time
       attr_accessor name: ::String
+      attr_accessor desired_state: ("RUNNING" | "STOPPED")
+      attr_accessor current_state: ("RUNNING" | "STOPPED" | "CREATING" | "UPDATING" | "DELETING" | "STARTING" | "STOPPING" | "CREATE_FAILED" | "UPDATE_FAILED" | "START_FAILED" | "STOP_FAILED" | "DELETE_FAILED" | "CREATE_ROLLBACK_FAILED" | "DELETE_ROLLBACK_FAILED" | "UPDATE_ROLLBACK_FAILED")
+      attr_accessor creation_time: ::Time
+      attr_accessor last_modified_time: ::Time
       SENSITIVE: []
     end
 
     class UpdatePipeSourceActiveMQBrokerParameters
-      attr_accessor batch_size: ::Integer
       attr_accessor credentials: Types::MQBrokerAccessCredentials
+      attr_accessor batch_size: ::Integer
       attr_accessor maximum_batching_window_in_seconds: ::Integer
       SENSITIVE: []
     end
@@ -684,10 +724,10 @@ module Aws::Pipes
     class UpdatePipeSourceDynamoDBStreamParameters
       attr_accessor batch_size: ::Integer
       attr_accessor dead_letter_config: Types::DeadLetterConfig
+      attr_accessor on_partial_batch_item_failure: ("AUTOMATIC_BISECT")
       attr_accessor maximum_batching_window_in_seconds: ::Integer
       attr_accessor maximum_record_age_in_seconds: ::Integer
       attr_accessor maximum_retry_attempts: ::Integer
-      attr_accessor on_partial_batch_item_failure: ("AUTOMATIC_BISECT")
       attr_accessor parallelization_factor: ::Integer
       SENSITIVE: []
     end
@@ -695,10 +735,10 @@ module Aws::Pipes
     class UpdatePipeSourceKinesisStreamParameters
       attr_accessor batch_size: ::Integer
       attr_accessor dead_letter_config: Types::DeadLetterConfig
+      attr_accessor on_partial_batch_item_failure: ("AUTOMATIC_BISECT")
       attr_accessor maximum_batching_window_in_seconds: ::Integer
       attr_accessor maximum_record_age_in_seconds: ::Integer
       attr_accessor maximum_retry_attempts: ::Integer
-      attr_accessor on_partial_batch_item_failure: ("AUTOMATIC_BISECT")
       attr_accessor parallelization_factor: ::Integer
       SENSITIVE: []
     end
@@ -711,28 +751,28 @@ module Aws::Pipes
     end
 
     class UpdatePipeSourceParameters
-      attr_accessor active_mq_broker_parameters: Types::UpdatePipeSourceActiveMQBrokerParameters
-      attr_accessor dynamo_db_stream_parameters: Types::UpdatePipeSourceDynamoDBStreamParameters
       attr_accessor filter_criteria: Types::FilterCriteria
       attr_accessor kinesis_stream_parameters: Types::UpdatePipeSourceKinesisStreamParameters
-      attr_accessor managed_streaming_kafka_parameters: Types::UpdatePipeSourceManagedStreamingKafkaParameters
-      attr_accessor rabbit_mq_broker_parameters: Types::UpdatePipeSourceRabbitMQBrokerParameters
-      attr_accessor self_managed_kafka_parameters: Types::UpdatePipeSourceSelfManagedKafkaParameters
+      attr_accessor dynamo_db_stream_parameters: Types::UpdatePipeSourceDynamoDBStreamParameters
       attr_accessor sqs_queue_parameters: Types::UpdatePipeSourceSqsQueueParameters
+      attr_accessor active_mq_broker_parameters: Types::UpdatePipeSourceActiveMQBrokerParameters
+      attr_accessor rabbit_mq_broker_parameters: Types::UpdatePipeSourceRabbitMQBrokerParameters
+      attr_accessor managed_streaming_kafka_parameters: Types::UpdatePipeSourceManagedStreamingKafkaParameters
+      attr_accessor self_managed_kafka_parameters: Types::UpdatePipeSourceSelfManagedKafkaParameters
       SENSITIVE: []
     end
 
     class UpdatePipeSourceRabbitMQBrokerParameters
-      attr_accessor batch_size: ::Integer
       attr_accessor credentials: Types::MQBrokerAccessCredentials
+      attr_accessor batch_size: ::Integer
       attr_accessor maximum_batching_window_in_seconds: ::Integer
       SENSITIVE: []
     end
 
     class UpdatePipeSourceSelfManagedKafkaParameters
       attr_accessor batch_size: ::Integer
-      attr_accessor credentials: Types::SelfManagedKafkaAccessConfigurationCredentials
       attr_accessor maximum_batching_window_in_seconds: ::Integer
+      attr_accessor credentials: Types::SelfManagedKafkaAccessConfigurationCredentials
       attr_accessor server_root_ca_certificate: ::String
       attr_accessor vpc: Types::SelfManagedKafkaAccessConfigurationVpc
       SENSITIVE: []
@@ -745,14 +785,14 @@ module Aws::Pipes
     end
 
     class ValidationException
-      attr_accessor field_list: ::Array[Types::ValidationExceptionField]
       attr_accessor message: ::String
+      attr_accessor field_list: ::Array[Types::ValidationExceptionField]
       SENSITIVE: []
     end
 
     class ValidationExceptionField
-      attr_accessor message: ::String
       attr_accessor name: ::String
+      attr_accessor message: ::String
       SENSITIVE: []
     end
   end

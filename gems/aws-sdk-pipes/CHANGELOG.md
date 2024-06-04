@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.19.0 (2024-06-04)
+------------------
+
+* Feature - This release adds Timestream for LiveAnalytics as a supported target in EventBridge Pipes
+
 1.18.0 (2024-05-13)
 ------------------
 

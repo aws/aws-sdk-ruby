@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.244.0 (2024-06-04)
+------------------
+
+* Feature - Extend DescribeClusterNode response with private DNS hostname and IP address, and placement information about availability zone and availability zone ID.
+
 1.243.0 (2024-05-30)
 ------------------
 
