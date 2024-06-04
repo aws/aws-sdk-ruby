@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Ensure no UTC offset when deserializing `iso8601` timestamp format values.
+
 3.196.1 (2024-05-14)
 ------------------
 

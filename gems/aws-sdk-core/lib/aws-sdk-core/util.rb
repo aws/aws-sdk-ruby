@@ -95,11 +95,11 @@ module Aws
       def deserialize_time(value)
         case value
         when nil then nil
-        when /^\d+$/ then Time.at(value.to_i)
+        when /^\d+$/ then Time.at(value.to_i).utc
         else
           begin
-            fractional_time = Time.parse(value).utc.to_f
-            Time.at(fractional_time)
+            fractional_time = Time.parse(value).to_f
+            Time.at(fractional_time).utc
           rescue ArgumentError
             raise "unhandled timestamp format `#{value}'"
           end
