@@ -95,7 +95,7 @@ module Aws
       def deserialize_time(value)
         case value
         when nil then nil
-        when /^\d+$/ then Time.at(value.to_i).utc
+        when /^[\d.]+$/ then Time.at(value.to_f).utc
         else
           begin
             fractional_time = Time.parse(value).to_f
