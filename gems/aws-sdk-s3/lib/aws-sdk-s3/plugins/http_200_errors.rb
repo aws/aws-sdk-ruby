@@ -36,7 +36,7 @@ module Aws
             end
           end
 
-          def output_has_body?(output)
+          def members_in_body?(output)
             output.shape.members.any? { |_, k| k.location.nil? }
           end
 
@@ -46,7 +46,7 @@ module Aws
               error_code = xml.match(/<Code>(.+?)<\/Code>/)[1]
               error_message = xml.match(/<Message>(.+?)<\/Message>/)[1]
               S3::Errors.error_class(error_code).new(context, error_message)
-            elsif output_has_body?(context.operation.output) && !xml.match(/<\w/)
+            elsif members_in_body?(context.operation.output) && !xml.match(/<\w/)
               # Must have a body member and have the start of an XML Tag
               # Other incomplete xml bodies will result in XML ParsingError
               Seahorse::Client::NetworkingError.new(
