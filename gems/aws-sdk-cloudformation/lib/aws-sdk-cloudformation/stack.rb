@@ -260,7 +260,7 @@ module Aws::CloudFormation
     #
     # @return [self]
     def load
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.describe_stacks(stack_name: @name)
       end
       @data = resp.stacks[0]
@@ -307,7 +307,7 @@ module Aws::CloudFormation
       options, params = separate_params_and_options(options)
       waiter = Waiters::StackExists.new(options)
       yield_waiter_and_warn(waiter, &block) if block_given?
-      Aws::Plugins::UserAgent.feature('resource') do
+      Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         waiter.wait(params.merge(stack_name: @name))
       end
       Stack.new({
@@ -410,7 +410,7 @@ module Aws::CloudFormation
           :retry
         end
       end
-      Aws::Plugins::UserAgent.feature('resource') do
+      Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         Aws::Waiters::Waiter.new(options).wait({})
       end
     end
@@ -432,7 +432,7 @@ module Aws::CloudFormation
     # @return [EmptyStructure]
     def cancel_update(options = {})
       options = options.merge(stack_name: @name)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.cancel_update_stack(options)
       end
       resp.data
@@ -730,7 +730,7 @@ module Aws::CloudFormation
     # @return [Types::CreateStackOutput]
     def create(options = {})
       options = options.merge(stack_name: @name)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.create_stack(options)
       end
       resp.data
@@ -794,7 +794,7 @@ module Aws::CloudFormation
     # @return [EmptyStructure]
     def delete(options = {})
       options = options.merge(stack_name: @name)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.delete_stack(options)
       end
       resp.data
@@ -1098,7 +1098,7 @@ module Aws::CloudFormation
     # @return [Types::UpdateStackOutput]
     def update(options = {})
       options = options.merge(stack_name: @name)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.update_stack(options)
       end
       resp.data
@@ -1114,7 +1114,7 @@ module Aws::CloudFormation
     def events(options = {})
       batches = Enumerator.new do |y|
         options = options.merge(stack_name: @name)
-        resp = Aws::Plugins::UserAgent.feature('resource') do
+        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
           @client.describe_stack_events(options)
         end
         resp.each_page do |page|
@@ -1150,7 +1150,7 @@ module Aws::CloudFormation
     def resource_summaries(options = {})
       batches = Enumerator.new do |y|
         options = options.merge(stack_name: @name)
-        resp = Aws::Plugins::UserAgent.feature('resource') do
+        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
           @client.list_stack_resources(options)
         end
         resp.each_page do |page|

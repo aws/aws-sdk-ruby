@@ -95,7 +95,7 @@ module Aws::IAM
     #
     # @return [self]
     def load
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.get_group(group_name: @name)
       end
       @data = resp.group
@@ -212,7 +212,7 @@ module Aws::IAM
           :retry
         end
       end
-      Aws::Plugins::UserAgent.feature('resource') do
+      Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         Aws::Waiters::Waiter.new(options).wait({})
       end
     end
@@ -239,7 +239,7 @@ module Aws::IAM
     # @return [EmptyStructure]
     def add_user(options = {})
       options = options.merge(group_name: @name)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.add_user_to_group(options)
       end
       resp.data
@@ -263,7 +263,7 @@ module Aws::IAM
     # @return [EmptyStructure]
     def attach_policy(options = {})
       options = options.merge(group_name: @name)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.attach_group_policy(options)
       end
       resp.data
@@ -296,7 +296,7 @@ module Aws::IAM
     # @return [Group]
     def create(options = {})
       options = options.merge(group_name: @name)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.create_group(options)
       end
       Group.new(
@@ -350,7 +350,7 @@ module Aws::IAM
     # @return [GroupPolicy]
     def create_policy(options = {})
       options = options.merge(group_name: @name)
-      Aws::Plugins::UserAgent.feature('resource') do
+      Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.put_group_policy(options)
       end
       GroupPolicy.new(
@@ -367,7 +367,7 @@ module Aws::IAM
     # @return [EmptyStructure]
     def delete(options = {})
       options = options.merge(group_name: @name)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.delete_group(options)
       end
       resp.data
@@ -391,7 +391,7 @@ module Aws::IAM
     # @return [EmptyStructure]
     def detach_policy(options = {})
       options = options.merge(group_name: @name)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.detach_group_policy(options)
       end
       resp.data
@@ -417,7 +417,7 @@ module Aws::IAM
     # @return [EmptyStructure]
     def remove_user(options = {})
       options = options.merge(group_name: @name)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.remove_user_from_group(options)
       end
       resp.data
@@ -454,7 +454,7 @@ module Aws::IAM
     # @return [Group]
     def update(options = {})
       options = options.merge(group_name: @name)
-      Aws::Plugins::UserAgent.feature('resource') do
+      Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.update_group(options)
       end
       Group.new(
@@ -490,7 +490,7 @@ module Aws::IAM
     def attached_policies(options = {})
       batches = Enumerator.new do |y|
         options = options.merge(group_name: @name)
-        resp = Aws::Plugins::UserAgent.feature('resource') do
+        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
           @client.list_attached_group_policies(options)
         end
         resp.each_page do |page|
@@ -515,7 +515,7 @@ module Aws::IAM
     def policies(options = {})
       batches = Enumerator.new do |y|
         options = options.merge(group_name: @name)
-        resp = Aws::Plugins::UserAgent.feature('resource') do
+        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
           @client.list_group_policies(options)
         end
         resp.each_page do |page|
@@ -551,7 +551,7 @@ module Aws::IAM
     def users(options = {})
       batches = Enumerator.new do |y|
         options = options.merge(group_name: @name)
-        resp = Aws::Plugins::UserAgent.feature('resource') do
+        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
           @client.get_group(options)
         end
         resp.each_page do |page|

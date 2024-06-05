@@ -3322,6 +3322,10 @@ module Aws::GlobalAccelerator
     #   accelerator, the value can be IPV4 or DUAL\_STACK.
     #   @return [String]
     #
+    # @!attribute [rw] ip_addresses
+    #   The IP addresses for an accelerator.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] enabled
     #   Indicates whether an accelerator is enabled. The value is true or
     #   false. The default value is true.
@@ -3336,6 +3340,7 @@ module Aws::GlobalAccelerator
       :accelerator_arn,
       :name,
       :ip_address_type,
+      :ip_addresses,
       :enabled)
       SENSITIVE = []
       include Aws::Structure
@@ -3501,6 +3506,10 @@ module Aws::GlobalAccelerator
     #   routing accelerator, the value must be IPV4.
     #   @return [String]
     #
+    # @!attribute [rw] ip_addresses
+    #   The IP addresses for an accelerator.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] enabled
     #   Indicates whether an accelerator is enabled. The value is true or
     #   false. The default value is true.
@@ -3515,6 +3524,7 @@ module Aws::GlobalAccelerator
       :accelerator_arn,
       :name,
       :ip_address_type,
+      :ip_addresses,
       :enabled)
       SENSITIVE = []
       include Aws::Structure

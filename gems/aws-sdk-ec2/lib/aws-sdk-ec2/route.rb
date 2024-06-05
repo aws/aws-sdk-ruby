@@ -267,7 +267,7 @@ module Aws::EC2
           :retry
         end
       end
-      Aws::Plugins::UserAgent.feature('resource') do
+      Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         Aws::Waiters::Waiter.new(options).wait({})
       end
     end
@@ -298,7 +298,7 @@ module Aws::EC2
         route_table_id: @route_table_id,
         destination_cidr_block: @destination_cidr_block
       )
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.delete_route(options)
       end
       resp.data
@@ -367,7 +367,7 @@ module Aws::EC2
         route_table_id: @route_table_id,
         destination_cidr_block: @destination_cidr_block
       )
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.replace_route(options)
       end
       resp.data

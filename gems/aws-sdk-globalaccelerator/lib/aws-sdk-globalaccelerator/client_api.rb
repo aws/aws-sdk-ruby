@@ -871,6 +871,7 @@ module Aws::GlobalAccelerator
     UpdateAcceleratorRequest.add_member(:accelerator_arn, Shapes::ShapeRef.new(shape: GenericString, required: true, location_name: "AcceleratorArn"))
     UpdateAcceleratorRequest.add_member(:name, Shapes::ShapeRef.new(shape: GenericString, location_name: "Name"))
     UpdateAcceleratorRequest.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: IpAddressType, location_name: "IpAddressType"))
+    UpdateAcceleratorRequest.add_member(:ip_addresses, Shapes::ShapeRef.new(shape: IpAddresses, location_name: "IpAddresses"))
     UpdateAcceleratorRequest.add_member(:enabled, Shapes::ShapeRef.new(shape: GenericBoolean, location_name: "Enabled"))
     UpdateAcceleratorRequest.struct_class = Types::UpdateAcceleratorRequest
 
@@ -900,6 +901,7 @@ module Aws::GlobalAccelerator
     UpdateCustomRoutingAcceleratorRequest.add_member(:accelerator_arn, Shapes::ShapeRef.new(shape: GenericString, required: true, location_name: "AcceleratorArn"))
     UpdateCustomRoutingAcceleratorRequest.add_member(:name, Shapes::ShapeRef.new(shape: GenericString, location_name: "Name"))
     UpdateCustomRoutingAcceleratorRequest.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: IpAddressType, location_name: "IpAddressType"))
+    UpdateCustomRoutingAcceleratorRequest.add_member(:ip_addresses, Shapes::ShapeRef.new(shape: IpAddresses, location_name: "IpAddresses"))
     UpdateCustomRoutingAcceleratorRequest.add_member(:enabled, Shapes::ShapeRef.new(shape: GenericBoolean, location_name: "Enabled"))
     UpdateCustomRoutingAcceleratorRequest.struct_class = Types::UpdateCustomRoutingAcceleratorRequest
 
@@ -950,9 +952,11 @@ module Aws::GlobalAccelerator
 
       api.metadata = {
         "apiVersion" => "2018-08-08",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "globalaccelerator",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "protocols" => ["json"],
         "serviceFullName" => "AWS Global Accelerator",
         "serviceId" => "Global Accelerator",
         "signatureVersion" => "v4",

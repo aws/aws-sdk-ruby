@@ -180,7 +180,7 @@ module Aws::IAM
           :retry
         end
       end
-      Aws::Plugins::UserAgent.feature('resource') do
+      Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         Aws::Waiters::Waiter.new(options).wait({})
       end
     end
@@ -198,7 +198,7 @@ module Aws::IAM
         access_key_id: @id,
         status: "Active"
       )
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.update_access_key(options)
       end
       resp.data
@@ -215,7 +215,7 @@ module Aws::IAM
         access_key_id: @id,
         status: "Inactive"
       )
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.update_access_key(options)
       end
       resp.data
@@ -231,7 +231,7 @@ module Aws::IAM
         user_name: @user_name,
         access_key_id: @id
       )
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.delete_access_key(options)
       end
       resp.data

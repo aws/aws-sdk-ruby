@@ -2963,6 +2963,9 @@ module Aws::GlobalAccelerator
     #   The IP address type that an accelerator supports. For a standard
     #   accelerator, the value can be IPV4 or DUAL\_STACK.
     #
+    # @option params [Array<String>] :ip_addresses
+    #   The IP addresses for an accelerator.
+    #
     # @option params [Boolean] :enabled
     #   Indicates whether an accelerator is enabled. The value is true or
     #   false. The default value is true.
@@ -2980,6 +2983,7 @@ module Aws::GlobalAccelerator
     #     accelerator_arn: "GenericString", # required
     #     name: "GenericString",
     #     ip_address_type: "IPV4", # accepts IPV4, DUAL_STACK
+    #     ip_addresses: ["IpAddress"],
     #     enabled: false,
     #   })
     #
@@ -3190,6 +3194,9 @@ module Aws::GlobalAccelerator
     #   The IP address type that an accelerator supports. For a custom routing
     #   accelerator, the value must be IPV4.
     #
+    # @option params [Array<String>] :ip_addresses
+    #   The IP addresses for an accelerator.
+    #
     # @option params [Boolean] :enabled
     #   Indicates whether an accelerator is enabled. The value is true or
     #   false. The default value is true.
@@ -3207,6 +3214,7 @@ module Aws::GlobalAccelerator
     #     accelerator_arn: "GenericString", # required
     #     name: "GenericString",
     #     ip_address_type: "IPV4", # accepts IPV4, DUAL_STACK
+    #     ip_addresses: ["IpAddress"],
     #     enabled: false,
     #   })
     #
@@ -3604,7 +3612,7 @@ module Aws::GlobalAccelerator
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-globalaccelerator'
-      context[:gem_version] = '1.59.0'
+      context[:gem_version] = '1.60.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

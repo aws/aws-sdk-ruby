@@ -52,6 +52,6 @@ require_relative 'aws-sdk-voiceid/customizations'
 # @!group service
 module Aws::VoiceID
 
-  GEM_VERSION = '1.24.0'
+  GEM_VERSION = '1.25.0'
 
 end

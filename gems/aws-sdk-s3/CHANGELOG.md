@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.152.0 (2024-06-05)
+------------------
+
+* Feature - Added new params copySource and key to copyObject API for supporting S3 Access Grants plugin. These changes will not change any of the existing S3 API functionality.
+
 1.151.0 (2024-05-14)
 ------------------
 

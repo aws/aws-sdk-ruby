@@ -253,7 +253,7 @@ module Aws::AutoScaling
     #
     # @return [self]
     def load
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.describe_auto_scaling_groups(auto_scaling_group_names: [@name])
       end
       @data = resp.auto_scaling_groups[0]
@@ -300,7 +300,7 @@ module Aws::AutoScaling
       options, params = separate_params_and_options(options)
       waiter = Waiters::GroupExists.new(options)
       yield_waiter_and_warn(waiter, &block) if block_given?
-      Aws::Plugins::UserAgent.feature('resource') do
+      Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         waiter.wait(params.merge(auto_scaling_group_names: [@name]))
       end
       AutoScalingGroup.new({
@@ -319,7 +319,7 @@ module Aws::AutoScaling
       options, params = separate_params_and_options(options)
       waiter = Waiters::GroupInService.new(options)
       yield_waiter_and_warn(waiter, &block) if block_given?
-      Aws::Plugins::UserAgent.feature('resource') do
+      Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         waiter.wait(params.merge(auto_scaling_group_names: [@name]))
       end
       AutoScalingGroup.new({
@@ -338,7 +338,7 @@ module Aws::AutoScaling
       options, params = separate_params_and_options(options)
       waiter = Waiters::GroupNotExists.new(options)
       yield_waiter_and_warn(waiter, &block) if block_given?
-      Aws::Plugins::UserAgent.feature('resource') do
+      Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         waiter.wait(params.merge(auto_scaling_group_names: [@name]))
       end
       AutoScalingGroup.new({
@@ -441,7 +441,7 @@ module Aws::AutoScaling
           :retry
         end
       end
-      Aws::Plugins::UserAgent.feature('resource') do
+      Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         Aws::Waiters::Waiter.new(options).wait({})
       end
     end
@@ -459,7 +459,7 @@ module Aws::AutoScaling
     # @return [EmptyStructure]
     def attach_instances(options = {})
       options = options.merge(auto_scaling_group_name: @name)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.attach_instances(options)
       end
       resp.data
@@ -479,7 +479,7 @@ module Aws::AutoScaling
     # @return [EmptyStructure]
     def delete(options = {})
       options = options.merge(auto_scaling_group_name: @name)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.delete_auto_scaling_group(options)
       end
       resp.data
@@ -501,7 +501,7 @@ module Aws::AutoScaling
     def detach_instances(options = {})
       batch = []
       options = options.merge(auto_scaling_group_name: @name)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.detach_instances(options)
       end
       resp.data.activities.each do |a|
@@ -576,7 +576,7 @@ module Aws::AutoScaling
     # @return [EmptyStructure]
     def disable_metrics_collection(options = {})
       options = options.merge(auto_scaling_group_name: @name)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.disable_metrics_collection(options)
       end
       resp.data
@@ -649,7 +649,7 @@ module Aws::AutoScaling
     # @return [EmptyStructure]
     def enable_metrics_collection(options = {})
       options = options.merge(auto_scaling_group_name: @name)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.enable_metrics_collection(options)
       end
       resp.data
@@ -967,7 +967,7 @@ module Aws::AutoScaling
     # @return [ScalingPolicy]
     def put_scaling_policy(options = {})
       options = options.merge(auto_scaling_group_name: @name)
-      Aws::Plugins::UserAgent.feature('resource') do
+      Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.put_scaling_policy(options)
       end
       ScalingPolicy.new(
@@ -1049,7 +1049,7 @@ module Aws::AutoScaling
     # @return [ScheduledAction]
     def put_scheduled_update_group_action(options = {})
       options = options.merge(auto_scaling_group_name: @name)
-      Aws::Plugins::UserAgent.feature('resource') do
+      Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.put_scheduled_update_group_action(options)
       end
       ScheduledAction.new(
@@ -1089,7 +1089,7 @@ module Aws::AutoScaling
     # @return [EmptyStructure]
     def resume_processes(options = {})
       options = options.merge(auto_scaling_group_name: @name)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.resume_processes(options)
       end
       resp.data
@@ -1115,7 +1115,7 @@ module Aws::AutoScaling
     # @return [EmptyStructure]
     def set_desired_capacity(options = {})
       options = options.merge(auto_scaling_group_name: @name)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.set_desired_capacity(options)
       end
       resp.data
@@ -1152,7 +1152,7 @@ module Aws::AutoScaling
     # @return [EmptyStructure]
     def suspend_processes(options = {})
       options = options.merge(auto_scaling_group_name: @name)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.suspend_processes(options)
       end
       resp.data
@@ -1466,7 +1466,7 @@ module Aws::AutoScaling
     # @return [AutoScalingGroup]
     def update(options = {})
       options = options.merge(auto_scaling_group_name: @name)
-      Aws::Plugins::UserAgent.feature('resource') do
+      Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.update_auto_scaling_group(options)
       end
       AutoScalingGroup.new(
@@ -1499,7 +1499,7 @@ module Aws::AutoScaling
     def activities(options = {})
       batches = Enumerator.new do |y|
         options = options.merge(auto_scaling_group_name: @name)
-        resp = Aws::Plugins::UserAgent.feature('resource') do
+        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
           @client.describe_scaling_activities(options)
         end
         resp.each_page do |page|
@@ -1567,7 +1567,7 @@ module Aws::AutoScaling
       batches = Enumerator.new do |y|
         batch = []
         options = options.merge(auto_scaling_group_name: @name)
-        resp = Aws::Plugins::UserAgent.feature('resource') do
+        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
           @client.describe_lifecycle_hooks(options)
         end
         resp.data.lifecycle_hooks.each do |l|
@@ -1601,7 +1601,7 @@ module Aws::AutoScaling
     def load_balancers(options = {})
       batches = Enumerator.new do |y|
         options = options.merge(auto_scaling_group_name: @name)
-        resp = Aws::Plugins::UserAgent.feature('resource') do
+        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
           @client.describe_load_balancers(options)
         end
         resp.each_page do |page|
@@ -1628,7 +1628,7 @@ module Aws::AutoScaling
     def notification_configurations(options = {})
       batches = Enumerator.new do |y|
         options = Aws::Util.deep_merge(options, auto_scaling_group_names: [@name])
-        resp = Aws::Plugins::UserAgent.feature('resource') do
+        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
           @client.describe_notification_configurations(options)
         end
         resp.each_page do |page|
@@ -1669,7 +1669,7 @@ module Aws::AutoScaling
     def policies(options = {})
       batches = Enumerator.new do |y|
         options = options.merge(auto_scaling_group_name: @name)
-        resp = Aws::Plugins::UserAgent.feature('resource') do
+        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
           @client.describe_policies(options)
         end
         resp.each_page do |page|
@@ -1711,7 +1711,7 @@ module Aws::AutoScaling
     def scheduled_actions(options = {})
       batches = Enumerator.new do |y|
         options = options.merge(auto_scaling_group_name: @name)
-        resp = Aws::Plugins::UserAgent.feature('resource') do
+        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
           @client.describe_scheduled_actions(options)
         end
         resp.each_page do |page|

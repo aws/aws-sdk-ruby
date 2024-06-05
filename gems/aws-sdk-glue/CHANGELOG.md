@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.176.0 (2024-06-05)
+------------------
+
+* Feature - AWS Glue now supports native SaaS connectivity: Salesforce connector available now
+
 1.175.0 (2024-05-29)
 ------------------
 

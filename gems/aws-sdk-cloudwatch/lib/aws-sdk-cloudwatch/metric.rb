@@ -63,7 +63,7 @@ module Aws::CloudWatch
     #
     # @return [self]
     def load
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.list_metrics(
         metric_name: @name,
         namespace: @namespace
@@ -183,7 +183,7 @@ module Aws::CloudWatch
           :retry
         end
       end
-      Aws::Plugins::UserAgent.feature('resource') do
+      Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         Aws::Waiters::Waiter.new(options).wait({})
       end
     end
@@ -304,7 +304,7 @@ module Aws::CloudWatch
         namespace: @namespace,
         metric_name: @name
       )
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.get_metric_statistics(options)
       end
       resp.data
@@ -756,7 +756,7 @@ module Aws::CloudWatch
         namespace: @namespace,
         metric_name: @name
       )
-      Aws::Plugins::UserAgent.feature('resource') do
+      Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.put_metric_alarm(options)
       end
       Alarm.new(
@@ -802,7 +802,7 @@ module Aws::CloudWatch
         namespace: @namespace,
         metric_data: [{ metric_name: @name }]
       )
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.put_metric_data(options)
       end
       resp.data
@@ -847,7 +847,7 @@ module Aws::CloudWatch
           namespace: @namespace,
           metric_name: @name
         )
-        resp = Aws::Plugins::UserAgent.feature('resource') do
+        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
           @client.describe_alarms_for_metric(options)
         end
         resp.data.metric_alarms.each do |m|

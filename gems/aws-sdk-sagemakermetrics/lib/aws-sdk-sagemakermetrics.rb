@@ -52,6 +52,6 @@ require_relative 'aws-sdk-sagemakermetrics/customizations'
 # @!group service
 module Aws::SageMakerMetrics
 
-  GEM_VERSION = '1.14.0'
+  GEM_VERSION = '1.15.0'
 
 end

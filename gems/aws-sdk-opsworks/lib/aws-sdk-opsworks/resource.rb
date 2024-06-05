@@ -355,7 +355,7 @@ module Aws::OpsWorks
     #    </note>
     # @return [Stack]
     def create_stack(options = {})
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.create_stack(options)
       end
       Stack.new(
@@ -402,7 +402,7 @@ module Aws::OpsWorks
     def stacks(options = {})
       batches = Enumerator.new do |y|
         batch = []
-        resp = Aws::Plugins::UserAgent.feature('resource') do
+        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
           @client.describe_stacks(options)
         end
         resp.data.stacks.each do |s|

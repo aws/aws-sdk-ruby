@@ -103,7 +103,7 @@ module Aws::EC2
     #
     # @return [self]
     def load
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.describe_vpcs(vpc_ids: [@id])
       end
       @data = resp.vpcs[0]
@@ -150,7 +150,7 @@ module Aws::EC2
       options, params = separate_params_and_options(options)
       waiter = Waiters::VpcAvailable.new(options)
       yield_waiter_and_warn(waiter, &block) if block_given?
-      Aws::Plugins::UserAgent.feature('resource') do
+      Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         waiter.wait(params.merge(vpc_ids: [@id]))
       end
       Vpc.new({
@@ -169,7 +169,7 @@ module Aws::EC2
       options, params = separate_params_and_options(options)
       waiter = Waiters::VpcExists.new(options)
       yield_waiter_and_warn(waiter, &block) if block_given?
-      Aws::Plugins::UserAgent.feature('resource') do
+      Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         waiter.wait(params.merge(vpc_ids: [@id]))
       end
       Vpc.new({
@@ -272,7 +272,7 @@ module Aws::EC2
           :retry
         end
       end
-      Aws::Plugins::UserAgent.feature('resource') do
+      Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         Aws::Waiters::Waiter.new(options).wait({})
       end
     end
@@ -297,7 +297,7 @@ module Aws::EC2
     # @return [EmptyStructure]
     def associate_dhcp_options(options = {})
       options = options.merge(vpc_id: @id)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.associate_dhcp_options(options)
       end
       resp.data
@@ -324,7 +324,7 @@ module Aws::EC2
     # @return [Types::AttachClassicLinkVpcResult]
     def attach_classic_link_instance(options = {})
       options = options.merge(vpc_id: @id)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.attach_classic_link_vpc(options)
       end
       resp.data
@@ -347,7 +347,7 @@ module Aws::EC2
     # @return [EmptyStructure]
     def attach_internet_gateway(options = {})
       options = options.merge(vpc_id: @id)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.attach_internet_gateway(options)
       end
       resp.data
@@ -389,7 +389,7 @@ module Aws::EC2
     # @return [NetworkAcl]
     def create_network_acl(options = {})
       options = options.merge(vpc_id: @id)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.create_network_acl(options)
       end
       NetworkAcl.new(
@@ -435,7 +435,7 @@ module Aws::EC2
     # @return [RouteTable]
     def create_route_table(options = {})
       options = options.merge(vpc_id: @id)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.create_route_table(options)
       end
       RouteTable.new(
@@ -488,7 +488,7 @@ module Aws::EC2
     # @return [SecurityGroup]
     def create_security_group(options = {})
       options = options.merge(vpc_id: @id)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.create_security_group(options)
       end
       SecurityGroup.new(
@@ -577,7 +577,7 @@ module Aws::EC2
     # @return [Subnet]
     def create_subnet(options = {})
       options = options.merge(vpc_id: @id)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.create_subnet(options)
       end
       Subnet.new(
@@ -612,7 +612,7 @@ module Aws::EC2
     def create_tags(options = {})
       batch = []
       options = Aws::Util.deep_merge(options, resources: [@id])
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.create_tags(options)
       end
       options[:tags].each do |t|
@@ -659,7 +659,7 @@ module Aws::EC2
     def delete_tags(options = {})
       batch = []
       options = Aws::Util.deep_merge(options, resources: [@id])
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.delete_tags(options)
       end
       options[:tags].each do |t|
@@ -687,7 +687,7 @@ module Aws::EC2
     # @return [EmptyStructure]
     def delete(options = {})
       options = options.merge(vpc_id: @id)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.delete_vpc(options)
       end
       resp.data
@@ -710,7 +710,7 @@ module Aws::EC2
     # @return [Types::DescribeVpcAttributeResult]
     def describe_attribute(options = {})
       options = options.merge(vpc_id: @id)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.describe_vpc_attribute(options)
       end
       resp.data
@@ -733,7 +733,7 @@ module Aws::EC2
     # @return [Types::DetachClassicLinkVpcResult]
     def detach_classic_link_instance(options = {})
       options = options.merge(vpc_id: @id)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.detach_classic_link_vpc(options)
       end
       resp.data
@@ -756,7 +756,7 @@ module Aws::EC2
     # @return [EmptyStructure]
     def detach_internet_gateway(options = {})
       options = options.merge(vpc_id: @id)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.detach_internet_gateway(options)
       end
       resp.data
@@ -776,7 +776,7 @@ module Aws::EC2
     # @return [Types::DisableVpcClassicLinkResult]
     def disable_classic_link(options = {})
       options = options.merge(vpc_id: @id)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.disable_vpc_classic_link(options)
       end
       resp.data
@@ -796,7 +796,7 @@ module Aws::EC2
     # @return [Types::EnableVpcClassicLinkResult]
     def enable_classic_link(options = {})
       options = options.merge(vpc_id: @id)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.enable_vpc_classic_link(options)
       end
       resp.data
@@ -840,7 +840,7 @@ module Aws::EC2
     # @return [EmptyStructure]
     def modify_attribute(options = {})
       options = options.merge(vpc_id: @id)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.modify_vpc_attribute(options)
       end
       resp.data
@@ -888,7 +888,7 @@ module Aws::EC2
     # @return [VpcPeeringConnection]
     def request_vpc_peering_connection(options = {})
       options = options.merge(vpc_id: @id)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.create_vpc_peering_connection(options)
       end
       VpcPeeringConnection.new(
@@ -969,7 +969,7 @@ module Aws::EC2
           name: "accepter-vpc-info.vpc-id",
           values: [@id]
         }])
-        resp = Aws::Plugins::UserAgent.feature('resource') do
+        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
           @client.describe_vpc_peering_connections(options)
         end
         resp.each_page do |page|
@@ -1453,7 +1453,7 @@ module Aws::EC2
           name: "vpc-id",
           values: [@id]
         }])
-        resp = Aws::Plugins::UserAgent.feature('resource') do
+        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
           @client.describe_instances(options)
         end
         resp.each_page do |page|
@@ -1525,7 +1525,7 @@ module Aws::EC2
           name: "attachment.vpc-id",
           values: [@id]
         }])
-        resp = Aws::Plugins::UserAgent.feature('resource') do
+        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
           @client.describe_internet_gateways(options)
         end
         resp.each_page do |page|
@@ -1629,7 +1629,7 @@ module Aws::EC2
           name: "vpc-id",
           values: [@id]
         }])
-        resp = Aws::Plugins::UserAgent.feature('resource') do
+        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
           @client.describe_network_acls(options)
         end
         resp.each_page do |page|
@@ -1791,7 +1791,7 @@ module Aws::EC2
           name: "vpc-id",
           values: [@id]
         }])
-        resp = Aws::Plugins::UserAgent.feature('resource') do
+        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
           @client.describe_network_interfaces(options)
         end
         resp.each_page do |page|
@@ -1878,7 +1878,7 @@ module Aws::EC2
           name: "requester-vpc-info.vpc-id",
           values: [@id]
         }])
-        resp = Aws::Plugins::UserAgent.feature('resource') do
+        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
           @client.describe_vpc_peering_connections(options)
         end
         resp.each_page do |page|
@@ -1998,7 +1998,7 @@ module Aws::EC2
           name: "vpc-id",
           values: [@id]
         }])
-        resp = Aws::Plugins::UserAgent.feature('resource') do
+        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
           @client.describe_route_tables(options)
         end
         resp.each_page do |page|
@@ -2134,7 +2134,7 @@ module Aws::EC2
           name: "vpc-id",
           values: [@id]
         }])
-        resp = Aws::Plugins::UserAgent.feature('resource') do
+        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
           @client.describe_security_groups(options)
         end
         resp.each_page do |page|
@@ -2270,7 +2270,7 @@ module Aws::EC2
           name: "vpc-id",
           values: [@id]
         }])
-        resp = Aws::Plugins::UserAgent.feature('resource') do
+        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
           @client.describe_subnets(options)
         end
         resp.each_page do |page|
