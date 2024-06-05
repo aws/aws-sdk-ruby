@@ -42,7 +42,7 @@ module Aws
 
           def check_for_error(context)
             xml = context.http_response.body_contents
-            if xml.match(/\?>\n<Error>/)
+            if xml.match(/\?>\s*<Error>/)
               error_code = xml.match(/<Code>(.+?)<\/Code>/)[1]
               error_message = xml.match(/<Message>(.+?)<\/Message>/)[1]
               S3::Errors.error_class(error_code).new(context, error_message)
