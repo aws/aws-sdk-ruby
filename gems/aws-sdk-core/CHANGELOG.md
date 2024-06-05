@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Ensure no UTC offset when deserializing `iso8601` timestamp format values.
+
 * Feature - Bump User Agent to version 2.1 to track business metrics. This changes the User Agent plugin order to be just before sending.
 
 3.196.1 (2024-05-14)
