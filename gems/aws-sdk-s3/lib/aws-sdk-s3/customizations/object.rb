@@ -76,7 +76,7 @@ module Aws
       # @see #copy_to
       #
       def copy_from(source, options = {})
-        Aws::Plugins::UserAgent.feature('resource') do
+        Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
           if Hash === source && source[:copy_source]
             # for backwards compatibility
             @client.copy_object(source.merge(bucket: bucket_name, key: key))
@@ -119,7 +119,7 @@ module Aws
       #   object.copy_to('src-bucket/src-key', multipart_copy: true)
       #
       def copy_to(target, options = {})
-        Aws::Plugins::UserAgent.feature('resource') do
+        Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
           ObjectCopier.new(self, options).copy_to(target, options)
         end
       end
@@ -390,7 +390,7 @@ module Aws
           tempfile: uploading_options.delete(:tempfile),
           part_size: uploading_options.delete(:part_size)
         )
-        Aws::Plugins::UserAgent.feature('resource') do
+        Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
           uploader.upload(
             uploading_options.merge(bucket: bucket_name, key: key),
             &block
@@ -473,7 +473,7 @@ module Aws
           multipart_threshold: uploading_options.delete(:multipart_threshold),
           client: client
         )
-        response = Aws::Plugins::UserAgent.feature('resource') do
+        response = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
           uploader.upload(
             source,
             uploading_options.merge(bucket: bucket_name, key: key)
@@ -551,7 +551,7 @@ module Aws
       # @see Client#head_object
       def download_file(destination, options = {})
         downloader = FileDownloader.new(client: client)
-        Aws::Plugins::UserAgent.feature('resource') do
+        Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
           downloader.download(
             destination,
             options.merge(bucket: bucket_name, key: key)

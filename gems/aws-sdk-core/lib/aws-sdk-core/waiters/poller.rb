@@ -62,7 +62,7 @@ module Aws
       def send_request(options)
         req = options[:client].build_request(@operation_name, options[:params])
         req.handlers.remove(RAISE_HANDLER)
-        Aws::Plugins::UserAgent.feature('waiter') do
+        Aws::Plugins::UserAgent.metric('WAITER') do
           req.send_request
         end
       end

@@ -69,10 +69,16 @@ setting, caching, and fallback behavior.
               context[:sigv4_credentials] = credentials # Sign will use this
             end
 
-            @handler.call(context)
+            with_metric(credentials) { @handler.call(context) }
           end
 
           private
+
+          def with_metric(credentials, &block)
+            return block.call unless credentials
+
+            Aws::Plugins::UserAgent.metric('S3_ACCESS_GRANTS', &block)
+          end
 
           def access_grants_operation?(context)
             params = context[:endpoint_params]

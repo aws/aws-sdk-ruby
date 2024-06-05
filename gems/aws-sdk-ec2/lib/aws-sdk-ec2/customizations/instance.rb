@@ -18,7 +18,7 @@ module Aws
       private
 
       def encrypted_password
-        bytes = Aws::Plugins::UserAgent.feature('resource') do
+        bytes = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
           client.get_password_data(instance_id: id).password_data
         end
         if bytes == ''

@@ -54,7 +54,7 @@ module AwsSdkCodeGenerator
         ).to_s.strip
         parts = []
         parts << 'resp = ' if waiter['path']
-        parts << "Aws::Plugins::UserAgent.feature('resource') do\n"
+        parts << "Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do\n"
         parts << "  waiter.wait(params.merge(#{args}))"
         parts << "\nend"
         parts.join
