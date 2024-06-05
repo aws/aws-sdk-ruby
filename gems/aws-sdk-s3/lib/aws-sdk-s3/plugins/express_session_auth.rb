@@ -47,10 +47,16 @@ for different buckets.
                 context[:sigv4_credentials] = credentials # Sign will use this
               end
             end
-            @handler.call(context)
+            with_metric(credentials) { @handler.call(context) }
           end
 
           private
+
+          def with_metric(credentials, &block)
+            return block.call unless credentials
+
+            Aws::Plugins::UserAgent.metric('S3_EXPRESS_BUCKET', &block)
+          end
 
           def checksum_required?(context)
             context.operation.http_checksum_required ||

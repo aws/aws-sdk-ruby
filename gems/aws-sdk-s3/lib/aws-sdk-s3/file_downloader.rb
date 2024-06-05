@@ -44,7 +44,7 @@ module Aws
 
         validate!
 
-        Aws::Plugins::UserAgent.feature('s3-transfer') do
+        Aws::Plugins::UserAgent.metric('S3_TRANSFER') do
           case @mode
           when 'auto' then multipart_download
           when 'single_request' then single_request

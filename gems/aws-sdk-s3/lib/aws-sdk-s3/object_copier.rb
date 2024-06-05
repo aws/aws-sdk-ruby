@@ -28,7 +28,7 @@ module Aws
         options[:bucket] = target_bucket
         options[:key] = target_key
         options[:copy_source] = copy_source(source)
-        Aws::Plugins::UserAgent.feature('s3-transfer') do
+        Aws::Plugins::UserAgent.metric('S3_TRANSFER') do
           if options.delete(:multipart_copy)
             apply_source_client(source, options)
             ObjectMultipartCopier.new(@options).copy(options)

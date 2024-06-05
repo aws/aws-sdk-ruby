@@ -4,6 +4,23 @@ module Aws
   module Plugins
     # @api private
     class UserAgent < Seahorse::Client::Plugin
+      METRICS = Aws::Json.load(<<-METRICS)
+        {
+          "RESOURCE_MODEL": "A",
+          "WAITER": "B",
+          "PAGINATOR": "C",
+          "RETRY_MODE_LEGACY": "D",
+          "RETRY_MODE_STANDARD": "E",
+          "RETRY_MODE_ADAPTIVE": "F",
+          "S3_TRANSFER": "G",
+          "S3_CRYPTO_V1N": "H",
+          "S3_CRYPTO_V2": "I",
+          "S3_EXPRESS_BUCKET": "J",
+          "S3_ACCESS_GRANTS": "K",
+          "GZIP_REQUEST_COMPRESSION": "L"
+        }
+      METRICS
+
       # @api private
       option(:user_agent_suffix)
       # @api private
@@ -23,12 +40,20 @@ variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
         app_id
       end
 
-      def self.feature(feature, &block)
-        Thread.current[:aws_sdk_core_user_agent_feature] ||= []
-        Thread.current[:aws_sdk_core_user_agent_feature] << "ft/#{feature}"
+      # Deprecated - must exist for old service gems
+      def self.feature(_feature, &block)
+        block.call
+      end
+
+      def self.metric(metric, &block)
+        Thread.current[:aws_sdk_core_user_agent_metric] ||= []
+        Thread.current[:aws_sdk_core_user_agent_metric] << METRICS[metric]
         block.call
       ensure
-        Thread.current[:aws_sdk_core_user_agent_feature].pop
+        Thread.current[:aws_sdk_core_user_agent_metric].pop
+        if Thread.current[:aws_sdk_core_user_agent_metric].empty?
+          Thread.current[:aws_sdk_core_user_agent_metric] = nil
+        end
       end
 
       # @api private
@@ -49,15 +74,24 @@ variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
 
           def to_s
             ua = "aws-sdk-ruby3/#{CORE_GEM_VERSION}"
-            ua += ' ua/2.0'
-            ua += " #{api_metadata}" if api_metadata
+            ua += ' ua/2.1'
+            if (api_m = api_metadata)
+              ua += " #{api_m}"
+            end
             ua += " #{os_metadata}"
             ua += " #{language_metadata}"
-            ua += " #{env_metadata}" if env_metadata
-            ua += " #{config_metadata}" if config_metadata
-            ua += " #{app_id}" if app_id
-            ua += " #{feature_metadata}" if feature_metadata
-            ua += " #{framework_metadata}" if framework_metadata
+            if (env_m = env_metadata)
+              ua += " #{env_m}"
+            end
+            if (app_id_m = app_id_metadata)
+              ua += " #{app_id_m}"
+            end
+            if (framework_m = framework_metadata)
+              ua += " #{framework_m}"
+            end
+            if (metric_m = metric_metadata)
+              ua += " #{metric_m}"
+            end
             if @context.config.user_agent_suffix
               ua += " #{@context.config.user_agent_suffix}"
             end
@@ -93,7 +127,6 @@ variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
             local_version = Gem::Platform.local.version
             metadata += "##{local_version}" if local_version
             metadata += " md/#{RbConfig::CONFIG['host_cpu']}"
-            metadata
           end
 
           # Used to be RUBY_ENGINE/RUBY_VERSION
@@ -107,22 +140,12 @@ variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
             "exec-env/#{execution_env}"
           end
 
-          def config_metadata
-            "cfg/retry-mode##{@context.config.retry_mode}"
-          end
-
-          def app_id
+          def app_id_metadata
             return unless (app_id = @context.config.sdk_ua_app_id)
 
             # Sanitize and only allow these characters
             app_id = app_id.gsub(/[^!#$%&'*+\-.^_`|~0-9A-Za-z]/, '-')
             "app/#{app_id}"
-          end
-
-          def feature_metadata
-            return unless Thread.current[:aws_sdk_core_user_agent_feature]
-
-            Thread.current[:aws_sdk_core_user_agent_feature].join(' ')
           end
 
           def framework_metadata
@@ -141,10 +164,21 @@ variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
             end
             frameworks.map { |n, v| "lib/#{n}##{v}" }.join(' ')
           end
+
+          def metric_metadata
+            return unless Thread.current[:aws_sdk_core_user_agent_metric]
+
+            metrics = Thread.current[:aws_sdk_core_user_agent_metric].join(',')
+            # Metric metadata is limited to 1024 bytes
+            return "m/#{metrics}" if metrics.bytesize <= 1024
+
+            # Removes the last unfinished metric
+            "m/#{metrics[0...metrics[0..1024].rindex(',')]}"
+          end
         end
       end
 
-      handler(Handler, priority: 1)
+      handler(Handler, step: :sign, priority: 97)
     end
   end
 end

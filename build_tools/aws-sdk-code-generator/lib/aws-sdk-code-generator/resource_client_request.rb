@@ -15,7 +15,7 @@ module AwsSdkCodeGenerator
         parts = []
         parts << request_options(params) if merge
         parts << assignment(options)
-        parts << "Aws::Plugins::UserAgent.feature('resource') do\n"
+        parts << "Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do\n"
         parts << "  @client."
         parts << operation_name(request)
         parts << arguments(merge, params, streaming)

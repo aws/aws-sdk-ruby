@@ -48,7 +48,7 @@ module Aws
     class Resource
       prepend ResourcePaginationFix
       def create_tags(options)
-        resp = Aws::Plugins::UserAgent.feature('resource') do
+        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
           @client.create_tags(options)
         end
         tags = []
