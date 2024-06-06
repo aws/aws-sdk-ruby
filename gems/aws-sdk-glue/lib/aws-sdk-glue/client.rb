@@ -4638,6 +4638,20 @@ module Aws::Glue
     #         name: "NameString",
     #         region: "NameString",
     #       },
+    #       view_definition: {
+    #         is_protected: false,
+    #         definer: "ArnString",
+    #         representations: [
+    #           {
+    #             dialect: "REDSHIFT", # accepts REDSHIFT, ATHENA, SPARK
+    #             dialect_version: "ViewDialectVersionString",
+    #             view_original_text: "ViewTextString",
+    #             validation_connection: "NameString",
+    #             view_expanded_text: "ViewTextString",
+    #           },
+    #         ],
+    #         sub_objects: ["ArnString"],
+    #       },
     #     },
     #     partition_indexes: [
     #       {
@@ -10952,6 +10966,7 @@ module Aws::Glue
     #   resp.table.view_definition.representations[0].dialect_version #=> String
     #   resp.table.view_definition.representations[0].view_original_text #=> String
     #   resp.table.view_definition.representations[0].view_expanded_text #=> String
+    #   resp.table.view_definition.representations[0].validation_connection #=> String
     #   resp.table.view_definition.representations[0].is_stale #=> Boolean
     #   resp.table.is_multi_dialect_view #=> Boolean
     #
@@ -11130,6 +11145,7 @@ module Aws::Glue
     #   resp.table_version.table.view_definition.representations[0].dialect_version #=> String
     #   resp.table_version.table.view_definition.representations[0].view_original_text #=> String
     #   resp.table_version.table.view_definition.representations[0].view_expanded_text #=> String
+    #   resp.table_version.table.view_definition.representations[0].validation_connection #=> String
     #   resp.table_version.table.view_definition.representations[0].is_stale #=> Boolean
     #   resp.table_version.table.is_multi_dialect_view #=> Boolean
     #   resp.table_version.version_id #=> String
@@ -11260,6 +11276,7 @@ module Aws::Glue
     #   resp.table_versions[0].table.view_definition.representations[0].dialect_version #=> String
     #   resp.table_versions[0].table.view_definition.representations[0].view_original_text #=> String
     #   resp.table_versions[0].table.view_definition.representations[0].view_expanded_text #=> String
+    #   resp.table_versions[0].table.view_definition.representations[0].validation_connection #=> String
     #   resp.table_versions[0].table.view_definition.representations[0].is_stale #=> Boolean
     #   resp.table_versions[0].table.is_multi_dialect_view #=> Boolean
     #   resp.table_versions[0].version_id #=> String
@@ -11401,6 +11418,7 @@ module Aws::Glue
     #   resp.table_list[0].view_definition.representations[0].dialect_version #=> String
     #   resp.table_list[0].view_definition.representations[0].view_original_text #=> String
     #   resp.table_list[0].view_definition.representations[0].view_expanded_text #=> String
+    #   resp.table_list[0].view_definition.representations[0].validation_connection #=> String
     #   resp.table_list[0].view_definition.representations[0].is_stale #=> Boolean
     #   resp.table_list[0].is_multi_dialect_view #=> Boolean
     #   resp.next_token #=> String
@@ -12119,6 +12137,7 @@ module Aws::Glue
     #   resp.table.view_definition.representations[0].dialect_version #=> String
     #   resp.table.view_definition.representations[0].view_original_text #=> String
     #   resp.table.view_definition.representations[0].view_expanded_text #=> String
+    #   resp.table.view_definition.representations[0].validation_connection #=> String
     #   resp.table.view_definition.representations[0].is_stale #=> Boolean
     #   resp.table.is_multi_dialect_view #=> Boolean
     #   resp.authorized_columns #=> Array
@@ -14598,6 +14617,7 @@ module Aws::Glue
     #   resp.table_list[0].view_definition.representations[0].dialect_version #=> String
     #   resp.table_list[0].view_definition.representations[0].view_original_text #=> String
     #   resp.table_list[0].view_definition.representations[0].view_expanded_text #=> String
+    #   resp.table_list[0].view_definition.representations[0].validation_connection #=> String
     #   resp.table_list[0].view_definition.representations[0].is_stale #=> Boolean
     #   resp.table_list[0].is_multi_dialect_view #=> Boolean
     #
@@ -16925,6 +16945,13 @@ module Aws::Glue
     # @option params [String] :version_id
     #   The version ID at which to update the table contents.
     #
+    # @option params [String] :view_update_action
+    #   The operation to be performed when updating the view.
+    #
+    # @option params [Boolean] :force
+    #   A flag that can be set to true to ignore matching storage descriptor
+    #   and subobject matching requirements.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -17013,10 +17040,26 @@ module Aws::Glue
     #         name: "NameString",
     #         region: "NameString",
     #       },
+    #       view_definition: {
+    #         is_protected: false,
+    #         definer: "ArnString",
+    #         representations: [
+    #           {
+    #             dialect: "REDSHIFT", # accepts REDSHIFT, ATHENA, SPARK
+    #             dialect_version: "ViewDialectVersionString",
+    #             view_original_text: "ViewTextString",
+    #             validation_connection: "NameString",
+    #             view_expanded_text: "ViewTextString",
+    #           },
+    #         ],
+    #         sub_objects: ["ArnString"],
+    #       },
     #     },
     #     skip_archive: false,
     #     transaction_id: "TransactionIdString",
     #     version_id: "VersionString",
+    #     view_update_action: "ADD", # accepts ADD, REPLACE, ADD_OR_REPLACE, DROP
+    #     force: false,
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateTable AWS API Documentation
@@ -17269,7 +17312,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.176.0'
+      context[:gem_version] = '1.177.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

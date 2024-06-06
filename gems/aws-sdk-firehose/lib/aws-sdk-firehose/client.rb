@@ -764,8 +764,8 @@ module Aws::Firehose
     #         data_table_columns: "DataTableColumns",
     #         copy_options: "CopyOptions",
     #       },
-    #       username: "Username", # required
-    #       password: "Password", # required
+    #       username: "Username",
+    #       password: "Password",
     #       retry_options: {
     #         duration_in_seconds: 1,
     #       },
@@ -832,6 +832,11 @@ module Aws::Firehose
     #         enabled: false,
     #         log_group_name: "LogGroupName",
     #         log_stream_name: "LogStreamName",
+    #       },
+    #       secrets_manager_configuration: {
+    #         secret_arn: "SecretARN",
+    #         role_arn: "RoleARN",
+    #         enabled: false, # required
     #       },
     #     },
     #     elasticsearch_destination_configuration: {
@@ -967,7 +972,7 @@ module Aws::Firehose
     #     splunk_destination_configuration: {
     #       hec_endpoint: "HECEndpoint", # required
     #       hec_endpoint_type: "Raw", # required, accepts Raw, Event
-    #       hec_token: "HECToken", # required
+    #       hec_token: "HECToken",
     #       hec_acknowledgment_timeout_in_seconds: 1,
     #       retry_options: {
     #         duration_in_seconds: 1,
@@ -1017,6 +1022,11 @@ module Aws::Firehose
     #       buffering_hints: {
     #         interval_in_seconds: 1,
     #         size_in_m_bs: 1,
+    #       },
+    #       secrets_manager_configuration: {
+    #         secret_arn: "SecretARN",
+    #         role_arn: "RoleARN",
+    #         enabled: false, # required
     #       },
     #     },
     #     http_endpoint_destination_configuration: {
@@ -1083,6 +1093,11 @@ module Aws::Firehose
     #           log_group_name: "LogGroupName",
     #           log_stream_name: "LogStreamName",
     #         },
+    #       },
+    #       secrets_manager_configuration: {
+    #         secret_arn: "SecretARN",
+    #         role_arn: "RoleARN",
+    #         enabled: false, # required
     #       },
     #     },
     #     tags: [
@@ -1160,9 +1175,9 @@ module Aws::Firehose
     #     },
     #     snowflake_destination_configuration: {
     #       account_url: "SnowflakeAccountUrl", # required
-    #       private_key: "SnowflakePrivateKey", # required
+    #       private_key: "SnowflakePrivateKey",
     #       key_passphrase: "SnowflakeKeyPassphrase",
-    #       user: "SnowflakeUser", # required
+    #       user: "SnowflakeUser",
     #       database: "SnowflakeDatabase", # required
     #       schema: "SnowflakeSchema", # required
     #       table: "SnowflakeTable", # required
@@ -1221,6 +1236,11 @@ module Aws::Firehose
     #           log_group_name: "LogGroupName",
     #           log_stream_name: "LogStreamName",
     #         },
+    #       },
+    #       secrets_manager_configuration: {
+    #         secret_arn: "SecretARN",
+    #         role_arn: "RoleARN",
+    #         enabled: false, # required
     #       },
     #     },
     #   })
@@ -1476,6 +1496,9 @@ module Aws::Firehose
     #   resp.delivery_stream_description.destinations[0].redshift_destination_description.cloud_watch_logging_options.enabled #=> Boolean
     #   resp.delivery_stream_description.destinations[0].redshift_destination_description.cloud_watch_logging_options.log_group_name #=> String
     #   resp.delivery_stream_description.destinations[0].redshift_destination_description.cloud_watch_logging_options.log_stream_name #=> String
+    #   resp.delivery_stream_description.destinations[0].redshift_destination_description.secrets_manager_configuration.secret_arn #=> String
+    #   resp.delivery_stream_description.destinations[0].redshift_destination_description.secrets_manager_configuration.role_arn #=> String
+    #   resp.delivery_stream_description.destinations[0].redshift_destination_description.secrets_manager_configuration.enabled #=> Boolean
     #   resp.delivery_stream_description.destinations[0].elasticsearch_destination_description.role_arn #=> String
     #   resp.delivery_stream_description.destinations[0].elasticsearch_destination_description.domain_arn #=> String
     #   resp.delivery_stream_description.destinations[0].elasticsearch_destination_description.cluster_endpoint #=> String
@@ -1581,6 +1604,9 @@ module Aws::Firehose
     #   resp.delivery_stream_description.destinations[0].splunk_destination_description.cloud_watch_logging_options.log_stream_name #=> String
     #   resp.delivery_stream_description.destinations[0].splunk_destination_description.buffering_hints.interval_in_seconds #=> Integer
     #   resp.delivery_stream_description.destinations[0].splunk_destination_description.buffering_hints.size_in_m_bs #=> Integer
+    #   resp.delivery_stream_description.destinations[0].splunk_destination_description.secrets_manager_configuration.secret_arn #=> String
+    #   resp.delivery_stream_description.destinations[0].splunk_destination_description.secrets_manager_configuration.role_arn #=> String
+    #   resp.delivery_stream_description.destinations[0].splunk_destination_description.secrets_manager_configuration.enabled #=> Boolean
     #   resp.delivery_stream_description.destinations[0].http_endpoint_destination_description.endpoint_configuration.url #=> String
     #   resp.delivery_stream_description.destinations[0].http_endpoint_destination_description.endpoint_configuration.name #=> String
     #   resp.delivery_stream_description.destinations[0].http_endpoint_destination_description.buffering_hints.size_in_m_bs #=> Integer
@@ -1613,6 +1639,9 @@ module Aws::Firehose
     #   resp.delivery_stream_description.destinations[0].http_endpoint_destination_description.s3_destination_description.cloud_watch_logging_options.enabled #=> Boolean
     #   resp.delivery_stream_description.destinations[0].http_endpoint_destination_description.s3_destination_description.cloud_watch_logging_options.log_group_name #=> String
     #   resp.delivery_stream_description.destinations[0].http_endpoint_destination_description.s3_destination_description.cloud_watch_logging_options.log_stream_name #=> String
+    #   resp.delivery_stream_description.destinations[0].http_endpoint_destination_description.secrets_manager_configuration.secret_arn #=> String
+    #   resp.delivery_stream_description.destinations[0].http_endpoint_destination_description.secrets_manager_configuration.role_arn #=> String
+    #   resp.delivery_stream_description.destinations[0].http_endpoint_destination_description.secrets_manager_configuration.enabled #=> Boolean
     #   resp.delivery_stream_description.destinations[0].snowflake_destination_description.account_url #=> String
     #   resp.delivery_stream_description.destinations[0].snowflake_destination_description.user #=> String
     #   resp.delivery_stream_description.destinations[0].snowflake_destination_description.database #=> String
@@ -1648,6 +1677,9 @@ module Aws::Firehose
     #   resp.delivery_stream_description.destinations[0].snowflake_destination_description.s3_destination_description.cloud_watch_logging_options.enabled #=> Boolean
     #   resp.delivery_stream_description.destinations[0].snowflake_destination_description.s3_destination_description.cloud_watch_logging_options.log_group_name #=> String
     #   resp.delivery_stream_description.destinations[0].snowflake_destination_description.s3_destination_description.cloud_watch_logging_options.log_stream_name #=> String
+    #   resp.delivery_stream_description.destinations[0].snowflake_destination_description.secrets_manager_configuration.secret_arn #=> String
+    #   resp.delivery_stream_description.destinations[0].snowflake_destination_description.secrets_manager_configuration.role_arn #=> String
+    #   resp.delivery_stream_description.destinations[0].snowflake_destination_description.secrets_manager_configuration.enabled #=> Boolean
     #   resp.delivery_stream_description.destinations[0].amazon_open_search_serverless_destination_description.role_arn #=> String
     #   resp.delivery_stream_description.destinations[0].amazon_open_search_serverless_destination_description.collection_endpoint #=> String
     #   resp.delivery_stream_description.destinations[0].amazon_open_search_serverless_destination_description.index_name #=> String
@@ -2041,9 +2073,10 @@ module Aws::Firehose
     # `CUSTOMER_MANAGED_CMK`, Firehose creates a grant that enables it to
     # use the new CMK to encrypt and decrypt data and to manage the grant.
     #
-    # For the KMS grant creation to be successful, Firehose APIs
-    # `StartDeliveryStreamEncryption` and `CreateDeliveryStream` should not
-    # be called with session credentials that are more than 6 hours old.
+    # For the KMS grant creation to be successful, the Firehose API
+    # operations `StartDeliveryStreamEncryption` and `CreateDeliveryStream`
+    # should not be called with session credentials that are more than 6
+    # hours old.
     #
     # If a delivery stream already has encryption enabled and then you
     # invoke this operation to change the ARN of the CMK or both its type
@@ -2302,7 +2335,7 @@ module Aws::Firehose
     #   Amazon OpenSearch Service.
     #
     # @option params [Types::SnowflakeDestinationUpdate] :snowflake_destination_update
-    #   Update to the Snowflake destination condiguration settings
+    #   Update to the Snowflake destination configuration settings.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2527,6 +2560,11 @@ module Aws::Firehose
     #         log_group_name: "LogGroupName",
     #         log_stream_name: "LogStreamName",
     #       },
+    #       secrets_manager_configuration: {
+    #         secret_arn: "SecretARN",
+    #         role_arn: "RoleARN",
+    #         enabled: false, # required
+    #       },
     #     },
     #     elasticsearch_destination_update: {
     #       role_arn: "RoleARN",
@@ -2700,6 +2738,11 @@ module Aws::Firehose
     #         interval_in_seconds: 1,
     #         size_in_m_bs: 1,
     #       },
+    #       secrets_manager_configuration: {
+    #         secret_arn: "SecretARN",
+    #         role_arn: "RoleARN",
+    #         enabled: false, # required
+    #       },
     #     },
     #     http_endpoint_destination_update: {
     #       endpoint_configuration: {
@@ -2765,6 +2808,11 @@ module Aws::Firehose
     #           log_group_name: "LogGroupName",
     #           log_stream_name: "LogStreamName",
     #         },
+    #       },
+    #       secrets_manager_configuration: {
+    #         secret_arn: "SecretARN",
+    #         role_arn: "RoleARN",
+    #         enabled: false, # required
     #       },
     #     },
     #     amazon_open_search_serverless_destination_update: {
@@ -2881,6 +2929,11 @@ module Aws::Firehose
     #           log_stream_name: "LogStreamName",
     #         },
     #       },
+    #       secrets_manager_configuration: {
+    #         secret_arn: "SecretARN",
+    #         role_arn: "RoleARN",
+    #         enabled: false, # required
+    #       },
     #     },
     #   })
     #
@@ -2906,7 +2959,7 @@ module Aws::Firehose
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-firehose'
-      context[:gem_version] = '1.69.0'
+      context[:gem_version] = '1.70.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

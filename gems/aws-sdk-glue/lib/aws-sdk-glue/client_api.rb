@@ -1243,12 +1243,16 @@ module Aws::Glue
     VersionString = Shapes::StringShape.new(name: 'VersionString')
     VersionsString = Shapes::StringShape.new(name: 'VersionsString')
     ViewDefinition = Shapes::StructureShape.new(name: 'ViewDefinition')
+    ViewDefinitionInput = Shapes::StructureShape.new(name: 'ViewDefinitionInput')
     ViewDialect = Shapes::StringShape.new(name: 'ViewDialect')
     ViewDialectVersionString = Shapes::StringShape.new(name: 'ViewDialectVersionString')
     ViewRepresentation = Shapes::StructureShape.new(name: 'ViewRepresentation')
+    ViewRepresentationInput = Shapes::StructureShape.new(name: 'ViewRepresentationInput')
+    ViewRepresentationInputList = Shapes::ListShape.new(name: 'ViewRepresentationInputList')
     ViewRepresentationList = Shapes::ListShape.new(name: 'ViewRepresentationList')
     ViewSubObjectsList = Shapes::ListShape.new(name: 'ViewSubObjectsList')
     ViewTextString = Shapes::StringShape.new(name: 'ViewTextString')
+    ViewUpdateAction = Shapes::StringShape.new(name: 'ViewUpdateAction')
     WorkerType = Shapes::StringShape.new(name: 'WorkerType')
     Workflow = Shapes::StructureShape.new(name: 'Workflow')
     WorkflowGraph = Shapes::StructureShape.new(name: 'WorkflowGraph')
@@ -5497,6 +5501,7 @@ module Aws::Glue
     TableInput.add_member(:table_type, Shapes::ShapeRef.new(shape: TableTypeString, location_name: "TableType"))
     TableInput.add_member(:parameters, Shapes::ShapeRef.new(shape: ParametersMap, location_name: "Parameters"))
     TableInput.add_member(:target_table, Shapes::ShapeRef.new(shape: TableIdentifier, location_name: "TargetTable"))
+    TableInput.add_member(:view_definition, Shapes::ShapeRef.new(shape: ViewDefinitionInput, location_name: "ViewDefinition"))
     TableInput.struct_class = Types::TableInput
 
     TableList.member = Shapes::ShapeRef.new(shape: Table)
@@ -5875,6 +5880,8 @@ module Aws::Glue
     UpdateTableRequest.add_member(:skip_archive, Shapes::ShapeRef.new(shape: BooleanNullable, location_name: "SkipArchive"))
     UpdateTableRequest.add_member(:transaction_id, Shapes::ShapeRef.new(shape: TransactionIdString, location_name: "TransactionId"))
     UpdateTableRequest.add_member(:version_id, Shapes::ShapeRef.new(shape: VersionString, location_name: "VersionId"))
+    UpdateTableRequest.add_member(:view_update_action, Shapes::ShapeRef.new(shape: ViewUpdateAction, location_name: "ViewUpdateAction"))
+    UpdateTableRequest.add_member(:force, Shapes::ShapeRef.new(shape: Boolean, location_name: "Force"))
     UpdateTableRequest.struct_class = Types::UpdateTableRequest
 
     UpdateTableResponse.struct_class = Types::UpdateTableResponse
@@ -5946,12 +5953,28 @@ module Aws::Glue
     ViewDefinition.add_member(:representations, Shapes::ShapeRef.new(shape: ViewRepresentationList, location_name: "Representations"))
     ViewDefinition.struct_class = Types::ViewDefinition
 
+    ViewDefinitionInput.add_member(:is_protected, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "IsProtected"))
+    ViewDefinitionInput.add_member(:definer, Shapes::ShapeRef.new(shape: ArnString, location_name: "Definer"))
+    ViewDefinitionInput.add_member(:representations, Shapes::ShapeRef.new(shape: ViewRepresentationInputList, location_name: "Representations"))
+    ViewDefinitionInput.add_member(:sub_objects, Shapes::ShapeRef.new(shape: ViewSubObjectsList, location_name: "SubObjects"))
+    ViewDefinitionInput.struct_class = Types::ViewDefinitionInput
+
     ViewRepresentation.add_member(:dialect, Shapes::ShapeRef.new(shape: ViewDialect, location_name: "Dialect"))
     ViewRepresentation.add_member(:dialect_version, Shapes::ShapeRef.new(shape: ViewDialectVersionString, location_name: "DialectVersion"))
     ViewRepresentation.add_member(:view_original_text, Shapes::ShapeRef.new(shape: ViewTextString, location_name: "ViewOriginalText"))
     ViewRepresentation.add_member(:view_expanded_text, Shapes::ShapeRef.new(shape: ViewTextString, location_name: "ViewExpandedText"))
+    ViewRepresentation.add_member(:validation_connection, Shapes::ShapeRef.new(shape: NameString, location_name: "ValidationConnection"))
     ViewRepresentation.add_member(:is_stale, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "IsStale"))
     ViewRepresentation.struct_class = Types::ViewRepresentation
+
+    ViewRepresentationInput.add_member(:dialect, Shapes::ShapeRef.new(shape: ViewDialect, location_name: "Dialect"))
+    ViewRepresentationInput.add_member(:dialect_version, Shapes::ShapeRef.new(shape: ViewDialectVersionString, location_name: "DialectVersion"))
+    ViewRepresentationInput.add_member(:view_original_text, Shapes::ShapeRef.new(shape: ViewTextString, location_name: "ViewOriginalText"))
+    ViewRepresentationInput.add_member(:validation_connection, Shapes::ShapeRef.new(shape: NameString, location_name: "ValidationConnection"))
+    ViewRepresentationInput.add_member(:view_expanded_text, Shapes::ShapeRef.new(shape: ViewTextString, location_name: "ViewExpandedText"))
+    ViewRepresentationInput.struct_class = Types::ViewRepresentationInput
+
+    ViewRepresentationInputList.member = Shapes::ShapeRef.new(shape: ViewRepresentationInput)
 
     ViewRepresentationList.member = Shapes::ShapeRef.new(shape: ViewRepresentation)
 

@@ -2944,6 +2944,8 @@ module Aws::StorageGateway
 
     # A JSON object containing the following fields:
     #
+    # * DescribeMaintenanceStartTimeOutput$SoftwareUpdatePreferences
+    #
     # * DescribeMaintenanceStartTimeOutput$DayOfMonth
     #
     # * DescribeMaintenanceStartTimeOutput$DayOfWeek
@@ -2981,8 +2983,8 @@ module Aws::StorageGateway
     # @!attribute [rw] day_of_month
     #   The day of the month component of the maintenance start time
     #   represented as an ordinal number from 1 to 28, where 1 represents
-    #   the first day of the month and 28 represents the last day of the
-    #   month.
+    #   the first day of the month. It is not possible to set the
+    #   maintenance schedule to start on days 29 through 31.
     #   @return [Integer]
     #
     # @!attribute [rw] timezone
@@ -2990,6 +2992,18 @@ module Aws::StorageGateway
     #   The start time and day of week specified should be in the time zone
     #   of the gateway.
     #   @return [String]
+    #
+    # @!attribute [rw] software_update_preferences
+    #   A set of variables indicating the software update preferences for
+    #   the gateway.
+    #
+    #   Includes `AutomaticUpdatePolicy` field with the following inputs:
+    #
+    #   `ALL_VERSIONS` - Enables regular gateway maintenance updates.
+    #
+    #   `EMERGENCY_VERSIONS_ONLY` - Disables regular gateway maintenance
+    #   updates.
+    #   @return [Types::SoftwareUpdatePreferences]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeMaintenanceStartTimeOutput AWS API Documentation
     #
@@ -2999,7 +3013,8 @@ module Aws::StorageGateway
       :minute_of_hour,
       :day_of_week,
       :day_of_month,
-      :timezone)
+      :timezone,
+      :software_update_preferences)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3126,24 +3141,24 @@ module Aws::StorageGateway
     #     different clients in your environment. Supported only for S3 File
     #     Gateway.
     #
-    #   * `MandatorySigning`: If you use this option, File Gateway only
+    #   * `MandatorySigning`: If you choose this option, File Gateway only
     #     allows connections from SMBv2 or SMBv3 clients that have signing
     #     turned on. This option works with SMB clients on Microsoft Windows
     #     Vista, Windows Server 2008, or later.
     #
-    #   * `MandatoryEncryption`: If you use this option, File Gateway only
-    #     allows connections from SMBv3 clients that have encryption turned
-    #     on. Both 256-bit and 128-bit algorithms are allowed. This option
-    #     is recommended for environments that handle sensitive data. It
-    #     works with SMB clients on Microsoft Windows 8, Windows Server
-    #     2012, or later.
-    #
-    #   * `EnforceEncryption`: If you use this option, File Gateway only
-    #     allows connections from SMBv3 clients that use 256-bit AES
-    #     encryption algorithms. 128-bit algorithms are not allowed. This
+    #   * `MandatoryEncryption`: If you choose this option, File Gateway
+    #     only allows connections from SMBv3 clients that have encryption
+    #     turned on. Both 256-bit and 128-bit algorithms are allowed. This
     #     option is recommended for environments that handle sensitive data.
     #     It works with SMB clients on Microsoft Windows 8, Windows Server
     #     2012, or later.
+    #
+    #   * `MandatoryEncryptionNoAes128`: If you choose this option, File
+    #     Gateway only allows connections from SMBv3 clients that use
+    #     256-bit AES encryption algorithms. 128-bit algorithms are not
+    #     allowed. This option is recommended for environments that handle
+    #     sensitive data. It works with SMB clients on Microsoft Windows 8,
+    #     Windows Server 2012, or later.
     #   @return [String]
     #
     # @!attribute [rw] file_shares_visible
@@ -5821,6 +5836,26 @@ module Aws::StorageGateway
       include Aws::Structure
     end
 
+    # A set of variables indicating the software update preferences for the
+    # gateway.
+    #
+    # @!attribute [rw] automatic_update_policy
+    #   Indicates the automatic update policy for a gateway.
+    #
+    #   `ALL_VERSIONS` - Enables regular gateway maintenance updates.
+    #
+    #   `EMERGENCY_VERSIONS_ONLY` - Disables regular gateway maintenance
+    #   updates.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/SoftwareUpdatePreferences AWS API Documentation
+    #
+    class SoftwareUpdatePreferences < Struct.new(
+      :automatic_update_policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
     #   operation to return a list of gateways for your account and Amazon
@@ -6594,7 +6629,14 @@ module Aws::StorageGateway
     #   @return [String]
     #
     # @!attribute [rw] gateway_capacity
-    #   Specifies the size of the gateway's metadata cache.
+    #   Specifies the size of the gateway's metadata cache. This setting
+    #   impacts gateway performance and hardware recommendations. For more
+    #   information, see [Performance guidance for gateways with multiple
+    #   file shares][1] in the *Amazon S3 File Gateway User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/filegateway/latest/files3/performance-multiple-file-shares.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateGatewayInformationInput AWS API Documentation
@@ -6667,6 +6709,8 @@ module Aws::StorageGateway
 
     # A JSON object containing the following fields:
     #
+    # * UpdateMaintenanceStartTimeInput$SoftwareUpdatePreferences
+    #
     # * UpdateMaintenanceStartTimeInput$DayOfMonth
     #
     # * UpdateMaintenanceStartTimeInput$DayOfWeek
@@ -6696,15 +6740,27 @@ module Aws::StorageGateway
     # @!attribute [rw] day_of_week
     #   The day of the week component of the maintenance start time week
     #   represented as an ordinal number from 0 to 6, where 0 represents
-    #   Sunday and 6 Saturday.
+    #   Sunday and 6 represents Saturday.
     #   @return [Integer]
     #
     # @!attribute [rw] day_of_month
     #   The day of the month component of the maintenance start time
     #   represented as an ordinal number from 1 to 28, where 1 represents
-    #   the first day of the month and 28 represents the last day of the
-    #   month.
+    #   the first day of the month. It is not possible to set the
+    #   maintenance schedule to start on days 29 through 31.
     #   @return [Integer]
+    #
+    # @!attribute [rw] software_update_preferences
+    #   A set of variables indicating the software update preferences for
+    #   the gateway.
+    #
+    #   Includes `AutomaticUpdatePolicy` field with the following inputs:
+    #
+    #   `ALL_VERSIONS` - Enables regular gateway maintenance updates.
+    #
+    #   `EMERGENCY_VERSIONS_ONLY` - Disables regular gateway maintenance
+    #   updates.
+    #   @return [Types::SoftwareUpdatePreferences]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateMaintenanceStartTimeInput AWS API Documentation
     #
@@ -6713,7 +6769,8 @@ module Aws::StorageGateway
       :hour_of_day,
       :minute_of_hour,
       :day_of_week,
-      :day_of_month)
+      :day_of_month,
+      :software_update_preferences)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7192,21 +7249,29 @@ module Aws::StorageGateway
     # @!attribute [rw] smb_security_strategy
     #   Specifies the type of security strategy.
     #
-    #   ClientSpecified: if you use this option, requests are established
-    #   based on what is negotiated by the client. This option is
-    #   recommended when you want to maximize compatibility across different
-    #   clients in your environment. Supported only in S3 File Gateway.
+    #   `ClientSpecified`: If you choose this option, requests are
+    #   established based on what is negotiated by the client. This option
+    #   is recommended when you want to maximize compatibility across
+    #   different clients in your environment. Supported only for S3 File
+    #   Gateway.
     #
-    #   MandatorySigning: if you use this option, file gateway only allows
-    #   connections from SMBv2 or SMBv3 clients that have signing enabled.
-    #   This option works with SMB clients on Microsoft Windows Vista,
-    #   Windows Server 2008 or newer.
+    #   `MandatorySigning`: If you choose this option, File Gateway only
+    #   allows connections from SMBv2 or SMBv3 clients that have signing
+    #   enabled. This option works with SMB clients on Microsoft Windows
+    #   Vista, Windows Server 2008 or newer.
     #
-    #   MandatoryEncryption: if you use this option, file gateway only
+    #   `MandatoryEncryption`: If you choose this option, File Gateway only
     #   allows connections from SMBv3 clients that have encryption enabled.
-    #   This option is highly recommended for environments that handle
-    #   sensitive data. This option works with SMB clients on Microsoft
-    #   Windows 8, Windows Server 2012 or newer.
+    #   This option is recommended for environments that handle sensitive
+    #   data. This option works with SMB clients on Microsoft Windows 8,
+    #   Windows Server 2012 or newer.
+    #
+    #   `MandatoryEncryptionNoAes128`: If you choose this option, File
+    #   Gateway only allows connections from SMBv3 clients that use 256-bit
+    #   AES encryption algorithms. 128-bit algorithms are not allowed. This
+    #   option is recommended for environments that handle sensitive data.
+    #   It works with SMB clients on Microsoft Windows 8, Windows Server
+    #   2012, or later.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateSMBSecurityStrategyInput AWS API Documentation

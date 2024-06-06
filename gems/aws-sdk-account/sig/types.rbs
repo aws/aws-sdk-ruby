@@ -8,6 +8,18 @@
 module Aws::Account
   module Types
 
+    class AcceptPrimaryEmailUpdateRequest
+      attr_accessor account_id: ::String
+      attr_accessor otp: ::String
+      attr_accessor primary_email: ::String
+      SENSITIVE: [:otp, :primary_email]
+    end
+
+    class AcceptPrimaryEmailUpdateResponse
+      attr_accessor status: ("PENDING" | "ACCEPTED")
+      SENSITIVE: []
+    end
+
     class AccessDeniedException
       attr_accessor message: ::String
       SENSITIVE: []
@@ -82,6 +94,16 @@ module Aws::Account
       SENSITIVE: []
     end
 
+    class GetPrimaryEmailRequest
+      attr_accessor account_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetPrimaryEmailResponse
+      attr_accessor primary_email: ::String
+      SENSITIVE: [:primary_email]
+    end
+
     class GetRegionOptStatusRequest
       attr_accessor account_id: ::String
       attr_accessor region_name: ::String
@@ -137,6 +159,17 @@ module Aws::Account
 
     class ResourceNotFoundException
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class StartPrimaryEmailUpdateRequest
+      attr_accessor account_id: ::String
+      attr_accessor primary_email: ::String
+      SENSITIVE: [:primary_email]
+    end
+
+    class StartPrimaryEmailUpdateResponse
+      attr_accessor status: ("PENDING" | "ACCEPTED")
       SENSITIVE: []
     end
 

@@ -233,8 +233,8 @@ module Aws
                                         data_table_columns: ::String?,
                                         copy_options: ::String?
                                       },
-                                      username: ::String,
-                                      password: ::String,
+                                      username: ::String?,
+                                      password: ::String?,
                                       retry_options: {
                                         duration_in_seconds: ::Integer?
                                       }?,
@@ -301,6 +301,11 @@ module Aws
                                         enabled: bool?,
                                         log_group_name: ::String?,
                                         log_stream_name: ::String?
+                                      }?,
+                                      secrets_manager_configuration: {
+                                        secret_arn: ::String?,
+                                        role_arn: ::String?,
+                                        enabled: bool
                                       }?
                                     },
                                     ?elasticsearch_destination_configuration: {
@@ -436,7 +441,7 @@ module Aws
                                     ?splunk_destination_configuration: {
                                       hec_endpoint: ::String,
                                       hec_endpoint_type: ("Raw" | "Event"),
-                                      hec_token: ::String,
+                                      hec_token: ::String?,
                                       hec_acknowledgment_timeout_in_seconds: ::Integer?,
                                       retry_options: {
                                         duration_in_seconds: ::Integer?
@@ -486,6 +491,11 @@ module Aws
                                       buffering_hints: {
                                         interval_in_seconds: ::Integer?,
                                         size_in_m_bs: ::Integer?
+                                      }?,
+                                      secrets_manager_configuration: {
+                                        secret_arn: ::String?,
+                                        role_arn: ::String?,
+                                        enabled: bool
                                       }?
                                     },
                                     ?http_endpoint_destination_configuration: {
@@ -552,7 +562,12 @@ module Aws
                                           log_group_name: ::String?,
                                           log_stream_name: ::String?
                                         }?
-                                      }
+                                      },
+                                      secrets_manager_configuration: {
+                                        secret_arn: ::String?,
+                                        role_arn: ::String?,
+                                        enabled: bool
+                                      }?
                                     },
                                     ?tags: Array[
                                       {
@@ -629,9 +644,9 @@ module Aws
                                     },
                                     ?snowflake_destination_configuration: {
                                       account_url: ::String,
-                                      private_key: ::String,
+                                      private_key: ::String?,
                                       key_passphrase: ::String?,
-                                      user: ::String,
+                                      user: ::String?,
                                       database: ::String,
                                       schema: ::String,
                                       table: ::String,
@@ -690,7 +705,12 @@ module Aws
                                           log_group_name: ::String?,
                                           log_stream_name: ::String?
                                         }?
-                                      }
+                                      },
+                                      secrets_manager_configuration: {
+                                        secret_arn: ::String?,
+                                        role_arn: ::String?,
+                                        enabled: bool
+                                      }?
                                     }
                                   ) -> _CreateDeliveryStreamResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDeliveryStreamResponseSuccess
@@ -1041,6 +1061,11 @@ module Aws
                                     enabled: bool?,
                                     log_group_name: ::String?,
                                     log_stream_name: ::String?
+                                  }?,
+                                  secrets_manager_configuration: {
+                                    secret_arn: ::String?,
+                                    role_arn: ::String?,
+                                    enabled: bool
                                   }?
                                 },
                                 ?elasticsearch_destination_update: {
@@ -1214,6 +1239,11 @@ module Aws
                                   buffering_hints: {
                                     interval_in_seconds: ::Integer?,
                                     size_in_m_bs: ::Integer?
+                                  }?,
+                                  secrets_manager_configuration: {
+                                    secret_arn: ::String?,
+                                    role_arn: ::String?,
+                                    enabled: bool
                                   }?
                                 },
                                 ?http_endpoint_destination_update: {
@@ -1280,6 +1310,11 @@ module Aws
                                       log_group_name: ::String?,
                                       log_stream_name: ::String?
                                     }?
+                                  }?,
+                                  secrets_manager_configuration: {
+                                    secret_arn: ::String?,
+                                    role_arn: ::String?,
+                                    enabled: bool
                                   }?
                                 },
                                 ?amazon_open_search_serverless_destination_update: {
@@ -1395,6 +1430,11 @@ module Aws
                                       log_group_name: ::String?,
                                       log_stream_name: ::String?
                                     }?
+                                  }?,
+                                  secrets_manager_configuration: {
+                                    secret_arn: ::String?,
+                                    role_arn: ::String?,
+                                    enabled: bool
                                   }?
                                 }
                               ) -> _UpdateDestinationResponseSuccess

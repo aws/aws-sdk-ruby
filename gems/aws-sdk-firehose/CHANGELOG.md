@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.70.0 (2024-06-06)
+------------------
+
+* Feature - Adds integration with Secrets Manager for Redshift, Splunk, HttpEndpoint, and Snowflake destinations
+
 1.69.0 (2024-06-05)
 ------------------
 

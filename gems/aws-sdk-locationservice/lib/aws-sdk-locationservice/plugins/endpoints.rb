@@ -114,6 +114,8 @@ module Aws::LocationService
             Aws::LocationService::Endpoints::DescribeTracker.build(context)
           when :disassociate_tracker_consumer
             Aws::LocationService::Endpoints::DisassociateTrackerConsumer.build(context)
+          when :forecast_geofence_events
+            Aws::LocationService::Endpoints::ForecastGeofenceEvents.build(context)
           when :get_device_position
             Aws::LocationService::Endpoints::GetDevicePosition.build(context)
           when :get_device_position_history
@@ -174,6 +176,8 @@ module Aws::LocationService
             Aws::LocationService::Endpoints::UpdateRouteCalculator.build(context)
           when :update_tracker
             Aws::LocationService::Endpoints::UpdateTracker.build(context)
+          when :verify_device_position
+            Aws::LocationService::Endpoints::VerifyDevicePosition.build(context)
           end
         end
       end

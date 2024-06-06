@@ -683,6 +683,7 @@ module Aws
         def day_of_week: () -> ::Integer
         def day_of_month: () -> ::Integer
         def timezone: () -> ::String
+        def software_update_preferences: () -> Types::SoftwareUpdatePreferences
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/StorageGateway/Client.html#describe_maintenance_start_time-instance_method
       def describe_maintenance_start_time: (
@@ -1251,10 +1252,13 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/StorageGateway/Client.html#update_maintenance_start_time-instance_method
       def update_maintenance_start_time: (
                                            gateway_arn: ::String,
-                                           hour_of_day: ::Integer,
-                                           minute_of_hour: ::Integer,
+                                           ?hour_of_day: ::Integer,
+                                           ?minute_of_hour: ::Integer,
                                            ?day_of_week: ::Integer,
-                                           ?day_of_month: ::Integer
+                                           ?day_of_month: ::Integer,
+                                           ?software_update_preferences: {
+                                             automatic_update_policy: ("ALL_VERSIONS" | "EMERGENCY_VERSIONS_ONLY")?
+                                           }
                                          ) -> _UpdateMaintenanceStartTimeResponseSuccess
                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateMaintenanceStartTimeResponseSuccess
 

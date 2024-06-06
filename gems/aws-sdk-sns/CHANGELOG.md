@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.77.0 (2024-06-06)
+------------------
+
+* Feature - Doc-only update for SNS. These changes include customer-reported issues and TXC3 updates.
+
 1.76.0 (2024-06-05)
 ------------------
 

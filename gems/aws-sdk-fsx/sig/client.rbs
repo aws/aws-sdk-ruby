@@ -320,6 +320,10 @@ module Aws
                                   root_squash_configuration: {
                                     root_squash: ::String?,
                                     no_squash_nids: Array[::String]?
+                                  }?,
+                                  metadata_configuration: {
+                                    iops: ::Integer?,
+                                    mode: ("AUTOMATIC" | "USER_PROVISIONED")
                                   }?
                                 },
                                 ?ontap_configuration: {
@@ -446,6 +450,10 @@ module Aws
                                               root_squash_configuration: {
                                                 root_squash: ::String?,
                                                 no_squash_nids: Array[::String]?
+                                              }?,
+                                              metadata_configuration: {
+                                                iops: ::Integer?,
+                                                mode: ("AUTOMATIC" | "USER_PROVISIONED")
                                               }?
                                             },
                                             ?storage_type: ("SSD" | "HDD"),
@@ -1159,7 +1167,11 @@ module Aws
                                     root_squash: ::String?,
                                     no_squash_nids: Array[::String]?
                                   }?,
-                                  per_unit_storage_throughput: ::Integer?
+                                  per_unit_storage_throughput: ::Integer?,
+                                  metadata_configuration: {
+                                    iops: ::Integer?,
+                                    mode: ("AUTOMATIC" | "USER_PROVISIONED")?
+                                  }?
                                 },
                                 ?ontap_configuration: {
                                   automatic_backup_retention_days: ::Integer?,

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.89.0 (2024-06-06)
+------------------
+
+* Feature - This release adds support to increase metadata performance on FSx for Lustre file systems beyond the default level provisioned when a file system is created. This can be done by specifying MetadataConfiguration during the creation of Persistent_2 file systems or by updating it on demand.
+
 1.88.0 (2024-06-05)
 ------------------
 

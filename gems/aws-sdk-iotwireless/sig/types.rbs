@@ -2273,7 +2273,7 @@ module Aws::IoTWireless
       attr_accessor last_uplink_received_at: ::String
       attr_accessor lo_ra_wan: Types::LoRaWANListDevice
       attr_accessor sidewalk: Types::SidewalkListDevice
-      attr_accessor fuota_device_status: ("Initial" | "Package_Not_Supported" | "FragAlgo_unsupported" | "Not_enough_memory" | "FragIndex_unsupported" | "Wrong_descriptor" | "SessionCnt_replay" | "MissingFrag" | "MemoryError" | "MICError" | "Successful")
+      attr_accessor fuota_device_status: ("Initial" | "Package_Not_Supported" | "FragAlgo_unsupported" | "Not_enough_memory" | "FragIndex_unsupported" | "Wrong_descriptor" | "SessionCnt_replay" | "MissingFrag" | "MemoryError" | "MICError" | "Successful" | "Device_exist_in_conflict_fuota_task")
       attr_accessor multicast_device_status: ::String
       attr_accessor mc_group_id: ::Integer
       SENSITIVE: []

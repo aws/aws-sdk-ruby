@@ -5248,6 +5248,7 @@ module Aws::Glue
       attr_accessor table_type: ::String
       attr_accessor parameters: ::Hash[::String, ::String]
       attr_accessor target_table: Types::TableIdentifier
+      attr_accessor view_definition: Types::ViewDefinitionInput
       SENSITIVE: []
     end
 
@@ -5708,6 +5709,8 @@ module Aws::Glue
       attr_accessor skip_archive: bool
       attr_accessor transaction_id: ::String
       attr_accessor version_id: ::String
+      attr_accessor view_update_action: ("ADD" | "REPLACE" | "ADD_OR_REPLACE" | "DROP")
+      attr_accessor force: bool
       SENSITIVE: []
     end
 
@@ -5802,12 +5805,30 @@ module Aws::Glue
       SENSITIVE: []
     end
 
+    class ViewDefinitionInput
+      attr_accessor is_protected: bool
+      attr_accessor definer: ::String
+      attr_accessor representations: ::Array[Types::ViewRepresentationInput]
+      attr_accessor sub_objects: ::Array[::String]
+      SENSITIVE: []
+    end
+
     class ViewRepresentation
       attr_accessor dialect: ("REDSHIFT" | "ATHENA" | "SPARK")
       attr_accessor dialect_version: ::String
       attr_accessor view_original_text: ::String
       attr_accessor view_expanded_text: ::String
+      attr_accessor validation_connection: ::String
       attr_accessor is_stale: bool
+      SENSITIVE: []
+    end
+
+    class ViewRepresentationInput
+      attr_accessor dialect: ("REDSHIFT" | "ATHENA" | "SPARK")
+      attr_accessor dialect_version: ::String
+      attr_accessor view_original_text: ::String
+      attr_accessor validation_connection: ::String
+      attr_accessor view_expanded_text: ::String
       SENSITIVE: []
     end
 

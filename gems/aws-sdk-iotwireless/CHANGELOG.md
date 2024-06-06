@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.49.0 (2024-06-06)
+------------------
+
+* Feature - Adds support for wireless device to be in Conflict FUOTA Device Status due to a FUOTA Task, so it couldn't be attached to a new one.
+
 1.48.0 (2024-06-05)
 ------------------
 

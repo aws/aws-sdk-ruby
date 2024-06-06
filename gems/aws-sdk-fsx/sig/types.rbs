@@ -300,6 +300,13 @@ module Aws::FSx
       attr_accessor data_compression_type: ("NONE" | "LZ4")
       attr_accessor log_configuration: Types::LustreLogCreateConfiguration
       attr_accessor root_squash_configuration: Types::LustreRootSquashConfiguration
+      attr_accessor metadata_configuration: Types::CreateFileSystemLustreMetadataConfiguration
+      SENSITIVE: []
+    end
+
+    class CreateFileSystemLustreMetadataConfiguration
+      attr_accessor iops: ::Integer
+      attr_accessor mode: ("AUTOMATIC" | "USER_PROVISIONED")
       SENSITIVE: []
     end
 
@@ -1009,6 +1016,12 @@ module Aws::FSx
       SENSITIVE: []
     end
 
+    class FileSystemLustreMetadataConfiguration
+      attr_accessor iops: ::Integer
+      attr_accessor mode: ("AUTOMATIC" | "USER_PROVISIONED")
+      SENSITIVE: []
+    end
+
     class FileSystemNotFound
       attr_accessor message: ::String
       SENSITIVE: []
@@ -1110,6 +1123,7 @@ module Aws::FSx
       attr_accessor data_compression_type: ("NONE" | "LZ4")
       attr_accessor log_configuration: Types::LustreLogConfiguration
       attr_accessor root_squash_configuration: Types::LustreRootSquashConfiguration
+      attr_accessor metadata_configuration: Types::FileSystemLustreMetadataConfiguration
       SENSITIVE: []
     end
 
@@ -1539,6 +1553,13 @@ module Aws::FSx
       attr_accessor log_configuration: Types::LustreLogCreateConfiguration
       attr_accessor root_squash_configuration: Types::LustreRootSquashConfiguration
       attr_accessor per_unit_storage_throughput: ::Integer
+      attr_accessor metadata_configuration: Types::UpdateFileSystemLustreMetadataConfiguration
+      SENSITIVE: []
+    end
+
+    class UpdateFileSystemLustreMetadataConfiguration
+      attr_accessor iops: ::Integer
+      attr_accessor mode: ("AUTOMATIC" | "USER_PROVISIONED")
       SENSITIVE: []
     end
 

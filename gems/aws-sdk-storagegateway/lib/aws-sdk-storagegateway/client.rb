@@ -3582,9 +3582,10 @@ module Aws::StorageGateway
       req.send_request(options)
     end
 
-    # Returns your gateway's weekly maintenance start time including the
-    # day and time of the week. Note that values are in terms of the
-    # gateway's time zone.
+    # Returns your gateway's maintenance window schedule information, with
+    # values for monthly or weekly cadence, specific day and time to begin
+    # maintenance, and which types of updates to apply. Time values returned
+    # are for the gateway's time zone.
     #
     # @option params [required, String] :gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
@@ -3599,6 +3600,7 @@ module Aws::StorageGateway
     #   * {Types::DescribeMaintenanceStartTimeOutput#day_of_week #day_of_week} => Integer
     #   * {Types::DescribeMaintenanceStartTimeOutput#day_of_month #day_of_month} => Integer
     #   * {Types::DescribeMaintenanceStartTimeOutput#timezone #timezone} => String
+    #   * {Types::DescribeMaintenanceStartTimeOutput#software_update_preferences #software_update_preferences} => Types::SoftwareUpdatePreferences
     #
     #
     # @example Example: To describe gateway's maintenance start time
@@ -3632,6 +3634,7 @@ module Aws::StorageGateway
     #   resp.day_of_week #=> Integer
     #   resp.day_of_month #=> Integer
     #   resp.timezone #=> String
+    #   resp.software_update_preferences.automatic_update_policy #=> String, one of "ALL_VERSIONS", "EMERGENCY_VERSIONS_ONLY"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeMaintenanceStartTime AWS API Documentation
     #
@@ -6418,9 +6421,10 @@ module Aws::StorageGateway
       req.send_request(options)
     end
 
-    # Updates a gateway's metadata, which includes the gateway's name and
-    # time zone. To specify which gateway to update, use the Amazon Resource
-    # Name (ARN) of the gateway in your request.
+    # Updates a gateway's metadata, which includes the gateway's name,
+    # time zone, and metadata cache size. To specify which gateway to
+    # update, use the Amazon Resource Name (ARN) of the gateway in your
+    # request.
     #
     # <note markdown="1"> For gateways activated after September 2, 2015, the gateway's ARN
     # contains the gateway ID rather than the gateway name. However,
@@ -6450,7 +6454,14 @@ module Aws::StorageGateway
     #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/WhatIsCloudWatchLogs.html
     #
     # @option params [String] :gateway_capacity
-    #   Specifies the size of the gateway's metadata cache.
+    #   Specifies the size of the gateway's metadata cache. This setting
+    #   impacts gateway performance and hardware recommendations. For more
+    #   information, see [Performance guidance for gateways with multiple file
+    #   shares][1] in the *Amazon S3 File Gateway User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/filegateway/latest/files3/performance-multiple-file-shares.html
     #
     # @return [Types::UpdateGatewayInformationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6562,21 +6573,36 @@ module Aws::StorageGateway
       req.send_request(options)
     end
 
-    # Updates a gateway's weekly maintenance start time information,
-    # including day and time of the week. The maintenance time is the time
-    # in your gateway's time zone.
+    # Updates a gateway's maintenance window schedule, with settings for
+    # monthly or weekly cadence, specific day and time to begin maintenance,
+    # and which types of updates to apply. Time configuration uses the
+    # gateway's time zone. You can pass values for a complete maintenance
+    # schedule, or update policy, or both. Previous values will persist for
+    # whichever setting you choose not to modify. If an incomplete or
+    # invalid maintenance schedule is passed, the entire request will be
+    # rejected with an error and no changes will occur.
+    #
+    # A complete maintenance schedule must include values for *both*
+    # `MinuteOfHour` and `HourOfDay`, and *either* `DayOfMonth` *or*
+    # `DayOfWeek`.
+    #
+    # <note markdown="1"> We recommend keeping maintenance updates turned on, except in specific
+    # use cases where the brief disruptions caused by updating the gateway
+    # could critically impact your deployment.
+    #
+    #  </note>
     #
     # @option params [required, String] :gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
     #   operation to return a list of gateways for your account and Amazon Web
     #   Services Region.
     #
-    # @option params [required, Integer] :hour_of_day
+    # @option params [Integer] :hour_of_day
     #   The hour component of the maintenance start time represented as *hh*,
     #   where *hh* is the hour (00 to 23). The hour of the day is in the time
     #   zone of the gateway.
     #
-    # @option params [required, Integer] :minute_of_hour
+    # @option params [Integer] :minute_of_hour
     #   The minute component of the maintenance start time represented as
     #   *mm*, where *mm* is the minute (00 to 59). The minute of the hour is
     #   in the time zone of the gateway.
@@ -6584,12 +6610,24 @@ module Aws::StorageGateway
     # @option params [Integer] :day_of_week
     #   The day of the week component of the maintenance start time week
     #   represented as an ordinal number from 0 to 6, where 0 represents
-    #   Sunday and 6 Saturday.
+    #   Sunday and 6 represents Saturday.
     #
     # @option params [Integer] :day_of_month
     #   The day of the month component of the maintenance start time
     #   represented as an ordinal number from 1 to 28, where 1 represents the
-    #   first day of the month and 28 represents the last day of the month.
+    #   first day of the month. It is not possible to set the maintenance
+    #   schedule to start on days 29 through 31.
+    #
+    # @option params [Types::SoftwareUpdatePreferences] :software_update_preferences
+    #   A set of variables indicating the software update preferences for the
+    #   gateway.
+    #
+    #   Includes `AutomaticUpdatePolicy` field with the following inputs:
+    #
+    #   `ALL_VERSIONS` - Enables regular gateway maintenance updates.
+    #
+    #   `EMERGENCY_VERSIONS_ONLY` - Disables regular gateway maintenance
+    #   updates.
     #
     # @return [Types::UpdateMaintenanceStartTimeOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6617,10 +6655,13 @@ module Aws::StorageGateway
     #
     #   resp = client.update_maintenance_start_time({
     #     gateway_arn: "GatewayARN", # required
-    #     hour_of_day: 1, # required
-    #     minute_of_hour: 1, # required
+    #     hour_of_day: 1,
+    #     minute_of_hour: 1,
     #     day_of_week: 1,
     #     day_of_month: 1,
+    #     software_update_preferences: {
+    #       automatic_update_policy: "ALL_VERSIONS", # accepts ALL_VERSIONS, EMERGENCY_VERSIONS_ONLY
+    #     },
     #   })
     #
     # @example Response structure
@@ -7103,14 +7144,21 @@ module Aws::StorageGateway
       req.send_request(options)
     end
 
-    # Updates the SMB security strategy on a file gateway. This action is
-    # only supported in file gateways.
+    # Updates the SMB security strategy level for an Amazon S3 file gateway.
+    # This action is only supported for Amazon S3 file gateways.
     #
-    # <note markdown="1"> This API is called Security level in the User Guide.
+    # <note markdown="1"> For information about configuring this setting using the Amazon Web
+    # Services console, see [Setting a security level for your gateway][1]
+    # in the *Amazon S3 File Gateway User Guide*.
     #
-    #  A higher security level can affect performance of the gateway.
+    #  A higher security strategy level can affect performance of the
+    # gateway.
     #
     #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/filegateway/latest/files3/security-strategy.html
     #
     # @option params [required, String] :gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
@@ -7120,21 +7168,28 @@ module Aws::StorageGateway
     # @option params [required, String] :smb_security_strategy
     #   Specifies the type of security strategy.
     #
-    #   ClientSpecified: if you use this option, requests are established
+    #   `ClientSpecified`: If you choose this option, requests are established
     #   based on what is negotiated by the client. This option is recommended
     #   when you want to maximize compatibility across different clients in
-    #   your environment. Supported only in S3 File Gateway.
+    #   your environment. Supported only for S3 File Gateway.
     #
-    #   MandatorySigning: if you use this option, file gateway only allows
-    #   connections from SMBv2 or SMBv3 clients that have signing enabled.
-    #   This option works with SMB clients on Microsoft Windows Vista, Windows
-    #   Server 2008 or newer.
+    #   `MandatorySigning`: If you choose this option, File Gateway only
+    #   allows connections from SMBv2 or SMBv3 clients that have signing
+    #   enabled. This option works with SMB clients on Microsoft Windows
+    #   Vista, Windows Server 2008 or newer.
     #
-    #   MandatoryEncryption: if you use this option, file gateway only allows
-    #   connections from SMBv3 clients that have encryption enabled. This
-    #   option is highly recommended for environments that handle sensitive
+    #   `MandatoryEncryption`: If you choose this option, File Gateway only
+    #   allows connections from SMBv3 clients that have encryption enabled.
+    #   This option is recommended for environments that handle sensitive
     #   data. This option works with SMB clients on Microsoft Windows 8,
     #   Windows Server 2012 or newer.
+    #
+    #   `MandatoryEncryptionNoAes128`: If you choose this option, File Gateway
+    #   only allows connections from SMBv3 clients that use 256-bit AES
+    #   encryption algorithms. 128-bit algorithms are not allowed. This option
+    #   is recommended for environments that handle sensitive data. It works
+    #   with SMB clients on Microsoft Windows 8, Windows Server 2012, or
+    #   later.
     #
     # @return [Types::UpdateSMBSecurityStrategyOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -7316,7 +7371,7 @@ module Aws::StorageGateway
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-storagegateway'
-      context[:gem_version] = '1.86.0'
+      context[:gem_version] = '1.87.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

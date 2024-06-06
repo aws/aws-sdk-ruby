@@ -479,13 +479,17 @@ module Aws::SQS
     #   size is 256 KiB.
     #
     #   A message can include only XML, JSON, and unformatted text. The
-    #   following Unicode characters are allowed:
+    #   following Unicode characters are allowed. For more information, see
+    #   the [W3C specification for characters][1].
     #
     #    `#x9` \| `#xA` \| `#xD` \| `#x20` to `#xD7FF` \| `#xE000` to `#xFFFD`
     #   \| `#x10000` to `#x10FFFF`
     #
-    #    Any characters not included in this list will be rejected. For more
-    #   information, see the [W3C specification for characters][1].
+    #    Amazon SQS does not throw an exception or completely reject the
+    #   message if it contains invalid characters. Instead, it replaces those
+    #   invalid characters with `U+FFFD` before storing the message in the
+    #   queue, as long as the message body contains at least one valid
+    #   character.
     #
     #
     #

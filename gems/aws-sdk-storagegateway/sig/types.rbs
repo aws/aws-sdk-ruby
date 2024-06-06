@@ -605,6 +605,7 @@ module Aws::StorageGateway
       attr_accessor day_of_week: ::Integer
       attr_accessor day_of_month: ::Integer
       attr_accessor timezone: ::String
+      attr_accessor software_update_preferences: Types::SoftwareUpdatePreferences
       SENSITIVE: []
     end
 
@@ -1219,6 +1220,11 @@ module Aws::StorageGateway
       SENSITIVE: []
     end
 
+    class SoftwareUpdatePreferences
+      attr_accessor automatic_update_policy: ("ALL_VERSIONS" | "EMERGENCY_VERSIONS_ONLY")
+      SENSITIVE: []
+    end
+
     class StartAvailabilityMonitorTestInput
       attr_accessor gateway_arn: ::String
       SENSITIVE: []
@@ -1417,6 +1423,7 @@ module Aws::StorageGateway
       attr_accessor minute_of_hour: ::Integer
       attr_accessor day_of_week: ::Integer
       attr_accessor day_of_month: ::Integer
+      attr_accessor software_update_preferences: Types::SoftwareUpdatePreferences
       SENSITIVE: []
     end
 

@@ -2311,6 +2311,20 @@ module Aws
                               database_name: ::String?,
                               name: ::String?,
                               region: ::String?
+                            }?,
+                            view_definition: {
+                              is_protected: bool?,
+                              definer: ::String?,
+                              representations: Array[
+                                {
+                                  dialect: ("REDSHIFT" | "ATHENA" | "SPARK")?,
+                                  dialect_version: ::String?,
+                                  view_original_text: ::String?,
+                                  validation_connection: ::String?,
+                                  view_expanded_text: ::String?
+                                },
+                              ]?,
+                              sub_objects: Array[::String]?
                             }?
                           },
                           ?partition_indexes: Array[
@@ -6558,11 +6572,27 @@ module Aws
                               database_name: ::String?,
                               name: ::String?,
                               region: ::String?
+                            }?,
+                            view_definition: {
+                              is_protected: bool?,
+                              definer: ::String?,
+                              representations: Array[
+                                {
+                                  dialect: ("REDSHIFT" | "ATHENA" | "SPARK")?,
+                                  dialect_version: ::String?,
+                                  view_original_text: ::String?,
+                                  validation_connection: ::String?,
+                                  view_expanded_text: ::String?
+                                },
+                              ]?,
+                              sub_objects: Array[::String]?
                             }?
                           },
                           ?skip_archive: bool,
                           ?transaction_id: ::String,
-                          ?version_id: ::String
+                          ?version_id: ::String,
+                          ?view_update_action: ("ADD" | "REPLACE" | "ADD_OR_REPLACE" | "DROP"),
+                          ?force: bool
                         ) -> _UpdateTableResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateTableResponseSuccess
 

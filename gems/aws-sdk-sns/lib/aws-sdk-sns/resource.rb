@@ -99,7 +99,7 @@ module Aws::SNS
     # @option options [Hash<String,String>] :attributes
     #   A map of attributes with their corresponding values.
     #
-    #   The following lists the names, descriptions, and values of the special
+    #   The following lists names, descriptions, and values of the special
     #   request parameters that the `CreateTopic` action uses:
     #
     #   * `DeliveryPolicy` – The policy that defines how Amazon SNS retries

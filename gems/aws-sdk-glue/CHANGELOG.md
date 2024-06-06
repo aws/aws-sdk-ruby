@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.177.0 (2024-06-06)
+------------------
+
+* Feature - This release adds support for creating and updating Glue Data Catalog Views.
+
 1.176.0 (2024-06-05)
 ------------------
 

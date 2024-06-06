@@ -21455,6 +21455,11 @@ module Aws::Glue
     #   resource linking.
     #   @return [Types::TableIdentifier]
     #
+    # @!attribute [rw] view_definition
+    #   A structure that contains all the information that defines the view,
+    #   including the dialect or dialects for the view, and the query.
+    #   @return [Types::ViewDefinitionInput]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/TableInput AWS API Documentation
     #
     class TableInput < Struct.new(
@@ -21470,7 +21475,8 @@ module Aws::Glue
       :view_expanded_text,
       :table_type,
       :parameters,
-      :target_table)
+      :target_table,
+      :view_definition)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -23238,6 +23244,15 @@ module Aws::Glue
     #   The version ID at which to update the table contents.
     #   @return [String]
     #
+    # @!attribute [rw] view_update_action
+    #   The operation to be performed when updating the view.
+    #   @return [String]
+    #
+    # @!attribute [rw] force
+    #   A flag that can be set to true to ignore matching storage descriptor
+    #   and subobject matching requirements.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateTableRequest AWS API Documentation
     #
     class UpdateTableRequest < Struct.new(
@@ -23246,7 +23261,9 @@ module Aws::Glue
       :table_input,
       :skip_archive,
       :transaction_id,
-      :version_id)
+      :version_id,
+      :view_update_action,
+      :force)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -23562,6 +23579,40 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # A structure containing details for creating or updating an Glue view.
+    #
+    # @!attribute [rw] is_protected
+    #   You can set this flag as true to instruct the engine not to push
+    #   user-provided operations into the logical plan of the view during
+    #   query planning. However, setting this flag does not guarantee that
+    #   the engine will comply. Refer to the engine's documentation to
+    #   understand the guarantees provided, if any.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] definer
+    #   The definer of a view in SQL.
+    #   @return [String]
+    #
+    # @!attribute [rw] representations
+    #   A list of structures that contains the dialect of the view, and the
+    #   query that defines the view.
+    #   @return [Array<Types::ViewRepresentationInput>]
+    #
+    # @!attribute [rw] sub_objects
+    #   A list of base table ARNs that make up the view.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ViewDefinitionInput AWS API Documentation
+    #
+    class ViewDefinitionInput < Struct.new(
+      :is_protected,
+      :definer,
+      :representations,
+      :sub_objects)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A structure that contains the dialect of the view, and the query that
     # defines the view.
     #
@@ -23593,6 +23644,11 @@ module Aws::Glue
     #   ^
     #   @return [String]
     #
+    # @!attribute [rw] validation_connection
+    #   The name of the connection to be used to validate the specific
+    #   representation of the view.
+    #   @return [String]
+    #
     # @!attribute [rw] is_stale
     #   Dialects marked as stale are no longer valid and must be updated
     #   before they can be queried in their respective query engines.
@@ -23605,7 +23661,48 @@ module Aws::Glue
       :dialect_version,
       :view_original_text,
       :view_expanded_text,
+      :validation_connection,
       :is_stale)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A structure containing details of a representation to update or create
+    # a Lake Formation view.
+    #
+    # @!attribute [rw] dialect
+    #   A parameter that specifies the engine type of a specific
+    #   representation.
+    #   @return [String]
+    #
+    # @!attribute [rw] dialect_version
+    #   A parameter that specifies the version of the engine of a specific
+    #   representation.
+    #   @return [String]
+    #
+    # @!attribute [rw] view_original_text
+    #   A string that represents the original SQL query that describes the
+    #   view.
+    #   @return [String]
+    #
+    # @!attribute [rw] validation_connection
+    #   The name of the connection to be used to validate the specific
+    #   representation of the view.
+    #   @return [String]
+    #
+    # @!attribute [rw] view_expanded_text
+    #   A string that represents the SQL query that describes the view with
+    #   expanded resource ARNs
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ViewRepresentationInput AWS API Documentation
+    #
+    class ViewRepresentationInput < Struct.new(
+      :dialect,
+      :dialect_version,
+      :view_original_text,
+      :validation_connection,
+      :view_expanded_text)
       SENSITIVE = []
       include Aws::Structure
     end

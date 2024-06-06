@@ -80,6 +80,7 @@ module Aws::FSx
     CreateFileSystemFromBackupRequest = Shapes::StructureShape.new(name: 'CreateFileSystemFromBackupRequest')
     CreateFileSystemFromBackupResponse = Shapes::StructureShape.new(name: 'CreateFileSystemFromBackupResponse')
     CreateFileSystemLustreConfiguration = Shapes::StructureShape.new(name: 'CreateFileSystemLustreConfiguration')
+    CreateFileSystemLustreMetadataConfiguration = Shapes::StructureShape.new(name: 'CreateFileSystemLustreMetadataConfiguration')
     CreateFileSystemOntapConfiguration = Shapes::StructureShape.new(name: 'CreateFileSystemOntapConfiguration')
     CreateFileSystemOpenZFSConfiguration = Shapes::StructureShape.new(name: 'CreateFileSystemOpenZFSConfiguration')
     CreateFileSystemRequest = Shapes::StructureShape.new(name: 'CreateFileSystemRequest')
@@ -211,6 +212,7 @@ module Aws::FSx
     FileSystemId = Shapes::StringShape.new(name: 'FileSystemId')
     FileSystemIds = Shapes::ListShape.new(name: 'FileSystemIds')
     FileSystemLifecycle = Shapes::StringShape.new(name: 'FileSystemLifecycle')
+    FileSystemLustreMetadataConfiguration = Shapes::StructureShape.new(name: 'FileSystemLustreMetadataConfiguration')
     FileSystemMaintenanceOperation = Shapes::StringShape.new(name: 'FileSystemMaintenanceOperation')
     FileSystemMaintenanceOperations = Shapes::ListShape.new(name: 'FileSystemMaintenanceOperations')
     FileSystemNotFound = Shapes::StructureShape.new(name: 'FileSystemNotFound')
@@ -265,6 +267,8 @@ module Aws::FSx
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     Megabytes = Shapes::IntegerShape.new(name: 'Megabytes')
     MegabytesPerSecond = Shapes::IntegerShape.new(name: 'MegabytesPerSecond')
+    MetadataConfigurationMode = Shapes::StringShape.new(name: 'MetadataConfigurationMode')
+    MetadataIops = Shapes::IntegerShape.new(name: 'MetadataIops')
     MetadataStorageCapacity = Shapes::IntegerShape.new(name: 'MetadataStorageCapacity')
     MissingFileCacheConfiguration = Shapes::StructureShape.new(name: 'MissingFileCacheConfiguration')
     MissingFileSystemConfiguration = Shapes::StructureShape.new(name: 'MissingFileSystemConfiguration')
@@ -408,6 +412,7 @@ module Aws::FSx
     UpdateFileCacheRequest = Shapes::StructureShape.new(name: 'UpdateFileCacheRequest')
     UpdateFileCacheResponse = Shapes::StructureShape.new(name: 'UpdateFileCacheResponse')
     UpdateFileSystemLustreConfiguration = Shapes::StructureShape.new(name: 'UpdateFileSystemLustreConfiguration')
+    UpdateFileSystemLustreMetadataConfiguration = Shapes::StructureShape.new(name: 'UpdateFileSystemLustreMetadataConfiguration')
     UpdateFileSystemOntapConfiguration = Shapes::StructureShape.new(name: 'UpdateFileSystemOntapConfiguration')
     UpdateFileSystemOpenZFSConfiguration = Shapes::StructureShape.new(name: 'UpdateFileSystemOpenZFSConfiguration')
     UpdateFileSystemRequest = Shapes::StructureShape.new(name: 'UpdateFileSystemRequest')
@@ -685,7 +690,12 @@ module Aws::FSx
     CreateFileSystemLustreConfiguration.add_member(:data_compression_type, Shapes::ShapeRef.new(shape: DataCompressionType, location_name: "DataCompressionType"))
     CreateFileSystemLustreConfiguration.add_member(:log_configuration, Shapes::ShapeRef.new(shape: LustreLogCreateConfiguration, location_name: "LogConfiguration"))
     CreateFileSystemLustreConfiguration.add_member(:root_squash_configuration, Shapes::ShapeRef.new(shape: LustreRootSquashConfiguration, location_name: "RootSquashConfiguration"))
+    CreateFileSystemLustreConfiguration.add_member(:metadata_configuration, Shapes::ShapeRef.new(shape: CreateFileSystemLustreMetadataConfiguration, location_name: "MetadataConfiguration"))
     CreateFileSystemLustreConfiguration.struct_class = Types::CreateFileSystemLustreConfiguration
+
+    CreateFileSystemLustreMetadataConfiguration.add_member(:iops, Shapes::ShapeRef.new(shape: MetadataIops, location_name: "Iops"))
+    CreateFileSystemLustreMetadataConfiguration.add_member(:mode, Shapes::ShapeRef.new(shape: MetadataConfigurationMode, required: true, location_name: "Mode"))
+    CreateFileSystemLustreMetadataConfiguration.struct_class = Types::CreateFileSystemLustreMetadataConfiguration
 
     CreateFileSystemOntapConfiguration.add_member(:automatic_backup_retention_days, Shapes::ShapeRef.new(shape: AutomaticBackupRetentionDays, location_name: "AutomaticBackupRetentionDays"))
     CreateFileSystemOntapConfiguration.add_member(:daily_automatic_backup_start_time, Shapes::ShapeRef.new(shape: DailyTime, location_name: "DailyAutomaticBackupStartTime"))
@@ -1244,6 +1254,10 @@ module Aws::FSx
 
     FileSystemIds.member = Shapes::ShapeRef.new(shape: FileSystemId)
 
+    FileSystemLustreMetadataConfiguration.add_member(:iops, Shapes::ShapeRef.new(shape: MetadataIops, location_name: "Iops"))
+    FileSystemLustreMetadataConfiguration.add_member(:mode, Shapes::ShapeRef.new(shape: MetadataConfigurationMode, required: true, location_name: "Mode"))
+    FileSystemLustreMetadataConfiguration.struct_class = Types::FileSystemLustreMetadataConfiguration
+
     FileSystemMaintenanceOperations.member = Shapes::ShapeRef.new(shape: FileSystemMaintenanceOperation)
 
     FileSystemNotFound.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
@@ -1320,6 +1334,7 @@ module Aws::FSx
     LustreFileSystemConfiguration.add_member(:data_compression_type, Shapes::ShapeRef.new(shape: DataCompressionType, location_name: "DataCompressionType"))
     LustreFileSystemConfiguration.add_member(:log_configuration, Shapes::ShapeRef.new(shape: LustreLogConfiguration, location_name: "LogConfiguration"))
     LustreFileSystemConfiguration.add_member(:root_squash_configuration, Shapes::ShapeRef.new(shape: LustreRootSquashConfiguration, location_name: "RootSquashConfiguration"))
+    LustreFileSystemConfiguration.add_member(:metadata_configuration, Shapes::ShapeRef.new(shape: FileSystemLustreMetadataConfiguration, location_name: "MetadataConfiguration"))
     LustreFileSystemConfiguration.struct_class = Types::LustreFileSystemConfiguration
 
     LustreLogConfiguration.add_member(:level, Shapes::ShapeRef.new(shape: LustreAccessAuditLogLevel, required: true, location_name: "Level"))
@@ -1685,7 +1700,12 @@ module Aws::FSx
     UpdateFileSystemLustreConfiguration.add_member(:log_configuration, Shapes::ShapeRef.new(shape: LustreLogCreateConfiguration, location_name: "LogConfiguration"))
     UpdateFileSystemLustreConfiguration.add_member(:root_squash_configuration, Shapes::ShapeRef.new(shape: LustreRootSquashConfiguration, location_name: "RootSquashConfiguration"))
     UpdateFileSystemLustreConfiguration.add_member(:per_unit_storage_throughput, Shapes::ShapeRef.new(shape: PerUnitStorageThroughput, location_name: "PerUnitStorageThroughput"))
+    UpdateFileSystemLustreConfiguration.add_member(:metadata_configuration, Shapes::ShapeRef.new(shape: UpdateFileSystemLustreMetadataConfiguration, location_name: "MetadataConfiguration"))
     UpdateFileSystemLustreConfiguration.struct_class = Types::UpdateFileSystemLustreConfiguration
+
+    UpdateFileSystemLustreMetadataConfiguration.add_member(:iops, Shapes::ShapeRef.new(shape: MetadataIops, location_name: "Iops"))
+    UpdateFileSystemLustreMetadataConfiguration.add_member(:mode, Shapes::ShapeRef.new(shape: MetadataConfigurationMode, location_name: "Mode"))
+    UpdateFileSystemLustreMetadataConfiguration.struct_class = Types::UpdateFileSystemLustreMetadataConfiguration
 
     UpdateFileSystemOntapConfiguration.add_member(:automatic_backup_retention_days, Shapes::ShapeRef.new(shape: AutomaticBackupRetentionDays, location_name: "AutomaticBackupRetentionDays"))
     UpdateFileSystemOntapConfiguration.add_member(:daily_automatic_backup_start_time, Shapes::ShapeRef.new(shape: DailyTime, location_name: "DailyAutomaticBackupStartTime"))
@@ -1865,6 +1885,7 @@ module Aws::FSx
         "endpointPrefix" => "fsx",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "protocols" => ["json"],
         "serviceFullName" => "Amazon FSx",
         "serviceId" => "FSx",
         "signatureVersion" => "v4",

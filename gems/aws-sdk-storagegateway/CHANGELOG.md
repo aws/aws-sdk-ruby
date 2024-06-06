@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.87.0 (2024-06-06)
+------------------
+
+* Feature - Adds SoftwareUpdatePreferences to DescribeMaintenanceStartTime and UpdateMaintenanceStartTime, a structure which contains AutomaticUpdatePolicy.
+
 1.86.0 (2024-06-05)
 ------------------
 

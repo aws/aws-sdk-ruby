@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.76.0 (2024-06-06)
+------------------
+
+* Feature - Doc only updates for SQS. These updates include customer-reported issues and TCX3 modifications.
+
 1.75.0 (2024-06-05)
 ------------------
 
