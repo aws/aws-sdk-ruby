@@ -15,39 +15,21 @@ module Aws
 
           def call(context)
             @handler.call(context).on(200) do |response|
-              return response if streaming_output?(context.operation.output)
-
-              error = check_for_error(context)
-              return response unless error
-
-              context.http_response.status_code = 500
-              response.data = nil
-              response.error = error
+              if error = check_for_error(context)
+                context.http_response.status_code = 500
+                response.data = nil
+                response.error = error
+              end
             end
-          end
-
-          private
-
-          def streaming_output?(output)
-            if (payload = output[:payload_member]) # checking ref and shape
-              payload['streaming'] || payload.shape['streaming']
-            else
-              false
-            end
-          end
-
-          def members_in_body?(output)
-            output.shape.members.any? { |_, k| k.location.nil? }
           end
 
           def check_for_error(context)
             xml = context.http_response.body_contents
-            if xml.match(/\?>\s*<Error>/)
+            if xml.match(/<Error>/)
               error_code = xml.match(/<Code>(.+?)<\/Code>/)[1]
               error_message = xml.match(/<Message>(.+?)<\/Message>/)[1]
               S3::Errors.error_class(error_code).new(context, error_message)
-            elsif members_in_body?(context.operation.output) && !xml.match(/<\w/)
-              # Must have a body member and have the start of an XML Tag
+            elsif !xml.match(/<\w/) # Must have the start of an XML Tag
               # Other incomplete xml bodies will result in XML ParsingError
               Seahorse::Client::NetworkingError.new(
                 S3::Errors
@@ -58,7 +40,15 @@ module Aws
           end
         end
 
-        handler(Handler, step: :sign)
+        handler(
+          Handler,
+          step: :sign,
+          operations: [
+            :complete_multipart_upload,
+            :copy_object,
+            :upload_part_copy,
+          ]
+        )
       end
     end
   end

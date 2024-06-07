@@ -45,16 +45,8 @@ module Aws
                                 'rw0nS41rawnLDzkf+PKXmmt/uEi4bzvNMr72o=',
                 'x-amz-request-id' => 'BE9C18E622969B17'
               },
-              body: <<-XML)
-<?xml version="1.0" encoding="UTF-8"?>
-<ListAllMyBucketsResult xmlns=\"http://s3.amazonaws.com/doc/2006-03-01/\">
-  <Buckets>
-    <Bucket>
-      <Name>aws-sdk-ruby</Name>
-    </Bucket>
-  </Buckets>
-</ListAllMyBucketsResult>
-XML
+              body: ''
+            )
             Seahorse::Client::Response.new(context: context)
           end
           resp = s3.list_buckets
@@ -431,14 +423,14 @@ BODY
               status_code: 409,
               headers: {},
               body: <<-XML.strip
-<?xml version="1.0" encoding="UTF-8"?>
-<Error>
-  <Code>BucketNotEmpty</Code>
-  <Message>The bucket you tried to delete is not empty</Message>
-  <BucketName>aws-sdk</BucketName>
-  <RequestId>740BE6AB575EACED</RequestId>
-  <HostId>MQVg1RMI+d93Hps1E8qpIuDb9Gd2TzkDhm0wE40981DjxSHP1UfLBB7qOAlwAqJB</HostId>
-</Error>
+                <?xml version="1.0" encoding="UTF-8"?>
+                <Error>
+                  <Code>BucketNotEmpty</Code>
+                  <Message>The bucket you tried to delete is not empty</Message>
+                  <BucketName>aws-sdk</BucketName>
+                  <RequestId>740BE6AB575EACED</RequestId>
+                  <HostId>MQVg1RMI+d93Hps1E8qpIuDb9Gd2TzkDhm0wE40981DjxSHP1UfLBB7qOAlwAqJB</HostId>
+                </Error>
               XML
             )
             Seahorse::Client::Response.new(context: context)
@@ -460,8 +452,8 @@ BODY
               status_code: 200,
               headers: {},
               body: <<-XML.strip
-<?xml version="1.0" encoding="UTF-8"?>
-<LocationConstraint xmlns="http://s3.amazonaws.com/doc/2006-03-01/">EU</LocationConstraint>
+                <?xml version="1.0" encoding="UTF-8"?>
+                <LocationConstraint xmlns="http://s3.amazonaws.com/doc/2006-03-01/">EU</LocationConstraint>
               XML
             )
             Seahorse::Client::Response.new(context: context)
@@ -477,8 +469,8 @@ BODY
               status_code: 200,
               headers: {},
               body: <<-XML.strip
-<?xml version="1.0" encoding="UTF-8"?>
-<LocationConstraint xmlns="http://s3.amazonaws.com/doc/2006-03-01/"/>
+                <?xml version="1.0" encoding="UTF-8"?>
+                <LocationConstraint xmlns="http://s3.amazonaws.com/doc/2006-03-01/"/>
               XML
             )
             Seahorse::Client::Response.new(context: context)
@@ -512,19 +504,19 @@ BODY
               status_code: 200,
               headers: {},
               body: <<-XML.strip)
-<?xml version="1.0" encoding="UTF-8"?>
-<ListBucketResult xmlns="http://s3.amazonaws.com/doc/2006-03-01/">
-  <Prefix>a%26</Prefix>
-  <Delimiter>b%26</Delimiter>
-  <Marker>c%26</Marker>
-  <NextMarker>d%26</NextMarker>
-  <Contents>
-    <Key>e%26</Key>
-  </Contents>
-  <CommonPrefixes>
-    <Prefix>f%26</Prefix>
-  </CommonPrefixes>
-</ListBucketResult>
+                <?xml version="1.0" encoding="UTF-8"?>
+                <ListBucketResult xmlns="http://s3.amazonaws.com/doc/2006-03-01/">
+                  <Prefix>a%26</Prefix>
+                  <Delimiter>b%26</Delimiter>
+                  <Marker>c%26</Marker>
+                  <NextMarker>d%26</NextMarker>
+                  <Contents>
+                    <Key>e%26</Key>
+                  </Contents>
+                  <CommonPrefixes>
+                    <Prefix>f%26</Prefix>
+                  </CommonPrefixes>
+                </ListBucketResult>
               XML
             Seahorse::Client::Response.new(context: context)
           end
@@ -549,12 +541,12 @@ BODY
               status_code: 200,
               headers: {},
               body: <<-XML.strip)
-<?xml version="1.0" encoding="UTF-8"?>
-<ListBucketResult xmlns="http://s3.amazonaws.com/doc/2006-03-01/">
-  <Contents>
-    <Key>a%26</Key>
-  </Contents>
-</ListBucketResult>
+                <?xml version="1.0" encoding="UTF-8"?>
+                <ListBucketResult xmlns="http://s3.amazonaws.com/doc/2006-03-01/">
+                  <Contents>
+                    <Key>a%26</Key>
+                  </Contents>
+                </ListBucketResult>
               XML
             Seahorse::Client::Response.new(context: context)
           end
@@ -570,22 +562,22 @@ BODY
               status_code: 200,
               headers: {},
               body: <<-XML.strip)
-<?xml version="1.0" encoding="UTF-8"?>
-<ListVersionsResult xmlns="http://s3.amazonaws.com/doc/2006-03-01">
-  <Prefix>a%26</Prefix>
-  <Delimiter>b%26</Delimiter>
-  <KeyMarker>c%26</KeyMarker>
-  <NextKeyMarker>d%26</NextKeyMarker>
-  <Version>
-    <Key>e%26</Key>
-  </Version>
-  <DeleteMarker>
-    <Key>f%26</Key>
-  </DeleteMarker>
-  <CommonPrefixes>
-    <Prefix>g%26</Prefix>
-  </CommonPrefixes>
-</ListVersionsResult>
+                <?xml version="1.0" encoding="UTF-8"?>
+                <ListVersionsResult xmlns="http://s3.amazonaws.com/doc/2006-03-01">
+                  <Prefix>a%26</Prefix>
+                  <Delimiter>b%26</Delimiter>
+                  <KeyMarker>c%26</KeyMarker>
+                  <NextKeyMarker>d%26</NextKeyMarker>
+                  <Version>
+                    <Key>e%26</Key>
+                  </Version>
+                  <DeleteMarker>
+                    <Key>f%26</Key>
+                  </DeleteMarker>
+                  <CommonPrefixes>
+                    <Prefix>g%26</Prefix>
+                  </CommonPrefixes>
+                </ListVersionsResult>
               XML
             Seahorse::Client::Response.new(context: context)
           end
@@ -610,19 +602,19 @@ BODY
               status_code: 200,
               headers: {},
               body: <<-XML.strip)
-<?xml version="1.0" encoding="UTF-8"?>
-<ListVersionsResult xmlns="http://s3.amazonaws.com/doc/2006-03-01">
-  <Prefix>a%26</Prefix>
-  <Delimiter>b%26</Delimiter>
-  <KeyMarker>c%26</KeyMarker>
-  <NextKeyMarker>d%26</NextKeyMarker>
-  <Upload>
-    <Key>e%26</Key>
-  </Upload>
-  <CommonPrefixes>
-    <Prefix>f%26</Prefix>
-  </CommonPrefixes>
-</ListVersionsResult>
+                <?xml version="1.0" encoding="UTF-8"?>
+                <ListVersionsResult xmlns="http://s3.amazonaws.com/doc/2006-03-01">
+                  <Prefix>a%26</Prefix>
+                  <Delimiter>b%26</Delimiter>
+                  <KeyMarker>c%26</KeyMarker>
+                  <NextKeyMarker>d%26</NextKeyMarker>
+                  <Upload>
+                    <Key>e%26</Key>
+                  </Upload>
+                  <CommonPrefixes>
+                    <Prefix>f%26</Prefix>
+                  </CommonPrefixes>
+                </ListVersionsResult>
               XML
             Seahorse::Client::Response.new(context: context)
           end
@@ -694,17 +686,17 @@ BODY
               status_code: 200,
               headers: {},
               body: <<-XML)
-<ListBucketResult xmlns="http://s3.amazonaws.com/doc/2006-03-01/">
-  <Contents>
-    <Key>prefix+suffix</Key>
-  </Contents>
-  <Contents>
-    <Key>prefix%2Bsuffix</Key>
-  </Contents>
-  <Contents>
-    <Key>prefix%20suffix</Key>
-  </Contents>
-</ListBucketResult>
+                <ListBucketResult xmlns="http://s3.amazonaws.com/doc/2006-03-01/">
+                  <Contents>
+                    <Key>prefix+suffix</Key>
+                  </Contents>
+                  <Contents>
+                    <Key>prefix%2Bsuffix</Key>
+                  </Contents>
+                  <Contents>
+                    <Key>prefix%20suffix</Key>
+                  </Contents>
+                </ListBucketResult>
               XML
             Seahorse::Client::Response.new(context: context)
           end
@@ -789,13 +781,13 @@ BODY
             client.handle(step: :send) do |context|
               context.http_response.signal_headers(200, {})
               context.http_response.signal_data(<<-XML.strip)
-<?xml version="1.0" encoding="UTF-8"?>
-<Error>
-  <Code>InternalError</Code>
-  <Message>We encountered an internal error. Please try again.</Message>
-  <RequestId>656c76696e6727732072657175657374</RequestId>
-  <HostId>Uuag1LuByRx9e6j5Onimru9pO4ZVKnJ2Qz7/C1NPcfTWAtRPfTaOFg==</HostId>
-</Error>
+                <?xml version="1.0" encoding="UTF-8"?>
+                <Error>
+                  <Code>InternalError</Code>
+                  <Message>We encountered an internal error. Please try again.</Message>
+                  <RequestId>656c76696e6727732072657175657374</RequestId>
+                  <HostId>Uuag1LuByRx9e6j5Onimru9pO4ZVKnJ2Qz7/C1NPcfTWAtRPfTaOFg==</HostId>
+                </Error>
               XML
               context.http_response.signal_done
               Seahorse::Client::Response.new(context: context)
