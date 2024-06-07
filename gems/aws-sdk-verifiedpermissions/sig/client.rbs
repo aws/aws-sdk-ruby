@@ -182,6 +182,24 @@ module Aws
                                         group_configuration: {
                                           group_entity_type: ::String
                                         }?
+                                      }?,
+                                      open_id_connect_configuration: {
+                                        issuer: ::String,
+                                        entity_id_prefix: ::String?,
+                                        group_configuration: {
+                                          group_claim: ::String,
+                                          group_entity_type: ::String
+                                        }?,
+                                        token_selection: {
+                                          access_token_only: {
+                                            principal_id_claim: ::String?,
+                                            audiences: Array[::String]?
+                                          }?,
+                                          identity_token_only: {
+                                            principal_id_claim: ::String?,
+                                            client_ids: Array[::String]?
+                                          }?
+                                        }
                                       }?
                                     },
                                     ?principal_entity_type: ::String
@@ -573,6 +591,24 @@ module Aws
                                         group_configuration: {
                                           group_entity_type: ::String
                                         }?
+                                      }?,
+                                      open_id_connect_configuration: {
+                                        issuer: ::String,
+                                        entity_id_prefix: ::String?,
+                                        group_configuration: {
+                                          group_claim: ::String,
+                                          group_entity_type: ::String
+                                        }?,
+                                        token_selection: {
+                                          access_token_only: {
+                                            principal_id_claim: ::String?,
+                                            audiences: Array[::String]?
+                                          }?,
+                                          identity_token_only: {
+                                            principal_id_claim: ::String?,
+                                            client_ids: Array[::String]?
+                                          }?
+                                        }
                                       }?
                                     },
                                     ?principal_entity_type: ::String

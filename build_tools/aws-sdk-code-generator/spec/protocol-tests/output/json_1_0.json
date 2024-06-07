@@ -3,6 +3,9 @@
         "description": "Test cases for EmptyInputAndEmptyOutput operation",
         "metadata": {
             "protocol": "json",
+            "protocols": [
+                "json"
+            ],
             "apiVersion": "2020-07-14",
             "jsonVersion": "1.0",
             "targetPrefix": "JsonRpc10"
@@ -43,6 +46,9 @@
         "description": "Test cases for GreetingWithErrors operation",
         "metadata": {
             "protocol": "json",
+            "protocols": [
+                "json"
+            ],
             "apiVersion": "2020-07-14",
             "jsonVersion": "1.0",
             "targetPrefix": "JsonRpc10"
@@ -99,6 +105,9 @@
         "description": "Test cases for GreetingWithErrors operation",
         "metadata": {
             "protocol": "json",
+            "protocols": [
+                "json"
+            ],
             "apiVersion": "2020-07-14",
             "jsonVersion": "1.0",
             "targetPrefix": "JsonRpc10"
@@ -359,6 +368,9 @@
         "description": "Test cases for GreetingWithErrors operation",
         "metadata": {
             "protocol": "json",
+            "protocols": [
+                "json"
+            ],
             "apiVersion": "2020-07-14",
             "jsonVersion": "1.0",
             "targetPrefix": "JsonRpc10"
@@ -455,6 +467,9 @@
         "description": "Test cases for JsonUnions operation",
         "metadata": {
             "protocol": "json",
+            "protocols": [
+                "json"
+            ],
             "apiVersion": "2020-07-14",
             "jsonVersion": "1.0",
             "targetPrefix": "JsonRpc10"
@@ -915,6 +930,9 @@
         "description": "Test cases for NoInputAndNoOutput operation",
         "metadata": {
             "protocol": "json",
+            "protocols": [
+                "json"
+            ],
             "apiVersion": "2020-07-14",
             "jsonVersion": "1.0",
             "targetPrefix": "JsonRpc10"
@@ -987,6 +1005,9 @@
         "description": "Test cases for NoInputAndOutput operation",
         "metadata": {
             "protocol": "json",
+            "protocols": [
+                "json"
+            ],
             "apiVersion": "2020-07-14",
             "jsonVersion": "1.0",
             "targetPrefix": "JsonRpc10"
@@ -1027,6 +1048,9 @@
         "description": "Test cases for SimpleScalarProperties operation",
         "metadata": {
             "protocol": "json",
+            "protocols": [
+                "json"
+            ],
             "apiVersion": "2020-07-14",
             "jsonVersion": "1.0",
             "targetPrefix": "JsonRpc10"

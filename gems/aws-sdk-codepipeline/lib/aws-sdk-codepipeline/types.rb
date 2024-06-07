@@ -2552,11 +2552,6 @@ module Aws::CodePipeline
     #   retrieve the remaining results, make another call with the returned
     #   nextToken value. Action execution history is retained for up to 12
     #   months, based on action execution start times. Default value is 100.
-    #
-    #   <note markdown="1"> Detailed execution history is available for executions run on or
-    #   after February 21, 2019.
-    #
-    #    </note>
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -4097,6 +4092,13 @@ module Aws::CodePipeline
     # for a pipeline execution that's being started. A source revision is
     # the version with all the changes to your application code, or source
     # artifact, for the pipeline execution.
+    #
+    # <note markdown="1"> For the `S3_OBJECT_VERSION_ID` and `S3_OBJECT_KEY` types of source
+    # revisions, either of the types can be used independently, or they can
+    # be used together to override the source with a specific ObjectKey and
+    # VersionID.
+    #
+    #  </note>
     #
     # @!attribute [rw] action_name
     #   The name of the action where the override will be applied.

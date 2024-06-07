@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.74.0 (2024-06-07)
+------------------
+
+* Feature - CodePipeline now supports overriding S3 Source Object Key during StartPipelineExecution, as part of Source Overrides.
+
 1.73.0 (2024-06-05)
 ------------------
 

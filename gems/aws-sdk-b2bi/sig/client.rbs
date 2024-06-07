@@ -140,7 +140,7 @@ module Aws
                                 name: ::String,
                                 email: ::String,
                                 ?phone: ::String,
-                                ?capabilities: Array[::String],
+                                capabilities: Array[::String],
                                 ?client_token: ::String,
                                 ?tags: Array[
                                   {

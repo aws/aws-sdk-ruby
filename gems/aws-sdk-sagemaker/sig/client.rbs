@@ -1372,7 +1372,8 @@ module Aws
                                         }?,
                                         routing_config: {
                                           routing_strategy: ("LEAST_OUTSTANDING_REQUESTS" | "RANDOM")
-                                        }?
+                                        }?,
+                                        inference_ami_version: ("al2-ami-sagemaker-inference-gpu-2")?
                                       },
                                     ],
                                     ?data_capture_config: {
@@ -1472,7 +1473,8 @@ module Aws
                                         }?,
                                         routing_config: {
                                           routing_strategy: ("LEAST_OUTSTANDING_REQUESTS" | "RANDOM")
-                                        }?
+                                        }?,
+                                        inference_ami_version: ("al2-ami-sagemaker-inference-gpu-2")?
                                       },
                                     ],
                                     ?execution_role_arn: ::String,

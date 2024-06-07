@@ -1686,6 +1686,7 @@ module Aws::SageMaker
     ProductionVariantAcceleratorType = Shapes::StringShape.new(name: 'ProductionVariantAcceleratorType')
     ProductionVariantContainerStartupHealthCheckTimeoutInSeconds = Shapes::IntegerShape.new(name: 'ProductionVariantContainerStartupHealthCheckTimeoutInSeconds')
     ProductionVariantCoreDumpConfig = Shapes::StructureShape.new(name: 'ProductionVariantCoreDumpConfig')
+    ProductionVariantInferenceAmiVersion = Shapes::StringShape.new(name: 'ProductionVariantInferenceAmiVersion')
     ProductionVariantInstanceType = Shapes::StringShape.new(name: 'ProductionVariantInstanceType')
     ProductionVariantList = Shapes::ListShape.new(name: 'ProductionVariantList')
     ProductionVariantManagedInstanceScaling = Shapes::StructureShape.new(name: 'ProductionVariantManagedInstanceScaling')
@@ -8359,6 +8360,7 @@ module Aws::SageMaker
     ProductionVariant.add_member(:enable_ssm_access, Shapes::ShapeRef.new(shape: ProductionVariantSSMAccess, location_name: "EnableSSMAccess"))
     ProductionVariant.add_member(:managed_instance_scaling, Shapes::ShapeRef.new(shape: ProductionVariantManagedInstanceScaling, location_name: "ManagedInstanceScaling"))
     ProductionVariant.add_member(:routing_config, Shapes::ShapeRef.new(shape: ProductionVariantRoutingConfig, location_name: "RoutingConfig"))
+    ProductionVariant.add_member(:inference_ami_version, Shapes::ShapeRef.new(shape: ProductionVariantInferenceAmiVersion, location_name: "InferenceAmiVersion"))
     ProductionVariant.struct_class = Types::ProductionVariant
 
     ProductionVariantCoreDumpConfig.add_member(:destination_s3_uri, Shapes::ShapeRef.new(shape: DestinationS3Uri, required: true, location_name: "DestinationS3Uri"))

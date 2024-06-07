@@ -78,10 +78,12 @@ module Aws::AuditManager
     CloudTrailArn = Shapes::StringShape.new(name: 'CloudTrailArn')
     ComplianceType = Shapes::StringShape.new(name: 'ComplianceType')
     Control = Shapes::StructureShape.new(name: 'Control')
+    ControlCatalogId = Shapes::StringShape.new(name: 'ControlCatalogId')
     ControlComment = Shapes::StructureShape.new(name: 'ControlComment')
     ControlCommentBody = Shapes::StringShape.new(name: 'ControlCommentBody')
     ControlComments = Shapes::ListShape.new(name: 'ControlComments')
     ControlDescription = Shapes::StringShape.new(name: 'ControlDescription')
+    ControlDomainId = Shapes::StringShape.new(name: 'ControlDomainId')
     ControlDomainInsights = Shapes::StructureShape.new(name: 'ControlDomainInsights')
     ControlDomainInsightsList = Shapes::ListShape.new(name: 'ControlDomainInsightsList')
     ControlInsightsMetadata = Shapes::ListShape.new(name: 'ControlInsightsMetadata')
@@ -101,6 +103,7 @@ module Aws::AuditManager
     ControlSets = Shapes::ListShape.new(name: 'ControlSets')
     ControlSetsCount = Shapes::IntegerShape.new(name: 'ControlSetsCount')
     ControlSources = Shapes::StringShape.new(name: 'ControlSources')
+    ControlState = Shapes::StringShape.new(name: 'ControlState')
     ControlStatus = Shapes::StringShape.new(name: 'ControlStatus')
     ControlType = Shapes::StringShape.new(name: 'ControlType')
     Controls = Shapes::ListShape.new(name: 'Controls')
@@ -122,6 +125,7 @@ module Aws::AuditManager
     CreateDelegationRequest = Shapes::StructureShape.new(name: 'CreateDelegationRequest')
     CreateDelegationRequests = Shapes::ListShape.new(name: 'CreateDelegationRequests')
     CreatedBy = Shapes::StringShape.new(name: 'CreatedBy')
+    DataSourceType = Shapes::StringShape.new(name: 'DataSourceType')
     DefaultExportDestination = Shapes::StructureShape.new(name: 'DefaultExportDestination')
     Delegation = Shapes::StructureShape.new(name: 'Delegation')
     DelegationComment = Shapes::StringShape.new(name: 'DelegationComment')
@@ -590,6 +594,7 @@ module Aws::AuditManager
     Control.add_member(:created_by, Shapes::ShapeRef.new(shape: CreatedBy, location_name: "createdBy"))
     Control.add_member(:last_updated_by, Shapes::ShapeRef.new(shape: LastUpdatedBy, location_name: "lastUpdatedBy"))
     Control.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    Control.add_member(:state, Shapes::ShapeRef.new(shape: ControlState, location_name: "state"))
     Control.struct_class = Types::Control
 
     ControlComment.add_member(:author_name, Shapes::ShapeRef.new(shape: Username, location_name: "authorName"))
@@ -599,8 +604,8 @@ module Aws::AuditManager
 
     ControlComments.member = Shapes::ShapeRef.new(shape: ControlComment)
 
-    ControlDomainInsights.add_member(:name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "name"))
-    ControlDomainInsights.add_member(:id, Shapes::ShapeRef.new(shape: UUID, location_name: "id"))
+    ControlDomainInsights.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
+    ControlDomainInsights.add_member(:id, Shapes::ShapeRef.new(shape: ControlDomainId, location_name: "id"))
     ControlDomainInsights.add_member(:controls_count_by_noncompliant_evidence, Shapes::ShapeRef.new(shape: NullableInteger, location_name: "controlsCountByNoncompliantEvidence"))
     ControlDomainInsights.add_member(:total_controls_count, Shapes::ShapeRef.new(shape: NullableInteger, location_name: "totalControlsCount"))
     ControlDomainInsights.add_member(:evidence_insights, Shapes::ShapeRef.new(shape: EvidenceInsights, location_name: "evidenceInsights"))
@@ -613,15 +618,15 @@ module Aws::AuditManager
 
     ControlInsightsMetadataByAssessment.member = Shapes::ShapeRef.new(shape: ControlInsightsMetadataByAssessmentItem)
 
-    ControlInsightsMetadataByAssessmentItem.add_member(:name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "name"))
-    ControlInsightsMetadataByAssessmentItem.add_member(:id, Shapes::ShapeRef.new(shape: UUID, location_name: "id"))
+    ControlInsightsMetadataByAssessmentItem.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
+    ControlInsightsMetadataByAssessmentItem.add_member(:id, Shapes::ShapeRef.new(shape: ControlDomainId, location_name: "id"))
     ControlInsightsMetadataByAssessmentItem.add_member(:evidence_insights, Shapes::ShapeRef.new(shape: EvidenceInsights, location_name: "evidenceInsights"))
     ControlInsightsMetadataByAssessmentItem.add_member(:control_set_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "controlSetName"))
     ControlInsightsMetadataByAssessmentItem.add_member(:last_updated, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdated"))
     ControlInsightsMetadataByAssessmentItem.struct_class = Types::ControlInsightsMetadataByAssessmentItem
 
-    ControlInsightsMetadataItem.add_member(:name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "name"))
-    ControlInsightsMetadataItem.add_member(:id, Shapes::ShapeRef.new(shape: UUID, location_name: "id"))
+    ControlInsightsMetadataItem.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
+    ControlInsightsMetadataItem.add_member(:id, Shapes::ShapeRef.new(shape: ControlDomainId, location_name: "id"))
     ControlInsightsMetadataItem.add_member(:evidence_insights, Shapes::ShapeRef.new(shape: EvidenceInsights, location_name: "evidenceInsights"))
     ControlInsightsMetadataItem.add_member(:last_updated, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdated"))
     ControlInsightsMetadataItem.struct_class = Types::ControlInsightsMetadataItem
@@ -1024,7 +1029,7 @@ module Aws::AuditManager
 
     Keywords.member = Shapes::ShapeRef.new(shape: KeywordValue)
 
-    ListAssessmentControlInsightsByControlDomainRequest.add_member(:control_domain_id, Shapes::ShapeRef.new(shape: UUID, required: true, location: "querystring", location_name: "controlDomainId"))
+    ListAssessmentControlInsightsByControlDomainRequest.add_member(:control_domain_id, Shapes::ShapeRef.new(shape: ControlDomainId, required: true, location: "querystring", location_name: "controlDomainId"))
     ListAssessmentControlInsightsByControlDomainRequest.add_member(:assessment_id, Shapes::ShapeRef.new(shape: UUID, required: true, location: "querystring", location_name: "assessmentId"))
     ListAssessmentControlInsightsByControlDomainRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location: "querystring", location_name: "nextToken"))
     ListAssessmentControlInsightsByControlDomainRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
@@ -1088,7 +1093,7 @@ module Aws::AuditManager
     ListControlDomainInsightsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "nextToken"))
     ListControlDomainInsightsResponse.struct_class = Types::ListControlDomainInsightsResponse
 
-    ListControlInsightsByControlDomainRequest.add_member(:control_domain_id, Shapes::ShapeRef.new(shape: UUID, required: true, location: "querystring", location_name: "controlDomainId"))
+    ListControlInsightsByControlDomainRequest.add_member(:control_domain_id, Shapes::ShapeRef.new(shape: ControlDomainId, required: true, location: "querystring", location_name: "controlDomainId"))
     ListControlInsightsByControlDomainRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location: "querystring", location_name: "nextToken"))
     ListControlInsightsByControlDomainRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListControlInsightsByControlDomainRequest.struct_class = Types::ListControlInsightsByControlDomainRequest
@@ -1100,13 +1105,14 @@ module Aws::AuditManager
     ListControlsRequest.add_member(:control_type, Shapes::ShapeRef.new(shape: ControlType, required: true, location: "querystring", location_name: "controlType"))
     ListControlsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location: "querystring", location_name: "nextToken"))
     ListControlsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListControlsRequest.add_member(:control_catalog_id, Shapes::ShapeRef.new(shape: ControlCatalogId, location: "querystring", location_name: "controlCatalogId"))
     ListControlsRequest.struct_class = Types::ListControlsRequest
 
     ListControlsResponse.add_member(:control_metadata_list, Shapes::ShapeRef.new(shape: ControlMetadataList, location_name: "controlMetadataList"))
     ListControlsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "nextToken"))
     ListControlsResponse.struct_class = Types::ListControlsResponse
 
-    ListKeywordsForDataSourceRequest.add_member(:source, Shapes::ShapeRef.new(shape: SourceType, required: true, location: "querystring", location_name: "source"))
+    ListKeywordsForDataSourceRequest.add_member(:source, Shapes::ShapeRef.new(shape: DataSourceType, required: true, location: "querystring", location_name: "source"))
     ListKeywordsForDataSourceRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location: "querystring", location_name: "nextToken"))
     ListKeywordsForDataSourceRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListKeywordsForDataSourceRequest.struct_class = Types::ListKeywordsForDataSourceRequest
@@ -1181,7 +1187,7 @@ module Aws::AuditManager
     Roles.member = Shapes::ShapeRef.new(shape: Role)
 
     Scope.add_member(:aws_accounts, Shapes::ShapeRef.new(shape: AWSAccounts, location_name: "awsAccounts"))
-    Scope.add_member(:aws_services, Shapes::ShapeRef.new(shape: AWSServices, location_name: "awsServices"))
+    Scope.add_member(:aws_services, Shapes::ShapeRef.new(shape: AWSServices, deprecated: true, location_name: "awsServices", metadata: {"deprecatedMessage"=>"You can't specify services in scope when creating/updating an assessment. If you use the parameter to specify one or more AWS services, Audit Manager ignores the input. Instead the value of the parameter will show as empty indicating that the services are defined and managed by Audit Manager."}))
     Scope.struct_class = Types::Scope
 
     ServiceMetadata.add_member(:name, Shapes::ShapeRef.new(shape: AWSServiceName, location_name: "name"))
@@ -1453,6 +1459,7 @@ module Aws::AuditManager
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:create_assessment_framework, Seahorse::Model::Operation.new.tap do |o|
@@ -2097,6 +2104,7 @@ module Aws::AuditManager
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:update_assessment_control, Seahorse::Model::Operation.new.tap do |o|

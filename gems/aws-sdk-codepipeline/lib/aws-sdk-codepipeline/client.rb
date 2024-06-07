@@ -1521,11 +1521,6 @@ module Aws::CodePipeline
     #   value. Action execution history is retained for up to 12 months, based
     #   on action execution start times. Default value is 100.
     #
-    #   <note markdown="1"> Detailed execution history is available for executions run on or after
-    #   February 21, 2019.
-    #
-    #    </note>
-    #
     # @option params [String] :next_token
     #   The token that was returned from the previous `ListActionExecutions`
     #   call, which can be used to return the next set of action executions in
@@ -1667,6 +1662,12 @@ module Aws::CodePipeline
     end
 
     # Gets a summary of the most recent executions for a pipeline.
+    #
+    # <note markdown="1"> When applying the filter for pipeline executions that have succeeded
+    # in the stage, the operation returns all executions in the current
+    # pipeline version beginning on February 1, 2024.
+    #
+    #  </note>
     #
     # @option params [required, String] :pipeline_name
     #   The name of the pipeline for which you want to get execution summary
@@ -2538,7 +2539,7 @@ module Aws::CodePipeline
     #     source_revisions: [
     #       {
     #         action_name: "ActionName", # required
-    #         revision_type: "COMMIT_ID", # required, accepts COMMIT_ID, IMAGE_DIGEST, S3_OBJECT_VERSION_ID
+    #         revision_type: "COMMIT_ID", # required, accepts COMMIT_ID, IMAGE_DIGEST, S3_OBJECT_VERSION_ID, S3_OBJECT_KEY
     #         revision_value: "Revision", # required
     #       },
     #     ],
@@ -2965,7 +2966,7 @@ module Aws::CodePipeline
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codepipeline'
-      context[:gem_version] = '1.73.0'
+      context[:gem_version] = '1.74.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.246.0 (2024-06-07)
+------------------
+
+* Feature - This release introduces a new optional parameter: InferenceAmiVersion, in ProductionVariant.
+
 1.245.0 (2024-06-05)
 ------------------
 

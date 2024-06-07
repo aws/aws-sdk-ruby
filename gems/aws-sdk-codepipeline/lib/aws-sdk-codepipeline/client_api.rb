@@ -1340,6 +1340,7 @@ module Aws::CodePipeline
 
       api.metadata = {
         "apiVersion" => "2015-07-09",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "codepipeline",
         "jsonVersion" => "1.1",
         "protocol" => "json",

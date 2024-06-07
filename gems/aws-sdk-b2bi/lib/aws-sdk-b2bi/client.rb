@@ -621,7 +621,7 @@ module Aws::B2bi
     # @option params [String] :phone
     #   Specifies the phone number associated with the partnership.
     #
-    # @option params [Array<String>] :capabilities
+    # @option params [required, Array<String>] :capabilities
     #   Specifies a list of the capabilities associated with this partnership.
     #
     # @option params [String] :client_token
@@ -689,7 +689,7 @@ module Aws::B2bi
     #     name: "PartnerName", # required
     #     email: "Email", # required
     #     phone: "Phone",
-    #     capabilities: ["CapabilityId"],
+    #     capabilities: ["CapabilityId"], # required
     #     client_token: "String",
     #     tags: [
     #       {
@@ -2579,7 +2579,7 @@ module Aws::B2bi
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-b2bi'
-      context[:gem_version] = '1.10.0'
+      context[:gem_version] = '1.11.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

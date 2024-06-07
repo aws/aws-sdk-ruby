@@ -3,6 +3,9 @@
         "description": "Test cases for BodyWithXmlName operation",
         "metadata": {
             "protocol": "rest-xml",
+            "protocols": [
+                "rest-xml"
+            ],
             "apiVersion": "2019-12-16"
         },
         "shapes": {
@@ -64,6 +67,9 @@
         "description": "Test cases for DatetimeOffsets operation",
         "metadata": {
             "protocol": "rest-xml",
+            "protocols": [
+                "rest-xml"
+            ],
             "apiVersion": "2019-12-16"
         },
         "shapes": {
@@ -137,6 +143,9 @@
         "description": "Test cases for EmptyInputAndEmptyOutput operation",
         "metadata": {
             "protocol": "rest-xml",
+            "protocols": [
+                "rest-xml"
+            ],
             "apiVersion": "2019-12-16"
         },
         "shapes": {
@@ -173,6 +182,9 @@
         "description": "Test cases for FlattenedXmlMap operation",
         "metadata": {
             "protocol": "rest-xml",
+            "protocols": [
+                "rest-xml"
+            ],
             "apiVersion": "2019-12-16"
         },
         "shapes": {
@@ -244,6 +256,9 @@
         "description": "Test cases for FlattenedXmlMapWithXmlName operation",
         "metadata": {
             "protocol": "rest-xml",
+            "protocols": [
+                "rest-xml"
+            ],
             "apiVersion": "2019-12-16"
         },
         "shapes": {
@@ -308,6 +323,9 @@
         "description": "Test cases for FlattenedXmlMapWithXmlNamespace operation",
         "metadata": {
             "protocol": "rest-xml",
+            "protocols": [
+                "rest-xml"
+            ],
             "apiVersion": "2019-12-16"
         },
         "shapes": {
@@ -375,6 +393,9 @@
         "description": "Test cases for FractionalSeconds operation",
         "metadata": {
             "protocol": "rest-xml",
+            "protocols": [
+                "rest-xml"
+            ],
             "apiVersion": "2019-12-16"
         },
         "shapes": {
@@ -423,6 +444,9 @@
         "description": "Test cases for GreetingWithErrors operation",
         "metadata": {
             "protocol": "rest-xml",
+            "protocols": [
+                "rest-xml"
+            ],
             "apiVersion": "2019-12-16"
         },
         "shapes": {
@@ -474,6 +498,9 @@
         "description": "Test cases for GreetingWithErrors operation",
         "metadata": {
             "protocol": "rest-xml",
+            "protocols": [
+                "rest-xml"
+            ],
             "apiVersion": "2019-12-16"
         },
         "shapes": {
@@ -533,6 +560,9 @@
         "description": "Test cases for GreetingWithErrors operation",
         "metadata": {
             "protocol": "rest-xml",
+            "protocols": [
+                "rest-xml"
+            ],
             "apiVersion": "2019-12-16"
         },
         "shapes": {
@@ -611,6 +641,9 @@
         "description": "Test cases for HttpEnumPayload operation",
         "metadata": {
             "protocol": "rest-xml",
+            "protocols": [
+                "rest-xml"
+            ],
             "apiVersion": "2019-12-16"
         },
         "shapes": {
@@ -658,6 +691,9 @@
         "description": "Test cases for HttpPayloadTraits operation",
         "metadata": {
             "protocol": "rest-xml",
+            "protocols": [
+                "rest-xml"
+            ],
             "apiVersion": "2019-12-16"
         },
         "shapes": {
@@ -742,6 +778,9 @@
         "description": "Test cases for HttpPayloadWithMemberXmlName operation",
         "metadata": {
             "protocol": "rest-xml",
+            "protocols": [
+                "rest-xml"
+            ],
             "apiVersion": "2019-12-16"
         },
         "shapes": {
@@ -804,6 +843,9 @@
         "description": "Test cases for HttpPayloadWithStructure operation",
         "metadata": {
             "protocol": "rest-xml",
+            "protocols": [
+                "rest-xml"
+            ],
             "apiVersion": "2019-12-16"
         },
         "shapes": {
@@ -869,6 +911,9 @@
         "description": "Test cases for HttpPayloadWithUnion operation",
         "metadata": {
             "protocol": "rest-xml",
+            "protocols": [
+                "rest-xml"
+            ],
             "apiVersion": "2019-12-16"
         },
         "shapes": {
@@ -956,6 +1001,9 @@
         "description": "Test cases for HttpPayloadWithXmlName operation",
         "metadata": {
             "protocol": "rest-xml",
+            "protocols": [
+                "rest-xml"
+            ],
             "apiVersion": "2019-12-16"
         },
         "shapes": {
@@ -1018,6 +1066,9 @@
         "description": "Test cases for HttpPayloadWithXmlNamespace operation",
         "metadata": {
             "protocol": "rest-xml",
+            "protocols": [
+                "rest-xml"
+            ],
             "apiVersion": "2019-12-16"
         },
         "shapes": {
@@ -1080,6 +1131,9 @@
         "description": "Test cases for HttpPayloadWithXmlNamespaceAndPrefix operation",
         "metadata": {
             "protocol": "rest-xml",
+            "protocols": [
+                "rest-xml"
+            ],
             "apiVersion": "2019-12-16"
         },
         "shapes": {
@@ -1145,6 +1199,9 @@
         "description": "Test cases for HttpPrefixHeaders operation",
         "metadata": {
             "protocol": "rest-xml",
+            "protocols": [
+                "rest-xml"
+            ],
             "apiVersion": "2019-12-16"
         },
         "shapes": {
@@ -1242,6 +1299,9 @@
         "description": "Test cases for HttpResponseCode operation",
         "metadata": {
             "protocol": "rest-xml",
+            "protocols": [
+                "rest-xml"
+            ],
             "apiVersion": "2019-12-16"
         },
         "shapes": {
@@ -1292,6 +1352,9 @@
         "description": "Test cases for HttpStringPayload operation",
         "metadata": {
             "protocol": "rest-xml",
+            "protocols": [
+                "rest-xml"
+            ],
             "apiVersion": "2019-12-16"
         },
         "shapes": {
@@ -1336,6 +1399,9 @@
         "description": "Test cases for IgnoreQueryParamsInResponse operation",
         "metadata": {
             "protocol": "rest-xml",
+            "protocols": [
+                "rest-xml"
+            ],
             "apiVersion": "2019-12-16"
         },
         "shapes": {
@@ -1386,6 +1452,9 @@
         "description": "Test cases for InputAndOutputWithHeaders operation",
         "metadata": {
             "protocol": "rest-xml",
+            "protocols": [
+                "rest-xml"
+            ],
             "apiVersion": "2019-12-16"
         },
         "shapes": {
@@ -1813,6 +1882,9 @@
         "description": "Test cases for NestedXmlMaps operation",
         "metadata": {
             "protocol": "rest-xml",
+            "protocols": [
+                "rest-xml"
+            ],
             "apiVersion": "2019-12-16"
         },
         "shapes": {
@@ -1925,6 +1997,9 @@
         "description": "Test cases for NoInputAndNoOutput operation",
         "metadata": {
             "protocol": "rest-xml",
+            "protocols": [
+                "rest-xml"
+            ],
             "apiVersion": "2019-12-16"
         },
         "shapes": {},
@@ -1953,6 +2028,9 @@
         "description": "Test cases for NoInputAndOutput operation",
         "metadata": {
             "protocol": "rest-xml",
+            "protocols": [
+                "rest-xml"
+            ],
             "apiVersion": "2019-12-16"
         },
         "shapes": {
@@ -1989,6 +2067,9 @@
         "description": "Test cases for RecursiveShapes operation",
         "metadata": {
             "protocol": "rest-xml",
+            "protocols": [
+                "rest-xml"
+            ],
             "apiVersion": "2019-12-16"
         },
         "shapes": {
@@ -2071,6 +2152,9 @@
         "description": "Test cases for SimpleScalarProperties operation",
         "metadata": {
             "protocol": "rest-xml",
+            "protocols": [
+                "rest-xml"
+            ],
             "apiVersion": "2019-12-16"
         },
         "shapes": {
@@ -2400,6 +2484,9 @@
         "description": "Test cases for TimestampFormatHeaders operation",
         "metadata": {
             "protocol": "rest-xml",
+            "protocols": [
+                "rest-xml"
+            ],
             "apiVersion": "2019-12-16"
         },
         "shapes": {
@@ -2516,6 +2603,9 @@
         "description": "Test cases for XmlAttributes operation",
         "metadata": {
             "protocol": "rest-xml",
+            "protocols": [
+                "rest-xml"
+            ],
             "apiVersion": "2019-12-16"
         },
         "shapes": {
@@ -2571,6 +2661,9 @@
         "description": "Test cases for XmlAttributesOnPayload operation",
         "metadata": {
             "protocol": "rest-xml",
+            "protocols": [
+                "rest-xml"
+            ],
             "apiVersion": "2019-12-16"
         },
         "shapes": {
@@ -2637,6 +2730,9 @@
         "description": "Test cases for XmlBlobs operation",
         "metadata": {
             "protocol": "rest-xml",
+            "protocols": [
+                "rest-xml"
+            ],
             "apiVersion": "2019-12-16"
         },
         "shapes": {
@@ -2685,6 +2781,9 @@
         "description": "Test cases for XmlEmptyBlobs operation",
         "metadata": {
             "protocol": "rest-xml",
+            "protocols": [
+                "rest-xml"
+            ],
             "apiVersion": "2019-12-16"
         },
         "shapes": {
@@ -2759,6 +2858,9 @@
         "description": "Test cases for XmlEmptyLists operation",
         "metadata": {
             "protocol": "rest-xml",
+            "protocols": [
+                "rest-xml"
+            ],
             "apiVersion": "2019-12-16"
         },
         "shapes": {
@@ -2974,6 +3076,9 @@
         "description": "Test cases for XmlEmptyMaps operation",
         "metadata": {
             "protocol": "rest-xml",
+            "protocols": [
+                "rest-xml"
+            ],
             "apiVersion": "2019-12-16"
         },
         "shapes": {
@@ -3063,6 +3168,9 @@
         "description": "Test cases for XmlEmptyStrings operation",
         "metadata": {
             "protocol": "rest-xml",
+            "protocols": [
+                "rest-xml"
+            ],
             "apiVersion": "2019-12-16"
         },
         "shapes": {
@@ -3137,6 +3245,9 @@
         "description": "Test cases for XmlEnums operation",
         "metadata": {
             "protocol": "rest-xml",
+            "protocols": [
+                "rest-xml"
+            ],
             "apiVersion": "2019-12-16"
         },
         "shapes": {
@@ -3246,6 +3357,9 @@
         "description": "Test cases for XmlIntEnums operation",
         "metadata": {
             "protocol": "rest-xml",
+            "protocols": [
+                "rest-xml"
+            ],
             "apiVersion": "2019-12-16"
         },
         "shapes": {
@@ -3349,6 +3463,9 @@
         "description": "Test cases for XmlLists operation",
         "metadata": {
             "protocol": "rest-xml",
+            "protocols": [
+                "rest-xml"
+            ],
             "apiVersion": "2019-12-16"
         },
         "shapes": {
@@ -3641,6 +3758,9 @@
         "description": "Test cases for XmlMaps operation",
         "metadata": {
             "protocol": "rest-xml",
+            "protocols": [
+                "rest-xml"
+            ],
             "apiVersion": "2019-12-16"
         },
         "shapes": {
@@ -3713,6 +3833,9 @@
         "description": "Test cases for XmlMapsXmlName operation",
         "metadata": {
             "protocol": "rest-xml",
+            "protocols": [
+                "rest-xml"
+            ],
             "apiVersion": "2019-12-16"
         },
         "shapes": {
@@ -3786,6 +3909,9 @@
         "description": "Test cases for XmlMapWithXmlNamespace operation",
         "metadata": {
             "protocol": "rest-xml",
+            "protocols": [
+                "rest-xml"
+            ],
             "apiVersion": "2019-12-16"
         },
         "shapes": {
@@ -3852,6 +3978,9 @@
         "description": "Test cases for XmlNamespaces operation",
         "metadata": {
             "protocol": "rest-xml",
+            "protocols": [
+                "rest-xml"
+            ],
             "apiVersion": "2019-12-16"
         },
         "shapes": {
@@ -3930,6 +4059,9 @@
         "description": "Test cases for XmlTimestamps operation",
         "metadata": {
             "protocol": "rest-xml",
+            "protocols": [
+                "rest-xml"
+            ],
             "apiVersion": "2019-12-16"
         },
         "shapes": {
@@ -4176,6 +4308,9 @@
         "description": "Test cases for XmlUnions operation",
         "metadata": {
             "protocol": "rest-xml",
+            "protocols": [
+                "rest-xml"
+            ],
             "apiVersion": "2019-12-16"
         },
         "shapes": {

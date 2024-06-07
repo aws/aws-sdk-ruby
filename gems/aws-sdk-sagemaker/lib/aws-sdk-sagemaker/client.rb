@@ -3336,6 +3336,7 @@ module Aws::SageMaker
     #         routing_config: {
     #           routing_strategy: "LEAST_OUTSTANDING_REQUESTS", # required, accepts LEAST_OUTSTANDING_REQUESTS, RANDOM
     #         },
+    #         inference_ami_version: "al2-ami-sagemaker-inference-gpu-2", # accepts al2-ami-sagemaker-inference-gpu-2
     #       },
     #     ],
     #     data_capture_config: {
@@ -3436,6 +3437,7 @@ module Aws::SageMaker
     #         routing_config: {
     #           routing_strategy: "LEAST_OUTSTANDING_REQUESTS", # required, accepts LEAST_OUTSTANDING_REQUESTS, RANDOM
     #         },
+    #         inference_ami_version: "al2-ami-sagemaker-inference-gpu-2", # accepts al2-ami-sagemaker-inference-gpu-2
     #       },
     #     ],
     #     execution_role_arn: "RoleArn",
@@ -6179,12 +6181,15 @@ module Aws::SageMaker
     #   schema of `ModelCard`. The `ModelPackageModelCard` schema does not
     #   include `model_package_details`, and `model_overview` is composed of
     #   the `model_creator` and `model_artifact` properties. For more
-    #   information about the model card associated with the model package,
-    #   see [View the Details of a Model Version][1].
+    #   information about the model package model card schema, see [Model
+    #   package model card schema][1]. For more information about the model
+    #   card associated with the model package, see [View the Details of a
+    #   Model Version][2].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry-details.html
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry-details.html#model-card-schema
+    #   [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry-details.html
     #
     # @return [Types::CreateModelPackageOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -12473,6 +12478,7 @@ module Aws::SageMaker
     #   resp.production_variants[0].managed_instance_scaling.min_instance_count #=> Integer
     #   resp.production_variants[0].managed_instance_scaling.max_instance_count #=> Integer
     #   resp.production_variants[0].routing_config.routing_strategy #=> String, one of "LEAST_OUTSTANDING_REQUESTS", "RANDOM"
+    #   resp.production_variants[0].inference_ami_version #=> String, one of "al2-ami-sagemaker-inference-gpu-2"
     #   resp.data_capture_config.enable_capture #=> Boolean
     #   resp.data_capture_config.initial_sampling_percentage #=> Integer
     #   resp.data_capture_config.destination_s3_uri #=> String
@@ -12536,6 +12542,7 @@ module Aws::SageMaker
     #   resp.shadow_production_variants[0].managed_instance_scaling.min_instance_count #=> Integer
     #   resp.shadow_production_variants[0].managed_instance_scaling.max_instance_count #=> Integer
     #   resp.shadow_production_variants[0].routing_config.routing_strategy #=> String, one of "LEAST_OUTSTANDING_REQUESTS", "RANDOM"
+    #   resp.shadow_production_variants[0].inference_ami_version #=> String, one of "al2-ami-sagemaker-inference-gpu-2"
     #   resp.execution_role_arn #=> String
     #   resp.vpc_config.security_group_ids #=> Array
     #   resp.vpc_config.security_group_ids[0] #=> String
@@ -24987,12 +24994,15 @@ module Aws::SageMaker
     #   schema of `ModelCard`. The `ModelPackageModelCard` schema does not
     #   include `model_package_details`, and `model_overview` is composed of
     #   the `model_creator` and `model_artifact` properties. For more
-    #   information about the model card associated with the model package,
-    #   see [View the Details of a Model Version][1].
+    #   information about the model package model card schema, see [Model
+    #   package model card schema][1]. For more information about the model
+    #   card associated with the model package, see [View the Details of a
+    #   Model Version][2].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry-details.html
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry-details.html#model-card-schema
+    #   [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry-details.html
     #
     # @return [Types::UpdateModelPackageOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -26441,7 +26451,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.245.0'
+      context[:gem_version] = '1.246.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

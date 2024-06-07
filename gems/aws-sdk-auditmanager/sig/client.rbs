@@ -246,7 +246,7 @@ module Aws
                                 source_name: ::String?,
                                 source_description: ::String?,
                                 source_set_up_option: ("System_Controls_Mapping" | "Procedural_Controls_Mapping")?,
-                                source_type: ("AWS_Cloudtrail" | "AWS_Config" | "AWS_Security_Hub" | "AWS_API_Call" | "MANUAL")?,
+                                source_type: ("AWS_Cloudtrail" | "AWS_Config" | "AWS_Security_Hub" | "AWS_API_Call" | "MANUAL" | "Common_Control" | "Core_Control")?,
                                 source_keyword: {
                                   keyword_input_type: ("SELECT_FROM_LIST" | "UPLOAD_FILE" | "INPUT_TEXT")?,
                                   keyword_value: ::String?
@@ -649,9 +649,10 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AuditManager/Client.html#list_controls-instance_method
       def list_controls: (
-                           control_type: ("Standard" | "Custom"),
+                           control_type: ("Standard" | "Custom" | "Core"),
                            ?next_token: ::String,
-                           ?max_results: ::Integer
+                           ?max_results: ::Integer,
+                           ?control_catalog_id: ::String
                          ) -> _ListControlsResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListControlsResponseSuccess
 
@@ -873,7 +874,7 @@ module Aws
                                 source_name: ::String?,
                                 source_description: ::String?,
                                 source_set_up_option: ("System_Controls_Mapping" | "Procedural_Controls_Mapping")?,
-                                source_type: ("AWS_Cloudtrail" | "AWS_Config" | "AWS_Security_Hub" | "AWS_API_Call" | "MANUAL")?,
+                                source_type: ("AWS_Cloudtrail" | "AWS_Config" | "AWS_Security_Hub" | "AWS_API_Call" | "MANUAL" | "Common_Control" | "Core_Control")?,
                                 source_keyword: {
                                   keyword_input_type: ("SELECT_FROM_LIST" | "UPLOAD_FILE" | "INPUT_TEXT")?,
                                   keyword_value: ::String?

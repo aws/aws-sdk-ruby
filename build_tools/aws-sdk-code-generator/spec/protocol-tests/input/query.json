@@ -3,6 +3,9 @@
         "description": "Test cases for EmptyInputAndEmptyOutput operation",
         "metadata": {
             "protocol": "query",
+            "protocols": [
+                "query"
+            ],
             "apiVersion": "2020-01-08"
         },
         "shapes": {
@@ -42,6 +45,9 @@
         "description": "Test cases for EndpointOperation operation",
         "metadata": {
             "protocol": "query",
+            "protocols": [
+                "query"
+            ],
             "apiVersion": "2020-01-08"
         },
         "shapes": {},
@@ -77,6 +83,9 @@
         "description": "Test cases for EndpointWithHostLabelOperation operation",
         "metadata": {
             "protocol": "query",
+            "protocols": [
+                "query"
+            ],
             "apiVersion": "2020-01-08"
         },
         "shapes": {
@@ -133,6 +142,9 @@
         "description": "Test cases for HostWithPathOperation operation",
         "metadata": {
             "protocol": "query",
+            "protocols": [
+                "query"
+            ],
             "apiVersion": "2020-01-08"
         },
         "shapes": {},
@@ -162,6 +174,9 @@
         "description": "Test cases for NestedStructures operation",
         "metadata": {
             "protocol": "query",
+            "protocols": [
+                "query"
+            ],
             "apiVersion": "2020-01-08"
         },
         "shapes": {
@@ -225,7 +240,10 @@
                     "body": "Action=NestedStructures&Version=2020-01-08&Nested.StringArg=foo&Nested.OtherArg=true&Nested.RecursiveArg.StringArg=baz",
                     "headers": {
                         "Content-Type": "application/x-www-form-urlencoded"
-                    }
+                    },
+                    "requireHeaders": [
+                        "Content-Length"
+                    ]
                 }
             }
         ]
@@ -234,6 +252,9 @@
         "description": "Test cases for NoInputAndNoOutput operation",
         "metadata": {
             "protocol": "query",
+            "protocols": [
+                "query"
+            ],
             "apiVersion": "2020-01-08"
         },
         "shapes": {},
@@ -265,6 +286,9 @@
         "description": "Test cases for NoInputAndOutput operation",
         "metadata": {
             "protocol": "query",
+            "protocols": [
+                "query"
+            ],
             "apiVersion": "2020-01-08"
         },
         "shapes": {
@@ -304,6 +328,9 @@
         "description": "Test cases for PutWithContentEncoding operation",
         "metadata": {
             "protocol": "query",
+            "protocols": [
+                "query"
+            ],
             "apiVersion": "2020-01-08"
         },
         "shapes": {
@@ -388,6 +415,9 @@
         "description": "Test cases for QueryIdempotencyTokenAutoFill operation",
         "metadata": {
             "protocol": "query",
+            "protocols": [
+                "query"
+            ],
             "apiVersion": "2020-01-08"
         },
         "shapes": {
@@ -426,7 +456,10 @@
                     "body": "Action=QueryIdempotencyTokenAutoFill&Version=2020-01-08&token=00000000-0000-4000-8000-000000000000",
                     "headers": {
                         "Content-Type": "application/x-www-form-urlencoded"
-                    }
+                    },
+                    "requireHeaders": [
+                        "Content-Length"
+                    ]
                 }
             },
             {
@@ -452,7 +485,10 @@
                     "body": "Action=QueryIdempotencyTokenAutoFill&Version=2020-01-08&token=00000000-0000-4000-8000-000000000123",
                     "headers": {
                         "Content-Type": "application/x-www-form-urlencoded"
-                    }
+                    },
+                    "requireHeaders": [
+                        "Content-Length"
+                    ]
                 }
             }
         ]
@@ -461,6 +497,9 @@
         "description": "Test cases for QueryLists operation",
         "metadata": {
             "protocol": "query",
+            "protocols": [
+                "query"
+            ],
             "apiVersion": "2020-01-08"
         },
         "shapes": {
@@ -718,6 +757,9 @@
         "description": "Test cases for QueryMaps operation",
         "metadata": {
             "protocol": "query",
+            "protocols": [
+                "query"
+            ],
             "apiVersion": "2020-01-08"
         },
         "shapes": {
@@ -1094,6 +1136,9 @@
         "description": "Test cases for QueryTimestamps operation",
         "metadata": {
             "protocol": "query",
+            "protocols": [
+                "query"
+            ],
             "apiVersion": "2020-01-08"
         },
         "shapes": {
@@ -1149,7 +1194,10 @@
                     "body": "Action=QueryTimestamps&Version=2020-01-08&normalFormat=2015-01-25T08%3A00%3A00Z&epochMember=1422172800&epochTarget=1422172800",
                     "headers": {
                         "Content-Type": "application/x-www-form-urlencoded"
-                    }
+                    },
+                    "requireHeaders": [
+                        "Content-Length"
+                    ]
                 }
             }
         ]
@@ -1158,6 +1206,9 @@
         "description": "Test cases for SimpleInputParams operation",
         "metadata": {
             "protocol": "query",
+            "protocols": [
+                "query"
+            ],
             "apiVersion": "2020-01-08"
         },
         "shapes": {
@@ -1255,7 +1306,10 @@
                     "body": "Action=SimpleInputParams&Version=2020-01-08&Foo=val1&Bar=val2",
                     "headers": {
                         "Content-Type": "application/x-www-form-urlencoded"
-                    }
+                    },
+                    "requireHeaders": [
+                        "Content-Length"
+                    ]
                 }
             },
             {
@@ -1282,7 +1336,10 @@
                     "body": "Action=SimpleInputParams&Version=2020-01-08&Foo=val1&Baz=true",
                     "headers": {
                         "Content-Type": "application/x-www-form-urlencoded"
-                    }
+                    },
+                    "requireHeaders": [
+                        "Content-Length"
+                    ]
                 }
             },
             {
@@ -1308,7 +1365,10 @@
                     "body": "Action=SimpleInputParams&Version=2020-01-08&Baz=false",
                     "headers": {
                         "Content-Type": "application/x-www-form-urlencoded"
-                    }
+                    },
+                    "requireHeaders": [
+                        "Content-Length"
+                    ]
                 }
             },
             {
@@ -1334,7 +1394,10 @@
                     "body": "Action=SimpleInputParams&Version=2020-01-08&Bam=10",
                     "headers": {
                         "Content-Type": "application/x-www-form-urlencoded"
-                    }
+                    },
+                    "requireHeaders": [
+                        "Content-Length"
+                    ]
                 }
             },
             {
@@ -1360,7 +1423,10 @@
                     "body": "Action=SimpleInputParams&Version=2020-01-08&Boo=10.8",
                     "headers": {
                         "Content-Type": "application/x-www-form-urlencoded"
-                    }
+                    },
+                    "requireHeaders": [
+                        "Content-Length"
+                    ]
                 }
             },
             {
@@ -1386,7 +1452,10 @@
                     "body": "Action=SimpleInputParams&Version=2020-01-08&Qux=dmFsdWU%3D",
                     "headers": {
                         "Content-Type": "application/x-www-form-urlencoded"
-                    }
+                    },
+                    "requireHeaders": [
+                        "Content-Length"
+                    ]
                 }
             },
             {
@@ -1412,7 +1481,10 @@
                     "body": "Action=SimpleInputParams&Version=2020-01-08&FooEnum=Foo",
                     "headers": {
                         "Content-Type": "application/x-www-form-urlencoded"
-                    }
+                    },
+                    "requireHeaders": [
+                        "Content-Length"
+                    ]
                 }
             },
             {
@@ -1438,7 +1510,10 @@
                     "body": "Action=SimpleInputParams&Version=2020-01-08&IntegerEnum=1",
                     "headers": {
                         "Content-Type": "application/x-www-form-urlencoded"
-                    }
+                    },
+                    "requireHeaders": [
+                        "Content-Length"
+                    ]
                 }
             },
             {
@@ -1465,7 +1540,10 @@
                     "body": "Action=SimpleInputParams&Version=2020-01-08&FloatValue=NaN&Boo=NaN",
                     "headers": {
                         "Content-Type": "application/x-www-form-urlencoded"
-                    }
+                    },
+                    "requireHeaders": [
+                        "Content-Length"
+                    ]
                 }
             },
             {
@@ -1492,7 +1570,10 @@
                     "body": "Action=SimpleInputParams&Version=2020-01-08&FloatValue=Infinity&Boo=Infinity",
                     "headers": {
                         "Content-Type": "application/x-www-form-urlencoded"
-                    }
+                    },
+                    "requireHeaders": [
+                        "Content-Length"
+                    ]
                 }
             },
             {
@@ -1519,7 +1600,10 @@
                     "body": "Action=SimpleInputParams&Version=2020-01-08&FloatValue=-Infinity&Boo=-Infinity",
                     "headers": {
                         "Content-Type": "application/x-www-form-urlencoded"
-                    }
+                    },
+                    "requireHeaders": [
+                        "Content-Length"
+                    ]
                 }
             }
         ]

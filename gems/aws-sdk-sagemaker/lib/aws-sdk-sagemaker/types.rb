@@ -8065,12 +8065,15 @@ module Aws::SageMaker
     #   schema of `ModelCard`. The `ModelPackageModelCard` schema does not
     #   include `model_package_details`, and `model_overview` is composed of
     #   the `model_creator` and `model_artifact` properties. For more
-    #   information about the model card associated with the model package,
-    #   see [View the Details of a Model Version][1].
+    #   information about the model package model card schema, see [Model
+    #   package model card schema][1]. For more information about the model
+    #   card associated with the model package, see [View the Details of a
+    #   Model Version][2].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry-details.html
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry-details.html#model-card-schema
+    #   [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry-details.html
     #   @return [Types::ModelPackageModelCard]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateModelPackageInput AWS API Documentation
@@ -15500,12 +15503,15 @@ module Aws::SageMaker
     #   schema of `ModelCard`. The `ModelPackageModelCard` schema does not
     #   include `model_package_details`, and `model_overview` is composed of
     #   the `model_creator` and `model_artifact` properties. For more
-    #   information about the model card associated with the model package,
-    #   see [View the Details of a Model Version][1].
+    #   information about the model package model card schema, see [Model
+    #   package model card schema][1]. For more information about the model
+    #   card associated with the model package, see [View the Details of a
+    #   Model Version][2].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry-details.html
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry-details.html#model-card-schema
+    #   [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry-details.html
     #   @return [Types::ModelPackageModelCard]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeModelPackageOutput AWS API Documentation
@@ -31737,12 +31743,15 @@ module Aws::SageMaker
     #   schema of `ModelCard`. The `ModelPackageModelCard` schema does not
     #   include `model_package_details`, and `model_overview` is composed of
     #   the `model_creator` and `model_artifact` properties. For more
-    #   information about the model card associated with the model package,
-    #   see [View the Details of a Model Version][1].
+    #   information about the model package model card schema, see [Model
+    #   package model card schema][1]. For more information about the model
+    #   card associated with the model package, see [View the Details of a
+    #   Model Version][2].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry-details.html
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry-details.html#model-card-schema
+    #   [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry-details.html
     #   @return [Types::ModelPackageModelCard]
     #
     # @!attribute [rw] tags
@@ -32006,15 +32015,23 @@ module Aws::SageMaker
     # schema of `ModelCard`. The `ModelPackageModelCard` schema does not
     # include `model_package_details`, and `model_overview` is composed of
     # the `model_creator` and `model_artifact` properties. For more
-    # information about the model card associated with the model package,
-    # see [View the Details of a Model Version][1].
+    # information about the model package model card schema, see [Model
+    # package model card schema][1]. For more information about the model
+    # card associated with the model package, see [View the Details of a
+    # Model Version][2].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry-details.html
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry-details.html#model-card-schema
+    # [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry-details.html
     #
     # @!attribute [rw] model_card_content
-    #   The content of the model card.
+    #   The content of the model card. The content must follow the schema
+    #   described in [Model Package Model Card Schema][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry-details.html#model-card-schema
     #   @return [String]
     #
     # @!attribute [rw] model_card_status
@@ -35698,6 +35715,19 @@ module Aws::SageMaker
     #   the instances that the endpoint hosts.
     #   @return [Types::ProductionVariantRoutingConfig]
     #
+    # @!attribute [rw] inference_ami_version
+    #   Specifies an option from a collection of preconfigured Amazon
+    #   Machine Image (AMI) images. Each image is configured by Amazon Web
+    #   Services with a set of software and driver versions. Amazon Web
+    #   Services optimizes these configurations for different machine
+    #   learning workloads.
+    #
+    #   By selecting an AMI version, you can ensure that your inference
+    #   environment is compatible with specific software requirements, such
+    #   as CUDA driver versions, Linux kernel versions, or Amazon Web
+    #   Services Neuron driver versions.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ProductionVariant AWS API Documentation
     #
     class ProductionVariant < Struct.new(
@@ -35714,7 +35744,8 @@ module Aws::SageMaker
       :container_startup_health_check_timeout_in_seconds,
       :enable_ssm_access,
       :managed_instance_scaling,
-      :routing_config)
+      :routing_config,
+      :inference_ami_version)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -44155,12 +44186,15 @@ module Aws::SageMaker
     #   schema of `ModelCard`. The `ModelPackageModelCard` schema does not
     #   include `model_package_details`, and `model_overview` is composed of
     #   the `model_creator` and `model_artifact` properties. For more
-    #   information about the model card associated with the model package,
-    #   see [View the Details of a Model Version][1].
+    #   information about the model package model card schema, see [Model
+    #   package model card schema][1]. For more information about the model
+    #   card associated with the model package, see [View the Details of a
+    #   Model Version][2].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry-details.html
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry-details.html#model-card-schema
+    #   [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry-details.html
     #   @return [Types::ModelPackageModelCard]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateModelPackageInput AWS API Documentation

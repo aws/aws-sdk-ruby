@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.11.0 (2024-06-07)
+------------------
+
+* Feature - Added exceptions to B2Bi List operations and ConflictException to B2Bi StartTransformerJob operation. Also made capabilities field explicitly required when creating a Partnership.
+
 1.10.0 (2024-06-05)
 ------------------
 
