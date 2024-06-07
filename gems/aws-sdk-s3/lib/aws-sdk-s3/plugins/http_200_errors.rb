@@ -30,7 +30,8 @@ module Aws
 
           def streaming_output?(output)
             if (payload = output[:payload_member]) # checking ref and shape
-              payload['streaming'] || payload.shape['streaming']
+              payload['streaming'] || payload.shape['streaming'] ||
+                payload.eventstream
             else
               false
             end
