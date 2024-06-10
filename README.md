@@ -519,6 +519,7 @@ RubyGems.org page under "LINKS" section.
 | Amazon CloudSearch Domain                             | Aws::CloudSearchDomain                   | aws-sdk-cloudsearchdomain                   | 2013-01-01  |
 | Amazon CloudWatch                                     | Aws::CloudWatch                          | aws-sdk-cloudwatch                          | 2010-08-01  |
 | Amazon CloudWatch Application Insights                | Aws::ApplicationInsights                 | aws-sdk-applicationinsights                 | 2018-11-25  |
+| Amazon CloudWatch Application Signals                 | Aws::ApplicationSignals                  | aws-sdk-applicationsignals                  | 2024-04-15  |
 | Amazon CloudWatch Events                              | Aws::CloudWatchEvents                    | aws-sdk-cloudwatchevents                    | 2015-10-07  |
 | Amazon CloudWatch Evidently                           | Aws::CloudWatchEvidently                 | aws-sdk-cloudwatchevidently                 | 2021-02-01  |
 | Amazon CloudWatch Internet Monitor                    | Aws::InternetMonitor                     | aws-sdk-internetmonitor                     | 2021-06-03  |

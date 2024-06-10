@@ -712,6 +712,10 @@ module Aws::ECS
     #           s3_key_prefix: "String",
     #         },
     #       },
+    #       managed_storage_configuration: {
+    #         kms_key_id: "String",
+    #         fargate_ephemeral_storage_kms_key_id: "String",
+    #       },
     #     },
     #     capacity_providers: ["String"],
     #     default_capacity_provider_strategy: [
@@ -737,6 +741,8 @@ module Aws::ECS
     #   resp.cluster.configuration.execute_command_configuration.log_configuration.s3_bucket_name #=> String
     #   resp.cluster.configuration.execute_command_configuration.log_configuration.s3_encryption_enabled #=> Boolean
     #   resp.cluster.configuration.execute_command_configuration.log_configuration.s3_key_prefix #=> String
+    #   resp.cluster.configuration.managed_storage_configuration.kms_key_id #=> String
+    #   resp.cluster.configuration.managed_storage_configuration.fargate_ephemeral_storage_kms_key_id #=> String
     #   resp.cluster.status #=> String
     #   resp.cluster.registered_container_instances_count #=> Integer
     #   resp.cluster.running_tasks_count #=> Integer
@@ -1619,6 +1625,7 @@ module Aws::ECS
     #   resp.service.task_sets[0].tags #=> Array
     #   resp.service.task_sets[0].tags[0].key #=> String
     #   resp.service.task_sets[0].tags[0].value #=> String
+    #   resp.service.task_sets[0].fargate_ephemeral_storage.kms_key_id #=> String
     #   resp.service.deployments #=> Array
     #   resp.service.deployments[0].id #=> String
     #   resp.service.deployments[0].status #=> String
@@ -1683,6 +1690,7 @@ module Aws::ECS
     #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.tag_specifications[0].propagate_tags #=> String, one of "TASK_DEFINITION", "SERVICE", "NONE"
     #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.role_arn #=> String
     #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.filesystem_type #=> String, one of "ext3", "ext4", "xfs"
+    #   resp.service.deployments[0].fargate_ephemeral_storage.kms_key_id #=> String
     #   resp.service.role_arn #=> String
     #   resp.service.events #=> Array
     #   resp.service.events[0].id #=> String
@@ -1960,6 +1968,7 @@ module Aws::ECS
     #   resp.task_set.tags #=> Array
     #   resp.task_set.tags[0].key #=> String
     #   resp.task_set.tags[0].value #=> String
+    #   resp.task_set.fargate_ephemeral_storage.kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/CreateTaskSet AWS API Documentation
     #
@@ -2223,6 +2232,8 @@ module Aws::ECS
     #   resp.cluster.configuration.execute_command_configuration.log_configuration.s3_bucket_name #=> String
     #   resp.cluster.configuration.execute_command_configuration.log_configuration.s3_encryption_enabled #=> Boolean
     #   resp.cluster.configuration.execute_command_configuration.log_configuration.s3_key_prefix #=> String
+    #   resp.cluster.configuration.managed_storage_configuration.kms_key_id #=> String
+    #   resp.cluster.configuration.managed_storage_configuration.fargate_ephemeral_storage_kms_key_id #=> String
     #   resp.cluster.status #=> String
     #   resp.cluster.registered_container_instances_count #=> Integer
     #   resp.cluster.running_tasks_count #=> Integer
@@ -2402,6 +2413,7 @@ module Aws::ECS
     #   resp.service.task_sets[0].tags #=> Array
     #   resp.service.task_sets[0].tags[0].key #=> String
     #   resp.service.task_sets[0].tags[0].value #=> String
+    #   resp.service.task_sets[0].fargate_ephemeral_storage.kms_key_id #=> String
     #   resp.service.deployments #=> Array
     #   resp.service.deployments[0].id #=> String
     #   resp.service.deployments[0].status #=> String
@@ -2466,6 +2478,7 @@ module Aws::ECS
     #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.tag_specifications[0].propagate_tags #=> String, one of "TASK_DEFINITION", "SERVICE", "NONE"
     #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.role_arn #=> String
     #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.filesystem_type #=> String, one of "ext3", "ext4", "xfs"
+    #   resp.service.deployments[0].fargate_ephemeral_storage.kms_key_id #=> String
     #   resp.service.role_arn #=> String
     #   resp.service.events #=> Array
     #   resp.service.events[0].id #=> String
@@ -2816,6 +2829,7 @@ module Aws::ECS
     #   resp.task_set.tags #=> Array
     #   resp.task_set.tags[0].key #=> String
     #   resp.task_set.tags[0].value #=> String
+    #   resp.task_set.fargate_ephemeral_storage.kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeleteTaskSet AWS API Documentation
     #
@@ -3347,6 +3361,8 @@ module Aws::ECS
     #   resp.clusters[0].configuration.execute_command_configuration.log_configuration.s3_bucket_name #=> String
     #   resp.clusters[0].configuration.execute_command_configuration.log_configuration.s3_encryption_enabled #=> Boolean
     #   resp.clusters[0].configuration.execute_command_configuration.log_configuration.s3_key_prefix #=> String
+    #   resp.clusters[0].configuration.managed_storage_configuration.kms_key_id #=> String
+    #   resp.clusters[0].configuration.managed_storage_configuration.fargate_ephemeral_storage_kms_key_id #=> String
     #   resp.clusters[0].status #=> String
     #   resp.clusters[0].registered_container_instances_count #=> Integer
     #   resp.clusters[0].running_tasks_count #=> Integer
@@ -3746,6 +3762,7 @@ module Aws::ECS
     #   resp.services[0].task_sets[0].tags #=> Array
     #   resp.services[0].task_sets[0].tags[0].key #=> String
     #   resp.services[0].task_sets[0].tags[0].value #=> String
+    #   resp.services[0].task_sets[0].fargate_ephemeral_storage.kms_key_id #=> String
     #   resp.services[0].deployments #=> Array
     #   resp.services[0].deployments[0].id #=> String
     #   resp.services[0].deployments[0].status #=> String
@@ -3810,6 +3827,7 @@ module Aws::ECS
     #   resp.services[0].deployments[0].volume_configurations[0].managed_ebs_volume.tag_specifications[0].propagate_tags #=> String, one of "TASK_DEFINITION", "SERVICE", "NONE"
     #   resp.services[0].deployments[0].volume_configurations[0].managed_ebs_volume.role_arn #=> String
     #   resp.services[0].deployments[0].volume_configurations[0].managed_ebs_volume.filesystem_type #=> String, one of "ext3", "ext4", "xfs"
+    #   resp.services[0].deployments[0].fargate_ephemeral_storage.kms_key_id #=> String
     #   resp.services[0].role_arn #=> String
     #   resp.services[0].events #=> Array
     #   resp.services[0].events[0].id #=> String
@@ -4215,6 +4233,7 @@ module Aws::ECS
     #   resp.task_sets[0].tags #=> Array
     #   resp.task_sets[0].tags[0].key #=> String
     #   resp.task_sets[0].tags[0].value #=> String
+    #   resp.task_sets[0].fargate_ephemeral_storage.kms_key_id #=> String
     #   resp.failures #=> Array
     #   resp.failures[0].arn #=> String
     #   resp.failures[0].reason #=> String
@@ -4424,6 +4443,8 @@ module Aws::ECS
     #   resp.tasks[0].task_definition_arn #=> String
     #   resp.tasks[0].version #=> Integer
     #   resp.tasks[0].ephemeral_storage.size_in_gi_b #=> Integer
+    #   resp.tasks[0].fargate_ephemeral_storage.size_in_gi_b #=> Integer
+    #   resp.tasks[0].fargate_ephemeral_storage.kms_key_id #=> String
     #   resp.failures #=> Array
     #   resp.failures[0].arn #=> String
     #   resp.failures[0].reason #=> String
@@ -6135,6 +6156,8 @@ module Aws::ECS
     #   resp.cluster.configuration.execute_command_configuration.log_configuration.s3_bucket_name #=> String
     #   resp.cluster.configuration.execute_command_configuration.log_configuration.s3_encryption_enabled #=> Boolean
     #   resp.cluster.configuration.execute_command_configuration.log_configuration.s3_key_prefix #=> String
+    #   resp.cluster.configuration.managed_storage_configuration.kms_key_id #=> String
+    #   resp.cluster.configuration.managed_storage_configuration.fargate_ephemeral_storage_kms_key_id #=> String
     #   resp.cluster.status #=> String
     #   resp.cluster.registered_container_instances_count #=> Integer
     #   resp.cluster.running_tasks_count #=> Integer
@@ -6728,9 +6751,6 @@ module Aws::ECS
     # @option params [Types::RuntimePlatform] :runtime_platform
     #   The operating system that your tasks definitions run on. A platform
     #   family is specified only for tasks using the Fargate launch type.
-    #
-    #   When you specify a task definition in a service, this value must match
-    #   the `runtimePlatform` value of the service.
     #
     # @return [Types::RegisterTaskDefinitionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -7772,6 +7792,8 @@ module Aws::ECS
     #   resp.tasks[0].task_definition_arn #=> String
     #   resp.tasks[0].version #=> Integer
     #   resp.tasks[0].ephemeral_storage.size_in_gi_b #=> Integer
+    #   resp.tasks[0].fargate_ephemeral_storage.size_in_gi_b #=> Integer
+    #   resp.tasks[0].fargate_ephemeral_storage.kms_key_id #=> String
     #   resp.failures #=> Array
     #   resp.failures[0].arn #=> String
     #   resp.failures[0].reason #=> String
@@ -8145,6 +8167,8 @@ module Aws::ECS
     #   resp.tasks[0].task_definition_arn #=> String
     #   resp.tasks[0].version #=> Integer
     #   resp.tasks[0].ephemeral_storage.size_in_gi_b #=> Integer
+    #   resp.tasks[0].fargate_ephemeral_storage.size_in_gi_b #=> Integer
+    #   resp.tasks[0].fargate_ephemeral_storage.kms_key_id #=> String
     #   resp.failures #=> Array
     #   resp.failures[0].arn #=> String
     #   resp.failures[0].reason #=> String
@@ -8169,16 +8193,22 @@ module Aws::ECS
     # the container handles the `SIGTERM` value gracefully and exits within
     # 30 seconds from receiving it, no `SIGKILL` value is sent.
     #
+    # For Windows containers, POSIX signals do not work and runtime stops
+    # the container by sending a `CTRL_SHUTDOWN_EVENT`. For more
+    # information, see [Unable to react to graceful shutdown of (Windows)
+    # container #25982][1] on GitHub.
+    #
     # <note markdown="1"> The default 30-second timeout can be configured on the Amazon ECS
     # container agent with the `ECS_CONTAINER_STOP_TIMEOUT` variable. For
-    # more information, see [Amazon ECS Container Agent Configuration][1] in
+    # more information, see [Amazon ECS Container Agent Configuration][2] in
     # the *Amazon Elastic Container Service Developer Guide*.
     #
     #  </note>
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-config.html
+    # [1]: https://github.com/moby/moby/issues/25982
+    # [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-config.html
     #
     # @option params [String] :cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster that
@@ -8312,6 +8342,8 @@ module Aws::ECS
     #   resp.task.task_definition_arn #=> String
     #   resp.task.version #=> Integer
     #   resp.task.ephemeral_storage.size_in_gi_b #=> Integer
+    #   resp.task.fargate_ephemeral_storage.size_in_gi_b #=> Integer
+    #   resp.task.fargate_ephemeral_storage.kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/StopTask AWS API Documentation
     #
@@ -8779,6 +8811,10 @@ module Aws::ECS
     #           s3_key_prefix: "String",
     #         },
     #       },
+    #       managed_storage_configuration: {
+    #         kms_key_id: "String",
+    #         fargate_ephemeral_storage_kms_key_id: "String",
+    #       },
     #     },
     #     service_connect_defaults: {
     #       namespace: "String", # required
@@ -8796,6 +8832,8 @@ module Aws::ECS
     #   resp.cluster.configuration.execute_command_configuration.log_configuration.s3_bucket_name #=> String
     #   resp.cluster.configuration.execute_command_configuration.log_configuration.s3_encryption_enabled #=> Boolean
     #   resp.cluster.configuration.execute_command_configuration.log_configuration.s3_key_prefix #=> String
+    #   resp.cluster.configuration.managed_storage_configuration.kms_key_id #=> String
+    #   resp.cluster.configuration.managed_storage_configuration.fargate_ephemeral_storage_kms_key_id #=> String
     #   resp.cluster.status #=> String
     #   resp.cluster.registered_container_instances_count #=> Integer
     #   resp.cluster.running_tasks_count #=> Integer
@@ -8880,6 +8918,8 @@ module Aws::ECS
     #   resp.cluster.configuration.execute_command_configuration.log_configuration.s3_bucket_name #=> String
     #   resp.cluster.configuration.execute_command_configuration.log_configuration.s3_encryption_enabled #=> Boolean
     #   resp.cluster.configuration.execute_command_configuration.log_configuration.s3_key_prefix #=> String
+    #   resp.cluster.configuration.managed_storage_configuration.kms_key_id #=> String
+    #   resp.cluster.configuration.managed_storage_configuration.fargate_ephemeral_storage_kms_key_id #=> String
     #   resp.cluster.status #=> String
     #   resp.cluster.registered_container_instances_count #=> Integer
     #   resp.cluster.running_tasks_count #=> Integer
@@ -9808,6 +9848,7 @@ module Aws::ECS
     #   resp.service.task_sets[0].tags #=> Array
     #   resp.service.task_sets[0].tags[0].key #=> String
     #   resp.service.task_sets[0].tags[0].value #=> String
+    #   resp.service.task_sets[0].fargate_ephemeral_storage.kms_key_id #=> String
     #   resp.service.deployments #=> Array
     #   resp.service.deployments[0].id #=> String
     #   resp.service.deployments[0].status #=> String
@@ -9872,6 +9913,7 @@ module Aws::ECS
     #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.tag_specifications[0].propagate_tags #=> String, one of "TASK_DEFINITION", "SERVICE", "NONE"
     #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.role_arn #=> String
     #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.filesystem_type #=> String, one of "ext3", "ext4", "xfs"
+    #   resp.service.deployments[0].fargate_ephemeral_storage.kms_key_id #=> String
     #   resp.service.role_arn #=> String
     #   resp.service.events #=> Array
     #   resp.service.events[0].id #=> String
@@ -9988,6 +10030,7 @@ module Aws::ECS
     #   resp.task_set.tags #=> Array
     #   resp.task_set.tags[0].key #=> String
     #   resp.task_set.tags[0].value #=> String
+    #   resp.task_set.fargate_ephemeral_storage.kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateServicePrimaryTaskSet AWS API Documentation
     #
@@ -10255,6 +10298,7 @@ module Aws::ECS
     #   resp.task_set.tags #=> Array
     #   resp.task_set.tags[0].key #=> String
     #   resp.task_set.tags[0].value #=> String
+    #   resp.task_set.fargate_ephemeral_storage.kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateTaskSet AWS API Documentation
     #

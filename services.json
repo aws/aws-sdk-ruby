@@ -78,6 +78,9 @@
   "ApplicationInsights": {
     "models": "application-insights/2018-11-25"
   },
+  "ApplicationSignals": {
+    "models": "application-signals/2024-04-15"
+  },
   "Artifact": {
     "models": "artifact/2018-05-10"
   },

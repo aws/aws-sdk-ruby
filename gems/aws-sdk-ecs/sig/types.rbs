@@ -106,6 +106,7 @@ module Aws::ECS
 
     class ClusterConfiguration
       attr_accessor execute_command_configuration: Types::ExecuteCommandConfiguration
+      attr_accessor managed_storage_configuration: Types::ManagedStorageConfiguration
       SENSITIVE: []
     end
 
@@ -445,6 +446,7 @@ module Aws::ECS
       attr_accessor service_connect_configuration: Types::ServiceConnectConfiguration
       attr_accessor service_connect_resources: ::Array[Types::ServiceConnectServiceResource]
       attr_accessor volume_configurations: ::Array[Types::ServiceVolumeConfiguration]
+      attr_accessor fargate_ephemeral_storage: Types::DeploymentEphemeralStorage
       SENSITIVE: []
     end
 
@@ -471,6 +473,11 @@ module Aws::ECS
 
     class DeploymentController
       attr_accessor type: ("ECS" | "CODE_DEPLOY" | "EXTERNAL")
+      SENSITIVE: []
+    end
+
+    class DeploymentEphemeralStorage
+      attr_accessor kms_key_id: ::String
       SENSITIVE: []
     end
 
@@ -974,6 +981,12 @@ module Aws::ECS
       attr_accessor minimum_scaling_step_size: ::Integer
       attr_accessor maximum_scaling_step_size: ::Integer
       attr_accessor instance_warmup_period: ::Integer
+      SENSITIVE: []
+    end
+
+    class ManagedStorageConfiguration
+      attr_accessor kms_key_id: ::String
+      attr_accessor fargate_ephemeral_storage_kms_key_id: ::String
       SENSITIVE: []
     end
 
@@ -1512,6 +1525,7 @@ module Aws::ECS
       attr_accessor task_definition_arn: ::String
       attr_accessor version: ::Integer
       attr_accessor ephemeral_storage: Types::EphemeralStorage
+      attr_accessor fargate_ephemeral_storage: Types::TaskEphemeralStorage
       SENSITIVE: []
     end
 
@@ -1546,6 +1560,12 @@ module Aws::ECS
     class TaskDefinitionPlacementConstraint
       attr_accessor type: ("memberOf")
       attr_accessor expression: ::String
+      SENSITIVE: []
+    end
+
+    class TaskEphemeralStorage
+      attr_accessor size_in_gi_b: ::Integer
+      attr_accessor kms_key_id: ::String
       SENSITIVE: []
     end
 
@@ -1605,6 +1625,7 @@ module Aws::ECS
       attr_accessor stability_status: ("STEADY_STATE" | "STABILIZING")
       attr_accessor stability_status_at: ::Time
       attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor fargate_ephemeral_storage: Types::DeploymentEphemeralStorage
       SENSITIVE: []
     end
 

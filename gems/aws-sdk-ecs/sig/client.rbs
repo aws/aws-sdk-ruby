@@ -131,6 +131,10 @@ module Aws
                                   s3_encryption_enabled: bool?,
                                   s3_key_prefix: ::String?
                                 }?
+                              }?,
+                              managed_storage_configuration: {
+                                kms_key_id: ::String?,
+                                fargate_ephemeral_storage_kms_key_id: ::String?
                               }?
                             },
                             ?capacity_providers: Array[::String],
@@ -1492,6 +1496,10 @@ module Aws
                                   s3_encryption_enabled: bool?,
                                   s3_key_prefix: ::String?
                                 }?
+                              }?,
+                              managed_storage_configuration: {
+                                kms_key_id: ::String?,
+                                fargate_ephemeral_storage_kms_key_id: ::String?
                               }?
                             },
                             ?service_connect_defaults: {

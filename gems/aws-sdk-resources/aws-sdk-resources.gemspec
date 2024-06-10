@@ -40,6 +40,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-applicationcostprofiler', '~> 1')
   spec.add_dependency('aws-sdk-applicationdiscoveryservice', '~> 1')
   spec.add_dependency('aws-sdk-applicationinsights', '~> 1')
+  spec.add_dependency('aws-sdk-applicationsignals', '~> 1')
   spec.add_dependency('aws-sdk-artifact', '~> 1')
   spec.add_dependency('aws-sdk-athena', '~> 1')
   spec.add_dependency('aws-sdk-auditmanager', '~> 1')

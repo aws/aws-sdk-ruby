@@ -269,6 +269,7 @@ module Aws
             'ApplicationCostProfiler' => 'application-cost-profiler',
             'ApplicationDiscoveryService' => 'discovery',
             'ApplicationInsights' => 'applicationinsights',
+            'ApplicationSignals' => 'application-signals',
             'Artifact' => 'artifact',
             'Athena' => 'athena',
             'AuditManager' => 'auditmanager',

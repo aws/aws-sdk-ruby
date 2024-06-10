@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+1.152.1 (2024-06-10)
+------------------
+
 * Issue - Handle 200 errors for all S3 operations that do not have streaming responses.
 
 1.152.0 (2024-06-05)

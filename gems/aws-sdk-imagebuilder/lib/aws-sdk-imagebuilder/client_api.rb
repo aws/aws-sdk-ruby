@@ -2120,6 +2120,7 @@ module Aws::Imagebuilder
         "endpointPrefix" => "imagebuilder",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceAbbreviation" => "imagebuilder",
         "serviceFullName" => "EC2 Image Builder",
         "serviceId" => "imagebuilder",

@@ -1,0 +1,418 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::ApplicationSignals
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class BatchGetServiceLevelObjectiveBudgetReportInput
+      attr_accessor timestamp: ::Time
+      attr_accessor slo_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BatchGetServiceLevelObjectiveBudgetReportOutput
+      attr_accessor timestamp: ::Time
+      attr_accessor reports: ::Array[Types::ServiceLevelObjectiveBudgetReport]
+      attr_accessor errors: ::Array[Types::ServiceLevelObjectiveBudgetReportError]
+      SENSITIVE: []
+    end
+
+    class CalendarInterval
+      attr_accessor start_time: ::Time
+      attr_accessor duration_unit: ("DAY" | "MONTH")
+      attr_accessor duration: ::Integer
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CreateServiceLevelObjectiveInput
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor sli_config: Types::ServiceLevelIndicatorConfig
+      attr_accessor goal: Types::Goal
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateServiceLevelObjectiveOutput
+      attr_accessor slo: Types::ServiceLevelObjective
+      SENSITIVE: []
+    end
+
+    class DeleteServiceLevelObjectiveInput
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteServiceLevelObjectiveOutput < Aws::EmptyStructure
+    end
+
+    class Dimension
+      attr_accessor name: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class GetServiceInput
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor key_attributes: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class GetServiceLevelObjectiveInput
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class GetServiceLevelObjectiveOutput
+      attr_accessor slo: Types::ServiceLevelObjective
+      SENSITIVE: []
+    end
+
+    class GetServiceOutput
+      attr_accessor service: Types::Service
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      SENSITIVE: []
+    end
+
+    class Goal
+      attr_accessor interval: Types::Interval
+      attr_accessor attainment_goal: ::Float
+      attr_accessor warning_threshold: ::Float
+      SENSITIVE: []
+    end
+
+    class Interval
+      attr_accessor rolling_interval: Types::RollingInterval
+      attr_accessor calendar_interval: Types::CalendarInterval
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class RollingInterval < Interval
+      end
+      class CalendarInterval < Interval
+      end
+      class Unknown < Interval
+      end
+    end
+
+    class ListServiceDependenciesInput
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor key_attributes: ::Hash[::String, ::String]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListServiceDependenciesOutput
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor service_dependencies: ::Array[Types::ServiceDependency]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListServiceDependentsInput
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor key_attributes: ::Hash[::String, ::String]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListServiceDependentsOutput
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor service_dependents: ::Array[Types::ServiceDependent]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListServiceLevelObjectivesInput
+      attr_accessor key_attributes: ::Hash[::String, ::String]
+      attr_accessor operation_name: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListServiceLevelObjectivesOutput
+      attr_accessor slo_summaries: ::Array[Types::ServiceLevelObjectiveSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListServiceOperationsInput
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor key_attributes: ::Hash[::String, ::String]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListServiceOperationsOutput
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor service_operations: ::Array[Types::ServiceOperation]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListServicesInput
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListServicesOutput
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor service_summaries: ::Array[Types::ServiceSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class Metric
+      attr_accessor namespace: ::String
+      attr_accessor metric_name: ::String
+      attr_accessor dimensions: ::Array[Types::Dimension]
+      SENSITIVE: []
+    end
+
+    class MetricDataQuery
+      attr_accessor id: ::String
+      attr_accessor metric_stat: Types::MetricStat
+      attr_accessor expression: ::String
+      attr_accessor label: ::String
+      attr_accessor return_data: bool
+      attr_accessor period: ::Integer
+      attr_accessor account_id: ::String
+      SENSITIVE: []
+    end
+
+    class MetricReference
+      attr_accessor namespace: ::String
+      attr_accessor metric_type: ::String
+      attr_accessor dimensions: ::Array[Types::Dimension]
+      attr_accessor metric_name: ::String
+      SENSITIVE: []
+    end
+
+    class MetricStat
+      attr_accessor metric: Types::Metric
+      attr_accessor period: ::Integer
+      attr_accessor stat: ::String
+      attr_accessor unit: ("Microseconds" | "Milliseconds" | "Seconds" | "Bytes" | "Kilobytes" | "Megabytes" | "Gigabytes" | "Terabytes" | "Bits" | "Kilobits" | "Megabits" | "Gigabits" | "Terabits" | "Percent" | "Count" | "Bytes/Second" | "Kilobytes/Second" | "Megabytes/Second" | "Gigabytes/Second" | "Terabytes/Second" | "Bits/Second" | "Kilobits/Second" | "Megabits/Second" | "Gigabits/Second" | "Terabits/Second" | "Count/Second" | "None")
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor resource_type: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class RollingInterval
+      attr_accessor duration_unit: ("DAY" | "MONTH")
+      attr_accessor duration: ::Integer
+      SENSITIVE: []
+    end
+
+    class Service
+      attr_accessor key_attributes: ::Hash[::String, ::String]
+      attr_accessor attribute_maps: ::Array[::Hash[::String, ::String]]
+      attr_accessor metric_references: ::Array[Types::MetricReference]
+      SENSITIVE: []
+    end
+
+    class ServiceDependency
+      attr_accessor operation_name: ::String
+      attr_accessor dependency_key_attributes: ::Hash[::String, ::String]
+      attr_accessor dependency_operation_name: ::String
+      attr_accessor metric_references: ::Array[Types::MetricReference]
+      SENSITIVE: []
+    end
+
+    class ServiceDependent
+      attr_accessor operation_name: ::String
+      attr_accessor dependent_key_attributes: ::Hash[::String, ::String]
+      attr_accessor dependent_operation_name: ::String
+      attr_accessor metric_references: ::Array[Types::MetricReference]
+      SENSITIVE: []
+    end
+
+    class ServiceLevelIndicator
+      attr_accessor sli_metric: Types::ServiceLevelIndicatorMetric
+      attr_accessor metric_threshold: ::Float
+      attr_accessor comparison_operator: ("GreaterThanOrEqualTo" | "GreaterThan" | "LessThan" | "LessThanOrEqualTo")
+      SENSITIVE: []
+    end
+
+    class ServiceLevelIndicatorConfig
+      attr_accessor sli_metric_config: Types::ServiceLevelIndicatorMetricConfig
+      attr_accessor metric_threshold: ::Float
+      attr_accessor comparison_operator: ("GreaterThanOrEqualTo" | "GreaterThan" | "LessThan" | "LessThanOrEqualTo")
+      SENSITIVE: []
+    end
+
+    class ServiceLevelIndicatorMetric
+      attr_accessor key_attributes: ::Hash[::String, ::String]
+      attr_accessor operation_name: ::String
+      attr_accessor metric_type: ("LATENCY" | "AVAILABILITY")
+      attr_accessor metric_data_queries: ::Array[Types::MetricDataQuery]
+      SENSITIVE: []
+    end
+
+    class ServiceLevelIndicatorMetricConfig
+      attr_accessor key_attributes: ::Hash[::String, ::String]
+      attr_accessor operation_name: ::String
+      attr_accessor metric_type: ("LATENCY" | "AVAILABILITY")
+      attr_accessor statistic: ::String
+      attr_accessor period_seconds: ::Integer
+      attr_accessor metric_data_queries: ::Array[Types::MetricDataQuery]
+      SENSITIVE: []
+    end
+
+    class ServiceLevelObjective
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor created_time: ::Time
+      attr_accessor last_updated_time: ::Time
+      attr_accessor sli: Types::ServiceLevelIndicator
+      attr_accessor goal: Types::Goal
+      SENSITIVE: []
+    end
+
+    class ServiceLevelObjectiveBudgetReport
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor budget_status: ("OK" | "WARNING" | "BREACHED" | "INSUFFICIENT_DATA")
+      attr_accessor attainment: ::Float
+      attr_accessor total_budget_seconds: ::Integer
+      attr_accessor budget_seconds_remaining: ::Integer
+      attr_accessor sli: Types::ServiceLevelIndicator
+      attr_accessor goal: Types::Goal
+      SENSITIVE: []
+    end
+
+    class ServiceLevelObjectiveBudgetReportError
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor error_code: ::String
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceLevelObjectiveSummary
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor key_attributes: ::Hash[::String, ::String]
+      attr_accessor operation_name: ::String
+      attr_accessor created_time: ::Time
+      SENSITIVE: []
+    end
+
+    class ServiceOperation
+      attr_accessor name: ::String
+      attr_accessor metric_references: ::Array[Types::MetricReference]
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceSummary
+      attr_accessor key_attributes: ::Hash[::String, ::String]
+      attr_accessor attribute_maps: ::Array[::Hash[::String, ::String]]
+      attr_accessor metric_references: ::Array[Types::MetricReference]
+      SENSITIVE: []
+    end
+
+    class StartDiscoveryInput < Aws::EmptyStructure
+    end
+
+    class StartDiscoveryOutput < Aws::EmptyStructure
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateServiceLevelObjectiveInput
+      attr_accessor id: ::String
+      attr_accessor description: ::String
+      attr_accessor sli_config: Types::ServiceLevelIndicatorConfig
+      attr_accessor goal: Types::Goal
+      SENSITIVE: []
+    end
+
+    class UpdateServiceLevelObjectiveOutput
+      attr_accessor slo: Types::ServiceLevelObjective
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

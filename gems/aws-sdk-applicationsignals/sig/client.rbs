@@ -1,0 +1,377 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module ApplicationSignals
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApplicationSignals/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _BatchGetServiceLevelObjectiveBudgetReportResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchGetServiceLevelObjectiveBudgetReportOutput]
+        def timestamp: () -> ::Time
+        def reports: () -> ::Array[Types::ServiceLevelObjectiveBudgetReport]
+        def errors: () -> ::Array[Types::ServiceLevelObjectiveBudgetReportError]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApplicationSignals/Client.html#batch_get_service_level_objective_budget_report-instance_method
+      def batch_get_service_level_objective_budget_report: (
+                                                             timestamp: ::Time,
+                                                             slo_ids: Array[::String]
+                                                           ) -> _BatchGetServiceLevelObjectiveBudgetReportResponseSuccess
+                                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchGetServiceLevelObjectiveBudgetReportResponseSuccess
+
+      interface _CreateServiceLevelObjectiveResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateServiceLevelObjectiveOutput]
+        def slo: () -> Types::ServiceLevelObjective
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApplicationSignals/Client.html#create_service_level_objective-instance_method
+      def create_service_level_objective: (
+                                            name: ::String,
+                                            ?description: ::String,
+                                            sli_config: {
+                                              sli_metric_config: {
+                                                key_attributes: Hash[::String, ::String]?,
+                                                operation_name: ::String?,
+                                                metric_type: ("LATENCY" | "AVAILABILITY")?,
+                                                statistic: ::String?,
+                                                period_seconds: ::Integer?,
+                                                metric_data_queries: Array[
+                                                  {
+                                                    id: ::String,
+                                                    metric_stat: {
+                                                      metric: {
+                                                        namespace: ::String?,
+                                                        metric_name: ::String?,
+                                                        dimensions: Array[
+                                                          {
+                                                            name: ::String,
+                                                            value: ::String
+                                                          },
+                                                        ]?
+                                                      },
+                                                      period: ::Integer,
+                                                      stat: ::String,
+                                                      unit: ("Microseconds" | "Milliseconds" | "Seconds" | "Bytes" | "Kilobytes" | "Megabytes" | "Gigabytes" | "Terabytes" | "Bits" | "Kilobits" | "Megabits" | "Gigabits" | "Terabits" | "Percent" | "Count" | "Bytes/Second" | "Kilobytes/Second" | "Megabytes/Second" | "Gigabytes/Second" | "Terabytes/Second" | "Bits/Second" | "Kilobits/Second" | "Megabits/Second" | "Gigabits/Second" | "Terabits/Second" | "Count/Second" | "None")?
+                                                    }?,
+                                                    expression: ::String?,
+                                                    label: ::String?,
+                                                    return_data: bool?,
+                                                    period: ::Integer?,
+                                                    account_id: ::String?
+                                                  },
+                                                ]?
+                                              },
+                                              metric_threshold: ::Float,
+                                              comparison_operator: ("GreaterThanOrEqualTo" | "GreaterThan" | "LessThan" | "LessThanOrEqualTo")
+                                            },
+                                            ?goal: {
+                                              interval: {
+                                                rolling_interval: {
+                                                  duration_unit: ("DAY" | "MONTH"),
+                                                  duration: ::Integer
+                                                }?,
+                                                calendar_interval: {
+                                                  start_time: ::Time,
+                                                  duration_unit: ("DAY" | "MONTH"),
+                                                  duration: ::Integer
+                                                }?
+                                              }?,
+                                              attainment_goal: ::Float?,
+                                              warning_threshold: ::Float?
+                                            },
+                                            ?tags: Array[
+                                              {
+                                                key: ::String,
+                                                value: ::String
+                                              },
+                                            ]
+                                          ) -> _CreateServiceLevelObjectiveResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateServiceLevelObjectiveResponseSuccess
+
+      interface _DeleteServiceLevelObjectiveResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteServiceLevelObjectiveOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApplicationSignals/Client.html#delete_service_level_objective-instance_method
+      def delete_service_level_objective: (
+                                            id: ::String
+                                          ) -> _DeleteServiceLevelObjectiveResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteServiceLevelObjectiveResponseSuccess
+
+      interface _GetServiceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetServiceOutput]
+        def service: () -> Types::Service
+        def start_time: () -> ::Time
+        def end_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApplicationSignals/Client.html#get_service-instance_method
+      def get_service: (
+                         start_time: ::Time,
+                         end_time: ::Time,
+                         key_attributes: Hash[::String, ::String]
+                       ) -> _GetServiceResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetServiceResponseSuccess
+
+      interface _GetServiceLevelObjectiveResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetServiceLevelObjectiveOutput]
+        def slo: () -> Types::ServiceLevelObjective
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApplicationSignals/Client.html#get_service_level_objective-instance_method
+      def get_service_level_objective: (
+                                         id: ::String
+                                       ) -> _GetServiceLevelObjectiveResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetServiceLevelObjectiveResponseSuccess
+
+      interface _ListServiceDependenciesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListServiceDependenciesOutput]
+        def start_time: () -> ::Time
+        def end_time: () -> ::Time
+        def service_dependencies: () -> ::Array[Types::ServiceDependency]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApplicationSignals/Client.html#list_service_dependencies-instance_method
+      def list_service_dependencies: (
+                                       start_time: ::Time,
+                                       end_time: ::Time,
+                                       key_attributes: Hash[::String, ::String],
+                                       ?max_results: ::Integer,
+                                       ?next_token: ::String
+                                     ) -> _ListServiceDependenciesResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListServiceDependenciesResponseSuccess
+
+      interface _ListServiceDependentsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListServiceDependentsOutput]
+        def start_time: () -> ::Time
+        def end_time: () -> ::Time
+        def service_dependents: () -> ::Array[Types::ServiceDependent]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApplicationSignals/Client.html#list_service_dependents-instance_method
+      def list_service_dependents: (
+                                     start_time: ::Time,
+                                     end_time: ::Time,
+                                     key_attributes: Hash[::String, ::String],
+                                     ?max_results: ::Integer,
+                                     ?next_token: ::String
+                                   ) -> _ListServiceDependentsResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListServiceDependentsResponseSuccess
+
+      interface _ListServiceLevelObjectivesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListServiceLevelObjectivesOutput]
+        def slo_summaries: () -> ::Array[Types::ServiceLevelObjectiveSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApplicationSignals/Client.html#list_service_level_objectives-instance_method
+      def list_service_level_objectives: (
+                                           ?key_attributes: Hash[::String, ::String],
+                                           ?operation_name: ::String,
+                                           ?max_results: ::Integer,
+                                           ?next_token: ::String
+                                         ) -> _ListServiceLevelObjectivesResponseSuccess
+                                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListServiceLevelObjectivesResponseSuccess
+
+      interface _ListServiceOperationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListServiceOperationsOutput]
+        def start_time: () -> ::Time
+        def end_time: () -> ::Time
+        def service_operations: () -> ::Array[Types::ServiceOperation]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApplicationSignals/Client.html#list_service_operations-instance_method
+      def list_service_operations: (
+                                     start_time: ::Time,
+                                     end_time: ::Time,
+                                     key_attributes: Hash[::String, ::String],
+                                     ?max_results: ::Integer,
+                                     ?next_token: ::String
+                                   ) -> _ListServiceOperationsResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListServiceOperationsResponseSuccess
+
+      interface _ListServicesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListServicesOutput]
+        def start_time: () -> ::Time
+        def end_time: () -> ::Time
+        def service_summaries: () -> ::Array[Types::ServiceSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApplicationSignals/Client.html#list_services-instance_method
+      def list_services: (
+                           start_time: ::Time,
+                           end_time: ::Time,
+                           ?max_results: ::Integer,
+                           ?next_token: ::String
+                         ) -> _ListServicesResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListServicesResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApplicationSignals/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _StartDiscoveryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartDiscoveryOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApplicationSignals/Client.html#start_discovery-instance_method
+      def start_discovery: (
+                           ) -> _StartDiscoveryResponseSuccess
+                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartDiscoveryResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApplicationSignals/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Array[
+                            {
+                              key: ::String,
+                              value: ::String
+                            },
+                          ]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApplicationSignals/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateServiceLevelObjectiveResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateServiceLevelObjectiveOutput]
+        def slo: () -> Types::ServiceLevelObjective
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApplicationSignals/Client.html#update_service_level_objective-instance_method
+      def update_service_level_objective: (
+                                            id: ::String,
+                                            ?description: ::String,
+                                            ?sli_config: {
+                                              sli_metric_config: {
+                                                key_attributes: Hash[::String, ::String]?,
+                                                operation_name: ::String?,
+                                                metric_type: ("LATENCY" | "AVAILABILITY")?,
+                                                statistic: ::String?,
+                                                period_seconds: ::Integer?,
+                                                metric_data_queries: Array[
+                                                  {
+                                                    id: ::String,
+                                                    metric_stat: {
+                                                      metric: {
+                                                        namespace: ::String?,
+                                                        metric_name: ::String?,
+                                                        dimensions: Array[
+                                                          {
+                                                            name: ::String,
+                                                            value: ::String
+                                                          },
+                                                        ]?
+                                                      },
+                                                      period: ::Integer,
+                                                      stat: ::String,
+                                                      unit: ("Microseconds" | "Milliseconds" | "Seconds" | "Bytes" | "Kilobytes" | "Megabytes" | "Gigabytes" | "Terabytes" | "Bits" | "Kilobits" | "Megabits" | "Gigabits" | "Terabits" | "Percent" | "Count" | "Bytes/Second" | "Kilobytes/Second" | "Megabytes/Second" | "Gigabytes/Second" | "Terabytes/Second" | "Bits/Second" | "Kilobits/Second" | "Megabits/Second" | "Gigabits/Second" | "Terabits/Second" | "Count/Second" | "None")?
+                                                    }?,
+                                                    expression: ::String?,
+                                                    label: ::String?,
+                                                    return_data: bool?,
+                                                    period: ::Integer?,
+                                                    account_id: ::String?
+                                                  },
+                                                ]?
+                                              },
+                                              metric_threshold: ::Float,
+                                              comparison_operator: ("GreaterThanOrEqualTo" | "GreaterThan" | "LessThan" | "LessThanOrEqualTo")
+                                            },
+                                            ?goal: {
+                                              interval: {
+                                                rolling_interval: {
+                                                  duration_unit: ("DAY" | "MONTH"),
+                                                  duration: ::Integer
+                                                }?,
+                                                calendar_interval: {
+                                                  start_time: ::Time,
+                                                  duration_unit: ("DAY" | "MONTH"),
+                                                  duration: ::Integer
+                                                }?
+                                              }?,
+                                              attainment_goal: ::Float?,
+                                              warning_threshold: ::Float?
+                                            }
+                                          ) -> _UpdateServiceLevelObjectiveResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateServiceLevelObjectiveResponseSuccess
+    end
+  end
+end
+

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.942.0 (2024-06-10)
+------------------
+
+* Feature - Added support for enumerating regions for  `Aws::ApplicationSignals`.
+
 1.941.0 (2024-06-07)
 ------------------
 

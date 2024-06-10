@@ -396,6 +396,13 @@ module Aws::ECS
     # available to all accounts and only need to be associated with a
     # cluster to be used in a capacity provider strategy.
     #
+    # With `FARGATE_SPOT`, you can run interruption tolerant tasks at a rate
+    # that's discounted compared to the `FARGATE` price. `FARGATE_SPOT`
+    # runs tasks on spare compute capacity. When Amazon Web Services needs
+    # the capacity back, your tasks are interrupted with a two-minute
+    # warning. `FARGATE_SPOT` only supports Linux tasks with the X86\_64
+    # architecture on platform version 1.3.0 or later.
+    #
     # A capacity provider strategy may contain a maximum of 6 capacity
     # providers.
     #
@@ -674,16 +681,21 @@ module Aws::ECS
       include Aws::Structure
     end
 
-    # The execute command configuration for the cluster.
+    # The execute command and managed storage configuration for the cluster.
     #
     # @!attribute [rw] execute_command_configuration
     #   The details of the execute command configuration.
     #   @return [Types::ExecuteCommandConfiguration]
     #
+    # @!attribute [rw] managed_storage_configuration
+    #   The details of the managed storage configuration.
+    #   @return [Types::ManagedStorageConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ClusterConfiguration AWS API Documentation
     #
     class ClusterConfiguration < Struct.new(
-      :execute_command_configuration)
+      :execute_command_configuration,
+      :managed_storage_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3628,6 +3640,10 @@ module Aws::ECS
     #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ServiceManagedEBSVolumeConfiguration.html
     #   @return [Array<Types::ServiceVolumeConfiguration>]
     #
+    # @!attribute [rw] fargate_ephemeral_storage
+    #   The Fargate ephemeral storage settings for the deployment.
+    #   @return [Types::DeploymentEphemeralStorage]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/Deployment AWS API Documentation
     #
     class Deployment < Struct.new(
@@ -3649,7 +3665,8 @@ module Aws::ECS
       :rollout_state_reason,
       :service_connect_configuration,
       :service_connect_resources,
-      :volume_configurations)
+      :volume_configurations,
+      :fargate_ephemeral_storage)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3910,6 +3927,21 @@ module Aws::ECS
     #
     class DeploymentController < Struct.new(
       :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The amount of ephemeral storage to allocate for the deployment.
+    #
+    # @!attribute [rw] kms_key_id
+    #   Specify an Key Management Service key ID to encrypt the ephemeral
+    #   storage for deployment.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeploymentEphemeralStorage AWS API Documentation
+    #
+    class DeploymentEphemeralStorage < Struct.new(
+      :kms_key_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5206,14 +5238,17 @@ module Aws::ECS
     #
     # The following are notes about container health check support:
     #
-    # * When the Amazon ECS agent cannot connect to the Amazon ECS service,
-    #   the service reports the container as `UNHEALTHY`.
+    # * If the Amazon ECS container agent becomes disconnected from the
+    #   Amazon ECS service, this won't cause a container to transition to
+    #   an `UNHEALTHY` status. This is by design, to ensure that containers
+    #   remain running during agent restarts or temporary unavailability.
+    #   The health check status is the "last heard from" response from the
+    #   Amazon ECS agent, so if the container was considered `HEALTHY` prior
+    #   to the disconnect, that status will remain until the agent
+    #   reconnects and another health check occurs. There are no assumptions
+    #   made about the status of the container health checks.
     #
-    # * The health check statuses are the "last heard from" response from
-    #   the Amazon ECS agent. There are no assumptions made about the status
-    #   of the container health checks.
-    #
-    # * Container health checks require version 1.17.0 or greater of the
+    # * Container health checks require version `1.17.0` or greater of the
     #   Amazon ECS container agent. For more information, see [Updating the
     #   Amazon ECS container agent][2].
     #
@@ -6766,6 +6801,27 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # The managed storage configuration for the cluster.
+    #
+    # @!attribute [rw] kms_key_id
+    #   Specify a Key Management Service key ID to encrypt the managed
+    #   storage.
+    #   @return [String]
+    #
+    # @!attribute [rw] fargate_ephemeral_storage_kms_key_id
+    #   Specify the Key Management Service key ID for the Fargate ephemeral
+    #   storage.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ManagedStorageConfiguration AWS API Documentation
+    #
+    class ManagedStorageConfiguration < Struct.new(
+      :kms_key_id,
+      :fargate_ephemeral_storage_kms_key_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Amazon ECS can't determine the current version of the Amazon ECS
     # container agent on the container instance and doesn't have enough
     # information to proceed with an update. This could be because the agent
@@ -8245,9 +8301,6 @@ module Aws::ECS
     # @!attribute [rw] runtime_platform
     #   The operating system that your tasks definitions run on. A platform
     #   family is specified only for tasks using the Fargate launch type.
-    #
-    #   When you specify a task definition in a service, this value must
-    #   match the `runtimePlatform` value of the service.
     #   @return [Types::RuntimePlatform]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/RegisterTaskDefinitionRequest AWS API Documentation
@@ -8385,13 +8438,13 @@ module Aws::ECS
     # @!attribute [rw] value
     #   The value for the specified resource type.
     #
-    #   If the `GPU` type is used, the value is the number of physical
-    #   `GPUs` the Amazon ECS container agent reserves for the container.
-    #   The number of GPUs that's reserved for all containers in a task
-    #   can't exceed the number of available GPUs on the container instance
-    #   that the task is launched on.
+    #   When the type is `GPU`, the value is the number of physical `GPUs`
+    #   the Amazon ECS container agent reserves for the container. The
+    #   number of GPUs that's reserved for all containers in a task can't
+    #   exceed the number of available GPUs on the container instance that
+    #   the task is launched on.
     #
-    #   If the `InferenceAccelerator` type is used, the `value` matches the
+    #   When the type is `InferenceAccelerator`, the `value` matches the
     #   `deviceName` for an [InferenceAccelerator][1] specified in a task
     #   definition.
     #
@@ -8401,8 +8454,7 @@ module Aws::ECS
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   The type of resource to assign to a container. The supported values
-    #   are `GPU` or `InferenceAccelerator`.
+    #   The type of resource to assign to a container.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ResourceRequirement AWS API Documentation
@@ -9412,8 +9464,7 @@ module Aws::ECS
       include Aws::Structure
     end
 
-    # An object that represents the Amazon Web Services Private Certificate
-    # Authority certificate.
+    # The certificate root authority that secures your service.
     #
     # @!attribute [rw] aws_pca_authority_arn
     #   The ARN of the Amazon Web Services Private Certificate Authority
@@ -9428,7 +9479,8 @@ module Aws::ECS
       include Aws::Structure
     end
 
-    # An object that represents the configuration for Service Connect TLS.
+    # The key that encrypts and decrypts your resources for Service Connect
+    # TLS.
     #
     # @!attribute [rw] issuer_certificate_authority
     #   The signer certificate authority.
@@ -10725,6 +10777,10 @@ module Aws::ECS
     #   The ephemeral storage settings for the task.
     #   @return [Types::EphemeralStorage]
     #
+    # @!attribute [rw] fargate_ephemeral_storage
+    #   The Fargate ephemeral storage settings for the task.
+    #   @return [Types::TaskEphemeralStorage]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/Task AWS API Documentation
     #
     class Task < Struct.new(
@@ -10763,7 +10819,8 @@ module Aws::ECS
       :task_arn,
       :task_definition_arn,
       :version,
-      :ephemeral_storage)
+      :ephemeral_storage,
+      :fargate_ephemeral_storage)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11228,6 +11285,28 @@ module Aws::ECS
     class TaskDefinitionPlacementConstraint < Struct.new(
       :type,
       :expression)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The amount of ephemeral storage to allocate for the task.
+    #
+    # @!attribute [rw] size_in_gi_b
+    #   The total amount, in GiB, of the ephemeral storage to set for the
+    #   task. The minimum supported value is `20` GiB and the maximum
+    #   supported value is  `200` GiB.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] kms_key_id
+    #   Specify an Key Management Service key ID to encrypt the ephemeral
+    #   storage for the task.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/TaskEphemeralStorage AWS API Documentation
+    #
+    class TaskEphemeralStorage < Struct.new(
+      :size_in_gi_b,
+      :kms_key_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11723,6 +11802,10 @@ module Aws::ECS
     #     against your tags per resource limit.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] fargate_ephemeral_storage
+    #   The Fargate ephemeral storage settings for the task set.
+    #   @return [Types::DeploymentEphemeralStorage]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/TaskSet AWS API Documentation
     #
     class TaskSet < Struct.new(
@@ -11749,7 +11832,8 @@ module Aws::ECS
       :scale,
       :stability_status,
       :stability_status_at,
-      :tags)
+      :tags,
+      :fargate_ephemeral_storage)
       SENSITIVE = []
       include Aws::Structure
     end
