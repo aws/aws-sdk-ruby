@@ -1,13 +1,76 @@
 {
   "pagination": {
+    "GetAnomalies": {
+      "input_token": "NextPageToken",
+      "output_token": "NextPageToken",
+      "limit_key": "MaxResults"
+    },
+    "GetAnomalyMonitors": {
+      "input_token": "NextPageToken",
+      "output_token": "NextPageToken",
+      "limit_key": "MaxResults"
+    },
+    "GetAnomalySubscriptions": {
+      "input_token": "NextPageToken",
+      "output_token": "NextPageToken",
+      "limit_key": "MaxResults"
+    },
+    "GetCostAndUsage": {
+      "input_token": "NextPageToken",
+      "output_token": "NextPageToken"
+    },
+    "GetCostAndUsageWithResources": {
+      "input_token": "NextPageToken",
+      "output_token": "NextPageToken"
+    },
+    "GetCostCategories": {
+      "input_token": "NextPageToken",
+      "output_token": "NextPageToken",
+      "limit_key": "MaxResults"
+    },
+    "GetDimensionValues": {
+      "input_token": "NextPageToken",
+      "output_token": "NextPageToken",
+      "limit_key": "MaxResults"
+    },
+    "GetReservationCoverage": {
+      "input_token": "NextPageToken",
+      "output_token": "NextPageToken",
+      "limit_key": "MaxResults"
+    },
+    "GetReservationPurchaseRecommendation": {
+      "input_token": "NextPageToken",
+      "output_token": "NextPageToken",
+      "limit_key": "PageSize"
+    },
+    "GetReservationUtilization": {
+      "input_token": "NextPageToken",
+      "output_token": "NextPageToken",
+      "limit_key": "MaxResults"
+    },
+    "GetRightsizingRecommendation": {
+      "input_token": "NextPageToken",
+      "output_token": "NextPageToken",
+      "limit_key": "PageSize"
+    },
     "GetSavingsPlansCoverage": {
       "input_token": "NextToken",
       "output_token": "NextToken",
       "limit_key": "MaxResults"
     },
+    "GetSavingsPlansPurchaseRecommendation": {
+      "input_token": "NextToken",
+      "output_token": "NextToken",
+      "limit_key": "PageSize"
+    },
     "GetSavingsPlansUtilizationDetails": {
       "input_token": "NextToken",
       "output_token": "NextToken",
+      "limit_key": "MaxResults"
+    },
+    "GetTags": {
+      "input_token": "NextPageToken",
+      "output_token": "NextPageToken",
       "limit_key": "MaxResults"
     },
     "ListCostAllocationTagBackfillHistory": {
@@ -24,6 +87,11 @@
       "input_token": "NextToken",
       "output_token": "NextToken",
       "limit_key": "MaxResults"
+    },
+    "ListSavingsPlansPurchaseRecommendationGeneration": {
+      "input_token": "NextToken",
+      "output_token": "NextToken",
+      "limit_key": "PageSize"
     }
   }
 }
