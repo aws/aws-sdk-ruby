@@ -250,12 +250,15 @@ module Aws::SageMaker
     ClientSecret = Shapes::StringShape.new(name: 'ClientSecret')
     ClientToken = Shapes::StringShape.new(name: 'ClientToken')
     ClusterArn = Shapes::StringShape.new(name: 'ClusterArn')
+    ClusterAvailabilityZone = Shapes::StringShape.new(name: 'ClusterAvailabilityZone')
+    ClusterAvailabilityZoneId = Shapes::StringShape.new(name: 'ClusterAvailabilityZoneId')
     ClusterInstanceCount = Shapes::IntegerShape.new(name: 'ClusterInstanceCount')
     ClusterInstanceGroupDetails = Shapes::StructureShape.new(name: 'ClusterInstanceGroupDetails')
     ClusterInstanceGroupDetailsList = Shapes::ListShape.new(name: 'ClusterInstanceGroupDetailsList')
     ClusterInstanceGroupName = Shapes::StringShape.new(name: 'ClusterInstanceGroupName')
     ClusterInstanceGroupSpecification = Shapes::StructureShape.new(name: 'ClusterInstanceGroupSpecification')
     ClusterInstanceGroupSpecifications = Shapes::ListShape.new(name: 'ClusterInstanceGroupSpecifications')
+    ClusterInstancePlacement = Shapes::StructureShape.new(name: 'ClusterInstancePlacement')
     ClusterInstanceStatus = Shapes::StringShape.new(name: 'ClusterInstanceStatus')
     ClusterInstanceStatusDetails = Shapes::StructureShape.new(name: 'ClusterInstanceStatusDetails')
     ClusterInstanceType = Shapes::StringShape.new(name: 'ClusterInstanceType')
@@ -268,6 +271,8 @@ module Aws::SageMaker
     ClusterNodeSummaries = Shapes::ListShape.new(name: 'ClusterNodeSummaries')
     ClusterNodeSummary = Shapes::StructureShape.new(name: 'ClusterNodeSummary')
     ClusterNonNegativeInstanceCount = Shapes::IntegerShape.new(name: 'ClusterNonNegativeInstanceCount')
+    ClusterPrivateDnsHostname = Shapes::StringShape.new(name: 'ClusterPrivateDnsHostname')
+    ClusterPrivatePrimaryIp = Shapes::StringShape.new(name: 'ClusterPrivatePrimaryIp')
     ClusterSortBy = Shapes::StringShape.new(name: 'ClusterSortBy')
     ClusterStatus = Shapes::StringShape.new(name: 'ClusterStatus')
     ClusterSummaries = Shapes::ListShape.new(name: 'ClusterSummaries')
@@ -1436,6 +1441,8 @@ module Aws::SageMaker
     ModelPackageGroupStatus = Shapes::StringShape.new(name: 'ModelPackageGroupStatus')
     ModelPackageGroupSummary = Shapes::StructureShape.new(name: 'ModelPackageGroupSummary')
     ModelPackageGroupSummaryList = Shapes::ListShape.new(name: 'ModelPackageGroupSummaryList')
+    ModelPackageModelCard = Shapes::StructureShape.new(name: 'ModelPackageModelCard')
+    ModelPackageSecurityConfig = Shapes::StructureShape.new(name: 'ModelPackageSecurityConfig')
     ModelPackageSortBy = Shapes::StringShape.new(name: 'ModelPackageSortBy')
     ModelPackageSourceUri = Shapes::StringShape.new(name: 'ModelPackageSourceUri')
     ModelPackageStatus = Shapes::StringShape.new(name: 'ModelPackageStatus')
@@ -1679,6 +1686,7 @@ module Aws::SageMaker
     ProductionVariantAcceleratorType = Shapes::StringShape.new(name: 'ProductionVariantAcceleratorType')
     ProductionVariantContainerStartupHealthCheckTimeoutInSeconds = Shapes::IntegerShape.new(name: 'ProductionVariantContainerStartupHealthCheckTimeoutInSeconds')
     ProductionVariantCoreDumpConfig = Shapes::StructureShape.new(name: 'ProductionVariantCoreDumpConfig')
+    ProductionVariantInferenceAmiVersion = Shapes::StringShape.new(name: 'ProductionVariantInferenceAmiVersion')
     ProductionVariantInstanceType = Shapes::StringShape.new(name: 'ProductionVariantInstanceType')
     ProductionVariantList = Shapes::ListShape.new(name: 'ProductionVariantList')
     ProductionVariantManagedInstanceScaling = Shapes::StructureShape.new(name: 'ProductionVariantManagedInstanceScaling')
@@ -2844,6 +2852,10 @@ module Aws::SageMaker
 
     ClusterInstanceGroupSpecifications.member = Shapes::ShapeRef.new(shape: ClusterInstanceGroupSpecification)
 
+    ClusterInstancePlacement.add_member(:availability_zone, Shapes::ShapeRef.new(shape: ClusterAvailabilityZone, location_name: "AvailabilityZone"))
+    ClusterInstancePlacement.add_member(:availability_zone_id, Shapes::ShapeRef.new(shape: ClusterAvailabilityZoneId, location_name: "AvailabilityZoneId"))
+    ClusterInstancePlacement.struct_class = Types::ClusterInstancePlacement
+
     ClusterInstanceStatusDetails.add_member(:status, Shapes::ShapeRef.new(shape: ClusterInstanceStatus, required: true, location_name: "Status"))
     ClusterInstanceStatusDetails.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     ClusterInstanceStatusDetails.struct_class = Types::ClusterInstanceStatusDetails
@@ -2859,6 +2871,9 @@ module Aws::SageMaker
     ClusterNodeDetails.add_member(:launch_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LaunchTime"))
     ClusterNodeDetails.add_member(:life_cycle_config, Shapes::ShapeRef.new(shape: ClusterLifeCycleConfig, location_name: "LifeCycleConfig"))
     ClusterNodeDetails.add_member(:threads_per_core, Shapes::ShapeRef.new(shape: ClusterThreadsPerCore, location_name: "ThreadsPerCore"))
+    ClusterNodeDetails.add_member(:private_primary_ip, Shapes::ShapeRef.new(shape: ClusterPrivatePrimaryIp, location_name: "PrivatePrimaryIp"))
+    ClusterNodeDetails.add_member(:private_dns_hostname, Shapes::ShapeRef.new(shape: ClusterPrivateDnsHostname, location_name: "PrivateDnsHostname"))
+    ClusterNodeDetails.add_member(:placement, Shapes::ShapeRef.new(shape: ClusterInstancePlacement, location_name: "Placement"))
     ClusterNodeDetails.struct_class = Types::ClusterNodeDetails
 
     ClusterNodeSummaries.member = Shapes::ShapeRef.new(shape: ClusterNodeSummary)
@@ -3462,6 +3477,8 @@ module Aws::SageMaker
     CreateModelPackageInput.add_member(:additional_inference_specifications, Shapes::ShapeRef.new(shape: AdditionalInferenceSpecifications, location_name: "AdditionalInferenceSpecifications"))
     CreateModelPackageInput.add_member(:skip_model_validation, Shapes::ShapeRef.new(shape: SkipModelValidation, location_name: "SkipModelValidation"))
     CreateModelPackageInput.add_member(:source_uri, Shapes::ShapeRef.new(shape: ModelPackageSourceUri, location_name: "SourceUri"))
+    CreateModelPackageInput.add_member(:security_config, Shapes::ShapeRef.new(shape: ModelPackageSecurityConfig, location_name: "SecurityConfig"))
+    CreateModelPackageInput.add_member(:model_card, Shapes::ShapeRef.new(shape: ModelPackageModelCard, location_name: "ModelCard"))
     CreateModelPackageInput.struct_class = Types::CreateModelPackageInput
 
     CreateModelPackageOutput.add_member(:model_package_arn, Shapes::ShapeRef.new(shape: ModelPackageArn, required: true, location_name: "ModelPackageArn"))
@@ -4836,6 +4853,8 @@ module Aws::SageMaker
     DescribeModelPackageOutput.add_member(:additional_inference_specifications, Shapes::ShapeRef.new(shape: AdditionalInferenceSpecifications, location_name: "AdditionalInferenceSpecifications"))
     DescribeModelPackageOutput.add_member(:skip_model_validation, Shapes::ShapeRef.new(shape: SkipModelValidation, location_name: "SkipModelValidation"))
     DescribeModelPackageOutput.add_member(:source_uri, Shapes::ShapeRef.new(shape: ModelPackageSourceUri, location_name: "SourceUri"))
+    DescribeModelPackageOutput.add_member(:security_config, Shapes::ShapeRef.new(shape: ModelPackageSecurityConfig, location_name: "SecurityConfig"))
+    DescribeModelPackageOutput.add_member(:model_card, Shapes::ShapeRef.new(shape: ModelPackageModelCard, location_name: "ModelCard"))
     DescribeModelPackageOutput.struct_class = Types::DescribeModelPackageOutput
 
     DescribeModelQualityJobDefinitionRequest.add_member(:job_definition_name, Shapes::ShapeRef.new(shape: MonitoringJobDefinitionName, required: true, location_name: "JobDefinitionName"))
@@ -7644,6 +7663,8 @@ module Aws::SageMaker
     ModelPackage.add_member(:sample_payload_url, Shapes::ShapeRef.new(shape: String, location_name: "SamplePayloadUrl"))
     ModelPackage.add_member(:additional_inference_specifications, Shapes::ShapeRef.new(shape: AdditionalInferenceSpecifications, location_name: "AdditionalInferenceSpecifications"))
     ModelPackage.add_member(:source_uri, Shapes::ShapeRef.new(shape: ModelPackageSourceUri, location_name: "SourceUri"))
+    ModelPackage.add_member(:security_config, Shapes::ShapeRef.new(shape: ModelPackageSecurityConfig, location_name: "SecurityConfig"))
+    ModelPackage.add_member(:model_card, Shapes::ShapeRef.new(shape: ModelPackageModelCard, location_name: "ModelCard"))
     ModelPackage.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     ModelPackage.add_member(:customer_metadata_properties, Shapes::ShapeRef.new(shape: CustomerMetadataMap, location_name: "CustomerMetadataProperties"))
     ModelPackage.add_member(:drift_check_baselines, Shapes::ShapeRef.new(shape: DriftCheckBaselines, location_name: "DriftCheckBaselines"))
@@ -7685,6 +7706,13 @@ module Aws::SageMaker
     ModelPackageGroupSummary.struct_class = Types::ModelPackageGroupSummary
 
     ModelPackageGroupSummaryList.member = Shapes::ShapeRef.new(shape: ModelPackageGroupSummary)
+
+    ModelPackageModelCard.add_member(:model_card_content, Shapes::ShapeRef.new(shape: ModelCardContent, location_name: "ModelCardContent"))
+    ModelPackageModelCard.add_member(:model_card_status, Shapes::ShapeRef.new(shape: ModelCardStatus, location_name: "ModelCardStatus"))
+    ModelPackageModelCard.struct_class = Types::ModelPackageModelCard
+
+    ModelPackageSecurityConfig.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, required: true, location_name: "KmsKeyId"))
+    ModelPackageSecurityConfig.struct_class = Types::ModelPackageSecurityConfig
 
     ModelPackageStatusDetails.add_member(:validation_statuses, Shapes::ShapeRef.new(shape: ModelPackageStatusItemList, required: true, location_name: "ValidationStatuses"))
     ModelPackageStatusDetails.add_member(:image_scan_statuses, Shapes::ShapeRef.new(shape: ModelPackageStatusItemList, location_name: "ImageScanStatuses"))
@@ -8332,6 +8360,7 @@ module Aws::SageMaker
     ProductionVariant.add_member(:enable_ssm_access, Shapes::ShapeRef.new(shape: ProductionVariantSSMAccess, location_name: "EnableSSMAccess"))
     ProductionVariant.add_member(:managed_instance_scaling, Shapes::ShapeRef.new(shape: ProductionVariantManagedInstanceScaling, location_name: "ManagedInstanceScaling"))
     ProductionVariant.add_member(:routing_config, Shapes::ShapeRef.new(shape: ProductionVariantRoutingConfig, location_name: "RoutingConfig"))
+    ProductionVariant.add_member(:inference_ami_version, Shapes::ShapeRef.new(shape: ProductionVariantInferenceAmiVersion, location_name: "InferenceAmiVersion"))
     ProductionVariant.struct_class = Types::ProductionVariant
 
     ProductionVariantCoreDumpConfig.add_member(:destination_s3_uri, Shapes::ShapeRef.new(shape: DestinationS3Uri, required: true, location_name: "DestinationS3Uri"))
@@ -9145,6 +9174,7 @@ module Aws::SageMaker
     TimeSeriesForecastingJobConfig.add_member(:transformations, Shapes::ShapeRef.new(shape: TimeSeriesTransformations, location_name: "Transformations"))
     TimeSeriesForecastingJobConfig.add_member(:time_series_config, Shapes::ShapeRef.new(shape: TimeSeriesConfig, required: true, location_name: "TimeSeriesConfig"))
     TimeSeriesForecastingJobConfig.add_member(:holiday_config, Shapes::ShapeRef.new(shape: HolidayConfig, location_name: "HolidayConfig"))
+    TimeSeriesForecastingJobConfig.add_member(:candidate_generation_config, Shapes::ShapeRef.new(shape: CandidateGenerationConfig, location_name: "CandidateGenerationConfig"))
     TimeSeriesForecastingJobConfig.struct_class = Types::TimeSeriesForecastingJobConfig
 
     TimeSeriesForecastingSettings.add_member(:status, Shapes::ShapeRef.new(shape: FeatureStatus, location_name: "Status"))
@@ -9684,6 +9714,7 @@ module Aws::SageMaker
     UpdateModelPackageInput.add_member(:additional_inference_specifications_to_add, Shapes::ShapeRef.new(shape: AdditionalInferenceSpecifications, location_name: "AdditionalInferenceSpecificationsToAdd"))
     UpdateModelPackageInput.add_member(:inference_specification, Shapes::ShapeRef.new(shape: InferenceSpecification, location_name: "InferenceSpecification"))
     UpdateModelPackageInput.add_member(:source_uri, Shapes::ShapeRef.new(shape: ModelPackageSourceUri, location_name: "SourceUri"))
+    UpdateModelPackageInput.add_member(:model_card, Shapes::ShapeRef.new(shape: ModelPackageModelCard, location_name: "ModelCard"))
     UpdateModelPackageInput.struct_class = Types::UpdateModelPackageInput
 
     UpdateModelPackageOutput.add_member(:model_package_arn, Shapes::ShapeRef.new(shape: ModelPackageArn, required: true, location_name: "ModelPackageArn"))
@@ -9957,6 +9988,7 @@ module Aws::SageMaker
 
       api.metadata = {
         "apiVersion" => "2017-07-24",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "api.sagemaker",
         "jsonVersion" => "1.1",
         "protocol" => "json",

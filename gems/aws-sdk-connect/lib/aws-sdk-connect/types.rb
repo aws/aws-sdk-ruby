@@ -161,6 +161,20 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # Information about an agent hierarchy group.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/AgentHierarchyGroup AWS API Documentation
+    #
+    class AgentHierarchyGroup < Struct.new(
+      :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A structure that defines search criteria for contacts using agent
     # hierarchy group levels. For more information about agent hierarchies,
     # see [Set Up Agent Hierarchies][1] in the *Amazon Connect Administrator
@@ -216,12 +230,42 @@ module Aws::Connect
     #   Agent pause duration for a contact in seconds.
     #   @return [Integer]
     #
+    # @!attribute [rw] hierarchy_groups
+    #   The agent hierarchy groups for the agent.
+    #   @return [Types::HierarchyGroups]
+    #
+    # @!attribute [rw] device_info
+    #   Information regarding Agent’s device.
+    #   @return [Types::DeviceInfo]
+    #
+    # @!attribute [rw] capabilities
+    #   The configuration for the allowed capabilities for participants
+    #   present over the call.
+    #   @return [Types::ParticipantCapabilities]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/AgentInfo AWS API Documentation
     #
     class AgentInfo < Struct.new(
       :id,
       :connected_to_agent_timestamp,
-      :agent_pause_duration_in_seconds)
+      :agent_pause_duration_in_seconds,
+      :hierarchy_groups,
+      :device_info,
+      :capabilities)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the quality of the Agent's media connection
+    #
+    # @!attribute [rw] audio
+    #   Information about the audio quality of the Agent
+    #   @return [Types::AudioQualityMetricsInfo]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/AgentQualityMetrics AWS API Documentation
+    #
+    class AgentQualityMetrics < Struct.new(
+      :audio)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1104,6 +1148,35 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # An object to specify the predefined attribute condition.
+    #
+    # @!attribute [rw] name
+    #   The name of predefined attribute.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of predefined attribute.
+    #   @return [String]
+    #
+    # @!attribute [rw] proficiency_level
+    #   The proficiency level of the condition.
+    #   @return [Float]
+    #
+    # @!attribute [rw] comparison_operator
+    #   The operator of the condition.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/AttributeCondition AWS API Documentation
+    #
+    class AttributeCondition < Struct.new(
+      :name,
+      :value,
+      :proficiency_level,
+      :comparison_operator)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Has audio-specific configurations as the operating parameter for Echo
     # Reduction.
     #
@@ -1116,6 +1189,30 @@ module Aws::Connect
     #
     class AudioFeatures < Struct.new(
       :echo_reduction)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information for score and potential quality issues for Audio
+    #
+    # @!attribute [rw] quality_score
+    #   Number measuring the estimated quality of the media connection.
+    #   @return [Float]
+    #
+    # @!attribute [rw] potential_quality_issues
+    #   List of potential issues causing degradation of quality on a media
+    #   connection. If the service did not detect any potential quality
+    #   issues the list is empty.
+    #
+    #   Valid values: `HighPacketLoss` \| `HighRoundTripTime` \|
+    #   `HighJitterBuffer`
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/AudioQualityMetricsInfo AWS API Documentation
+    #
+    class AudioQualityMetricsInfo < Struct.new(
+      :quality_score,
+      :potential_quality_issues)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1899,6 +1996,53 @@ module Aws::Connect
     #   Services generated and user-defined tags.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] connected_to_system_timestamp
+    #   The timestamp when customer endpoint connected to Amazon Connect.
+    #   @return [Time]
+    #
+    # @!attribute [rw] routing_criteria
+    #   Latest routing criteria on the contact.
+    #   @return [Types::RoutingCriteria]
+    #
+    # @!attribute [rw] customer
+    #   Information about the Customer on the contact.
+    #   @return [Types::Customer]
+    #
+    # @!attribute [rw] campaign
+    #   Information associated with a campaign.
+    #   @return [Types::Campaign]
+    #
+    # @!attribute [rw] answering_machine_detection_status
+    #   Indicates how an [outbound campaign][1] call is actually disposed if
+    #   the contact is connected to Amazon Connect.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/how-to-create-campaigns.html
+    #   @return [String]
+    #
+    # @!attribute [rw] customer_voice_activity
+    #   Information about customer’s voice activity.
+    #   @return [Types::CustomerVoiceActivity]
+    #
+    # @!attribute [rw] quality_metrics
+    #   Information about the quality of the participant's media
+    #   connection.
+    #   @return [Types::QualityMetrics]
+    #
+    # @!attribute [rw] disconnect_details
+    #   Information about the call disconnect experience.
+    #   @return [Types::DisconnectDetails]
+    #
+    # @!attribute [rw] segment_attributes
+    #   A set of system defined key-value pairs stored on individual contact
+    #   segments using an attribute map. The attributes are standard Amazon
+    #   Connect attributes and can be accessed in flows. Attribute keys can
+    #   include only alphanumeric, -, and \_ characters. This field can be
+    #   used to show channel subtype. For example, `connect:Guide` or
+    #   `connect:SMS`.
+    #   @return [Hash<String,Types::SegmentAttributeValue>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/Contact AWS API Documentation
     #
     class Contact < Struct.new(
@@ -1924,7 +2068,16 @@ module Aws::Connect
       :wisdom_info,
       :queue_time_adjustment_seconds,
       :queue_priority,
-      :tags)
+      :tags,
+      :connected_to_system_timestamp,
+      :routing_criteria,
+      :customer,
+      :campaign,
+      :answering_machine_detection_status,
+      :customer_voice_activity,
+      :quality_metrics,
+      :disconnect_details,
+      :segment_attributes)
       SENSITIVE = [:name, :description]
       include Aws::Structure
     end
@@ -4446,6 +4599,61 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # Information about the Customer on the contact.
+    #
+    # @!attribute [rw] device_info
+    #   Information regarding Customer’s device.
+    #   @return [Types::DeviceInfo]
+    #
+    # @!attribute [rw] capabilities
+    #   The configuration for the allowed capabilities for participants
+    #   present over the call.
+    #   @return [Types::ParticipantCapabilities]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/Customer AWS API Documentation
+    #
+    class Customer < Struct.new(
+      :device_info,
+      :capabilities)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the quality of the Customer's media connection
+    #
+    # @!attribute [rw] audio
+    #   Information about the audio quality of the Customer
+    #   @return [Types::AudioQualityMetricsInfo]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CustomerQualityMetrics AWS API Documentation
+    #
+    class CustomerQualityMetrics < Struct.new(
+      :audio)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about customer’s voice activity.
+    #
+    # @!attribute [rw] greeting_start_timestamp
+    #   Timestamp that measures the beginning of the customer greeting from
+    #   an outbound voice call.
+    #   @return [Time]
+    #
+    # @!attribute [rw] greeting_end_timestamp
+    #   Timestamp that measures the end of the customer greeting from an
+    #   outbound voice call.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CustomerVoiceActivity AWS API Documentation
+    #
+    class CustomerVoiceActivity < Struct.new(
+      :greeting_start_timestamp,
+      :greeting_end_timestamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about a reference when the `referenceType` is `DATE`.
     # Otherwise, null.
     #
@@ -5928,6 +6136,30 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # Information regarding the device.
+    #
+    # @!attribute [rw] platform_name
+    #   Name of the platform that the participant used for the call.
+    #   @return [String]
+    #
+    # @!attribute [rw] platform_version
+    #   Version of the platform that the participant used for the call.
+    #   @return [String]
+    #
+    # @!attribute [rw] operating_system
+    #   Operating system that the participant used for the call.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DeviceInfo AWS API Documentation
+    #
+    class DeviceInfo < Struct.new(
+      :platform_name,
+      :platform_version,
+      :operating_system)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains information about the dimensions for a set of metrics.
     #
     # @!attribute [rw] queue
@@ -6299,6 +6531,21 @@ module Aws::Connect
       :instance_id,
       :user_id,
       :user_proficiencies)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the call disconnect experience.
+    #
+    # @!attribute [rw] potential_disconnect_issue
+    #   Indicates the potential disconnection issues for a call. This field
+    #   is not populated if the service does not detect potential issues.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DisconnectDetails AWS API Documentation
+    #
+    class DisconnectDetails < Struct.new(
+      :potential_disconnect_issue)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7386,6 +7633,49 @@ module Aws::Connect
     #
     class EventBridgeActionDefinition < Struct.new(
       :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object to specify the expiration of a routing step.
+    #
+    # @!attribute [rw] duration_in_seconds
+    #   The number of seconds to wait before expiring the routing step.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] expiry_timestamp
+    #   The timestamp indicating when the routing step expires.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/Expiry AWS API Documentation
+    #
+    class Expiry < Struct.new(
+      :duration_in_seconds,
+      :expiry_timestamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A tagged union to specify expression for a routing step.
+    #
+    # @!attribute [rw] attribute_condition
+    #   An object to specify the predefined attribute condition.
+    #   @return [Types::AttributeCondition]
+    #
+    # @!attribute [rw] and_expression
+    #   List of routing expressions which will be AND-ed together.
+    #   @return [Array<Types::Expression>]
+    #
+    # @!attribute [rw] or_expression
+    #   List of routing expressions which will be OR-ed together.
+    #   @return [Array<Types::Expression>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/Expression AWS API Documentation
+    #
+    class Expression < Struct.new(
+      :attribute_condition,
+      :and_expression,
+      :or_expression)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9971,6 +10261,41 @@ module Aws::Connect
     class HierarchyGroupSummaryReference < Struct.new(
       :id,
       :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the agent hierarchy. Hierarchies can be configured
+    # with up to five levels.
+    #
+    # @!attribute [rw] level_1
+    #   The group at level one of the agent hierarchy.
+    #   @return [Types::AgentHierarchyGroup]
+    #
+    # @!attribute [rw] level_2
+    #   The group at level two of the agent hierarchy.
+    #   @return [Types::AgentHierarchyGroup]
+    #
+    # @!attribute [rw] level_3
+    #   The group at level three of the agent hierarchy.
+    #   @return [Types::AgentHierarchyGroup]
+    #
+    # @!attribute [rw] level_4
+    #   The group at level four of the agent hierarchy.
+    #   @return [Types::AgentHierarchyGroup]
+    #
+    # @!attribute [rw] level_5
+    #   The group at level five of the agent hierarchy.
+    #   @return [Types::AgentHierarchyGroup]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/HierarchyGroups AWS API Documentation
+    #
+    class HierarchyGroups < Struct.new(
+      :level_1,
+      :level_2,
+      :level_3,
+      :level_4,
+      :level_5)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14589,6 +14914,25 @@ module Aws::Connect
     #
     class PutUserStatusResponse < Aws::EmptyStructure; end
 
+    # Information about the quality of the participant's media connection.
+    #
+    # @!attribute [rw] agent
+    #   Information about the quality of Agent media connection.
+    #   @return [Types::AgentQualityMetrics]
+    #
+    # @!attribute [rw] customer
+    #   Information about the quality of Customer media connection.
+    #   @return [Types::CustomerQualityMetrics]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/QualityMetrics AWS API Documentation
+    #
+    class QualityMetrics < Struct.new(
+      :agent,
+      :customer)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains information about a queue.
     #
     # @!attribute [rw] name
@@ -15755,6 +16099,39 @@ module Aws::Connect
     #
     class ResumeContactResponse < Aws::EmptyStructure; end
 
+    # Latest routing criteria on the contact.
+    #
+    # @!attribute [rw] steps
+    #   List of routing steps. When Amazon Connect does not find an
+    #   available agent meeting the requirements in a step for a given step
+    #   duration, the routing criteria will move on to the next step
+    #   sequentially until a join is completed with an agent. When all steps
+    #   are exhausted, the contact will be offered to any agent in the
+    #   queue.
+    #   @return [Array<Types::Step>]
+    #
+    # @!attribute [rw] activation_timestamp
+    #   The timestamp indicating when the routing criteria is set to active.
+    #   A routing criteria is activated when contact is transferred to a
+    #   queue. ActivationTimestamp will be set on routing criteria for
+    #   contacts in agent queue even though Routing criteria is never
+    #   activated for contacts in agent queue.
+    #   @return [Time]
+    #
+    # @!attribute [rw] index
+    #   Information about the index of the routing criteria.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/RoutingCriteria AWS API Documentation
+    #
+    class RoutingCriteria < Struct.new(
+      :steps,
+      :activation_timestamp,
+      :index)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains information about a routing profile.
     #
     # @!attribute [rw] instance_id
@@ -15825,6 +16202,10 @@ module Aws::Connect
     #   Whether this a default routing profile.
     #   @return [Boolean]
     #
+    # @!attribute [rw] associated_queue_ids
+    #   The IDs of the associated queue.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/RoutingProfile AWS API Documentation
     #
     class RoutingProfile < Struct.new(
@@ -15841,7 +16222,8 @@ module Aws::Connect
       :agent_availability_timer,
       :last_modified_time,
       :last_modified_region,
-      :is_default)
+      :is_default,
+      :associated_queue_ids)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -15995,8 +16377,8 @@ module Aws::Connect
     #   A leaf node condition which can be used to specify a string
     #   condition.
     #
-    #   <note markdown="1"> The currently supported values for `FieldName` are `name`,
-    #   `description`, and `resourceID`.
+    #   <note markdown="1"> The currently supported values for `FieldName` are
+    #   `associatedQueueIds`, `name`, `description`, and `resourceID`.
     #
     #    </note>
     #   @return [Types::StringCondition]
@@ -18661,6 +19043,30 @@ module Aws::Connect
       :contact_id,
       :participant_id,
       :participant_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Step signifies the criteria to be used for routing to an agent
+    #
+    # @!attribute [rw] expiry
+    #   An object to specify the expiration of a routing step.
+    #   @return [Types::Expiry]
+    #
+    # @!attribute [rw] expression
+    #   A tagged union to specify expression for a routing step.
+    #   @return [Types::Expression]
+    #
+    # @!attribute [rw] status
+    #   Represents status of the Routing step.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/Step AWS API Documentation
+    #
+    class Step < Struct.new(
+      :expiry,
+      :expression,
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end

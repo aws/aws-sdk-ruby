@@ -102,7 +102,7 @@ module Aws::IAM
     #
     # @return [self]
     def load
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.get_instance_profile(instance_profile_name: @name)
       end
       @data = resp.instance_profile
@@ -149,7 +149,7 @@ module Aws::IAM
       options, params = separate_params_and_options(options)
       waiter = Waiters::InstanceProfileExists.new(options)
       yield_waiter_and_warn(waiter, &block) if block_given?
-      Aws::Plugins::UserAgent.feature('resource') do
+      Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         waiter.wait(params.merge(instance_profile_name: @name))
       end
       InstanceProfile.new({
@@ -252,7 +252,7 @@ module Aws::IAM
           :retry
         end
       end
-      Aws::Plugins::UserAgent.feature('resource') do
+      Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         Aws::Waiters::Waiter.new(options).wait({})
       end
     end
@@ -279,7 +279,7 @@ module Aws::IAM
     # @return [EmptyStructure]
     def add_role(options = {})
       options = options.merge(instance_profile_name: @name)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.add_role_to_instance_profile(options)
       end
       resp.data
@@ -292,7 +292,7 @@ module Aws::IAM
     # @return [EmptyStructure]
     def delete(options = {})
       options = options.merge(instance_profile_name: @name)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.delete_instance_profile(options)
       end
       resp.data
@@ -318,7 +318,7 @@ module Aws::IAM
     # @return [EmptyStructure]
     def remove_role(options = {})
       options = options.merge(instance_profile_name: @name)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.remove_role_from_instance_profile(options)
       end
       resp.data

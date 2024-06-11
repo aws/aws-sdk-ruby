@@ -424,6 +424,639 @@ module Aws::BedrockRuntime
 
     # @!group API Operations
 
+    # Sends messages to the specified Amazon Bedrock model. `Converse`
+    # provides a consistent interface that works with all models that
+    # support messages. This allows you to write code once and use it with
+    # different models. Should a model have unique inference parameters, you
+    # can also pass those unique parameters to the model. For more
+    # information, see [Run inference][1] in the Bedrock User Guide.
+    #
+    # This operation requires permission for the `bedrock:InvokeModel`
+    # action.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/api-methods-run.html
+    #
+    # @option params [required, String] :model_id
+    #   The identifier for the model that you want to call.
+    #
+    #   The `modelId` to provide depends on the type of model that you use:
+    #
+    #   * If you use a base model, specify the model ID or its ARN. For a list
+    #     of model IDs for base models, see [Amazon Bedrock base model IDs
+    #     (on-demand throughput)][1] in the Amazon Bedrock User Guide.
+    #
+    #   * If you use a provisioned model, specify the ARN of the Provisioned
+    #     Throughput. For more information, see [Run inference using a
+    #     Provisioned Throughput][2] in the Amazon Bedrock User Guide.
+    #
+    #   * If you use a custom model, first purchase Provisioned Throughput for
+    #     it. Then specify the ARN of the resulting provisioned model. For
+    #     more information, see [Use a custom model in Amazon Bedrock][3] in
+    #     the Amazon Bedrock User Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-ids.html#model-ids-arns
+    #   [2]: https://docs.aws.amazon.com/bedrock/latest/userguide/prov-thru-use.html
+    #   [3]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-use.html
+    #
+    # @option params [required, Array<Types::Message>] :messages
+    #   The messages that you want to send to the model.
+    #
+    # @option params [Array<Types::SystemContentBlock>] :system
+    #   A system prompt to pass to the model.
+    #
+    # @option params [Types::InferenceConfiguration] :inference_config
+    #   Inference parameters to pass to the model. `Converse` supports a base
+    #   set of inference parameters. If you need to pass additional parameters
+    #   that the model supports, use the `additionalModelRequestFields`
+    #   request field.
+    #
+    # @option params [Types::ToolConfiguration] :tool_config
+    #   Configuration information for the tools that the model can use when
+    #   generating a response.
+    #
+    #   <note markdown="1"> This field is only supported by Anthropic Claude 3, Cohere Command R,
+    #   Cohere Command R+, and Mistral Large models.
+    #
+    #    </note>
+    #
+    # @option params [Hash,Array,String,Numeric,Boolean] :additional_model_request_fields
+    #   Additional inference parameters that the model supports, beyond the
+    #   base set of inference parameters that `Converse` supports in the
+    #   `inferenceConfig` field. For more information, see [Model
+    #   parameters][1].
+    #
+    #   Document type used to carry open content
+    #   (Hash,Array,String,Numeric,Boolean). A document type value is
+    #   serialized using the same format as its surroundings and requires no
+    #   additional encoding or escaping.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html
+    #
+    # @option params [Array<String>] :additional_model_response_field_paths
+    #   Additional model parameters field paths to return in the response.
+    #   `Converse` returns the requested fields as a JSON Pointer object in
+    #   the `additionalModelResultFields` field. The following is example JSON
+    #   for `additionalModelResponseFieldPaths`.
+    #
+    #   `[ "/stop_sequence" ]`
+    #
+    #   For information about the JSON Pointer syntax, see the [Internet
+    #   Engineering Task Force (IETF)][1] documentation.
+    #
+    #   `Converse` rejects an empty JSON Pointer or incorrectly structured
+    #   JSON Pointer with a `400` error code. if the JSON Pointer is valid,
+    #   but the requested field is not in the model response, it is ignored by
+    #   `Converse`.
+    #
+    #
+    #
+    #   [1]: https://datatracker.ietf.org/doc/html/rfc6901
+    #
+    # @return [Types::ConverseResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ConverseResponse#output #output} => Types::ConverseOutput
+    #   * {Types::ConverseResponse#stop_reason #stop_reason} => String
+    #   * {Types::ConverseResponse#usage #usage} => Types::TokenUsage
+    #   * {Types::ConverseResponse#metrics #metrics} => Types::ConverseMetrics
+    #   * {Types::ConverseResponse#additional_model_response_fields #additional_model_response_fields} => Hash,Array,String,Numeric,Boolean
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.converse({
+    #     model_id: "ConversationalModelId", # required
+    #     messages: [ # required
+    #       {
+    #         role: "user", # required, accepts user, assistant
+    #         content: [ # required
+    #           {
+    #             text: "String",
+    #             image: {
+    #               format: "png", # required, accepts png, jpeg, gif, webp
+    #               source: { # required
+    #                 bytes: "data",
+    #               },
+    #             },
+    #             tool_use: {
+    #               tool_use_id: "ToolUseId", # required
+    #               name: "ToolName", # required
+    #               input: { # required
+    #               },
+    #             },
+    #             tool_result: {
+    #               tool_use_id: "ToolUseId", # required
+    #               content: [ # required
+    #                 {
+    #                   json: {
+    #                   },
+    #                   text: "String",
+    #                   image: {
+    #                     format: "png", # required, accepts png, jpeg, gif, webp
+    #                     source: { # required
+    #                       bytes: "data",
+    #                     },
+    #                   },
+    #                 },
+    #               ],
+    #               status: "success", # accepts success, error
+    #             },
+    #           },
+    #         ],
+    #       },
+    #     ],
+    #     system: [
+    #       {
+    #         text: "NonEmptyString",
+    #       },
+    #     ],
+    #     inference_config: {
+    #       max_tokens: 1,
+    #       temperature: 1.0,
+    #       top_p: 1.0,
+    #       stop_sequences: ["NonEmptyString"],
+    #     },
+    #     tool_config: {
+    #       tools: [ # required
+    #         {
+    #           tool_spec: {
+    #             name: "ToolName", # required
+    #             description: "NonEmptyString",
+    #             input_schema: { # required
+    #               json: {
+    #               },
+    #             },
+    #           },
+    #         },
+    #       ],
+    #       tool_choice: {
+    #         auto: {
+    #         },
+    #         any: {
+    #         },
+    #         tool: {
+    #           name: "ToolName", # required
+    #         },
+    #       },
+    #     },
+    #     additional_model_request_fields: {
+    #     },
+    #     additional_model_response_field_paths: ["ConverseRequestAdditionalModelResponseFieldPathsListMemberString"],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.output.message.role #=> String, one of "user", "assistant"
+    #   resp.output.message.content #=> Array
+    #   resp.output.message.content[0].text #=> String
+    #   resp.output.message.content[0].image.format #=> String, one of "png", "jpeg", "gif", "webp"
+    #   resp.output.message.content[0].image.source.bytes #=> String
+    #   resp.output.message.content[0].tool_use.tool_use_id #=> String
+    #   resp.output.message.content[0].tool_use.name #=> String
+    #   resp.output.message.content[0].tool_result.tool_use_id #=> String
+    #   resp.output.message.content[0].tool_result.content #=> Array
+    #   resp.output.message.content[0].tool_result.content[0].text #=> String
+    #   resp.output.message.content[0].tool_result.content[0].image.format #=> String, one of "png", "jpeg", "gif", "webp"
+    #   resp.output.message.content[0].tool_result.content[0].image.source.bytes #=> String
+    #   resp.output.message.content[0].tool_result.status #=> String, one of "success", "error"
+    #   resp.stop_reason #=> String, one of "end_turn", "tool_use", "max_tokens", "stop_sequence", "content_filtered"
+    #   resp.usage.input_tokens #=> Integer
+    #   resp.usage.output_tokens #=> Integer
+    #   resp.usage.total_tokens #=> Integer
+    #   resp.metrics.latency_ms #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/Converse AWS API Documentation
+    #
+    # @overload converse(params = {})
+    # @param [Hash] params ({})
+    def converse(params = {}, options = {})
+      req = build_request(:converse, params)
+      req.send_request(options)
+    end
+
+    # Sends messages to the specified Amazon Bedrock model and returns the
+    # response in a stream. `ConverseStream` provides a consistent API that
+    # works with all Amazon Bedrock models that support messages. This
+    # allows you to write code once and use it with different models. Should
+    # a model have unique inference parameters, you can also pass those
+    # unique parameters to the model. For more information, see [Run
+    # inference][1] in the Bedrock User Guide.
+    #
+    # To find out if a model supports streaming, call
+    # [GetFoundationModel][2] and check the `responseStreamingSupported`
+    # field in the response.
+    #
+    # For example code, see *Invoke model with streaming code example* in
+    # the *Amazon Bedrock User Guide*.
+    #
+    # This operation requires permission for the
+    # `bedrock:InvokeModelWithResponseStream` action.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/api-methods-run.html
+    # [2]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_GetFoundationModel.html
+    #
+    # @option params [required, String] :model_id
+    #   The ID for the model.
+    #
+    #   The `modelId` to provide depends on the type of model that you use:
+    #
+    #   * If you use a base model, specify the model ID or its ARN. For a list
+    #     of model IDs for base models, see [Amazon Bedrock base model IDs
+    #     (on-demand throughput)][1] in the Amazon Bedrock User Guide.
+    #
+    #   * If you use a provisioned model, specify the ARN of the Provisioned
+    #     Throughput. For more information, see [Run inference using a
+    #     Provisioned Throughput][2] in the Amazon Bedrock User Guide.
+    #
+    #   * If you use a custom model, first purchase Provisioned Throughput for
+    #     it. Then specify the ARN of the resulting provisioned model. For
+    #     more information, see [Use a custom model in Amazon Bedrock][3] in
+    #     the Amazon Bedrock User Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-ids.html#model-ids-arns
+    #   [2]: https://docs.aws.amazon.com/bedrock/latest/userguide/prov-thru-use.html
+    #   [3]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-use.html
+    #
+    # @option params [required, Array<Types::Message>] :messages
+    #   The messages that you want to send to the model.
+    #
+    # @option params [Array<Types::SystemContentBlock>] :system
+    #   A system prompt to send to the model.
+    #
+    # @option params [Types::InferenceConfiguration] :inference_config
+    #   Inference parameters to pass to the model. `ConverseStream` supports a
+    #   base set of inference parameters. If you need to pass additional
+    #   parameters that the model supports, use the
+    #   `additionalModelRequestFields` request field.
+    #
+    # @option params [Types::ToolConfiguration] :tool_config
+    #   Configuration information for the tools that the model can use when
+    #   generating a response.
+    #
+    #   <note markdown="1"> This field is only supported by Anthropic Claude 3 models.
+    #
+    #    </note>
+    #
+    # @option params [Hash,Array,String,Numeric,Boolean] :additional_model_request_fields
+    #   Additional inference parameters that the model supports, beyond the
+    #   base set of inference parameters that `ConverseStream` supports in the
+    #   `inferenceConfig` field.
+    #
+    #   Document type used to carry open content
+    #   (Hash,Array,String,Numeric,Boolean). A document type value is
+    #   serialized using the same format as its surroundings and requires no
+    #   additional encoding or escaping.
+    #
+    # @option params [Array<String>] :additional_model_response_field_paths
+    #   Additional model parameters field paths to return in the response.
+    #   `ConverseStream` returns the requested fields as a JSON Pointer object
+    #   in the `additionalModelResultFields` field. The following is example
+    #   JSON for `additionalModelResponseFieldPaths`.
+    #
+    #   `[ "/stop_sequence" ]`
+    #
+    #   For information about the JSON Pointer syntax, see the [Internet
+    #   Engineering Task Force (IETF)][1] documentation.
+    #
+    #   `ConverseStream` rejects an empty JSON Pointer or incorrectly
+    #   structured JSON Pointer with a `400` error code. if the JSON Pointer
+    #   is valid, but the requested field is not in the model response, it is
+    #   ignored by `ConverseStream`.
+    #
+    #
+    #
+    #   [1]: https://datatracker.ietf.org/doc/html/rfc6901
+    #
+    # @return [Types::ConverseStreamResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ConverseStreamResponse#stream #stream} => Types::ConverseStreamOutput
+    #
+    # @example EventStream Operation Example
+    #
+    #   You can process the event once it arrives immediately, or wait until the
+    #   full response is complete and iterate through the eventstream enumerator.
+    #
+    #   To interact with event immediately, you need to register #converse_stream
+    #   with callbacks. Callbacks can be registered for specific events or for all
+    #   events, including error events.
+    #
+    #   Callbacks can be passed into the `:event_stream_handler` option or within a
+    #   block statement attached to the #converse_stream call directly. Hybrid
+    #   pattern of both is also supported.
+    #
+    #   `:event_stream_handler` option takes in either a Proc object or
+    #   Aws::BedrockRuntime::EventStreams::ConverseStreamOutput object.
+    #
+    #   Usage pattern a): Callbacks with a block attached to #converse_stream
+    #     Example for registering callbacks for all event types and an error event
+    #
+    #     client.converse_stream( # params input# ) do |stream|
+    #       stream.on_error_event do |event|
+    #         # catch unmodeled error event in the stream
+    #         raise event
+    #         # => Aws::Errors::EventError
+    #         # event.event_type => :error
+    #         # event.error_code => String
+    #         # event.error_message => String
+    #       end
+    #
+    #       stream.on_event do |event|
+    #         # process all events arrive
+    #         puts event.event_type
+    #         ...
+    #       end
+    #
+    #     end
+    #
+    #   Usage pattern b): Pass in `:event_stream_handler` for #converse_stream
+    #
+    #     1) Create a Aws::BedrockRuntime::EventStreams::ConverseStreamOutput object
+    #     Example for registering callbacks with specific events
+    #
+    #       handler = Aws::BedrockRuntime::EventStreams::ConverseStreamOutput.new
+    #       handler.on_message_start_event do |event|
+    #         event # => Aws::BedrockRuntime::Types::messageStart
+    #       end
+    #       handler.on_content_block_start_event do |event|
+    #         event # => Aws::BedrockRuntime::Types::contentBlockStart
+    #       end
+    #       handler.on_content_block_delta_event do |event|
+    #         event # => Aws::BedrockRuntime::Types::contentBlockDelta
+    #       end
+    #       handler.on_content_block_stop_event do |event|
+    #         event # => Aws::BedrockRuntime::Types::contentBlockStop
+    #       end
+    #       handler.on_message_stop_event do |event|
+    #         event # => Aws::BedrockRuntime::Types::messageStop
+    #       end
+    #       handler.on_metadata_event do |event|
+    #         event # => Aws::BedrockRuntime::Types::metadata
+    #       end
+    #       handler.on_internal_server_exception_event do |event|
+    #         event # => Aws::BedrockRuntime::Types::internalServerException
+    #       end
+    #       handler.on_model_stream_error_exception_event do |event|
+    #         event # => Aws::BedrockRuntime::Types::modelStreamErrorException
+    #       end
+    #       handler.on_validation_exception_event do |event|
+    #         event # => Aws::BedrockRuntime::Types::validationException
+    #       end
+    #       handler.on_throttling_exception_event do |event|
+    #         event # => Aws::BedrockRuntime::Types::throttlingException
+    #       end
+    #
+    #     client.converse_stream( # params input #, event_stream_handler: handler)
+    #
+    #     2) Use a Ruby Proc object
+    #     Example for registering callbacks with specific events
+    #
+    #     handler = Proc.new do |stream|
+    #       stream.on_message_start_event do |event|
+    #         event # => Aws::BedrockRuntime::Types::messageStart
+    #       end
+    #       stream.on_content_block_start_event do |event|
+    #         event # => Aws::BedrockRuntime::Types::contentBlockStart
+    #       end
+    #       stream.on_content_block_delta_event do |event|
+    #         event # => Aws::BedrockRuntime::Types::contentBlockDelta
+    #       end
+    #       stream.on_content_block_stop_event do |event|
+    #         event # => Aws::BedrockRuntime::Types::contentBlockStop
+    #       end
+    #       stream.on_message_stop_event do |event|
+    #         event # => Aws::BedrockRuntime::Types::messageStop
+    #       end
+    #       stream.on_metadata_event do |event|
+    #         event # => Aws::BedrockRuntime::Types::metadata
+    #       end
+    #       stream.on_internal_server_exception_event do |event|
+    #         event # => Aws::BedrockRuntime::Types::internalServerException
+    #       end
+    #       stream.on_model_stream_error_exception_event do |event|
+    #         event # => Aws::BedrockRuntime::Types::modelStreamErrorException
+    #       end
+    #       stream.on_validation_exception_event do |event|
+    #         event # => Aws::BedrockRuntime::Types::validationException
+    #       end
+    #       stream.on_throttling_exception_event do |event|
+    #         event # => Aws::BedrockRuntime::Types::throttlingException
+    #       end
+    #     end
+    #
+    #     client.converse_stream( # params input #, event_stream_handler: handler)
+    #
+    #   Usage pattern c): Hybrid pattern of a) and b)
+    #
+    #       handler = Aws::BedrockRuntime::EventStreams::ConverseStreamOutput.new
+    #       handler.on_message_start_event do |event|
+    #         event # => Aws::BedrockRuntime::Types::messageStart
+    #       end
+    #       handler.on_content_block_start_event do |event|
+    #         event # => Aws::BedrockRuntime::Types::contentBlockStart
+    #       end
+    #       handler.on_content_block_delta_event do |event|
+    #         event # => Aws::BedrockRuntime::Types::contentBlockDelta
+    #       end
+    #       handler.on_content_block_stop_event do |event|
+    #         event # => Aws::BedrockRuntime::Types::contentBlockStop
+    #       end
+    #       handler.on_message_stop_event do |event|
+    #         event # => Aws::BedrockRuntime::Types::messageStop
+    #       end
+    #       handler.on_metadata_event do |event|
+    #         event # => Aws::BedrockRuntime::Types::metadata
+    #       end
+    #       handler.on_internal_server_exception_event do |event|
+    #         event # => Aws::BedrockRuntime::Types::internalServerException
+    #       end
+    #       handler.on_model_stream_error_exception_event do |event|
+    #         event # => Aws::BedrockRuntime::Types::modelStreamErrorException
+    #       end
+    #       handler.on_validation_exception_event do |event|
+    #         event # => Aws::BedrockRuntime::Types::validationException
+    #       end
+    #       handler.on_throttling_exception_event do |event|
+    #         event # => Aws::BedrockRuntime::Types::throttlingException
+    #       end
+    #
+    #     client.converse_stream( # params input #, event_stream_handler: handler) do |stream|
+    #       stream.on_error_event do |event|
+    #         # catch unmodeled error event in the stream
+    #         raise event
+    #         # => Aws::Errors::EventError
+    #         # event.event_type => :error
+    #         # event.error_code => String
+    #         # event.error_message => String
+    #       end
+    #     end
+    #
+    #   You can also iterate through events after the response complete.
+    #
+    #   Events are available at resp.stream # => Enumerator
+    #   For parameter input example, please refer to following request syntax
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.converse_stream({
+    #     model_id: "ConversationalModelId", # required
+    #     messages: [ # required
+    #       {
+    #         role: "user", # required, accepts user, assistant
+    #         content: [ # required
+    #           {
+    #             text: "String",
+    #             image: {
+    #               format: "png", # required, accepts png, jpeg, gif, webp
+    #               source: { # required
+    #                 bytes: "data",
+    #               },
+    #             },
+    #             tool_use: {
+    #               tool_use_id: "ToolUseId", # required
+    #               name: "ToolName", # required
+    #               input: { # required
+    #               },
+    #             },
+    #             tool_result: {
+    #               tool_use_id: "ToolUseId", # required
+    #               content: [ # required
+    #                 {
+    #                   json: {
+    #                   },
+    #                   text: "String",
+    #                   image: {
+    #                     format: "png", # required, accepts png, jpeg, gif, webp
+    #                     source: { # required
+    #                       bytes: "data",
+    #                     },
+    #                   },
+    #                 },
+    #               ],
+    #               status: "success", # accepts success, error
+    #             },
+    #           },
+    #         ],
+    #       },
+    #     ],
+    #     system: [
+    #       {
+    #         text: "NonEmptyString",
+    #       },
+    #     ],
+    #     inference_config: {
+    #       max_tokens: 1,
+    #       temperature: 1.0,
+    #       top_p: 1.0,
+    #       stop_sequences: ["NonEmptyString"],
+    #     },
+    #     tool_config: {
+    #       tools: [ # required
+    #         {
+    #           tool_spec: {
+    #             name: "ToolName", # required
+    #             description: "NonEmptyString",
+    #             input_schema: { # required
+    #               json: {
+    #               },
+    #             },
+    #           },
+    #         },
+    #       ],
+    #       tool_choice: {
+    #         auto: {
+    #         },
+    #         any: {
+    #         },
+    #         tool: {
+    #           name: "ToolName", # required
+    #         },
+    #       },
+    #     },
+    #     additional_model_request_fields: {
+    #     },
+    #     additional_model_response_field_paths: ["ConverseStreamRequestAdditionalModelResponseFieldPathsListMemberString"],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   All events are available at resp.stream:
+    #   resp.stream #=> Enumerator
+    #   resp.stream.event_types #=> [:message_start, :content_block_start, :content_block_delta, :content_block_stop, :message_stop, :metadata, :internal_server_exception, :model_stream_error_exception, :validation_exception, :throttling_exception]
+    #
+    #   For :message_start event available at #on_message_start_event callback and response eventstream enumerator:
+    #   event.role #=> String, one of "user", "assistant"
+    #
+    #   For :content_block_start event available at #on_content_block_start_event callback and response eventstream enumerator:
+    #   event.start.tool_use.tool_use_id #=> String
+    #   event.start.tool_use.name #=> String
+    #   event.content_block_index #=> Integer
+    #
+    #   For :content_block_delta event available at #on_content_block_delta_event callback and response eventstream enumerator:
+    #   event.delta.text #=> String
+    #   event.delta.tool_use.input #=> String
+    #   event.content_block_index #=> Integer
+    #
+    #   For :content_block_stop event available at #on_content_block_stop_event callback and response eventstream enumerator:
+    #   event.content_block_index #=> Integer
+    #
+    #   For :message_stop event available at #on_message_stop_event callback and response eventstream enumerator:
+    #   event.stop_reason #=> String, one of "end_turn", "tool_use", "max_tokens", "stop_sequence", "content_filtered"
+    #
+    #   For :metadata event available at #on_metadata_event callback and response eventstream enumerator:
+    #   event.usage.input_tokens #=> Integer
+    #   event.usage.output_tokens #=> Integer
+    #   event.usage.total_tokens #=> Integer
+    #   event.metrics.latency_ms #=> Integer
+    #
+    #   For :internal_server_exception event available at #on_internal_server_exception_event callback and response eventstream enumerator:
+    #   event.message #=> String
+    #
+    #   For :model_stream_error_exception event available at #on_model_stream_error_exception_event callback and response eventstream enumerator:
+    #   event.message #=> String
+    #   event.original_status_code #=> Integer
+    #   event.original_message #=> String
+    #
+    #   For :validation_exception event available at #on_validation_exception_event callback and response eventstream enumerator:
+    #   event.message #=> String
+    #
+    #   For :throttling_exception event available at #on_throttling_exception_event callback and response eventstream enumerator:
+    #   event.message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/ConverseStream AWS API Documentation
+    #
+    # @overload converse_stream(params = {})
+    # @param [Hash] params ({})
+    def converse_stream(params = {}, options = {}, &block)
+      params = params.dup
+      event_stream_handler = case handler = params.delete(:event_stream_handler)
+        when EventStreams::ConverseStreamOutput then handler
+        when Proc then EventStreams::ConverseStreamOutput.new.tap(&handler)
+        when nil then EventStreams::ConverseStreamOutput.new
+        else
+          msg = "expected :event_stream_handler to be a block or "\
+                "instance of Aws::BedrockRuntime::EventStreams::ConverseStreamOutput"\
+                ", got `#{handler.inspect}` instead"
+          raise ArgumentError, msg
+        end
+
+      yield(event_stream_handler) if block_given?
+
+      req = build_request(:converse_stream, params)
+
+      req.context[:event_stream_handler] = event_stream_handler
+      req.handlers.add(Aws::Binary::DecodeHandler, priority: 95)
+
+      req.send_request(options, &block)
+    end
+
     # Invokes the specified Amazon Bedrock model to run inference using the
     # prompt and inference parameters provided in the request body. You use
     # model inference to generate text, images, and embeddings.
@@ -831,7 +1464,7 @@ module Aws::BedrockRuntime
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-bedrockruntime'
-      context[:gem_version] = '1.8.0'
+      context[:gem_version] = '1.10.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

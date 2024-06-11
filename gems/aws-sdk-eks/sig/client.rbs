@@ -161,7 +161,13 @@ module Aws
                           ?resolve_conflicts: ("OVERWRITE" | "NONE" | "PRESERVE"),
                           ?client_request_token: ::String,
                           ?tags: Hash[::String, ::String],
-                          ?configuration_values: ::String
+                          ?configuration_values: ::String,
+                          ?pod_identity_associations: Array[
+                            {
+                              service_account: ::String,
+                              role_arn: ::String
+                            },
+                          ]
                         ) -> _CreateAddonResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAddonResponseSuccess
 
@@ -431,6 +437,7 @@ module Aws
         def addon_name: () -> ::String
         def addon_version: () -> ::String
         def configuration_schema: () -> ::String
+        def pod_identity_configuration: () -> ::Array[Types::AddonPodIdentityConfiguration]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EKS/Client.html#describe_addon_configuration-instance_method
       def describe_addon_configuration: (
@@ -813,7 +820,13 @@ module Aws
                           ?service_account_role_arn: ::String,
                           ?resolve_conflicts: ("OVERWRITE" | "NONE" | "PRESERVE"),
                           ?client_request_token: ::String,
-                          ?configuration_values: ::String
+                          ?configuration_values: ::String,
+                          ?pod_identity_associations: Array[
+                            {
+                              service_account: ::String,
+                              role_arn: ::String
+                            },
+                          ]
                         ) -> _UpdateAddonResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAddonResponseSuccess
 

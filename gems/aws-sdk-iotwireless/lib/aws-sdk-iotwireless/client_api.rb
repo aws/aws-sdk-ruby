@@ -2475,6 +2475,7 @@ module Aws::IoTWireless
         "apiVersion" => "2020-11-22",
         "endpointPrefix" => "api.iotwireless",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceFullName" => "AWS IoT Wireless",
         "serviceId" => "IoT Wireless",
         "signatureVersion" => "v4",

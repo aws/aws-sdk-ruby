@@ -2098,9 +2098,9 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] database_name
-    #   The name for your database of up to 64 alphanumeric characters. If
-    #   you don't provide a name, Amazon RDS doesn't create a database in
-    #   the DB cluster you are creating.
+    #   The name for your database of up to 64 alphanumeric characters. A
+    #   database named `postgres` is always created. If this parameter is
+    #   specified, an additional database with this name is created.
     #
     #   Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
     #   @return [String]
@@ -3283,9 +3283,9 @@ module Aws::RDS
     #   Amazon Aurora PostgreSQL
     #
     #   : The name of the database to create when the primary DB instance of
-    #     the Aurora PostgreSQL DB cluster is created. If this parameter
-    #     isn't specified for an Aurora PostgreSQL DB cluster, a database
-    #     named `postgres` is created in the DB cluster.
+    #     the Aurora PostgreSQL DB cluster is created. A database named
+    #     `postgres` is always created. If this parameter is specified, an
+    #     additional database with this name is created.
     #
     #     Constraints:
     #
@@ -3381,8 +3381,9 @@ module Aws::RDS
     #   RDS for PostgreSQL
     #
     #   : The name of the database to create when the DB instance is
-    #     created. If this parameter isn't specified, a database named
-    #     `postgres` is created in the DB instance.
+    #     created. A database named `postgres` is always created. If this
+    #     parameter is specified, an additional database with this name is
+    #     created.
     #
     #     Constraints:
     #
@@ -24971,8 +24972,15 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] s3_ingestion_role_arn
-    #   An Amazon Web Services Identity and Access Management (IAM) role to
-    #   allow Amazon RDS to access your Amazon S3 bucket.
+    #   An Amazon Web Services Identity and Access Management (IAM) role
+    #   with a trust policy and a permissions policy that allows Amazon RDS
+    #   to access your Amazon S3 bucket. For information about this role,
+    #   see [ Creating an IAM role manually][1] in the *Amazon RDS User
+    #   Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/MySQL.Procedural.Importing.html#MySQL.Procedural.Importing.Enabling.IAM
     #   @return [String]
     #
     # @!attribute [rw] enable_performance_insights
@@ -27229,11 +27237,13 @@ module Aws::RDS
     # pair.
     #
     # For more information, see [Tagging Amazon RDS Resources][1] in the
-    # *Amazon RDS User Guide.*
+    # *Amazon RDS User Guide* or [Tagging Amazon Aurora and Amazon RDS
+    # Resources][2] in the *Amazon Aurora User Guide*.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+    # [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html
     #
     # @!attribute [rw] key
     #   A key is the required name of the tag. The string value can be from

@@ -1552,12 +1552,12 @@ module Aws::DynamoDB
     # includes the total provisioned throughput consumed, along with
     # statistics for the table and any indexes involved in the operation.
     # `ConsumedCapacity` is only returned if the request asked for it. For
-    # more information, see [Provisioned Throughput][1] in the *Amazon
+    # more information, see [Provisioned capacity mode][1] in the *Amazon
     # DynamoDB Developer Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ProvisionedThroughputIntro.html
+    # [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/provisioned-capacity-mode.html
     #
     # @!attribute [rw] table_name
     #   The name of the table that was affected by the operation. If you had
@@ -1984,16 +1984,16 @@ module Aws::DynamoDB
     #
     #   * `PROVISIONED` - We recommend using `PROVISIONED` for predictable
     #     workloads. `PROVISIONED` sets the billing mode to [Provisioned
-    #     Mode][1].
+    #     capacity mode][1].
     #
     #   * `PAY_PER_REQUEST` - We recommend using `PAY_PER_REQUEST` for
     #     unpredictable workloads. `PAY_PER_REQUEST` sets the billing mode
-    #     to [On-Demand Mode][2].
+    #     to [On-demand capacity mode][2].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadWriteCapacityMode.html#HowItWorks.ProvisionedThroughput.Manual
-    #   [2]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadWriteCapacityMode.html#HowItWorks.OnDemand
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/provisioned-capacity-mode.html
+    #   [2]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/on-demand-capacity-mode.html
     #   @return [String]
     #
     # @!attribute [rw] provisioned_throughput
@@ -2073,6 +2073,12 @@ module Aws::DynamoDB
     #   policy against this limit. For a full list of all considerations
     #   that apply for resource-based policies, see [Resource-based policy
     #   considerations][1].
+    #
+    #   <note markdown="1"> You need to specify the `CreateTable` and `PutResourcePolicy` IAM
+    #   actions for authorizing a user to create a table with a
+    #   resource-based policy.
+    #
+    #    </note>
     #
     #
     #
@@ -2464,12 +2470,12 @@ module Aws::DynamoDB
     #   with statistics for the table and any indexes involved in the
     #   operation. `ConsumedCapacity` is only returned if the
     #   `ReturnConsumedCapacity` parameter was specified. For more
-    #   information, see [Provisioned Throughput][1] in the *Amazon DynamoDB
-    #   Developer Guide*.
+    #   information, see [Provisioned capacity mode][1] in the *Amazon
+    #   DynamoDB Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ProvisionedThroughputIntro.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/provisioned-capacity-mode.html
     #   @return [Types::ConsumedCapacity]
     #
     # @!attribute [rw] item_collection_metrics
@@ -3165,12 +3171,12 @@ module Aws::DynamoDB
     #   includes the total provisioned throughput consumed, along with
     #   statistics for the table and any indexes involved in the operation.
     #   `ConsumedCapacity` is only returned if the request asked for it. For
-    #   more information, see [Provisioned Throughput][1] in the *Amazon
+    #   more information, see [Provisioned capacity mode][1] in the *Amazon
     #   DynamoDB Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ProvisionedThroughputIntro.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/provisioned-capacity-mode.html
     #   @return [Types::ConsumedCapacity]
     #
     # @!attribute [rw] last_evaluated_key
@@ -4014,12 +4020,12 @@ module Aws::DynamoDB
     #   with statistics for the table and any indexes involved in the
     #   operation. `ConsumedCapacity` is only returned if the
     #   `ReturnConsumedCapacity` parameter was specified. For more
-    #   information, see [Provisioned Throughput][1] in the *Amazon DynamoDB
-    #   Developer Guide*.
+    #   information, see [Capacity unit consumption for read operations][1]
+    #   in the *Amazon DynamoDB Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ProvisionedThroughput.html#ItemSizeCalculations.Reads
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/read-write-operations.html#read-operation-consumption
     #   @return [Types::ConsumedCapacity]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/GetItemOutput AWS API Documentation
@@ -6349,12 +6355,12 @@ module Aws::DynamoDB
     #   with statistics for the table and any indexes involved in the
     #   operation. `ConsumedCapacity` is only returned if the
     #   `ReturnConsumedCapacity` parameter was specified. For more
-    #   information, see [Provisioned Throughput][1] in the *Amazon DynamoDB
-    #   Developer Guide*.
+    #   information, see [Capacity unity consumption for write
+    #   operations][1] in the *Amazon DynamoDB Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ProvisionedThroughputIntro.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/read-write-operations.html#write-operation-consumption
     #   @return [Types::ConsumedCapacity]
     #
     # @!attribute [rw] item_collection_metrics
@@ -6963,12 +6969,12 @@ module Aws::DynamoDB
     #   with statistics for the table and any indexes involved in the
     #   operation. `ConsumedCapacity` is only returned if the
     #   `ReturnConsumedCapacity` parameter was specified. For more
-    #   information, see [Provisioned Throughput][1] in the *Amazon DynamoDB
-    #   Developer Guide*.
+    #   information, see [Capacity unit consumption for read operations][1]
+    #   in the *Amazon DynamoDB Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ProvisionedThroughputIntro.html
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/read-write-operations.html#read-operation-consumption
     #   @return [Types::ConsumedCapacity]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/QueryOutput AWS API Documentation
@@ -8309,12 +8315,12 @@ module Aws::DynamoDB
     #   with statistics for the table and any indexes involved in the
     #   operation. `ConsumedCapacity` is only returned if the
     #   `ReturnConsumedCapacity` parameter was specified. For more
-    #   information, see [Provisioned Throughput][1] in the *Amazon DynamoDB
-    #   Developer Guide*.
+    #   information, see [Capacity unit consumption for read operations][1]
+    #   in the *Amazon DynamoDB Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ProvisionedThroughput.html#ItemSizeCalculations.Reads
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/read-write-operations.html#read-operation-consumption
     #   @return [Types::ConsumedCapacity]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ScanOutput AWS API Documentation
@@ -9732,16 +9738,16 @@ module Aws::DynamoDB
     #
     #   * `PROVISIONED` - We recommend using `PROVISIONED` for predictable
     #     workloads. `PROVISIONED` sets the billing mode to [Provisioned
-    #     Mode][1].
+    #     capacity mode][1].
     #
     #   * `PAY_PER_REQUEST` - We recommend using `PAY_PER_REQUEST` for
     #     unpredictable workloads. `PAY_PER_REQUEST` sets the billing mode
-    #     to [On-Demand Mode][2].
+    #     to [On-demand capacity mode][2].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadWriteCapacityMode.html#HowItWorks.ProvisionedThroughput.Manual
-    #   [2]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadWriteCapacityMode.html#HowItWorks.OnDemand
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/provisioned-capacity-mode.html
+    #   [2]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/on-demand-capacity-mode.html
     #   @return [String]
     #
     # @!attribute [rw] global_table_provisioned_write_capacity_units
@@ -10144,12 +10150,12 @@ module Aws::DynamoDB
     #   with statistics for the table and any indexes involved in the
     #   operation. `ConsumedCapacity` is only returned if the
     #   `ReturnConsumedCapacity` parameter was specified. For more
-    #   information, see [Provisioned Throughput][1] in the *Amazon DynamoDB
-    #   Developer Guide*.
+    #   information, see [Capacity unity consumption for write
+    #   operations][1] in the *Amazon DynamoDB Developer Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ProvisionedThroughput.html#ItemSizeCalculations.Reads
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/read-write-operations.html#write-operation-consumption
     #   @return [Types::ConsumedCapacity]
     #
     # @!attribute [rw] item_collection_metrics
@@ -10322,16 +10328,16 @@ module Aws::DynamoDB
     #
     #   * `PROVISIONED` - We recommend using `PROVISIONED` for predictable
     #     workloads. `PROVISIONED` sets the billing mode to [Provisioned
-    #     Mode][1].
+    #     capacity mode][1].
     #
     #   * `PAY_PER_REQUEST` - We recommend using `PAY_PER_REQUEST` for
     #     unpredictable workloads. `PAY_PER_REQUEST` sets the billing mode
-    #     to [On-Demand Mode][2].
+    #     to [On-demand capacity mode][2].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadWriteCapacityMode.html#HowItWorks.ProvisionedThroughput.Manual
-    #   [2]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadWriteCapacityMode.html#HowItWorks.OnDemand
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/provisioned-capacity-mode.html
+    #   [2]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/on-demand-capacity-mode.html
     #   @return [String]
     #
     # @!attribute [rw] provisioned_throughput
@@ -10379,14 +10385,10 @@ module Aws::DynamoDB
     #   A list of replica update actions (create, delete, or update) for the
     #   table.
     #
-    #   <note markdown="1"> This property only applies to [Version 2019.11.21 (Current)][1] of
-    #   global tables.
+    #   <note markdown="1"> For global tables, this property only applies to global tables using
+    #   Version 2019.11.21 (Current version).
     #
     #    </note>
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V2.html
     #   @return [Array<Types::ReplicationGroupUpdate>]
     #
     # @!attribute [rw] table_class

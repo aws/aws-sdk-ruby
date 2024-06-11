@@ -156,7 +156,7 @@ module Aws::Glacier
           :retry
         end
       end
-      Aws::Plugins::UserAgent.feature('resource') do
+      Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         Aws::Waiters::Waiter.new(options).wait({})
       end
     end
@@ -174,7 +174,7 @@ module Aws::Glacier
     # @return [Vault]
     def create_vault(options = {})
       options = options.merge(account_id: @id)
-      Aws::Plugins::UserAgent.feature('resource') do
+      Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.create_vault(options)
       end
       Vault.new(
@@ -204,7 +204,7 @@ module Aws::Glacier
     def vaults(options = {})
       batches = Enumerator.new do |y|
         options = options.merge(account_id: @id)
-        resp = Aws::Plugins::UserAgent.feature('resource') do
+        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
           @client.list_vaults(options)
         end
         resp.each_page do |page|

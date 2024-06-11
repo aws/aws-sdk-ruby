@@ -52,6 +52,6 @@ require_relative 'aws-sdk-codecatalyst/customizations'
 # @!group service
 module Aws::CodeCatalyst
 
-  GEM_VERSION = '1.19.0'
+  GEM_VERSION = '1.20.0'
 
 end

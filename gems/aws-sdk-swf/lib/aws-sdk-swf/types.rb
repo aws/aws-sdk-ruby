@@ -1798,6 +1798,36 @@ module Aws::SWF
     #   @return [String]
     #
     # @!attribute [rw] activity_type
+    #   The activity type to delete.
+    #   @return [Types::ActivityType]
+    #
+    class DeleteActivityTypeInput < Struct.new(
+      :domain,
+      :activity_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain
+    #   The name of the domain in which the workflow type is registered.
+    #   @return [String]
+    #
+    # @!attribute [rw] workflow_type
+    #   The workflow type to delete.
+    #   @return [Types::WorkflowType]
+    #
+    class DeleteWorkflowTypeInput < Struct.new(
+      :domain,
+      :workflow_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain
+    #   The name of the domain in which the activity type is registered.
+    #   @return [String]
+    #
+    # @!attribute [rw] activity_type
     #   The activity type to deprecate.
     #   @return [Types::ActivityType]
     #
@@ -5581,6 +5611,17 @@ module Aws::SWF
     #   @return [String]
     #
     class TypeDeprecatedFault < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Returned when the resource type has not been deprecated.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    class TypeNotDeprecatedFault < Struct.new(
       :message)
       SENSITIVE = []
       include Aws::Structure

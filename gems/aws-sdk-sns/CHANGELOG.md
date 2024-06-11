@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.77.0 (2024-06-06)
+------------------
+
+* Feature - Doc-only update for SNS. These changes include customer-reported issues and TXC3 updates.
+
+1.76.0 (2024-06-05)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.75.0 (2024-05-13)
 ------------------
 

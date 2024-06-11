@@ -413,6 +413,70 @@ module Aws::Account
 
     # @!group API Operations
 
+    # Accepts the request that originated from StartPrimaryEmailUpdate to
+    # update the primary email address (also known as the root user email
+    # address) for the specified account.
+    #
+    # @option params [required, String] :account_id
+    #   Specifies the 12-digit account ID number of the Amazon Web Services
+    #   account that you want to access or modify with this operation. To use
+    #   this parameter, the caller must be an identity in the [organization's
+    #   management account][1] or a delegated administrator account. The
+    #   specified account ID must be a member account in the same
+    #   organization. The organization must have [all features enabled][2],
+    #   and the organization must have [trusted access][3] enabled for the
+    #   Account Management service, and optionally a [delegated admin][4]
+    #   account assigned.
+    #
+    #   This operation can only be called from the management account or the
+    #   delegated administrator account of an organization for a member
+    #   account.
+    #
+    #   <note markdown="1"> The management account can't specify its own `AccountId`.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#account
+    #   [2]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html
+    #   [3]: https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-trusted-access.html
+    #   [4]: https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-delegated-admin.html
+    #
+    # @option params [required, String] :otp
+    #   The OTP code sent to the `PrimaryEmail` specified on the
+    #   `StartPrimaryEmailUpdate` API call.
+    #
+    # @option params [required, String] :primary_email
+    #   The new primary email address for use with the specified account. This
+    #   must match the `PrimaryEmail` from the `StartPrimaryEmailUpdate` API
+    #   call.
+    #
+    # @return [Types::AcceptPrimaryEmailUpdateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AcceptPrimaryEmailUpdateResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.accept_primary_email_update({
+    #     account_id: "AccountId", # required
+    #     otp: "Otp", # required
+    #     primary_email: "PrimaryEmailAddress", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status #=> String, one of "PENDING", "ACCEPTED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/account-2021-02-01/AcceptPrimaryEmailUpdate AWS API Documentation
+    #
+    # @overload accept_primary_email_update(params = {})
+    # @param [Hash] params ({})
+    def accept_primary_email_update(params = {}, options = {})
+      req = build_request(:accept_primary_email_update, params)
+      req.send_request(options)
+    end
+
     # Deletes the specified alternate contact from an Amazon Web Services
     # account.
     #
@@ -488,6 +552,11 @@ module Aws::Account
 
     # Disables (opts-out) a particular Region for an account.
     #
+    # <note markdown="1"> The act of disabling a Region will remove all IAM access to any
+    # resources that reside in that Region.
+    #
+    #  </note>
+    #
     # @option params [String] :account_id
     #   Specifies the 12-digit account ID number of the Amazon Web Services
     #   account that you want to access or modify with this operation. If you
@@ -495,7 +564,7 @@ module Aws::Account
     #   account of the identity used to call the operation. To use this
     #   parameter, the caller must be an identity in the [organization's
     #   management account][1] or a delegated administrator account. The
-    #   specified account ID must also be a member account in the same
+    #   specified account ID must be a member account in the same
     #   organization. The organization must have [all features enabled][2],
     #   and the organization must have [trusted access][3] enabled for the
     #   Account Management service, and optionally a [delegated admin][4]
@@ -554,7 +623,7 @@ module Aws::Account
     #   account of the identity used to call the operation. To use this
     #   parameter, the caller must be an identity in the [organization's
     #   management account][1] or a delegated administrator account. The
-    #   specified account ID must also be a member account in the same
+    #   specified account ID must be a member account in the same
     #   organization. The organization must have [all features enabled][2],
     #   and the organization must have [trusted access][3] enabled for the
     #   Account Management service, and optionally a [delegated admin][4]
@@ -705,7 +774,7 @@ module Aws::Account
     #   account of the identity used to call the operation. To use this
     #   parameter, the caller must be an identity in the [organization's
     #   management account][1] or a delegated administrator account. The
-    #   specified account ID must also be a member account in the same
+    #   specified account ID must be a member account in the same
     #   organization. The organization must have [all features enabled][2],
     #   and the organization must have [trusted access][3] enabled for the
     #   Account Management service, and optionally a [delegated admin][4]
@@ -763,6 +832,57 @@ module Aws::Account
       req.send_request(options)
     end
 
+    # Retrieves the primary email address for the specified account.
+    #
+    # @option params [required, String] :account_id
+    #   Specifies the 12-digit account ID number of the Amazon Web Services
+    #   account that you want to access or modify with this operation. To use
+    #   this parameter, the caller must be an identity in the [organization's
+    #   management account][1] or a delegated administrator account. The
+    #   specified account ID must be a member account in the same
+    #   organization. The organization must have [all features enabled][2],
+    #   and the organization must have [trusted access][3] enabled for the
+    #   Account Management service, and optionally a [delegated admin][4]
+    #   account assigned.
+    #
+    #   This operation can only be called from the management account or the
+    #   delegated administrator account of an organization for a member
+    #   account.
+    #
+    #   <note markdown="1"> The management account can't specify its own `AccountId`.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#account
+    #   [2]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html
+    #   [3]: https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-trusted-access.html
+    #   [4]: https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-delegated-admin.html
+    #
+    # @return [Types::GetPrimaryEmailResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetPrimaryEmailResponse#primary_email #primary_email} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_primary_email({
+    #     account_id: "AccountId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.primary_email #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/account-2021-02-01/GetPrimaryEmail AWS API Documentation
+    #
+    # @overload get_primary_email(params = {})
+    # @param [Hash] params ({})
+    def get_primary_email(params = {}, options = {})
+      req = build_request(:get_primary_email, params)
+      req.send_request(options)
+    end
+
     # Retrieves the opt-in status of a particular Region.
     #
     # @option params [String] :account_id
@@ -772,7 +892,7 @@ module Aws::Account
     #   account of the identity used to call the operation. To use this
     #   parameter, the caller must be an identity in the [organization's
     #   management account][1] or a delegated administrator account. The
-    #   specified account ID must also be a member account in the same
+    #   specified account ID must be a member account in the same
     #   organization. The organization must have [all features enabled][2],
     #   and the organization must have [trusted access][3] enabled for the
     #   Account Management service, and optionally a [delegated admin][4]
@@ -838,7 +958,7 @@ module Aws::Account
     #   account of the identity used to call the operation. To use this
     #   parameter, the caller must be an identity in the [organization's
     #   management account][1] or a delegated administrator account. The
-    #   specified account ID must also be a member account in the same
+    #   specified account ID must be a member account in the same
     #   organization. The organization must have [all features enabled][2],
     #   and the organization must have [trusted access][3] enabled for the
     #   Account Management service, and optionally a [delegated admin][4]
@@ -1030,7 +1150,7 @@ module Aws::Account
     #   account of the identity used to call the operation. To use this
     #   parameter, the caller must be an identity in the [organization's
     #   management account][1] or a delegated administrator account. The
-    #   specified account ID must also be a member account in the same
+    #   specified account ID must be a member account in the same
     #   organization. The organization must have [all features enabled][2],
     #   and the organization must have [trusted access][3] enabled for the
     #   Account Management service, and optionally a [delegated admin][4]
@@ -1089,6 +1209,63 @@ module Aws::Account
       req.send_request(options)
     end
 
+    # Starts the process to update the primary email address for the
+    # specified account.
+    #
+    # @option params [required, String] :account_id
+    #   Specifies the 12-digit account ID number of the Amazon Web Services
+    #   account that you want to access or modify with this operation. To use
+    #   this parameter, the caller must be an identity in the [organization's
+    #   management account][1] or a delegated administrator account. The
+    #   specified account ID must be a member account in the same
+    #   organization. The organization must have [all features enabled][2],
+    #   and the organization must have [trusted access][3] enabled for the
+    #   Account Management service, and optionally a [delegated admin][4]
+    #   account assigned.
+    #
+    #   This operation can only be called from the management account or the
+    #   delegated administrator account of an organization for a member
+    #   account.
+    #
+    #   <note markdown="1"> The management account can't specify its own `AccountId`.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#account
+    #   [2]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html
+    #   [3]: https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-trusted-access.html
+    #   [4]: https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-delegated-admin.html
+    #
+    # @option params [required, String] :primary_email
+    #   The new primary email address (also known as the root user email
+    #   address) to use in the specified account.
+    #
+    # @return [Types::StartPrimaryEmailUpdateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartPrimaryEmailUpdateResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_primary_email_update({
+    #     account_id: "AccountId", # required
+    #     primary_email: "PrimaryEmailAddress", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status #=> String, one of "PENDING", "ACCEPTED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/account-2021-02-01/StartPrimaryEmailUpdate AWS API Documentation
+    #
+    # @overload start_primary_email_update(params = {})
+    # @param [Hash] params ({})
+    def start_primary_email_update(params = {}, options = {})
+      req = build_request(:start_primary_email_update, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -1102,7 +1279,7 @@ module Aws::Account
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-account'
-      context[:gem_version] = '1.23.0'
+      context[:gem_version] = '1.25.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

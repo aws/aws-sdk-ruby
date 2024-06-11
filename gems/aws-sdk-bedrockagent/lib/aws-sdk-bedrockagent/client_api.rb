@@ -47,6 +47,7 @@ module Aws::BedrockAgent
     AssociateAgentKnowledgeBaseResponse = Shapes::StructureShape.new(name: 'AssociateAgentKnowledgeBaseResponse')
     BasePromptTemplate = Shapes::StringShape.new(name: 'BasePromptTemplate')
     BedrockEmbeddingModelArn = Shapes::StringShape.new(name: 'BedrockEmbeddingModelArn')
+    BedrockEmbeddingModelConfiguration = Shapes::StructureShape.new(name: 'BedrockEmbeddingModelConfiguration')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     BucketOwnerAccountId = Shapes::StringShape.new(name: 'BucketOwnerAccountId')
     ChunkingConfiguration = Shapes::StructureShape.new(name: 'ChunkingConfiguration')
@@ -87,9 +88,11 @@ module Aws::BedrockAgent
     DeleteKnowledgeBaseRequest = Shapes::StructureShape.new(name: 'DeleteKnowledgeBaseRequest')
     DeleteKnowledgeBaseResponse = Shapes::StructureShape.new(name: 'DeleteKnowledgeBaseResponse')
     Description = Shapes::StringShape.new(name: 'Description')
+    Dimensions = Shapes::IntegerShape.new(name: 'Dimensions')
     DisassociateAgentKnowledgeBaseRequest = Shapes::StructureShape.new(name: 'DisassociateAgentKnowledgeBaseRequest')
     DisassociateAgentKnowledgeBaseResponse = Shapes::StructureShape.new(name: 'DisassociateAgentKnowledgeBaseResponse')
     DraftVersion = Shapes::StringShape.new(name: 'DraftVersion')
+    EmbeddingModelConfiguration = Shapes::StructureShape.new(name: 'EmbeddingModelConfiguration')
     FailureReason = Shapes::StringShape.new(name: 'FailureReason')
     FailureReasons = Shapes::ListShape.new(name: 'FailureReasons')
     FieldName = Shapes::StringShape.new(name: 'FieldName')
@@ -433,6 +436,9 @@ module Aws::BedrockAgent
     AssociateAgentKnowledgeBaseResponse.add_member(:agent_knowledge_base, Shapes::ShapeRef.new(shape: AgentKnowledgeBase, required: true, location_name: "agentKnowledgeBase"))
     AssociateAgentKnowledgeBaseResponse.struct_class = Types::AssociateAgentKnowledgeBaseResponse
 
+    BedrockEmbeddingModelConfiguration.add_member(:dimensions, Shapes::ShapeRef.new(shape: Dimensions, location_name: "dimensions"))
+    BedrockEmbeddingModelConfiguration.struct_class = Types::BedrockEmbeddingModelConfiguration
+
     ChunkingConfiguration.add_member(:chunking_strategy, Shapes::ShapeRef.new(shape: ChunkingStrategy, required: true, location_name: "chunkingStrategy"))
     ChunkingConfiguration.add_member(:fixed_size_chunking_configuration, Shapes::ShapeRef.new(shape: FixedSizeChunkingConfiguration, location_name: "fixedSizeChunkingConfiguration"))
     ChunkingConfiguration.struct_class = Types::ChunkingConfiguration
@@ -592,6 +598,9 @@ module Aws::BedrockAgent
     DisassociateAgentKnowledgeBaseRequest.struct_class = Types::DisassociateAgentKnowledgeBaseRequest
 
     DisassociateAgentKnowledgeBaseResponse.struct_class = Types::DisassociateAgentKnowledgeBaseResponse
+
+    EmbeddingModelConfiguration.add_member(:bedrock_embedding_model_configuration, Shapes::ShapeRef.new(shape: BedrockEmbeddingModelConfiguration, location_name: "bedrockEmbeddingModelConfiguration"))
+    EmbeddingModelConfiguration.struct_class = Types::EmbeddingModelConfiguration
 
     FailureReasons.member = Shapes::ShapeRef.new(shape: FailureReason)
 
@@ -1073,6 +1082,7 @@ module Aws::BedrockAgent
     VectorIngestionConfiguration.struct_class = Types::VectorIngestionConfiguration
 
     VectorKnowledgeBaseConfiguration.add_member(:embedding_model_arn, Shapes::ShapeRef.new(shape: BedrockEmbeddingModelArn, required: true, location_name: "embeddingModelArn"))
+    VectorKnowledgeBaseConfiguration.add_member(:embedding_model_configuration, Shapes::ShapeRef.new(shape: EmbeddingModelConfiguration, location_name: "embeddingModelConfiguration"))
     VectorKnowledgeBaseConfiguration.struct_class = Types::VectorKnowledgeBaseConfiguration
 
 

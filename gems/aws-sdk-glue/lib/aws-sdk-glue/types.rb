@@ -467,6 +467,83 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # A structure containing the authentication configuration.
+    #
+    # @!attribute [rw] authentication_type
+    #   A structure containing the authentication configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] secret_arn
+    #   The secret manager ARN to store credentials.
+    #   @return [String]
+    #
+    # @!attribute [rw] o_auth_2_properties
+    #   The properties for OAuth2 authentication.
+    #   @return [Types::OAuth2Properties]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/AuthenticationConfiguration AWS API Documentation
+    #
+    class AuthenticationConfiguration < Struct.new(
+      :authentication_type,
+      :secret_arn,
+      :o_auth_2_properties)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A structure containing the authentication configuration in the
+    # CreateConnection request.
+    #
+    # @!attribute [rw] authentication_type
+    #   A structure containing the authentication configuration in the
+    #   CreateConnection request.
+    #   @return [String]
+    #
+    # @!attribute [rw] secret_arn
+    #   The secret manager ARN to store credentials in the CreateConnection
+    #   request.
+    #   @return [String]
+    #
+    # @!attribute [rw] o_auth_2_properties
+    #   The properties for OAuth2 authentication in the CreateConnection
+    #   request.
+    #   @return [Types::OAuth2PropertiesInput]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/AuthenticationConfigurationInput AWS API Documentation
+    #
+    class AuthenticationConfigurationInput < Struct.new(
+      :authentication_type,
+      :secret_arn,
+      :o_auth_2_properties)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The set of properties required for the the OAuth2 `AUTHORIZATION_CODE`
+    # grant type workflow.
+    #
+    # @!attribute [rw] authorization_code
+    #   An authorization code to be used in the third leg of the
+    #   `AUTHORIZATION_CODE` grant workflow. This is a single-use code which
+    #   becomes invalid once exchanged for an access token, thus it is
+    #   acceptable to have this value as a request parameter.
+    #   @return [String]
+    #
+    # @!attribute [rw] redirect_uri
+    #   The redirect URI where the user gets redirected to by authorization
+    #   server when issuing an authorization code. The URI is subsequently
+    #   used when the authorization code is exchanged for an access token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/AuthorizationCodeProperties AWS API Documentation
+    #
+    class AuthorizationCodeProperties < Struct.new(
+      :authorization_code,
+      :redirect_uri)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A list of errors that can occur when registering partition indexes for
     # an existing table.
     #
@@ -3184,23 +3261,42 @@ module Aws::Glue
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] physical_connection_requirements
-    #   A map of physical connection requirements, such as virtual private
-    #   cloud (VPC) and `SecurityGroup`, that are needed to make this
-    #   connection successfully.
+    #   The physical connection requirements, such as virtual private cloud
+    #   (VPC) and `SecurityGroup`, that are needed to make this connection
+    #   successfully.
     #   @return [Types::PhysicalConnectionRequirements]
     #
     # @!attribute [rw] creation_time
-    #   The time that this connection definition was created.
+    #   The timestamp of the time that this connection definition was
+    #   created.
     #   @return [Time]
     #
     # @!attribute [rw] last_updated_time
-    #   The last time that this connection definition was updated.
+    #   The timestamp of the last time the connection definition was
+    #   updated.
     #   @return [Time]
     #
     # @!attribute [rw] last_updated_by
     #   The user, group, or role that last updated this connection
     #   definition.
     #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the connection. Can be one of: `READY`, `IN_PROGRESS`,
+    #   or `FAILED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   The reason for the connection status.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_connection_validation_time
+    #   A timestamp of the time this connection was last validated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] authentication_configuration
+    #   The authentication properties of the connection.
+    #   @return [Types::AuthenticationConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Connection AWS API Documentation
     #
@@ -3213,7 +3309,11 @@ module Aws::Glue
       :physical_connection_requirements,
       :creation_time,
       :last_updated_time,
-      :last_updated_by)
+      :last_updated_by,
+      :status,
+      :status_reason,
+      :last_connection_validation_time,
+      :authentication_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3221,8 +3321,7 @@ module Aws::Glue
     # A structure that is used to specify a connection to create or update.
     #
     # @!attribute [rw] name
-    #   The name of the connection. Connection will not function as expected
-    #   without a name.
+    #   The name of the connection.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -3285,6 +3384,14 @@ module Aws::Glue
     #
     #     * Required: All of (`USERNAME`, `PASSWORD`) or `SECRET_ID`.
     #
+    #   * `SALESFORCE` - Designates a connection to Salesforce using OAuth
+    #     authencation.
+    #
+    #     * Requires the `AuthenticationConfiguration` member to be
+    #       configured.
+    #
+    #     ^
+    #
     #   * `NETWORK` - Designates a network connection to a data source
     #     within an Amazon Virtual Private Cloud environment (Amazon VPC).
     #
@@ -3333,10 +3440,20 @@ module Aws::Glue
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] physical_connection_requirements
-    #   A map of physical connection requirements, such as virtual private
-    #   cloud (VPC) and `SecurityGroup`, that are needed to successfully
-    #   make this connection.
+    #   The physical connection requirements, such as virtual private cloud
+    #   (VPC) and `SecurityGroup`, that are needed to successfully make this
+    #   connection.
     #   @return [Types::PhysicalConnectionRequirements]
+    #
+    # @!attribute [rw] authentication_configuration
+    #   The authentication properties of the connection. Used for a
+    #   Salesforce connection.
+    #   @return [Types::AuthenticationConfigurationInput]
+    #
+    # @!attribute [rw] validate_credentials
+    #   A flag to validate the credentials during create connection. Used
+    #   for a Salesforce connection. Default is true.
+    #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ConnectionInput AWS API Documentation
     #
@@ -3346,7 +3463,9 @@ module Aws::Glue
       :connection_type,
       :match_criteria,
       :connection_properties,
-      :physical_connection_requirements)
+      :physical_connection_requirements,
+      :authentication_configuration,
+      :validate_credentials)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4034,9 +4153,19 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # @!attribute [rw] create_connection_status
+    #   The status of the connection creation request. The request can take
+    #   some time for certain authentication types, for example when
+    #   creating an OAuth connection with token exchange over VPC.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateConnectionResponse AWS API Documentation
     #
-    class CreateConnectionResponse < Aws::EmptyStructure; end
+    class CreateConnectionResponse < Struct.new(
+      :create_connection_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @!attribute [rw] name
     #   Name of the new crawler.
@@ -4661,6 +4790,22 @@ module Aws::Glue
     #   your account.
     #   @return [String]
     #
+    # @!attribute [rw] job_mode
+    #   A mode that describes how a job was created. Valid values are:
+    #
+    #   * `SCRIPT` - The job was created using the Glue Studio script
+    #     editor.
+    #
+    #   * `VISUAL` - The job was created using the Glue Studio visual
+    #     editor.
+    #
+    #   * `NOTEBOOK` - The job was created using an interactive sessions
+    #     notebook.
+    #
+    #   When the `JobMode` field is missing or null, `SCRIPT` is assigned as
+    #   the default value.
+    #   @return [String]
+    #
     # @!attribute [rw] description
     #   Description of the job being defined.
     #   @return [String]
@@ -4744,7 +4889,13 @@ module Aws::Glue
     # @!attribute [rw] timeout
     #   The job timeout in minutes. This is the maximum time that a job run
     #   can consume resources before it is terminated and enters `TIMEOUT`
-    #   status. The default is 2,880 minutes (48 hours).
+    #   status. The default is 2,880 minutes (48 hours) for batch jobs.
+    #
+    #   Streaming jobs must have timeout values less than 7 days or 10080
+    #   minutes. When the value is left blank, the job will be restarted
+    #   after 7 days based if you have not setup a maintenance window. If
+    #   you have setup maintenance window, it will be restarted during the
+    #   maintenance window after 7 days.
     #   @return [Integer]
     #
     # @!attribute [rw] max_capacity
@@ -4915,6 +5066,7 @@ module Aws::Glue
     #
     class CreateJobRequest < Struct.new(
       :name,
+      :job_mode,
       :description,
       :log_uri,
       :role,
@@ -13204,6 +13356,22 @@ module Aws::Glue
     #   The name you assign to this job definition.
     #   @return [String]
     #
+    # @!attribute [rw] job_mode
+    #   A mode that describes how a job was created. Valid values are:
+    #
+    #   * `SCRIPT` - The job was created using the Glue Studio script
+    #     editor.
+    #
+    #   * `VISUAL` - The job was created using the Glue Studio visual
+    #     editor.
+    #
+    #   * `NOTEBOOK` - The job was created using an interactive sessions
+    #     notebook.
+    #
+    #   When the `JobMode` field is missing or null, `SCRIPT` is assigned as
+    #   the default value.
+    #   @return [String]
+    #
     # @!attribute [rw] description
     #   A description of the job.
     #   @return [String]
@@ -13297,7 +13465,13 @@ module Aws::Glue
     # @!attribute [rw] timeout
     #   The job timeout in minutes. This is the maximum time that a job run
     #   can consume resources before it is terminated and enters `TIMEOUT`
-    #   status. The default is 2,880 minutes (48 hours).
+    #   status. The default is 2,880 minutes (48 hours) for batch jobs.
+    #
+    #   Streaming jobs must have timeout values less than 7 days or 10080
+    #   minutes. When the value is left blank, the job will be restarted
+    #   after 7 days based if you have not setup a maintenance window. If
+    #   you have setup maintenance window, it will be restarted during the
+    #   maintenance window after 7 days.
     #   @return [Integer]
     #
     # @!attribute [rw] max_capacity
@@ -13458,6 +13632,7 @@ module Aws::Glue
     #
     class Job < Struct.new(
       :name,
+      :job_mode,
       :description,
       :log_uri,
       :role,
@@ -13628,6 +13803,22 @@ module Aws::Glue
     #   The name of the job definition being used in this run.
     #   @return [String]
     #
+    # @!attribute [rw] job_mode
+    #   A mode that describes how a job was created. Valid values are:
+    #
+    #   * `SCRIPT` - The job was created using the Glue Studio script
+    #     editor.
+    #
+    #   * `VISUAL` - The job was created using the Glue Studio visual
+    #     editor.
+    #
+    #   * `NOTEBOOK` - The job was created using an interactive sessions
+    #     notebook.
+    #
+    #   When the `JobMode` field is missing or null, `SCRIPT` is assigned as
+    #   the default value.
+    #   @return [String]
+    #
     # @!attribute [rw] started_on
     #   The date and time at which this job run was started.
     #   @return [Time]
@@ -13712,13 +13903,6 @@ module Aws::Glue
     #   run can consume resources before it is terminated and enters
     #   `TIMEOUT` status. This value overrides the timeout value set in the
     #   parent job.
-    #
-    #   The maximum value for timeout for batch jobs is 7 days or 10080
-    #   minutes. The default is 2880 minutes (48 hours) for batch jobs.
-    #
-    #   Any existing Glue jobs that have a greater timeout value are
-    #   defaulted to 7 days. For instance you have specified a timeout of 20
-    #   days for a batch job, it will be stopped on the 7th day.
     #
     #   Streaming jobs must have timeout values less than 7 days or 10080
     #   minutes. When the value is left blank, the job will be restarted
@@ -13901,6 +14085,7 @@ module Aws::Glue
       :previous_run_id,
       :trigger_name,
       :job_name,
+      :job_mode,
       :started_on,
       :last_modified_on,
       :completed_on,
@@ -13927,6 +14112,22 @@ module Aws::Glue
 
     # Specifies information used to update an existing job definition. The
     # previous job definition is completely overwritten by this information.
+    #
+    # @!attribute [rw] job_mode
+    #   A mode that describes how a job was created. Valid values are:
+    #
+    #   * `SCRIPT` - The job was created using the Glue Studio script
+    #     editor.
+    #
+    #   * `VISUAL` - The job was created using the Glue Studio visual
+    #     editor.
+    #
+    #   * `NOTEBOOK` - The job was created using an interactive sessions
+    #     notebook.
+    #
+    #   When the `JobMode` field is missing or null, `SCRIPT` is assigned as
+    #   the default value.
+    #   @return [String]
     #
     # @!attribute [rw] description
     #   Description of the job being defined.
@@ -14011,7 +14212,13 @@ module Aws::Glue
     # @!attribute [rw] timeout
     #   The job timeout in minutes. This is the maximum time that a job run
     #   can consume resources before it is terminated and enters `TIMEOUT`
-    #   status. The default is 2,880 minutes (48 hours).
+    #   status. The default is 2,880 minutes (48 hours) for batch jobs.
+    #
+    #   Streaming jobs must have timeout values less than 7 days or 10080
+    #   minutes. When the value is left blank, the job will be restarted
+    #   after 7 days based if you have not setup a maintenance window. If
+    #   you have setup maintenance window, it will be restarted during the
+    #   maintenance window after 7 days.
     #   @return [Integer]
     #
     # @!attribute [rw] max_capacity
@@ -14171,6 +14378,7 @@ module Aws::Glue
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/JobUpdate AWS API Documentation
     #
     class JobUpdate < Struct.new(
+      :job_mode,
       :description,
       :log_uri,
       :role,
@@ -16359,6 +16567,98 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # The OAuth2 client app used for the connection.
+    #
+    # @!attribute [rw] user_managed_client_application_client_id
+    #   The client application clientID if the ClientAppType is
+    #   `USER_MANAGED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] aws_managed_client_application_reference
+    #   The reference to the SaaS-side client app that is Amazon Web
+    #   Services managed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/OAuth2ClientApplication AWS API Documentation
+    #
+    class OAuth2ClientApplication < Struct.new(
+      :user_managed_client_application_client_id,
+      :aws_managed_client_application_reference)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A structure containing properties for OAuth2 authentication.
+    #
+    # @!attribute [rw] o_auth_2_grant_type
+    #   The OAuth2 grant type. For example, `AUTHORIZATION_CODE`,
+    #   `JWT_BEARER`, or `CLIENT_CREDENTIALS`.
+    #   @return [String]
+    #
+    # @!attribute [rw] o_auth_2_client_application
+    #   The client application type. For example, AWS\_MANAGED or
+    #   USER\_MANAGED.
+    #   @return [Types::OAuth2ClientApplication]
+    #
+    # @!attribute [rw] token_url
+    #   The URL of the provider's authentication server, to exchange an
+    #   authorization code for an access token.
+    #   @return [String]
+    #
+    # @!attribute [rw] token_url_parameters_map
+    #   A map of parameters that are added to the token `GET` request.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/OAuth2Properties AWS API Documentation
+    #
+    class OAuth2Properties < Struct.new(
+      :o_auth_2_grant_type,
+      :o_auth_2_client_application,
+      :token_url,
+      :token_url_parameters_map)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A structure containing properties for OAuth2 in the CreateConnection
+    # request.
+    #
+    # @!attribute [rw] o_auth_2_grant_type
+    #   The OAuth2 grant type in the CreateConnection request. For example,
+    #   `AUTHORIZATION_CODE`, `JWT_BEARER`, or `CLIENT_CREDENTIALS`.
+    #   @return [String]
+    #
+    # @!attribute [rw] o_auth_2_client_application
+    #   The client application type in the CreateConnection request. For
+    #   example, `AWS_MANAGED` or `USER_MANAGED`.
+    #   @return [Types::OAuth2ClientApplication]
+    #
+    # @!attribute [rw] token_url
+    #   The URL of the provider's authentication server, to exchange an
+    #   authorization code for an access token.
+    #   @return [String]
+    #
+    # @!attribute [rw] token_url_parameters_map
+    #   A map of parameters that are added to the token `GET` request.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] authorization_code_properties
+    #   The set of properties required for the the OAuth2
+    #   `AUTHORIZATION_CODE` grant type.
+    #   @return [Types::AuthorizationCodeProperties]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/OAuth2PropertiesInput AWS API Documentation
+    #
+    class OAuth2PropertiesInput < Struct.new(
+      :o_auth_2_grant_type,
+      :o_auth_2_client_application,
+      :token_url,
+      :token_url_parameters_map,
+      :authorization_code_properties)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A structure representing an open format table.
     #
     # @!attribute [rw] iceberg_input
@@ -16772,7 +17072,7 @@ module Aws::Glue
       include Aws::Structure
     end
 
-    # Specifies the physical requirements for a connection.
+    # The OAuth client app in GetConnection response.
     #
     # @!attribute [rw] subnet_id
     #   The subnet ID used by the connection.
@@ -16783,10 +17083,7 @@ module Aws::Glue
     #   @return [Array<String>]
     #
     # @!attribute [rw] availability_zone
-    #   The connection's Availability Zone. This field is redundant because
-    #   the specified subnet implies the Availability Zone to be used.
-    #   Currently the field must be populated, but it will be deprecated in
-    #   the future.
+    #   The connection's Availability Zone.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/PhysicalConnectionRequirements AWS API Documentation
@@ -20212,8 +20509,11 @@ module Aws::Glue
     #   `TIMEOUT` status. This value overrides the timeout value set in the
     #   parent job.
     #
-    #   Streaming jobs do not have a timeout. The default for non-streaming
-    #   jobs is 2,880 minutes (48 hours).
+    #   Streaming jobs must have timeout values less than 7 days or 10080
+    #   minutes. When the value is left blank, the job will be restarted
+    #   after 7 days based if you have not setup a maintenance window. If
+    #   you have setup maintenance window, it will be restarted during the
+    #   maintenance window after 7 days.
     #   @return [Integer]
     #
     # @!attribute [rw] max_capacity
@@ -21155,6 +21455,11 @@ module Aws::Glue
     #   resource linking.
     #   @return [Types::TableIdentifier]
     #
+    # @!attribute [rw] view_definition
+    #   A structure that contains all the information that defines the view,
+    #   including the dialect or dialects for the view, and the query.
+    #   @return [Types::ViewDefinitionInput]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/TableInput AWS API Documentation
     #
     class TableInput < Struct.new(
@@ -21170,7 +21475,8 @@ module Aws::Glue
       :view_expanded_text,
       :table_type,
       :parameters,
-      :target_table)
+      :target_table,
+      :view_definition)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -22938,6 +23244,15 @@ module Aws::Glue
     #   The version ID at which to update the table contents.
     #   @return [String]
     #
+    # @!attribute [rw] view_update_action
+    #   The operation to be performed when updating the view.
+    #   @return [String]
+    #
+    # @!attribute [rw] force
+    #   A flag that can be set to true to ignore matching storage descriptor
+    #   and subobject matching requirements.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateTableRequest AWS API Documentation
     #
     class UpdateTableRequest < Struct.new(
@@ -22946,7 +23261,9 @@ module Aws::Glue
       :table_input,
       :skip_archive,
       :transaction_id,
-      :version_id)
+      :version_id,
+      :view_update_action,
+      :force)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -23262,6 +23579,40 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # A structure containing details for creating or updating an Glue view.
+    #
+    # @!attribute [rw] is_protected
+    #   You can set this flag as true to instruct the engine not to push
+    #   user-provided operations into the logical plan of the view during
+    #   query planning. However, setting this flag does not guarantee that
+    #   the engine will comply. Refer to the engine's documentation to
+    #   understand the guarantees provided, if any.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] definer
+    #   The definer of a view in SQL.
+    #   @return [String]
+    #
+    # @!attribute [rw] representations
+    #   A list of structures that contains the dialect of the view, and the
+    #   query that defines the view.
+    #   @return [Array<Types::ViewRepresentationInput>]
+    #
+    # @!attribute [rw] sub_objects
+    #   A list of base table ARNs that make up the view.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ViewDefinitionInput AWS API Documentation
+    #
+    class ViewDefinitionInput < Struct.new(
+      :is_protected,
+      :definer,
+      :representations,
+      :sub_objects)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A structure that contains the dialect of the view, and the query that
     # defines the view.
     #
@@ -23287,10 +23638,15 @@ module Aws::Glue
     #   view creation to transform `ViewOriginalText` to `ViewExpandedText`.
     #   For example:
     #
-    #   * Fully qualify identifiers: `SELECT * from table1 → SELECT * from
-    #     db1.table1`
+    #   * Fully qualified identifiers: `SELECT * from table1 -> SELECT *
+    #     from db1.table1`
     #
     #   ^
+    #   @return [String]
+    #
+    # @!attribute [rw] validation_connection
+    #   The name of the connection to be used to validate the specific
+    #   representation of the view.
     #   @return [String]
     #
     # @!attribute [rw] is_stale
@@ -23305,7 +23661,48 @@ module Aws::Glue
       :dialect_version,
       :view_original_text,
       :view_expanded_text,
+      :validation_connection,
       :is_stale)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A structure containing details of a representation to update or create
+    # a Lake Formation view.
+    #
+    # @!attribute [rw] dialect
+    #   A parameter that specifies the engine type of a specific
+    #   representation.
+    #   @return [String]
+    #
+    # @!attribute [rw] dialect_version
+    #   A parameter that specifies the version of the engine of a specific
+    #   representation.
+    #   @return [String]
+    #
+    # @!attribute [rw] view_original_text
+    #   A string that represents the original SQL query that describes the
+    #   view.
+    #   @return [String]
+    #
+    # @!attribute [rw] validation_connection
+    #   The name of the connection to be used to validate the specific
+    #   representation of the view.
+    #   @return [String]
+    #
+    # @!attribute [rw] view_expanded_text
+    #   A string that represents the SQL query that describes the view with
+    #   expanded resource ARNs
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ViewRepresentationInput AWS API Documentation
+    #
+    class ViewRepresentationInput < Struct.new(
+      :dialect,
+      :dialect_version,
+      :view_original_text,
+      :validation_connection,
+      :view_expanded_text)
       SENSITIVE = []
       include Aws::Structure
     end

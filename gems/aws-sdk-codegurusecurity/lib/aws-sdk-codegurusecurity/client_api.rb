@@ -34,6 +34,7 @@ module Aws::CodeGuruSecurity
     Double = Shapes::FloatShape.new(name: 'Double')
     EncryptionConfig = Shapes::StructureShape.new(name: 'EncryptionConfig')
     ErrorCode = Shapes::StringShape.new(name: 'ErrorCode')
+    ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     FilePath = Shapes::StructureShape.new(name: 'FilePath')
     Finding = Shapes::StructureShape.new(name: 'Finding')
     FindingIdentifier = Shapes::StructureShape.new(name: 'FindingIdentifier')
@@ -251,6 +252,7 @@ module Aws::CodeGuruSecurity
 
     GetScanResponse.add_member(:analysis_type, Shapes::ShapeRef.new(shape: AnalysisType, required: true, location_name: "analysisType"))
     GetScanResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
+    GetScanResponse.add_member(:error_message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "errorMessage"))
     GetScanResponse.add_member(:number_of_revisions, Shapes::ShapeRef.new(shape: Long, location_name: "numberOfRevisions"))
     GetScanResponse.add_member(:run_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location_name: "runId"))
     GetScanResponse.add_member(:scan_name, Shapes::ShapeRef.new(shape: ScanName, required: true, location_name: "scanName"))
@@ -392,7 +394,7 @@ module Aws::CodeGuruSecurity
 
     Vulnerability.add_member(:file_path, Shapes::ShapeRef.new(shape: FilePath, location_name: "filePath"))
     Vulnerability.add_member(:id, Shapes::ShapeRef.new(shape: String, location_name: "id"))
-    Vulnerability.add_member(:item_count, Shapes::ShapeRef.new(shape: Integer, location_name: "itemCount"))
+    Vulnerability.add_member(:item_count, Shapes::ShapeRef.new(shape: Integer, deprecated: true, location_name: "itemCount", metadata: {"deprecatedMessage"=>"This shape is not used."}))
     Vulnerability.add_member(:reference_urls, Shapes::ShapeRef.new(shape: ReferenceUrls, location_name: "referenceUrls"))
     Vulnerability.add_member(:related_vulnerabilities, Shapes::ShapeRef.new(shape: RelatedVulnerabilities, location_name: "relatedVulnerabilities"))
     Vulnerability.struct_class = Types::Vulnerability
@@ -408,6 +410,7 @@ module Aws::CodeGuruSecurity
         "endpointPrefix" => "codeguru-security",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceFullName" => "Amazon CodeGuru Security",
         "serviceId" => "CodeGuru Security",
         "signatureVersion" => "v4",
@@ -506,6 +509,7 @@ module Aws::CodeGuruSecurity
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 

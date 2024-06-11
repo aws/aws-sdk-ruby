@@ -9,7 +9,7 @@ module Aws
       let(:client) { svc::Client.new(stub_responses: true) }
 
       def setup(given)
-        feature_callable = nil
+        metric_callable = nil
         caller = []
         config_frameworks = []
 
@@ -37,12 +37,13 @@ module Aws
               allow_any_instance_of(Aws::SharedConfig)
                 .to receive(k.to_sym).and_return(v)
             end
-          when 'feature'
-            version = given['feature']['version']
-            feature = given['feature']['name']
-            feature += "##{version}" unless version.empty?
-            feature_callable = proc do |callable|
-              Aws::Plugins::UserAgent.feature(feature) do
+          when 'metric'
+            stub_const(
+              'Aws::Plugins::UserAgent::METRICS',
+              { 'metric' => given['metric'] }
+            )
+            metric_callable = proc do |callable|
+              Aws::Plugins::UserAgent.metric('metric') do
                 callable.call
               end
             end
@@ -56,7 +57,7 @@ module Aws
           end
         end
 
-        [feature_callable, caller, config_frameworks]
+        [metric_callable, caller, config_frameworks]
       end
 
       def assert_header(expected, actual)
@@ -97,13 +98,13 @@ module Aws
           it "passes test #{index + 1}: #{test['description']}" do
             given = test['given']
             expected_header = test['expectedRequestHeaders']['user-agent']
-            feature_callable, caller, config_frameworks = setup(given)
+            metric_callable, caller, config_frameworks = setup(given)
             allow(Kernel).to receive(:caller).and_return(caller)
             client.config.user_agent_frameworks = config_frameworks
 
             callable1 = proc { client.example_operation }
             callable2 = callable1
-            callable2 = proc { feature_callable.call(callable1) } if feature_callable
+            callable2 = proc { metric_callable.call(callable1) } if metric_callable
             resp = callable2.call
 
             actual_header = resp.context.http_request.headers['User-Agent']

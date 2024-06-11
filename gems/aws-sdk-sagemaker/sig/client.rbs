@@ -519,7 +519,7 @@ module Aws
                                     feature_specification_s3_uri: ::String?,
                                     algorithms_config: Array[
                                       {
-                                        auto_ml_algorithms: Array[("xgboost" | "linear-learner" | "mlp" | "lightgbm" | "catboost" | "randomforest" | "extra-trees" | "nn-torch" | "fastai")]
+                                        auto_ml_algorithms: Array[("xgboost" | "linear-learner" | "mlp" | "lightgbm" | "catboost" | "randomforest" | "extra-trees" | "nn-torch" | "fastai" | "cnn-qr" | "deepar" | "prophet" | "npts" | "arima" | "ets")]
                                       },
                                     ]?
                                   }?,
@@ -608,13 +608,20 @@ module Aws
                                          {
                                            country_code: ::String?
                                          },
-                                       ]?
+                                       ]?,
+                                       candidate_generation_config: {
+                                         algorithms_config: Array[
+                                           {
+                                             auto_ml_algorithms: Array[("xgboost" | "linear-learner" | "mlp" | "lightgbm" | "catboost" | "randomforest" | "extra-trees" | "nn-torch" | "fastai" | "cnn-qr" | "deepar" | "prophet" | "npts" | "arima" | "ets")]
+                                           },
+                                         ]?
+                                       }?
                                      }?,
                                      tabular_job_config: {
                                        candidate_generation_config: {
                                          algorithms_config: Array[
                                            {
-                                             auto_ml_algorithms: Array[("xgboost" | "linear-learner" | "mlp" | "lightgbm" | "catboost" | "randomforest" | "extra-trees" | "nn-torch" | "fastai")]
+                                             auto_ml_algorithms: Array[("xgboost" | "linear-learner" | "mlp" | "lightgbm" | "catboost" | "randomforest" | "extra-trees" | "nn-torch" | "fastai" | "cnn-qr" | "deepar" | "prophet" | "npts" | "arima" | "ets")]
                                            },
                                          ]?
                                        }?,
@@ -1365,7 +1372,8 @@ module Aws
                                         }?,
                                         routing_config: {
                                           routing_strategy: ("LEAST_OUTSTANDING_REQUESTS" | "RANDOM")
-                                        }?
+                                        }?,
+                                        inference_ami_version: ("al2-ami-sagemaker-inference-gpu-2")?
                                       },
                                     ],
                                     ?data_capture_config: {
@@ -1465,7 +1473,8 @@ module Aws
                                         }?,
                                         routing_config: {
                                           routing_strategy: ("LEAST_OUTSTANDING_REQUESTS" | "RANDOM")
-                                        }?
+                                        }?,
+                                        inference_ami_version: ("al2-ami-sagemaker-inference-gpu-2")?
                                       },
                                     ],
                                     ?execution_role_arn: ::String,
@@ -2887,7 +2896,14 @@ module Aws
                                     },
                                   ],
                                   ?skip_model_validation: ("All" | "None"),
-                                  ?source_uri: ::String
+                                  ?source_uri: ::String,
+                                  ?security_config: {
+                                    kms_key_id: ::String
+                                  },
+                                  ?model_card: {
+                                    model_card_content: ::String?,
+                                    model_card_status: ("Draft" | "PendingReview" | "Approved" | "Archived")?
+                                  }
                                 ) -> _CreateModelPackageResponseSuccess
                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateModelPackageResponseSuccess
 
@@ -5307,6 +5323,8 @@ module Aws
         def additional_inference_specifications: () -> ::Array[Types::AdditionalInferenceSpecificationDefinition]
         def skip_model_validation: () -> ("All" | "None")
         def source_uri: () -> ::String
+        def security_config: () -> Types::ModelPackageSecurityConfig
+        def model_card: () -> Types::ModelPackageModelCard
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#describe_model_package-instance_method
       def describe_model_package: (
@@ -8362,7 +8380,11 @@ module Aws
                                     supported_content_types: Array[::String]?,
                                     supported_response_mime_types: Array[::String]?
                                   },
-                                  ?source_uri: ::String
+                                  ?source_uri: ::String,
+                                  ?model_card: {
+                                    model_card_content: ::String?,
+                                    model_card_status: ("Draft" | "PendingReview" | "Approved" | "Archived")?
+                                  }
                                 ) -> _UpdateModelPackageResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateModelPackageResponseSuccess
 

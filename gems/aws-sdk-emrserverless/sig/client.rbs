@@ -157,6 +157,10 @@ module Aws
                                   prometheus_monitoring_configuration: {
                                     remote_write_url: ::String?
                                   }?
+                                },
+                                ?interactive_configuration: {
+                                  studio_enabled: bool?,
+                                  livy_endpoint_enabled: bool?
                                 }
                               ) -> _CreateApplicationResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateApplicationResponseSuccess
@@ -187,7 +191,8 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EMRServerless/Client.html#get_dashboard_for_job_run-instance_method
       def get_dashboard_for_job_run: (
                                        application_id: ::String,
-                                       job_run_id: ::String
+                                       job_run_id: ::String,
+                                       ?attempt: ::Integer
                                      ) -> _GetDashboardForJobRunResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDashboardForJobRunResponseSuccess
 
@@ -198,7 +203,8 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EMRServerless/Client.html#get_job_run-instance_method
       def get_job_run: (
                          application_id: ::String,
-                         job_run_id: ::String
+                         job_run_id: ::String,
+                         ?attempt: ::Integer
                        ) -> _GetJobRunResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetJobRunResponseSuccess
 
@@ -215,6 +221,20 @@ module Aws
                              ) -> _ListApplicationsResponseSuccess
                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListApplicationsResponseSuccess
 
+      interface _ListJobRunAttemptsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListJobRunAttemptsResponse]
+        def job_run_attempts: () -> ::Array[Types::JobRunAttemptSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EMRServerless/Client.html#list_job_run_attempts-instance_method
+      def list_job_run_attempts: (
+                                   application_id: ::String,
+                                   job_run_id: ::String,
+                                   ?next_token: ::String,
+                                   ?max_results: ::Integer
+                                 ) -> _ListJobRunAttemptsResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListJobRunAttemptsResponseSuccess
+
       interface _ListJobRunsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListJobRunsResponse]
         def job_runs: () -> ::Array[Types::JobRunSummary]
@@ -227,7 +247,8 @@ module Aws
                            ?max_results: ::Integer,
                            ?created_at_after: ::Time,
                            ?created_at_before: ::Time,
-                           ?states: Array[("SUBMITTED" | "PENDING" | "SCHEDULED" | "RUNNING" | "SUCCESS" | "FAILED" | "CANCELLING" | "CANCELLED")]
+                           ?states: Array[("SUBMITTED" | "PENDING" | "SCHEDULED" | "RUNNING" | "SUCCESS" | "FAILED" | "CANCELLING" | "CANCELLED")],
+                           ?mode: ("BATCH" | "STREAMING")
                          ) -> _ListJobRunsResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListJobRunsResponseSuccess
 
@@ -304,7 +325,12 @@ module Aws
                            },
                            ?tags: Hash[::String, ::String],
                            ?execution_timeout_minutes: ::Integer,
-                           ?name: ::String
+                           ?name: ::String,
+                           ?mode: ("BATCH" | "STREAMING"),
+                           ?retry_policy: {
+                             max_attempts: ::Integer?,
+                             max_failed_attempts_per_hour: ::Integer?
+                           }
                          ) -> _StartJobRunResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartJobRunResponseSuccess
 
@@ -379,6 +405,10 @@ module Aws
                                       image_uri: ::String?
                                     }?
                                   }],
+                                ?interactive_configuration: {
+                                  studio_enabled: bool?,
+                                  livy_endpoint_enabled: bool?
+                                },
                                 ?release_label: ::String,
                                 ?runtime_configuration: Array[
                                   {

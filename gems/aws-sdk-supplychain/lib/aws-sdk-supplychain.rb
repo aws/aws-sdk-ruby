@@ -52,6 +52,6 @@ require_relative 'aws-sdk-supplychain/customizations'
 # @!group service
 module Aws::SupplyChain
 
-  GEM_VERSION = '1.4.0'
+  GEM_VERSION = '1.5.0'
 
 end

@@ -101,7 +101,7 @@ module Aws::RDS
     #
     # @return [self]
     def load
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.describe_db_subnet_groups(db_subnet_group_name: @name)
       end
       @data = resp.db_subnet_groups[0]
@@ -218,7 +218,7 @@ module Aws::RDS
           :retry
         end
       end
-      Aws::Plugins::UserAgent.feature('resource') do
+      Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         Aws::Waiters::Waiter.new(options).wait({})
       end
     end
@@ -247,7 +247,7 @@ module Aws::RDS
     # @return [DBSubnetGroup]
     def create(options = {})
       options = options.merge(db_subnet_group_name: @name)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.create_db_subnet_group(options)
       end
       DBSubnetGroup.new(
@@ -264,7 +264,7 @@ module Aws::RDS
     # @return [EmptyStructure]
     def delete(options = {})
       options = options.merge(db_subnet_group_name: @name)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.delete_db_subnet_group(options)
       end
       resp.data
@@ -284,7 +284,7 @@ module Aws::RDS
     # @return [DBSubnetGroup]
     def modify(options = {})
       options = options.merge(db_subnet_group_name: @name)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.modify_db_subnet_group(options)
       end
       DBSubnetGroup.new(

@@ -1707,44 +1707,63 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # The collection of algorithms run on a dataset for training the model
-    # candidates of an Autopilot job.
+    # The selection of algorithms trained on your dataset to generate the
+    # model candidates for an Autopilot job.
     #
     # @!attribute [rw] auto_ml_algorithms
-    #   The selection of algorithms run on a dataset to train the model
-    #   candidates of an Autopilot job.
+    #   The selection of algorithms trained on your dataset to generate the
+    #   model candidates for an Autopilot job.
     #
-    #   <note markdown="1"> Selected algorithms must belong to the list corresponding to the
-    #   training mode set in [AutoMLJobConfig.Mode][1] (`ENSEMBLING` or
-    #   `HYPERPARAMETER_TUNING`). Choose a minimum of 1 algorithm.
+    #   * **For the tabular problem type `TabularJobConfig`:**
     #
-    #    </note>
+    #     <note markdown="1"> Selected algorithms must belong to the list corresponding to the
+    #     training mode set in [AutoMLJobConfig.Mode][1] (`ENSEMBLING` or
+    #     `HYPERPARAMETER_TUNING`). Choose a minimum of 1 algorithm.
     #
-    #   * In `ENSEMBLING` mode:
+    #      </note>
     #
-    #     * "catboost"
+    #     * In `ENSEMBLING` mode:
     #
-    #     * "extra-trees"
+    #       * "catboost"
     #
-    #     * "fastai"
+    #       * "extra-trees"
     #
-    #     * "lightgbm"
+    #       * "fastai"
     #
-    #     * "linear-learner"
+    #       * "lightgbm"
     #
-    #     * "nn-torch"
+    #       * "linear-learner"
     #
-    #     * "randomforest"
+    #       * "nn-torch"
     #
-    #     * "xgboost"
+    #       * "randomforest"
     #
-    #   * In `HYPERPARAMETER_TUNING` mode:
+    #       * "xgboost"
     #
-    #     * "linear-learner"
+    #     * In `HYPERPARAMETER_TUNING` mode:
     #
-    #     * "mlp"
+    #       * "linear-learner"
     #
-    #     * "xgboost"
+    #       * "mlp"
+    #
+    #       * "xgboost"
+    #
+    #   * **For the time-series forecasting problem type
+    #     `TimeSeriesForecastingJobConfig`:**
+    #
+    #     * Choose your algorithms from this list.
+    #
+    #       * "cnn-qr"
+    #
+    #       * "deepar"
+    #
+    #       * "prophet"
+    #
+    #       * "arima"
+    #
+    #       * "npts"
+    #
+    #       * "ets"
     #
     #
     #
@@ -1874,33 +1893,34 @@ module Aws::SageMaker
     #
     # @!attribute [rw] algorithms_config
     #   Stores the configuration information for the selection of algorithms
-    #   used to train the model candidates.
+    #   trained on tabular data.
     #
     #   The list of available algorithms to choose from depends on the
-    #   training mode set in [ `AutoMLJobConfig.Mode` ][1].
+    #   training mode set in [ `TabularJobConfig.Mode` ][1].
     #
-    #   * `AlgorithmsConfig` should not be set in `AUTO` training mode.
+    #   * `AlgorithmsConfig` should not be set if the training mode is set
+    #     on `AUTO`.
     #
     #   * When `AlgorithmsConfig` is provided, one `AutoMLAlgorithms`
     #     attribute must be set and one only.
     #
     #     If the list of algorithms provided as values for
-    #     `AutoMLAlgorithms` is empty, `AutoMLCandidateGenerationConfig`
-    #     uses the full set of algorithms for the given training mode.
+    #     `AutoMLAlgorithms` is empty, `CandidateGenerationConfig` uses the
+    #     full set of algorithms for the given training mode.
     #
     #   * When `AlgorithmsConfig` is not provided,
-    #     `AutoMLCandidateGenerationConfig` uses the full set of algorithms
-    #     for the given training mode.
+    #     `CandidateGenerationConfig` uses the full set of algorithms for
+    #     the given training mode.
     #
-    #   For the list of all algorithms per training mode, see [
-    #   AutoMLAlgorithmConfig][2].
+    #   For the list of all algorithms per problem type and training mode,
+    #   see [ AutoMLAlgorithmConfig][2].
     #
     #   For more information on each algorithm, see the [Algorithm
     #   support][3] section in Autopilot developer guide.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AutoMLJobConfig.html
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_TabularJobConfig.html
     #   [2]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AutoMLAlgorithmConfig.html
     #   [3]: https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-model-support-validation.html#autopilot-algorithm-support
     #   @return [Array<Types::AutoMLAlgorithmConfig>]
@@ -3153,36 +3173,63 @@ module Aws::SageMaker
     # generated using an AutoML job V2.
     #
     # @!attribute [rw] algorithms_config
-    #   Stores the configuration information for the selection of algorithms
-    #   used to train model candidates on tabular data.
+    #   Your Autopilot job trains a default set of algorithms on your
+    #   dataset. For tabular and time-series data, you can customize the
+    #   algorithm list by selecting a subset of algorithms for your problem
+    #   type.
     #
-    #   The list of available algorithms to choose from depends on the
-    #   training mode set in [ `TabularJobConfig.Mode` ][1].
+    #   `AlgorithmsConfig` stores the customized selection of algorithms to
+    #   train on your data.
     #
-    #   * `AlgorithmsConfig` should not be set in `AUTO` training mode.
+    #   * **For the tabular problem type `TabularJobConfig`,** the list of
+    #     available algorithms to choose from depends on the training mode
+    #     set in [ `AutoMLJobConfig.Mode` ][1].
     #
-    #   * When `AlgorithmsConfig` is provided, one `AutoMLAlgorithms`
-    #     attribute must be set and one only.
+    #     * `AlgorithmsConfig` should not be set when the training mode
+    #       `AutoMLJobConfig.Mode` is set to `AUTO`.
     #
-    #     If the list of algorithms provided as values for
-    #     `AutoMLAlgorithms` is empty, `CandidateGenerationConfig` uses the
-    #     full set of algorithms for the given training mode.
+    #     * When `AlgorithmsConfig` is provided, one `AutoMLAlgorithms`
+    #       attribute must be set and one only.
     #
-    #   * When `AlgorithmsConfig` is not provided,
-    #     `CandidateGenerationConfig` uses the full set of algorithms for
-    #     the given training mode.
+    #       If the list of algorithms provided as values for
+    #       `AutoMLAlgorithms` is empty, `CandidateGenerationConfig` uses
+    #       the full set of algorithms for the given training mode.
     #
-    #   For the list of all algorithms per problem type and training mode,
-    #   see [ AutoMLAlgorithmConfig][2].
+    #     * When `AlgorithmsConfig` is not provided,
+    #       `CandidateGenerationConfig` uses the full set of algorithms for
+    #       the given training mode.
     #
-    #   For more information on each algorithm, see the [Algorithm
-    #   support][3] section in Autopilot developer guide.
+    #     For the list of all algorithms per training mode, see [
+    #     AlgorithmConfig][2].
+    #
+    #     For more information on each algorithm, see the [Algorithm
+    #     support][3] section in the Autopilot developer guide.
+    #
+    #   * **For the time-series forecasting problem type
+    #     `TimeSeriesForecastingJobConfig`,** choose your algorithms from
+    #     the list provided in [ AlgorithmConfig][2].
+    #
+    #     For more information on each algorithm, see the [Algorithms
+    #     support for time-series forecasting][4] section in the Autopilot
+    #     developer guide.
+    #
+    #     * When `AlgorithmsConfig` is provided, one `AutoMLAlgorithms`
+    #       attribute must be set and one only.
+    #
+    #       If the list of algorithms provided as values for
+    #       `AutoMLAlgorithms` is empty, `CandidateGenerationConfig` uses
+    #       the full set of algorithms for time-series forecasting.
+    #
+    #     * When `AlgorithmsConfig` is not provided,
+    #       `CandidateGenerationConfig` uses the full set of algorithms for
+    #       time-series forecasting.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_TabularJobConfig.html
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AutoMLJobConfig.html
     #   [2]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AutoMLAlgorithmConfig.html
     #   [3]: https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-model-support-validation.html#autopilot-algorithm-support
+    #   [4]: https://docs.aws.amazon.com/sagemaker/latest/dg/timeseries-forecasting-algorithms.html
     #   @return [Array<Types::AutoMLAlgorithmConfig>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CandidateGenerationConfig AWS API Documentation
@@ -4042,6 +4089,29 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # Specifies the placement details for the node in the SageMaker HyperPod
+    # cluster, including the Availability Zone and the unique identifier
+    # (ID) of the Availability Zone.
+    #
+    # @!attribute [rw] availability_zone
+    #   The Availability Zone where the node in the SageMaker HyperPod
+    #   cluster is launched.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone_id
+    #   The unique identifier (ID) of the Availability Zone where the node
+    #   in the SageMaker HyperPod cluster is launched.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ClusterInstancePlacement AWS API Documentation
+    #
+    class ClusterInstancePlacement < Struct.new(
+      :availability_zone,
+      :availability_zone_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Details of an instance in a SageMaker HyperPod cluster.
     #
     # @!attribute [rw] status
@@ -4123,6 +4193,19 @@ module Aws::SageMaker
     #   `CreateCluster`.
     #   @return [Integer]
     #
+    # @!attribute [rw] private_primary_ip
+    #   The private primary IP address of the SageMaker HyperPod cluster
+    #   node.
+    #   @return [String]
+    #
+    # @!attribute [rw] private_dns_hostname
+    #   The private DNS hostname of the SageMaker HyperPod cluster node.
+    #   @return [String]
+    #
+    # @!attribute [rw] placement
+    #   The placement details of the SageMaker HyperPod cluster node.
+    #   @return [Types::ClusterInstancePlacement]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ClusterNodeDetails AWS API Documentation
     #
     class ClusterNodeDetails < Struct.new(
@@ -4132,7 +4215,10 @@ module Aws::SageMaker
       :instance_type,
       :launch_time,
       :life_cycle_config,
-      :threads_per_core)
+      :threads_per_core,
+      :private_primary_ip,
+      :private_dns_hostname,
+      :placement)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7967,6 +8053,29 @@ module Aws::SageMaker
     #   (ARN). If you want to register a model, set it to the model ARN.
     #   @return [String]
     #
+    # @!attribute [rw] security_config
+    #   The KMS Key ID (`KMSKeyId`) used for encryption of model package
+    #   information.
+    #   @return [Types::ModelPackageSecurityConfig]
+    #
+    # @!attribute [rw] model_card
+    #   The model card associated with the model package. Since
+    #   `ModelPackageModelCard` is tied to a model package, it is a specific
+    #   usage of a model card and its schema is simplified compared to the
+    #   schema of `ModelCard`. The `ModelPackageModelCard` schema does not
+    #   include `model_package_details`, and `model_overview` is composed of
+    #   the `model_creator` and `model_artifact` properties. For more
+    #   information about the model package model card schema, see [Model
+    #   package model card schema][1]. For more information about the model
+    #   card associated with the model package, see [View the Details of a
+    #   Model Version][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry-details.html#model-card-schema
+    #   [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry-details.html
+    #   @return [Types::ModelPackageModelCard]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateModelPackageInput AWS API Documentation
     #
     class CreateModelPackageInput < Struct.new(
@@ -7989,7 +8098,9 @@ module Aws::SageMaker
       :drift_check_baselines,
       :additional_inference_specifications,
       :skip_model_validation,
-      :source_uri)
+      :source_uri,
+      :security_config,
+      :model_card)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12063,11 +12174,11 @@ module Aws::SageMaker
 
     # @!attribute [rw] cluster_name
     #   The string name or the Amazon Resource Name (ARN) of the SageMaker
-    #   HyperPod cluster in which the instance is.
+    #   HyperPod cluster in which the node is.
     #   @return [String]
     #
     # @!attribute [rw] node_id
-    #   The ID of the instance.
+    #   The ID of the SageMaker HyperPod cluster node.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeClusterNodeRequest AWS API Documentation
@@ -12080,7 +12191,7 @@ module Aws::SageMaker
     end
 
     # @!attribute [rw] node_details
-    #   The details of the instance.
+    #   The details of the SageMaker HyperPod cluster node.
     #   @return [Types::ClusterNodeDetails]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeClusterNodeResponse AWS API Documentation
@@ -15380,6 +15491,29 @@ module Aws::SageMaker
     #   The URI of the source for the model package.
     #   @return [String]
     #
+    # @!attribute [rw] security_config
+    #   The KMS Key ID (`KMSKeyId`) used for encryption of model package
+    #   information.
+    #   @return [Types::ModelPackageSecurityConfig]
+    #
+    # @!attribute [rw] model_card
+    #   The model card associated with the model package. Since
+    #   `ModelPackageModelCard` is tied to a model package, it is a specific
+    #   usage of a model card and its schema is simplified compared to the
+    #   schema of `ModelCard`. The `ModelPackageModelCard` schema does not
+    #   include `model_package_details`, and `model_overview` is composed of
+    #   the `model_creator` and `model_artifact` properties. For more
+    #   information about the model package model card schema, see [Model
+    #   package model card schema][1]. For more information about the model
+    #   card associated with the model package, see [View the Details of a
+    #   Model Version][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry-details.html#model-card-schema
+    #   [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry-details.html
+    #   @return [Types::ModelPackageModelCard]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeModelPackageOutput AWS API Documentation
     #
     class DescribeModelPackageOutput < Struct.new(
@@ -15409,7 +15543,9 @@ module Aws::SageMaker
       :drift_check_baselines,
       :additional_inference_specifications,
       :skip_model_validation,
-      :source_uri)
+      :source_uri,
+      :security_config,
+      :model_card)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -24939,9 +25075,9 @@ module Aws::SageMaker
     #
     # @!attribute [rw] max_results
     #   This parameter defines the maximum number of results that can be
-    #   returned in a single response. The `MaxResults` parameter is an
-    #   upper bound, not a target. If there are more results available than
-    #   the value specified, a `NextToken` is provided in the response. The
+    #   return in a single response. The `MaxResults` parameter is an upper
+    #   bound, not a target. If there are more results available than the
+    #   value specified, a `NextToken` is provided in the response. The
     #   `NextToken` indicates that the user should get the next set of
     #   results by providing this token as a part of a subsequent call. The
     #   default value for `MaxResults` is 10.
@@ -25957,9 +26093,9 @@ module Aws::SageMaker
     #
     # @!attribute [rw] max_results
     #   This parameter defines the maximum number of results that can be
-    #   returned in a single response. The `MaxResults` parameter is an
-    #   upper bound, not a target. If there are more results available than
-    #   the value specified, a `NextToken` is provided in the response. The
+    #   return in a single response. The `MaxResults` parameter is an upper
+    #   bound, not a target. If there are more results available than the
+    #   value specified, a `NextToken` is provided in the response. The
     #   `NextToken` indicates that the user should get the next set of
     #   results by providing this token as a part of a subsequent call. The
     #   default value for `MaxResults` is 10.
@@ -29283,9 +29419,9 @@ module Aws::SageMaker
     #
     # @!attribute [rw] max_results
     #   This parameter defines the maximum number of results that can be
-    #   returned in a single response. The `MaxResults` parameter is an
-    #   upper bound, not a target. If there are more results available than
-    #   the value specified, a `NextToken` is provided in the response. The
+    #   return in a single response. The `MaxResults` parameter is an upper
+    #   bound, not a target. If there are more results available than the
+    #   value specified, a `NextToken` is provided in the response. The
     #   `NextToken` indicates that the user should get the next set of
     #   results by providing this token as a part of a subsequent call. The
     #   default value for `MaxResults` is 10.
@@ -29969,9 +30105,9 @@ module Aws::SageMaker
     #
     # @!attribute [rw] max_results
     #   This parameter defines the maximum number of results that can be
-    #   returned in a single response. The `MaxResults` parameter is an
-    #   upper bound, not a target. If there are more results available than
-    #   the value specified, a `NextToken` is provided in the response. The
+    #   return in a single response. The `MaxResults` parameter is an upper
+    #   bound, not a target. If there are more results available than the
+    #   value specified, a `NextToken` is provided in the response. The
     #   `NextToken` indicates that the user should get the next set of
     #   results by providing this token as a part of a subsequent call. The
     #   default value for `MaxResults` is 10.
@@ -31594,6 +31730,30 @@ module Aws::SageMaker
     #   The URI of the source for the model package.
     #   @return [String]
     #
+    # @!attribute [rw] security_config
+    #   An optional Key Management Service key to encrypt, decrypt, and
+    #   re-encrypt model package information for regulated workloads with
+    #   highly sensitive data.
+    #   @return [Types::ModelPackageSecurityConfig]
+    #
+    # @!attribute [rw] model_card
+    #   The model card associated with the model package. Since
+    #   `ModelPackageModelCard` is tied to a model package, it is a specific
+    #   usage of a model card and its schema is simplified compared to the
+    #   schema of `ModelCard`. The `ModelPackageModelCard` schema does not
+    #   include `model_package_details`, and `model_overview` is composed of
+    #   the `model_creator` and `model_artifact` properties. For more
+    #   information about the model package model card schema, see [Model
+    #   package model card schema][1]. For more information about the model
+    #   card associated with the model package, see [View the Details of a
+    #   Model Version][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry-details.html#model-card-schema
+    #   [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry-details.html
+    #   @return [Types::ModelPackageModelCard]
+    #
     # @!attribute [rw] tags
     #   A list of the tags associated with the model package. For more
     #   information, see [Tagging Amazon Web Services resources][1] in the
@@ -31644,6 +31804,8 @@ module Aws::SageMaker
       :sample_payload_url,
       :additional_inference_specifications,
       :source_uri,
+      :security_config,
+      :model_card,
       :tags,
       :customer_metadata_properties,
       :drift_check_baselines,
@@ -31843,6 +32005,74 @@ module Aws::SageMaker
       :model_package_group_description,
       :creation_time,
       :model_package_group_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The model card associated with the model package. Since
+    # `ModelPackageModelCard` is tied to a model package, it is a specific
+    # usage of a model card and its schema is simplified compared to the
+    # schema of `ModelCard`. The `ModelPackageModelCard` schema does not
+    # include `model_package_details`, and `model_overview` is composed of
+    # the `model_creator` and `model_artifact` properties. For more
+    # information about the model package model card schema, see [Model
+    # package model card schema][1]. For more information about the model
+    # card associated with the model package, see [View the Details of a
+    # Model Version][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry-details.html#model-card-schema
+    # [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry-details.html
+    #
+    # @!attribute [rw] model_card_content
+    #   The content of the model card. The content must follow the schema
+    #   described in [Model Package Model Card Schema][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry-details.html#model-card-schema
+    #   @return [String]
+    #
+    # @!attribute [rw] model_card_status
+    #   The approval status of the model card within your organization.
+    #   Different organizations might have different criteria for model card
+    #   review and approval.
+    #
+    #   * `Draft`: The model card is a work in progress.
+    #
+    #   * `PendingReview`: The model card is pending review.
+    #
+    #   * `Approved`: The model card is approved.
+    #
+    #   * `Archived`: The model card is archived. No more updates can be
+    #     made to the model card content. If you try to update the model
+    #     card content, you will receive the message `Model Card is in
+    #     Archived state`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ModelPackageModelCard AWS API Documentation
+    #
+    class ModelPackageModelCard < Struct.new(
+      :model_card_content,
+      :model_card_status)
+      SENSITIVE = [:model_card_content]
+      include Aws::Structure
+    end
+
+    # An optional Key Management Service key to encrypt, decrypt, and
+    # re-encrypt model package information for regulated workloads with
+    # highly sensitive data.
+    #
+    # @!attribute [rw] kms_key_id
+    #   The KMS Key ID (`KMSKeyId`) used for encryption of model package
+    #   information.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ModelPackageSecurityConfig AWS API Documentation
+    #
+    class ModelPackageSecurityConfig < Struct.new(
+      :kms_key_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -35485,6 +35715,19 @@ module Aws::SageMaker
     #   the instances that the endpoint hosts.
     #   @return [Types::ProductionVariantRoutingConfig]
     #
+    # @!attribute [rw] inference_ami_version
+    #   Specifies an option from a collection of preconfigured Amazon
+    #   Machine Image (AMI) images. Each image is configured by Amazon Web
+    #   Services with a set of software and driver versions. Amazon Web
+    #   Services optimizes these configurations for different machine
+    #   learning workloads.
+    #
+    #   By selecting an AMI version, you can ensure that your inference
+    #   environment is compatible with specific software requirements, such
+    #   as CUDA driver versions, Linux kernel versions, or Amazon Web
+    #   Services Neuron driver versions.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ProductionVariant AWS API Documentation
     #
     class ProductionVariant < Struct.new(
@@ -35501,7 +35744,8 @@ module Aws::SageMaker
       :container_startup_health_check_timeout_in_seconds,
       :enable_ssm_access,
       :managed_instance_scaling,
-      :routing_config)
+      :routing_config,
+      :inference_ami_version)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -40683,6 +40927,11 @@ module Aws::SageMaker
     #   model.
     #   @return [Array<Types::HolidayConfigAttributes>]
     #
+    # @!attribute [rw] candidate_generation_config
+    #   Stores the configuration information for how model candidates are
+    #   generated using an AutoML job V2.
+    #   @return [Types::CandidateGenerationConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/TimeSeriesForecastingJobConfig AWS API Documentation
     #
     class TimeSeriesForecastingJobConfig < Struct.new(
@@ -40693,7 +40942,8 @@ module Aws::SageMaker
       :forecast_quantiles,
       :transformations,
       :time_series_config,
-      :holiday_config)
+      :holiday_config,
+      :candidate_generation_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -43929,6 +44179,24 @@ module Aws::SageMaker
     #   The URI of the source for the model package.
     #   @return [String]
     #
+    # @!attribute [rw] model_card
+    #   The model card associated with the model package. Since
+    #   `ModelPackageModelCard` is tied to a model package, it is a specific
+    #   usage of a model card and its schema is simplified compared to the
+    #   schema of `ModelCard`. The `ModelPackageModelCard` schema does not
+    #   include `model_package_details`, and `model_overview` is composed of
+    #   the `model_creator` and `model_artifact` properties. For more
+    #   information about the model package model card schema, see [Model
+    #   package model card schema][1]. For more information about the model
+    #   card associated with the model package, see [View the Details of a
+    #   Model Version][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry-details.html#model-card-schema
+    #   [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry-details.html
+    #   @return [Types::ModelPackageModelCard]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateModelPackageInput AWS API Documentation
     #
     class UpdateModelPackageInput < Struct.new(
@@ -43939,7 +44207,8 @@ module Aws::SageMaker
       :customer_metadata_properties_to_remove,
       :additional_inference_specifications_to_add,
       :inference_specification,
-      :source_uri)
+      :source_uri,
+      :model_card)
       SENSITIVE = []
       include Aws::Structure
     end

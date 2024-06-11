@@ -2360,6 +2360,8 @@ module Aws::Kafka
     #   resp.node_info_list[0].broker_node_info.current_broker_software_info.kafka_version #=> String
     #   resp.node_info_list[0].broker_node_info.endpoints #=> Array
     #   resp.node_info_list[0].broker_node_info.endpoints[0] #=> String
+    #   resp.node_info_list[0].controller_node_info.endpoints #=> Array
+    #   resp.node_info_list[0].controller_node_info.endpoints[0] #=> String
     #   resp.node_info_list[0].instance_type #=> String
     #   resp.node_info_list[0].node_arn #=> String
     #   resp.node_info_list[0].node_type #=> String, one of "BROKER"
@@ -3349,7 +3351,7 @@ module Aws::Kafka
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kafka'
-      context[:gem_version] = '1.72.0'
+      context[:gem_version] = '1.74.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

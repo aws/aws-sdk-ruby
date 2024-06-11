@@ -226,17 +226,21 @@ module Aws::ManagedBlockchain
     # @!attribute [rw] network_type
     #   The blockchain network that the `Accessor` token is created for.
     #
-    #   <note markdown="1"> We recommend using the appropriate `networkType` value for the
-    #   blockchain network that you are creating the `Accessor` token for.
-    #   You cannnot use the value `ETHEREUM_MAINNET_AND_GOERLI` to specify a
-    #   `networkType` for your Accessor token.
+    #   <note markdown="1"> * Use the actual `networkType` value for the blockchain network that
+    #     you are creating the `Accessor` token for.
     #
-    #    The default value of `ETHEREUM_MAINNET_AND_GOERLI` is only applied:
+    #   * With the shut down of the *Ethereum Goerli* and *Polygon Mumbai
+    #     Testnet* networks the following `networkType` values are no longer
+    #     available for selection and use.
     #
-    #    * when the `CreateAccessor` action does not set a `networkType`.
+    #     * `ETHEREUM_MAINNET_AND_GOERLI`
     #
-    #   * to all existing `Accessor` tokens that were created before the
-    #     `networkType` property was introduced.
+    #     * `ETHEREUM_GOERLI`
+    #
+    #     * `POLYGON_MUMBAI`
+    #
+    #     However, your existing `Accessor` tokens with these `networkType`
+    #     values will remain unchanged.
     #
     #    </note>
     #   @return [String]
@@ -434,7 +438,7 @@ module Aws::ManagedBlockchain
     #
     #   * `n-ethereum-mainnet`
     #
-    #   * `n-ethereum-goerli`
+    #   ^
     #   @return [String]
     #
     # @!attribute [rw] member_id
@@ -611,7 +615,7 @@ module Aws::ManagedBlockchain
     #
     #   * `n-ethereum-mainnet`
     #
-    #   * `n-ethereum-goerli`
+    #   ^
     #   @return [String]
     #
     # @!attribute [rw] member_id
@@ -1808,7 +1812,7 @@ module Aws::ManagedBlockchain
     #
     #   * mainnet = `1`
     #
-    #   * goerli = `5`
+    #   ^
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/managedblockchain-2018-09-24/NetworkEthereumAttributes AWS API Documentation

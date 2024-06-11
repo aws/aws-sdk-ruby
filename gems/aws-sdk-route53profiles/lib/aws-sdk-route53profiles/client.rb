@@ -1160,7 +1160,7 @@ module Aws::Route53Profiles
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-route53profiles'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.4.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

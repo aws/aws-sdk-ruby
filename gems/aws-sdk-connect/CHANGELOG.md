@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.162.0 (2024-06-05)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.161.0 (2024-05-30)
+------------------
+
+* Feature - Adding associatedQueueIds as a SearchCriteria and response field to the SearchRoutingProfiles API
+
+1.160.0 (2024-05-29)
+------------------
+
+* Feature - This release includes changes to DescribeContact API's response by including ConnectedToSystemTimestamp, RoutingCriteria, Customer, Campaign, AnsweringMachineDetectionStatus, CustomerVoiceActivity, QualityMetrics, DisconnectDetails, and SegmentAttributes information from a contact in Amazon Connect.
+
 1.159.0 (2024-05-16)
 ------------------
 

@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.25.0 (2024-06-05)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.24.0 (2024-06-03)
+------------------
+
+* Feature - Support RESET_VALUE UpdateType for PropertyUpdates to reset property value to default or null
+
 1.23.0 (2024-05-13)
 ------------------
 

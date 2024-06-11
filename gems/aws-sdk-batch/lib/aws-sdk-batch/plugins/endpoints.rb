@@ -84,6 +84,8 @@ module Aws::Batch
             Aws::Batch::Endpoints::DescribeJobs.build(context)
           when :describe_scheduling_policies
             Aws::Batch::Endpoints::DescribeSchedulingPolicies.build(context)
+          when :get_job_queue_snapshot
+            Aws::Batch::Endpoints::GetJobQueueSnapshot.build(context)
           when :list_jobs
             Aws::Batch::Endpoints::ListJobs.build(context)
           when :list_scheduling_policies

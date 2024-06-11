@@ -665,8 +665,10 @@ module Aws::SNS
 
       api.metadata = {
         "apiVersion" => "2010-03-31",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "sns",
         "protocol" => "query",
+        "protocols" => ["query"],
         "serviceAbbreviation" => "Amazon SNS",
         "serviceFullName" => "Amazon Simple Notification Service",
         "serviceId" => "SNS",

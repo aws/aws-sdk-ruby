@@ -160,7 +160,7 @@ module Aws::DynamoDB
     #   * `NONE` - No `ConsumedCapacity` details are included in the response.
     # @return [Types::BatchGetItemOutput]
     def batch_get_item(options = {})
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.batch_get_item(options)
       end
       resp.data
@@ -243,7 +243,7 @@ module Aws::DynamoDB
     #   response. If set to `NONE` (the default), no statistics are returned.
     # @return [Types::BatchWriteItemOutput]
     def batch_write_item(options = {})
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.batch_write_item(options)
       end
       resp.data
@@ -467,16 +467,16 @@ module Aws::DynamoDB
     #
     #   * `PROVISIONED` - We recommend using `PROVISIONED` for predictable
     #     workloads. `PROVISIONED` sets the billing mode to [Provisioned
-    #     Mode][1].
+    #     capacity mode][1].
     #
     #   * `PAY_PER_REQUEST` - We recommend using `PAY_PER_REQUEST` for
     #     unpredictable workloads. `PAY_PER_REQUEST` sets the billing mode to
-    #     [On-Demand Mode][2].
+    #     [On-demand capacity mode][2].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadWriteCapacityMode.html#HowItWorks.ProvisionedThroughput.Manual
-    #   [2]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadWriteCapacityMode.html#HowItWorks.OnDemand
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/provisioned-capacity-mode.html
+    #   [2]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/on-demand-capacity-mode.html
     # @option options [Types::ProvisionedThroughput] :provisioned_throughput
     #   Represents the provisioned throughput settings for a specified table
     #   or index. The settings can be modified using the `UpdateTable`
@@ -543,6 +543,12 @@ module Aws::DynamoDB
     #   for resource-based policies, see [Resource-based policy
     #   considerations][1].
     #
+    #   <note markdown="1"> You need to specify the `CreateTable` and `PutResourcePolicy` IAM
+    #   actions for authorizing a user to create a table with a resource-based
+    #   policy.
+    #
+    #    </note>
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/rbac-considerations.html
@@ -552,7 +558,7 @@ module Aws::DynamoDB
     #   specify `MaxReadRequestUnits`, `MaxWriteRequestUnits`, or both.
     # @return [Table]
     def create_table(options = {})
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.create_table(options)
       end
       Table.new(
@@ -580,7 +586,7 @@ module Aws::DynamoDB
     # @return [Table::Collection]
     def tables(options = {})
       batches = Enumerator.new do |y|
-        resp = Aws::Plugins::UserAgent.feature('resource') do
+        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
           @client.list_tables(options)
         end
         resp.each_page do |page|

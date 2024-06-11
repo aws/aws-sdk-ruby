@@ -3164,7 +3164,7 @@ module Aws::CloudWatchEvidently
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudwatchevidently'
-      context[:gem_version] = '1.24.0'
+      context[:gem_version] = '1.25.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

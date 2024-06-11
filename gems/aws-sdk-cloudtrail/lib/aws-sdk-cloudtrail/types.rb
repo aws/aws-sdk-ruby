@@ -265,6 +265,8 @@ module Aws::CloudTrail
     #
     #     * `AWS::PCAConnectorAD::Connector`
     #
+    #     * `AWS::QApps:QApp`
+    #
     #     * `AWS::QBusiness::Application`
     #
     #     * `AWS::QBusiness::DataSource`
@@ -297,11 +299,13 @@ module Aws::CloudTrail
     #
     #     * `AWS::SNS::Topic`
     #
-    #     * `AWS::SWF::Domain`
-    #
     #     * `AWS::SQS::Queue`
     #
+    #     * `AWS::SSM::ManagedNode`
+    #
     #     * `AWS::SSMMessages::ControlChannel`
+    #
+    #     * `AWS::SWF::Domain`
     #
     #     * `AWS::ThinClient::Device`
     #
@@ -313,6 +317,8 @@ module Aws::CloudTrail
     #
     #     * `AWS::VerifiedPermissions::PolicyStore`
     #
+    #     * `AWS::XRay::Trace`
+    #
     #     You can have only one `resources.type` ﬁeld per selector. To log
     #     data events on more than one resource type, add another selector.
     #
@@ -320,10 +326,18 @@ module Aws::CloudTrail
     #     with `resources.ARN`, but if you use `Equals` or `NotEquals`, the
     #     value must exactly match the ARN of a valid resource of the type
     #     you've speciﬁed in the template as the value of resources.type.
-    #     For example, if resources.type equals `AWS::S3::Object`, the ARN
-    #     must be in one of the following formats. To log all data events
-    #     for all objects in a specific S3 bucket, use the `StartsWith`
-    #     operator, and include only the bucket ARN as the matching value.
+    #
+    #     <note markdown="1"> You can't use the `resources.ARN` field to filter resource types
+    #     that do not have ARNs.
+    #
+    #      </note>
+    #
+    #     The `resources.ARN` field can be set one of the following.
+    #
+    #     If resources.type equals `AWS::S3::Object`, the ARN must be in one
+    #     of the following formats. To log all data events for all objects
+    #     in a specific S3 bucket, use the `StartsWith` operator, and
+    #     include only the bucket ARN as the matching value.
     #
     #     The trailing slash is intentional; do not exclude it. Replace the
     #     text between less than and greater than symbols (&lt;&gt;) with
@@ -597,6 +611,14 @@ module Aws::CloudTrail
     #
     #     ^
     #
+    #     When `resources.type` equals `AWS::QApps:QApp`, and the operator
+    #     is set to `Equals` or `NotEquals`, the ARN must be in the
+    #     following format:
+    #
+    #     * `arn:<partition>:qapps:<region>:<account_ID>:application/<application_UUID>/qapp/<qapp_UUID>`
+    #
+    #     ^
+    #
     #     When `resources.type` equals `AWS::QBusiness::Application`, and
     #     the operator is set to `Equals` or `NotEquals`, the ARN must be in
     #     the following format:
@@ -729,14 +751,6 @@ module Aws::CloudTrail
     #
     #     ^
     #
-    #     When `resources.type` equals `AWS::SWF::Domain`, and the operator
-    #     is set to `Equals` or `NotEquals`, the ARN must be in the
-    #     following format:
-    #
-    #     * `arn:<partition>:swf:<region>:<account_ID>:domain/<domain_name>`
-    #
-    #     ^
-    #
     #     When `resources.type` equals `AWS::SQS::Queue`, and the operator
     #     is set to `Equals` or `NotEquals`, the ARN must be in the
     #     following format:
@@ -745,11 +759,27 @@ module Aws::CloudTrail
     #
     #     ^
     #
+    #     When `resources.type` equals `AWS::SSM::ManagedNode`, and the
+    #     operator is set to `Equals` or `NotEquals`, the ARN must be in one
+    #     of the following formats:
+    #
+    #     * `arn:<partition>:ssm:<region>:<account_ID>:managed-instance/<instance_ID>`
+    #
+    #     * `arn:<partition>:ec2:<region>:<account_ID>:instance/<instance_ID>`
+    #
     #     When `resources.type` equals `AWS::SSMMessages::ControlChannel`,
     #     and the operator is set to `Equals` or `NotEquals`, the ARN must
     #     be in the following format:
     #
     #     * `arn:<partition>:ssmmessages:<region>:<account_ID>:control-channel/<channel_ID>`
+    #
+    #     ^
+    #
+    #     When `resources.type` equals `AWS::SWF::Domain`, and the operator
+    #     is set to `Equals` or `NotEquals`, the ARN must be in the
+    #     following format:
+    #
+    #     * `arn:<partition>:swf:<region>:<account_ID>:domain/<domain_name>`
     #
     #     ^
     #
@@ -959,13 +989,14 @@ module Aws::CloudTrail
     class CloudTrailARNInvalidException < Aws::EmptyStructure; end
 
     # This exception is thrown when trusted access has not been enabled
-    # between CloudTrail and Organizations. For more information, see
-    # [Enabling Trusted Access with Other Amazon Web Services Services][1]
-    # and [Prepare For Creating a Trail For Your Organization][2].
+    # between CloudTrail and Organizations. For more information, see [How
+    # to enable or disable trusted access][1] in the *Organizations User
+    # Guide* and [Prepare For Creating a Trail For Your Organization][2] in
+    # the *CloudTrail User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services.html
+    # [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services.html#orgs_how-to-enable-disable-trusted-access
     # [2]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/creating-an-organizational-trail-prepare.html
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/CloudTrailAccessNotEnabledException AWS API Documentation
@@ -1097,15 +1128,15 @@ module Aws::CloudTrail
     #   the CloudTrail User Guide.
     #
     #   For more information about how to use advanced event selectors to
-    #   include non-Amazon Web Services events in your event data store, see
-    #   [Create an integration to log events from outside Amazon Web
-    #   Services][3] in the CloudTrail User Guide.
+    #   include events outside of Amazon Web Services events in your event
+    #   data store, see [Create an integration to log events from outside
+    #   Amazon Web Services][3] in the CloudTrail User Guide.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-data-events-with-cloudtrail.html#creating-data-event-selectors-advanced
-    #   [2]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/query-lake-cli.html#lake-cli-create-eds-config
-    #   [3]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/query-lake-cli.html#lake-cli-create-integration
+    #   [2]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/lake-eds-cli.html#lake-cli-create-eds-config
+    #   [3]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/lake-integrations-cli.html#lake-cli-create-integration
     #   @return [Array<Types::AdvancedEventSelector>]
     #
     # @!attribute [rw] multi_region_enabled
@@ -1339,11 +1370,12 @@ module Aws::CloudTrail
     #
     # @!attribute [rw] s3_bucket_name
     #   Specifies the name of the Amazon S3 bucket designated for publishing
-    #   log files. See [Amazon S3 Bucket Naming Requirements][1].
+    #   log files. For information about bucket naming rules, see [Bucket
+    #   naming rules][1] in the *Amazon Simple Storage Service User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/create_trail_naming_policy.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucketnamingrules.html
     #   @return [String]
     #
     # @!attribute [rw] s3_key_prefix
@@ -1354,7 +1386,7 @@ module Aws::CloudTrail
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-find-log-files.html
+    #   [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/get-and-view-cloudtrail-log-files.html#cloudtrail-find-log-files
     #   @return [String]
     #
     # @!attribute [rw] sns_topic_name
@@ -1482,7 +1514,7 @@ module Aws::CloudTrail
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-find-log-files.html
+    #   [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/get-and-view-cloudtrail-log-files.html#cloudtrail-find-log-files
     #   @return [String]
     #
     # @!attribute [rw] sns_topic_name
@@ -1559,12 +1591,22 @@ module Aws::CloudTrail
       include Aws::Structure
     end
 
-    # The Amazon S3 buckets, Lambda functions, or Amazon DynamoDB tables
-    # that you specify in your event selectors for your trail to log data
-    # events. Data events provide information about the resource operations
+    # Data events provide information about the resource operations
     # performed on or within a resource itself. These are also known as data
     # plane operations. You can specify up to 250 data resources for a
     # trail.
+    #
+    # Configure the `DataResource` to specify the resource type and resource
+    # ARNs for which you want to log data events.
+    #
+    # You can specify the following resource types in your event selectors
+    # for your trail:
+    #
+    # * `AWS::DynamoDB::Table`
+    #
+    # * `AWS::Lambda::Function`
+    #
+    # * `AWS::S3::Object`
     #
     # <note markdown="1"> The total number of allowed data resources is 250. This number can be
     # distributed between 1 and 5 event selectors, but the total cannot
@@ -1637,7 +1679,7 @@ module Aws::CloudTrail
     #
     # @!attribute [rw] values
     #   An array of Amazon Resource Name (ARN) strings or partial ARN
-    #   strings for the specified objects.
+    #   strings for the specified resource type.
     #
     #   * To log data events for all objects in all S3 buckets in your
     #     Amazon Web Services account, specify the prefix as `arn:aws:s3`.
@@ -2107,7 +2149,7 @@ module Aws::CloudTrail
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-data-events-with-cloudtrail.html#creating-data-event-selectors-advanced
+    # [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-concepts.html#adv-event-selectors
     #
     # @!attribute [rw] event_data_store_arn
     #   The ARN of the event data store.
@@ -2449,6 +2491,12 @@ module Aws::CloudTrail
     #   data store.
     #   @return [String]
     #
+    # @!attribute [rw] partition_keys
+    #   The partition keys for the event data store. To improve query
+    #   performance and efficiency, CloudTrail Lake organizes event data
+    #   into partitions based on values derived from partition keys.
+    #   @return [Array<Types::PartitionKey>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/GetEventDataStoreResponse AWS API Documentation
     #
     class GetEventDataStoreResponse < Struct.new(
@@ -2465,7 +2513,8 @@ module Aws::CloudTrail
       :kms_key_id,
       :billing_mode,
       :federation_status,
-      :federation_role_arn)
+      :federation_role_arn,
+      :partition_keys)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2817,15 +2866,16 @@ module Aws::CloudTrail
     #
     #   <note markdown="1"> This error occurs only when there is a problem with the destination
     #   S3 bucket, and does not occur for requests that time out. To resolve
-    #   the issue, create a new bucket, and then call `UpdateTrail` to
-    #   specify the new bucket; or fix the existing objects so that
-    #   CloudTrail can again write to the bucket.
+    #   the issue, fix the [bucket policy][2] so that CloudTrail can write
+    #   to the bucket; or create a new bucket and call `UpdateTrail` to
+    #   specify the new bucket.
     #
     #    </note>
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html
+    #   [2]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/create-s3-bucket-policy-for-cloudtrail.html
     #   @return [String]
     #
     # @!attribute [rw] latest_notification_error
@@ -2882,15 +2932,16 @@ module Aws::CloudTrail
     #
     #   <note markdown="1"> This error occurs only when there is a problem with the destination
     #   S3 bucket, and does not occur for requests that time out. To resolve
-    #   the issue, create a new bucket, and then call `UpdateTrail` to
-    #   specify the new bucket; or fix the existing objects so that
-    #   CloudTrail can again write to the bucket.
+    #   the issue, fix the [bucket policy][2] so that CloudTrail can write
+    #   to the bucket; or create a new bucket and call `UpdateTrail` to
+    #   specify the new bucket.
     #
     #    </note>
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html
+    #   [2]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/create-s3-bucket-policy-for-cloudtrail.html
     #   @return [String]
     #
     # @!attribute [rw] latest_delivery_attempt_time
@@ -4077,12 +4128,12 @@ module Aws::CloudTrail
     # the request to create or update an organization trail or event data
     # store is not the management account for an organization in
     # Organizations. For more information, see [Prepare For Creating a Trail
-    # For Your Organization][1] or [Create an event data store][2].
+    # For Your Organization][1] or [Organization event data stores][2].
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/creating-an-organizational-trail-prepare.html
-    # [2]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/query-event-data-store.html
+    # [2]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-organizations.html
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/NotOrganizationMasterAccountException AWS API Documentation
     #
@@ -4111,6 +4162,26 @@ module Aws::CloudTrail
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/OrganizationsNotInUseException AWS API Documentation
     #
     class OrganizationsNotInUseException < Aws::EmptyStructure; end
+
+    # Contains information about a partition key for an event data store.
+    #
+    # @!attribute [rw] name
+    #   The name of the partition key.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The data type of the partition key. For example, `bigint` or
+    #   `string`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/PartitionKey AWS API Documentation
+    #
+    class PartitionKey < Struct.new(
+      :name,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # Contains information about a returned public key.
     #
@@ -5084,11 +5155,11 @@ module Aws::CloudTrail
     #
     # @!attribute [rw] s3_bucket_name
     #   Name of the Amazon S3 bucket into which CloudTrail delivers your
-    #   trail files. See [Amazon S3 Bucket Naming Requirements][1].
+    #   trail files. See [Amazon S3 Bucket naming rules][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/create_trail_naming_policy.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucketnamingrules.html
     #   @return [String]
     #
     # @!attribute [rw] s3_key_prefix
@@ -5099,7 +5170,7 @@ module Aws::CloudTrail
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-find-log-files.html
+    #   [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/get-and-view-cloudtrail-log-files.html#cloudtrail-find-log-files
     #   @return [String]
     #
     # @!attribute [rw] sns_topic_name
@@ -5560,11 +5631,11 @@ module Aws::CloudTrail
     #
     # @!attribute [rw] s3_bucket_name
     #   Specifies the name of the Amazon S3 bucket designated for publishing
-    #   log files. See [Amazon S3 Bucket Naming Requirements][1].
+    #   log files. See [Amazon S3 Bucket naming rules][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/create_trail_naming_policy.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucketnamingrules.html
     #   @return [String]
     #
     # @!attribute [rw] s3_key_prefix
@@ -5575,7 +5646,7 @@ module Aws::CloudTrail
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-find-log-files.html
+    #   [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/get-and-view-cloudtrail-log-files.html#cloudtrail-find-log-files
     #   @return [String]
     #
     # @!attribute [rw] sns_topic_name
@@ -5713,7 +5784,7 @@ module Aws::CloudTrail
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-find-log-files.html
+    #   [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/get-and-view-cloudtrail-log-files.html#cloudtrail-find-log-files
     #   @return [String]
     #
     # @!attribute [rw] sns_topic_name

@@ -844,6 +844,7 @@ module Aws::GlobalAccelerator
       attr_accessor accelerator_arn: ::String
       attr_accessor name: ::String
       attr_accessor ip_address_type: ("IPV4" | "DUAL_STACK")
+      attr_accessor ip_addresses: ::Array[::String]
       attr_accessor enabled: bool
       SENSITIVE: []
     end
@@ -885,6 +886,7 @@ module Aws::GlobalAccelerator
       attr_accessor accelerator_arn: ::String
       attr_accessor name: ::String
       attr_accessor ip_address_type: ("IPV4" | "DUAL_STACK")
+      attr_accessor ip_addresses: ::Array[::String]
       attr_accessor enabled: bool
       SENSITIVE: []
     end

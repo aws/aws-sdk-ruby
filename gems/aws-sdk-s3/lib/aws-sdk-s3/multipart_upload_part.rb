@@ -262,7 +262,7 @@ module Aws::S3
           :retry
         end
       end
-      Aws::Plugins::UserAgent.feature('resource') do
+      Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         Aws::Waiters::Waiter.new(options).wait({})
       end
     end
@@ -500,7 +500,7 @@ module Aws::S3
         upload_id: @multipart_upload_id,
         part_number: @part_number
       )
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.upload_part_copy(options)
       end
       resp.data
@@ -650,7 +650,7 @@ module Aws::S3
         upload_id: @multipart_upload_id,
         part_number: @part_number
       )
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.upload_part(options)
       end
       resp.data

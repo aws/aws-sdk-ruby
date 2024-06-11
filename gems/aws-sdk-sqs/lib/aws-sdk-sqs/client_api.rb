@@ -503,6 +503,7 @@ module Aws::SQS
         "errorPrefix" => "AWS.SimpleQueueService.",
         "jsonVersion" => "1.0",
         "protocol" => "json",
+        "protocols" => ["json"],
         "serviceAbbreviation" => "Amazon SQS",
         "serviceFullName" => "Amazon Simple Queue Service",
         "serviceId" => "SQS",

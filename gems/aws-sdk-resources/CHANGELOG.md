@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+3.195.0 (2024-06-10)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-applicationsignals` gem.
+
+3.194.0 (2024-06-04)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-taxsettings` gem.
+
 3.193.0 (2024-05-21)
 ------------------
 

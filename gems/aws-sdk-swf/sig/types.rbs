@@ -324,6 +324,18 @@ module Aws::SWF
       SENSITIVE: []
     end
 
+    class DeleteActivityTypeInput
+      attr_accessor domain: ::String
+      attr_accessor activity_type: Types::ActivityType
+      SENSITIVE: []
+    end
+
+    class DeleteWorkflowTypeInput
+      attr_accessor domain: ::String
+      attr_accessor workflow_type: Types::WorkflowType
+      SENSITIVE: []
+    end
+
     class DeprecateActivityTypeInput
       attr_accessor domain: ::String
       attr_accessor activity_type: Types::ActivityType
@@ -997,6 +1009,11 @@ module Aws::SWF
     end
 
     class TypeDeprecatedFault
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TypeNotDeprecatedFault
       attr_accessor message: ::String
       SENSITIVE: []
     end

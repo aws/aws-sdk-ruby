@@ -7437,9 +7437,14 @@ module Aws::EC2
     # Contains the parameters for CreateCustomerGateway.
     #
     # @!attribute [rw] bgp_asn
-    #   For devices that support BGP, the customer gateway's BGP ASN.
+    #   For customer gateway devices that support BGP, specify the device's
+    #   ASN. You must specify either `BgpAsn` or `BgpAsnExtended` when
+    #   creating the customer gateway. If the ASN is larger than
+    #   `2,147,483,647`, you must use `BgpAsnExtended`.
     #
     #   Default: 65000
+    #
+    #   Valid values: `1` to `2,147,483,647`
     #   @return [Integer]
     #
     # @!attribute [rw] public_ip
@@ -7469,7 +7474,10 @@ module Aws::EC2
     #
     # @!attribute [rw] ip_address
     #   IPv4 address for the customer gateway device's outside interface.
-    #   The address must be static.
+    #   The address must be static. If `OutsideIpAddressType` in your VPN
+    #   connection options is set to `PrivateIpv4`, you can use an RFC6598
+    #   or RFC1918 private IPv4 address. If `OutsideIpAddressType` is set to
+    #   `PublicIpv4`, you can use a public IPv4 address.
     #   @return [String]
     #
     # @!attribute [rw] dry_run
@@ -7478,6 +7486,15 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
+    #
+    # @!attribute [rw] bgp_asn_extended
+    #   For customer gateway devices that support BGP, specify the device's
+    #   ASN. You must specify either `BgpAsn` or `BgpAsnExtended` when
+    #   creating the customer gateway. If the ASN is larger than
+    #   `2,147,483,647`, you must use `BgpAsnExtended`.
+    #
+    #   Valid values: `2,147,483,648` to `4,294,967,295`
+    #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateCustomerGatewayRequest AWS API Documentation
     #
@@ -7489,7 +7506,8 @@ module Aws::EC2
       :tag_specifications,
       :device_name,
       :ip_address,
-      :dry_run)
+      :dry_run,
+      :bgp_asn_extended)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13242,8 +13260,10 @@ module Aws::EC2
     # Describes a customer gateway.
     #
     # @!attribute [rw] bgp_asn
-    #   The customer gateway's Border Gateway Protocol (BGP) Autonomous
-    #   System Number (ASN).
+    #   The customer gateway device's Border Gateway Protocol (BGP)
+    #   Autonomous System Number (ASN).
+    #
+    #   Valid values: `1` to `2,147,483,647`
     #   @return [String]
     #
     # @!attribute [rw] customer_gateway_id
@@ -13251,7 +13271,11 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] ip_address
-    #   The IP address of the customer gateway device's outside interface.
+    #   IPv4 address for the customer gateway device's outside interface.
+    #   The address must be static. If `OutsideIpAddressType` in your VPN
+    #   connection options is set to `PrivateIpv4`, you can use an RFC6598
+    #   or RFC1918 private IPv4 address. If `OutsideIpAddressType` is set to
+    #   `PublicIpv4`, you can use a public IPv4 address.
     #   @return [String]
     #
     # @!attribute [rw] certificate_arn
@@ -13276,6 +13300,13 @@ module Aws::EC2
     #   Any tags assigned to the customer gateway.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] bgp_asn_extended
+    #   The customer gateway device's Border Gateway Protocol (BGP)
+    #   Autonomous System Number (ASN).
+    #
+    #   Valid values: `2,147,483,648` to `4,294,967,295`
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CustomerGateway AWS API Documentation
     #
     class CustomerGateway < Struct.new(
@@ -13286,7 +13317,8 @@ module Aws::EC2
       :state,
       :type,
       :device_name,
-      :tags)
+      :tags,
+      :bgp_asn_extended)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -3,6 +3,9 @@
         "description": "Test cases for AllQueryStringTypes operation",
         "metadata": {
             "protocol": "rest-json",
+            "protocols": [
+                "rest-json"
+            ],
             "apiVersion": "2019-12-16"
         },
         "shapes": {
@@ -577,6 +580,9 @@
         "description": "Test cases for ConstantAndVariableQueryString operation",
         "metadata": {
             "protocol": "rest-json",
+            "protocols": [
+                "rest-json"
+            ],
             "apiVersion": "2019-12-16"
         },
         "shapes": {
@@ -655,6 +661,9 @@
         "description": "Test cases for ConstantQueryString operation",
         "metadata": {
             "protocol": "rest-json",
+            "protocols": [
+                "rest-json"
+            ],
             "apiVersion": "2019-12-16"
         },
         "shapes": {
@@ -706,6 +715,9 @@
         "description": "Test cases for DocumentType operation",
         "metadata": {
             "protocol": "rest-json",
+            "protocols": [
+                "rest-json"
+            ],
             "apiVersion": "2019-12-16"
         },
         "shapes": {
@@ -898,6 +910,9 @@
         "description": "Test cases for DocumentTypeAsMapValue operation",
         "metadata": {
             "protocol": "rest-json",
+            "protocols": [
+                "rest-json"
+            ],
             "apiVersion": "2019-12-16"
         },
         "shapes": {
@@ -973,6 +988,9 @@
         "description": "Test cases for DocumentTypeAsPayload operation",
         "metadata": {
             "protocol": "rest-json",
+            "protocols": [
+                "rest-json"
+            ],
             "apiVersion": "2019-12-16"
         },
         "shapes": {
@@ -1056,6 +1074,9 @@
         "description": "Test cases for EmptyInputAndEmptyOutput operation",
         "metadata": {
             "protocol": "rest-json",
+            "protocols": [
+                "rest-json"
+            ],
             "apiVersion": "2019-12-16"
         },
         "shapes": {
@@ -1093,6 +1114,9 @@
         "description": "Test cases for EndpointOperation operation",
         "metadata": {
             "protocol": "rest-json",
+            "protocols": [
+                "rest-json"
+            ],
             "apiVersion": "2019-12-16"
         },
         "shapes": {},
@@ -1126,6 +1150,9 @@
         "description": "Test cases for EndpointWithHostLabelOperation operation",
         "metadata": {
             "protocol": "rest-json",
+            "protocols": [
+                "rest-json"
+            ],
             "apiVersion": "2019-12-16"
         },
         "shapes": {
@@ -1180,6 +1207,9 @@
         "description": "Test cases for HostWithPathOperation operation",
         "metadata": {
             "protocol": "rest-json",
+            "protocols": [
+                "rest-json"
+            ],
             "apiVersion": "2019-12-16"
         },
         "shapes": {},
@@ -1210,6 +1240,9 @@
         "description": "Test cases for HttpChecksumRequired operation",
         "metadata": {
             "protocol": "rest-json",
+            "protocols": [
+                "rest-json"
+            ],
             "apiVersion": "2019-12-16"
         },
         "shapes": {
@@ -1261,6 +1294,9 @@
         "description": "Test cases for HttpEnumPayload operation",
         "metadata": {
             "protocol": "rest-json",
+            "protocols": [
+                "rest-json"
+            ],
             "apiVersion": "2019-12-16"
         },
         "shapes": {
@@ -1309,6 +1345,9 @@
         "description": "Test cases for HttpPayloadTraits operation",
         "metadata": {
             "protocol": "rest-json",
+            "protocols": [
+                "rest-json"
+            ],
             "apiVersion": "2019-12-16"
         },
         "shapes": {
@@ -1360,7 +1399,10 @@
                     "headers": {
                         "Content-Type": "application/octet-stream",
                         "X-Foo": "Foo"
-                    }
+                    },
+                    "requireHeaders": [
+                        "Content-Length"
+                    ]
                 }
             },
             {
@@ -1396,6 +1438,9 @@
         "description": "Test cases for HttpPayloadWithStructure operation",
         "metadata": {
             "protocol": "rest-json",
+            "protocols": [
+                "rest-json"
+            ],
             "apiVersion": "2019-12-16"
         },
         "shapes": {
@@ -1452,7 +1497,10 @@
                     "body": "{\n    \"greeting\": \"hello\",\n    \"name\": \"Phreddy\"\n}",
                     "headers": {
                         "Content-Type": "application/json"
-                    }
+                    },
+                    "requireHeaders": [
+                        "Content-Length"
+                    ]
                 }
             }
         ]
@@ -1461,6 +1509,9 @@
         "description": "Test cases for HttpPayloadWithUnion operation",
         "metadata": {
             "protocol": "rest-json",
+            "protocols": [
+                "rest-json"
+            ],
             "apiVersion": "2019-12-16"
         },
         "shapes": {
@@ -1514,7 +1565,10 @@
                     "body": "{\n    \"greeting\": \"hello\"\n}",
                     "headers": {
                         "Content-Type": "application/json"
-                    }
+                    },
+                    "requireHeaders": [
+                        "Content-Length"
+                    ]
                 }
             },
             {
@@ -1546,6 +1600,9 @@
         "description": "Test cases for HttpPrefixHeaders operation",
         "metadata": {
             "protocol": "rest-json",
+            "protocols": [
+                "rest-json"
+            ],
             "apiVersion": "2019-12-16"
         },
         "shapes": {
@@ -1645,6 +1702,9 @@
         "description": "Test cases for HttpRequestWithFloatLabels operation",
         "metadata": {
             "protocol": "rest-json",
+            "protocols": [
+                "rest-json"
+            ],
             "apiVersion": "2019-12-16"
         },
         "shapes": {
@@ -1755,6 +1815,9 @@
         "description": "Test cases for HttpRequestWithGreedyLabelInPath operation",
         "metadata": {
             "protocol": "rest-json",
+            "protocols": [
+                "rest-json"
+            ],
             "apiVersion": "2019-12-16"
         },
         "shapes": {
@@ -1812,6 +1875,9 @@
         "description": "Test cases for HttpRequestWithLabels operation",
         "metadata": {
             "protocol": "rest-json",
+            "protocols": [
+                "rest-json"
+            ],
             "apiVersion": "2019-12-16"
         },
         "shapes": {
@@ -1968,6 +2034,9 @@
         "description": "Test cases for HttpRequestWithLabelsAndTimestampFormat operation",
         "metadata": {
             "protocol": "rest-json",
+            "protocols": [
+                "rest-json"
+            ],
             "apiVersion": "2019-12-16"
         },
         "shapes": {
@@ -2085,6 +2154,9 @@
         "description": "Test cases for HttpRequestWithRegexLiteral operation",
         "metadata": {
             "protocol": "rest-json",
+            "protocols": [
+                "rest-json"
+            ],
             "apiVersion": "2019-12-16"
         },
         "shapes": {
@@ -2135,6 +2207,9 @@
         "description": "Test cases for HttpStringPayload operation",
         "metadata": {
             "protocol": "rest-json",
+            "protocols": [
+                "rest-json"
+            ],
             "apiVersion": "2019-12-16"
         },
         "shapes": {
@@ -2180,6 +2255,9 @@
         "description": "Test cases for InputAndOutputWithHeaders operation",
         "metadata": {
             "protocol": "rest-json",
+            "protocols": [
+                "rest-json"
+            ],
             "apiVersion": "2019-12-16"
         },
         "shapes": {
@@ -2699,6 +2777,9 @@
         "description": "Test cases for JsonBlobs operation",
         "metadata": {
             "protocol": "rest-json",
+            "protocols": [
+                "rest-json"
+            ],
             "apiVersion": "2019-12-16"
         },
         "shapes": {
@@ -2748,6 +2829,9 @@
         "description": "Test cases for JsonEnums operation",
         "metadata": {
             "protocol": "rest-json",
+            "protocols": [
+                "rest-json"
+            ],
             "apiVersion": "2019-12-16"
         },
         "shapes": {
@@ -2858,6 +2942,9 @@
         "description": "Test cases for JsonIntEnums operation",
         "metadata": {
             "protocol": "rest-json",
+            "protocols": [
+                "rest-json"
+            ],
             "apiVersion": "2019-12-16"
         },
         "shapes": {
@@ -2963,6 +3050,9 @@
         "description": "Test cases for JsonLists operation",
         "metadata": {
             "protocol": "rest-json",
+            "protocols": [
+                "rest-json"
+            ],
             "apiVersion": "2019-12-16"
         },
         "shapes": {
@@ -3206,6 +3296,9 @@
         "description": "Test cases for JsonMaps operation",
         "metadata": {
             "protocol": "rest-json",
+            "protocols": [
+                "rest-json"
+            ],
             "apiVersion": "2019-12-16"
         },
         "shapes": {
@@ -3406,6 +3499,9 @@
         "description": "Test cases for JsonTimestamps operation",
         "metadata": {
             "protocol": "rest-json",
+            "protocols": [
+                "rest-json"
+            ],
             "apiVersion": "2019-12-16"
         },
         "shapes": {
@@ -3659,6 +3755,9 @@
         "description": "Test cases for JsonUnions operation",
         "metadata": {
             "protocol": "rest-json",
+            "protocols": [
+                "rest-json"
+            ],
             "apiVersion": "2019-12-16"
         },
         "shapes": {
@@ -4084,6 +4183,9 @@
         "description": "Test cases for MediaTypeHeader operation",
         "metadata": {
             "protocol": "rest-json",
+            "protocols": [
+                "rest-json"
+            ],
             "apiVersion": "2019-12-16"
         },
         "shapes": {
@@ -4136,6 +4238,9 @@
         "description": "Test cases for NoInputAndNoOutput operation",
         "metadata": {
             "protocol": "rest-json",
+            "protocols": [
+                "rest-json"
+            ],
             "apiVersion": "2019-12-16"
         },
         "shapes": {},
@@ -4165,6 +4270,9 @@
         "description": "Test cases for NoInputAndOutput operation",
         "metadata": {
             "protocol": "rest-json",
+            "protocols": [
+                "rest-json"
+            ],
             "apiVersion": "2019-12-16"
         },
         "shapes": {},
@@ -4194,6 +4302,9 @@
         "description": "Test cases for NullAndEmptyHeadersClient operation",
         "metadata": {
             "protocol": "rest-json",
+            "protocols": [
+                "rest-json"
+            ],
             "apiVersion": "2019-12-16"
         },
         "shapes": {
@@ -4265,6 +4376,9 @@
         "description": "Test cases for OmitsNullSerializesEmptyString operation",
         "metadata": {
             "protocol": "rest-json",
+            "protocols": [
+                "rest-json"
+            ],
             "apiVersion": "2019-12-16"
         },
         "shapes": {
@@ -4342,6 +4456,9 @@
         "description": "Test cases for OmitsSerializingEmptyLists operation",
         "metadata": {
             "protocol": "rest-json",
+            "protocols": [
+                "rest-json"
+            ],
             "apiVersion": "2019-12-16"
         },
         "shapes": {
@@ -4497,6 +4614,9 @@
         "description": "Test cases for PostUnionWithJsonName operation",
         "metadata": {
             "protocol": "rest-json",
+            "protocols": [
+                "rest-json"
+            ],
             "apiVersion": "2019-12-16"
         },
         "shapes": {
@@ -4623,6 +4743,9 @@
         "description": "Test cases for PutWithContentEncoding operation",
         "metadata": {
             "protocol": "rest-json",
+            "protocols": [
+                "rest-json"
+            ],
             "apiVersion": "2019-12-16"
         },
         "shapes": {
@@ -4711,6 +4834,9 @@
         "description": "Test cases for QueryIdempotencyTokenAutoFill operation",
         "metadata": {
             "protocol": "rest-json",
+            "protocols": [
+                "rest-json"
+            ],
             "apiVersion": "2019-12-16"
         },
         "shapes": {
@@ -4782,6 +4908,9 @@
         "description": "Test cases for QueryParamsAsStringListMap operation",
         "metadata": {
             "protocol": "rest-json",
+            "protocols": [
+                "rest-json"
+            ],
             "apiVersion": "2019-12-16"
         },
         "shapes": {
@@ -4854,6 +4983,9 @@
         "description": "Test cases for QueryPrecedence operation",
         "metadata": {
             "protocol": "rest-json",
+            "protocols": [
+                "rest-json"
+            ],
             "apiVersion": "2019-12-16"
         },
         "shapes": {
@@ -4918,6 +5050,9 @@
         "description": "Test cases for RecursiveShapes operation",
         "metadata": {
             "protocol": "rest-json",
+            "protocols": [
+                "rest-json"
+            ],
             "apiVersion": "2019-12-16"
         },
         "shapes": {
@@ -5001,6 +5136,9 @@
         "description": "Test cases for SimpleScalarProperties operation",
         "metadata": {
             "protocol": "rest-json",
+            "protocols": [
+                "rest-json"
+            ],
             "apiVersion": "2019-12-16"
         },
         "shapes": {
@@ -5221,6 +5359,9 @@
         "description": "Test cases for TestBodyStructure operation",
         "metadata": {
             "protocol": "rest-json",
+            "protocols": [
+                "rest-json"
+            ],
             "apiVersion": "2019-12-16"
         },
         "shapes": {
@@ -5281,7 +5422,10 @@
                     "body": "{\"testConfig\":\n    {\"timeout\": 10}\n}",
                     "headers": {
                         "Content-Type": "application/json"
-                    }
+                    },
+                    "requireHeaders": [
+                        "Content-Length"
+                    ]
                 }
             },
             {
@@ -5307,7 +5451,10 @@
                     "body": "{}",
                     "headers": {
                         "Content-Type": "application/json"
-                    }
+                    },
+                    "requireHeaders": [
+                        "Content-Length"
+                    ]
                 }
             }
         ]
@@ -5316,6 +5463,9 @@
         "description": "Test cases for TestNoPayload operation",
         "metadata": {
             "protocol": "rest-json",
+            "protocols": [
+                "rest-json"
+            ],
             "apiVersion": "2019-12-16"
         },
         "shapes": {
@@ -5397,6 +5547,9 @@
         "description": "Test cases for TestPayloadBlob operation",
         "metadata": {
             "protocol": "rest-json",
+            "protocols": [
+                "rest-json"
+            ],
             "apiVersion": "2019-12-16"
         },
         "shapes": {
@@ -5474,7 +5627,10 @@
                     "body": "1234",
                     "headers": {
                         "Content-Type": "image/jpg"
-                    }
+                    },
+                    "requireHeaders": [
+                        "Content-Length"
+                    ]
                 }
             }
         ]
@@ -5483,6 +5639,9 @@
         "description": "Test cases for TestPayloadStructure operation",
         "metadata": {
             "protocol": "rest-json",
+            "protocols": [
+                "rest-json"
+            ],
             "apiVersion": "2019-12-16"
         },
         "shapes": {
@@ -5540,7 +5699,10 @@
                     "body": "{}",
                     "headers": {
                         "Content-Type": "application/json"
-                    }
+                    },
+                    "requireHeaders": [
+                        "Content-Length"
+                    ]
                 }
             },
             {
@@ -5570,7 +5732,10 @@
                     "body": "{\"data\": 25\n}",
                     "headers": {
                         "Content-Type": "application/json"
-                    }
+                    },
+                    "requireHeaders": [
+                        "Content-Length"
+                    ]
                 }
             },
             {
@@ -5599,7 +5764,10 @@
                     "headers": {
                         "Content-Type": "application/json",
                         "X-Amz-Test-Id": "t-12345"
-                    }
+                    },
+                    "requireHeaders": [
+                        "Content-Length"
+                    ]
                 }
             }
         ]
@@ -5608,6 +5776,9 @@
         "description": "Test cases for TimestampFormatHeaders operation",
         "metadata": {
             "protocol": "rest-json",
+            "protocols": [
+                "rest-json"
+            ],
             "apiVersion": "2019-12-16"
         },
         "shapes": {
@@ -5725,6 +5896,9 @@
         "description": "Test cases for UnitInputAndOutput operation",
         "metadata": {
             "protocol": "rest-json",
+            "protocols": [
+                "rest-json"
+            ],
             "apiVersion": "2019-12-16"
         },
         "shapes": {},

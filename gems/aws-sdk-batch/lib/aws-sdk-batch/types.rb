@@ -4609,6 +4609,79 @@ module Aws::Batch
       include Aws::Structure
     end
 
+    # Contains a list of the first 100 `RUNNABLE` jobs associated to a
+    # single job queue.
+    #
+    # @!attribute [rw] jobs
+    #   The Amazon Resource Names (ARNs) of the first 100 `RUNNABLE` jobs in
+    #   a named job queue. For first-in-first-out (FIFO) job queues, jobs
+    #   are ordered based on their submission time. For fair share
+    #   scheduling (FSS) job queues, jobs are ordered based on their job
+    #   priority and share usage.
+    #   @return [Array<Types::FrontOfQueueJobSummary>]
+    #
+    # @!attribute [rw] last_updated_at
+    #   The Unix timestamp (in milliseconds) for when each of the first 100
+    #   `RUNNABLE` jobs were last updated.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/FrontOfQueueDetail AWS API Documentation
+    #
+    class FrontOfQueueDetail < Struct.new(
+      :jobs,
+      :last_updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that represents summary details for the first 100 `RUNNABLE`
+    # jobs in a job queue.
+    #
+    # @!attribute [rw] job_arn
+    #   The ARN for a job in a named job queue.
+    #   @return [String]
+    #
+    # @!attribute [rw] earliest_time_at_position
+    #   The Unix timestamp (in milliseconds) for when the job transitioned
+    #   to its current position in the job queue.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/FrontOfQueueJobSummary AWS API Documentation
+    #
+    class FrontOfQueueJobSummary < Struct.new(
+      :job_arn,
+      :earliest_time_at_position)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] job_queue
+    #   The job queue’s name or full queue Amazon Resource Name (ARN).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/GetJobQueueSnapshotRequest AWS API Documentation
+    #
+    class GetJobQueueSnapshotRequest < Struct.new(
+      :job_queue)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] front_of_queue
+    #   The list of the first 100 `RUNNABLE` jobs in each job queue. For
+    #   first-in-first-out (FIFO) job queues, jobs are ordered based on
+    #   their submission time. For fair share scheduling (FSS) job queues,
+    #   jobs are ordered based on their job priority and share usage.
+    #   @return [Types::FrontOfQueueDetail]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/GetJobQueueSnapshotResponse AWS API Documentation
+    #
+    class GetJobQueueSnapshotResponse < Struct.new(
+      :front_of_queue)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Determine whether your data volume persists on the host container
     # instance and where it's stored. If this parameter is empty, then the
     # Docker daemon assigns a host path for your data volume. However, the
@@ -5543,14 +5616,24 @@ module Aws::Batch
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results returned by `ListJobs` in paginated
-    #   output. When this parameter is used, `ListJobs` only returns
+    #   The maximum number of results returned by `ListJobs` in a paginated
+    #   output. When this parameter is used, `ListJobs` returns up to
     #   `maxResults` results in a single page and a `nextToken` response
-    #   element. The remaining results of the initial request can be seen by
-    #   sending another `ListJobs` request with the returned `nextToken`
-    #   value. This value can be between 1 and 100. If this parameter isn't
-    #   used, then `ListJobs` returns up to 100 results and a `nextToken`
-    #   value if applicable.
+    #   element, if applicable. The remaining results of the initial request
+    #   can be seen by sending another `ListJobs` request with the returned
+    #   `nextToken` value.
+    #
+    #   The following outlines key parameters and limitations:
+    #
+    #   * The minimum value is 1.
+    #
+    #   * When `--job-status` is used, Batch returns up to 1000 values.
+    #
+    #   * When `--filters` is used, Batch returns up to 100 values.
+    #
+    #   * If neither parameter is used, then `ListJobs` returns up to 1000
+    #     results (jobs that are in the `RUNNING` status) and a `nextToken`
+    #     value, if applicable.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token

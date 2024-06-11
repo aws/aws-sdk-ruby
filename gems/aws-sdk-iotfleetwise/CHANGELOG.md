@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.25.0 (2024-06-05)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.24.0 (2024-05-24)
+------------------
+
+* Feature - AWS IoT FleetWise now supports listing vehicles with attributes filter, ListVehicles API is updated to support additional attributes filter.
+
 1.23.0 (2024-05-13)
 ------------------
 

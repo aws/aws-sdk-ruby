@@ -122,6 +122,11 @@ module Aws::Batch
     FairsharePolicy = Shapes::StructureShape.new(name: 'FairsharePolicy')
     FargatePlatformConfiguration = Shapes::StructureShape.new(name: 'FargatePlatformConfiguration')
     Float = Shapes::FloatShape.new(name: 'Float')
+    FrontOfQueueDetail = Shapes::StructureShape.new(name: 'FrontOfQueueDetail')
+    FrontOfQueueJobSummary = Shapes::StructureShape.new(name: 'FrontOfQueueJobSummary')
+    FrontOfQueueJobSummaryList = Shapes::ListShape.new(name: 'FrontOfQueueJobSummaryList')
+    GetJobQueueSnapshotRequest = Shapes::StructureShape.new(name: 'GetJobQueueSnapshotRequest')
+    GetJobQueueSnapshotResponse = Shapes::StructureShape.new(name: 'GetJobQueueSnapshotResponse')
     Host = Shapes::StructureShape.new(name: 'Host')
     ImageIdOverride = Shapes::StringShape.new(name: 'ImageIdOverride')
     ImagePullSecret = Shapes::StructureShape.new(name: 'ImagePullSecret')
@@ -761,6 +766,22 @@ module Aws::Batch
     FargatePlatformConfiguration.add_member(:platform_version, Shapes::ShapeRef.new(shape: String, location_name: "platformVersion"))
     FargatePlatformConfiguration.struct_class = Types::FargatePlatformConfiguration
 
+    FrontOfQueueDetail.add_member(:jobs, Shapes::ShapeRef.new(shape: FrontOfQueueJobSummaryList, location_name: "jobs"))
+    FrontOfQueueDetail.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: Long, location_name: "lastUpdatedAt"))
+    FrontOfQueueDetail.struct_class = Types::FrontOfQueueDetail
+
+    FrontOfQueueJobSummary.add_member(:job_arn, Shapes::ShapeRef.new(shape: String, location_name: "jobArn"))
+    FrontOfQueueJobSummary.add_member(:earliest_time_at_position, Shapes::ShapeRef.new(shape: Long, location_name: "earliestTimeAtPosition"))
+    FrontOfQueueJobSummary.struct_class = Types::FrontOfQueueJobSummary
+
+    FrontOfQueueJobSummaryList.member = Shapes::ShapeRef.new(shape: FrontOfQueueJobSummary)
+
+    GetJobQueueSnapshotRequest.add_member(:job_queue, Shapes::ShapeRef.new(shape: String, required: true, location_name: "jobQueue"))
+    GetJobQueueSnapshotRequest.struct_class = Types::GetJobQueueSnapshotRequest
+
+    GetJobQueueSnapshotResponse.add_member(:front_of_queue, Shapes::ShapeRef.new(shape: FrontOfQueueDetail, location_name: "frontOfQueue"))
+    GetJobQueueSnapshotResponse.struct_class = Types::GetJobQueueSnapshotResponse
+
     Host.add_member(:source_path, Shapes::ShapeRef.new(shape: String, location_name: "sourcePath"))
     Host.struct_class = Types::Host
 
@@ -1237,6 +1258,7 @@ module Aws::Batch
         "endpointPrefix" => "batch",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceAbbreviation" => "AWS Batch",
         "serviceFullName" => "AWS Batch",
         "serviceId" => "Batch",
@@ -1388,6 +1410,16 @@ module Aws::Batch
         o.http_request_uri = "/v1/describeschedulingpolicies"
         o.input = Shapes::ShapeRef.new(shape: DescribeSchedulingPoliciesRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeSchedulingPoliciesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+      end)
+
+      api.add_operation(:get_job_queue_snapshot, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetJobQueueSnapshot"
+        o.http_method = "POST"
+        o.http_request_uri = "/v1/getjobqueuesnapshot"
+        o.input = Shapes::ShapeRef.new(shape: GetJobQueueSnapshotRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetJobQueueSnapshotResponse)
         o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
       end)

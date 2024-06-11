@@ -302,7 +302,7 @@ module Aws::RDS
     #
     # @return [self]
     def load
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.describe_db_snapshots(db_snapshot_identifier: @snapshot_id)
       end
       @data = resp.db_snapshots[0]
@@ -419,7 +419,7 @@ module Aws::RDS
           :retry
         end
       end
-      Aws::Plugins::UserAgent.feature('resource') do
+      Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         Aws::Waiters::Waiter.new(options).wait({})
       end
     end
@@ -450,7 +450,7 @@ module Aws::RDS
         db_instance_identifier: @instance_id,
         db_snapshot_identifier: @snapshot_id
       )
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.create_db_snapshot(options)
       end
       DBSnapshot.new(
@@ -625,7 +625,7 @@ module Aws::RDS
     # @return [DBSnapshot]
     def copy(options = {})
       options = options.merge(source_db_snapshot_identifier: @snapshot_id)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.copy_db_snapshot(options)
       end
       DBSnapshot.new(
@@ -643,7 +643,7 @@ module Aws::RDS
     # @return [DBSnapshot]
     def delete(options = {})
       options = options.merge(db_snapshot_identifier: @snapshot_id)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.delete_db_snapshot(options)
       end
       DBSnapshot.new(
@@ -1230,7 +1230,7 @@ module Aws::RDS
     # @return [DBInstance]
     def restore(options = {})
       options = options.merge(db_snapshot_identifier: @snapshot_id)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.restore_db_instance_from_db_snapshot(options)
       end
       DBInstance.new(
@@ -1252,7 +1252,7 @@ module Aws::RDS
     # @return [EventSubscription]
     def subscribe_to(options = {})
       options = options.merge(source_identifier: @snapshot_id)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.add_source_identifier_to_subscription(options)
       end
       EventSubscription.new(
@@ -1274,7 +1274,7 @@ module Aws::RDS
     # @return [EventSubscription]
     def unsubscribe_from(options = {})
       options = options.merge(source_identifier: @snapshot_id)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.remove_source_identifier_from_subscription(options)
       end
       EventSubscription.new(
@@ -1295,7 +1295,7 @@ module Aws::RDS
       batches = Enumerator.new do |y|
         batch = []
         options = options.merge(db_snapshot_identifier: @snapshot_id)
-        resp = Aws::Plugins::UserAgent.feature('resource') do
+        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
           @client.describe_db_snapshot_attributes(options)
         end
         resp.data.db_snapshot_attributes_result.db_snapshot_attributes.each do |d|
@@ -1362,7 +1362,7 @@ module Aws::RDS
           source_type: "db-snapshot",
           source_identifier: @snapshot_id
         )
-        resp = Aws::Plugins::UserAgent.feature('resource') do
+        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
           @client.describe_events(options)
         end
         resp.each_page do |page|

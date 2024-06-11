@@ -4618,6 +4618,7 @@ module Aws::EC2
     CreateCustomerGatewayRequest.add_member(:device_name, Shapes::ShapeRef.new(shape: String, location_name: "DeviceName"))
     CreateCustomerGatewayRequest.add_member(:ip_address, Shapes::ShapeRef.new(shape: String, location_name: "IpAddress"))
     CreateCustomerGatewayRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
+    CreateCustomerGatewayRequest.add_member(:bgp_asn_extended, Shapes::ShapeRef.new(shape: Long, location_name: "BgpAsnExtended"))
     CreateCustomerGatewayRequest.struct_class = Types::CreateCustomerGatewayRequest
 
     CreateCustomerGatewayResult.add_member(:customer_gateway, Shapes::ShapeRef.new(shape: CustomerGateway, location_name: "customerGateway"))
@@ -5577,6 +5578,7 @@ module Aws::EC2
     CustomerGateway.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "type"))
     CustomerGateway.add_member(:device_name, Shapes::ShapeRef.new(shape: String, location_name: "deviceName"))
     CustomerGateway.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
+    CustomerGateway.add_member(:bgp_asn_extended, Shapes::ShapeRef.new(shape: String, location_name: "bgpAsnExtended"))
     CustomerGateway.struct_class = Types::CustomerGateway
 
     CustomerGatewayIdStringList.member = Shapes::ShapeRef.new(shape: CustomerGatewayId, location_name: "CustomerGatewayId")
@@ -15714,6 +15716,7 @@ module Aws::EC2
         "apiVersion" => "2016-11-15",
         "endpointPrefix" => "ec2",
         "protocol" => "ec2",
+        "protocols" => ["query"],
         "serviceAbbreviation" => "Amazon EC2",
         "serviceFullName" => "Amazon Elastic Compute Cloud",
         "serviceId" => "EC2",

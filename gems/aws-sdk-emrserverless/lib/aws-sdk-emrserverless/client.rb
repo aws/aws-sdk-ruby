@@ -518,6 +518,10 @@ module Aws::EMRServerless
     # @option params [Types::MonitoringConfiguration] :monitoring_configuration
     #   The configuration setting for monitoring.
     #
+    # @option params [Types::InteractiveConfiguration] :interactive_configuration
+    #   The interactive configuration object that enables the interactive use
+    #   cases to use when running an application.
+    #
     # @return [Types::CreateApplicationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateApplicationResponse#application_id #application_id} => String
@@ -604,6 +608,10 @@ module Aws::EMRServerless
     #       prometheus_monitoring_configuration: {
     #         remote_write_url: "PrometheusUrlString",
     #       },
+    #     },
+    #     interactive_configuration: {
+    #       studio_enabled: false,
+    #       livy_endpoint_enabled: false,
     #     },
     #   })
     #
@@ -712,6 +720,8 @@ module Aws::EMRServerless
     #   resp.application.monitoring_configuration.cloud_watch_logging_configuration.log_types["WorkerTypeString"] #=> Array
     #   resp.application.monitoring_configuration.cloud_watch_logging_configuration.log_types["WorkerTypeString"][0] #=> String
     #   resp.application.monitoring_configuration.prometheus_monitoring_configuration.remote_write_url #=> String
+    #   resp.application.interactive_configuration.studio_enabled #=> Boolean
+    #   resp.application.interactive_configuration.livy_endpoint_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/emr-serverless-2021-07-13/GetApplication AWS API Documentation
     #
@@ -742,6 +752,11 @@ module Aws::EMRServerless
     # @option params [required, String] :job_run_id
     #   The ID of the job run.
     #
+    # @option params [Integer] :attempt
+    #   An optimal parameter that indicates the amount of attempts for the
+    #   job. If not specified, this value defaults to the attempt of the
+    #   latest job.
+    #
     # @return [Types::GetDashboardForJobRunResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetDashboardForJobRunResponse#url #url} => String
@@ -751,6 +766,7 @@ module Aws::EMRServerless
     #   resp = client.get_dashboard_for_job_run({
     #     application_id: "ApplicationId", # required
     #     job_run_id: "JobRunId", # required
+    #     attempt: 1,
     #   })
     #
     # @example Response structure
@@ -774,6 +790,11 @@ module Aws::EMRServerless
     # @option params [required, String] :job_run_id
     #   The ID of the job run.
     #
+    # @option params [Integer] :attempt
+    #   An optimal parameter that indicates the amount of attempts for the
+    #   job. If not specified, this value defaults to the attempt of the
+    #   latest job.
+    #
     # @return [Types::GetJobRunResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetJobRunResponse#job_run #job_run} => Types::JobRun
@@ -783,6 +804,7 @@ module Aws::EMRServerless
     #   resp = client.get_job_run({
     #     application_id: "ApplicationId", # required
     #     job_run_id: "JobRunId", # required
+    #     attempt: 1,
     #   })
     #
     # @example Response structure
@@ -836,6 +858,12 @@ module Aws::EMRServerless
     #   resp.job_run.billed_resource_utilization.v_cpu_hour #=> Float
     #   resp.job_run.billed_resource_utilization.memory_gb_hour #=> Float
     #   resp.job_run.billed_resource_utilization.storage_gb_hour #=> Float
+    #   resp.job_run.mode #=> String, one of "BATCH", "STREAMING"
+    #   resp.job_run.retry_policy.max_attempts #=> Integer
+    #   resp.job_run.retry_policy.max_failed_attempts_per_hour #=> Integer
+    #   resp.job_run.attempt #=> Integer
+    #   resp.job_run.attempt_created_at #=> Time
+    #   resp.job_run.attempt_updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/emr-serverless-2021-07-13/GetJobRun AWS API Documentation
     #
@@ -898,6 +926,65 @@ module Aws::EMRServerless
       req.send_request(options)
     end
 
+    # Lists all attempt of a job run.
+    #
+    # @option params [required, String] :application_id
+    #   The ID of the application for which to list job runs.
+    #
+    # @option params [required, String] :job_run_id
+    #   The ID of the job run to list.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of job run attempt results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of job run attempts to list.
+    #
+    # @return [Types::ListJobRunAttemptsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListJobRunAttemptsResponse#job_run_attempts #job_run_attempts} => Array&lt;Types::JobRunAttemptSummary&gt;
+    #   * {Types::ListJobRunAttemptsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_job_run_attempts({
+    #     application_id: "ApplicationId", # required
+    #     job_run_id: "JobRunId", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_run_attempts #=> Array
+    #   resp.job_run_attempts[0].application_id #=> String
+    #   resp.job_run_attempts[0].id #=> String
+    #   resp.job_run_attempts[0].name #=> String
+    #   resp.job_run_attempts[0].mode #=> String, one of "BATCH", "STREAMING"
+    #   resp.job_run_attempts[0].arn #=> String
+    #   resp.job_run_attempts[0].created_by #=> String
+    #   resp.job_run_attempts[0].job_created_at #=> Time
+    #   resp.job_run_attempts[0].created_at #=> Time
+    #   resp.job_run_attempts[0].updated_at #=> Time
+    #   resp.job_run_attempts[0].execution_role #=> String
+    #   resp.job_run_attempts[0].state #=> String, one of "SUBMITTED", "PENDING", "SCHEDULED", "RUNNING", "SUCCESS", "FAILED", "CANCELLING", "CANCELLED"
+    #   resp.job_run_attempts[0].state_details #=> String
+    #   resp.job_run_attempts[0].release_label #=> String
+    #   resp.job_run_attempts[0].type #=> String
+    #   resp.job_run_attempts[0].attempt #=> Integer
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/emr-serverless-2021-07-13/ListJobRunAttempts AWS API Documentation
+    #
+    # @overload list_job_run_attempts(params = {})
+    # @param [Hash] params ({})
+    def list_job_run_attempts(params = {}, options = {})
+      req = build_request(:list_job_run_attempts, params)
+      req.send_request(options)
+    end
+
     # Lists job runs based on a set of parameters.
     #
     # @option params [required, String] :application_id
@@ -920,6 +1007,9 @@ module Aws::EMRServerless
     #   contains multiple states, the resulting list will be grouped by the
     #   state.
     #
+    # @option params [String] :mode
+    #   The mode of the job runs to list.
+    #
     # @return [Types::ListJobRunsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListJobRunsResponse#job_runs #job_runs} => Array&lt;Types::JobRunSummary&gt;
@@ -936,6 +1026,7 @@ module Aws::EMRServerless
     #     created_at_after: Time.now,
     #     created_at_before: Time.now,
     #     states: ["SUBMITTED"], # accepts SUBMITTED, PENDING, SCHEDULED, RUNNING, SUCCESS, FAILED, CANCELLING, CANCELLED
+    #     mode: "BATCH", # accepts BATCH, STREAMING
     #   })
     #
     # @example Response structure
@@ -944,6 +1035,7 @@ module Aws::EMRServerless
     #   resp.job_runs[0].application_id #=> String
     #   resp.job_runs[0].id #=> String
     #   resp.job_runs[0].name #=> String
+    #   resp.job_runs[0].mode #=> String, one of "BATCH", "STREAMING"
     #   resp.job_runs[0].arn #=> String
     #   resp.job_runs[0].created_by #=> String
     #   resp.job_runs[0].created_at #=> Time
@@ -953,6 +1045,9 @@ module Aws::EMRServerless
     #   resp.job_runs[0].state_details #=> String
     #   resp.job_runs[0].release_label #=> String
     #   resp.job_runs[0].type #=> String
+    #   resp.job_runs[0].attempt #=> Integer
+    #   resp.job_runs[0].attempt_created_at #=> Time
+    #   resp.job_runs[0].attempt_updated_at #=> Time
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/emr-serverless-2021-07-13/ListJobRuns AWS API Documentation
@@ -1049,6 +1144,12 @@ module Aws::EMRServerless
     # @option params [String] :name
     #   The optional job run name. This doesn't have to be unique.
     #
+    # @option params [String] :mode
+    #   The mode of the job run when it starts.
+    #
+    # @option params [Types::RetryPolicy] :retry_policy
+    #   The retry policy when job run starts.
+    #
     # @return [Types::StartJobRunResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartJobRunResponse#application_id #application_id} => String
@@ -1113,6 +1214,11 @@ module Aws::EMRServerless
     #     },
     #     execution_timeout_minutes: 1,
     #     name: "String256",
+    #     mode: "BATCH", # accepts BATCH, STREAMING
+    #     retry_policy: {
+    #       max_attempts: 1,
+    #       max_failed_attempts_per_hour: 1,
+    #     },
     #   })
     #
     # @example Response structure
@@ -1268,6 +1374,10 @@ module Aws::EMRServerless
     #   image details in this parameter for each worker type, or in
     #   `imageConfiguration` for all worker types.
     #
+    # @option params [Types::InteractiveConfiguration] :interactive_configuration
+    #   The interactive configuration object that contains new interactive use
+    #   cases when the application is updated.
+    #
     # @option params [String] :release_label
     #   The Amazon EMR release label for the application. You can change the
     #   release label to use a different release of Amazon EMR.
@@ -1331,6 +1441,10 @@ module Aws::EMRServerless
     #           image_uri: "ImageUri",
     #         },
     #       },
+    #     },
+    #     interactive_configuration: {
+    #       studio_enabled: false,
+    #       livy_endpoint_enabled: false,
     #     },
     #     release_label: "ReleaseLabel",
     #     runtime_configuration: [
@@ -1420,6 +1534,8 @@ module Aws::EMRServerless
     #   resp.application.monitoring_configuration.cloud_watch_logging_configuration.log_types["WorkerTypeString"] #=> Array
     #   resp.application.monitoring_configuration.cloud_watch_logging_configuration.log_types["WorkerTypeString"][0] #=> String
     #   resp.application.monitoring_configuration.prometheus_monitoring_configuration.remote_write_url #=> String
+    #   resp.application.interactive_configuration.studio_enabled #=> Boolean
+    #   resp.application.interactive_configuration.livy_endpoint_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/emr-serverless-2021-07-13/UpdateApplication AWS API Documentation
     #
@@ -1443,7 +1559,7 @@ module Aws::EMRServerless
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-emrserverless'
-      context[:gem_version] = '1.23.0'
+      context[:gem_version] = '1.26.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

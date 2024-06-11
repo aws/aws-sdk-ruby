@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.87.0 (2024-06-06)
+------------------
+
+* Feature - Adds SoftwareUpdatePreferences to DescribeMaintenanceStartTime and UpdateMaintenanceStartTime, a structure which contains AutomaticUpdatePolicy.
+
+1.86.0 (2024-06-05)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.85.0 (2024-05-21)
 ------------------
 

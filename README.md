@@ -519,6 +519,7 @@ RubyGems.org page under "LINKS" section.
 | Amazon CloudSearch Domain                             | Aws::CloudSearchDomain                   | aws-sdk-cloudsearchdomain                   | 2013-01-01  |
 | Amazon CloudWatch                                     | Aws::CloudWatch                          | aws-sdk-cloudwatch                          | 2010-08-01  |
 | Amazon CloudWatch Application Insights                | Aws::ApplicationInsights                 | aws-sdk-applicationinsights                 | 2018-11-25  |
+| Amazon CloudWatch Application Signals                 | Aws::ApplicationSignals                  | aws-sdk-applicationsignals                  | 2024-04-15  |
 | Amazon CloudWatch Events                              | Aws::CloudWatchEvents                    | aws-sdk-cloudwatchevents                    | 2015-10-07  |
 | Amazon CloudWatch Evidently                           | Aws::CloudWatchEvidently                 | aws-sdk-cloudwatchevidently                 | 2021-02-01  |
 | Amazon CloudWatch Internet Monitor                    | Aws::InternetMonitor                     | aws-sdk-internetmonitor                     | 2021-06-03  |
@@ -705,6 +706,7 @@ RubyGems.org page under "LINKS" section.
 | Schemas                                               | Aws::Schemas                             | aws-sdk-schemas                             | 2019-12-02  |
 | Service Quotas                                        | Aws::ServiceQuotas                       | aws-sdk-servicequotas                       | 2019-06-24  |
 | Synthetics                                            | Aws::Synthetics                          | aws-sdk-synthetics                          | 2017-10-11  |
+| Tax Settings                                          | Aws::TaxSettings                         | aws-sdk-taxsettings                         | 2018-05-10  |
 | Timestream InfluxDB                                   | Aws::TimestreamInfluxDB                  | aws-sdk-timestreaminfluxdb                  | 2023-01-27  |
 | TrustedAdvisor Public API                             | Aws::TrustedAdvisor                      | aws-sdk-trustedadvisor                      | 2022-09-15  |
 

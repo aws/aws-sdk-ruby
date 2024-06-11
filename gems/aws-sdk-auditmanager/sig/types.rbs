@@ -44,7 +44,7 @@ module Aws::AuditManager
       attr_accessor evidence_sources: ::Array[::String]
       attr_accessor evidence_count: ::Integer
       attr_accessor assessment_report_evidence_count: ::Integer
-      SENSITIVE: []
+      SENSITIVE: [:description]
     end
 
     class AssessmentControlSet
@@ -292,7 +292,7 @@ module Aws::AuditManager
     class Control
       attr_accessor arn: ::String
       attr_accessor id: ::String
-      attr_accessor type: ("Standard" | "Custom")
+      attr_accessor type: ("Standard" | "Custom" | "Core")
       attr_accessor name: ::String
       attr_accessor description: ::String
       attr_accessor testing_information: ::String
@@ -305,7 +305,8 @@ module Aws::AuditManager
       attr_accessor created_by: ::String
       attr_accessor last_updated_by: ::String
       attr_accessor tags: ::Hash[::String, ::String]
-      SENSITIVE: [:testing_information, :action_plan_title, :action_plan_instructions, :created_by, :last_updated_by]
+      attr_accessor state: ("ACTIVE" | "END_OF_SUPPORT")
+      SENSITIVE: [:description, :testing_information, :action_plan_title, :action_plan_instructions, :created_by, :last_updated_by]
     end
 
     class ControlComment
@@ -347,7 +348,7 @@ module Aws::AuditManager
       attr_accessor source_name: ::String
       attr_accessor source_description: ::String
       attr_accessor source_set_up_option: ("System_Controls_Mapping" | "Procedural_Controls_Mapping")
-      attr_accessor source_type: ("AWS_Cloudtrail" | "AWS_Config" | "AWS_Security_Hub" | "AWS_API_Call" | "MANUAL")
+      attr_accessor source_type: ("AWS_Cloudtrail" | "AWS_Config" | "AWS_Security_Hub" | "AWS_API_Call" | "MANUAL" | "Common_Control" | "Core_Control")
       attr_accessor source_keyword: Types::SourceKeyword
       attr_accessor source_frequency: ("DAILY" | "WEEKLY" | "MONTHLY")
       attr_accessor troubleshooting_text: ::String
@@ -429,7 +430,7 @@ module Aws::AuditManager
       attr_accessor source_name: ::String
       attr_accessor source_description: ::String
       attr_accessor source_set_up_option: ("System_Controls_Mapping" | "Procedural_Controls_Mapping")
-      attr_accessor source_type: ("AWS_Cloudtrail" | "AWS_Config" | "AWS_Security_Hub" | "AWS_API_Call" | "MANUAL")
+      attr_accessor source_type: ("AWS_Cloudtrail" | "AWS_Config" | "AWS_Security_Hub" | "AWS_API_Call" | "MANUAL" | "Common_Control" | "Core_Control")
       attr_accessor source_keyword: Types::SourceKeyword
       attr_accessor source_frequency: ("DAILY" | "WEEKLY" | "MONTHLY")
       attr_accessor troubleshooting_text: ::String
@@ -444,7 +445,7 @@ module Aws::AuditManager
       attr_accessor action_plan_instructions: ::String
       attr_accessor control_mapping_sources: ::Array[Types::CreateControlMappingSource]
       attr_accessor tags: ::Hash[::String, ::String]
-      SENSITIVE: [:testing_information, :action_plan_title, :action_plan_instructions]
+      SENSITIVE: [:description, :testing_information, :action_plan_title, :action_plan_instructions]
     end
 
     class CreateControlResponse
@@ -955,9 +956,10 @@ module Aws::AuditManager
     end
 
     class ListControlsRequest
-      attr_accessor control_type: ("Standard" | "Custom")
+      attr_accessor control_type: ("Standard" | "Custom" | "Core")
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
+      attr_accessor control_catalog_id: ::String
       SENSITIVE: []
     end
 
@@ -1236,7 +1238,7 @@ module Aws::AuditManager
       attr_accessor action_plan_title: ::String
       attr_accessor action_plan_instructions: ::String
       attr_accessor control_mapping_sources: ::Array[Types::ControlMappingSource]
-      SENSITIVE: [:testing_information, :action_plan_title, :action_plan_instructions]
+      SENSITIVE: [:description, :testing_information, :action_plan_title, :action_plan_instructions]
     end
 
     class UpdateControlResponse

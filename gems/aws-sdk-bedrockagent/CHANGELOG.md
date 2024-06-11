@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.14.0 (2024-06-05)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.13.0 (2024-05-30)
+------------------
+
+* Feature - With this release, Knowledge bases for Bedrock adds support for Titan Text Embedding v2.
+
 1.12.0 (2024-05-20)
 ------------------
 

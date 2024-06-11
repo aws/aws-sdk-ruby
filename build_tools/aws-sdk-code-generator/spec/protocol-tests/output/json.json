@@ -3,6 +3,9 @@
         "description": "Test cases for DatetimeOffsets operation",
         "metadata": {
             "protocol": "json",
+            "protocols": [
+                "json"
+            ],
             "apiVersion": "2018-01-01",
             "jsonVersion": "1.1",
             "targetPrefix": "JsonProtocol"
@@ -76,6 +79,9 @@
         "description": "Test cases for EmptyOperation operation",
         "metadata": {
             "protocol": "json",
+            "protocols": [
+                "json"
+            ],
             "apiVersion": "2018-01-01",
             "jsonVersion": "1.1",
             "targetPrefix": "JsonProtocol"
@@ -145,6 +151,9 @@
         "description": "Test cases for FractionalSeconds operation",
         "metadata": {
             "protocol": "json",
+            "protocols": [
+                "json"
+            ],
             "apiVersion": "2018-01-01",
             "jsonVersion": "1.1",
             "targetPrefix": "JsonProtocol"
@@ -194,6 +203,9 @@
         "description": "Test cases for GreetingWithErrors operation",
         "metadata": {
             "protocol": "json",
+            "protocols": [
+                "json"
+            ],
             "apiVersion": "2018-01-01",
             "jsonVersion": "1.1",
             "targetPrefix": "JsonProtocol"
@@ -250,6 +262,9 @@
         "description": "Test cases for GreetingWithErrors operation",
         "metadata": {
             "protocol": "json",
+            "protocols": [
+                "json"
+            ],
             "apiVersion": "2018-01-01",
             "jsonVersion": "1.1",
             "targetPrefix": "JsonProtocol"
@@ -345,6 +360,9 @@
         "description": "Test cases for GreetingWithErrors operation",
         "metadata": {
             "protocol": "json",
+            "protocols": [
+                "json"
+            ],
             "apiVersion": "2018-01-01",
             "jsonVersion": "1.1",
             "targetPrefix": "JsonProtocol"
@@ -605,6 +623,9 @@
         "description": "Test cases for JsonEnums operation",
         "metadata": {
             "protocol": "json",
+            "protocols": [
+                "json"
+            ],
             "apiVersion": "2018-01-01",
             "jsonVersion": "1.1",
             "targetPrefix": "JsonProtocol"
@@ -715,6 +736,9 @@
         "description": "Test cases for JsonUnions operation",
         "metadata": {
             "protocol": "json",
+            "protocols": [
+                "json"
+            ],
             "apiVersion": "2018-01-01",
             "jsonVersion": "1.1",
             "targetPrefix": "JsonProtocol"
@@ -1111,6 +1135,9 @@
         "description": "Test cases for KitchenSinkOperation operation",
         "metadata": {
             "protocol": "json",
+            "protocols": [
+                "json"
+            ],
             "apiVersion": "2018-01-01",
             "jsonVersion": "1.1",
             "targetPrefix": "JsonProtocol"
@@ -1977,6 +2004,9 @@
         "description": "Test cases for NullOperation operation",
         "metadata": {
             "protocol": "json",
+            "protocols": [
+                "json"
+            ],
             "apiVersion": "2018-01-01",
             "jsonVersion": "1.1",
             "targetPrefix": "JsonProtocol"
@@ -2023,6 +2053,9 @@
         "description": "Test cases for PutAndGetInlineDocuments operation",
         "metadata": {
             "protocol": "json",
+            "protocols": [
+                "json"
+            ],
             "apiVersion": "2018-01-01",
             "jsonVersion": "1.1",
             "targetPrefix": "JsonProtocol"
@@ -2076,6 +2109,9 @@
         "description": "Test cases for SimpleScalarProperties operation",
         "metadata": {
             "protocol": "json",
+            "protocols": [
+                "json"
+            ],
             "apiVersion": "2018-01-01",
             "jsonVersion": "1.1",
             "targetPrefix": "JsonProtocol"

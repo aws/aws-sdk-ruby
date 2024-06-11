@@ -629,6 +629,28 @@ module Aws::Batch
       SENSITIVE: []
     end
 
+    class FrontOfQueueDetail
+      attr_accessor jobs: ::Array[Types::FrontOfQueueJobSummary]
+      attr_accessor last_updated_at: ::Integer
+      SENSITIVE: []
+    end
+
+    class FrontOfQueueJobSummary
+      attr_accessor job_arn: ::String
+      attr_accessor earliest_time_at_position: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetJobQueueSnapshotRequest
+      attr_accessor job_queue: ::String
+      SENSITIVE: []
+    end
+
+    class GetJobQueueSnapshotResponse
+      attr_accessor front_of_queue: Types::FrontOfQueueDetail
+      SENSITIVE: []
+    end
+
     class Host
       attr_accessor source_path: ::String
       SENSITIVE: []

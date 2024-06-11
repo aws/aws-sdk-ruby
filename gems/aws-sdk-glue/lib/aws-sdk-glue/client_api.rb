@@ -13,6 +13,7 @@ module Aws::Glue
 
     include Seahorse::Model
 
+    AWSManagedClientApplicationReference = Shapes::StringShape.new(name: 'AWSManagedClientApplicationReference')
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     AccountId = Shapes::StringShape.new(name: 'AccountId')
     Action = Shapes::StructureShape.new(name: 'Action')
@@ -39,6 +40,11 @@ module Aws::Glue
     AuditContext = Shapes::StructureShape.new(name: 'AuditContext')
     AuditContextString = Shapes::StringShape.new(name: 'AuditContextString')
     AuthTokenString = Shapes::StringShape.new(name: 'AuthTokenString')
+    AuthenticationConfiguration = Shapes::StructureShape.new(name: 'AuthenticationConfiguration')
+    AuthenticationConfigurationInput = Shapes::StructureShape.new(name: 'AuthenticationConfigurationInput')
+    AuthenticationType = Shapes::StringShape.new(name: 'AuthenticationType')
+    AuthorizationCode = Shapes::StringShape.new(name: 'AuthorizationCode')
+    AuthorizationCodeProperties = Shapes::StructureShape.new(name: 'AuthorizationCodeProperties')
     BackfillError = Shapes::StructureShape.new(name: 'BackfillError')
     BackfillErrorCode = Shapes::StringShape.new(name: 'BackfillErrorCode')
     BackfillErroredPartitionsList = Shapes::ListShape.new(name: 'BackfillErroredPartitionsList')
@@ -209,6 +215,7 @@ module Aws::Glue
     ConnectionPasswordEncryption = Shapes::StructureShape.new(name: 'ConnectionPasswordEncryption')
     ConnectionProperties = Shapes::MapShape.new(name: 'ConnectionProperties')
     ConnectionPropertyKey = Shapes::StringShape.new(name: 'ConnectionPropertyKey')
+    ConnectionStatus = Shapes::StringShape.new(name: 'ConnectionStatus')
     ConnectionType = Shapes::StringShape.new(name: 'ConnectionType')
     ConnectionsList = Shapes::StructureShape.new(name: 'ConnectionsList')
     ConnectorDataSource = Shapes::StructureShape.new(name: 'ConnectorDataSource')
@@ -689,6 +696,7 @@ module Aws::Glue
     JobBookmarksEncryptionMode = Shapes::StringShape.new(name: 'JobBookmarksEncryptionMode')
     JobCommand = Shapes::StructureShape.new(name: 'JobCommand')
     JobList = Shapes::ListShape.new(name: 'JobList')
+    JobMode = Shapes::StringShape.new(name: 'JobMode')
     JobName = Shapes::StringShape.new(name: 'JobName')
     JobNameList = Shapes::ListShape.new(name: 'JobNameList')
     JobNodeDetails = Shapes::StructureShape.new(name: 'JobNodeDetails')
@@ -773,6 +781,7 @@ module Aws::Glue
     Long = Shapes::IntegerShape.new(name: 'Long')
     LongColumnStatisticsData = Shapes::StructureShape.new(name: 'LongColumnStatisticsData')
     LongValue = Shapes::IntegerShape.new(name: 'LongValue')
+    LongValueString = Shapes::StringShape.new(name: 'LongValueString')
     MLTransform = Shapes::StructureShape.new(name: 'MLTransform')
     MLTransformNotReadyException = Shapes::StructureShape.new(name: 'MLTransformNotReadyException')
     MLUserDataEncryption = Shapes::StructureShape.new(name: 'MLUserDataEncryption')
@@ -831,6 +840,10 @@ module Aws::Glue
     NullableDouble = Shapes::FloatShape.new(name: 'NullableDouble')
     NullableInteger = Shapes::IntegerShape.new(name: 'NullableInteger')
     NullableString = Shapes::StringShape.new(name: 'NullableString')
+    OAuth2ClientApplication = Shapes::StructureShape.new(name: 'OAuth2ClientApplication')
+    OAuth2GrantType = Shapes::StringShape.new(name: 'OAuth2GrantType')
+    OAuth2Properties = Shapes::StructureShape.new(name: 'OAuth2Properties')
+    OAuth2PropertiesInput = Shapes::StructureShape.new(name: 'OAuth2PropertiesInput')
     OneInput = Shapes::ListShape.new(name: 'OneInput')
     OpenTableFormatInput = Shapes::StructureShape.new(name: 'OpenTableFormatInput')
     OperationTimeoutException = Shapes::StructureShape.new(name: 'OperationTimeoutException')
@@ -918,6 +931,7 @@ module Aws::Glue
     RecordsCount = Shapes::IntegerShape.new(name: 'RecordsCount')
     RecrawlBehavior = Shapes::StringShape.new(name: 'RecrawlBehavior')
     RecrawlPolicy = Shapes::StructureShape.new(name: 'RecrawlPolicy')
+    RedirectUri = Shapes::StringShape.new(name: 'RedirectUri')
     RedshiftSource = Shapes::StructureShape.new(name: 'RedshiftSource')
     RedshiftTarget = Shapes::StructureShape.new(name: 'RedshiftTarget')
     RegisterSchemaVersionInput = Shapes::StructureShape.new(name: 'RegisterSchemaVersionInput')
@@ -1006,6 +1020,7 @@ module Aws::Glue
     SearchPropertyPredicates = Shapes::ListShape.new(name: 'SearchPropertyPredicates')
     SearchTablesRequest = Shapes::StructureShape.new(name: 'SearchTablesRequest')
     SearchTablesResponse = Shapes::StructureShape.new(name: 'SearchTablesResponse')
+    SecretArn = Shapes::StringShape.new(name: 'SecretArn')
     SecurityConfiguration = Shapes::StructureShape.new(name: 'SecurityConfiguration')
     SecurityConfigurationList = Shapes::ListShape.new(name: 'SecurityConfigurationList')
     SecurityGroupIdList = Shapes::ListShape.new(name: 'SecurityGroupIdList')
@@ -1126,6 +1141,10 @@ module Aws::Glue
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     TimestampValue = Shapes::TimestampShape.new(name: 'TimestampValue')
     Token = Shapes::StringShape.new(name: 'Token')
+    TokenUrl = Shapes::StringShape.new(name: 'TokenUrl')
+    TokenUrlParameterKey = Shapes::StringShape.new(name: 'TokenUrlParameterKey')
+    TokenUrlParameterValue = Shapes::StringShape.new(name: 'TokenUrlParameterValue')
+    TokenUrlParametersMap = Shapes::MapShape.new(name: 'TokenUrlParametersMap')
     Topk = Shapes::IntegerShape.new(name: 'Topk')
     TotalSegmentsInteger = Shapes::IntegerShape.new(name: 'TotalSegmentsInteger')
     TransactionIdString = Shapes::StringShape.new(name: 'TransactionIdString')
@@ -1214,6 +1233,7 @@ module Aws::Glue
     UserDefinedFunction = Shapes::StructureShape.new(name: 'UserDefinedFunction')
     UserDefinedFunctionInput = Shapes::StructureShape.new(name: 'UserDefinedFunctionInput')
     UserDefinedFunctionList = Shapes::ListShape.new(name: 'UserDefinedFunctionList')
+    UserManagedClientApplicationClientId = Shapes::StringShape.new(name: 'UserManagedClientApplicationClientId')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     ValueString = Shapes::StringShape.new(name: 'ValueString')
     ValueStringList = Shapes::ListShape.new(name: 'ValueStringList')
@@ -1223,12 +1243,16 @@ module Aws::Glue
     VersionString = Shapes::StringShape.new(name: 'VersionString')
     VersionsString = Shapes::StringShape.new(name: 'VersionsString')
     ViewDefinition = Shapes::StructureShape.new(name: 'ViewDefinition')
+    ViewDefinitionInput = Shapes::StructureShape.new(name: 'ViewDefinitionInput')
     ViewDialect = Shapes::StringShape.new(name: 'ViewDialect')
     ViewDialectVersionString = Shapes::StringShape.new(name: 'ViewDialectVersionString')
     ViewRepresentation = Shapes::StructureShape.new(name: 'ViewRepresentation')
+    ViewRepresentationInput = Shapes::StructureShape.new(name: 'ViewRepresentationInput')
+    ViewRepresentationInputList = Shapes::ListShape.new(name: 'ViewRepresentationInputList')
     ViewRepresentationList = Shapes::ListShape.new(name: 'ViewRepresentationList')
     ViewSubObjectsList = Shapes::ListShape.new(name: 'ViewSubObjectsList')
     ViewTextString = Shapes::StringShape.new(name: 'ViewTextString')
+    ViewUpdateAction = Shapes::StringShape.new(name: 'ViewUpdateAction')
     WorkerType = Shapes::StringShape.new(name: 'WorkerType')
     Workflow = Shapes::StructureShape.new(name: 'Workflow')
     WorkflowGraph = Shapes::StructureShape.new(name: 'WorkflowGraph')
@@ -1343,6 +1367,20 @@ module Aws::Glue
     AuditContext.add_member(:requested_columns, Shapes::ShapeRef.new(shape: AuditColumnNamesList, location_name: "RequestedColumns"))
     AuditContext.add_member(:all_columns_requested, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "AllColumnsRequested"))
     AuditContext.struct_class = Types::AuditContext
+
+    AuthenticationConfiguration.add_member(:authentication_type, Shapes::ShapeRef.new(shape: AuthenticationType, location_name: "AuthenticationType"))
+    AuthenticationConfiguration.add_member(:secret_arn, Shapes::ShapeRef.new(shape: SecretArn, location_name: "SecretArn"))
+    AuthenticationConfiguration.add_member(:o_auth_2_properties, Shapes::ShapeRef.new(shape: OAuth2Properties, location_name: "OAuth2Properties"))
+    AuthenticationConfiguration.struct_class = Types::AuthenticationConfiguration
+
+    AuthenticationConfigurationInput.add_member(:authentication_type, Shapes::ShapeRef.new(shape: AuthenticationType, location_name: "AuthenticationType"))
+    AuthenticationConfigurationInput.add_member(:secret_arn, Shapes::ShapeRef.new(shape: SecretArn, location_name: "SecretArn"))
+    AuthenticationConfigurationInput.add_member(:o_auth_2_properties, Shapes::ShapeRef.new(shape: OAuth2PropertiesInput, location_name: "OAuth2Properties"))
+    AuthenticationConfigurationInput.struct_class = Types::AuthenticationConfigurationInput
+
+    AuthorizationCodeProperties.add_member(:authorization_code, Shapes::ShapeRef.new(shape: AuthorizationCode, location_name: "AuthorizationCode"))
+    AuthorizationCodeProperties.add_member(:redirect_uri, Shapes::ShapeRef.new(shape: RedirectUri, location_name: "RedirectUri"))
+    AuthorizationCodeProperties.struct_class = Types::AuthorizationCodeProperties
 
     BackfillError.add_member(:code, Shapes::ShapeRef.new(shape: BackfillErrorCode, location_name: "Code"))
     BackfillError.add_member(:partitions, Shapes::ShapeRef.new(shape: BackfillErroredPartitionsList, location_name: "Partitions"))
@@ -1931,6 +1969,10 @@ module Aws::Glue
     Connection.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
     Connection.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastUpdatedTime"))
     Connection.add_member(:last_updated_by, Shapes::ShapeRef.new(shape: NameString, location_name: "LastUpdatedBy"))
+    Connection.add_member(:status, Shapes::ShapeRef.new(shape: ConnectionStatus, location_name: "Status"))
+    Connection.add_member(:status_reason, Shapes::ShapeRef.new(shape: LongValueString, location_name: "StatusReason"))
+    Connection.add_member(:last_connection_validation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastConnectionValidationTime"))
+    Connection.add_member(:authentication_configuration, Shapes::ShapeRef.new(shape: AuthenticationConfiguration, location_name: "AuthenticationConfiguration"))
     Connection.struct_class = Types::Connection
 
     ConnectionInput.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
@@ -1939,6 +1981,8 @@ module Aws::Glue
     ConnectionInput.add_member(:match_criteria, Shapes::ShapeRef.new(shape: MatchCriteria, location_name: "MatchCriteria"))
     ConnectionInput.add_member(:connection_properties, Shapes::ShapeRef.new(shape: ConnectionProperties, required: true, location_name: "ConnectionProperties"))
     ConnectionInput.add_member(:physical_connection_requirements, Shapes::ShapeRef.new(shape: PhysicalConnectionRequirements, location_name: "PhysicalConnectionRequirements"))
+    ConnectionInput.add_member(:authentication_configuration, Shapes::ShapeRef.new(shape: AuthenticationConfigurationInput, location_name: "AuthenticationConfiguration"))
+    ConnectionInput.add_member(:validate_credentials, Shapes::ShapeRef.new(shape: Boolean, location_name: "ValidateCredentials"))
     ConnectionInput.struct_class = Types::ConnectionInput
 
     ConnectionList.member = Shapes::ShapeRef.new(shape: Connection)
@@ -2083,6 +2127,7 @@ module Aws::Glue
     CreateConnectionRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "Tags"))
     CreateConnectionRequest.struct_class = Types::CreateConnectionRequest
 
+    CreateConnectionResponse.add_member(:create_connection_status, Shapes::ShapeRef.new(shape: ConnectionStatus, location_name: "CreateConnectionStatus"))
     CreateConnectionResponse.struct_class = Types::CreateConnectionResponse
 
     CreateCrawlerRequest.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
@@ -2188,6 +2233,7 @@ module Aws::Glue
     CreateGrokClassifierRequest.struct_class = Types::CreateGrokClassifierRequest
 
     CreateJobRequest.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
+    CreateJobRequest.add_member(:job_mode, Shapes::ShapeRef.new(shape: JobMode, location_name: "JobMode"))
     CreateJobRequest.add_member(:description, Shapes::ShapeRef.new(shape: DescriptionString, location_name: "Description"))
     CreateJobRequest.add_member(:log_uri, Shapes::ShapeRef.new(shape: UriString, location_name: "LogUri"))
     CreateJobRequest.add_member(:role, Shapes::ShapeRef.new(shape: RoleString, required: true, location_name: "Role"))
@@ -3898,6 +3944,7 @@ module Aws::Glue
     JdbcTargetList.member = Shapes::ShapeRef.new(shape: JdbcTarget)
 
     Job.add_member(:name, Shapes::ShapeRef.new(shape: NameString, location_name: "Name"))
+    Job.add_member(:job_mode, Shapes::ShapeRef.new(shape: JobMode, location_name: "JobMode"))
     Job.add_member(:description, Shapes::ShapeRef.new(shape: DescriptionString, location_name: "Description"))
     Job.add_member(:log_uri, Shapes::ShapeRef.new(shape: UriString, location_name: "LogUri"))
     Job.add_member(:role, Shapes::ShapeRef.new(shape: RoleString, location_name: "Role"))
@@ -3954,6 +4001,7 @@ module Aws::Glue
     JobRun.add_member(:previous_run_id, Shapes::ShapeRef.new(shape: IdString, location_name: "PreviousRunId"))
     JobRun.add_member(:trigger_name, Shapes::ShapeRef.new(shape: NameString, location_name: "TriggerName"))
     JobRun.add_member(:job_name, Shapes::ShapeRef.new(shape: NameString, location_name: "JobName"))
+    JobRun.add_member(:job_mode, Shapes::ShapeRef.new(shape: JobMode, location_name: "JobMode"))
     JobRun.add_member(:started_on, Shapes::ShapeRef.new(shape: TimestampValue, location_name: "StartedOn"))
     JobRun.add_member(:last_modified_on, Shapes::ShapeRef.new(shape: TimestampValue, location_name: "LastModifiedOn"))
     JobRun.add_member(:completed_on, Shapes::ShapeRef.new(shape: TimestampValue, location_name: "CompletedOn"))
@@ -3978,6 +4026,7 @@ module Aws::Glue
 
     JobRunList.member = Shapes::ShapeRef.new(shape: JobRun)
 
+    JobUpdate.add_member(:job_mode, Shapes::ShapeRef.new(shape: JobMode, location_name: "JobMode"))
     JobUpdate.add_member(:description, Shapes::ShapeRef.new(shape: DescriptionString, location_name: "Description"))
     JobUpdate.add_member(:log_uri, Shapes::ShapeRef.new(shape: UriString, location_name: "LogUri"))
     JobUpdate.add_member(:role, Shapes::ShapeRef.new(shape: RoleString, location_name: "Role"))
@@ -4448,6 +4497,23 @@ module Aws::Glue
     NullValueField.struct_class = Types::NullValueField
 
     NullValueFields.member = Shapes::ShapeRef.new(shape: NullValueField)
+
+    OAuth2ClientApplication.add_member(:user_managed_client_application_client_id, Shapes::ShapeRef.new(shape: UserManagedClientApplicationClientId, location_name: "UserManagedClientApplicationClientId"))
+    OAuth2ClientApplication.add_member(:aws_managed_client_application_reference, Shapes::ShapeRef.new(shape: AWSManagedClientApplicationReference, location_name: "AWSManagedClientApplicationReference"))
+    OAuth2ClientApplication.struct_class = Types::OAuth2ClientApplication
+
+    OAuth2Properties.add_member(:o_auth_2_grant_type, Shapes::ShapeRef.new(shape: OAuth2GrantType, location_name: "OAuth2GrantType"))
+    OAuth2Properties.add_member(:o_auth_2_client_application, Shapes::ShapeRef.new(shape: OAuth2ClientApplication, location_name: "OAuth2ClientApplication"))
+    OAuth2Properties.add_member(:token_url, Shapes::ShapeRef.new(shape: TokenUrl, location_name: "TokenUrl"))
+    OAuth2Properties.add_member(:token_url_parameters_map, Shapes::ShapeRef.new(shape: TokenUrlParametersMap, location_name: "TokenUrlParametersMap"))
+    OAuth2Properties.struct_class = Types::OAuth2Properties
+
+    OAuth2PropertiesInput.add_member(:o_auth_2_grant_type, Shapes::ShapeRef.new(shape: OAuth2GrantType, location_name: "OAuth2GrantType"))
+    OAuth2PropertiesInput.add_member(:o_auth_2_client_application, Shapes::ShapeRef.new(shape: OAuth2ClientApplication, location_name: "OAuth2ClientApplication"))
+    OAuth2PropertiesInput.add_member(:token_url, Shapes::ShapeRef.new(shape: TokenUrl, location_name: "TokenUrl"))
+    OAuth2PropertiesInput.add_member(:token_url_parameters_map, Shapes::ShapeRef.new(shape: TokenUrlParametersMap, location_name: "TokenUrlParametersMap"))
+    OAuth2PropertiesInput.add_member(:authorization_code_properties, Shapes::ShapeRef.new(shape: AuthorizationCodeProperties, location_name: "AuthorizationCodeProperties"))
+    OAuth2PropertiesInput.struct_class = Types::OAuth2PropertiesInput
 
     OneInput.member = Shapes::ShapeRef.new(shape: NodeId)
 
@@ -5435,6 +5501,7 @@ module Aws::Glue
     TableInput.add_member(:table_type, Shapes::ShapeRef.new(shape: TableTypeString, location_name: "TableType"))
     TableInput.add_member(:parameters, Shapes::ShapeRef.new(shape: ParametersMap, location_name: "Parameters"))
     TableInput.add_member(:target_table, Shapes::ShapeRef.new(shape: TableIdentifier, location_name: "TargetTable"))
+    TableInput.add_member(:view_definition, Shapes::ShapeRef.new(shape: ViewDefinitionInput, location_name: "ViewDefinition"))
     TableInput.struct_class = Types::TableInput
 
     TableList.member = Shapes::ShapeRef.new(shape: Table)
@@ -5509,6 +5576,9 @@ module Aws::Glue
     TaskRunSortCriteria.add_member(:column, Shapes::ShapeRef.new(shape: TaskRunSortColumnType, required: true, location_name: "Column"))
     TaskRunSortCriteria.add_member(:sort_direction, Shapes::ShapeRef.new(shape: SortDirectionType, required: true, location_name: "SortDirection"))
     TaskRunSortCriteria.struct_class = Types::TaskRunSortCriteria
+
+    TokenUrlParametersMap.key = Shapes::ShapeRef.new(shape: TokenUrlParameterKey)
+    TokenUrlParametersMap.value = Shapes::ShapeRef.new(shape: TokenUrlParameterValue)
 
     TransformConfigParameter.add_member(:name, Shapes::ShapeRef.new(shape: EnclosedInStringProperty, required: true, location_name: "Name"))
     TransformConfigParameter.add_member(:type, Shapes::ShapeRef.new(shape: ParamType, required: true, location_name: "Type"))
@@ -5810,6 +5880,8 @@ module Aws::Glue
     UpdateTableRequest.add_member(:skip_archive, Shapes::ShapeRef.new(shape: BooleanNullable, location_name: "SkipArchive"))
     UpdateTableRequest.add_member(:transaction_id, Shapes::ShapeRef.new(shape: TransactionIdString, location_name: "TransactionId"))
     UpdateTableRequest.add_member(:version_id, Shapes::ShapeRef.new(shape: VersionString, location_name: "VersionId"))
+    UpdateTableRequest.add_member(:view_update_action, Shapes::ShapeRef.new(shape: ViewUpdateAction, location_name: "ViewUpdateAction"))
+    UpdateTableRequest.add_member(:force, Shapes::ShapeRef.new(shape: Boolean, location_name: "Force"))
     UpdateTableRequest.struct_class = Types::UpdateTableRequest
 
     UpdateTableResponse.struct_class = Types::UpdateTableResponse
@@ -5881,12 +5953,28 @@ module Aws::Glue
     ViewDefinition.add_member(:representations, Shapes::ShapeRef.new(shape: ViewRepresentationList, location_name: "Representations"))
     ViewDefinition.struct_class = Types::ViewDefinition
 
+    ViewDefinitionInput.add_member(:is_protected, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "IsProtected"))
+    ViewDefinitionInput.add_member(:definer, Shapes::ShapeRef.new(shape: ArnString, location_name: "Definer"))
+    ViewDefinitionInput.add_member(:representations, Shapes::ShapeRef.new(shape: ViewRepresentationInputList, location_name: "Representations"))
+    ViewDefinitionInput.add_member(:sub_objects, Shapes::ShapeRef.new(shape: ViewSubObjectsList, location_name: "SubObjects"))
+    ViewDefinitionInput.struct_class = Types::ViewDefinitionInput
+
     ViewRepresentation.add_member(:dialect, Shapes::ShapeRef.new(shape: ViewDialect, location_name: "Dialect"))
     ViewRepresentation.add_member(:dialect_version, Shapes::ShapeRef.new(shape: ViewDialectVersionString, location_name: "DialectVersion"))
     ViewRepresentation.add_member(:view_original_text, Shapes::ShapeRef.new(shape: ViewTextString, location_name: "ViewOriginalText"))
     ViewRepresentation.add_member(:view_expanded_text, Shapes::ShapeRef.new(shape: ViewTextString, location_name: "ViewExpandedText"))
+    ViewRepresentation.add_member(:validation_connection, Shapes::ShapeRef.new(shape: NameString, location_name: "ValidationConnection"))
     ViewRepresentation.add_member(:is_stale, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "IsStale"))
     ViewRepresentation.struct_class = Types::ViewRepresentation
+
+    ViewRepresentationInput.add_member(:dialect, Shapes::ShapeRef.new(shape: ViewDialect, location_name: "Dialect"))
+    ViewRepresentationInput.add_member(:dialect_version, Shapes::ShapeRef.new(shape: ViewDialectVersionString, location_name: "DialectVersion"))
+    ViewRepresentationInput.add_member(:view_original_text, Shapes::ShapeRef.new(shape: ViewTextString, location_name: "ViewOriginalText"))
+    ViewRepresentationInput.add_member(:validation_connection, Shapes::ShapeRef.new(shape: NameString, location_name: "ValidationConnection"))
+    ViewRepresentationInput.add_member(:view_expanded_text, Shapes::ShapeRef.new(shape: ViewTextString, location_name: "ViewExpandedText"))
+    ViewRepresentationInput.struct_class = Types::ViewRepresentationInput
+
+    ViewRepresentationInputList.member = Shapes::ShapeRef.new(shape: ViewRepresentationInput)
 
     ViewRepresentationList.member = Shapes::ShapeRef.new(shape: ViewRepresentation)
 
@@ -5955,6 +6043,7 @@ module Aws::Glue
 
       api.metadata = {
         "apiVersion" => "2017-03-31",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "glue",
         "jsonVersion" => "1.1",
         "protocol" => "json",

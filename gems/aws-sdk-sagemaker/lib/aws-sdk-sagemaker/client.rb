@@ -1436,7 +1436,7 @@ module Aws::SageMaker
     #         feature_specification_s3_uri: "S3Uri",
     #         algorithms_config: [
     #           {
-    #             auto_ml_algorithms: ["xgboost"], # required, accepts xgboost, linear-learner, mlp, lightgbm, catboost, randomforest, extra-trees, nn-torch, fastai
+    #             auto_ml_algorithms: ["xgboost"], # required, accepts xgboost, linear-learner, mlp, lightgbm, catboost, randomforest, extra-trees, nn-torch, fastai, cnn-qr, deepar, prophet, npts, arima, ets
     #           },
     #         ],
     #       },
@@ -1674,12 +1674,19 @@ module Aws::SageMaker
     #             country_code: "CountryCode",
     #           },
     #         ],
+    #         candidate_generation_config: {
+    #           algorithms_config: [
+    #             {
+    #               auto_ml_algorithms: ["xgboost"], # required, accepts xgboost, linear-learner, mlp, lightgbm, catboost, randomforest, extra-trees, nn-torch, fastai, cnn-qr, deepar, prophet, npts, arima, ets
+    #             },
+    #           ],
+    #         },
     #       },
     #       tabular_job_config: {
     #         candidate_generation_config: {
     #           algorithms_config: [
     #             {
-    #               auto_ml_algorithms: ["xgboost"], # required, accepts xgboost, linear-learner, mlp, lightgbm, catboost, randomforest, extra-trees, nn-torch, fastai
+    #               auto_ml_algorithms: ["xgboost"], # required, accepts xgboost, linear-learner, mlp, lightgbm, catboost, randomforest, extra-trees, nn-torch, fastai, cnn-qr, deepar, prophet, npts, arima, ets
     #             },
     #           ],
     #         },
@@ -3329,6 +3336,7 @@ module Aws::SageMaker
     #         routing_config: {
     #           routing_strategy: "LEAST_OUTSTANDING_REQUESTS", # required, accepts LEAST_OUTSTANDING_REQUESTS, RANDOM
     #         },
+    #         inference_ami_version: "al2-ami-sagemaker-inference-gpu-2", # accepts al2-ami-sagemaker-inference-gpu-2
     #       },
     #     ],
     #     data_capture_config: {
@@ -3429,6 +3437,7 @@ module Aws::SageMaker
     #         routing_config: {
     #           routing_strategy: "LEAST_OUTSTANDING_REQUESTS", # required, accepts LEAST_OUTSTANDING_REQUESTS, RANDOM
     #         },
+    #         inference_ami_version: "al2-ami-sagemaker-inference-gpu-2", # accepts al2-ami-sagemaker-inference-gpu-2
     #       },
     #     ],
     #     execution_role_arn: "RoleArn",
@@ -6161,6 +6170,27 @@ module Aws::SageMaker
     #   model package, set it to the model package Amazon Resource Name (ARN).
     #   If you want to register a model, set it to the model ARN.
     #
+    # @option params [Types::ModelPackageSecurityConfig] :security_config
+    #   The KMS Key ID (`KMSKeyId`) used for encryption of model package
+    #   information.
+    #
+    # @option params [Types::ModelPackageModelCard] :model_card
+    #   The model card associated with the model package. Since
+    #   `ModelPackageModelCard` is tied to a model package, it is a specific
+    #   usage of a model card and its schema is simplified compared to the
+    #   schema of `ModelCard`. The `ModelPackageModelCard` schema does not
+    #   include `model_package_details`, and `model_overview` is composed of
+    #   the `model_creator` and `model_artifact` properties. For more
+    #   information about the model package model card schema, see [Model
+    #   package model card schema][1]. For more information about the model
+    #   card associated with the model package, see [View the Details of a
+    #   Model Version][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry-details.html#model-card-schema
+    #   [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry-details.html
+    #
     # @return [Types::CreateModelPackageOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateModelPackageOutput#model_package_arn #model_package_arn} => String
@@ -6437,6 +6467,13 @@ module Aws::SageMaker
     #     ],
     #     skip_model_validation: "All", # accepts All, None
     #     source_uri: "ModelPackageSourceUri",
+    #     security_config: {
+    #       kms_key_id: "KmsKeyId", # required
+    #     },
+    #     model_card: {
+    #       model_card_content: "ModelCardContent",
+    #       model_card_status: "Draft", # accepts Draft, PendingReview, Approved, Archived
+    #     },
     #   })
     #
     # @example Response structure
@@ -11113,7 +11150,7 @@ module Aws::SageMaker
     #   resp.auto_ml_job_config.candidate_generation_config.feature_specification_s3_uri #=> String
     #   resp.auto_ml_job_config.candidate_generation_config.algorithms_config #=> Array
     #   resp.auto_ml_job_config.candidate_generation_config.algorithms_config[0].auto_ml_algorithms #=> Array
-    #   resp.auto_ml_job_config.candidate_generation_config.algorithms_config[0].auto_ml_algorithms[0] #=> String, one of "xgboost", "linear-learner", "mlp", "lightgbm", "catboost", "randomforest", "extra-trees", "nn-torch", "fastai"
+    #   resp.auto_ml_job_config.candidate_generation_config.algorithms_config[0].auto_ml_algorithms[0] #=> String, one of "xgboost", "linear-learner", "mlp", "lightgbm", "catboost", "randomforest", "extra-trees", "nn-torch", "fastai", "cnn-qr", "deepar", "prophet", "npts", "arima", "ets"
     #   resp.auto_ml_job_config.data_split_config.validation_fraction #=> Float
     #   resp.auto_ml_job_config.mode #=> String, one of "AUTO", "ENSEMBLING", "HYPERPARAMETER_TUNING"
     #   resp.creation_time #=> Time
@@ -11263,9 +11300,12 @@ module Aws::SageMaker
     #   resp.auto_ml_problem_type_config.time_series_forecasting_job_config.time_series_config.grouping_attribute_names[0] #=> String
     #   resp.auto_ml_problem_type_config.time_series_forecasting_job_config.holiday_config #=> Array
     #   resp.auto_ml_problem_type_config.time_series_forecasting_job_config.holiday_config[0].country_code #=> String
+    #   resp.auto_ml_problem_type_config.time_series_forecasting_job_config.candidate_generation_config.algorithms_config #=> Array
+    #   resp.auto_ml_problem_type_config.time_series_forecasting_job_config.candidate_generation_config.algorithms_config[0].auto_ml_algorithms #=> Array
+    #   resp.auto_ml_problem_type_config.time_series_forecasting_job_config.candidate_generation_config.algorithms_config[0].auto_ml_algorithms[0] #=> String, one of "xgboost", "linear-learner", "mlp", "lightgbm", "catboost", "randomforest", "extra-trees", "nn-torch", "fastai", "cnn-qr", "deepar", "prophet", "npts", "arima", "ets"
     #   resp.auto_ml_problem_type_config.tabular_job_config.candidate_generation_config.algorithms_config #=> Array
     #   resp.auto_ml_problem_type_config.tabular_job_config.candidate_generation_config.algorithms_config[0].auto_ml_algorithms #=> Array
-    #   resp.auto_ml_problem_type_config.tabular_job_config.candidate_generation_config.algorithms_config[0].auto_ml_algorithms[0] #=> String, one of "xgboost", "linear-learner", "mlp", "lightgbm", "catboost", "randomforest", "extra-trees", "nn-torch", "fastai"
+    #   resp.auto_ml_problem_type_config.tabular_job_config.candidate_generation_config.algorithms_config[0].auto_ml_algorithms[0] #=> String, one of "xgboost", "linear-learner", "mlp", "lightgbm", "catboost", "randomforest", "extra-trees", "nn-torch", "fastai", "cnn-qr", "deepar", "prophet", "npts", "arima", "ets"
     #   resp.auto_ml_problem_type_config.tabular_job_config.completion_criteria.max_candidates #=> Integer
     #   resp.auto_ml_problem_type_config.tabular_job_config.completion_criteria.max_runtime_per_training_job_in_seconds #=> Integer
     #   resp.auto_ml_problem_type_config.tabular_job_config.completion_criteria.max_auto_ml_job_runtime_in_seconds #=> Integer
@@ -11405,15 +11445,15 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
-    # Retrieves information of an instance (also called a *node*
+    # Retrieves information of a node (also called a *instance*
     # interchangeably) of a SageMaker HyperPod cluster.
     #
     # @option params [required, String] :cluster_name
     #   The string name or the Amazon Resource Name (ARN) of the SageMaker
-    #   HyperPod cluster in which the instance is.
+    #   HyperPod cluster in which the node is.
     #
     # @option params [required, String] :node_id
-    #   The ID of the instance.
+    #   The ID of the SageMaker HyperPod cluster node.
     #
     # @return [Types::DescribeClusterNodeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -11437,6 +11477,10 @@ module Aws::SageMaker
     #   resp.node_details.life_cycle_config.source_s3_uri #=> String
     #   resp.node_details.life_cycle_config.on_create #=> String
     #   resp.node_details.threads_per_core #=> Integer
+    #   resp.node_details.private_primary_ip #=> String
+    #   resp.node_details.private_dns_hostname #=> String
+    #   resp.node_details.placement.availability_zone #=> String
+    #   resp.node_details.placement.availability_zone_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeClusterNode AWS API Documentation
     #
@@ -12434,6 +12478,7 @@ module Aws::SageMaker
     #   resp.production_variants[0].managed_instance_scaling.min_instance_count #=> Integer
     #   resp.production_variants[0].managed_instance_scaling.max_instance_count #=> Integer
     #   resp.production_variants[0].routing_config.routing_strategy #=> String, one of "LEAST_OUTSTANDING_REQUESTS", "RANDOM"
+    #   resp.production_variants[0].inference_ami_version #=> String, one of "al2-ami-sagemaker-inference-gpu-2"
     #   resp.data_capture_config.enable_capture #=> Boolean
     #   resp.data_capture_config.initial_sampling_percentage #=> Integer
     #   resp.data_capture_config.destination_s3_uri #=> String
@@ -12497,6 +12542,7 @@ module Aws::SageMaker
     #   resp.shadow_production_variants[0].managed_instance_scaling.min_instance_count #=> Integer
     #   resp.shadow_production_variants[0].managed_instance_scaling.max_instance_count #=> Integer
     #   resp.shadow_production_variants[0].routing_config.routing_strategy #=> String, one of "LEAST_OUTSTANDING_REQUESTS", "RANDOM"
+    #   resp.shadow_production_variants[0].inference_ami_version #=> String, one of "al2-ami-sagemaker-inference-gpu-2"
     #   resp.execution_role_arn #=> String
     #   resp.vpc_config.security_group_ids #=> Array
     #   resp.vpc_config.security_group_ids[0] #=> String
@@ -14147,8 +14193,16 @@ module Aws::SageMaker
     # create SageMaker models or list them on Amazon Web Services
     # Marketplace.
     #
+    # If you provided a KMS Key ID when you created your model package, you
+    # will see the [KMS Decrypt][1] API call in your CloudTrail logs when
+    # you use this API.
+    #
     # To create models in SageMaker, buyers can subscribe to model packages
     # listed on Amazon Web Services Marketplace.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/kms/latest/APIReference/API_Decrypt.html
     #
     # @option params [required, String] :model_package_name
     #   The name or Amazon Resource Name (ARN) of the model package to
@@ -14186,6 +14240,8 @@ module Aws::SageMaker
     #   * {Types::DescribeModelPackageOutput#additional_inference_specifications #additional_inference_specifications} => Array&lt;Types::AdditionalInferenceSpecificationDefinition&gt;
     #   * {Types::DescribeModelPackageOutput#skip_model_validation #skip_model_validation} => String
     #   * {Types::DescribeModelPackageOutput#source_uri #source_uri} => String
+    #   * {Types::DescribeModelPackageOutput#security_config #security_config} => Types::ModelPackageSecurityConfig
+    #   * {Types::DescribeModelPackageOutput#model_card #model_card} => Types::ModelPackageModelCard
     #
     # @example Request syntax with placeholder values
     #
@@ -14372,6 +14428,9 @@ module Aws::SageMaker
     #   resp.additional_inference_specifications[0].supported_response_mime_types[0] #=> String
     #   resp.skip_model_validation #=> String, one of "All", "None"
     #   resp.source_uri #=> String
+    #   resp.security_config.kms_key_id #=> String
+    #   resp.model_card.model_card_content #=> String
+    #   resp.model_card.model_card_status #=> String, one of "Draft", "PendingReview", "Approved", "Archived"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeModelPackage AWS API Documentation
     #
@@ -16712,7 +16771,7 @@ module Aws::SageMaker
     #
     # @option params [Integer] :max_results
     #   This parameter defines the maximum number of results that can be
-    #   returned in a single response. The `MaxResults` parameter is an upper
+    #   return in a single response. The `MaxResults` parameter is an upper
     #   bound, not a target. If there are more results available than the
     #   value specified, a `NextToken` is provided in the response. The
     #   `NextToken` indicates that the user should get the next set of results
@@ -17782,7 +17841,7 @@ module Aws::SageMaker
     #
     # @option params [Integer] :max_results
     #   This parameter defines the maximum number of results that can be
-    #   returned in a single response. The `MaxResults` parameter is an upper
+    #   return in a single response. The `MaxResults` parameter is an upper
     #   bound, not a target. If there are more results available than the
     #   value specified, a `NextToken` is provided in the response. The
     #   `NextToken` indicates that the user should get the next set of results
@@ -21251,7 +21310,7 @@ module Aws::SageMaker
     #
     # @option params [Integer] :max_results
     #   This parameter defines the maximum number of results that can be
-    #   returned in a single response. The `MaxResults` parameter is an upper
+    #   return in a single response. The `MaxResults` parameter is an upper
     #   bound, not a target. If there are more results available than the
     #   value specified, a `NextToken` is provided in the response. The
     #   `NextToken` indicates that the user should get the next set of results
@@ -22023,7 +22082,7 @@ module Aws::SageMaker
     #
     # @option params [Integer] :max_results
     #   This parameter defines the maximum number of results that can be
-    #   returned in a single response. The `MaxResults` parameter is an upper
+    #   return in a single response. The `MaxResults` parameter is an upper
     #   bound, not a target. If there are more results available than the
     #   value specified, a `NextToken` is provided in the response. The
     #   `NextToken` indicates that the user should get the next set of results
@@ -24928,6 +24987,23 @@ module Aws::SageMaker
     # @option params [String] :source_uri
     #   The URI of the source for the model package.
     #
+    # @option params [Types::ModelPackageModelCard] :model_card
+    #   The model card associated with the model package. Since
+    #   `ModelPackageModelCard` is tied to a model package, it is a specific
+    #   usage of a model card and its schema is simplified compared to the
+    #   schema of `ModelCard`. The `ModelPackageModelCard` schema does not
+    #   include `model_package_details`, and `model_overview` is composed of
+    #   the `model_creator` and `model_artifact` properties. For more
+    #   information about the model package model card schema, see [Model
+    #   package model card schema][1]. For more information about the model
+    #   card associated with the model package, see [View the Details of a
+    #   Model Version][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry-details.html#model-card-schema
+    #   [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry-details.html
+    #
     # @return [Types::UpdateModelPackageOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateModelPackageOutput#model_package_arn #model_package_arn} => String
@@ -25025,6 +25101,10 @@ module Aws::SageMaker
     #       supported_response_mime_types: ["ResponseMIMEType"],
     #     },
     #     source_uri: "ModelPackageSourceUri",
+    #     model_card: {
+    #       model_card_content: "ModelCardContent",
+    #       model_card_status: "Draft", # accepts Draft, PendingReview, Approved, Archived
+    #     },
     #   })
     #
     # @example Response structure
@@ -26371,7 +26451,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.242.0'
+      context[:gem_version] = '1.246.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

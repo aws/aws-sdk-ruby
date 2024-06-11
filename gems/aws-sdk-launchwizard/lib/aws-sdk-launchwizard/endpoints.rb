@@ -68,6 +68,20 @@ module Aws::LaunchWizard
       end
     end
 
+    class GetWorkloadDeploymentPattern
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::LaunchWizard::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class ListDeploymentEvents
       def self.build(context)
         unless context.config.regional_endpoint
@@ -96,6 +110,20 @@ module Aws::LaunchWizard
       end
     end
 
+    class ListTagsForResource
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::LaunchWizard::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class ListWorkloadDeploymentPatterns
       def self.build(context)
         unless context.config.regional_endpoint
@@ -111,6 +139,34 @@ module Aws::LaunchWizard
     end
 
     class ListWorkloads
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::LaunchWizard::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class TagResource
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::LaunchWizard::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class UntagResource
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s

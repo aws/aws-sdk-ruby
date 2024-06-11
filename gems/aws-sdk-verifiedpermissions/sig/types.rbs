@@ -143,10 +143,13 @@ module Aws::VerifiedPermissions
 
     class Configuration
       attr_accessor cognito_user_pool_configuration: Types::CognitoUserPoolConfiguration
+      attr_accessor open_id_connect_configuration: Types::OpenIdConnectConfiguration
       attr_accessor unknown: untyped
       SENSITIVE: []
 
       class CognitoUserPoolConfiguration < Configuration
+      end
+      class OpenIdConnectConfiguration < Configuration
       end
       class Unknown < Configuration
       end
@@ -154,10 +157,13 @@ module Aws::VerifiedPermissions
 
     class ConfigurationDetail
       attr_accessor cognito_user_pool_configuration: Types::CognitoUserPoolConfigurationDetail
+      attr_accessor open_id_connect_configuration: Types::OpenIdConnectConfigurationDetail
       attr_accessor unknown: untyped
       SENSITIVE: []
 
       class CognitoUserPoolConfiguration < ConfigurationDetail
+      end
+      class OpenIdConnectConfiguration < ConfigurationDetail
       end
       class Unknown < ConfigurationDetail
       end
@@ -165,10 +171,13 @@ module Aws::VerifiedPermissions
 
     class ConfigurationItem
       attr_accessor cognito_user_pool_configuration: Types::CognitoUserPoolConfigurationItem
+      attr_accessor open_id_connect_configuration: Types::OpenIdConnectConfigurationItem
       attr_accessor unknown: untyped
       SENSITIVE: []
 
       class CognitoUserPoolConfiguration < ConfigurationItem
+      end
+      class OpenIdConnectConfiguration < ConfigurationItem
       end
       class Unknown < ConfigurationItem
       end
@@ -183,7 +192,7 @@ module Aws::VerifiedPermissions
     class ContextDefinition
       attr_accessor context_map: ::Hash[::String, Types::AttributeValue]
       attr_accessor unknown: untyped
-      SENSITIVE: []
+      SENSITIVE: [:context_map]
 
       class ContextMap < ContextDefinition
       end
@@ -549,6 +558,126 @@ module Aws::VerifiedPermissions
       SENSITIVE: []
     end
 
+    class OpenIdConnectAccessTokenConfiguration
+      attr_accessor principal_id_claim: ::String
+      attr_accessor audiences: ::Array[::String]
+      SENSITIVE: [:principal_id_claim]
+    end
+
+    class OpenIdConnectAccessTokenConfigurationDetail
+      attr_accessor principal_id_claim: ::String
+      attr_accessor audiences: ::Array[::String]
+      SENSITIVE: [:principal_id_claim]
+    end
+
+    class OpenIdConnectAccessTokenConfigurationItem
+      attr_accessor principal_id_claim: ::String
+      attr_accessor audiences: ::Array[::String]
+      SENSITIVE: [:principal_id_claim]
+    end
+
+    class OpenIdConnectConfiguration
+      attr_accessor issuer: ::String
+      attr_accessor entity_id_prefix: ::String
+      attr_accessor group_configuration: Types::OpenIdConnectGroupConfiguration
+      attr_accessor token_selection: Types::OpenIdConnectTokenSelection
+      SENSITIVE: [:entity_id_prefix]
+    end
+
+    class OpenIdConnectConfigurationDetail
+      attr_accessor issuer: ::String
+      attr_accessor entity_id_prefix: ::String
+      attr_accessor group_configuration: Types::OpenIdConnectGroupConfigurationDetail
+      attr_accessor token_selection: Types::OpenIdConnectTokenSelectionDetail
+      SENSITIVE: [:entity_id_prefix]
+    end
+
+    class OpenIdConnectConfigurationItem
+      attr_accessor issuer: ::String
+      attr_accessor entity_id_prefix: ::String
+      attr_accessor group_configuration: Types::OpenIdConnectGroupConfigurationItem
+      attr_accessor token_selection: Types::OpenIdConnectTokenSelectionItem
+      SENSITIVE: [:entity_id_prefix]
+    end
+
+    class OpenIdConnectGroupConfiguration
+      attr_accessor group_claim: ::String
+      attr_accessor group_entity_type: ::String
+      SENSITIVE: [:group_claim, :group_entity_type]
+    end
+
+    class OpenIdConnectGroupConfigurationDetail
+      attr_accessor group_claim: ::String
+      attr_accessor group_entity_type: ::String
+      SENSITIVE: [:group_claim, :group_entity_type]
+    end
+
+    class OpenIdConnectGroupConfigurationItem
+      attr_accessor group_claim: ::String
+      attr_accessor group_entity_type: ::String
+      SENSITIVE: [:group_claim, :group_entity_type]
+    end
+
+    class OpenIdConnectIdentityTokenConfiguration
+      attr_accessor principal_id_claim: ::String
+      attr_accessor client_ids: ::Array[::String]
+      SENSITIVE: [:principal_id_claim]
+    end
+
+    class OpenIdConnectIdentityTokenConfigurationDetail
+      attr_accessor principal_id_claim: ::String
+      attr_accessor client_ids: ::Array[::String]
+      SENSITIVE: [:principal_id_claim]
+    end
+
+    class OpenIdConnectIdentityTokenConfigurationItem
+      attr_accessor principal_id_claim: ::String
+      attr_accessor client_ids: ::Array[::String]
+      SENSITIVE: [:principal_id_claim]
+    end
+
+    class OpenIdConnectTokenSelection
+      attr_accessor access_token_only: Types::OpenIdConnectAccessTokenConfiguration
+      attr_accessor identity_token_only: Types::OpenIdConnectIdentityTokenConfiguration
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class AccessTokenOnly < OpenIdConnectTokenSelection
+      end
+      class IdentityTokenOnly < OpenIdConnectTokenSelection
+      end
+      class Unknown < OpenIdConnectTokenSelection
+      end
+    end
+
+    class OpenIdConnectTokenSelectionDetail
+      attr_accessor access_token_only: Types::OpenIdConnectAccessTokenConfigurationDetail
+      attr_accessor identity_token_only: Types::OpenIdConnectIdentityTokenConfigurationDetail
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class AccessTokenOnly < OpenIdConnectTokenSelectionDetail
+      end
+      class IdentityTokenOnly < OpenIdConnectTokenSelectionDetail
+      end
+      class Unknown < OpenIdConnectTokenSelectionDetail
+      end
+    end
+
+    class OpenIdConnectTokenSelectionItem
+      attr_accessor access_token_only: Types::OpenIdConnectAccessTokenConfigurationItem
+      attr_accessor identity_token_only: Types::OpenIdConnectIdentityTokenConfigurationItem
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class AccessTokenOnly < OpenIdConnectTokenSelectionItem
+      end
+      class IdentityTokenOnly < OpenIdConnectTokenSelectionItem
+      end
+      class Unknown < OpenIdConnectTokenSelectionItem
+      end
+    end
+
     class PolicyDefinition
       attr_accessor static: Types::StaticPolicyDefinition
       attr_accessor template_linked: Types::TemplateLinkedPolicyDefinition
@@ -737,10 +866,13 @@ module Aws::VerifiedPermissions
 
     class UpdateConfiguration
       attr_accessor cognito_user_pool_configuration: Types::UpdateCognitoUserPoolConfiguration
+      attr_accessor open_id_connect_configuration: Types::UpdateOpenIdConnectConfiguration
       attr_accessor unknown: untyped
       SENSITIVE: []
 
       class CognitoUserPoolConfiguration < UpdateConfiguration
+      end
+      class OpenIdConnectConfiguration < UpdateConfiguration
       end
       class Unknown < UpdateConfiguration
       end
@@ -760,6 +892,46 @@ module Aws::VerifiedPermissions
       attr_accessor last_updated_date: ::Time
       attr_accessor policy_store_id: ::String
       SENSITIVE: []
+    end
+
+    class UpdateOpenIdConnectAccessTokenConfiguration
+      attr_accessor principal_id_claim: ::String
+      attr_accessor audiences: ::Array[::String]
+      SENSITIVE: [:principal_id_claim]
+    end
+
+    class UpdateOpenIdConnectConfiguration
+      attr_accessor issuer: ::String
+      attr_accessor entity_id_prefix: ::String
+      attr_accessor group_configuration: Types::UpdateOpenIdConnectGroupConfiguration
+      attr_accessor token_selection: Types::UpdateOpenIdConnectTokenSelection
+      SENSITIVE: [:entity_id_prefix]
+    end
+
+    class UpdateOpenIdConnectGroupConfiguration
+      attr_accessor group_claim: ::String
+      attr_accessor group_entity_type: ::String
+      SENSITIVE: [:group_claim, :group_entity_type]
+    end
+
+    class UpdateOpenIdConnectIdentityTokenConfiguration
+      attr_accessor principal_id_claim: ::String
+      attr_accessor client_ids: ::Array[::String]
+      SENSITIVE: [:principal_id_claim]
+    end
+
+    class UpdateOpenIdConnectTokenSelection
+      attr_accessor access_token_only: Types::UpdateOpenIdConnectAccessTokenConfiguration
+      attr_accessor identity_token_only: Types::UpdateOpenIdConnectIdentityTokenConfiguration
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class AccessTokenOnly < UpdateOpenIdConnectTokenSelection
+      end
+      class IdentityTokenOnly < UpdateOpenIdConnectTokenSelection
+      end
+      class Unknown < UpdateOpenIdConnectTokenSelection
+      end
     end
 
     class UpdatePolicyDefinition

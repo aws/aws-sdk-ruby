@@ -661,6 +661,7 @@ module Aws
                                 accelerator_arn: ::String,
                                 ?name: ::String,
                                 ?ip_address_type: ("IPV4" | "DUAL_STACK"),
+                                ?ip_addresses: Array[::String],
                                 ?enabled: bool
                               ) -> _UpdateAcceleratorResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAcceleratorResponseSuccess
@@ -714,6 +715,7 @@ module Aws
                                                accelerator_arn: ::String,
                                                ?name: ::String,
                                                ?ip_address_type: ("IPV4" | "DUAL_STACK"),
+                                               ?ip_addresses: Array[::String],
                                                ?enabled: bool
                                              ) -> _UpdateCustomRoutingAcceleratorResponseSuccess
                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateCustomRoutingAcceleratorResponseSuccess

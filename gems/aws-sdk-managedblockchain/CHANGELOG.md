@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.53.0 (2024-06-05)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.52.0 (2024-05-24)
+------------------
+
+* Feature - This is a minor documentation update to address the impact of the shut down of the Goerli and Polygon networks.
+
 1.51.0 (2024-05-13)
 ------------------
 

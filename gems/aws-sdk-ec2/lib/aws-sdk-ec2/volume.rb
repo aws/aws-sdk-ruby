@@ -162,7 +162,7 @@ module Aws::EC2
     #
     # @return [self]
     def load
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.describe_volumes(volume_ids: [@id])
       end
       @data = resp.volumes[0]
@@ -279,7 +279,7 @@ module Aws::EC2
           :retry
         end
       end
-      Aws::Plugins::UserAgent.feature('resource') do
+      Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         Aws::Waiters::Waiter.new(options).wait({})
       end
     end
@@ -306,7 +306,7 @@ module Aws::EC2
     # @return [Types::VolumeAttachment]
     def attach_to_instance(options = {})
       options = options.merge(volume_id: @id)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.attach_volume(options)
       end
       resp.data
@@ -364,7 +364,7 @@ module Aws::EC2
     # @return [Snapshot]
     def create_snapshot(options = {})
       options = options.merge(volume_id: @id)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.create_snapshot(options)
       end
       Snapshot.new(
@@ -399,7 +399,7 @@ module Aws::EC2
     def create_tags(options = {})
       batch = []
       options = Aws::Util.deep_merge(options, resources: [@id])
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.create_tags(options)
       end
       options[:tags].each do |t|
@@ -446,7 +446,7 @@ module Aws::EC2
     def delete_tags(options = {})
       batch = []
       options = Aws::Util.deep_merge(options, resources: [@id])
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.delete_tags(options)
       end
       options[:tags].each do |t|
@@ -474,7 +474,7 @@ module Aws::EC2
     # @return [EmptyStructure]
     def delete(options = {})
       options = options.merge(volume_id: @id)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.delete_volume(options)
       end
       resp.data
@@ -497,7 +497,7 @@ module Aws::EC2
     # @return [Types::DescribeVolumeAttributeResult]
     def describe_attribute(options = {})
       options = options.merge(volume_id: @id)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.describe_volume_attribute(options)
       end
       resp.data
@@ -574,7 +574,7 @@ module Aws::EC2
     # @return [Types::DescribeVolumeStatusResult]
     def describe_status(options = {})
       options = Aws::Util.deep_merge(options, volume_ids: [@id])
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.describe_volume_status(options)
       end
       resp.data
@@ -611,7 +611,7 @@ module Aws::EC2
     # @return [Types::VolumeAttachment]
     def detach_from_instance(options = {})
       options = options.merge(volume_id: @id)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.detach_volume(options)
       end
       resp.data
@@ -631,7 +631,7 @@ module Aws::EC2
     # @return [EmptyStructure]
     def enable_io(options = {})
       options = options.merge(volume_id: @id)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.enable_volume_io(options)
       end
       resp.data
@@ -657,7 +657,7 @@ module Aws::EC2
     # @return [EmptyStructure]
     def modify_attribute(options = {})
       options = options.merge(volume_id: @id)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.modify_volume_attribute(options)
       end
       resp.data
@@ -746,7 +746,7 @@ module Aws::EC2
           name: "volume-id",
           values: [@id]
         }])
-        resp = Aws::Plugins::UserAgent.feature('resource') do
+        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
           @client.describe_snapshots(options)
         end
         resp.each_page do |page|

@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.46.0 (2024-06-07)
+------------------
+
+* Feature - New feature: common controls. When creating custom controls, you can now use pre-grouped AWS data sources based on common compliance themes. Also, the awsServices parameter is deprecated because we now manage services in scope for you. If used, the input is ignored and an empty list is returned.
+
+1.45.0 (2024-06-05)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.44.0 (2024-05-13)
 ------------------
 

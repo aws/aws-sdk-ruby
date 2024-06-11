@@ -251,6 +251,19 @@ module Aws::EKS
     #   The configuration values that you provided.
     #   @return [String]
     #
+    # @!attribute [rw] pod_identity_associations
+    #   An array of Pod Identity Assocations owned by the Addon. Each EKS
+    #   Pod Identity association maps a role to a service account in a
+    #   namespace in the cluster.
+    #
+    #   For more information, see [Attach an IAM Role to an Amazon EKS
+    #   add-on using Pod Identity][1] in the EKS User Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/add-ons-iam.html
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/Addon AWS API Documentation
     #
     class Addon < Struct.new(
@@ -267,7 +280,8 @@ module Aws::EKS
       :publisher,
       :owner,
       :marketplace_information,
-      :configuration_values)
+      :configuration_values,
+      :pod_identity_associations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -352,6 +366,54 @@ module Aws::EKS
       include Aws::Structure
     end
 
+    # A type of Pod Identity Association owned by an Amazon EKS Add-on.
+    #
+    # Each EKS Pod Identity Association maps a role to a service account in
+    # a namespace in the cluster.
+    #
+    # For more information, see [Attach an IAM Role to an Amazon EKS add-on
+    # using Pod Identity][1] in the EKS User Guide.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/eks/latest/userguide/add-ons-iam.html
+    #
+    # @!attribute [rw] service_account
+    #   The name of a Kubernetes Service Account.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The ARN of an IAM Role.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/AddonPodIdentityAssociations AWS API Documentation
+    #
+    class AddonPodIdentityAssociations < Struct.new(
+      :service_account,
+      :role_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about how to configure IAM for an Addon.
+    #
+    # @!attribute [rw] service_account
+    #   The Kubernetes Service Account name used by the addon.
+    #   @return [String]
+    #
+    # @!attribute [rw] recommended_managed_policies
+    #   A suggested IAM Policy for the addon.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/AddonPodIdentityConfiguration AWS API Documentation
+    #
+    class AddonPodIdentityConfiguration < Struct.new(
+      :service_account,
+      :recommended_managed_policies)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about an add-on version.
     #
     # @!attribute [rw] addon_version
@@ -370,13 +432,19 @@ module Aws::EKS
     #   Whether the add-on requires configuration.
     #   @return [Boolean]
     #
+    # @!attribute [rw] requires_iam_permissions
+    #   Indicates if the Addon requires IAM Permissions to operate, such as
+    #   networking permissions.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/AddonVersionInfo AWS API Documentation
     #
     class AddonVersionInfo < Struct.new(
       :addon_version,
       :architecture,
       :compatibilities,
-      :requires_configuration)
+      :requires_configuration,
+      :requires_iam_permissions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -780,9 +848,7 @@ module Aws::EKS
     #   @return [String]
     #
     # @!attribute [rw] health
-    #   An object representing the health of your local Amazon EKS cluster
-    #   on an Amazon Web Services Outpost. This object isn't available for
-    #   clusters on the Amazon Web Services cloud.
+    #   An object representing the health of your Amazon EKS cluster.
     #   @return [Types::ClusterHealth]
     #
     # @!attribute [rw] outpost_config
@@ -823,13 +889,10 @@ module Aws::EKS
       include Aws::Structure
     end
 
-    # An object representing the health of your local Amazon EKS cluster on
-    # an Amazon Web Services Outpost. You can't use this API with an Amazon
-    # EKS cluster on the Amazon Web Services cloud.
+    # An object representing the health of your Amazon EKS cluster.
     #
     # @!attribute [rw] issues
-    #   An object representing the health issues of your local Amazon EKS
-    #   cluster on an Amazon Web Services Outpost.
+    #   An object representing the health issues of your Amazon EKS cluster.
     #   @return [Array<Types::ClusterIssue>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ClusterHealth AWS API Documentation
@@ -840,9 +903,7 @@ module Aws::EKS
       include Aws::Structure
     end
 
-    # An issue with your local Amazon EKS cluster on an Amazon Web Services
-    # Outpost. You can't use this API with an Amazon EKS cluster on the
-    # Amazon Web Services cloud.
+    # An issue with your Amazon EKS cluster.
     #
     # @!attribute [rw] code
     #   The error code of the issue.
@@ -1234,6 +1295,19 @@ module Aws::EKS
     #   `DescribeAddonConfiguration`.
     #   @return [String]
     #
+    # @!attribute [rw] pod_identity_associations
+    #   An array of Pod Identity Assocations to be created. Each EKS Pod
+    #   Identity association maps a Kubernetes service account to an IAM
+    #   Role.
+    #
+    #   For more information, see [Attach an IAM Role to an Amazon EKS
+    #   add-on using Pod Identity][1] in the EKS User Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/add-ons-iam.html
+    #   @return [Array<Types::AddonPodIdentityAssociations>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/CreateAddonRequest AWS API Documentation
     #
     class CreateAddonRequest < Struct.new(
@@ -1244,7 +1318,8 @@ module Aws::EKS
       :resolve_conflicts,
       :client_request_token,
       :tags,
-      :configuration_values)
+      :configuration_values,
+      :pod_identity_associations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1567,8 +1642,8 @@ module Aws::EKS
     #   default disk size is 50 GiB for Windows. If you specify
     #   `launchTemplate`, then don't specify `diskSize`, or the node group
     #   deployment will fail. For more information about using launch
-    #   templates with Amazon EKS, see [Launch template support][1] in the
-    #   *Amazon EKS User Guide*.
+    #   templates with Amazon EKS, see [Customizing managed nodes with
+    #   launch templates][1] in the *Amazon EKS User Guide*.
     #
     #
     #
@@ -1580,8 +1655,8 @@ module Aws::EKS
     #   your node group. If you specify `launchTemplate`, then don't
     #   specify ` SubnetId ` in your launch template, or the node group
     #   deployment will fail. For more information about using launch
-    #   templates with Amazon EKS, see [Launch template support][1] in the
-    #   *Amazon EKS User Guide*.
+    #   templates with Amazon EKS, see [Customizing managed nodes with
+    #   launch templates][1] in the *Amazon EKS User Guide*.
     #
     #
     #
@@ -1600,8 +1675,8 @@ module Aws::EKS
     #   `instanceTypes`, then `t3.medium` is used, by default. If you
     #   specify `Spot` for `capacityType`, then we recommend specifying
     #   multiple values for `instanceTypes`. For more information, see
-    #   [Managed node group capacity types][1] and [Launch template
-    #   support][2] in the *Amazon EKS User Guide*.
+    #   [Managed node group capacity types][1] and [Customizing managed
+    #   nodes with launch templates][2] in the *Amazon EKS User Guide*.
     #
     #
     #
@@ -1616,8 +1691,8 @@ module Aws::EKS
     #   template uses a Windows custom AMI, then add
     #   `eks:kube-proxy-windows` to your Windows nodes `rolearn` in the
     #   `aws-auth` `ConfigMap`. For more information about using launch
-    #   templates with Amazon EKS, see [Launch template support][1] in the
-    #   *Amazon EKS User Guide*.
+    #   templates with Amazon EKS, see [Customizing managed nodes with
+    #   launch templates][1] in the *Amazon EKS User Guide*.
     #
     #
     #
@@ -1629,8 +1704,8 @@ module Aws::EKS
     #   Linux, the protocol is SSH. For Windows, the protocol is RDP. If you
     #   specify `launchTemplate`, then don't specify `remoteAccess`, or the
     #   node group deployment will fail. For more information about using
-    #   launch templates with Amazon EKS, see [Launch template support][1]
-    #   in the *Amazon EKS User Guide*.
+    #   launch templates with Amazon EKS, see [Customizing managed nodes
+    #   with launch templates][1] in the *Amazon EKS User Guide*.
     #
     #
     #
@@ -1649,7 +1724,8 @@ module Aws::EKS
     #   specify `launchTemplate`, then don't specify ` IamInstanceProfile `
     #   in your launch template, or the node group deployment will fail. For
     #   more information about using launch templates with Amazon EKS, see
-    #   [Launch template support][2] in the *Amazon EKS User Guide*.
+    #   [Customizing managed nodes with launch templates][2] in the *Amazon
+    #   EKS User Guide*.
     #
     #
     #
@@ -1688,9 +1764,15 @@ module Aws::EKS
     #
     # @!attribute [rw] launch_template
     #   An object representing a node group's launch template
-    #   specification. If specified, then do not specify `instanceTypes`,
-    #   `diskSize`, or `remoteAccess` and make sure that the launch template
-    #   meets the requirements in `launchTemplateSpecification`.
+    #   specification. When using this object, don't directly specify
+    #   `instanceTypes`, `diskSize`, or `remoteAccess`. Make sure that the
+    #   launch template meets the requirements in
+    #   `launchTemplateSpecification`. Also refer to [Customizing managed
+    #   nodes with launch templates][1] in the *Amazon EKS User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html
     #   @return [Types::LaunchTemplateSpecification]
     #
     # @!attribute [rw] update_config
@@ -1707,8 +1789,8 @@ module Aws::EKS
     #   accepted specified value. If you specify `launchTemplate`, and your
     #   launch template uses a custom AMI, then don't specify `version`, or
     #   the node group deployment will fail. For more information about
-    #   using launch templates with Amazon EKS, see [Launch template
-    #   support][1] in the *Amazon EKS User Guide*.
+    #   using launch templates with Amazon EKS, see [Customizing managed
+    #   nodes with launch templates][1] in the *Amazon EKS User Guide*.
     #
     #
     #
@@ -1728,8 +1810,8 @@ module Aws::EKS
     #   If you specify `launchTemplate`, and your launch template uses a
     #   custom AMI, then don't specify `releaseVersion`, or the node group
     #   deployment will fail. For more information about using launch
-    #   templates with Amazon EKS, see [Launch template support][3] in the
-    #   *Amazon EKS User Guide*.
+    #   templates with Amazon EKS, see [Customizing managed nodes with
+    #   launch templates][3] in the *Amazon EKS User Guide*.
     #
     #
     #
@@ -2199,12 +2281,19 @@ module Aws::EKS
     #   provide when an add-on is created or updated.
     #   @return [String]
     #
+    # @!attribute [rw] pod_identity_configuration
+    #   The Kubernetes service account name used by the addon, and any
+    #   suggested IAM policies. Use this information to create an IAM Role
+    #   for the Addon.
+    #   @return [Array<Types::AddonPodIdentityConfiguration>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DescribeAddonConfigurationResponse AWS API Documentation
     #
     class DescribeAddonConfigurationResponse < Struct.new(
       :addon_name,
       :addon_version,
-      :configuration_schema)
+      :configuration_schema,
+      :pod_identity_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3453,8 +3542,8 @@ module Aws::EKS
     # group deployment or update will fail. For more information about
     # launch templates, see [ `CreateLaunchTemplate` ][6] in the Amazon EC2
     # API Reference. For more information about using launch templates with
-    # Amazon EKS, see [Launch template support][7] in the *Amazon EKS User
-    # Guide*.
+    # Amazon EKS, see [Customizing managed nodes with launch templates][7]
+    # in the *Amazon EKS User Guide*.
     #
     # You must specify either the launch template ID or the launch template
     # name in the request, but not both.
@@ -5066,6 +5155,11 @@ module Aws::EKS
     #   The most recent timestamp that the association was modified at
     #   @return [Time]
     #
+    # @!attribute [rw] owner_arn
+    #   If defined, the Pod Identity Association is owned by an Amazon EKS
+    #   Addon.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/PodIdentityAssociation AWS API Documentation
     #
     class PodIdentityAssociation < Struct.new(
@@ -5077,7 +5171,8 @@ module Aws::EKS
       :association_id,
       :tags,
       :created_at,
-      :modified_at)
+      :modified_at,
+      :owner_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5119,6 +5214,11 @@ module Aws::EKS
     #   The ID of the association.
     #   @return [String]
     #
+    # @!attribute [rw] owner_arn
+    #   If defined, the Pod Identity Association is owned by an Amazon EKS
+    #   Addon.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/PodIdentityAssociationSummary AWS API Documentation
     #
     class PodIdentityAssociationSummary < Struct.new(
@@ -5126,7 +5226,8 @@ module Aws::EKS
       :namespace,
       :service_account,
       :association_arn,
-      :association_id)
+      :association_id,
+      :owner_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5726,6 +5827,21 @@ module Aws::EKS
     #   `DescribeAddonConfiguration`.
     #   @return [String]
     #
+    # @!attribute [rw] pod_identity_associations
+    #   An array of Pod Identity Assocations to be updated. Each EKS Pod
+    #   Identity association maps a Kubernetes service account to an IAM
+    #   Role. If this value is left blank, no change. If an empty array is
+    #   provided, existing Pod Identity Assocations owned by the Addon are
+    #   deleted.
+    #
+    #   For more information, see [Attach an IAM Role to an Amazon EKS
+    #   add-on using Pod Identity][1] in the EKS User Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/add-ons-iam.html
+    #   @return [Array<Types::AddonPodIdentityAssociations>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/UpdateAddonRequest AWS API Documentation
     #
     class UpdateAddonRequest < Struct.new(
@@ -5735,7 +5851,8 @@ module Aws::EKS
       :service_account_role_arn,
       :resolve_conflicts,
       :client_request_token,
-      :configuration_values)
+      :configuration_values,
+      :pod_identity_associations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5995,8 +6112,8 @@ module Aws::EKS
     #   version. If you specify `launchTemplate`, and your launch template
     #   uses a custom AMI, then don't specify `version`, or the node group
     #   update will fail. For more information about using launch templates
-    #   with Amazon EKS, see [Launch template support][1] in the *Amazon EKS
-    #   User Guide*.
+    #   with Amazon EKS, see [Customizing managed nodes with launch
+    #   templates][1] in the *Amazon EKS User Guide*.
     #
     #
     #
@@ -6016,8 +6133,8 @@ module Aws::EKS
     #   If you specify `launchTemplate`, and your launch template uses a
     #   custom AMI, then don't specify `releaseVersion`, or the node group
     #   update will fail. For more information about using launch templates
-    #   with Amazon EKS, see [Launch template support][3] in the *Amazon EKS
-    #   User Guide*.
+    #   with Amazon EKS, see [Customizing managed nodes with launch
+    #   templates][3] in the *Amazon EKS User Guide*.
     #
     #
     #

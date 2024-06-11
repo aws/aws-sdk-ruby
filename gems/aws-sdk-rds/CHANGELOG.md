@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.234.0 (2024-06-05)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.233.0 (2024-05-30)
+------------------
+
+* Feature - Updates Amazon RDS documentation for Aurora Postgres DBname.
+
 1.232.0 (2024-05-21)
 ------------------
 

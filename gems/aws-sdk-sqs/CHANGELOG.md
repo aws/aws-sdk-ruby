@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.76.0 (2024-06-06)
+------------------
+
+* Feature - Doc only updates for SQS. These updates include customer-reported issues and TCX3 modifications.
+
+1.75.0 (2024-06-05)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.74.0 (2024-05-13)
 ------------------
 

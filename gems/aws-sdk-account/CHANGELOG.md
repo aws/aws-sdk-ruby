@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.25.0 (2024-06-06)
+------------------
+
+* Feature - This release adds 3 new APIs (AcceptPrimaryEmailUpdate, GetPrimaryEmail, and StartPrimaryEmailUpdate) used to centrally manage the root user email address of member accounts within an AWS organization.
+
+1.24.0 (2024-06-05)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.23.0 (2024-05-13)
 ------------------
 

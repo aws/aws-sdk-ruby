@@ -552,8 +552,8 @@ module Aws::IoTFleetWise
     #   @return [String]
     #
     # @!attribute [rw] signal_catalog_arn
-    #   (Optional) The Amazon Resource Name (ARN) of the signal catalog to
-    #   associate with the campaign.
+    #   The Amazon Resource Name (ARN) of the signal catalog to associate
+    #   with the campaign.
     #   @return [String]
     #
     # @!attribute [rw] target_arn
@@ -2745,6 +2745,18 @@ module Aws::IoTFleetWise
     #   created from a certain vehicle model.
     #   @return [String]
     #
+    # @!attribute [rw] attribute_names
+    #   The fully qualified names of the attributes. For example, the fully
+    #   qualified name of an attribute might be `Vehicle.Body.Engine.Type`.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] attribute_values
+    #   Static information about a vehicle attribute value in string format.
+    #   For example:
+    #
+    #   `"1.3 L R2"`
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] next_token
     #   A pagination token for the next set of results.
     #
@@ -2761,6 +2773,8 @@ module Aws::IoTFleetWise
     #
     class ListVehiclesRequest < Struct.new(
       :model_manifest_arn,
+      :attribute_names,
+      :attribute_values,
       :next_token,
       :max_results)
       SENSITIVE = []

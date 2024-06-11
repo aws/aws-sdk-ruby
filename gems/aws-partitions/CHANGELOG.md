@@ -1,6 +1,51 @@
 Unreleased Changes
 ------------------
 
+1.942.0 (2024-06-10)
+------------------
+
+* Feature - Added support for enumerating regions for  `Aws::ApplicationSignals`.
+
+1.941.0 (2024-06-07)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.940.0 (2024-06-05)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.939.0 (2024-06-04)
+------------------
+
+* Feature - Added support for enumerating regions for  `Aws::TaxSettings`.
+
+1.938.0 (2024-06-03)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.937.0 (2024-05-30)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.936.0 (2024-05-29)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.935.0 (2024-05-28)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.934.0 (2024-05-23)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
 1.933.0 (2024-05-22)
 ------------------
 

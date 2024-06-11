@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.246.0 (2024-06-07)
+------------------
+
+* Feature - This release introduces a new optional parameter: InferenceAmiVersion, in ProductionVariant.
+
+1.245.0 (2024-06-05)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.244.0 (2024-06-04)
+------------------
+
+* Feature - Extend DescribeClusterNode response with private DNS hostname and IP address, and placement information about availability zone and availability zone ID.
+
+1.243.0 (2024-05-30)
+------------------
+
+* Feature - Adds Model Card information as a new component to Model Package. Autopilot launches algorithm selection for TimeSeries modality to generate AutoML candidates per algorithm.
+
 1.242.0 (2024-05-16)
 ------------------
 

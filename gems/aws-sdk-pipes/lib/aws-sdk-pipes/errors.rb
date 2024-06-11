@@ -115,11 +115,6 @@ module Aws::Pipes
       end
 
       # @return [String]
-      def quota_code
-        @data[:quota_code]
-      end
-
-      # @return [String]
       def resource_id
         @data[:resource_id]
       end
@@ -132,6 +127,11 @@ module Aws::Pipes
       # @return [String]
       def service_code
         @data[:service_code]
+      end
+
+      # @return [String]
+      def quota_code
+        @data[:quota_code]
       end
     end
 
@@ -150,6 +150,11 @@ module Aws::Pipes
       end
 
       # @return [String]
+      def service_code
+        @data[:service_code]
+      end
+
+      # @return [String]
       def quota_code
         @data[:quota_code]
       end
@@ -157,11 +162,6 @@ module Aws::Pipes
       # @return [String]
       def retry_after_seconds
         @data[:retry_after_seconds]
-      end
-
-      # @return [String]
-      def service_code
-        @data[:service_code]
       end
     end
 
@@ -175,13 +175,13 @@ module Aws::Pipes
       end
 
       # @return [String]
-      def field_list
-        @data[:field_list]
+      def message
+        @message || @data[:message]
       end
 
       # @return [String]
-      def message
-        @message || @data[:message]
+      def field_list
+        @data[:field_list]
       end
     end
 

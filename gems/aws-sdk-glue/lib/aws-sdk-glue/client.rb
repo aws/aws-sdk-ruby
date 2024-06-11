@@ -1089,6 +1089,7 @@ module Aws::Glue
     #
     #   resp.jobs #=> Array
     #   resp.jobs[0].name #=> String
+    #   resp.jobs[0].job_mode #=> String, one of "SCRIPT", "VISUAL", "NOTEBOOK"
     #   resp.jobs[0].description #=> String
     #   resp.jobs[0].log_uri #=> String
     #   resp.jobs[0].role #=> String
@@ -2282,6 +2283,7 @@ module Aws::Glue
     #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].previous_run_id #=> String
     #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].trigger_name #=> String
     #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].job_name #=> String
+    #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].job_mode #=> String, one of "SCRIPT", "VISUAL", "NOTEBOOK"
     #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].started_on #=> Time
     #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].last_modified_on #=> Time
     #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].completed_on #=> Time
@@ -2351,6 +2353,7 @@ module Aws::Glue
     #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].previous_run_id #=> String
     #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].trigger_name #=> String
     #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].job_name #=> String
+    #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].job_mode #=> String, one of "SCRIPT", "VISUAL", "NOTEBOOK"
     #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].started_on #=> Time
     #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].last_modified_on #=> Time
     #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].completed_on #=> Time
@@ -2822,7 +2825,9 @@ module Aws::Glue
     # @option params [Hash<String,String>] :tags
     #   The tags you assign to the connection.
     #
-    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    # @return [Types::CreateConnectionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateConnectionResponse#create_connection_status #create_connection_status} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -2831,7 +2836,7 @@ module Aws::Glue
     #     connection_input: { # required
     #       name: "NameString", # required
     #       description: "DescriptionString",
-    #       connection_type: "JDBC", # required, accepts JDBC, SFTP, MONGODB, KAFKA, NETWORK, MARKETPLACE, CUSTOM
+    #       connection_type: "JDBC", # required, accepts JDBC, SFTP, MONGODB, KAFKA, NETWORK, MARKETPLACE, CUSTOM, SALESFORCE
     #       match_criteria: ["NameString"],
     #       connection_properties: { # required
     #         "HOST" => "ValueString",
@@ -2841,11 +2846,35 @@ module Aws::Glue
     #         security_group_id_list: ["NameString"],
     #         availability_zone: "NameString",
     #       },
+    #       authentication_configuration: {
+    #         authentication_type: "BASIC", # accepts BASIC, OAUTH2, CUSTOM
+    #         secret_arn: "SecretArn",
+    #         o_auth_2_properties: {
+    #           o_auth_2_grant_type: "AUTHORIZATION_CODE", # accepts AUTHORIZATION_CODE, CLIENT_CREDENTIALS, JWT_BEARER
+    #           o_auth_2_client_application: {
+    #             user_managed_client_application_client_id: "UserManagedClientApplicationClientId",
+    #             aws_managed_client_application_reference: "AWSManagedClientApplicationReference",
+    #           },
+    #           token_url: "TokenUrl",
+    #           token_url_parameters_map: {
+    #             "TokenUrlParameterKey" => "TokenUrlParameterValue",
+    #           },
+    #           authorization_code_properties: {
+    #             authorization_code: "AuthorizationCode",
+    #             redirect_uri: "RedirectUri",
+    #           },
+    #         },
+    #       },
+    #       validate_credentials: false,
     #     },
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
     #   })
+    #
+    # @example Response structure
+    #
+    #   resp.create_connection_status #=> String, one of "READY", "IN_PROGRESS", "FAILED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateConnection AWS API Documentation
     #
@@ -3417,6 +3446,19 @@ module Aws::Glue
     #   The name you assign to this job definition. It must be unique in your
     #   account.
     #
+    # @option params [String] :job_mode
+    #   A mode that describes how a job was created. Valid values are:
+    #
+    #   * `SCRIPT` - The job was created using the Glue Studio script editor.
+    #
+    #   * `VISUAL` - The job was created using the Glue Studio visual editor.
+    #
+    #   * `NOTEBOOK` - The job was created using an interactive sessions
+    #     notebook.
+    #
+    #   When the `JobMode` field is missing or null, `SCRIPT` is assigned as
+    #   the default value.
+    #
     # @option params [String] :description
     #   Description of the job being defined.
     #
@@ -3490,7 +3532,13 @@ module Aws::Glue
     # @option params [Integer] :timeout
     #   The job timeout in minutes. This is the maximum time that a job run
     #   can consume resources before it is terminated and enters `TIMEOUT`
-    #   status. The default is 2,880 minutes (48 hours).
+    #   status. The default is 2,880 minutes (48 hours) for batch jobs.
+    #
+    #   Streaming jobs must have timeout values less than 7 days or 10080
+    #   minutes. When the value is left blank, the job will be restarted after
+    #   7 days based if you have not setup a maintenance window. If you have
+    #   setup maintenance window, it will be restarted during the maintenance
+    #   window after 7 days.
     #
     # @option params [Float] :max_capacity
     #   For Glue version 1.0 or earlier jobs, using the standard worker type,
@@ -4589,6 +4637,20 @@ module Aws::Glue
     #         database_name: "NameString",
     #         name: "NameString",
     #         region: "NameString",
+    #       },
+    #       view_definition: {
+    #         is_protected: false,
+    #         definer: "ArnString",
+    #         representations: [
+    #           {
+    #             dialect: "REDSHIFT", # accepts REDSHIFT, ATHENA, SPARK
+    #             dialect_version: "ViewDialectVersionString",
+    #             view_original_text: "ViewTextString",
+    #             validation_connection: "NameString",
+    #             view_expanded_text: "ViewTextString",
+    #           },
+    #         ],
+    #         sub_objects: ["ArnString"],
     #       },
     #     },
     #     partition_indexes: [
@@ -6348,7 +6410,7 @@ module Aws::Glue
     #
     #   resp.connection.name #=> String
     #   resp.connection.description #=> String
-    #   resp.connection.connection_type #=> String, one of "JDBC", "SFTP", "MONGODB", "KAFKA", "NETWORK", "MARKETPLACE", "CUSTOM"
+    #   resp.connection.connection_type #=> String, one of "JDBC", "SFTP", "MONGODB", "KAFKA", "NETWORK", "MARKETPLACE", "CUSTOM", "SALESFORCE"
     #   resp.connection.match_criteria #=> Array
     #   resp.connection.match_criteria[0] #=> String
     #   resp.connection.connection_properties #=> Hash
@@ -6360,6 +6422,17 @@ module Aws::Glue
     #   resp.connection.creation_time #=> Time
     #   resp.connection.last_updated_time #=> Time
     #   resp.connection.last_updated_by #=> String
+    #   resp.connection.status #=> String, one of "READY", "IN_PROGRESS", "FAILED"
+    #   resp.connection.status_reason #=> String
+    #   resp.connection.last_connection_validation_time #=> Time
+    #   resp.connection.authentication_configuration.authentication_type #=> String, one of "BASIC", "OAUTH2", "CUSTOM"
+    #   resp.connection.authentication_configuration.secret_arn #=> String
+    #   resp.connection.authentication_configuration.o_auth_2_properties.o_auth_2_grant_type #=> String, one of "AUTHORIZATION_CODE", "CLIENT_CREDENTIALS", "JWT_BEARER"
+    #   resp.connection.authentication_configuration.o_auth_2_properties.o_auth_2_client_application.user_managed_client_application_client_id #=> String
+    #   resp.connection.authentication_configuration.o_auth_2_properties.o_auth_2_client_application.aws_managed_client_application_reference #=> String
+    #   resp.connection.authentication_configuration.o_auth_2_properties.token_url #=> String
+    #   resp.connection.authentication_configuration.o_auth_2_properties.token_url_parameters_map #=> Hash
+    #   resp.connection.authentication_configuration.o_auth_2_properties.token_url_parameters_map["TokenUrlParameterKey"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetConnection AWS API Documentation
     #
@@ -6406,7 +6479,7 @@ module Aws::Glue
     #     catalog_id: "CatalogIdString",
     #     filter: {
     #       match_criteria: ["NameString"],
-    #       connection_type: "JDBC", # accepts JDBC, SFTP, MONGODB, KAFKA, NETWORK, MARKETPLACE, CUSTOM
+    #       connection_type: "JDBC", # accepts JDBC, SFTP, MONGODB, KAFKA, NETWORK, MARKETPLACE, CUSTOM, SALESFORCE
     #     },
     #     hide_password: false,
     #     next_token: "Token",
@@ -6418,7 +6491,7 @@ module Aws::Glue
     #   resp.connection_list #=> Array
     #   resp.connection_list[0].name #=> String
     #   resp.connection_list[0].description #=> String
-    #   resp.connection_list[0].connection_type #=> String, one of "JDBC", "SFTP", "MONGODB", "KAFKA", "NETWORK", "MARKETPLACE", "CUSTOM"
+    #   resp.connection_list[0].connection_type #=> String, one of "JDBC", "SFTP", "MONGODB", "KAFKA", "NETWORK", "MARKETPLACE", "CUSTOM", "SALESFORCE"
     #   resp.connection_list[0].match_criteria #=> Array
     #   resp.connection_list[0].match_criteria[0] #=> String
     #   resp.connection_list[0].connection_properties #=> Hash
@@ -6430,6 +6503,17 @@ module Aws::Glue
     #   resp.connection_list[0].creation_time #=> Time
     #   resp.connection_list[0].last_updated_time #=> Time
     #   resp.connection_list[0].last_updated_by #=> String
+    #   resp.connection_list[0].status #=> String, one of "READY", "IN_PROGRESS", "FAILED"
+    #   resp.connection_list[0].status_reason #=> String
+    #   resp.connection_list[0].last_connection_validation_time #=> Time
+    #   resp.connection_list[0].authentication_configuration.authentication_type #=> String, one of "BASIC", "OAUTH2", "CUSTOM"
+    #   resp.connection_list[0].authentication_configuration.secret_arn #=> String
+    #   resp.connection_list[0].authentication_configuration.o_auth_2_properties.o_auth_2_grant_type #=> String, one of "AUTHORIZATION_CODE", "CLIENT_CREDENTIALS", "JWT_BEARER"
+    #   resp.connection_list[0].authentication_configuration.o_auth_2_properties.o_auth_2_client_application.user_managed_client_application_client_id #=> String
+    #   resp.connection_list[0].authentication_configuration.o_auth_2_properties.o_auth_2_client_application.aws_managed_client_application_reference #=> String
+    #   resp.connection_list[0].authentication_configuration.o_auth_2_properties.token_url #=> String
+    #   resp.connection_list[0].authentication_configuration.o_auth_2_properties.token_url_parameters_map #=> Hash
+    #   resp.connection_list[0].authentication_configuration.o_auth_2_properties.token_url_parameters_map["TokenUrlParameterKey"] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetConnections AWS API Documentation
@@ -7334,6 +7418,7 @@ module Aws::Glue
     # @example Response structure
     #
     #   resp.job.name #=> String
+    #   resp.job.job_mode #=> String, one of "SCRIPT", "VISUAL", "NOTEBOOK"
     #   resp.job.description #=> String
     #   resp.job.log_uri #=> String
     #   resp.job.role #=> String
@@ -8307,6 +8392,7 @@ module Aws::Glue
     #   resp.job_run.previous_run_id #=> String
     #   resp.job_run.trigger_name #=> String
     #   resp.job_run.job_name #=> String
+    #   resp.job_run.job_mode #=> String, one of "SCRIPT", "VISUAL", "NOTEBOOK"
     #   resp.job_run.started_on #=> Time
     #   resp.job_run.last_modified_on #=> Time
     #   resp.job_run.completed_on #=> Time
@@ -8374,6 +8460,7 @@ module Aws::Glue
     #   resp.job_runs[0].previous_run_id #=> String
     #   resp.job_runs[0].trigger_name #=> String
     #   resp.job_runs[0].job_name #=> String
+    #   resp.job_runs[0].job_mode #=> String, one of "SCRIPT", "VISUAL", "NOTEBOOK"
     #   resp.job_runs[0].started_on #=> Time
     #   resp.job_runs[0].last_modified_on #=> Time
     #   resp.job_runs[0].completed_on #=> Time
@@ -8434,6 +8521,7 @@ module Aws::Glue
     #
     #   resp.jobs #=> Array
     #   resp.jobs[0].name #=> String
+    #   resp.jobs[0].job_mode #=> String, one of "SCRIPT", "VISUAL", "NOTEBOOK"
     #   resp.jobs[0].description #=> String
     #   resp.jobs[0].log_uri #=> String
     #   resp.jobs[0].role #=> String
@@ -10878,6 +10966,7 @@ module Aws::Glue
     #   resp.table.view_definition.representations[0].dialect_version #=> String
     #   resp.table.view_definition.representations[0].view_original_text #=> String
     #   resp.table.view_definition.representations[0].view_expanded_text #=> String
+    #   resp.table.view_definition.representations[0].validation_connection #=> String
     #   resp.table.view_definition.representations[0].is_stale #=> Boolean
     #   resp.table.is_multi_dialect_view #=> Boolean
     #
@@ -11056,6 +11145,7 @@ module Aws::Glue
     #   resp.table_version.table.view_definition.representations[0].dialect_version #=> String
     #   resp.table_version.table.view_definition.representations[0].view_original_text #=> String
     #   resp.table_version.table.view_definition.representations[0].view_expanded_text #=> String
+    #   resp.table_version.table.view_definition.representations[0].validation_connection #=> String
     #   resp.table_version.table.view_definition.representations[0].is_stale #=> Boolean
     #   resp.table_version.table.is_multi_dialect_view #=> Boolean
     #   resp.table_version.version_id #=> String
@@ -11186,6 +11276,7 @@ module Aws::Glue
     #   resp.table_versions[0].table.view_definition.representations[0].dialect_version #=> String
     #   resp.table_versions[0].table.view_definition.representations[0].view_original_text #=> String
     #   resp.table_versions[0].table.view_definition.representations[0].view_expanded_text #=> String
+    #   resp.table_versions[0].table.view_definition.representations[0].validation_connection #=> String
     #   resp.table_versions[0].table.view_definition.representations[0].is_stale #=> Boolean
     #   resp.table_versions[0].table.is_multi_dialect_view #=> Boolean
     #   resp.table_versions[0].version_id #=> String
@@ -11327,6 +11418,7 @@ module Aws::Glue
     #   resp.table_list[0].view_definition.representations[0].dialect_version #=> String
     #   resp.table_list[0].view_definition.representations[0].view_original_text #=> String
     #   resp.table_list[0].view_definition.representations[0].view_expanded_text #=> String
+    #   resp.table_list[0].view_definition.representations[0].validation_connection #=> String
     #   resp.table_list[0].view_definition.representations[0].is_stale #=> Boolean
     #   resp.table_list[0].is_multi_dialect_view #=> Boolean
     #   resp.next_token #=> String
@@ -12045,6 +12137,7 @@ module Aws::Glue
     #   resp.table.view_definition.representations[0].dialect_version #=> String
     #   resp.table.view_definition.representations[0].view_original_text #=> String
     #   resp.table.view_definition.representations[0].view_expanded_text #=> String
+    #   resp.table.view_definition.representations[0].validation_connection #=> String
     #   resp.table.view_definition.representations[0].is_stale #=> Boolean
     #   resp.table.is_multi_dialect_view #=> Boolean
     #   resp.authorized_columns #=> Array
@@ -12259,6 +12352,7 @@ module Aws::Glue
     #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].previous_run_id #=> String
     #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].trigger_name #=> String
     #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].job_name #=> String
+    #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].job_mode #=> String, one of "SCRIPT", "VISUAL", "NOTEBOOK"
     #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].started_on #=> Time
     #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].last_modified_on #=> Time
     #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].completed_on #=> Time
@@ -12328,6 +12422,7 @@ module Aws::Glue
     #   resp.workflow.graph.nodes[0].job_details.job_runs[0].previous_run_id #=> String
     #   resp.workflow.graph.nodes[0].job_details.job_runs[0].trigger_name #=> String
     #   resp.workflow.graph.nodes[0].job_details.job_runs[0].job_name #=> String
+    #   resp.workflow.graph.nodes[0].job_details.job_runs[0].job_mode #=> String, one of "SCRIPT", "VISUAL", "NOTEBOOK"
     #   resp.workflow.graph.nodes[0].job_details.job_runs[0].started_on #=> Time
     #   resp.workflow.graph.nodes[0].job_details.job_runs[0].last_modified_on #=> Time
     #   resp.workflow.graph.nodes[0].job_details.job_runs[0].completed_on #=> Time
@@ -12450,6 +12545,7 @@ module Aws::Glue
     #   resp.run.graph.nodes[0].job_details.job_runs[0].previous_run_id #=> String
     #   resp.run.graph.nodes[0].job_details.job_runs[0].trigger_name #=> String
     #   resp.run.graph.nodes[0].job_details.job_runs[0].job_name #=> String
+    #   resp.run.graph.nodes[0].job_details.job_runs[0].job_mode #=> String, one of "SCRIPT", "VISUAL", "NOTEBOOK"
     #   resp.run.graph.nodes[0].job_details.job_runs[0].started_on #=> Time
     #   resp.run.graph.nodes[0].job_details.job_runs[0].last_modified_on #=> Time
     #   resp.run.graph.nodes[0].job_details.job_runs[0].completed_on #=> Time
@@ -12612,6 +12708,7 @@ module Aws::Glue
     #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].previous_run_id #=> String
     #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].trigger_name #=> String
     #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].job_name #=> String
+    #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].job_mode #=> String, one of "SCRIPT", "VISUAL", "NOTEBOOK"
     #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].started_on #=> Time
     #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].last_modified_on #=> Time
     #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].completed_on #=> Time
@@ -14520,6 +14617,7 @@ module Aws::Glue
     #   resp.table_list[0].view_definition.representations[0].dialect_version #=> String
     #   resp.table_list[0].view_definition.representations[0].view_original_text #=> String
     #   resp.table_list[0].view_definition.representations[0].view_expanded_text #=> String
+    #   resp.table_list[0].view_definition.representations[0].validation_connection #=> String
     #   resp.table_list[0].view_definition.representations[0].is_stale #=> Boolean
     #   resp.table_list[0].is_multi_dialect_view #=> Boolean
     #
@@ -14997,8 +15095,11 @@ module Aws::Glue
     #   run can consume resources before it is terminated and enters `TIMEOUT`
     #   status. This value overrides the timeout value set in the parent job.
     #
-    #   Streaming jobs do not have a timeout. The default for non-streaming
-    #   jobs is 2,880 minutes (48 hours).
+    #   Streaming jobs must have timeout values less than 7 days or 10080
+    #   minutes. When the value is left blank, the job will be restarted after
+    #   7 days based if you have not setup a maintenance window. If you have
+    #   setup maintenance window, it will be restarted during the maintenance
+    #   window after 7 days.
     #
     # @option params [Float] :max_capacity
     #   For Glue version 1.0 or earlier jobs, using the standard worker type,
@@ -15902,7 +16003,7 @@ module Aws::Glue
     #     connection_input: { # required
     #       name: "NameString", # required
     #       description: "DescriptionString",
-    #       connection_type: "JDBC", # required, accepts JDBC, SFTP, MONGODB, KAFKA, NETWORK, MARKETPLACE, CUSTOM
+    #       connection_type: "JDBC", # required, accepts JDBC, SFTP, MONGODB, KAFKA, NETWORK, MARKETPLACE, CUSTOM, SALESFORCE
     #       match_criteria: ["NameString"],
     #       connection_properties: { # required
     #         "HOST" => "ValueString",
@@ -15912,6 +16013,26 @@ module Aws::Glue
     #         security_group_id_list: ["NameString"],
     #         availability_zone: "NameString",
     #       },
+    #       authentication_configuration: {
+    #         authentication_type: "BASIC", # accepts BASIC, OAUTH2, CUSTOM
+    #         secret_arn: "SecretArn",
+    #         o_auth_2_properties: {
+    #           o_auth_2_grant_type: "AUTHORIZATION_CODE", # accepts AUTHORIZATION_CODE, CLIENT_CREDENTIALS, JWT_BEARER
+    #           o_auth_2_client_application: {
+    #             user_managed_client_application_client_id: "UserManagedClientApplicationClientId",
+    #             aws_managed_client_application_reference: "AWSManagedClientApplicationReference",
+    #           },
+    #           token_url: "TokenUrl",
+    #           token_url_parameters_map: {
+    #             "TokenUrlParameterKey" => "TokenUrlParameterValue",
+    #           },
+    #           authorization_code_properties: {
+    #             authorization_code: "AuthorizationCode",
+    #             redirect_uri: "RedirectUri",
+    #           },
+    #         },
+    #       },
+    #       validate_credentials: false,
     #     },
     #   })
     #
@@ -16824,6 +16945,13 @@ module Aws::Glue
     # @option params [String] :version_id
     #   The version ID at which to update the table contents.
     #
+    # @option params [String] :view_update_action
+    #   The operation to be performed when updating the view.
+    #
+    # @option params [Boolean] :force
+    #   A flag that can be set to true to ignore matching storage descriptor
+    #   and subobject matching requirements.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -16912,10 +17040,26 @@ module Aws::Glue
     #         name: "NameString",
     #         region: "NameString",
     #       },
+    #       view_definition: {
+    #         is_protected: false,
+    #         definer: "ArnString",
+    #         representations: [
+    #           {
+    #             dialect: "REDSHIFT", # accepts REDSHIFT, ATHENA, SPARK
+    #             dialect_version: "ViewDialectVersionString",
+    #             view_original_text: "ViewTextString",
+    #             validation_connection: "NameString",
+    #             view_expanded_text: "ViewTextString",
+    #           },
+    #         ],
+    #         sub_objects: ["ArnString"],
+    #       },
     #     },
     #     skip_archive: false,
     #     transaction_id: "TransactionIdString",
     #     version_id: "VersionString",
+    #     view_update_action: "ADD", # accepts ADD, REPLACE, ADD_OR_REPLACE, DROP
+    #     force: false,
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateTable AWS API Documentation
@@ -17168,7 +17312,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.174.0'
+      context[:gem_version] = '1.177.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.104.0 (2024-06-05)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.103.0 (2024-06-03)
+------------------
+
+* Feature - Adds support for EKS add-ons pod identity associations integration
+
 1.102.0 (2024-05-13)
 ------------------
 

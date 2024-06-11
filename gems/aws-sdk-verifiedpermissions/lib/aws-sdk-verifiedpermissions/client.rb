@@ -689,37 +689,34 @@ module Aws::VerifiedPermissions
       req.send_request(options)
     end
 
-    # Creates a reference to an Amazon Cognito user pool as an external
-    # identity provider (IdP).
+    # Adds an identity source to a policy store–an Amazon Cognito user pool
+    # or OpenID Connect (OIDC) identity provider (IdP).
     #
     # After you create an identity source, you can use the identities
     # provided by the IdP as proxies for the principal in authorization
-    # queries that use the [IsAuthorizedWithToken][1] operation. These
-    # identities take the form of tokens that contain claims about the user,
-    # such as IDs, attributes and group memberships. Amazon Cognito provides
-    # both identity tokens and access tokens, and Verified Permissions can
-    # use either or both. Any combination of identity and access tokens
-    # results in the same Cedar principal. Verified Permissions
-    # automatically translates the information about the identities into the
-    # standard Cedar attributes that can be evaluated by your policies.
-    # Because the Amazon Cognito identity and access tokens can contain
-    # different information, the tokens you choose to use determine which
-    # principal attributes are available to access when evaluating Cedar
-    # policies.
+    # queries that use the [IsAuthorizedWithToken][1] or
+    # [BatchIsAuthorizedWithToken][2] API operations. These identities take
+    # the form of tokens that contain claims about the user, such as IDs,
+    # attributes and group memberships. Identity sources provide identity
+    # (ID) tokens and access tokens. Verified Permissions derives
+    # information about your user and session from token claims. Access
+    # tokens provide action `context` to your policies, and ID tokens
+    # provide principal `Attributes`.
     #
-    # If you delete a Amazon Cognito user pool or user, tokens from that
-    # deleted pool or that deleted user continue to be usable until they
-    # expire.
+    # Tokens from an identity source user continue to be usable until they
+    # expire. Token revocation and resource deletion have no effect on the
+    # validity of a token in your policy store
     #
     # <note markdown="1"> To reference a user from this identity source in your Cedar policies,
-    # use the following syntax.
+    # refer to the following syntax examples.
     #
-    #  *IdentityType::"&lt;CognitoUserPoolIdentifier&gt;\|&lt;CognitoClientId&gt;*
+    #  * Amazon Cognito user pool: `Namespace::[Entity type]::[User pool
+    #   ID]|[user principal attribute]`, for example
+    #   `MyCorp::User::us-east-1_EXAMPLE|a1b2c3d4-5678-90ab-cdef-EXAMPLE11111`.
     #
-    #  Where `IdentityType` is the string that you provide to the
-    # `PrincipalEntityType` parameter for this operation. The
-    # `CognitoUserPoolId` and `CognitoClientId` are defined by the Amazon
-    # Cognito user pool.
+    # * OpenID Connect (OIDC) provider: `Namespace::[Entity
+    #   type]::[principalIdClaim]|[user principal attribute]`, for example
+    #   `MyCorp::User::MyOIDCProvider|a1b2c3d4-5678-90ab-cdef-EXAMPLE22222`.
     #
     #  </note>
     #
@@ -734,6 +731,7 @@ module Aws::VerifiedPermissions
     #
     #
     # [1]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorizedWithToken.html
+    # [2]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_BatchIsAuthorizedWithToken.html
     #
     # @option params [String] :client_token
     #   Specifies a unique, case-sensitive ID that you provide to ensure the
@@ -771,13 +769,6 @@ module Aws::VerifiedPermissions
     #   Specifies the details required to communicate with the identity
     #   provider (IdP) associated with this identity source.
     #
-    #   <note markdown="1"> At this time, the only valid member of this structure is a Amazon
-    #   Cognito user pool configuration.
-    #
-    #    You must specify a `UserPoolArn`, and optionally, a `ClientId`.
-    #
-    #    </note>
-    #
     # @option params [String] :principal_entity_type
     #   Specifies the namespace and data type of the principals generated for
     #   identities authenticated by the new identity source.
@@ -800,6 +791,24 @@ module Aws::VerifiedPermissions
     #         client_ids: ["ClientId"],
     #         group_configuration: {
     #           group_entity_type: "GroupEntityType", # required
+    #         },
+    #       },
+    #       open_id_connect_configuration: {
+    #         issuer: "Issuer", # required
+    #         entity_id_prefix: "EntityIdPrefix",
+    #         group_configuration: {
+    #           group_claim: "Claim", # required
+    #           group_entity_type: "GroupEntityType", # required
+    #         },
+    #         token_selection: { # required
+    #           access_token_only: {
+    #             principal_id_claim: "Claim",
+    #             audiences: ["Audience"],
+    #           },
+    #           identity_token_only: {
+    #             principal_id_claim: "Claim",
+    #             client_ids: ["ClientId"],
+    #           },
     #         },
     #       },
     #     },
@@ -1298,6 +1307,16 @@ module Aws::VerifiedPermissions
     #   resp.configuration.cognito_user_pool_configuration.client_ids[0] #=> String
     #   resp.configuration.cognito_user_pool_configuration.issuer #=> String
     #   resp.configuration.cognito_user_pool_configuration.group_configuration.group_entity_type #=> String
+    #   resp.configuration.open_id_connect_configuration.issuer #=> String
+    #   resp.configuration.open_id_connect_configuration.entity_id_prefix #=> String
+    #   resp.configuration.open_id_connect_configuration.group_configuration.group_claim #=> String
+    #   resp.configuration.open_id_connect_configuration.group_configuration.group_entity_type #=> String
+    #   resp.configuration.open_id_connect_configuration.token_selection.access_token_only.principal_id_claim #=> String
+    #   resp.configuration.open_id_connect_configuration.token_selection.access_token_only.audiences #=> Array
+    #   resp.configuration.open_id_connect_configuration.token_selection.access_token_only.audiences[0] #=> String
+    #   resp.configuration.open_id_connect_configuration.token_selection.identity_token_only.principal_id_claim #=> String
+    #   resp.configuration.open_id_connect_configuration.token_selection.identity_token_only.client_ids #=> Array
+    #   resp.configuration.open_id_connect_configuration.token_selection.identity_token_only.client_ids[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/GetIdentitySource AWS API Documentation
     #
@@ -1610,9 +1629,9 @@ module Aws::VerifiedPermissions
     # Verified Permissions validates each token that is specified in a
     # request by checking its expiration date and its signature.
     #
-    # If you delete a Amazon Cognito user pool or user, tokens from that
-    # deleted pool or that deleted user continue to be usable until they
-    # expire.
+    # Tokens from an identity source user continue to be usable until they
+    # expire. Token revocation and resource deletion have no effect on the
+    # validity of a token in your policy store
     #
     #
     #
@@ -1806,6 +1825,16 @@ module Aws::VerifiedPermissions
     #   resp.identity_sources[0].configuration.cognito_user_pool_configuration.client_ids[0] #=> String
     #   resp.identity_sources[0].configuration.cognito_user_pool_configuration.issuer #=> String
     #   resp.identity_sources[0].configuration.cognito_user_pool_configuration.group_configuration.group_entity_type #=> String
+    #   resp.identity_sources[0].configuration.open_id_connect_configuration.issuer #=> String
+    #   resp.identity_sources[0].configuration.open_id_connect_configuration.entity_id_prefix #=> String
+    #   resp.identity_sources[0].configuration.open_id_connect_configuration.group_configuration.group_claim #=> String
+    #   resp.identity_sources[0].configuration.open_id_connect_configuration.group_configuration.group_entity_type #=> String
+    #   resp.identity_sources[0].configuration.open_id_connect_configuration.token_selection.access_token_only.principal_id_claim #=> String
+    #   resp.identity_sources[0].configuration.open_id_connect_configuration.token_selection.access_token_only.audiences #=> Array
+    #   resp.identity_sources[0].configuration.open_id_connect_configuration.token_selection.access_token_only.audiences[0] #=> String
+    #   resp.identity_sources[0].configuration.open_id_connect_configuration.token_selection.identity_token_only.principal_id_claim #=> String
+    #   resp.identity_sources[0].configuration.open_id_connect_configuration.token_selection.identity_token_only.client_ids #=> Array
+    #   resp.identity_sources[0].configuration.open_id_connect_configuration.token_selection.identity_token_only.client_ids[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/ListIdentitySources AWS API Documentation
     #
@@ -2090,7 +2119,7 @@ module Aws::VerifiedPermissions
     end
 
     # Updates the specified identity source to use a new identity provider
-    # (IdP) source, or to change the mapping of identities from the IdP to a
+    # (IdP), or to change the mapping of identities from the IdP to a
     # different principal entity type.
     #
     # <note markdown="1"> Verified Permissions is <i> <a
@@ -2141,6 +2170,24 @@ module Aws::VerifiedPermissions
     #         client_ids: ["ClientId"],
     #         group_configuration: {
     #           group_entity_type: "GroupEntityType", # required
+    #         },
+    #       },
+    #       open_id_connect_configuration: {
+    #         issuer: "Issuer", # required
+    #         entity_id_prefix: "EntityIdPrefix",
+    #         group_configuration: {
+    #           group_claim: "Claim", # required
+    #           group_entity_type: "GroupEntityType", # required
+    #         },
+    #         token_selection: { # required
+    #           access_token_only: {
+    #             principal_id_claim: "Claim",
+    #             audiences: ["Audience"],
+    #           },
+    #           identity_token_only: {
+    #             principal_id_claim: "Claim",
+    #             client_ids: ["ClientId"],
+    #           },
     #         },
     #       },
     #     },
@@ -2441,7 +2488,7 @@ module Aws::VerifiedPermissions
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-verifiedpermissions'
-      context[:gem_version] = '1.22.0'
+      context[:gem_version] = '1.24.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

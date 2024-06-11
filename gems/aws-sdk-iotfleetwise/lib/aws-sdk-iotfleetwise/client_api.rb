@@ -260,7 +260,9 @@ module Aws::IoTFleetWise
     VehicleSummary = Shapes::StructureShape.new(name: 'VehicleSummary')
     arn = Shapes::StringShape.new(name: 'arn')
     attributeName = Shapes::StringShape.new(name: 'attributeName')
+    attributeNamesList = Shapes::ListShape.new(name: 'attributeNamesList')
     attributeValue = Shapes::StringShape.new(name: 'attributeValue')
+    attributeValuesList = Shapes::ListShape.new(name: 'attributeValuesList')
     attributesMap = Shapes::MapShape.new(name: 'attributesMap')
     campaignName = Shapes::StringShape.new(name: 'campaignName')
     campaignSummaries = Shapes::ListShape.new(name: 'campaignSummaries')
@@ -900,6 +902,8 @@ module Aws::IoTFleetWise
     ListVehiclesInFleetResponse.struct_class = Types::ListVehiclesInFleetResponse
 
     ListVehiclesRequest.add_member(:model_manifest_arn, Shapes::ShapeRef.new(shape: arn, location_name: "modelManifestArn"))
+    ListVehiclesRequest.add_member(:attribute_names, Shapes::ShapeRef.new(shape: attributeNamesList, location_name: "attributeNames"))
+    ListVehiclesRequest.add_member(:attribute_values, Shapes::ShapeRef.new(shape: attributeValuesList, location_name: "attributeValues"))
     ListVehiclesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: nextToken, location_name: "nextToken"))
     ListVehiclesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: listVehiclesMaxResults, location_name: "maxResults"))
     ListVehiclesRequest.struct_class = Types::ListVehiclesRequest
@@ -1255,6 +1259,10 @@ module Aws::IoTFleetWise
     VehicleSummary.add_member(:last_modification_time, Shapes::ShapeRef.new(shape: timestamp, required: true, location_name: "lastModificationTime"))
     VehicleSummary.add_member(:attributes, Shapes::ShapeRef.new(shape: attributesMap, location_name: "attributes"))
     VehicleSummary.struct_class = Types::VehicleSummary
+
+    attributeNamesList.member = Shapes::ShapeRef.new(shape: attributeName)
+
+    attributeValuesList.member = Shapes::ShapeRef.new(shape: attributeValue)
 
     attributesMap.key = Shapes::ShapeRef.new(shape: attributeName)
     attributesMap.value = Shapes::ShapeRef.new(shape: attributeValue)

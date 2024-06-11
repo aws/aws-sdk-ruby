@@ -253,7 +253,11 @@ module Aws::Amplify
       include Aws::Structure
     end
 
-    # Describes the backend properties associated with an Amplify `Branch`.
+    # Describes the backend associated with an Amplify `Branch`.
+    #
+    # This property is available to Amplify Gen 2 apps only. When you deploy
+    # an application with Amplify Gen 2, you provision the app's backend
+    # infrastructure using Typescript code.
     #
     # @!attribute [rw] stack_arn
     #   The Amazon Resource Name (ARN) for the CloudFormation stack.
@@ -267,7 +271,9 @@ module Aws::Amplify
       include Aws::Structure
     end
 
-    # Describes the backend environment for an Amplify app.
+    # Describes the backend environment associated with a `Branch` of a Gen
+    # 1 Amplify app. Amplify Gen 1 applications are created using Amplify
+    # Studio or the Amplify command line interface (CLI).
     #
     # @!attribute [rw] backend_environment_arn
     #   The Amazon Resource Name (ARN) for a backend environment that is
@@ -444,11 +450,18 @@ module Aws::Amplify
     # @!attribute [rw] backend_environment_arn
     #   The Amazon Resource Name (ARN) for a backend environment that is
     #   part of an Amplify app.
+    #
+    #   This property is available to Amplify Gen 1 apps only. When you
+    #   deploy an application with Amplify Gen 2, you provision the app's
+    #   backend infrastructure using Typescript code.
     #   @return [String]
     #
     # @!attribute [rw] backend
-    #   Describes the backend properties associated with an Amplify
-    #   `Branch`.
+    #   Describes the backend associated with an Amplify `Branch`.
+    #
+    #   This property is available to Amplify Gen 2 apps only. When you
+    #   deploy an application with Amplify Gen 2, you provision the app's
+    #   backend infrastructure using Typescript code.
     #   @return [Types::Backend]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/Branch AWS API Documentation
@@ -867,12 +880,20 @@ module Aws::Amplify
     #
     # @!attribute [rw] backend_environment_arn
     #   The Amazon Resource Name (ARN) for a backend environment that is
-    #   part of an Amplify app.
+    #   part of a Gen 1 Amplify app.
+    #
+    #   This field is available to Amplify Gen 1 apps only where the backend
+    #   is created using Amplify Studio or the Amplify command line
+    #   interface (CLI).
     #   @return [String]
     #
     # @!attribute [rw] backend
     #   The backend for a `Branch` of an Amplify app. Use for a backend
     #   created from an CloudFormation stack.
+    #
+    #   This field is available to Amplify Gen 2 apps only. When you deploy
+    #   an application with Amplify Gen 2, you provision the app's backend
+    #   infrastructure using Typescript code.
     #   @return [Types::Backend]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/CreateBranchRequest AWS API Documentation
@@ -2820,12 +2841,20 @@ module Aws::Amplify
     #
     # @!attribute [rw] backend_environment_arn
     #   The Amazon Resource Name (ARN) for a backend environment that is
-    #   part of an Amplify app.
+    #   part of a Gen 1 Amplify app.
+    #
+    #   This field is available to Amplify Gen 1 apps only where the backend
+    #   is created using Amplify Studio or the Amplify command line
+    #   interface (CLI).
     #   @return [String]
     #
     # @!attribute [rw] backend
     #   The backend for a `Branch` of an Amplify app. Use for a backend
     #   created from an CloudFormation stack.
+    #
+    #   This field is available to Amplify Gen 2 apps only. When you deploy
+    #   an application with Amplify Gen 2, you provision the app's backend
+    #   infrastructure using Typescript code.
     #   @return [Types::Backend]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/UpdateBranchRequest AWS API Documentation

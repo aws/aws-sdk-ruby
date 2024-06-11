@@ -3,6 +3,9 @@
         "description": "Test cases for DatetimeOffsets operation",
         "metadata": {
             "protocol": "query",
+            "protocols": [
+                "query"
+            ],
             "apiVersion": "2020-01-08"
         },
         "shapes": {
@@ -74,6 +77,9 @@
         "description": "Test cases for EmptyInputAndEmptyOutput operation",
         "metadata": {
             "protocol": "query",
+            "protocols": [
+                "query"
+            ],
             "apiVersion": "2020-01-08"
         },
         "shapes": {
@@ -108,6 +114,9 @@
         "description": "Test cases for FlattenedXmlMap operation",
         "metadata": {
             "protocol": "query",
+            "protocols": [
+                "query"
+            ],
             "apiVersion": "2020-01-08"
         },
         "shapes": {
@@ -178,6 +187,9 @@
         "description": "Test cases for FlattenedXmlMapWithXmlName operation",
         "metadata": {
             "protocol": "query",
+            "protocols": [
+                "query"
+            ],
             "apiVersion": "2020-01-08"
         },
         "shapes": {
@@ -241,6 +253,9 @@
         "description": "Test cases for FlattenedXmlMapWithXmlNamespace operation",
         "metadata": {
             "protocol": "query",
+            "protocols": [
+                "query"
+            ],
             "apiVersion": "2020-01-08"
         },
         "shapes": {
@@ -307,6 +322,9 @@
         "description": "Test cases for FractionalSeconds operation",
         "metadata": {
             "protocol": "query",
+            "protocols": [
+                "query"
+            ],
             "apiVersion": "2020-01-08"
         },
         "shapes": {
@@ -354,6 +372,9 @@
         "description": "Test cases for GreetingWithErrors operation",
         "metadata": {
             "protocol": "query",
+            "protocols": [
+                "query"
+            ],
             "apiVersion": "2020-01-08"
         },
         "shapes": {
@@ -401,6 +422,9 @@
         "description": "Test cases for GreetingWithErrors operation",
         "metadata": {
             "protocol": "query",
+            "protocols": [
+                "query"
+            ],
             "apiVersion": "2020-01-08"
         },
         "shapes": {
@@ -454,6 +478,9 @@
         "description": "Test cases for GreetingWithErrors operation",
         "metadata": {
             "protocol": "query",
+            "protocols": [
+                "query"
+            ],
             "apiVersion": "2020-01-08"
         },
         "shapes": {
@@ -511,6 +538,9 @@
         "description": "Test cases for GreetingWithErrors operation",
         "metadata": {
             "protocol": "query",
+            "protocols": [
+                "query"
+            ],
             "apiVersion": "2020-01-08"
         },
         "shapes": {
@@ -576,6 +606,9 @@
         "description": "Test cases for IgnoresWrappingXmlName operation",
         "metadata": {
             "protocol": "query",
+            "protocols": [
+                "query"
+            ],
             "apiVersion": "2020-01-08"
         },
         "shapes": {
@@ -624,6 +657,9 @@
         "description": "Test cases for NoInputAndNoOutput operation",
         "metadata": {
             "protocol": "query",
+            "protocols": [
+                "query"
+            ],
             "apiVersion": "2020-01-08"
         },
         "shapes": {},
@@ -650,6 +686,9 @@
         "description": "Test cases for NoInputAndOutput operation",
         "metadata": {
             "protocol": "query",
+            "protocols": [
+                "query"
+            ],
             "apiVersion": "2020-01-08"
         },
         "shapes": {
@@ -684,6 +723,9 @@
         "description": "Test cases for RecursiveXmlShapes operation",
         "metadata": {
             "protocol": "query",
+            "protocols": [
+                "query"
+            ],
             "apiVersion": "2020-01-08"
         },
         "shapes": {
@@ -764,6 +806,9 @@
         "description": "Test cases for SimpleScalarXmlProperties operation",
         "metadata": {
             "protocol": "query",
+            "protocols": [
+                "query"
+            ],
             "apiVersion": "2020-01-08"
         },
         "shapes": {
@@ -942,6 +987,9 @@
         "description": "Test cases for XmlBlobs operation",
         "metadata": {
             "protocol": "query",
+            "protocols": [
+                "query"
+            ],
             "apiVersion": "2020-01-08"
         },
         "shapes": {
@@ -989,6 +1037,9 @@
         "description": "Test cases for XmlEmptyBlobs operation",
         "metadata": {
             "protocol": "query",
+            "protocols": [
+                "query"
+            ],
             "apiVersion": "2020-01-08"
         },
         "shapes": {
@@ -1059,6 +1110,9 @@
         "description": "Test cases for XmlEmptyLists operation",
         "metadata": {
             "protocol": "query",
+            "protocols": [
+                "query"
+            ],
             "apiVersion": "2020-01-08"
         },
         "shapes": {
@@ -1268,6 +1322,9 @@
         "description": "Test cases for XmlEmptyMaps operation",
         "metadata": {
             "protocol": "query",
+            "protocols": [
+                "query"
+            ],
             "apiVersion": "2020-01-08"
         },
         "shapes": {
@@ -1355,6 +1412,9 @@
         "description": "Test cases for XmlEnums operation",
         "metadata": {
             "protocol": "query",
+            "protocols": [
+                "query"
+            ],
             "apiVersion": "2020-01-08"
         },
         "shapes": {
@@ -1462,6 +1522,9 @@
         "description": "Test cases for XmlIntEnums operation",
         "metadata": {
             "protocol": "query",
+            "protocols": [
+                "query"
+            ],
             "apiVersion": "2020-01-08"
         },
         "shapes": {
@@ -1563,6 +1626,9 @@
         "description": "Test cases for XmlLists operation",
         "metadata": {
             "protocol": "query",
+            "protocols": [
+                "query"
+            ],
             "apiVersion": "2020-01-08"
         },
         "shapes": {
@@ -1839,6 +1905,9 @@
         "description": "Test cases for XmlMaps operation",
         "metadata": {
             "protocol": "query",
+            "protocols": [
+                "query"
+            ],
             "apiVersion": "2020-01-08"
         },
         "shapes": {
@@ -1910,6 +1979,9 @@
         "description": "Test cases for XmlMapsXmlName operation",
         "metadata": {
             "protocol": "query",
+            "protocols": [
+                "query"
+            ],
             "apiVersion": "2020-01-08"
         },
         "shapes": {
@@ -1982,6 +2054,9 @@
         "description": "Test cases for XmlNamespaces operation",
         "metadata": {
             "protocol": "query",
+            "protocols": [
+                "query"
+            ],
             "apiVersion": "2020-01-08"
         },
         "shapes": {
@@ -2059,6 +2134,9 @@
         "description": "Test cases for XmlTimestamps operation",
         "metadata": {
             "protocol": "query",
+            "protocols": [
+                "query"
+            ],
             "apiVersion": "2020-01-08"
         },
         "shapes": {

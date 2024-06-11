@@ -439,6 +439,7 @@ module Aws::Firehose
       attr_accessor retry_options: Types::HttpEndpointRetryOptions
       attr_accessor s3_backup_mode: ("FailedDataOnly" | "AllData")
       attr_accessor s3_configuration: Types::S3DestinationConfiguration
+      attr_accessor secrets_manager_configuration: Types::SecretsManagerConfiguration
       SENSITIVE: []
     end
 
@@ -452,6 +453,7 @@ module Aws::Firehose
       attr_accessor retry_options: Types::HttpEndpointRetryOptions
       attr_accessor s3_backup_mode: ("FailedDataOnly" | "AllData")
       attr_accessor s3_destination_description: Types::S3DestinationDescription
+      attr_accessor secrets_manager_configuration: Types::SecretsManagerConfiguration
       SENSITIVE: []
     end
 
@@ -465,6 +467,7 @@ module Aws::Firehose
       attr_accessor retry_options: Types::HttpEndpointRetryOptions
       attr_accessor s3_backup_mode: ("FailedDataOnly" | "AllData")
       attr_accessor s3_update: Types::S3DestinationUpdate
+      attr_accessor secrets_manager_configuration: Types::SecretsManagerConfiguration
       SENSITIVE: []
     end
 
@@ -668,6 +671,7 @@ module Aws::Firehose
       attr_accessor s3_backup_mode: ("Disabled" | "Enabled")
       attr_accessor s3_backup_configuration: Types::S3DestinationConfiguration
       attr_accessor cloud_watch_logging_options: Types::CloudWatchLoggingOptions
+      attr_accessor secrets_manager_configuration: Types::SecretsManagerConfiguration
       SENSITIVE: [:username, :password]
     end
 
@@ -682,6 +686,7 @@ module Aws::Firehose
       attr_accessor s3_backup_mode: ("Disabled" | "Enabled")
       attr_accessor s3_backup_description: Types::S3DestinationDescription
       attr_accessor cloud_watch_logging_options: Types::CloudWatchLoggingOptions
+      attr_accessor secrets_manager_configuration: Types::SecretsManagerConfiguration
       SENSITIVE: [:username]
     end
 
@@ -697,6 +702,7 @@ module Aws::Firehose
       attr_accessor s3_backup_mode: ("Disabled" | "Enabled")
       attr_accessor s3_backup_update: Types::S3DestinationUpdate
       attr_accessor cloud_watch_logging_options: Types::CloudWatchLoggingOptions
+      attr_accessor secrets_manager_configuration: Types::SecretsManagerConfiguration
       SENSITIVE: [:username, :password]
     end
 
@@ -766,6 +772,13 @@ module Aws::Firehose
       SENSITIVE: []
     end
 
+    class SecretsManagerConfiguration
+      attr_accessor secret_arn: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor enabled: bool
+      SENSITIVE: []
+    end
+
     class Serializer
       attr_accessor parquet_ser_de: Types::ParquetSerDe
       attr_accessor orc_ser_de: Types::OrcSerDe
@@ -796,6 +809,7 @@ module Aws::Firehose
       attr_accessor retry_options: Types::SnowflakeRetryOptions
       attr_accessor s3_backup_mode: ("FailedDataOnly" | "AllData")
       attr_accessor s3_configuration: Types::S3DestinationConfiguration
+      attr_accessor secrets_manager_configuration: Types::SecretsManagerConfiguration
       SENSITIVE: [:account_url, :private_key, :key_passphrase, :user, :database, :schema, :table, :meta_data_column_name, :content_column_name]
     end
 
@@ -816,6 +830,7 @@ module Aws::Firehose
       attr_accessor retry_options: Types::SnowflakeRetryOptions
       attr_accessor s3_backup_mode: ("FailedDataOnly" | "AllData")
       attr_accessor s3_destination_description: Types::S3DestinationDescription
+      attr_accessor secrets_manager_configuration: Types::SecretsManagerConfiguration
       SENSITIVE: [:account_url, :user, :database, :schema, :table, :meta_data_column_name, :content_column_name]
     end
 
@@ -837,6 +852,7 @@ module Aws::Firehose
       attr_accessor retry_options: Types::SnowflakeRetryOptions
       attr_accessor s3_backup_mode: ("FailedDataOnly" | "AllData")
       attr_accessor s3_update: Types::S3DestinationUpdate
+      attr_accessor secrets_manager_configuration: Types::SecretsManagerConfiguration
       SENSITIVE: [:account_url, :private_key, :key_passphrase, :user, :database, :schema, :table, :meta_data_column_name, :content_column_name]
     end
 
@@ -879,6 +895,7 @@ module Aws::Firehose
       attr_accessor processing_configuration: Types::ProcessingConfiguration
       attr_accessor cloud_watch_logging_options: Types::CloudWatchLoggingOptions
       attr_accessor buffering_hints: Types::SplunkBufferingHints
+      attr_accessor secrets_manager_configuration: Types::SecretsManagerConfiguration
       SENSITIVE: []
     end
 
@@ -893,6 +910,7 @@ module Aws::Firehose
       attr_accessor processing_configuration: Types::ProcessingConfiguration
       attr_accessor cloud_watch_logging_options: Types::CloudWatchLoggingOptions
       attr_accessor buffering_hints: Types::SplunkBufferingHints
+      attr_accessor secrets_manager_configuration: Types::SecretsManagerConfiguration
       SENSITIVE: []
     end
 
@@ -907,6 +925,7 @@ module Aws::Firehose
       attr_accessor processing_configuration: Types::ProcessingConfiguration
       attr_accessor cloud_watch_logging_options: Types::CloudWatchLoggingOptions
       attr_accessor buffering_hints: Types::SplunkBufferingHints
+      attr_accessor secrets_manager_configuration: Types::SecretsManagerConfiguration
       SENSITIVE: []
     end
 

@@ -16,6 +16,7 @@ require_relative 'aws-sdk-pipes/client_api'
 require_relative 'aws-sdk-pipes/plugins/endpoints.rb'
 require_relative 'aws-sdk-pipes/client'
 require_relative 'aws-sdk-pipes/errors'
+require_relative 'aws-sdk-pipes/waiters'
 require_relative 'aws-sdk-pipes/resource'
 require_relative 'aws-sdk-pipes/endpoint_parameters'
 require_relative 'aws-sdk-pipes/endpoint_provider'
@@ -52,6 +53,6 @@ require_relative 'aws-sdk-pipes/customizations'
 # @!group service
 module Aws::Pipes
 
-  GEM_VERSION = '1.18.0'
+  GEM_VERSION = '1.20.0'
 
 end

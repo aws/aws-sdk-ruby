@@ -116,6 +116,26 @@ module Aws::Glue
       SENSITIVE: []
     end
 
+    class AuthenticationConfiguration
+      attr_accessor authentication_type: ("BASIC" | "OAUTH2" | "CUSTOM")
+      attr_accessor secret_arn: ::String
+      attr_accessor o_auth_2_properties: Types::OAuth2Properties
+      SENSITIVE: []
+    end
+
+    class AuthenticationConfigurationInput
+      attr_accessor authentication_type: ("BASIC" | "OAUTH2" | "CUSTOM")
+      attr_accessor secret_arn: ::String
+      attr_accessor o_auth_2_properties: Types::OAuth2PropertiesInput
+      SENSITIVE: []
+    end
+
+    class AuthorizationCodeProperties
+      attr_accessor authorization_code: ::String
+      attr_accessor redirect_uri: ::String
+      SENSITIVE: []
+    end
+
     class BackfillError
       attr_accessor code: ("ENCRYPTED_PARTITION_ERROR" | "INTERNAL_ERROR" | "INVALID_PARTITION_TYPE_DATA_ERROR" | "MISSING_PARTITION_VALUE_ERROR" | "UNSUPPORTED_PARTITION_CHARACTER_ERROR")
       attr_accessor partitions: ::Array[Types::PartitionValueList]
@@ -799,23 +819,29 @@ module Aws::Glue
     class Connection
       attr_accessor name: ::String
       attr_accessor description: ::String
-      attr_accessor connection_type: ("JDBC" | "SFTP" | "MONGODB" | "KAFKA" | "NETWORK" | "MARKETPLACE" | "CUSTOM")
+      attr_accessor connection_type: ("JDBC" | "SFTP" | "MONGODB" | "KAFKA" | "NETWORK" | "MARKETPLACE" | "CUSTOM" | "SALESFORCE")
       attr_accessor match_criteria: ::Array[::String]
-      attr_accessor connection_properties: ::Hash[("HOST" | "PORT" | "USERNAME" | "PASSWORD" | "ENCRYPTED_PASSWORD" | "JDBC_DRIVER_JAR_URI" | "JDBC_DRIVER_CLASS_NAME" | "JDBC_ENGINE" | "JDBC_ENGINE_VERSION" | "CONFIG_FILES" | "INSTANCE_ID" | "JDBC_CONNECTION_URL" | "JDBC_ENFORCE_SSL" | "CUSTOM_JDBC_CERT" | "SKIP_CUSTOM_JDBC_CERT_VALIDATION" | "CUSTOM_JDBC_CERT_STRING" | "CONNECTION_URL" | "KAFKA_BOOTSTRAP_SERVERS" | "KAFKA_SSL_ENABLED" | "KAFKA_CUSTOM_CERT" | "KAFKA_SKIP_CUSTOM_CERT_VALIDATION" | "KAFKA_CLIENT_KEYSTORE" | "KAFKA_CLIENT_KEYSTORE_PASSWORD" | "KAFKA_CLIENT_KEY_PASSWORD" | "ENCRYPTED_KAFKA_CLIENT_KEYSTORE_PASSWORD" | "ENCRYPTED_KAFKA_CLIENT_KEY_PASSWORD" | "SECRET_ID" | "CONNECTOR_URL" | "CONNECTOR_TYPE" | "CONNECTOR_CLASS_NAME" | "KAFKA_SASL_MECHANISM" | "KAFKA_SASL_PLAIN_USERNAME" | "KAFKA_SASL_PLAIN_PASSWORD" | "ENCRYPTED_KAFKA_SASL_PLAIN_PASSWORD" | "KAFKA_SASL_SCRAM_USERNAME" | "KAFKA_SASL_SCRAM_PASSWORD" | "KAFKA_SASL_SCRAM_SECRETS_ARN" | "ENCRYPTED_KAFKA_SASL_SCRAM_PASSWORD" | "KAFKA_SASL_GSSAPI_KEYTAB" | "KAFKA_SASL_GSSAPI_KRB5_CONF" | "KAFKA_SASL_GSSAPI_SERVICE" | "KAFKA_SASL_GSSAPI_PRINCIPAL"), ::String]
+      attr_accessor connection_properties: ::Hash[("HOST" | "PORT" | "USERNAME" | "PASSWORD" | "ENCRYPTED_PASSWORD" | "JDBC_DRIVER_JAR_URI" | "JDBC_DRIVER_CLASS_NAME" | "JDBC_ENGINE" | "JDBC_ENGINE_VERSION" | "CONFIG_FILES" | "INSTANCE_ID" | "JDBC_CONNECTION_URL" | "JDBC_ENFORCE_SSL" | "CUSTOM_JDBC_CERT" | "SKIP_CUSTOM_JDBC_CERT_VALIDATION" | "CUSTOM_JDBC_CERT_STRING" | "CONNECTION_URL" | "KAFKA_BOOTSTRAP_SERVERS" | "KAFKA_SSL_ENABLED" | "KAFKA_CUSTOM_CERT" | "KAFKA_SKIP_CUSTOM_CERT_VALIDATION" | "KAFKA_CLIENT_KEYSTORE" | "KAFKA_CLIENT_KEYSTORE_PASSWORD" | "KAFKA_CLIENT_KEY_PASSWORD" | "ENCRYPTED_KAFKA_CLIENT_KEYSTORE_PASSWORD" | "ENCRYPTED_KAFKA_CLIENT_KEY_PASSWORD" | "SECRET_ID" | "CONNECTOR_URL" | "CONNECTOR_TYPE" | "CONNECTOR_CLASS_NAME" | "KAFKA_SASL_MECHANISM" | "KAFKA_SASL_PLAIN_USERNAME" | "KAFKA_SASL_PLAIN_PASSWORD" | "ENCRYPTED_KAFKA_SASL_PLAIN_PASSWORD" | "KAFKA_SASL_SCRAM_USERNAME" | "KAFKA_SASL_SCRAM_PASSWORD" | "KAFKA_SASL_SCRAM_SECRETS_ARN" | "ENCRYPTED_KAFKA_SASL_SCRAM_PASSWORD" | "KAFKA_SASL_GSSAPI_KEYTAB" | "KAFKA_SASL_GSSAPI_KRB5_CONF" | "KAFKA_SASL_GSSAPI_SERVICE" | "KAFKA_SASL_GSSAPI_PRINCIPAL" | "ROLE_ARN"), ::String]
       attr_accessor physical_connection_requirements: Types::PhysicalConnectionRequirements
       attr_accessor creation_time: ::Time
       attr_accessor last_updated_time: ::Time
       attr_accessor last_updated_by: ::String
+      attr_accessor status: ("READY" | "IN_PROGRESS" | "FAILED")
+      attr_accessor status_reason: ::String
+      attr_accessor last_connection_validation_time: ::Time
+      attr_accessor authentication_configuration: Types::AuthenticationConfiguration
       SENSITIVE: []
     end
 
     class ConnectionInput
       attr_accessor name: ::String
       attr_accessor description: ::String
-      attr_accessor connection_type: ("JDBC" | "SFTP" | "MONGODB" | "KAFKA" | "NETWORK" | "MARKETPLACE" | "CUSTOM")
+      attr_accessor connection_type: ("JDBC" | "SFTP" | "MONGODB" | "KAFKA" | "NETWORK" | "MARKETPLACE" | "CUSTOM" | "SALESFORCE")
       attr_accessor match_criteria: ::Array[::String]
-      attr_accessor connection_properties: ::Hash[("HOST" | "PORT" | "USERNAME" | "PASSWORD" | "ENCRYPTED_PASSWORD" | "JDBC_DRIVER_JAR_URI" | "JDBC_DRIVER_CLASS_NAME" | "JDBC_ENGINE" | "JDBC_ENGINE_VERSION" | "CONFIG_FILES" | "INSTANCE_ID" | "JDBC_CONNECTION_URL" | "JDBC_ENFORCE_SSL" | "CUSTOM_JDBC_CERT" | "SKIP_CUSTOM_JDBC_CERT_VALIDATION" | "CUSTOM_JDBC_CERT_STRING" | "CONNECTION_URL" | "KAFKA_BOOTSTRAP_SERVERS" | "KAFKA_SSL_ENABLED" | "KAFKA_CUSTOM_CERT" | "KAFKA_SKIP_CUSTOM_CERT_VALIDATION" | "KAFKA_CLIENT_KEYSTORE" | "KAFKA_CLIENT_KEYSTORE_PASSWORD" | "KAFKA_CLIENT_KEY_PASSWORD" | "ENCRYPTED_KAFKA_CLIENT_KEYSTORE_PASSWORD" | "ENCRYPTED_KAFKA_CLIENT_KEY_PASSWORD" | "SECRET_ID" | "CONNECTOR_URL" | "CONNECTOR_TYPE" | "CONNECTOR_CLASS_NAME" | "KAFKA_SASL_MECHANISM" | "KAFKA_SASL_PLAIN_USERNAME" | "KAFKA_SASL_PLAIN_PASSWORD" | "ENCRYPTED_KAFKA_SASL_PLAIN_PASSWORD" | "KAFKA_SASL_SCRAM_USERNAME" | "KAFKA_SASL_SCRAM_PASSWORD" | "KAFKA_SASL_SCRAM_SECRETS_ARN" | "ENCRYPTED_KAFKA_SASL_SCRAM_PASSWORD" | "KAFKA_SASL_GSSAPI_KEYTAB" | "KAFKA_SASL_GSSAPI_KRB5_CONF" | "KAFKA_SASL_GSSAPI_SERVICE" | "KAFKA_SASL_GSSAPI_PRINCIPAL"), ::String]
+      attr_accessor connection_properties: ::Hash[("HOST" | "PORT" | "USERNAME" | "PASSWORD" | "ENCRYPTED_PASSWORD" | "JDBC_DRIVER_JAR_URI" | "JDBC_DRIVER_CLASS_NAME" | "JDBC_ENGINE" | "JDBC_ENGINE_VERSION" | "CONFIG_FILES" | "INSTANCE_ID" | "JDBC_CONNECTION_URL" | "JDBC_ENFORCE_SSL" | "CUSTOM_JDBC_CERT" | "SKIP_CUSTOM_JDBC_CERT_VALIDATION" | "CUSTOM_JDBC_CERT_STRING" | "CONNECTION_URL" | "KAFKA_BOOTSTRAP_SERVERS" | "KAFKA_SSL_ENABLED" | "KAFKA_CUSTOM_CERT" | "KAFKA_SKIP_CUSTOM_CERT_VALIDATION" | "KAFKA_CLIENT_KEYSTORE" | "KAFKA_CLIENT_KEYSTORE_PASSWORD" | "KAFKA_CLIENT_KEY_PASSWORD" | "ENCRYPTED_KAFKA_CLIENT_KEYSTORE_PASSWORD" | "ENCRYPTED_KAFKA_CLIENT_KEY_PASSWORD" | "SECRET_ID" | "CONNECTOR_URL" | "CONNECTOR_TYPE" | "CONNECTOR_CLASS_NAME" | "KAFKA_SASL_MECHANISM" | "KAFKA_SASL_PLAIN_USERNAME" | "KAFKA_SASL_PLAIN_PASSWORD" | "ENCRYPTED_KAFKA_SASL_PLAIN_PASSWORD" | "KAFKA_SASL_SCRAM_USERNAME" | "KAFKA_SASL_SCRAM_PASSWORD" | "KAFKA_SASL_SCRAM_SECRETS_ARN" | "ENCRYPTED_KAFKA_SASL_SCRAM_PASSWORD" | "KAFKA_SASL_GSSAPI_KEYTAB" | "KAFKA_SASL_GSSAPI_KRB5_CONF" | "KAFKA_SASL_GSSAPI_SERVICE" | "KAFKA_SASL_GSSAPI_PRINCIPAL" | "ROLE_ARN"), ::String]
       attr_accessor physical_connection_requirements: Types::PhysicalConnectionRequirements
+      attr_accessor authentication_configuration: Types::AuthenticationConfigurationInput
+      attr_accessor validate_credentials: bool
       SENSITIVE: []
     end
 
@@ -976,7 +1002,9 @@ module Aws::Glue
       SENSITIVE: []
     end
 
-    class CreateConnectionResponse < Aws::EmptyStructure
+    class CreateConnectionResponse
+      attr_accessor create_connection_status: ("READY" | "IN_PROGRESS" | "FAILED")
+      SENSITIVE: []
     end
 
     class CreateCrawlerRequest
@@ -1105,6 +1133,7 @@ module Aws::Glue
 
     class CreateJobRequest
       attr_accessor name: ::String
+      attr_accessor job_mode: ("SCRIPT" | "VISUAL" | "NOTEBOOK")
       attr_accessor description: ::String
       attr_accessor log_uri: ::String
       attr_accessor role: ::String
@@ -2102,7 +2131,7 @@ module Aws::Glue
     end
 
     class FederationSourceException
-      attr_accessor federation_source_error_code: ("InvalidResponseException" | "OperationTimeoutException" | "OperationNotSupportedException" | "InternalServiceException" | "ThrottlingException")
+      attr_accessor federation_source_error_code: ("AccessDeniedException" | "EntityNotFoundException" | "InvalidCredentialsException" | "InvalidInputException" | "InvalidResponseException" | "OperationTimeoutException" | "OperationNotSupportedException" | "InternalServiceException" | "PartialFailureException" | "ThrottlingException")
       attr_accessor message: ::String
       SENSITIVE: []
     end
@@ -2301,7 +2330,7 @@ module Aws::Glue
 
     class GetConnectionsFilter
       attr_accessor match_criteria: ::Array[::String]
-      attr_accessor connection_type: ("JDBC" | "SFTP" | "MONGODB" | "KAFKA" | "NETWORK" | "MARKETPLACE" | "CUSTOM")
+      attr_accessor connection_type: ("JDBC" | "SFTP" | "MONGODB" | "KAFKA" | "NETWORK" | "MARKETPLACE" | "CUSTOM" | "SALESFORCE")
       SENSITIVE: []
     end
 
@@ -3315,6 +3344,7 @@ module Aws::Glue
 
     class Job
       attr_accessor name: ::String
+      attr_accessor job_mode: ("SCRIPT" | "VISUAL" | "NOTEBOOK")
       attr_accessor description: ::String
       attr_accessor log_uri: ::String
       attr_accessor role: ::String
@@ -3377,6 +3407,7 @@ module Aws::Glue
       attr_accessor previous_run_id: ::String
       attr_accessor trigger_name: ::String
       attr_accessor job_name: ::String
+      attr_accessor job_mode: ("SCRIPT" | "VISUAL" | "NOTEBOOK")
       attr_accessor started_on: ::Time
       attr_accessor last_modified_on: ::Time
       attr_accessor completed_on: ::Time
@@ -3401,6 +3432,7 @@ module Aws::Glue
     end
 
     class JobUpdate
+      attr_accessor job_mode: ("SCRIPT" | "VISUAL" | "NOTEBOOK")
       attr_accessor description: ::String
       attr_accessor log_uri: ::String
       attr_accessor role: ::String
@@ -3971,6 +4003,29 @@ module Aws::Glue
     class NullValueField
       attr_accessor value: ::String
       attr_accessor datatype: Types::Datatype
+      SENSITIVE: []
+    end
+
+    class OAuth2ClientApplication
+      attr_accessor user_managed_client_application_client_id: ::String
+      attr_accessor aws_managed_client_application_reference: ::String
+      SENSITIVE: []
+    end
+
+    class OAuth2Properties
+      attr_accessor o_auth_2_grant_type: ("AUTHORIZATION_CODE" | "CLIENT_CREDENTIALS" | "JWT_BEARER")
+      attr_accessor o_auth_2_client_application: Types::OAuth2ClientApplication
+      attr_accessor token_url: ::String
+      attr_accessor token_url_parameters_map: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class OAuth2PropertiesInput
+      attr_accessor o_auth_2_grant_type: ("AUTHORIZATION_CODE" | "CLIENT_CREDENTIALS" | "JWT_BEARER")
+      attr_accessor o_auth_2_client_application: Types::OAuth2ClientApplication
+      attr_accessor token_url: ::String
+      attr_accessor token_url_parameters_map: ::Hash[::String, ::String]
+      attr_accessor authorization_code_properties: Types::AuthorizationCodeProperties
       SENSITIVE: []
     end
 
@@ -5193,6 +5248,7 @@ module Aws::Glue
       attr_accessor table_type: ::String
       attr_accessor parameters: ::Hash[::String, ::String]
       attr_accessor target_table: Types::TableIdentifier
+      attr_accessor view_definition: Types::ViewDefinitionInput
       SENSITIVE: []
     end
 
@@ -5653,6 +5709,8 @@ module Aws::Glue
       attr_accessor skip_archive: bool
       attr_accessor transaction_id: ::String
       attr_accessor version_id: ::String
+      attr_accessor view_update_action: ("ADD" | "REPLACE" | "ADD_OR_REPLACE" | "DROP")
+      attr_accessor force: bool
       SENSITIVE: []
     end
 
@@ -5747,12 +5805,30 @@ module Aws::Glue
       SENSITIVE: []
     end
 
+    class ViewDefinitionInput
+      attr_accessor is_protected: bool
+      attr_accessor definer: ::String
+      attr_accessor representations: ::Array[Types::ViewRepresentationInput]
+      attr_accessor sub_objects: ::Array[::String]
+      SENSITIVE: []
+    end
+
     class ViewRepresentation
       attr_accessor dialect: ("REDSHIFT" | "ATHENA" | "SPARK")
       attr_accessor dialect_version: ::String
       attr_accessor view_original_text: ::String
       attr_accessor view_expanded_text: ::String
+      attr_accessor validation_connection: ::String
       attr_accessor is_stale: bool
+      SENSITIVE: []
+    end
+
+    class ViewRepresentationInput
+      attr_accessor dialect: ("REDSHIFT" | "ATHENA" | "SPARK")
+      attr_accessor dialect_version: ::String
+      attr_accessor view_original_text: ::String
+      attr_accessor validation_connection: ::String
+      attr_accessor view_expanded_text: ::String
       SENSITIVE: []
     end
 

@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.177.0 (2024-06-06)
+------------------
+
+* Feature - This release adds support for creating and updating Glue Data Catalog Views.
+
+1.176.0 (2024-06-05)
+------------------
+
+* Feature - AWS Glue now supports native SaaS connectivity: Salesforce connector available now
+
+1.175.0 (2024-05-29)
+------------------
+
+* Feature - Add optional field JobMode to CreateJob and UpdateJob APIs.
+
 1.174.0 (2024-05-21)
 ------------------
 

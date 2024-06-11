@@ -158,6 +158,26 @@ module Aws
                                         ) -> _CountPendingDecisionTasksResponseSuccess
                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CountPendingDecisionTasksResponseSuccess
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SWF/Client.html#delete_activity_type-instance_method
+      def delete_activity_type: (
+                                  domain: ::String,
+                                  activity_type: {
+                                    name: ::String,
+                                    version: ::String
+                                  }
+                                ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SWF/Client.html#delete_workflow_type-instance_method
+      def delete_workflow_type: (
+                                  domain: ::String,
+                                  workflow_type: {
+                                    name: ::String,
+                                    version: ::String
+                                  }
+                                ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SWF/Client.html#deprecate_activity_type-instance_method
       def deprecate_activity_type: (
                                      domain: ::String,

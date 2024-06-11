@@ -1097,6 +1097,11 @@ module Aws::BedrockAgent
     #       type: "VECTOR", # required, accepts VECTOR
     #       vector_knowledge_base_configuration: {
     #         embedding_model_arn: "BedrockEmbeddingModelArn", # required
+    #         embedding_model_configuration: {
+    #           bedrock_embedding_model_configuration: {
+    #             dimensions: 1,
+    #           },
+    #         },
     #       },
     #     },
     #     name: "Name", # required
@@ -1171,6 +1176,7 @@ module Aws::BedrockAgent
     #   resp.knowledge_base.knowledge_base_arn #=> String
     #   resp.knowledge_base.knowledge_base_configuration.type #=> String, one of "VECTOR"
     #   resp.knowledge_base.knowledge_base_configuration.vector_knowledge_base_configuration.embedding_model_arn #=> String
+    #   resp.knowledge_base.knowledge_base_configuration.vector_knowledge_base_configuration.embedding_model_configuration.bedrock_embedding_model_configuration.dimensions #=> Integer
     #   resp.knowledge_base.knowledge_base_id #=> String
     #   resp.knowledge_base.name #=> String
     #   resp.knowledge_base.role_arn #=> String
@@ -1881,6 +1887,7 @@ module Aws::BedrockAgent
     #   resp.knowledge_base.knowledge_base_arn #=> String
     #   resp.knowledge_base.knowledge_base_configuration.type #=> String, one of "VECTOR"
     #   resp.knowledge_base.knowledge_base_configuration.vector_knowledge_base_configuration.embedding_model_arn #=> String
+    #   resp.knowledge_base.knowledge_base_configuration.vector_knowledge_base_configuration.embedding_model_configuration.bedrock_embedding_model_configuration.dimensions #=> Integer
     #   resp.knowledge_base.knowledge_base_id #=> String
     #   resp.knowledge_base.name #=> String
     #   resp.knowledge_base.role_arn #=> String
@@ -3129,6 +3136,11 @@ module Aws::BedrockAgent
     #       type: "VECTOR", # required, accepts VECTOR
     #       vector_knowledge_base_configuration: {
     #         embedding_model_arn: "BedrockEmbeddingModelArn", # required
+    #         embedding_model_configuration: {
+    #           bedrock_embedding_model_configuration: {
+    #             dimensions: 1,
+    #           },
+    #         },
     #       },
     #     },
     #     knowledge_base_id: "Id", # required
@@ -3201,6 +3213,7 @@ module Aws::BedrockAgent
     #   resp.knowledge_base.knowledge_base_arn #=> String
     #   resp.knowledge_base.knowledge_base_configuration.type #=> String, one of "VECTOR"
     #   resp.knowledge_base.knowledge_base_configuration.vector_knowledge_base_configuration.embedding_model_arn #=> String
+    #   resp.knowledge_base.knowledge_base_configuration.vector_knowledge_base_configuration.embedding_model_configuration.bedrock_embedding_model_configuration.dimensions #=> Integer
     #   resp.knowledge_base.knowledge_base_id #=> String
     #   resp.knowledge_base.name #=> String
     #   resp.knowledge_base.role_arn #=> String
@@ -3263,7 +3276,7 @@ module Aws::BedrockAgent
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-bedrockagent'
-      context[:gem_version] = '1.12.0'
+      context[:gem_version] = '1.14.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

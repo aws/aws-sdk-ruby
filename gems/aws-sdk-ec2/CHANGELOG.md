@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.460.0 (2024-06-05)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.459.0 (2024-06-04)
+------------------
+
+* Feature - U7i instances with up to 32 TiB of DDR5 memory and 896 vCPUs are now available. C7i-flex instances are launched and are lower-priced variants of the Amazon EC2 C7i instances that offer a baseline level of CPU performance with the ability to scale up to the full compute performance 95% of the time.
+
+1.458.0 (2024-05-28)
+------------------
+
+* Feature - Providing support to accept BgpAsnExtended attribute
+
 1.457.1 (2024-05-21)
 ------------------
 

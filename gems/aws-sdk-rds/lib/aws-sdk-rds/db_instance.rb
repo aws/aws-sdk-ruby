@@ -808,7 +808,7 @@ module Aws::RDS
     #
     # @return [self]
     def load
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.describe_db_instances(db_instance_identifier: @id)
       end
       @data = resp.db_instances[0]
@@ -925,7 +925,7 @@ module Aws::RDS
           :retry
         end
       end
-      Aws::Plugins::UserAgent.feature('resource') do
+      Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         Aws::Waiters::Waiter.new(options).wait({})
       end
     end
@@ -1029,9 +1029,9 @@ module Aws::RDS
     #   Amazon Aurora PostgreSQL
     #
     #   : The name of the database to create when the primary DB instance of
-    #     the Aurora PostgreSQL DB cluster is created. If this parameter
-    #     isn't specified for an Aurora PostgreSQL DB cluster, a database
-    #     named `postgres` is created in the DB cluster.
+    #     the Aurora PostgreSQL DB cluster is created. A database named
+    #     `postgres` is always created. If this parameter is specified, an
+    #     additional database with this name is created.
     #
     #     Constraints:
     #
@@ -1126,8 +1126,8 @@ module Aws::RDS
     #   RDS for PostgreSQL
     #
     #   : The name of the database to create when the DB instance is created.
-    #     If this parameter isn't specified, a database named `postgres` is
-    #     created in the DB instance.
+    #     A database named `postgres` is always created. If this parameter is
+    #     specified, an additional database with this name is created.
     #
     #     Constraints:
     #
@@ -2227,7 +2227,7 @@ module Aws::RDS
     # @return [DBInstance]
     def create(options = {})
       options = options.merge(db_instance_identifier: @id)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.create_db_instance(options)
       end
       DBInstance.new(
@@ -2873,7 +2873,7 @@ module Aws::RDS
     # @return [DBInstance]
     def create_read_replica(options = {})
       options = options.merge(source_db_instance_identifier: @id)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.create_db_instance_read_replica(options)
       end
       DBInstance.new(
@@ -2919,7 +2919,7 @@ module Aws::RDS
     # @return [DBSnapshot]
     def create_snapshot(options = {})
       options = options.merge(db_instance_identifier: @id)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.create_db_snapshot(options)
       end
       DBSnapshot.new(
@@ -2986,7 +2986,7 @@ module Aws::RDS
     # @return [DBInstance]
     def delete(options = {})
       options = options.merge(db_instance_identifier: @id)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.delete_db_instance(options)
       end
       DBInstance.new(
@@ -4082,7 +4082,7 @@ module Aws::RDS
     # @return [DBInstance]
     def modify(options = {})
       options = options.merge(db_instance_identifier: @id)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.modify_db_instance(options)
       end
       DBInstance.new(
@@ -4137,7 +4137,7 @@ module Aws::RDS
     # @return [DBInstance]
     def promote(options = {})
       options = options.merge(db_instance_identifier: @id)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.promote_read_replica(options)
       end
       DBInstance.new(
@@ -4161,7 +4161,7 @@ module Aws::RDS
     # @return [DBInstance]
     def reboot(options = {})
       options = options.merge(db_instance_identifier: @id)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.reboot_db_instance(options)
       end
       DBInstance.new(
@@ -4777,7 +4777,7 @@ module Aws::RDS
     # @return [DBInstance]
     def restore(options = {})
       options = options.merge(source_db_instance_identifier: @id)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.restore_db_instance_to_point_in_time(options)
       end
       DBInstance.new(
@@ -4799,7 +4799,7 @@ module Aws::RDS
     # @return [EventSubscription]
     def subscribe_to(options = {})
       options = options.merge(source_identifier: @id)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.add_source_identifier_to_subscription(options)
       end
       EventSubscription.new(
@@ -4821,7 +4821,7 @@ module Aws::RDS
     # @return [EventSubscription]
     def unsubscribe_from(options = {})
       options = options.merge(source_identifier: @id)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.remove_source_identifier_from_subscription(options)
       end
       EventSubscription.new(
@@ -4908,7 +4908,7 @@ module Aws::RDS
           source_type: "db-instance",
           source_identifier: @id
         )
-        resp = Aws::Plugins::UserAgent.feature('resource') do
+        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
           @client.describe_events(options)
         end
         resp.each_page do |page|
@@ -4956,7 +4956,7 @@ module Aws::RDS
     def log_files(options = {})
       batches = Enumerator.new do |y|
         options = options.merge(db_instance_identifier: @id)
-        resp = Aws::Plugins::UserAgent.feature('resource') do
+        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
           @client.describe_db_log_files(options)
         end
         resp.each_page do |page|
@@ -5033,7 +5033,7 @@ module Aws::RDS
           name: "db-instance-id",
           values: [@id]
         }])
-        resp = Aws::Plugins::UserAgent.feature('resource') do
+        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
           @client.describe_pending_maintenance_actions(options)
         end
         resp.each_page do |page|
@@ -5182,7 +5182,7 @@ module Aws::RDS
     def snapshots(options = {})
       batches = Enumerator.new do |y|
         options = options.merge(db_instance_identifier: @id)
-        resp = Aws::Plugins::UserAgent.feature('resource') do
+        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
           @client.describe_db_snapshots(options)
         end
         resp.each_page do |page|

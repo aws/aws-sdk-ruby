@@ -1776,12 +1776,14 @@ module Aws::FSx
     #   Choose `PERSISTENT_2` for longer-term storage and for
     #   latency-sensitive workloads that require the highest levels of
     #   IOPS/throughput. `PERSISTENT_2` supports SSD storage, and offers
-    #   higher `PerUnitStorageThroughput` (up to 1000 MB/s/TiB).
-    #   `PERSISTENT_2` is available in a limited number of Amazon Web
-    #   Services Regions. For more information, and an up-to-date list of
-    #   Amazon Web Services Regions in which `PERSISTENT_2` is available,
-    #   see [File system deployment options for FSx for Lustre][1] in the
-    #   *Amazon FSx for Lustre User Guide*.
+    #   higher `PerUnitStorageThroughput` (up to 1000 MB/s/TiB). You can
+    #   optionally specify a metadata configuration mode for `PERSISTENT_2`
+    #   which supports increasing metadata performance. `PERSISTENT_2` is
+    #   available in a limited number of Amazon Web Services Regions. For
+    #   more information, and an up-to-date list of Amazon Web Services
+    #   Regions in which `PERSISTENT_2` is available, see [File system
+    #   deployment options for FSx for Lustre][1] in the *Amazon FSx for
+    #   Lustre User Guide*.
     #
     #   <note markdown="1"> If you choose `PERSISTENT_2`, and you set `FileSystemTypeVersion` to
     #   `2.10`, the `CreateFileSystem` operation fails.
@@ -1789,7 +1791,7 @@ module Aws::FSx
     #    </note>
     #
     #   Encryption of data in transit is automatically turned on when you
-    #   access `SCRATCH_2`, `PERSISTENT_1` and `PERSISTENT_2` file systems
+    #   access `SCRATCH_2`, `PERSISTENT_1`, and `PERSISTENT_2` file systems
     #   from Amazon EC2 instances that support automatic encryption in the
     #   Amazon Web Services Regions where they are available. For more
     #   information about encryption in transit for FSx for Lustre file
@@ -1937,6 +1939,11 @@ module Aws::FSx
     #   as a root user.
     #   @return [Types::LustreRootSquashConfiguration]
     #
+    # @!attribute [rw] metadata_configuration
+    #   The Lustre metadata performance configuration for the creation of an
+    #   FSx for Lustre file system using a `PERSISTENT_2` deployment type.
+    #   @return [Types::CreateFileSystemLustreMetadataConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateFileSystemLustreConfiguration AWS API Documentation
     #
     class CreateFileSystemLustreConfiguration < Struct.new(
@@ -1953,7 +1960,60 @@ module Aws::FSx
       :drive_cache_type,
       :data_compression_type,
       :log_configuration,
-      :root_squash_configuration)
+      :root_squash_configuration,
+      :metadata_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Lustre metadata performance configuration for the creation of an
+    # Amazon FSx for Lustre file system using a `PERSISTENT_2` deployment
+    # type. The configuration uses a Metadata IOPS value to set the maximum
+    # rate of metadata disk IOPS supported by the file system.
+    #
+    # After creation, the file system supports increasing metadata
+    # performance. For more information on Metadata IOPS, see [Lustre
+    # metadata performance configuration][1] in the *Amazon FSx for Lustre
+    # User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/managing-metadata-performance.html#metadata-configuration
+    #
+    # @!attribute [rw] iops
+    #   (USER\_PROVISIONED mode only) Specifies the number of Metadata IOPS
+    #   to provision for the file system. This parameter sets the maximum
+    #   rate of metadata disk IOPS supported by the file system. Valid
+    #   values are `1500`, `3000`, `6000`, `12000`, and multiples of `12000`
+    #   up to a maximum of `192000`.
+    #
+    #   <note markdown="1"> Iops doesn’t have a default value. If you're using
+    #   USER\_PROVISIONED mode, you can choose to specify a valid value. If
+    #   you're using AUTOMATIC mode, you cannot specify a value because FSx
+    #   for Lustre automatically sets the value based on your file system
+    #   storage capacity.
+    #
+    #    </note>
+    #   @return [Integer]
+    #
+    # @!attribute [rw] mode
+    #   The metadata configuration mode for provisioning Metadata IOPS for
+    #   an FSx for Lustre file system using a `PERSISTENT_2` deployment
+    #   type.
+    #
+    #   * In AUTOMATIC mode, FSx for Lustre automatically provisions and
+    #     scales the number of Metadata IOPS for your file system based on
+    #     your file system storage capacity.
+    #
+    #   * In USER\_PROVISIONED mode, you specify the number of Metadata IOPS
+    #     to provision for your file system.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateFileSystemLustreMetadataConfiguration AWS API Documentation
+    #
+    class CreateFileSystemLustreMetadataConfiguration < Struct.new(
+      :iops,
+      :mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2094,7 +2154,7 @@ module Aws::FSx
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/HA-pairs.html
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/administering-file-systems.html#HA-pairs
     #   @return [Integer]
     #
     # @!attribute [rw] throughput_capacity_per_ha_pair
@@ -2329,7 +2389,7 @@ module Aws::FSx
     #   that you can configure depends on the value that you set for
     #   `StorageType` and the Lustre `DeploymentType`, as follows:
     #
-    #   * For `SCRATCH_2`, `PERSISTENT_2` and `PERSISTENT_1` deployment
+    #   * For `SCRATCH_2`, `PERSISTENT_2`, and `PERSISTENT_1` deployment
     #     types using SSD storage type, the valid values are 1200 GiB, 2400
     #     GiB, and increments of 2400 GiB.
     #
@@ -2469,24 +2529,26 @@ module Aws::FSx
     #   @return [Types::CreateFileSystemOntapConfiguration]
     #
     # @!attribute [rw] file_system_type_version
-    #   (Optional) For FSx for Lustre file systems, sets the Lustre version
-    #   for the file system that you're creating. Valid values are `2.10`,
-    #   `2.12`, and `2.15`:
+    #   For FSx for Lustre file systems, sets the Lustre version for the
+    #   file system that you're creating. Valid values are `2.10`, `2.12`,
+    #   and `2.15`:
     #
-    #   * 2\.10 is supported by the Scratch and Persistent\_1 Lustre
+    #   * `2.10` is supported by the Scratch and Persistent\_1 Lustre
     #     deployment types.
     #
-    #   * 2\.12 and 2.15 are supported by all Lustre deployment types. `2.12`
-    #     or `2.15` is required when setting FSx for Lustre `DeploymentType`
-    #     to `PERSISTENT_2`.
+    #   * `2.12` is supported by all Lustre deployment types, except for
+    #     `PERSISTENT_2` with a metadata configuration mode.
     #
-    #   Default value = `2.10`, except when `DeploymentType` is set to
-    #   `PERSISTENT_2`, then the default is `2.12`.
+    #   * `2.15` is supported by all Lustre deployment types and is
+    #     recommended for all new file systems.
     #
-    #   <note markdown="1"> If you set `FileSystemTypeVersion` to `2.10` for a `PERSISTENT_2`
-    #   Lustre deployment type, the `CreateFileSystem` operation fails.
+    #   Default value is `2.10`, except for the following deployments:
     #
-    #    </note>
+    #   * Default value is `2.12` when `DeploymentType` is set to
+    #     `PERSISTENT_2` without a metadata configuration mode.
+    #
+    #   * Default value is `2.15` when `DeploymentType` is set to
+    #     `PERSISTENT_2` with a metadata configuration mode.
     #   @return [String]
     #
     # @!attribute [rw] open_zfs_configuration
@@ -2703,9 +2765,8 @@ module Aws::FSx
     #   Specifies the security style for the volume. If a volume's security
     #   style is not specified, it is automatically set to the root
     #   volume's security style. The security style determines the type of
-    #   permissions that FSx for ONTAP uses to control data access. For more
-    #   information, see [Volume security style][1] in the *Amazon FSx for
-    #   NetApp ONTAP User Guide*. Specify one of the following values:
+    #   permissions that FSx for ONTAP uses to control data access. Specify
+    #   one of the following values:
     #
     #   * `UNIX` if the file system is managed by a UNIX administrator, the
     #     majority of users are NFS clients, and an application accessing
@@ -2716,17 +2777,16 @@ module Aws::FSx
     #     accessing the data uses a Windows user as the service account.
     #
     #   * `MIXED` This is an advanced setting. For more information, see the
-    #     topic [What the security styles and their effects are][2] in the
+    #     topic [What the security styles and their effects are][1] in the
     #     NetApp Documentation Center.
     #
-    #   For more information, see [Volume security style][3] in the FSx for
+    #   For more information, see [Volume security style][2] in the FSx for
     #   ONTAP User Guide.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/volume-security-style
-    #   [2]: https://docs.netapp.com/us-en/ontap/nfs-admin/security-styles-their-effects-concept.html
-    #   [3]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/volume-security-style.html
+    #   [1]: https://docs.netapp.com/us-en/ontap/nfs-admin/security-styles-their-effects-concept.html
+    #   [2]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/managing-volumes.html#volume-security-style
     #   @return [String]
     #
     # @!attribute [rw] size_in_megabytes
@@ -2794,7 +2854,7 @@ module Aws::FSx
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/volume-types
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/managing-volumes.html#volume-types
     #   @return [String]
     #
     # @!attribute [rw] snapshot_policy
@@ -2848,7 +2908,7 @@ module Aws::FSx
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/volume-styles.html
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/managing-volumes.html#volume-styles
     #   @return [String]
     #
     # @!attribute [rw] aggregate_configuration
@@ -3243,9 +3303,14 @@ module Aws::FSx
     #     the service account.
     #
     #   * `MIXED` This is an advanced setting. For more information, see
-    #     [Volume security
-    #     style](fsx/latest/ONTAPGuide/volume-security-style.html) in the
-    #     Amazon FSx for NetApp ONTAP User Guide.
+    #     [Volume security style][1] in the Amazon FSx for NetApp ONTAP User
+    #     Guide.
+    #
+    #
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/volume-security-style.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateStorageVirtualMachineRequest AWS API Documentation
@@ -5612,7 +5677,7 @@ module Aws::FSx
     #     * If you are not using the `DataRepositorySubdirectories`
     #       parameter, the path is to an NFS Export directory (or one of its
     #       subdirectories) in the format
-    #       `nsf://nfs-domain-name/exportpath`. You can therefore link a
+    #       `nfs://nfs-domain-name/exportpath`. You can therefore link a
     #       single NFS Export to a single data repository association.
     #
     #     * If you are using the `DataRepositorySubdirectories` parameter,
@@ -6037,6 +6102,38 @@ module Aws::FSx
       include Aws::Structure
     end
 
+    # The Lustre metadata performance configuration of an Amazon FSx for
+    # Lustre file system using a `PERSISTENT_2` deployment type. The
+    # configuration enables the file system to support increasing metadata
+    # performance.
+    #
+    # @!attribute [rw] iops
+    #   The number of Metadata IOPS provisioned for the file system. Valid
+    #   values are `1500`, `3000`, `6000`, `12000`, and multiples of `12000`
+    #   up to a maximum of `192000`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] mode
+    #   The metadata configuration mode for provisioning Metadata IOPS for
+    #   the file system.
+    #
+    #   * In AUTOMATIC mode, FSx for Lustre automatically provisions and
+    #     scales the number of Metadata IOPS on your file system based on
+    #     your file system storage capacity.
+    #
+    #   * In USER\_PROVISIONED mode, you can choose to specify the number of
+    #     Metadata IOPS to provision for your file system.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/FileSystemLustreMetadataConfiguration AWS API Documentation
+    #
+    class FileSystemLustreMetadataConfiguration < Struct.new(
+      :iops,
+      :mode)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # No Amazon FSx file systems were found based upon supplied parameters.
     #
     # @!attribute [rw] message
@@ -6449,6 +6546,11 @@ module Aws::FSx
     #   from clients that try to access your file system as a root user.
     #   @return [Types::LustreRootSquashConfiguration]
     #
+    # @!attribute [rw] metadata_configuration
+    #   The Lustre metadata performance configuration for an Amazon FSx for
+    #   Lustre file system using a `PERSISTENT_2` deployment type.
+    #   @return [Types::FileSystemLustreMetadataConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/LustreFileSystemConfiguration AWS API Documentation
     #
     class LustreFileSystemConfiguration < Struct.new(
@@ -6463,7 +6565,8 @@ module Aws::FSx
       :drive_cache_type,
       :data_compression_type,
       :log_configuration,
-      :root_squash_configuration)
+      :root_squash_configuration,
+      :metadata_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7913,13 +8016,13 @@ module Aws::FSx
     end
 
     # Specifies changes you are making to the self-managed Microsoft Active
-    # Directory (AD) configuration to which an FSx for Windows File Server
-    # file system or an FSx for ONTAP SVM is joined.
+    # Directory configuration to which an FSx for Windows File Server file
+    # system or an FSx for ONTAP SVM is joined.
     #
     # @!attribute [rw] user_name
     #   Specifies the updated user name for the service account on your
-    #   self-managed AD domain. Amazon FSx uses this account to join to your
-    #   self-managed AD domain.
+    #   self-managed Active Directory domain. Amazon FSx uses this account
+    #   to join to your self-managed Active Directory domain.
     #
     #   This account must have the permissions required to join computers to
     #   the domain in the organizational unit provided in
@@ -7928,29 +8031,29 @@ module Aws::FSx
     #
     # @!attribute [rw] password
     #   Specifies the updated password for the service account on your
-    #   self-managed AD domain. Amazon FSx uses this account to join to your
-    #   self-managed AD domain.
+    #   self-managed Active Directory domain. Amazon FSx uses this account
+    #   to join to your self-managed Active Directory domain.
     #   @return [String]
     #
     # @!attribute [rw] dns_ips
     #   A list of up to three DNS server or domain controller IP addresses
-    #   in your self-managed AD domain.
+    #   in your self-managed Active Directory domain.
     #   @return [Array<String>]
     #
     # @!attribute [rw] domain_name
     #   Specifies an updated fully qualified domain name of your
-    #   self-managed AD configuration.
+    #   self-managed Active Directory configuration.
     #   @return [String]
     #
     # @!attribute [rw] organizational_unit_distinguished_name
     #   Specifies an updated fully qualified distinguished name of the
-    #   organization unit within your self-managed AD.
+    #   organization unit within your self-managed Active Directory.
     #   @return [String]
     #
     # @!attribute [rw] file_system_administrators_group
-    #   Specifies the updated name of the self-managed AD domain group whose
-    #   members are granted administrative privileges for the Amazon FSx
-    #   resource.
+    #   For FSx for ONTAP file systems only - Specifies the updated name of
+    #   the self-managed Active Directory domain group whose members are
+    #   granted administrative privileges for the Amazon FSx resource.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/SelfManagedActiveDirectoryConfigurationUpdates AWS API Documentation
@@ -8882,6 +8985,13 @@ module Aws::FSx
     #   [1]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/managing-throughput-capacity.html
     #   @return [Integer]
     #
+    # @!attribute [rw] metadata_configuration
+    #   The Lustre metadata performance configuration for an Amazon FSx for
+    #   Lustre file system using a `PERSISTENT_2` deployment type. When this
+    #   configuration is enabled, the file system supports increasing
+    #   metadata performance.
+    #   @return [Types::UpdateFileSystemLustreMetadataConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/UpdateFileSystemLustreConfiguration AWS API Documentation
     #
     class UpdateFileSystemLustreConfiguration < Struct.new(
@@ -8892,7 +9002,60 @@ module Aws::FSx
       :data_compression_type,
       :log_configuration,
       :root_squash_configuration,
-      :per_unit_storage_throughput)
+      :per_unit_storage_throughput,
+      :metadata_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Lustre metadata performance configuration update for an Amazon FSx
+    # for Lustre file system using a `PERSISTENT_2` deployment type. You can
+    # request an increase in your file system's Metadata IOPS and/or switch
+    # your file system's metadata configuration mode. For more information,
+    # see [Managing metadata performance][1] in the *Amazon FSx for Lustre
+    # User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/managing-metadata-performance.html
+    #
+    # @!attribute [rw] iops
+    #   (USER\_PROVISIONED mode only) Specifies the number of Metadata IOPS
+    #   to provision for your file system. Valid values are `1500`, `3000`,
+    #   `6000`, `12000`, and multiples of `12000` up to a maximum of
+    #   `192000`.
+    #
+    #   The value you provide must be greater than or equal to the current
+    #   number of Metadata IOPS provisioned for the file system.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] mode
+    #   The metadata configuration mode for provisioning Metadata IOPS for
+    #   an FSx for Lustre file system using a `PERSISTENT_2` deployment
+    #   type.
+    #
+    #   * To increase the Metadata IOPS or to switch from AUTOMATIC mode,
+    #     specify `USER_PROVISIONED` as the value for this parameter. Then
+    #     use the Iops parameter to provide a Metadata IOPS value that is
+    #     greater than or equal to the current number of Metadata IOPS
+    #     provisioned for the file system.
+    #
+    #   * To switch from USER\_PROVISIONED mode, specify `AUTOMATIC` as the
+    #     value for this parameter, but do not input a value for Iops.
+    #
+    #     <note markdown="1"> If you request to switch from USER\_PROVISIONED to AUTOMATIC mode
+    #     and the current Metadata IOPS value is greater than the automated
+    #     default, FSx for Lustre rejects the request because downscaling
+    #     Metadata IOPS is not supported.
+    #
+    #      </note>
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/UpdateFileSystemLustreMetadataConfiguration AWS API Documentation
+    #
+    class UpdateFileSystemLustreMetadataConfiguration < Struct.new(
+      :iops,
+      :mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9703,7 +9866,7 @@ module Aws::FSx
     #
     # @!attribute [rw] self_managed_active_directory_configuration
     #   Specifies changes you are making to the self-managed Microsoft
-    #   Active Directory (AD) configuration to which an FSx for Windows File
+    #   Active Directory configuration to which an FSx for Windows File
     #   Server file system or an FSx for ONTAP SVM is joined.
     #   @return [Types::SelfManagedActiveDirectoryConfigurationUpdates]
     #

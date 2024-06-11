@@ -48,6 +48,11 @@ module Aws::Connect
       SENSITIVE: []
     end
 
+    class AgentHierarchyGroup
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
     class AgentHierarchyGroups
       attr_accessor l1_ids: ::Array[::String]
       attr_accessor l2_ids: ::Array[::String]
@@ -61,6 +66,14 @@ module Aws::Connect
       attr_accessor id: ::String
       attr_accessor connected_to_agent_timestamp: ::Time
       attr_accessor agent_pause_duration_in_seconds: ::Integer
+      attr_accessor hierarchy_groups: Types::HierarchyGroups
+      attr_accessor device_info: Types::DeviceInfo
+      attr_accessor capabilities: Types::ParticipantCapabilities
+      SENSITIVE: []
+    end
+
+    class AgentQualityMetrics
+      attr_accessor audio: Types::AudioQualityMetricsInfo
       SENSITIVE: []
     end
 
@@ -292,8 +305,22 @@ module Aws::Connect
       SENSITIVE: []
     end
 
+    class AttributeCondition
+      attr_accessor name: ::String
+      attr_accessor value: ::String
+      attr_accessor proficiency_level: ::Float
+      attr_accessor comparison_operator: ::String
+      SENSITIVE: []
+    end
+
     class AudioFeatures
       attr_accessor echo_reduction: ("AVAILABLE" | "UNAVAILABLE")
+      SENSITIVE: []
+    end
+
+    class AudioQualityMetricsInfo
+      attr_accessor quality_score: ::Float
+      attr_accessor potential_quality_issues: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -472,6 +499,15 @@ module Aws::Connect
       attr_accessor queue_time_adjustment_seconds: ::Integer
       attr_accessor queue_priority: ::Integer
       attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor connected_to_system_timestamp: ::Time
+      attr_accessor routing_criteria: Types::RoutingCriteria
+      attr_accessor customer: Types::Customer
+      attr_accessor campaign: Types::Campaign
+      attr_accessor answering_machine_detection_status: ("ANSWERED" | "UNDETECTED" | "ERROR" | "HUMAN_ANSWERED" | "SIT_TONE_DETECTED" | "SIT_TONE_BUSY" | "SIT_TONE_INVALID_NUMBER" | "FAX_MACHINE_DETECTED" | "VOICEMAIL_BEEP" | "VOICEMAIL_NO_BEEP" | "AMD_UNRESOLVED" | "AMD_UNANSWERED" | "AMD_ERROR" | "AMD_NOT_APPLICABLE")
+      attr_accessor customer_voice_activity: Types::CustomerVoiceActivity
+      attr_accessor quality_metrics: Types::QualityMetrics
+      attr_accessor disconnect_details: Types::DisconnectDetails
+      attr_accessor segment_attributes: ::Hash[::String, Types::SegmentAttributeValue]
       SENSITIVE: [:name, :description]
     end
 
@@ -1055,6 +1091,23 @@ module Aws::Connect
       SENSITIVE: []
     end
 
+    class Customer
+      attr_accessor device_info: Types::DeviceInfo
+      attr_accessor capabilities: Types::ParticipantCapabilities
+      SENSITIVE: []
+    end
+
+    class CustomerQualityMetrics
+      attr_accessor audio: Types::AudioQualityMetricsInfo
+      SENSITIVE: []
+    end
+
+    class CustomerVoiceActivity
+      attr_accessor greeting_start_timestamp: ::Time
+      attr_accessor greeting_end_timestamp: ::Time
+      SENSITIVE: []
+    end
+
     class DateReference
       attr_accessor name: ::String
       attr_accessor value: ::String
@@ -1519,6 +1572,13 @@ module Aws::Connect
       SENSITIVE: []
     end
 
+    class DeviceInfo
+      attr_accessor platform_name: ::String
+      attr_accessor platform_version: ::String
+      attr_accessor operating_system: ::String
+      SENSITIVE: []
+    end
+
     class Dimensions
       attr_accessor queue: Types::QueueReference
       attr_accessor channel: ("VOICE" | "CHAT" | "TASK")
@@ -1617,6 +1677,11 @@ module Aws::Connect
       attr_accessor instance_id: ::String
       attr_accessor user_id: ::String
       attr_accessor user_proficiencies: ::Array[Types::UserProficiencyDisassociate]
+      SENSITIVE: []
+    end
+
+    class DisconnectDetails
+      attr_accessor potential_disconnect_issue: ::String
       SENSITIVE: []
     end
 
@@ -1932,6 +1997,19 @@ module Aws::Connect
       SENSITIVE: []
     end
 
+    class Expiry
+      attr_accessor duration_in_seconds: ::Integer
+      attr_accessor expiry_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class Expression
+      attr_accessor attribute_condition: Types::AttributeCondition
+      attr_accessor and_expression: ::Array[Types::Expression]
+      attr_accessor or_expression: ::Array[Types::Expression]
+      SENSITIVE: []
+    end
+
     class FailedRequest
       attr_accessor request_identifier: ::String
       attr_accessor failure_reason_code: ("INVALID_ATTRIBUTE_KEY" | "INVALID_CUSTOMER_ENDPOINT" | "INVALID_SYSTEM_ENDPOINT" | "INVALID_QUEUE" | "MISSING_CAMPAIGN" | "MISSING_CUSTOMER_ENDPOINT" | "MISSING_QUEUE_ID_AND_SYSTEM_ENDPOINT" | "REQUEST_THROTTLED" | "IDEMPOTENCY_EXCEPTION" | "INTERNAL_ERROR")
@@ -2187,6 +2265,15 @@ module Aws::Connect
     class HierarchyGroupSummaryReference
       attr_accessor id: ::String
       attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class HierarchyGroups
+      attr_accessor level_1: Types::AgentHierarchyGroup
+      attr_accessor level_2: Types::AgentHierarchyGroup
+      attr_accessor level_3: Types::AgentHierarchyGroup
+      attr_accessor level_4: Types::AgentHierarchyGroup
+      attr_accessor level_5: Types::AgentHierarchyGroup
       SENSITIVE: []
     end
 
@@ -3396,6 +3483,12 @@ module Aws::Connect
     class PutUserStatusResponse < Aws::EmptyStructure
     end
 
+    class QualityMetrics
+      attr_accessor agent: Types::AgentQualityMetrics
+      attr_accessor customer: Types::CustomerQualityMetrics
+      SENSITIVE: []
+    end
+
     class Queue
       attr_accessor name: ::String
       attr_accessor queue_arn: ::String
@@ -3727,6 +3820,13 @@ module Aws::Connect
     class ResumeContactResponse < Aws::EmptyStructure
     end
 
+    class RoutingCriteria
+      attr_accessor steps: ::Array[Types::Step]
+      attr_accessor activation_timestamp: ::Time
+      attr_accessor index: ::Integer
+      SENSITIVE: []
+    end
+
     class RoutingProfile
       attr_accessor instance_id: ::String
       attr_accessor name: ::String
@@ -3742,6 +3842,7 @@ module Aws::Connect
       attr_accessor last_modified_time: ::Time
       attr_accessor last_modified_region: ::String
       attr_accessor is_default: bool
+      attr_accessor associated_queue_ids: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -4360,6 +4461,13 @@ module Aws::Connect
       attr_accessor contact_id: ::String
       attr_accessor participant_id: ::String
       attr_accessor participant_token: ::String
+      SENSITIVE: []
+    end
+
+    class Step
+      attr_accessor expiry: Types::Expiry
+      attr_accessor expression: Types::Expression
+      attr_accessor status: ("ACTIVE" | "INACTIVE" | "JOINED" | "EXPIRED")
       SENSITIVE: []
     end
 

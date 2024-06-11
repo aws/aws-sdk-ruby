@@ -1080,7 +1080,7 @@ module Aws::SecurityHub
     #   resp.configuration_policy_associations #=> Array
     #   resp.configuration_policy_associations[0].configuration_policy_id #=> String
     #   resp.configuration_policy_associations[0].target_id #=> String
-    #   resp.configuration_policy_associations[0].target_type #=> String, one of "ACCOUNT", "ORGANIZATIONAL_UNIT"
+    #   resp.configuration_policy_associations[0].target_type #=> String, one of "ACCOUNT", "ORGANIZATIONAL_UNIT", "ROOT"
     #   resp.configuration_policy_associations[0].association_type #=> String, one of "INHERITED", "APPLIED"
     #   resp.configuration_policy_associations[0].updated_at #=> Time
     #   resp.configuration_policy_associations[0].association_status #=> String, one of "PENDING", "SUCCESS", "FAILED"
@@ -5180,7 +5180,7 @@ module Aws::SecurityHub
     #
     #   resp.configuration_policy_id #=> String
     #   resp.target_id #=> String
-    #   resp.target_type #=> String, one of "ACCOUNT", "ORGANIZATIONAL_UNIT"
+    #   resp.target_type #=> String, one of "ACCOUNT", "ORGANIZATIONAL_UNIT", "ROOT"
     #   resp.association_type #=> String, one of "INHERITED", "APPLIED"
     #   resp.updated_at #=> Time
     #   resp.association_status #=> String, one of "PENDING", "SUCCESS", "FAILED"
@@ -7447,7 +7447,7 @@ module Aws::SecurityHub
     #   resp.configuration_policy_association_summaries #=> Array
     #   resp.configuration_policy_association_summaries[0].configuration_policy_id #=> String
     #   resp.configuration_policy_association_summaries[0].target_id #=> String
-    #   resp.configuration_policy_association_summaries[0].target_type #=> String, one of "ACCOUNT", "ORGANIZATIONAL_UNIT"
+    #   resp.configuration_policy_association_summaries[0].target_type #=> String, one of "ACCOUNT", "ORGANIZATIONAL_UNIT", "ROOT"
     #   resp.configuration_policy_association_summaries[0].association_type #=> String, one of "INHERITED", "APPLIED"
     #   resp.configuration_policy_association_summaries[0].updated_at #=> Time
     #   resp.configuration_policy_association_summaries[0].association_status #=> String, one of "PENDING", "SUCCESS", "FAILED"
@@ -8161,7 +8161,7 @@ module Aws::SecurityHub
     #
     #   resp.configuration_policy_id #=> String
     #   resp.target_id #=> String
-    #   resp.target_type #=> String, one of "ACCOUNT", "ORGANIZATIONAL_UNIT"
+    #   resp.target_type #=> String, one of "ACCOUNT", "ORGANIZATIONAL_UNIT", "ROOT"
     #   resp.association_type #=> String, one of "INHERITED", "APPLIED"
     #   resp.updated_at #=> Time
     #   resp.association_status #=> String, one of "PENDING", "SUCCESS", "FAILED"
@@ -10407,7 +10407,7 @@ module Aws::SecurityHub
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-securityhub'
-      context[:gem_version] = '1.107.0'
+      context[:gem_version] = '1.109.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

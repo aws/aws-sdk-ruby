@@ -72,6 +72,18 @@ module Aws
                   | (?Hash[Symbol, untyped]) -> instance
 
 
+      interface _AcceptPrimaryEmailUpdateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AcceptPrimaryEmailUpdateResponse]
+        def status: () -> ("PENDING" | "ACCEPTED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Account/Client.html#accept_primary_email_update-instance_method
+      def accept_primary_email_update: (
+                                         account_id: ::String,
+                                         otp: ::String,
+                                         primary_email: ::String
+                                       ) -> _AcceptPrimaryEmailUpdateResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AcceptPrimaryEmailUpdateResponseSuccess
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Account/Client.html#delete_alternate_contact-instance_method
       def delete_alternate_contact: (
                                       ?account_id: ::String,
@@ -113,6 +125,16 @@ module Aws
                                      ?account_id: ::String
                                    ) -> _GetContactInformationResponseSuccess
                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetContactInformationResponseSuccess
+
+      interface _GetPrimaryEmailResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetPrimaryEmailResponse]
+        def primary_email: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Account/Client.html#get_primary_email-instance_method
+      def get_primary_email: (
+                               account_id: ::String
+                             ) -> _GetPrimaryEmailResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetPrimaryEmailResponseSuccess
 
       interface _GetRegionOptStatusResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetRegionOptStatusResponse]
@@ -170,6 +192,17 @@ module Aws
                                      }
                                    ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _StartPrimaryEmailUpdateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartPrimaryEmailUpdateResponse]
+        def status: () -> ("PENDING" | "ACCEPTED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Account/Client.html#start_primary_email_update-instance_method
+      def start_primary_email_update: (
+                                        account_id: ::String,
+                                        primary_email: ::String
+                                      ) -> _StartPrimaryEmailUpdateResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartPrimaryEmailUpdateResponseSuccess
     end
   end
 end

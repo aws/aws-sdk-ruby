@@ -500,9 +500,8 @@ module Aws::VerifiedPermissions
     # to an Amazon Cognito user pool used as an identity provider for
     # Verified Permissions.
     #
-    # This data type is used as a field that is part of an
-    # [Configuration][1] structure that is used as a parameter to
-    # [CreateIdentitySource][2].
+    # This data type part of a [Configuration][1] structure that is used as
+    # a parameter to [CreateIdentitySource][2].
     #
     # Example:`"CognitoUserPoolConfiguration":\{"UserPoolArn":"arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5","ClientIds":
     # ["a1b2c3d4e5f6g7h8i9j0kalbmc"],"groupConfiguration":
@@ -670,13 +669,6 @@ module Aws::VerifiedPermissions
     # Contains configuration information used when creating a new identity
     # source.
     #
-    # <note markdown="1"> At this time, the only valid member of this structure is a Amazon
-    # Cognito user pool configuration.
-    #
-    #  Specifies a `userPoolArn`, a `groupConfiguration`, and a `ClientId`.
-    #
-    #  </note>
-    #
     # This data type is used as a request parameter for the
     # [CreateIdentitySource][1] operation.
     #
@@ -702,16 +694,28 @@ module Aws::VerifiedPermissions
     #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [Types::CognitoUserPoolConfiguration]
     #
+    # @!attribute [rw] open_id_connect_configuration
+    #   Contains configuration details of an OpenID Connect (OIDC) identity
+    #   provider, or identity source, that Verified Permissions can use to
+    #   generate entities from authenticated identities. It specifies the
+    #   issuer URL, token type that you want to use, and policy store entity
+    #   details.
+    #
+    #   Example:`"configuration":\{"openIdConnectConfiguration":\{"issuer":"https://auth.example.com","tokenSelection":\{"accessTokenOnly":\{"audiences":["https://myapp.example.com","https://myapp2.example.com"],"principalIdClaim":"sub"\}\},"entityIdPrefix":"MyOIDCProvider","groupConfiguration":\{"groupClaim":"groups","groupEntityType":"MyCorp::UserGroup"\}\}\}`
+    #   @return [Types::OpenIdConnectConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/Configuration AWS API Documentation
     #
     class Configuration < Struct.new(
       :cognito_user_pool_configuration,
+      :open_id_connect_configuration,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
       include Aws::Structure::Union
 
       class CognitoUserPoolConfiguration < Configuration; end
+      class OpenIdConnectConfiguration < Configuration; end
       class Unknown < Configuration; end
     end
 
@@ -743,16 +747,28 @@ module Aws::VerifiedPermissions
     #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [Types::CognitoUserPoolConfigurationDetail]
     #
+    # @!attribute [rw] open_id_connect_configuration
+    #   Contains configuration details of an OpenID Connect (OIDC) identity
+    #   provider, or identity source, that Verified Permissions can use to
+    #   generate entities from authenticated identities. It specifies the
+    #   issuer URL, token type that you want to use, and policy store entity
+    #   details.
+    #
+    #   Example:`"configuration":\{"openIdConnectConfiguration":\{"issuer":"https://auth.example.com","tokenSelection":\{"accessTokenOnly":\{"audiences":["https://myapp.example.com","https://myapp2.example.com"],"principalIdClaim":"sub"\}\},"entityIdPrefix":"MyOIDCProvider","groupConfiguration":\{"groupClaim":"groups","groupEntityType":"MyCorp::UserGroup"\}\}\}`
+    #   @return [Types::OpenIdConnectConfigurationDetail]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/ConfigurationDetail AWS API Documentation
     #
     class ConfigurationDetail < Struct.new(
       :cognito_user_pool_configuration,
+      :open_id_connect_configuration,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
       include Aws::Structure::Union
 
       class CognitoUserPoolConfiguration < ConfigurationDetail; end
+      class OpenIdConnectConfiguration < ConfigurationDetail; end
       class Unknown < ConfigurationDetail; end
     end
 
@@ -784,16 +800,28 @@ module Aws::VerifiedPermissions
     #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [Types::CognitoUserPoolConfigurationItem]
     #
+    # @!attribute [rw] open_id_connect_configuration
+    #   Contains configuration details of an OpenID Connect (OIDC) identity
+    #   provider, or identity source, that Verified Permissions can use to
+    #   generate entities from authenticated identities. It specifies the
+    #   issuer URL, token type that you want to use, and policy store entity
+    #   details.
+    #
+    #   Example:`"configuration":\{"openIdConnectConfiguration":\{"issuer":"https://auth.example.com","tokenSelection":\{"accessTokenOnly":\{"audiences":["https://myapp.example.com","https://myapp2.example.com"],"principalIdClaim":"sub"\}\},"entityIdPrefix":"MyOIDCProvider","groupConfiguration":\{"groupClaim":"groups","groupEntityType":"MyCorp::UserGroup"\}\}\}`
+    #   @return [Types::OpenIdConnectConfigurationItem]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/ConfigurationItem AWS API Documentation
     #
     class ConfigurationItem < Struct.new(
       :cognito_user_pool_configuration,
+      :open_id_connect_configuration,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
       include Aws::Structure::Union
 
       class CognitoUserPoolConfiguration < ConfigurationItem; end
+      class OpenIdConnectConfiguration < ConfigurationItem; end
       class Unknown < ConfigurationItem; end
     end
 
@@ -851,7 +879,7 @@ module Aws::VerifiedPermissions
     class ContextDefinition < Struct.new(
       :context_map,
       :unknown)
-      SENSITIVE = []
+      SENSITIVE = [:context_map]
       include Aws::Structure
       include Aws::Structure::Union
 
@@ -897,13 +925,6 @@ module Aws::VerifiedPermissions
     # @!attribute [rw] configuration
     #   Specifies the details required to communicate with the identity
     #   provider (IdP) associated with this identity source.
-    #
-    #   <note markdown="1"> At this time, the only valid member of this structure is a Amazon
-    #   Cognito user pool configuration.
-    #
-    #    You must specify a `UserPoolArn`, and optionally, a `ClientId`.
-    #
-    #    </note>
     #   @return [Types::Configuration]
     #
     # @!attribute [rw] principal_entity_type
@@ -1430,7 +1451,15 @@ module Aws::VerifiedPermissions
     #   @return [Hash<String,Types::AttributeValue>]
     #
     # @!attribute [rw] parents
-    #   The parents in the hierarchy that contains the entity.
+    #   The parent entities in the hierarchy that contains the entity. A
+    #   principal or resource entity can be defined with at most 99
+    #   *transitive parents* per authorization request.
+    #
+    #   A transitive parent is an entity in the hierarchy of entities
+    #   including all direct parents, and parents of parents. For example, a
+    #   user can be a member of 91 groups if one of those groups is a member
+    #   of eight groups, for a total of 100: one entity, 91 entity parents,
+    #   and eight parents of parents.
     #   @return [Array<Types::EntityIdentifier>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/EntityItem AWS API Documentation
@@ -2437,6 +2466,582 @@ module Aws::VerifiedPermissions
       include Aws::Structure
     end
 
+    # The configuration of an OpenID Connect (OIDC) identity source for
+    # handling access token claims. Contains the claim that you want to
+    # identify as the principal in an authorization request, and the values
+    # of the `aud` claim, or audiences, that you want to accept.
+    #
+    # This data type is part of a [OpenIdConnectTokenSelection][1]
+    # structure, which is a parameter of [CreateIdentitySource][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_OpenIdConnectTokenSelection.html
+    # [2]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_CreateIdentitySource.html
+    #
+    # @!attribute [rw] principal_id_claim
+    #   The claim that determines the principal in OIDC access tokens. For
+    #   example, `sub`.
+    #   @return [String]
+    #
+    # @!attribute [rw] audiences
+    #   The access token `aud` claim values that you want to accept in your
+    #   policy store. For example, `https://myapp.example.com,
+    #   https://myapp2.example.com`.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/OpenIdConnectAccessTokenConfiguration AWS API Documentation
+    #
+    class OpenIdConnectAccessTokenConfiguration < Struct.new(
+      :principal_id_claim,
+      :audiences)
+      SENSITIVE = [:principal_id_claim]
+      include Aws::Structure
+    end
+
+    # The configuration of an OpenID Connect (OIDC) identity source for
+    # handling access token claims. Contains the claim that you want to
+    # identify as the principal in an authorization request, and the values
+    # of the `aud` claim, or audiences, that you want to accept.
+    #
+    # This data type is part of a [OpenIdConnectTokenSelectionDetail][1]
+    # structure, which is a parameter of [GetIdentitySource][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_OpenIdConnectTokenSelectionDetail.html
+    # [2]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_GetIdentitySource.html
+    #
+    # @!attribute [rw] principal_id_claim
+    #   The claim that determines the principal in OIDC access tokens. For
+    #   example, `sub`.
+    #   @return [String]
+    #
+    # @!attribute [rw] audiences
+    #   The access token `aud` claim values that you want to accept in your
+    #   policy store. For example, `https://myapp.example.com,
+    #   https://myapp2.example.com`.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/OpenIdConnectAccessTokenConfigurationDetail AWS API Documentation
+    #
+    class OpenIdConnectAccessTokenConfigurationDetail < Struct.new(
+      :principal_id_claim,
+      :audiences)
+      SENSITIVE = [:principal_id_claim]
+      include Aws::Structure
+    end
+
+    # The configuration of an OpenID Connect (OIDC) identity source for
+    # handling access token claims. Contains the claim that you want to
+    # identify as the principal in an authorization request, and the values
+    # of the `aud` claim, or audiences, that you want to accept.
+    #
+    # This data type is part of a [OpenIdConnectTokenSelectionItem][1]
+    # structure, which is a parameter of [ListIdentitySources][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_OpenIdConnectTokenSelectionItem.html
+    # [2]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListIdentitySources.html
+    #
+    # @!attribute [rw] principal_id_claim
+    #   The claim that determines the principal in OIDC access tokens. For
+    #   example, `sub`.
+    #   @return [String]
+    #
+    # @!attribute [rw] audiences
+    #   The access token `aud` claim values that you want to accept in your
+    #   policy store. For example, `https://myapp.example.com,
+    #   https://myapp2.example.com`.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/OpenIdConnectAccessTokenConfigurationItem AWS API Documentation
+    #
+    class OpenIdConnectAccessTokenConfigurationItem < Struct.new(
+      :principal_id_claim,
+      :audiences)
+      SENSITIVE = [:principal_id_claim]
+      include Aws::Structure
+    end
+
+    # Contains configuration details of an OpenID Connect (OIDC) identity
+    # provider, or identity source, that Verified Permissions can use to
+    # generate entities from authenticated identities. It specifies the
+    # issuer URL, token type that you want to use, and policy store entity
+    # details.
+    #
+    # This data type is part of a [Configuration][1] structure, which is a
+    # parameter to [CreateIdentitySource][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_Configuration.html
+    # [2]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_CreateIdentitySource.html
+    #
+    # @!attribute [rw] issuer
+    #   The issuer URL of an OIDC identity provider. This URL must have an
+    #   OIDC discovery endpoint at the path
+    #   `.well-known/openid-configuration`.
+    #   @return [String]
+    #
+    # @!attribute [rw] entity_id_prefix
+    #   A descriptive string that you want to prefix to user entities from
+    #   your OIDC identity provider. For example, if you set an
+    #   `entityIdPrefix` of `MyOIDCProvider`, you can reference principals
+    #   in your policies in the format
+    #   `MyCorp::User::MyOIDCProvider|Carlos`.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_configuration
+    #   The claim in OIDC identity provider tokens that indicates a user's
+    #   group membership, and the entity type that you want to map it to.
+    #   For example, this object can map the contents of a `groups` claim to
+    #   `MyCorp::UserGroup`.
+    #   @return [Types::OpenIdConnectGroupConfiguration]
+    #
+    # @!attribute [rw] token_selection
+    #   The token type that you want to process from your OIDC identity
+    #   provider. Your policy store can process either identity (ID) or
+    #   access tokens from a given OIDC identity source.
+    #   @return [Types::OpenIdConnectTokenSelection]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/OpenIdConnectConfiguration AWS API Documentation
+    #
+    class OpenIdConnectConfiguration < Struct.new(
+      :issuer,
+      :entity_id_prefix,
+      :group_configuration,
+      :token_selection)
+      SENSITIVE = [:entity_id_prefix]
+      include Aws::Structure
+    end
+
+    # Contains configuration details of an OpenID Connect (OIDC) identity
+    # provider, or identity source, that Verified Permissions can use to
+    # generate entities from authenticated identities. It specifies the
+    # issuer URL, token type that you want to use, and policy store entity
+    # details.
+    #
+    # This data type is part of a [ConfigurationDetail][1] structure, which
+    # is a parameter to [GetIdentitySource][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ConfigurationDetail.html
+    # [2]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_GetIdentitySource.html
+    #
+    # @!attribute [rw] issuer
+    #   The issuer URL of an OIDC identity provider. This URL must have an
+    #   OIDC discovery endpoint at the path
+    #   `.well-known/openid-configuration`.
+    #   @return [String]
+    #
+    # @!attribute [rw] entity_id_prefix
+    #   A descriptive string that you want to prefix to user entities from
+    #   your OIDC identity provider. For example, if you set an
+    #   `entityIdPrefix` of `MyOIDCProvider`, you can reference principals
+    #   in your policies in the format
+    #   `MyCorp::User::MyOIDCProvider|Carlos`.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_configuration
+    #   The claim in OIDC identity provider tokens that indicates a user's
+    #   group membership, and the entity type that you want to map it to.
+    #   For example, this object can map the contents of a `groups` claim to
+    #   `MyCorp::UserGroup`.
+    #   @return [Types::OpenIdConnectGroupConfigurationDetail]
+    #
+    # @!attribute [rw] token_selection
+    #   The token type that you want to process from your OIDC identity
+    #   provider. Your policy store can process either identity (ID) or
+    #   access tokens from a given OIDC identity source.
+    #   @return [Types::OpenIdConnectTokenSelectionDetail]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/OpenIdConnectConfigurationDetail AWS API Documentation
+    #
+    class OpenIdConnectConfigurationDetail < Struct.new(
+      :issuer,
+      :entity_id_prefix,
+      :group_configuration,
+      :token_selection)
+      SENSITIVE = [:entity_id_prefix]
+      include Aws::Structure
+    end
+
+    # Contains configuration details of an OpenID Connect (OIDC) identity
+    # provider, or identity source, that Verified Permissions can use to
+    # generate entities from authenticated identities. It specifies the
+    # issuer URL, token type that you want to use, and policy store entity
+    # details.
+    #
+    # This data type is part of a [ConfigurationItem][1] structure, which is
+    # a parameter to [ListIdentitySources][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ConfigurationDetail.html
+    # [2]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListIdentitySources.html
+    #
+    # @!attribute [rw] issuer
+    #   The issuer URL of an OIDC identity provider. This URL must have an
+    #   OIDC discovery endpoint at the path
+    #   `.well-known/openid-configuration`.
+    #   @return [String]
+    #
+    # @!attribute [rw] entity_id_prefix
+    #   A descriptive string that you want to prefix to user entities from
+    #   your OIDC identity provider. For example, if you set an
+    #   `entityIdPrefix` of `MyOIDCProvider`, you can reference principals
+    #   in your policies in the format
+    #   `MyCorp::User::MyOIDCProvider|Carlos`.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_configuration
+    #   The claim in OIDC identity provider tokens that indicates a user's
+    #   group membership, and the entity type that you want to map it to.
+    #   For example, this object can map the contents of a `groups` claim to
+    #   `MyCorp::UserGroup`.
+    #   @return [Types::OpenIdConnectGroupConfigurationItem]
+    #
+    # @!attribute [rw] token_selection
+    #   The token type that you want to process from your OIDC identity
+    #   provider. Your policy store can process either identity (ID) or
+    #   access tokens from a given OIDC identity source.
+    #   @return [Types::OpenIdConnectTokenSelectionItem]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/OpenIdConnectConfigurationItem AWS API Documentation
+    #
+    class OpenIdConnectConfigurationItem < Struct.new(
+      :issuer,
+      :entity_id_prefix,
+      :group_configuration,
+      :token_selection)
+      SENSITIVE = [:entity_id_prefix]
+      include Aws::Structure
+    end
+
+    # The claim in OIDC identity provider tokens that indicates a user's
+    # group membership, and the entity type that you want to map it to. For
+    # example, this object can map the contents of a `groups` claim to
+    # `MyCorp::UserGroup`.
+    #
+    # This data type is part of a [OpenIdConnectConfiguration][1] structure,
+    # which is a parameter of [CreateIdentitySource][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_OpenIdConnectConfiguration.html
+    # [2]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_CreateIdentitySource.html
+    #
+    # @!attribute [rw] group_claim
+    #   The token claim that you want Verified Permissions to interpret as
+    #   group membership. For example, `groups`.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_entity_type
+    #   The policy store entity type that you want to map your users' group
+    #   claim to. For example, `MyCorp::UserGroup`. A group entity type is
+    #   an entity that can have a user entity type as a member.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/OpenIdConnectGroupConfiguration AWS API Documentation
+    #
+    class OpenIdConnectGroupConfiguration < Struct.new(
+      :group_claim,
+      :group_entity_type)
+      SENSITIVE = [:group_claim, :group_entity_type]
+      include Aws::Structure
+    end
+
+    # The claim in OIDC identity provider tokens that indicates a user's
+    # group membership, and the entity type that you want to map it to. For
+    # example, this object can map the contents of a `groups` claim to
+    # `MyCorp::UserGroup`.
+    #
+    # This data type is part of a [OpenIdConnectConfigurationDetail][1]
+    # structure, which is a parameter of [GetIdentitySource][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_OpenIdConnectConfigurationDetail.html
+    # [2]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_GetIdentitySource.html
+    #
+    # @!attribute [rw] group_claim
+    #   The token claim that you want Verified Permissions to interpret as
+    #   group membership. For example, `groups`.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_entity_type
+    #   The policy store entity type that you want to map your users' group
+    #   claim to. For example, `MyCorp::UserGroup`. A group entity type is
+    #   an entity that can have a user entity type as a member.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/OpenIdConnectGroupConfigurationDetail AWS API Documentation
+    #
+    class OpenIdConnectGroupConfigurationDetail < Struct.new(
+      :group_claim,
+      :group_entity_type)
+      SENSITIVE = [:group_claim, :group_entity_type]
+      include Aws::Structure
+    end
+
+    # The claim in OIDC identity provider tokens that indicates a user's
+    # group membership, and the entity type that you want to map it to. For
+    # example, this object can map the contents of a `groups` claim to
+    # `MyCorp::UserGroup`.
+    #
+    # This data type is part of a [OpenIdConnectConfigurationItem][1]
+    # structure, which is a parameter of [ListIdentitySourcea][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_OpenIdConnectConfigurationItem.html
+    # [2]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListIdentitySources.html
+    #
+    # @!attribute [rw] group_claim
+    #   The token claim that you want Verified Permissions to interpret as
+    #   group membership. For example, `groups`.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_entity_type
+    #   The policy store entity type that you want to map your users' group
+    #   claim to. For example, `MyCorp::UserGroup`. A group entity type is
+    #   an entity that can have a user entity type as a member.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/OpenIdConnectGroupConfigurationItem AWS API Documentation
+    #
+    class OpenIdConnectGroupConfigurationItem < Struct.new(
+      :group_claim,
+      :group_entity_type)
+      SENSITIVE = [:group_claim, :group_entity_type]
+      include Aws::Structure
+    end
+
+    # The configuration of an OpenID Connect (OIDC) identity source for
+    # handling identity (ID) token claims. Contains the claim that you want
+    # to identify as the principal in an authorization request, and the
+    # values of the `aud` claim, or audiences, that you want to accept.
+    #
+    # This data type is part of a [OpenIdConnectTokenSelection][1]
+    # structure, which is a parameter of [CreateIdentitySource][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_OpenIdConnectTokenSelection.html
+    # [2]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_CreateIdentitySource.html
+    #
+    # @!attribute [rw] principal_id_claim
+    #   The claim that determines the principal in OIDC access tokens. For
+    #   example, `sub`.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_ids
+    #   The ID token audience, or client ID, claim values that you want to
+    #   accept in your policy store from an OIDC identity provider. For
+    #   example, `1example23456789, 2example10111213`.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/OpenIdConnectIdentityTokenConfiguration AWS API Documentation
+    #
+    class OpenIdConnectIdentityTokenConfiguration < Struct.new(
+      :principal_id_claim,
+      :client_ids)
+      SENSITIVE = [:principal_id_claim]
+      include Aws::Structure
+    end
+
+    # The configuration of an OpenID Connect (OIDC) identity source for
+    # handling identity (ID) token claims. Contains the claim that you want
+    # to identify as the principal in an authorization request, and the
+    # values of the `aud` claim, or audiences, that you want to accept.
+    #
+    # This data type is part of a [OpenIdConnectTokenSelectionDetail][1]
+    # structure, which is a parameter of [GetIdentitySource][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_OpenIdConnectTokenSelectionDetail.html
+    # [2]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_GetIdentitySource.html
+    #
+    # @!attribute [rw] principal_id_claim
+    #   The claim that determines the principal in OIDC access tokens. For
+    #   example, `sub`.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_ids
+    #   The ID token audience, or client ID, claim values that you want to
+    #   accept in your policy store from an OIDC identity provider. For
+    #   example, `1example23456789, 2example10111213`.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/OpenIdConnectIdentityTokenConfigurationDetail AWS API Documentation
+    #
+    class OpenIdConnectIdentityTokenConfigurationDetail < Struct.new(
+      :principal_id_claim,
+      :client_ids)
+      SENSITIVE = [:principal_id_claim]
+      include Aws::Structure
+    end
+
+    # The configuration of an OpenID Connect (OIDC) identity source for
+    # handling identity (ID) token claims. Contains the claim that you want
+    # to identify as the principal in an authorization request, and the
+    # values of the `aud` claim, or audiences, that you want to accept.
+    #
+    # This data type is part of a [OpenIdConnectTokenSelectionItem][1]
+    # structure, which is a parameter of [ListIdentitySources][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_OpenIdConnectTokenSelectionItem.html
+    # [2]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListIdentitySources.html
+    #
+    # @!attribute [rw] principal_id_claim
+    #   The claim that determines the principal in OIDC access tokens. For
+    #   example, `sub`.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_ids
+    #   The ID token audience, or client ID, claim values that you want to
+    #   accept in your policy store from an OIDC identity provider. For
+    #   example, `1example23456789, 2example10111213`.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/OpenIdConnectIdentityTokenConfigurationItem AWS API Documentation
+    #
+    class OpenIdConnectIdentityTokenConfigurationItem < Struct.new(
+      :principal_id_claim,
+      :client_ids)
+      SENSITIVE = [:principal_id_claim]
+      include Aws::Structure
+    end
+
+    # The token type that you want to process from your OIDC identity
+    # provider. Your policy store can process either identity (ID) or access
+    # tokens from a given OIDC identity source.
+    #
+    # This data type is part of a [OpenIdConnectConfiguration][1] structure,
+    # which is a parameter of [CreateIdentitySource][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_OpenIdConnectConfiguration.html
+    # [2]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_CreateIdentitySource.html
+    #
+    # @note OpenIdConnectTokenSelection is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] access_token_only
+    #   The OIDC configuration for processing access tokens. Contains
+    #   allowed audience claims, for example `https://auth.example.com`, and
+    #   the claim that you want to map to the principal, for example `sub`.
+    #   @return [Types::OpenIdConnectAccessTokenConfiguration]
+    #
+    # @!attribute [rw] identity_token_only
+    #   The OIDC configuration for processing identity (ID) tokens. Contains
+    #   allowed client ID claims, for example `1example23456789`, and the
+    #   claim that you want to map to the principal, for example `sub`.
+    #   @return [Types::OpenIdConnectIdentityTokenConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/OpenIdConnectTokenSelection AWS API Documentation
+    #
+    class OpenIdConnectTokenSelection < Struct.new(
+      :access_token_only,
+      :identity_token_only,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class AccessTokenOnly < OpenIdConnectTokenSelection; end
+      class IdentityTokenOnly < OpenIdConnectTokenSelection; end
+      class Unknown < OpenIdConnectTokenSelection; end
+    end
+
+    # The token type that you want to process from your OIDC identity
+    # provider. Your policy store can process either identity (ID) or access
+    # tokens from a given OIDC identity source.
+    #
+    # This data type is part of a [OpenIdConnectConfigurationDetail][1]
+    # structure, which is a parameter of [GetIdentitySource][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_OpenIdConnectConfigurationDetail.html
+    # [2]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_GetIdentitySource.html
+    #
+    # @note OpenIdConnectTokenSelectionDetail is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of OpenIdConnectTokenSelectionDetail corresponding to the set member.
+    #
+    # @!attribute [rw] access_token_only
+    #   The OIDC configuration for processing access tokens. Contains
+    #   allowed audience claims, for example `https://auth.example.com`, and
+    #   the claim that you want to map to the principal, for example `sub`.
+    #   @return [Types::OpenIdConnectAccessTokenConfigurationDetail]
+    #
+    # @!attribute [rw] identity_token_only
+    #   The OIDC configuration for processing identity (ID) tokens. Contains
+    #   allowed client ID claims, for example `1example23456789`, and the
+    #   claim that you want to map to the principal, for example `sub`.
+    #   @return [Types::OpenIdConnectIdentityTokenConfigurationDetail]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/OpenIdConnectTokenSelectionDetail AWS API Documentation
+    #
+    class OpenIdConnectTokenSelectionDetail < Struct.new(
+      :access_token_only,
+      :identity_token_only,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class AccessTokenOnly < OpenIdConnectTokenSelectionDetail; end
+      class IdentityTokenOnly < OpenIdConnectTokenSelectionDetail; end
+      class Unknown < OpenIdConnectTokenSelectionDetail; end
+    end
+
+    # The token type that you want to process from your OIDC identity
+    # provider. Your policy store can process either identity (ID) or access
+    # tokens from a given OIDC identity source.
+    #
+    # This data type is part of a [OpenIdConnectConfigurationItem][1]
+    # structure, which is a parameter of [ListIdentitySources][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_OpenIdConnectConfigurationItem.html
+    # [2]: http://amazonaws.com/verifiedpermissions/latest/apireference/API_ListIdentitySources.html
+    #
+    # @note OpenIdConnectTokenSelectionItem is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of OpenIdConnectTokenSelectionItem corresponding to the set member.
+    #
+    # @!attribute [rw] access_token_only
+    #   The OIDC configuration for processing access tokens. Contains
+    #   allowed audience claims, for example `https://auth.example.com`, and
+    #   the claim that you want to map to the principal, for example `sub`.
+    #   @return [Types::OpenIdConnectAccessTokenConfigurationItem]
+    #
+    # @!attribute [rw] identity_token_only
+    #   The OIDC configuration for processing identity (ID) tokens. Contains
+    #   allowed client ID claims, for example `1example23456789`, and the
+    #   claim that you want to map to the principal, for example `sub`.
+    #   @return [Types::OpenIdConnectIdentityTokenConfigurationItem]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/OpenIdConnectTokenSelectionItem AWS API Documentation
+    #
+    class OpenIdConnectTokenSelectionItem < Struct.new(
+      :access_token_only,
+      :identity_token_only,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class AccessTokenOnly < OpenIdConnectTokenSelectionItem; end
+      class IdentityTokenOnly < OpenIdConnectTokenSelectionItem; end
+      class Unknown < OpenIdConnectTokenSelectionItem; end
+    end
+
     # A structure that contains the details for a Cedar policy definition.
     # It includes the policy type, a description, and a policy body. This is
     # a top level data type used to create a policy.
@@ -3162,15 +3767,8 @@ module Aws::VerifiedPermissions
       include Aws::Structure
     end
 
-    # Contains an updated configuration to replace the configuration in an
-    # existing identity source.
-    #
-    # <note markdown="1"> At this time, the only valid member of this structure is a Amazon
-    # Cognito user pool configuration.
-    #
-    #  You must specify a `userPoolArn`, and optionally, a `ClientId`.
-    #
-    #  </note>
+    # Contains an update to replace the configuration in an existing
+    # identity source.
     #
     # @note UpdateConfiguration is a union - when making an API calls you must set exactly one of the members.
     #
@@ -3178,16 +3776,26 @@ module Aws::VerifiedPermissions
     #   Contains configuration details of a Amazon Cognito user pool.
     #   @return [Types::UpdateCognitoUserPoolConfiguration]
     #
+    # @!attribute [rw] open_id_connect_configuration
+    #   Contains configuration details of an OpenID Connect (OIDC) identity
+    #   provider, or identity source, that Verified Permissions can use to
+    #   generate entities from authenticated identities. It specifies the
+    #   issuer URL, token type that you want to use, and policy store entity
+    #   details.
+    #   @return [Types::UpdateOpenIdConnectConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/UpdateConfiguration AWS API Documentation
     #
     class UpdateConfiguration < Struct.new(
       :cognito_user_pool_configuration,
+      :open_id_connect_configuration,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
       include Aws::Structure::Union
 
       class CognitoUserPoolConfiguration < UpdateConfiguration; end
+      class OpenIdConnectConfiguration < UpdateConfiguration; end
       class Unknown < UpdateConfiguration; end
     end
 
@@ -3256,6 +3864,198 @@ module Aws::VerifiedPermissions
       :policy_store_id)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # The configuration of an OpenID Connect (OIDC) identity source for
+    # handling access token claims. Contains the claim that you want to
+    # identify as the principal in an authorization request, and the values
+    # of the `aud` claim, or audiences, that you want to accept.
+    #
+    # This data type is part of a [UpdateOpenIdConnectTokenSelection][1]
+    # structure, which is a parameter to [UpdateIdentitySource][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_UpdateOpenIdConnectTokenSelection.html
+    # [2]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_UpdateIdentitySource.html
+    #
+    # @!attribute [rw] principal_id_claim
+    #   The claim that determines the principal in OIDC access tokens. For
+    #   example, `sub`.
+    #   @return [String]
+    #
+    # @!attribute [rw] audiences
+    #   The access token `aud` claim values that you want to accept in your
+    #   policy store. For example, `https://myapp.example.com,
+    #   https://myapp2.example.com`.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/UpdateOpenIdConnectAccessTokenConfiguration AWS API Documentation
+    #
+    class UpdateOpenIdConnectAccessTokenConfiguration < Struct.new(
+      :principal_id_claim,
+      :audiences)
+      SENSITIVE = [:principal_id_claim]
+      include Aws::Structure
+    end
+
+    # Contains configuration details of an OpenID Connect (OIDC) identity
+    # provider, or identity source, that Verified Permissions can use to
+    # generate entities from authenticated identities. It specifies the
+    # issuer URL, token type that you want to use, and policy store entity
+    # details.
+    #
+    # This data type is part of a [UpdateConfiguration][1] structure, which
+    # is a parameter to [UpdateIdentitySource][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_UpdateConfiguration.html
+    # [2]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_UpdateIdentitySource.html
+    #
+    # @!attribute [rw] issuer
+    #   The issuer URL of an OIDC identity provider. This URL must have an
+    #   OIDC discovery endpoint at the path
+    #   `.well-known/openid-configuration`.
+    #   @return [String]
+    #
+    # @!attribute [rw] entity_id_prefix
+    #   A descriptive string that you want to prefix to user entities from
+    #   your OIDC identity provider. For example, if you set an
+    #   `entityIdPrefix` of `MyOIDCProvider`, you can reference principals
+    #   in your policies in the format
+    #   `MyCorp::User::MyOIDCProvider|Carlos`.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_configuration
+    #   The claim in OIDC identity provider tokens that indicates a user's
+    #   group membership, and the entity type that you want to map it to.
+    #   For example, this object can map the contents of a `groups` claim to
+    #   `MyCorp::UserGroup`.
+    #   @return [Types::UpdateOpenIdConnectGroupConfiguration]
+    #
+    # @!attribute [rw] token_selection
+    #   The token type that you want to process from your OIDC identity
+    #   provider. Your policy store can process either identity (ID) or
+    #   access tokens from a given OIDC identity source.
+    #   @return [Types::UpdateOpenIdConnectTokenSelection]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/UpdateOpenIdConnectConfiguration AWS API Documentation
+    #
+    class UpdateOpenIdConnectConfiguration < Struct.new(
+      :issuer,
+      :entity_id_prefix,
+      :group_configuration,
+      :token_selection)
+      SENSITIVE = [:entity_id_prefix]
+      include Aws::Structure
+    end
+
+    # The claim in OIDC identity provider tokens that indicates a user's
+    # group membership, and the entity type that you want to map it to. For
+    # example, this object can map the contents of a `groups` claim to
+    # `MyCorp::UserGroup`.
+    #
+    # This data type is part of a [UpdateOpenIdConnectConfiguration][1]
+    # structure, which is a parameter to [UpdateIdentitySource][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_UpdateOpenIdConnectConfiguration.html
+    # [2]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_UpdateIdentitySource.html
+    #
+    # @!attribute [rw] group_claim
+    #   The token claim that you want Verified Permissions to interpret as
+    #   group membership. For example, `groups`.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_entity_type
+    #   The policy store entity type that you want to map your users' group
+    #   claim to. For example, `MyCorp::UserGroup`. A group entity type is
+    #   an entity that can have a user entity type as a member.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/UpdateOpenIdConnectGroupConfiguration AWS API Documentation
+    #
+    class UpdateOpenIdConnectGroupConfiguration < Struct.new(
+      :group_claim,
+      :group_entity_type)
+      SENSITIVE = [:group_claim, :group_entity_type]
+      include Aws::Structure
+    end
+
+    # The configuration of an OpenID Connect (OIDC) identity source for
+    # handling identity (ID) token claims. Contains the claim that you want
+    # to identify as the principal in an authorization request, and the
+    # values of the `aud` claim, or audiences, that you want to accept.
+    #
+    # This data type is part of a [UpdateOpenIdConnectTokenSelection][1]
+    # structure, which is a parameter to [UpdateIdentitySource][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_UpdateOpenIdConnectTokenSelection.html
+    # [2]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_UpdateIdentitySource.html
+    #
+    # @!attribute [rw] principal_id_claim
+    #   The claim that determines the principal in OIDC access tokens. For
+    #   example, `sub`.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_ids
+    #   The ID token audience, or client ID, claim values that you want to
+    #   accept in your policy store from an OIDC identity provider. For
+    #   example, `1example23456789, 2example10111213`.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/UpdateOpenIdConnectIdentityTokenConfiguration AWS API Documentation
+    #
+    class UpdateOpenIdConnectIdentityTokenConfiguration < Struct.new(
+      :principal_id_claim,
+      :client_ids)
+      SENSITIVE = [:principal_id_claim]
+      include Aws::Structure
+    end
+
+    # The token type that you want to process from your OIDC identity
+    # provider. Your policy store can process either identity (ID) or access
+    # tokens from a given OIDC identity source.
+    #
+    # This data type is part of a [UpdateOpenIdConnectConfiguration][1]
+    # structure, which is a parameter to [UpdateIdentitySource][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_UpdateOpenIdConnectConfiguration.html
+    # [2]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_UpdateIdentitySource.html
+    #
+    # @note UpdateOpenIdConnectTokenSelection is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] access_token_only
+    #   The OIDC configuration for processing access tokens. Contains
+    #   allowed audience claims, for example `https://auth.example.com`, and
+    #   the claim that you want to map to the principal, for example `sub`.
+    #   @return [Types::UpdateOpenIdConnectAccessTokenConfiguration]
+    #
+    # @!attribute [rw] identity_token_only
+    #   The OIDC configuration for processing identity (ID) tokens. Contains
+    #   allowed client ID claims, for example `1example23456789`, and the
+    #   claim that you want to map to the principal, for example `sub`.
+    #   @return [Types::UpdateOpenIdConnectIdentityTokenConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/UpdateOpenIdConnectTokenSelection AWS API Documentation
+    #
+    class UpdateOpenIdConnectTokenSelection < Struct.new(
+      :access_token_only,
+      :identity_token_only,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class AccessTokenOnly < UpdateOpenIdConnectTokenSelection; end
+      class IdentityTokenOnly < UpdateOpenIdConnectTokenSelection; end
+      class Unknown < UpdateOpenIdConnectTokenSelection; end
     end
 
     # Contains information about updates to be applied to a policy.

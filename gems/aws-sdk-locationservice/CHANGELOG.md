@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.51.0 (2024-06-06)
+------------------
+
+* Feature - Added two new APIs, VerifyDevicePosition and ForecastGeofenceEvents. Added support for putting larger geofences up to 100,000 vertices with Geobuf fields.
+
+1.50.0 (2024-06-05)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.49.0 (2024-05-13)
 ------------------
 

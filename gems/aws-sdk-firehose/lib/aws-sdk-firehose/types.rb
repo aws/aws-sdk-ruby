@@ -2266,7 +2266,7 @@ module Aws::Firehose
     #   @return [Types::CloudWatchLoggingOptions]
     #
     # @!attribute [rw] request_configuration
-    #   The configuration of the requeste sent to the HTTP endpoint
+    #   The configuration of the request sent to the HTTP endpoint that is
     #   specified as the destination.
     #   @return [Types::HttpEndpointRequestConfiguration]
     #
@@ -2298,6 +2298,11 @@ module Aws::Firehose
     #   Describes the configuration of a destination in Amazon S3.
     #   @return [Types::S3DestinationConfiguration]
     #
+    # @!attribute [rw] secrets_manager_configuration
+    #   The configuration that defines how you access secrets for HTTP
+    #   Endpoint destination.
+    #   @return [Types::SecretsManagerConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/HttpEndpointDestinationConfiguration AWS API Documentation
     #
     class HttpEndpointDestinationConfiguration < Struct.new(
@@ -2309,7 +2314,8 @@ module Aws::Firehose
       :role_arn,
       :retry_options,
       :s3_backup_mode,
-      :s3_configuration)
+      :s3_configuration,
+      :secrets_manager_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2367,6 +2373,11 @@ module Aws::Firehose
     #   Describes a destination in Amazon S3.
     #   @return [Types::S3DestinationDescription]
     #
+    # @!attribute [rw] secrets_manager_configuration
+    #   The configuration that defines how you access secrets for HTTP
+    #   Endpoint destination.
+    #   @return [Types::SecretsManagerConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/HttpEndpointDestinationDescription AWS API Documentation
     #
     class HttpEndpointDestinationDescription < Struct.new(
@@ -2378,7 +2389,8 @@ module Aws::Firehose
       :role_arn,
       :retry_options,
       :s3_backup_mode,
-      :s3_destination_description)
+      :s3_destination_description,
+      :secrets_manager_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2436,6 +2448,11 @@ module Aws::Firehose
     #   Describes an update for a destination in Amazon S3.
     #   @return [Types::S3DestinationUpdate]
     #
+    # @!attribute [rw] secrets_manager_configuration
+    #   The configuration that defines how you access secrets for HTTP
+    #   Endpoint destination.
+    #   @return [Types::SecretsManagerConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/HttpEndpointDestinationUpdate AWS API Documentation
     #
     class HttpEndpointDestinationUpdate < Struct.new(
@@ -2447,7 +2464,8 @@ module Aws::Firehose
       :role_arn,
       :retry_options,
       :s3_backup_mode,
-      :s3_update)
+      :s3_update,
+      :secrets_manager_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2986,7 +3004,7 @@ module Aws::Firehose
     #
     #
     #
-    # [1]: https://parquet.apache.org/documentation/latest/
+    # [1]: https://parquet.apache.org/docs/
     #
     # @!attribute [rw] block_size_bytes
     #   The Hadoop Distributed File System (HDFS) block size. This is useful
@@ -3291,6 +3309,11 @@ module Aws::Firehose
     #   The CloudWatch logging options for your delivery stream.
     #   @return [Types::CloudWatchLoggingOptions]
     #
+    # @!attribute [rw] secrets_manager_configuration
+    #   The configuration that defines how you access secrets for Amazon
+    #   Redshift.
+    #   @return [Types::SecretsManagerConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/RedshiftDestinationConfiguration AWS API Documentation
     #
     class RedshiftDestinationConfiguration < Struct.new(
@@ -3304,7 +3327,8 @@ module Aws::Firehose
       :processing_configuration,
       :s3_backup_mode,
       :s3_backup_configuration,
-      :cloud_watch_logging_options)
+      :cloud_watch_logging_options,
+      :secrets_manager_configuration)
       SENSITIVE = [:username, :password]
       include Aws::Structure
     end
@@ -3358,6 +3382,11 @@ module Aws::Firehose
     #   The Amazon CloudWatch logging options for your delivery stream.
     #   @return [Types::CloudWatchLoggingOptions]
     #
+    # @!attribute [rw] secrets_manager_configuration
+    #   The configuration that defines how you access secrets for Amazon
+    #   Redshift.
+    #   @return [Types::SecretsManagerConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/RedshiftDestinationDescription AWS API Documentation
     #
     class RedshiftDestinationDescription < Struct.new(
@@ -3370,7 +3399,8 @@ module Aws::Firehose
       :processing_configuration,
       :s3_backup_mode,
       :s3_backup_description,
-      :cloud_watch_logging_options)
+      :cloud_watch_logging_options,
+      :secrets_manager_configuration)
       SENSITIVE = [:username]
       include Aws::Structure
     end
@@ -3435,6 +3465,11 @@ module Aws::Firehose
     #   The Amazon CloudWatch logging options for your delivery stream.
     #   @return [Types::CloudWatchLoggingOptions]
     #
+    # @!attribute [rw] secrets_manager_configuration
+    #   The configuration that defines how you access secrets for Amazon
+    #   Redshift.
+    #   @return [Types::SecretsManagerConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/RedshiftDestinationUpdate AWS API Documentation
     #
     class RedshiftDestinationUpdate < Struct.new(
@@ -3448,7 +3483,8 @@ module Aws::Firehose
       :processing_configuration,
       :s3_backup_mode,
       :s3_backup_update,
-      :cloud_watch_logging_options)
+      :cloud_watch_logging_options,
+      :secrets_manager_configuration)
       SENSITIVE = [:username, :password]
       include Aws::Structure
     end
@@ -3814,6 +3850,42 @@ module Aws::Firehose
       include Aws::Structure
     end
 
+    # The structure that defines how Firehose accesses the secret.
+    #
+    # @!attribute [rw] secret_arn
+    #   The ARN of the secret that stores your credentials. It must be in
+    #   the same region as the Firehose stream and the role. The secret ARN
+    #   can reside in a different account than the delivery stream and role
+    #   as Firehose supports cross-account secret access. This parameter is
+    #   required when **Enabled** is set to `True`.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   Specifies the role that Firehose assumes when calling the Secrets
+    #   Manager API operation. When you provide the role, it overrides any
+    #   destination specific role defined in the destination configuration.
+    #   If you do not provide the then we use the destination specific role.
+    #   This parameter is required for Splunk.
+    #   @return [String]
+    #
+    # @!attribute [rw] enabled
+    #   Specifies whether you want to use the the secrets manager feature.
+    #   When set as `True` the secrets manager configuration overwrites the
+    #   existing secrets in the destination configuration. When it's set to
+    #   `False` Firehose falls back to the credentials in the destination
+    #   configuration.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/SecretsManagerConfiguration AWS API Documentation
+    #
+    class SecretsManagerConfiguration < Struct.new(
+      :secret_arn,
+      :role_arn,
+      :enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The serializer that you want Firehose to use to convert data to the
     # target format before writing it to Amazon S3. Firehose supports two
     # types of serializers: the [ORC SerDe][1] and the [Parquet SerDe][2].
@@ -3977,6 +4049,10 @@ module Aws::Firehose
     #   Describes the configuration of a destination in Amazon S3.
     #   @return [Types::S3DestinationConfiguration]
     #
+    # @!attribute [rw] secrets_manager_configuration
+    #   The configuration that defines how you access secrets for Snowflake.
+    #   @return [Types::SecretsManagerConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/SnowflakeDestinationConfiguration AWS API Documentation
     #
     class SnowflakeDestinationConfiguration < Struct.new(
@@ -3997,7 +4073,8 @@ module Aws::Firehose
       :role_arn,
       :retry_options,
       :s3_backup_mode,
-      :s3_configuration)
+      :s3_configuration,
+      :secrets_manager_configuration)
       SENSITIVE = [:account_url, :private_key, :key_passphrase, :user, :database, :schema, :table, :meta_data_column_name, :content_column_name]
       include Aws::Structure
     end
@@ -4087,6 +4164,10 @@ module Aws::Firehose
     #   Describes a destination in Amazon S3.
     #   @return [Types::S3DestinationDescription]
     #
+    # @!attribute [rw] secrets_manager_configuration
+    #   The configuration that defines how you access secrets for Snowflake.
+    #   @return [Types::SecretsManagerConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/SnowflakeDestinationDescription AWS API Documentation
     #
     class SnowflakeDestinationDescription < Struct.new(
@@ -4105,7 +4186,8 @@ module Aws::Firehose
       :role_arn,
       :retry_options,
       :s3_backup_mode,
-      :s3_destination_description)
+      :s3_destination_description,
+      :secrets_manager_configuration)
       SENSITIVE = [:account_url, :user, :database, :schema, :table, :meta_data_column_name, :content_column_name]
       include Aws::Structure
     end
@@ -4221,6 +4303,10 @@ module Aws::Firehose
     #   Describes an update for a destination in Amazon S3.
     #   @return [Types::S3DestinationUpdate]
     #
+    # @!attribute [rw] secrets_manager_configuration
+    #   Describes the Secrets Manager configuration in Snowflake.
+    #   @return [Types::SecretsManagerConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/SnowflakeDestinationUpdate AWS API Documentation
     #
     class SnowflakeDestinationUpdate < Struct.new(
@@ -4240,7 +4326,8 @@ module Aws::Firehose
       :role_arn,
       :retry_options,
       :s3_backup_mode,
-      :s3_update)
+      :s3_update,
+      :secrets_manager_configuration)
       SENSITIVE = [:account_url, :private_key, :key_passphrase, :user, :database, :schema, :table, :meta_data_column_name, :content_column_name]
       include Aws::Structure
     end
@@ -4420,6 +4507,10 @@ module Aws::Firehose
     #   for Splunk are used.
     #   @return [Types::SplunkBufferingHints]
     #
+    # @!attribute [rw] secrets_manager_configuration
+    #   The configuration that defines how you access secrets for Splunk.
+    #   @return [Types::SecretsManagerConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/SplunkDestinationConfiguration AWS API Documentation
     #
     class SplunkDestinationConfiguration < Struct.new(
@@ -4432,7 +4523,8 @@ module Aws::Firehose
       :s3_configuration,
       :processing_configuration,
       :cloud_watch_logging_options,
-      :buffering_hints)
+      :buffering_hints,
+      :secrets_manager_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4492,6 +4584,10 @@ module Aws::Firehose
     #   for Splunk are used.
     #   @return [Types::SplunkBufferingHints]
     #
+    # @!attribute [rw] secrets_manager_configuration
+    #   The configuration that defines how you access secrets for Splunk.
+    #   @return [Types::SecretsManagerConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/SplunkDestinationDescription AWS API Documentation
     #
     class SplunkDestinationDescription < Struct.new(
@@ -4504,7 +4600,8 @@ module Aws::Firehose
       :s3_destination_description,
       :processing_configuration,
       :cloud_watch_logging_options,
-      :buffering_hints)
+      :buffering_hints,
+      :secrets_manager_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4568,6 +4665,10 @@ module Aws::Firehose
     #   for Splunk are used.
     #   @return [Types::SplunkBufferingHints]
     #
+    # @!attribute [rw] secrets_manager_configuration
+    #   The configuration that defines how you access secrets for Splunk.
+    #   @return [Types::SecretsManagerConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/SplunkDestinationUpdate AWS API Documentation
     #
     class SplunkDestinationUpdate < Struct.new(
@@ -4580,7 +4681,8 @@ module Aws::Firehose
       :s3_update,
       :processing_configuration,
       :cloud_watch_logging_options,
-      :buffering_hints)
+      :buffering_hints,
+      :secrets_manager_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4763,7 +4865,7 @@ module Aws::Firehose
     #   @return [Types::AmazonOpenSearchServerlessDestinationUpdate]
     #
     # @!attribute [rw] snowflake_destination_update
-    #   Update to the Snowflake destination condiguration settings
+    #   Update to the Snowflake destination configuration settings.
     #   @return [Types::SnowflakeDestinationUpdate]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/UpdateDestinationInput AWS API Documentation

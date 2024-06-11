@@ -65,6 +65,11 @@ module Aws::S3
   #
   #   @return [String]
   #
+  # @!attribute copy_source
+  #   The Copy Source used for Copy Object request. This is an optional parameter that will be set automatically for operations that are scoped to Copy Source.
+  #
+  #   @return [String]
+  #
   # @!attribute disable_access_points
   #   Internal parameter to disable Access Point Buckets
   #
@@ -102,6 +107,7 @@ module Aws::S3
     :use_object_lambda_endpoint,
     :key,
     :prefix,
+    :copy_source,
     :disable_access_points,
     :disable_multi_region_access_points,
     :use_arn_region,
@@ -124,6 +130,7 @@ module Aws::S3
         'UseObjectLambdaEndpoint' => :use_object_lambda_endpoint,
         'Key' => :key,
         'Prefix' => :prefix,
+        'CopySource' => :copy_source,
         'DisableAccessPoints' => :disable_access_points,
         'DisableMultiRegionAccessPoints' => :disable_multi_region_access_points,
         'UseArnRegion' => :use_arn_region,
@@ -164,6 +171,7 @@ module Aws::S3
       self[:use_object_lambda_endpoint] = options[:use_object_lambda_endpoint]
       self[:key] = options[:key]
       self[:prefix] = options[:prefix]
+      self[:copy_source] = options[:copy_source]
       self[:disable_access_points] = options[:disable_access_points]
       self[:disable_multi_region_access_points] = options[:disable_multi_region_access_points]
       self[:disable_multi_region_access_points] = false if self[:disable_multi_region_access_points].nil?

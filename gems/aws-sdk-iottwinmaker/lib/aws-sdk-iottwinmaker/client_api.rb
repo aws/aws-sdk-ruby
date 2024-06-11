@@ -1386,8 +1386,8 @@ module Aws::IoTTwinMaker
       api.metadata = {
         "apiVersion" => "2021-11-29",
         "endpointPrefix" => "iottwinmaker",
-        "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceFullName" => "AWS IoT TwinMaker",
         "serviceId" => "IoTTwinMaker",
         "signatureVersion" => "v4",

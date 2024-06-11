@@ -72,6 +72,8 @@ module Aws::EMRServerless
             Aws::EMRServerless::Endpoints::GetJobRun.build(context)
           when :list_applications
             Aws::EMRServerless::Endpoints::ListApplications.build(context)
+          when :list_job_run_attempts
+            Aws::EMRServerless::Endpoints::ListJobRunAttempts.build(context)
           when :list_job_runs
             Aws::EMRServerless::Endpoints::ListJobRuns.build(context)
           when :list_tags_for_resource

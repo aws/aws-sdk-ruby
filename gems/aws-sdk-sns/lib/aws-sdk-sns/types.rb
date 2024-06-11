@@ -345,8 +345,8 @@ module Aws::SNS
     # @!attribute [rw] attributes
     #   A map of attributes with their corresponding values.
     #
-    #   The following lists the names, descriptions, and values of the
-    #   special request parameters that the `CreateTopic` action uses:
+    #   The following lists names, descriptions, and values of the special
+    #   request parameters that the `CreateTopic` action uses:
     #
     #   * `DeliveryPolicy` – The policy that defines how Amazon SNS retries
     #     failed deliveries to HTTP/S endpoints.
@@ -839,20 +839,20 @@ module Aws::SNS
     #   * `TopicArn` – The topic ARN that the subscription is associated
     #     with.
     #
-    #   The following attribute applies only to Amazon Kinesis Data Firehose
+    #   The following attribute applies only to Amazon Data Firehose
     #   delivery stream subscriptions:
     #
     #   * `SubscriptionRoleArn` – The ARN of the IAM role that has the
     #     following:
     #
-    #     * Permission to write to the Kinesis Data Firehose delivery stream
+    #     * Permission to write to the Firehose delivery stream
     #
     #     * Amazon SNS listed as a trusted entity
     #
-    #     Specifying a valid ARN for this attribute is required for Kinesis
-    #     Data Firehose delivery stream subscriptions. For more information,
-    #     see [Fanout to Kinesis Data Firehose delivery streams][2] in the
-    #     *Amazon SNS Developer Guide*.
+    #     Specifying a valid ARN for this attribute is required for Firehose
+    #     delivery stream subscriptions. For more information, see [Fanout
+    #     to Firehose delivery streams][2] in the *Amazon SNS Developer
+    #     Guide*.
     #
     #
     #
@@ -1960,9 +1960,8 @@ module Aws::SNS
     #   included, if present, in the standard JSON messages delivered to
     #   other endpoints.
     #
-    #   Constraints: Subjects must be ASCII text that begins with a letter,
-    #   number, or punctuation mark; must not include line breaks or control
-    #   characters; and must be less than 100 characters long.
+    #   Constraints: Subjects must be UTF-8 text with no line breaks or
+    #   control characters, and less than 100 characters long.
     #   @return [String]
     #
     # @!attribute [rw] message_structure
@@ -2436,20 +2435,20 @@ module Aws::SNS
     #     unavailable) are held in the dead-letter queue for further
     #     analysis or reprocessing.
     #
-    #   The following attribute applies only to Amazon Kinesis Data Firehose
+    #   The following attribute applies only to Amazon Data Firehose
     #   delivery stream subscriptions:
     #
     #   * `SubscriptionRoleArn` – The ARN of the IAM role that has the
     #     following:
     #
-    #     * Permission to write to the Kinesis Data Firehose delivery stream
+    #     * Permission to write to the Firehose delivery stream
     #
     #     * Amazon SNS listed as a trusted entity
     #
-    #     Specifying a valid ARN for this attribute is required for Kinesis
-    #     Data Firehose delivery stream subscriptions. For more information,
-    #     see [Fanout to Kinesis Data Firehose delivery streams][1] in the
-    #     *Amazon SNS Developer Guide*.
+    #     Specifying a valid ARN for this attribute is required for Firehose
+    #     delivery stream subscriptions. For more information, see [Fanout
+    #     to Firehose delivery streams][1] in the *Amazon SNS Developer
+    #     Guide*.
     #
     #
     #
@@ -2761,20 +2760,20 @@ module Aws::SNS
     #     unavailable) are held in the dead-letter queue for further
     #     analysis or reprocessing.
     #
-    #   The following attribute applies only to Amazon Kinesis Data Firehose
+    #   The following attribute applies only to Amazon Data Firehose
     #   delivery stream subscriptions:
     #
     #   * `SubscriptionRoleArn` – The ARN of the IAM role that has the
     #     following:
     #
-    #     * Permission to write to the Kinesis Data Firehose delivery stream
+    #     * Permission to write to the Firehose delivery stream
     #
     #     * Amazon SNS listed as a trusted entity
     #
-    #     Specifying a valid ARN for this attribute is required for Kinesis
-    #     Data Firehose delivery stream subscriptions. For more information,
-    #     see [Fanout to Kinesis Data Firehose delivery streams][1] in the
-    #     *Amazon SNS Developer Guide*.
+    #     Specifying a valid ARN for this attribute is required for Firehose
+    #     delivery stream subscriptions. For more information, see [Fanout
+    #     to Firehose delivery streams][1] in the *Amazon SNS Developer
+    #     Guide*.
     #
     #   The following attributes apply only to [FIFO topics][2]:
     #

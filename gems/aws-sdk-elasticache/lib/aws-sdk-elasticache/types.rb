@@ -4782,7 +4782,7 @@ module Aws::ElastiCache
     #   An optional marker returned from a prior request. Use this marker
     #   for pagination of results from this operation. If this parameter is
     #   specified, the response includes only records beyond the marker, up
-    #   to the value specified by MaxRecords. &gt;
+    #   to the value specified by MaxRecords.&gt;
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeUserGroupsResult AWS API Documentation
@@ -6076,9 +6076,11 @@ module Aws::ElastiCache
     #   parameter must be specified with the `auth-token` parameter.
     #   Possible values:
     #
-    #   * Rotate
+    #   * ROTATE - default, if no update strategy is provided
     #
-    #   * Set
+    #   * SET - allowed only after ROTATE
+    #
+    #   * DELETE - allowed only when transitioning to RBAC
     #
     #   For more information, see [Authenticating Users with Redis AUTH][1]
     #
@@ -6479,9 +6481,11 @@ module Aws::ElastiCache
     #   parameter must be specified with the `auth-token` parameter.
     #   Possible values:
     #
-    #   * Rotate
+    #   * ROTATE - default, if no update strategy is provided
     #
-    #   * Set
+    #   * SET - allowed only after ROTATE
+    #
+    #   * DELETE - allowed only when transitioning to RBAC
     #
     #   For more information, see [Authenticating Users with Redis AUTH][1]
     #
@@ -9332,7 +9336,7 @@ module Aws::ElastiCache
     # @!attribute [rw] node_group_id
     #   The name of the node group (called shard in the console) in this
     #   replication group on which automatic failover is to be tested. You
-    #   may test automatic failover on up to 5 node groups in any rolling
+    #   may test automatic failover on up to 15 node groups in any rolling
     #   24-hour period.
     #   @return [String]
     #

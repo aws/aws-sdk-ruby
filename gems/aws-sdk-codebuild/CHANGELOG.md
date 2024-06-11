@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.117.0 (2024-06-05)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.116.0 (2024-05-31)
+------------------
+
+* Feature - AWS CodeBuild now supports Self-hosted GitHub Actions runners for Github Enterprise
+
+1.115.0 (2024-05-29)
+------------------
+
+* Feature - AWS CodeBuild now supports manually creating GitHub webhooks
+
 1.114.0 (2024-05-17)
 ------------------
 

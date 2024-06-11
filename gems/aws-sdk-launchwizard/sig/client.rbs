@@ -82,6 +82,7 @@ module Aws
                                ?dry_run: bool,
                                name: ::String,
                                specifications: Hash[::String, ::String],
+                               ?tags: Hash[::String, ::String],
                                workload_name: ::String
                              ) -> _CreateDeploymentResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDeploymentResponseSuccess
@@ -117,6 +118,17 @@ module Aws
                         ) -> _GetWorkloadResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetWorkloadResponseSuccess
 
+      interface _GetWorkloadDeploymentPatternResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetWorkloadDeploymentPatternOutput]
+        def workload_deployment_pattern: () -> Types::WorkloadDeploymentPatternData
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LaunchWizard/Client.html#get_workload_deployment_pattern-instance_method
+      def get_workload_deployment_pattern: (
+                                             deployment_pattern_name: ::String,
+                                             workload_name: ::String
+                                           ) -> _GetWorkloadDeploymentPatternResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetWorkloadDeploymentPatternResponseSuccess
+
       interface _ListDeploymentEventsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListDeploymentEventsOutput]
         def deployment_events: () -> ::Array[Types::DeploymentEventDataSummary]
@@ -148,6 +160,16 @@ module Aws
                             ) -> _ListDeploymentsResponseSuccess
                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDeploymentsResponseSuccess
 
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceOutput]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LaunchWizard/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
       interface _ListWorkloadDeploymentPatternsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListWorkloadDeploymentPatternsOutput]
         def next_token: () -> ::String
@@ -172,6 +194,26 @@ module Aws
                             ?next_token: ::String
                           ) -> _ListWorkloadsResponseSuccess
                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListWorkloadsResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LaunchWizard/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LaunchWizard/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
     end
   end
 end

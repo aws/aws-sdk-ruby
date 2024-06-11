@@ -156,7 +156,7 @@ module Aws::RDS
           :retry
         end
       end
-      Aws::Plugins::UserAgent.feature('resource') do
+      Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         Aws::Waiters::Waiter.new(options).wait({})
       end
     end
@@ -184,7 +184,7 @@ module Aws::RDS
     def option_group_options(options = {})
       batches = Enumerator.new do |y|
         options = options.merge(engine_name: @name)
-        resp = Aws::Plugins::UserAgent.feature('resource') do
+        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
           @client.describe_option_group_options(options)
         end
         resp.each_page do |page|
@@ -228,7 +228,7 @@ module Aws::RDS
     def option_groups(options = {})
       batches = Enumerator.new do |y|
         options = options.merge(engine_name: @name)
-        resp = Aws::Plugins::UserAgent.feature('resource') do
+        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
           @client.describe_option_groups(options)
         end
         resp.each_page do |page|
@@ -353,7 +353,7 @@ module Aws::RDS
     def versions(options = {})
       batches = Enumerator.new do |y|
         options = options.merge(engine: @name)
-        resp = Aws::Plugins::UserAgent.feature('resource') do
+        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
           @client.describe_db_engine_versions(options)
         end
         resp.each_page do |page|

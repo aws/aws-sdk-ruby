@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.112.0 (2024-06-05)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.111.0 (2024-05-28)
+------------------
+
+* Feature - Doc-only update for DynamoDB. Specified the IAM actions needed to authorize a user to create a table with a resource-based policy.
+
+1.110.0 (2024-05-24)
+------------------
+
+* Feature - Documentation only updates for DynamoDB.
+
 1.109.0 (2024-05-13)
 ------------------
 

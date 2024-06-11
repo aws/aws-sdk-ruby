@@ -3324,6 +3324,10 @@ module Aws::Kafka
     #   The broker node info.
     #   @return [Types::BrokerNodeInfo]
     #
+    # @!attribute [rw] controller_node_info
+    #   The ControllerNodeInfo.
+    #   @return [Types::ControllerNodeInfo]
+    #
     # @!attribute [rw] instance_type
     #   The instance type.
     #   @return [String]
@@ -3345,6 +3349,7 @@ module Aws::Kafka
     class NodeInfo < Struct.new(
       :added_to_cluster_time,
       :broker_node_info,
+      :controller_node_info,
       :instance_type,
       :node_arn,
       :node_type,
@@ -4440,7 +4445,7 @@ module Aws::Kafka
     # Zookeeper node information.
     #
     # @!attribute [rw] attached_eni_id
-    #   The attached elastic network interface of the broker.
+    #   The attached elastic network interface of the zookeeper.
     #   @return [String]
     #
     # @!attribute [rw] client_vpc_ip_address
@@ -4467,6 +4472,20 @@ module Aws::Kafka
       :endpoints,
       :zookeeper_id,
       :zookeeper_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Controller node information.
+    #
+    # @!attribute [rw] endpoints
+    #   Endpoints for accessing the Controller.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/ControllerNodeInfo AWS API Documentation
+    #
+    class ControllerNodeInfo < Struct.new(
+      :endpoints)
       SENSITIVE = []
       include Aws::Structure
     end

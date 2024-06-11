@@ -316,7 +316,7 @@ module Aws::RDS
     #
     # @return [self]
     def load
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.describe_db_engine_versions(
         engine: @engine_name,
         engine_version: @version
@@ -436,7 +436,7 @@ module Aws::RDS
           :retry
         end
       end
-      Aws::Plugins::UserAgent.feature('resource') do
+      Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         Aws::Waiters::Waiter.new(options).wait({})
       end
     end
@@ -471,7 +471,7 @@ module Aws::RDS
           engine_name: @engine,
           major_engine_version: @version
         )
-        resp = Aws::Plugins::UserAgent.feature('resource') do
+        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
           @client.describe_option_group_options(options)
         end
         resp.each_page do |page|
@@ -513,7 +513,7 @@ module Aws::RDS
           engine_name: @engine,
           major_engine_version: @version
         )
-        resp = Aws::Plugins::UserAgent.feature('resource') do
+        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
           @client.describe_option_groups(options)
         end
         resp.each_page do |page|

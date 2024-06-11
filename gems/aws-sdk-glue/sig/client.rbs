@@ -501,6 +501,7 @@ module Aws
 
       interface _CreateConnectionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateConnectionResponse]
+        def create_connection_status: () -> ("READY" | "IN_PROGRESS" | "FAILED")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glue/Client.html#create_connection-instance_method
       def create_connection: (
@@ -508,14 +509,32 @@ module Aws
                                connection_input: {
                                  name: ::String,
                                  description: ::String?,
-                                 connection_type: ("JDBC" | "SFTP" | "MONGODB" | "KAFKA" | "NETWORK" | "MARKETPLACE" | "CUSTOM"),
+                                 connection_type: ("JDBC" | "SFTP" | "MONGODB" | "KAFKA" | "NETWORK" | "MARKETPLACE" | "CUSTOM" | "SALESFORCE"),
                                  match_criteria: Array[::String]?,
-                                 connection_properties: Hash[("HOST" | "PORT" | "USERNAME" | "PASSWORD" | "ENCRYPTED_PASSWORD" | "JDBC_DRIVER_JAR_URI" | "JDBC_DRIVER_CLASS_NAME" | "JDBC_ENGINE" | "JDBC_ENGINE_VERSION" | "CONFIG_FILES" | "INSTANCE_ID" | "JDBC_CONNECTION_URL" | "JDBC_ENFORCE_SSL" | "CUSTOM_JDBC_CERT" | "SKIP_CUSTOM_JDBC_CERT_VALIDATION" | "CUSTOM_JDBC_CERT_STRING" | "CONNECTION_URL" | "KAFKA_BOOTSTRAP_SERVERS" | "KAFKA_SSL_ENABLED" | "KAFKA_CUSTOM_CERT" | "KAFKA_SKIP_CUSTOM_CERT_VALIDATION" | "KAFKA_CLIENT_KEYSTORE" | "KAFKA_CLIENT_KEYSTORE_PASSWORD" | "KAFKA_CLIENT_KEY_PASSWORD" | "ENCRYPTED_KAFKA_CLIENT_KEYSTORE_PASSWORD" | "ENCRYPTED_KAFKA_CLIENT_KEY_PASSWORD" | "SECRET_ID" | "CONNECTOR_URL" | "CONNECTOR_TYPE" | "CONNECTOR_CLASS_NAME" | "KAFKA_SASL_MECHANISM" | "KAFKA_SASL_PLAIN_USERNAME" | "KAFKA_SASL_PLAIN_PASSWORD" | "ENCRYPTED_KAFKA_SASL_PLAIN_PASSWORD" | "KAFKA_SASL_SCRAM_USERNAME" | "KAFKA_SASL_SCRAM_PASSWORD" | "KAFKA_SASL_SCRAM_SECRETS_ARN" | "ENCRYPTED_KAFKA_SASL_SCRAM_PASSWORD" | "KAFKA_SASL_GSSAPI_KEYTAB" | "KAFKA_SASL_GSSAPI_KRB5_CONF" | "KAFKA_SASL_GSSAPI_SERVICE" | "KAFKA_SASL_GSSAPI_PRINCIPAL"), ::String],
+                                 connection_properties: Hash[("HOST" | "PORT" | "USERNAME" | "PASSWORD" | "ENCRYPTED_PASSWORD" | "JDBC_DRIVER_JAR_URI" | "JDBC_DRIVER_CLASS_NAME" | "JDBC_ENGINE" | "JDBC_ENGINE_VERSION" | "CONFIG_FILES" | "INSTANCE_ID" | "JDBC_CONNECTION_URL" | "JDBC_ENFORCE_SSL" | "CUSTOM_JDBC_CERT" | "SKIP_CUSTOM_JDBC_CERT_VALIDATION" | "CUSTOM_JDBC_CERT_STRING" | "CONNECTION_URL" | "KAFKA_BOOTSTRAP_SERVERS" | "KAFKA_SSL_ENABLED" | "KAFKA_CUSTOM_CERT" | "KAFKA_SKIP_CUSTOM_CERT_VALIDATION" | "KAFKA_CLIENT_KEYSTORE" | "KAFKA_CLIENT_KEYSTORE_PASSWORD" | "KAFKA_CLIENT_KEY_PASSWORD" | "ENCRYPTED_KAFKA_CLIENT_KEYSTORE_PASSWORD" | "ENCRYPTED_KAFKA_CLIENT_KEY_PASSWORD" | "SECRET_ID" | "CONNECTOR_URL" | "CONNECTOR_TYPE" | "CONNECTOR_CLASS_NAME" | "KAFKA_SASL_MECHANISM" | "KAFKA_SASL_PLAIN_USERNAME" | "KAFKA_SASL_PLAIN_PASSWORD" | "ENCRYPTED_KAFKA_SASL_PLAIN_PASSWORD" | "KAFKA_SASL_SCRAM_USERNAME" | "KAFKA_SASL_SCRAM_PASSWORD" | "KAFKA_SASL_SCRAM_SECRETS_ARN" | "ENCRYPTED_KAFKA_SASL_SCRAM_PASSWORD" | "KAFKA_SASL_GSSAPI_KEYTAB" | "KAFKA_SASL_GSSAPI_KRB5_CONF" | "KAFKA_SASL_GSSAPI_SERVICE" | "KAFKA_SASL_GSSAPI_PRINCIPAL" | "ROLE_ARN"), ::String],
                                  physical_connection_requirements: {
                                    subnet_id: ::String?,
                                    security_group_id_list: Array[::String]?,
                                    availability_zone: ::String?
-                                 }?
+                                 }?,
+                                 authentication_configuration: {
+                                   authentication_type: ("BASIC" | "OAUTH2" | "CUSTOM")?,
+                                   secret_arn: ::String?,
+                                   o_auth_2_properties: {
+                                     o_auth_2_grant_type: ("AUTHORIZATION_CODE" | "CLIENT_CREDENTIALS" | "JWT_BEARER")?,
+                                     o_auth_2_client_application: {
+                                       user_managed_client_application_client_id: ::String?,
+                                       aws_managed_client_application_reference: ::String?
+                                     }?,
+                                     token_url: ::String?,
+                                     token_url_parameters_map: Hash[::String, ::String]?,
+                                     authorization_code_properties: {
+                                       authorization_code: ::String?,
+                                       redirect_uri: ::String?
+                                     }?
+                                   }?
+                                 }?,
+                                 validate_credentials: bool?
                                },
                                ?tags: Hash[::String, ::String]
                              ) -> _CreateConnectionResponseSuccess
@@ -734,6 +753,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glue/Client.html#create_job-instance_method
       def create_job: (
                         name: ::String,
+                        ?job_mode: ("SCRIPT" | "VISUAL" | "NOTEBOOK"),
                         ?description: ::String,
                         ?log_uri: ::String,
                         role: ::String,
@@ -2291,6 +2311,20 @@ module Aws
                               database_name: ::String?,
                               name: ::String?,
                               region: ::String?
+                            }?,
+                            view_definition: {
+                              is_protected: bool?,
+                              definer: ::String?,
+                              representations: Array[
+                                {
+                                  dialect: ("REDSHIFT" | "ATHENA" | "SPARK")?,
+                                  dialect_version: ::String?,
+                                  view_original_text: ::String?,
+                                  validation_connection: ::String?,
+                                  view_expanded_text: ::String?
+                                },
+                              ]?,
+                              sub_objects: Array[::String]?
                             }?
                           },
                           ?partition_indexes: Array[
@@ -2836,7 +2870,7 @@ module Aws
                              ?catalog_id: ::String,
                              ?filter: {
                                match_criteria: Array[::String]?,
-                               connection_type: ("JDBC" | "SFTP" | "MONGODB" | "KAFKA" | "NETWORK" | "MARKETPLACE" | "CUSTOM")?
+                               connection_type: ("JDBC" | "SFTP" | "MONGODB" | "KAFKA" | "NETWORK" | "MARKETPLACE" | "CUSTOM" | "SALESFORCE")?
                              },
                              ?hide_password: bool,
                              ?next_token: ::String,
@@ -4860,14 +4894,32 @@ module Aws
                                connection_input: {
                                  name: ::String,
                                  description: ::String?,
-                                 connection_type: ("JDBC" | "SFTP" | "MONGODB" | "KAFKA" | "NETWORK" | "MARKETPLACE" | "CUSTOM"),
+                                 connection_type: ("JDBC" | "SFTP" | "MONGODB" | "KAFKA" | "NETWORK" | "MARKETPLACE" | "CUSTOM" | "SALESFORCE"),
                                  match_criteria: Array[::String]?,
-                                 connection_properties: Hash[("HOST" | "PORT" | "USERNAME" | "PASSWORD" | "ENCRYPTED_PASSWORD" | "JDBC_DRIVER_JAR_URI" | "JDBC_DRIVER_CLASS_NAME" | "JDBC_ENGINE" | "JDBC_ENGINE_VERSION" | "CONFIG_FILES" | "INSTANCE_ID" | "JDBC_CONNECTION_URL" | "JDBC_ENFORCE_SSL" | "CUSTOM_JDBC_CERT" | "SKIP_CUSTOM_JDBC_CERT_VALIDATION" | "CUSTOM_JDBC_CERT_STRING" | "CONNECTION_URL" | "KAFKA_BOOTSTRAP_SERVERS" | "KAFKA_SSL_ENABLED" | "KAFKA_CUSTOM_CERT" | "KAFKA_SKIP_CUSTOM_CERT_VALIDATION" | "KAFKA_CLIENT_KEYSTORE" | "KAFKA_CLIENT_KEYSTORE_PASSWORD" | "KAFKA_CLIENT_KEY_PASSWORD" | "ENCRYPTED_KAFKA_CLIENT_KEYSTORE_PASSWORD" | "ENCRYPTED_KAFKA_CLIENT_KEY_PASSWORD" | "SECRET_ID" | "CONNECTOR_URL" | "CONNECTOR_TYPE" | "CONNECTOR_CLASS_NAME" | "KAFKA_SASL_MECHANISM" | "KAFKA_SASL_PLAIN_USERNAME" | "KAFKA_SASL_PLAIN_PASSWORD" | "ENCRYPTED_KAFKA_SASL_PLAIN_PASSWORD" | "KAFKA_SASL_SCRAM_USERNAME" | "KAFKA_SASL_SCRAM_PASSWORD" | "KAFKA_SASL_SCRAM_SECRETS_ARN" | "ENCRYPTED_KAFKA_SASL_SCRAM_PASSWORD" | "KAFKA_SASL_GSSAPI_KEYTAB" | "KAFKA_SASL_GSSAPI_KRB5_CONF" | "KAFKA_SASL_GSSAPI_SERVICE" | "KAFKA_SASL_GSSAPI_PRINCIPAL"), ::String],
+                                 connection_properties: Hash[("HOST" | "PORT" | "USERNAME" | "PASSWORD" | "ENCRYPTED_PASSWORD" | "JDBC_DRIVER_JAR_URI" | "JDBC_DRIVER_CLASS_NAME" | "JDBC_ENGINE" | "JDBC_ENGINE_VERSION" | "CONFIG_FILES" | "INSTANCE_ID" | "JDBC_CONNECTION_URL" | "JDBC_ENFORCE_SSL" | "CUSTOM_JDBC_CERT" | "SKIP_CUSTOM_JDBC_CERT_VALIDATION" | "CUSTOM_JDBC_CERT_STRING" | "CONNECTION_URL" | "KAFKA_BOOTSTRAP_SERVERS" | "KAFKA_SSL_ENABLED" | "KAFKA_CUSTOM_CERT" | "KAFKA_SKIP_CUSTOM_CERT_VALIDATION" | "KAFKA_CLIENT_KEYSTORE" | "KAFKA_CLIENT_KEYSTORE_PASSWORD" | "KAFKA_CLIENT_KEY_PASSWORD" | "ENCRYPTED_KAFKA_CLIENT_KEYSTORE_PASSWORD" | "ENCRYPTED_KAFKA_CLIENT_KEY_PASSWORD" | "SECRET_ID" | "CONNECTOR_URL" | "CONNECTOR_TYPE" | "CONNECTOR_CLASS_NAME" | "KAFKA_SASL_MECHANISM" | "KAFKA_SASL_PLAIN_USERNAME" | "KAFKA_SASL_PLAIN_PASSWORD" | "ENCRYPTED_KAFKA_SASL_PLAIN_PASSWORD" | "KAFKA_SASL_SCRAM_USERNAME" | "KAFKA_SASL_SCRAM_PASSWORD" | "KAFKA_SASL_SCRAM_SECRETS_ARN" | "ENCRYPTED_KAFKA_SASL_SCRAM_PASSWORD" | "KAFKA_SASL_GSSAPI_KEYTAB" | "KAFKA_SASL_GSSAPI_KRB5_CONF" | "KAFKA_SASL_GSSAPI_SERVICE" | "KAFKA_SASL_GSSAPI_PRINCIPAL" | "ROLE_ARN"), ::String],
                                  physical_connection_requirements: {
                                    subnet_id: ::String?,
                                    security_group_id_list: Array[::String]?,
                                    availability_zone: ::String?
-                                 }?
+                                 }?,
+                                 authentication_configuration: {
+                                   authentication_type: ("BASIC" | "OAUTH2" | "CUSTOM")?,
+                                   secret_arn: ::String?,
+                                   o_auth_2_properties: {
+                                     o_auth_2_grant_type: ("AUTHORIZATION_CODE" | "CLIENT_CREDENTIALS" | "JWT_BEARER")?,
+                                     o_auth_2_client_application: {
+                                       user_managed_client_application_client_id: ::String?,
+                                       aws_managed_client_application_reference: ::String?
+                                     }?,
+                                     token_url: ::String?,
+                                     token_url_parameters_map: Hash[::String, ::String]?,
+                                     authorization_code_properties: {
+                                       authorization_code: ::String?,
+                                       redirect_uri: ::String?
+                                     }?
+                                   }?
+                                 }?,
+                                 validate_credentials: bool?
                                }
                              ) -> _UpdateConnectionResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateConnectionResponseSuccess
@@ -5054,6 +5106,7 @@ module Aws
       def update_job: (
                         job_name: ::String,
                         job_update: {
+                          job_mode: ("SCRIPT" | "VISUAL" | "NOTEBOOK")?,
                           description: ::String?,
                           log_uri: ::String?,
                           role: ::String?,
@@ -6519,11 +6572,27 @@ module Aws
                               database_name: ::String?,
                               name: ::String?,
                               region: ::String?
+                            }?,
+                            view_definition: {
+                              is_protected: bool?,
+                              definer: ::String?,
+                              representations: Array[
+                                {
+                                  dialect: ("REDSHIFT" | "ATHENA" | "SPARK")?,
+                                  dialect_version: ::String?,
+                                  view_original_text: ::String?,
+                                  validation_connection: ::String?,
+                                  view_expanded_text: ::String?
+                                },
+                              ]?,
+                              sub_objects: Array[::String]?
                             }?
                           },
                           ?skip_archive: bool,
                           ?transaction_id: ::String,
-                          ?version_id: ::String
+                          ?version_id: ::String,
+                          ?view_update_action: ("ADD" | "REPLACE" | "ADD_OR_REPLACE" | "DROP"),
+                          ?force: bool
                         ) -> _UpdateTableResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateTableResponseSuccess
 

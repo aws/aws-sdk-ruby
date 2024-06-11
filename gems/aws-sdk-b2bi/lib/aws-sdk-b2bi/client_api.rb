@@ -167,7 +167,7 @@ module Aws::B2bi
     CreatePartnershipRequest.add_member(:name, Shapes::ShapeRef.new(shape: PartnerName, required: true, location_name: "name"))
     CreatePartnershipRequest.add_member(:email, Shapes::ShapeRef.new(shape: Email, required: true, location_name: "email"))
     CreatePartnershipRequest.add_member(:phone, Shapes::ShapeRef.new(shape: Phone, location_name: "phone"))
-    CreatePartnershipRequest.add_member(:capabilities, Shapes::ShapeRef.new(shape: PartnershipCapabilities, location_name: "capabilities"))
+    CreatePartnershipRequest.add_member(:capabilities, Shapes::ShapeRef.new(shape: PartnershipCapabilities, required: true, location_name: "capabilities"))
     CreatePartnershipRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     CreatePartnershipRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     CreatePartnershipRequest.struct_class = Types::CreatePartnershipRequest
@@ -545,9 +545,11 @@ module Aws::B2bi
 
       api.metadata = {
         "apiVersion" => "2022-06-23",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "b2bi",
         "jsonVersion" => "1.0",
         "protocol" => "json",
+        "protocols" => ["json"],
         "serviceAbbreviation" => "AWS B2BI",
         "serviceFullName" => "AWS B2B Data Interchange",
         "serviceId" => "b2bi",
@@ -744,6 +746,10 @@ module Aws::B2bi
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ListCapabilitiesRequest)
         o.output = Shapes::ShapeRef.new(shape: ListCapabilitiesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -777,6 +783,10 @@ module Aws::B2bi
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ListProfilesRequest)
         o.output = Shapes::ShapeRef.new(shape: ListProfilesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -802,6 +812,10 @@ module Aws::B2bi
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ListTransformersRequest)
         o.output = Shapes::ShapeRef.new(shape: ListTransformersResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -816,6 +830,7 @@ module Aws::B2bi
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: StartTransformerJobRequest)
         o.output = Shapes::ShapeRef.new(shape: StartTransformerJobResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)

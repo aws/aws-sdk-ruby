@@ -50,6 +50,7 @@ module Aws::Kafka
     ConnectivityInfo = Shapes::StructureShape.new(name: 'ConnectivityInfo')
     ConsumerGroupReplication = Shapes::StructureShape.new(name: 'ConsumerGroupReplication')
     ConsumerGroupReplicationUpdate = Shapes::StructureShape.new(name: 'ConsumerGroupReplicationUpdate')
+    ControllerNodeInfo = Shapes::StructureShape.new(name: 'ControllerNodeInfo')
     CreateClusterRequest = Shapes::StructureShape.new(name: 'CreateClusterRequest')
     CreateClusterResponse = Shapes::StructureShape.new(name: 'CreateClusterResponse')
     CreateClusterV2Request = Shapes::StructureShape.new(name: 'CreateClusterV2Request')
@@ -472,6 +473,9 @@ module Aws::Kafka
     ConsumerGroupReplicationUpdate.add_member(:synchronise_consumer_group_offsets, Shapes::ShapeRef.new(shape: __boolean, required: true, location_name: "synchroniseConsumerGroupOffsets"))
     ConsumerGroupReplicationUpdate.struct_class = Types::ConsumerGroupReplicationUpdate
 
+    ControllerNodeInfo.add_member(:endpoints, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "endpoints"))
+    ControllerNodeInfo.struct_class = Types::ControllerNodeInfo
+
     CreateClusterRequest.add_member(:broker_node_group_info, Shapes::ShapeRef.new(shape: BrokerNodeGroupInfo, required: true, location_name: "brokerNodeGroupInfo"))
     CreateClusterRequest.add_member(:client_authentication, Shapes::ShapeRef.new(shape: ClientAuthentication, location_name: "clientAuthentication"))
     CreateClusterRequest.add_member(:cluster_name, Shapes::ShapeRef.new(shape: __stringMin1Max64, required: true, location_name: "clusterName"))
@@ -892,6 +896,7 @@ module Aws::Kafka
 
     NodeInfo.add_member(:added_to_cluster_time, Shapes::ShapeRef.new(shape: __string, location_name: "addedToClusterTime"))
     NodeInfo.add_member(:broker_node_info, Shapes::ShapeRef.new(shape: BrokerNodeInfo, location_name: "brokerNodeInfo"))
+    NodeInfo.add_member(:controller_node_info, Shapes::ShapeRef.new(shape: ControllerNodeInfo, location_name: "controllerNodeInfo"))
     NodeInfo.add_member(:instance_type, Shapes::ShapeRef.new(shape: __string, location_name: "instanceType"))
     NodeInfo.add_member(:node_arn, Shapes::ShapeRef.new(shape: __string, location_name: "nodeARN"))
     NodeInfo.add_member(:node_type, Shapes::ShapeRef.new(shape: NodeType, location_name: "nodeType"))

@@ -95,7 +95,7 @@ module Aws::S3
       options, params = separate_params_and_options(options)
       waiter = Waiters::BucketExists.new(options)
       yield_waiter_and_warn(waiter, &block) if block_given?
-      Aws::Plugins::UserAgent.feature('resource') do
+      Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         waiter.wait(params.merge(bucket: @name))
       end
       Bucket.new({
@@ -114,7 +114,7 @@ module Aws::S3
       options, params = separate_params_and_options(options)
       waiter = Waiters::BucketNotExists.new(options)
       yield_waiter_and_warn(waiter, &block) if block_given?
-      Aws::Plugins::UserAgent.feature('resource') do
+      Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         waiter.wait(params.merge(bucket: @name))
       end
       Bucket.new({
@@ -217,7 +217,7 @@ module Aws::S3
           :retry
         end
       end
-      Aws::Plugins::UserAgent.feature('resource') do
+      Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         Aws::Waiters::Waiter.new(options).wait({})
       end
     end
@@ -334,7 +334,7 @@ module Aws::S3
     # @return [Types::CreateBucketOutput]
     def create(options = {})
       options = options.merge(bucket: @name)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.create_bucket(options)
       end
       resp.data
@@ -359,7 +359,7 @@ module Aws::S3
     # @return [EmptyStructure]
     def delete(options = {})
       options = options.merge(bucket: @name)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.delete_bucket(options)
       end
       resp.data
@@ -473,7 +473,7 @@ module Aws::S3
     # @return [Types::DeleteObjectsOutput]
     def delete_objects(options = {})
       options = options.merge(bucket: @name)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.delete_objects(options)
       end
       resp.data
@@ -939,7 +939,7 @@ module Aws::S3
     # @return [Object]
     def put_object(options = {})
       options = options.merge(bucket: @name)
-      Aws::Plugins::UserAgent.feature('resource') do
+      Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.put_object(options)
       end
       Object.new(
@@ -1097,7 +1097,7 @@ module Aws::S3
     def multipart_uploads(options = {})
       batches = Enumerator.new do |y|
         options = options.merge(bucket: @name)
-        resp = Aws::Plugins::UserAgent.feature('resource') do
+        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
           @client.list_multipart_uploads(options)
         end
         resp.each_page do |page|
@@ -1200,7 +1200,7 @@ module Aws::S3
     def object_versions(options = {})
       batches = Enumerator.new do |y|
         options = options.merge(bucket: @name)
-        resp = Aws::Plugins::UserAgent.feature('resource') do
+        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
           @client.list_object_versions(options)
         end
         resp.each_page do |page|
@@ -1303,7 +1303,7 @@ module Aws::S3
     def objects(options = {})
       batches = Enumerator.new do |y|
         options = options.merge(bucket: @name)
-        resp = Aws::Plugins::UserAgent.feature('resource') do
+        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
           @client.list_objects_v2(options)
         end
         resp.each_page do |page|

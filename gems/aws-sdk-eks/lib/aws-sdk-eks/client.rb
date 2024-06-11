@@ -520,7 +520,7 @@ module Aws::EKS
     #   resp.update.status #=> String, one of "InProgress", "Failed", "Cancelled", "Successful"
     #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AssociateIdentityProviderConfig", "DisassociateIdentityProviderConfig", "AssociateEncryptionConfig", "AddonUpdate", "VpcConfigUpdate", "AccessConfigUpdate"
     #   resp.update.params #=> Array
-    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "TaintsToAdd", "TaintsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "LaunchTemplateName", "LaunchTemplateVersion", "IdentityProviderConfig", "EncryptionConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts", "MaxUnavailable", "MaxUnavailablePercentage", "ConfigurationValues", "SecurityGroups", "Subnets", "AuthenticationMode"
+    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "TaintsToAdd", "TaintsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "LaunchTemplateName", "LaunchTemplateVersion", "IdentityProviderConfig", "EncryptionConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts", "MaxUnavailable", "MaxUnavailablePercentage", "ConfigurationValues", "SecurityGroups", "Subnets", "AuthenticationMode", "PodIdentityAssociations"
     #   resp.update.params[0].value #=> String
     #   resp.update.created_at #=> Time
     #   resp.update.errors #=> Array
@@ -604,7 +604,7 @@ module Aws::EKS
     #   resp.update.status #=> String, one of "InProgress", "Failed", "Cancelled", "Successful"
     #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AssociateIdentityProviderConfig", "DisassociateIdentityProviderConfig", "AssociateEncryptionConfig", "AddonUpdate", "VpcConfigUpdate", "AccessConfigUpdate"
     #   resp.update.params #=> Array
-    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "TaintsToAdd", "TaintsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "LaunchTemplateName", "LaunchTemplateVersion", "IdentityProviderConfig", "EncryptionConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts", "MaxUnavailable", "MaxUnavailablePercentage", "ConfigurationValues", "SecurityGroups", "Subnets", "AuthenticationMode"
+    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "TaintsToAdd", "TaintsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "LaunchTemplateName", "LaunchTemplateVersion", "IdentityProviderConfig", "EncryptionConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts", "MaxUnavailable", "MaxUnavailablePercentage", "ConfigurationValues", "SecurityGroups", "Subnets", "AuthenticationMode", "PodIdentityAssociations"
     #   resp.update.params[0].value #=> String
     #   resp.update.created_at #=> Time
     #   resp.update.errors #=> Array
@@ -864,6 +864,17 @@ module Aws::EKS
     #   values that you provide are validated against the schema returned by
     #   `DescribeAddonConfiguration`.
     #
+    # @option params [Array<Types::AddonPodIdentityAssociations>] :pod_identity_associations
+    #   An array of Pod Identity Assocations to be created. Each EKS Pod
+    #   Identity association maps a Kubernetes service account to an IAM Role.
+    #
+    #   For more information, see [Attach an IAM Role to an Amazon EKS add-on
+    #   using Pod Identity][1] in the EKS User Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/add-ons-iam.html
+    #
     # @return [Types::CreateAddonResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateAddonResponse#addon #addon} => Types::Addon
@@ -881,6 +892,12 @@ module Aws::EKS
     #       "TagKey" => "TagValue",
     #     },
     #     configuration_values: "String",
+    #     pod_identity_associations: [
+    #       {
+    #         service_account: "String", # required
+    #         role_arn: "String", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -890,7 +907,7 @@ module Aws::EKS
     #   resp.addon.status #=> String, one of "CREATING", "ACTIVE", "CREATE_FAILED", "UPDATING", "DELETING", "DELETE_FAILED", "DEGRADED", "UPDATE_FAILED"
     #   resp.addon.addon_version #=> String
     #   resp.addon.health.issues #=> Array
-    #   resp.addon.health.issues[0].code #=> String, one of "AccessDenied", "InternalFailure", "ClusterUnreachable", "InsufficientNumberOfReplicas", "ConfigurationConflict", "AdmissionRequestDenied", "UnsupportedAddonModification", "K8sResourceNotFound"
+    #   resp.addon.health.issues[0].code #=> String, one of "AccessDenied", "InternalFailure", "ClusterUnreachable", "InsufficientNumberOfReplicas", "ConfigurationConflict", "AdmissionRequestDenied", "UnsupportedAddonModification", "K8sResourceNotFound", "AddonSubscriptionNeeded", "AddonPermissionFailure"
     #   resp.addon.health.issues[0].message #=> String
     #   resp.addon.health.issues[0].resource_ids #=> Array
     #   resp.addon.health.issues[0].resource_ids[0] #=> String
@@ -905,6 +922,8 @@ module Aws::EKS
     #   resp.addon.marketplace_information.product_id #=> String
     #   resp.addon.marketplace_information.product_url #=> String
     #   resp.addon.configuration_values #=> String
+    #   resp.addon.pod_identity_associations #=> Array
+    #   resp.addon.pod_identity_associations[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/CreateAddon AWS API Documentation
     #
@@ -957,16 +976,16 @@ module Aws::EKS
     # In most cases, it takes several minutes to create a cluster. After you
     # create an Amazon EKS cluster, you must configure your Kubernetes
     # tooling to communicate with the API server and launch nodes into your
-    # cluster. For more information, see [Managing Cluster
-    # Authentication][4] and [Launching Amazon EKS nodes][5] in the *Amazon
-    # EKS User Guide*.
+    # cluster. For more information, see [Allowing users to access your
+    # cluster][4] and [Launching Amazon EKS nodes][5] in the *Amazon EKS
+    # User Guide*.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html
     # [2]: https://docs.aws.amazon.com/eks/latest/userguide/control-plane-logs.html
     # [3]: http://aws.amazon.com/cloudwatch/pricing/
-    # [4]: https://docs.aws.amazon.com/eks/latest/userguide/managing-auth.html
+    # [4]: https://docs.aws.amazon.com/eks/latest/userguide/cluster-auth.html
     # [5]: https://docs.aws.amazon.com/eks/latest/userguide/launch-workers.html
     #
     # @option params [required, String] :name
@@ -1433,7 +1452,7 @@ module Aws::EKS
     # created with the latest AMI release version for the respective minor
     # Kubernetes version of the cluster, unless you deploy a custom AMI
     # using a launch template. For more information about using launch
-    # templates, see [Launch template support][1].
+    # templates, see [Customizing managed nodes with launch templates][1].
     #
     # An Amazon EKS managed node group is an Amazon EC2 Auto Scaling group
     # and associated Amazon EC2 instances that are managed by Amazon Web
@@ -1466,7 +1485,8 @@ module Aws::EKS
     #   disk size is 50 GiB for Windows. If you specify `launchTemplate`, then
     #   don't specify `diskSize`, or the node group deployment will fail. For
     #   more information about using launch templates with Amazon EKS, see
-    #   [Launch template support][1] in the *Amazon EKS User Guide*.
+    #   [Customizing managed nodes with launch templates][1] in the *Amazon
+    #   EKS User Guide*.
     #
     #
     #
@@ -1477,7 +1497,8 @@ module Aws::EKS
     #   node group. If you specify `launchTemplate`, then don't specify `
     #   SubnetId ` in your launch template, or the node group deployment will
     #   fail. For more information about using launch templates with Amazon
-    #   EKS, see [Launch template support][1] in the *Amazon EKS User Guide*.
+    #   EKS, see [Customizing managed nodes with launch templates][1] in the
+    #   *Amazon EKS User Guide*.
     #
     #
     #
@@ -1495,8 +1516,8 @@ module Aws::EKS
     #   then `t3.medium` is used, by default. If you specify `Spot` for
     #   `capacityType`, then we recommend specifying multiple values for
     #   `instanceTypes`. For more information, see [Managed node group
-    #   capacity types][1] and [Launch template support][2] in the *Amazon EKS
-    #   User Guide*.
+    #   capacity types][1] and [Customizing managed nodes with launch
+    #   templates][2] in the *Amazon EKS User Guide*.
     #
     #
     #
@@ -1509,8 +1530,8 @@ module Aws::EKS
     #   or the node group deployment will fail. If your launch template uses a
     #   Windows custom AMI, then add `eks:kube-proxy-windows` to your Windows
     #   nodes `rolearn` in the `aws-auth` `ConfigMap`. For more information
-    #   about using launch templates with Amazon EKS, see [Launch template
-    #   support][1] in the *Amazon EKS User Guide*.
+    #   about using launch templates with Amazon EKS, see [Customizing managed
+    #   nodes with launch templates][1] in the *Amazon EKS User Guide*.
     #
     #
     #
@@ -1521,8 +1542,8 @@ module Aws::EKS
     #   Linux, the protocol is SSH. For Windows, the protocol is RDP. If you
     #   specify `launchTemplate`, then don't specify `remoteAccess`, or the
     #   node group deployment will fail. For more information about using
-    #   launch templates with Amazon EKS, see [Launch template support][1] in
-    #   the *Amazon EKS User Guide*.
+    #   launch templates with Amazon EKS, see [Customizing managed nodes with
+    #   launch templates][1] in the *Amazon EKS User Guide*.
     #
     #
     #
@@ -1539,8 +1560,9 @@ module Aws::EKS
     #   in the <i> <i>Amazon EKS User Guide</i> </i>. If you specify
     #   `launchTemplate`, then don't specify ` IamInstanceProfile ` in your
     #   launch template, or the node group deployment will fail. For more
-    #   information about using launch templates with Amazon EKS, see [Launch
-    #   template support][2] in the *Amazon EKS User Guide*.
+    #   information about using launch templates with Amazon EKS, see
+    #   [Customizing managed nodes with launch templates][2] in the *Amazon
+    #   EKS User Guide*.
     #
     #
     #
@@ -1573,9 +1595,15 @@ module Aws::EKS
     #
     # @option params [Types::LaunchTemplateSpecification] :launch_template
     #   An object representing a node group's launch template specification.
-    #   If specified, then do not specify `instanceTypes`, `diskSize`, or
-    #   `remoteAccess` and make sure that the launch template meets the
-    #   requirements in `launchTemplateSpecification`.
+    #   When using this object, don't directly specify `instanceTypes`,
+    #   `diskSize`, or `remoteAccess`. Make sure that the launch template
+    #   meets the requirements in `launchTemplateSpecification`. Also refer to
+    #   [Customizing managed nodes with launch templates][1] in the *Amazon
+    #   EKS User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html
     #
     # @option params [Types::NodegroupUpdateConfig] :update_config
     #   The node group update configuration.
@@ -1589,8 +1617,8 @@ module Aws::EKS
     #   accepted specified value. If you specify `launchTemplate`, and your
     #   launch template uses a custom AMI, then don't specify `version`, or
     #   the node group deployment will fail. For more information about using
-    #   launch templates with Amazon EKS, see [Launch template support][1] in
-    #   the *Amazon EKS User Guide*.
+    #   launch templates with Amazon EKS, see [Customizing managed nodes with
+    #   launch templates][1] in the *Amazon EKS User Guide*.
     #
     #
     #
@@ -1609,8 +1637,8 @@ module Aws::EKS
     #   If you specify `launchTemplate`, and your launch template uses a
     #   custom AMI, then don't specify `releaseVersion`, or the node group
     #   deployment will fail. For more information about using launch
-    #   templates with Amazon EKS, see [Launch template support][3] in the
-    #   *Amazon EKS User Guide*.
+    #   templates with Amazon EKS, see [Customizing managed nodes with launch
+    #   templates][3] in the *Amazon EKS User Guide*.
     #
     #
     #
@@ -1828,6 +1856,7 @@ module Aws::EKS
     #   resp.association.tags["TagKey"] #=> String
     #   resp.association.created_at #=> Time
     #   resp.association.modified_at #=> Time
+    #   resp.association.owner_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/CreatePodIdentityAssociation AWS API Documentation
     #
@@ -1909,7 +1938,7 @@ module Aws::EKS
     #   resp.addon.status #=> String, one of "CREATING", "ACTIVE", "CREATE_FAILED", "UPDATING", "DELETING", "DELETE_FAILED", "DEGRADED", "UPDATE_FAILED"
     #   resp.addon.addon_version #=> String
     #   resp.addon.health.issues #=> Array
-    #   resp.addon.health.issues[0].code #=> String, one of "AccessDenied", "InternalFailure", "ClusterUnreachable", "InsufficientNumberOfReplicas", "ConfigurationConflict", "AdmissionRequestDenied", "UnsupportedAddonModification", "K8sResourceNotFound"
+    #   resp.addon.health.issues[0].code #=> String, one of "AccessDenied", "InternalFailure", "ClusterUnreachable", "InsufficientNumberOfReplicas", "ConfigurationConflict", "AdmissionRequestDenied", "UnsupportedAddonModification", "K8sResourceNotFound", "AddonSubscriptionNeeded", "AddonPermissionFailure"
     #   resp.addon.health.issues[0].message #=> String
     #   resp.addon.health.issues[0].resource_ids #=> Array
     #   resp.addon.health.issues[0].resource_ids[0] #=> String
@@ -1924,6 +1953,8 @@ module Aws::EKS
     #   resp.addon.marketplace_information.product_id #=> String
     #   resp.addon.marketplace_information.product_url #=> String
     #   resp.addon.configuration_values #=> String
+    #   resp.addon.pod_identity_associations #=> Array
+    #   resp.addon.pod_identity_associations[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DeleteAddon AWS API Documentation
     #
@@ -2251,6 +2282,7 @@ module Aws::EKS
     #   resp.association.tags["TagKey"] #=> String
     #   resp.association.created_at #=> Time
     #   resp.association.modified_at #=> Time
+    #   resp.association.owner_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DeletePodIdentityAssociation AWS API Documentation
     #
@@ -2420,7 +2452,7 @@ module Aws::EKS
     #   resp.addon.status #=> String, one of "CREATING", "ACTIVE", "CREATE_FAILED", "UPDATING", "DELETING", "DELETE_FAILED", "DEGRADED", "UPDATE_FAILED"
     #   resp.addon.addon_version #=> String
     #   resp.addon.health.issues #=> Array
-    #   resp.addon.health.issues[0].code #=> String, one of "AccessDenied", "InternalFailure", "ClusterUnreachable", "InsufficientNumberOfReplicas", "ConfigurationConflict", "AdmissionRequestDenied", "UnsupportedAddonModification", "K8sResourceNotFound"
+    #   resp.addon.health.issues[0].code #=> String, one of "AccessDenied", "InternalFailure", "ClusterUnreachable", "InsufficientNumberOfReplicas", "ConfigurationConflict", "AdmissionRequestDenied", "UnsupportedAddonModification", "K8sResourceNotFound", "AddonSubscriptionNeeded", "AddonPermissionFailure"
     #   resp.addon.health.issues[0].message #=> String
     #   resp.addon.health.issues[0].resource_ids #=> Array
     #   resp.addon.health.issues[0].resource_ids[0] #=> String
@@ -2435,6 +2467,8 @@ module Aws::EKS
     #   resp.addon.marketplace_information.product_id #=> String
     #   resp.addon.marketplace_information.product_url #=> String
     #   resp.addon.configuration_values #=> String
+    #   resp.addon.pod_identity_associations #=> Array
+    #   resp.addon.pod_identity_associations[0] #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -2470,6 +2504,7 @@ module Aws::EKS
     #   * {Types::DescribeAddonConfigurationResponse#addon_name #addon_name} => String
     #   * {Types::DescribeAddonConfigurationResponse#addon_version #addon_version} => String
     #   * {Types::DescribeAddonConfigurationResponse#configuration_schema #configuration_schema} => String
+    #   * {Types::DescribeAddonConfigurationResponse#pod_identity_configuration #pod_identity_configuration} => Array&lt;Types::AddonPodIdentityConfiguration&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -2483,6 +2518,10 @@ module Aws::EKS
     #   resp.addon_name #=> String
     #   resp.addon_version #=> String
     #   resp.configuration_schema #=> String
+    #   resp.pod_identity_configuration #=> Array
+    #   resp.pod_identity_configuration[0].service_account #=> String
+    #   resp.pod_identity_configuration[0].recommended_managed_policies #=> Array
+    #   resp.pod_identity_configuration[0].recommended_managed_policies[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DescribeAddonConfiguration AWS API Documentation
     #
@@ -2578,6 +2617,7 @@ module Aws::EKS
     #   resp.addons[0].addon_versions[0].compatibilities[0].platform_versions[0] #=> String
     #   resp.addons[0].addon_versions[0].compatibilities[0].default_version #=> Boolean
     #   resp.addons[0].addon_versions[0].requires_configuration #=> Boolean
+    #   resp.addons[0].addon_versions[0].requires_iam_permissions #=> Boolean
     #   resp.addons[0].publisher #=> String
     #   resp.addons[0].owner #=> String
     #   resp.addons[0].marketplace_information.product_id #=> String
@@ -3041,6 +3081,7 @@ module Aws::EKS
     #   resp.association.tags["TagKey"] #=> String
     #   resp.association.created_at #=> Time
     #   resp.association.modified_at #=> Time
+    #   resp.association.owner_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DescribePodIdentityAssociation AWS API Documentation
     #
@@ -3095,7 +3136,7 @@ module Aws::EKS
     #   resp.update.status #=> String, one of "InProgress", "Failed", "Cancelled", "Successful"
     #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AssociateIdentityProviderConfig", "DisassociateIdentityProviderConfig", "AssociateEncryptionConfig", "AddonUpdate", "VpcConfigUpdate", "AccessConfigUpdate"
     #   resp.update.params #=> Array
-    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "TaintsToAdd", "TaintsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "LaunchTemplateName", "LaunchTemplateVersion", "IdentityProviderConfig", "EncryptionConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts", "MaxUnavailable", "MaxUnavailablePercentage", "ConfigurationValues", "SecurityGroups", "Subnets", "AuthenticationMode"
+    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "TaintsToAdd", "TaintsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "LaunchTemplateName", "LaunchTemplateVersion", "IdentityProviderConfig", "EncryptionConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts", "MaxUnavailable", "MaxUnavailablePercentage", "ConfigurationValues", "SecurityGroups", "Subnets", "AuthenticationMode", "PodIdentityAssociations"
     #   resp.update.params[0].value #=> String
     #   resp.update.created_at #=> Time
     #   resp.update.errors #=> Array
@@ -3184,7 +3225,7 @@ module Aws::EKS
     #   resp.update.status #=> String, one of "InProgress", "Failed", "Cancelled", "Successful"
     #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AssociateIdentityProviderConfig", "DisassociateIdentityProviderConfig", "AssociateEncryptionConfig", "AddonUpdate", "VpcConfigUpdate", "AccessConfigUpdate"
     #   resp.update.params #=> Array
-    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "TaintsToAdd", "TaintsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "LaunchTemplateName", "LaunchTemplateVersion", "IdentityProviderConfig", "EncryptionConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts", "MaxUnavailable", "MaxUnavailablePercentage", "ConfigurationValues", "SecurityGroups", "Subnets", "AuthenticationMode"
+    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "TaintsToAdd", "TaintsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "LaunchTemplateName", "LaunchTemplateVersion", "IdentityProviderConfig", "EncryptionConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts", "MaxUnavailable", "MaxUnavailablePercentage", "ConfigurationValues", "SecurityGroups", "Subnets", "AuthenticationMode", "PodIdentityAssociations"
     #   resp.update.params[0].value #=> String
     #   resp.update.created_at #=> Time
     #   resp.update.errors #=> Array
@@ -3905,6 +3946,7 @@ module Aws::EKS
     #   resp.associations[0].service_account #=> String
     #   resp.associations[0].association_arn #=> String
     #   resp.associations[0].association_id #=> String
+    #   resp.associations[0].owner_arn #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ListPodIdentityAssociations AWS API Documentation
@@ -4371,6 +4413,19 @@ module Aws::EKS
     #   values that you provide are validated against the schema returned by
     #   `DescribeAddonConfiguration`.
     #
+    # @option params [Array<Types::AddonPodIdentityAssociations>] :pod_identity_associations
+    #   An array of Pod Identity Assocations to be updated. Each EKS Pod
+    #   Identity association maps a Kubernetes service account to an IAM Role.
+    #   If this value is left blank, no change. If an empty array is provided,
+    #   existing Pod Identity Assocations owned by the Addon are deleted.
+    #
+    #   For more information, see [Attach an IAM Role to an Amazon EKS add-on
+    #   using Pod Identity][1] in the EKS User Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/add-ons-iam.html
+    #
     # @return [Types::UpdateAddonResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateAddonResponse#update #update} => Types::Update
@@ -4385,6 +4440,12 @@ module Aws::EKS
     #     resolve_conflicts: "OVERWRITE", # accepts OVERWRITE, NONE, PRESERVE
     #     client_request_token: "String",
     #     configuration_values: "String",
+    #     pod_identity_associations: [
+    #       {
+    #         service_account: "String", # required
+    #         role_arn: "String", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -4393,7 +4454,7 @@ module Aws::EKS
     #   resp.update.status #=> String, one of "InProgress", "Failed", "Cancelled", "Successful"
     #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AssociateIdentityProviderConfig", "DisassociateIdentityProviderConfig", "AssociateEncryptionConfig", "AddonUpdate", "VpcConfigUpdate", "AccessConfigUpdate"
     #   resp.update.params #=> Array
-    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "TaintsToAdd", "TaintsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "LaunchTemplateName", "LaunchTemplateVersion", "IdentityProviderConfig", "EncryptionConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts", "MaxUnavailable", "MaxUnavailablePercentage", "ConfigurationValues", "SecurityGroups", "Subnets", "AuthenticationMode"
+    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "TaintsToAdd", "TaintsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "LaunchTemplateName", "LaunchTemplateVersion", "IdentityProviderConfig", "EncryptionConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts", "MaxUnavailable", "MaxUnavailablePercentage", "ConfigurationValues", "SecurityGroups", "Subnets", "AuthenticationMode", "PodIdentityAssociations"
     #   resp.update.params[0].value #=> String
     #   resp.update.created_at #=> Time
     #   resp.update.errors #=> Array
@@ -4526,7 +4587,7 @@ module Aws::EKS
     #   resp.update.status #=> String, one of "InProgress", "Failed", "Cancelled", "Successful"
     #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AssociateIdentityProviderConfig", "DisassociateIdentityProviderConfig", "AssociateEncryptionConfig", "AddonUpdate", "VpcConfigUpdate", "AccessConfigUpdate"
     #   resp.update.params #=> Array
-    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "TaintsToAdd", "TaintsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "LaunchTemplateName", "LaunchTemplateVersion", "IdentityProviderConfig", "EncryptionConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts", "MaxUnavailable", "MaxUnavailablePercentage", "ConfigurationValues", "SecurityGroups", "Subnets", "AuthenticationMode"
+    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "TaintsToAdd", "TaintsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "LaunchTemplateName", "LaunchTemplateVersion", "IdentityProviderConfig", "EncryptionConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts", "MaxUnavailable", "MaxUnavailablePercentage", "ConfigurationValues", "SecurityGroups", "Subnets", "AuthenticationMode", "PodIdentityAssociations"
     #   resp.update.params[0].value #=> String
     #   resp.update.created_at #=> Time
     #   resp.update.errors #=> Array
@@ -4590,7 +4651,7 @@ module Aws::EKS
     #   resp.update.status #=> String, one of "InProgress", "Failed", "Cancelled", "Successful"
     #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AssociateIdentityProviderConfig", "DisassociateIdentityProviderConfig", "AssociateEncryptionConfig", "AddonUpdate", "VpcConfigUpdate", "AccessConfigUpdate"
     #   resp.update.params #=> Array
-    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "TaintsToAdd", "TaintsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "LaunchTemplateName", "LaunchTemplateVersion", "IdentityProviderConfig", "EncryptionConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts", "MaxUnavailable", "MaxUnavailablePercentage", "ConfigurationValues", "SecurityGroups", "Subnets", "AuthenticationMode"
+    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "TaintsToAdd", "TaintsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "LaunchTemplateName", "LaunchTemplateVersion", "IdentityProviderConfig", "EncryptionConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts", "MaxUnavailable", "MaxUnavailablePercentage", "ConfigurationValues", "SecurityGroups", "Subnets", "AuthenticationMode", "PodIdentityAssociations"
     #   resp.update.params[0].value #=> String
     #   resp.update.created_at #=> Time
     #   resp.update.errors #=> Array
@@ -4753,7 +4814,7 @@ module Aws::EKS
     #   resp.update.status #=> String, one of "InProgress", "Failed", "Cancelled", "Successful"
     #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AssociateIdentityProviderConfig", "DisassociateIdentityProviderConfig", "AssociateEncryptionConfig", "AddonUpdate", "VpcConfigUpdate", "AccessConfigUpdate"
     #   resp.update.params #=> Array
-    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "TaintsToAdd", "TaintsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "LaunchTemplateName", "LaunchTemplateVersion", "IdentityProviderConfig", "EncryptionConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts", "MaxUnavailable", "MaxUnavailablePercentage", "ConfigurationValues", "SecurityGroups", "Subnets", "AuthenticationMode"
+    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "TaintsToAdd", "TaintsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "LaunchTemplateName", "LaunchTemplateVersion", "IdentityProviderConfig", "EncryptionConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts", "MaxUnavailable", "MaxUnavailablePercentage", "ConfigurationValues", "SecurityGroups", "Subnets", "AuthenticationMode", "PodIdentityAssociations"
     #   resp.update.params[0].value #=> String
     #   resp.update.created_at #=> Time
     #   resp.update.errors #=> Array
@@ -4819,7 +4880,8 @@ module Aws::EKS
     #   specify `launchTemplate`, and your launch template uses a custom AMI,
     #   then don't specify `version`, or the node group update will fail. For
     #   more information about using launch templates with Amazon EKS, see
-    #   [Launch template support][1] in the *Amazon EKS User Guide*.
+    #   [Customizing managed nodes with launch templates][1] in the *Amazon
+    #   EKS User Guide*.
     #
     #
     #
@@ -4838,8 +4900,8 @@ module Aws::EKS
     #   If you specify `launchTemplate`, and your launch template uses a
     #   custom AMI, then don't specify `releaseVersion`, or the node group
     #   update will fail. For more information about using launch templates
-    #   with Amazon EKS, see [Launch template support][3] in the *Amazon EKS
-    #   User Guide*.
+    #   with Amazon EKS, see [Customizing managed nodes with launch
+    #   templates][3] in the *Amazon EKS User Guide*.
     #
     #
     #
@@ -4892,7 +4954,7 @@ module Aws::EKS
     #   resp.update.status #=> String, one of "InProgress", "Failed", "Cancelled", "Successful"
     #   resp.update.type #=> String, one of "VersionUpdate", "EndpointAccessUpdate", "LoggingUpdate", "ConfigUpdate", "AssociateIdentityProviderConfig", "DisassociateIdentityProviderConfig", "AssociateEncryptionConfig", "AddonUpdate", "VpcConfigUpdate", "AccessConfigUpdate"
     #   resp.update.params #=> Array
-    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "TaintsToAdd", "TaintsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "LaunchTemplateName", "LaunchTemplateVersion", "IdentityProviderConfig", "EncryptionConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts", "MaxUnavailable", "MaxUnavailablePercentage", "ConfigurationValues", "SecurityGroups", "Subnets", "AuthenticationMode"
+    #   resp.update.params[0].type #=> String, one of "Version", "PlatformVersion", "EndpointPrivateAccess", "EndpointPublicAccess", "ClusterLogging", "DesiredSize", "LabelsToAdd", "LabelsToRemove", "TaintsToAdd", "TaintsToRemove", "MaxSize", "MinSize", "ReleaseVersion", "PublicAccessCidrs", "LaunchTemplateName", "LaunchTemplateVersion", "IdentityProviderConfig", "EncryptionConfig", "AddonVersion", "ServiceAccountRoleArn", "ResolveConflicts", "MaxUnavailable", "MaxUnavailablePercentage", "ConfigurationValues", "SecurityGroups", "Subnets", "AuthenticationMode", "PodIdentityAssociations"
     #   resp.update.params[0].value #=> String
     #   resp.update.created_at #=> Time
     #   resp.update.errors #=> Array
@@ -4957,6 +5019,7 @@ module Aws::EKS
     #   resp.association.tags["TagKey"] #=> String
     #   resp.association.created_at #=> Time
     #   resp.association.modified_at #=> Time
+    #   resp.association.owner_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/UpdatePodIdentityAssociation AWS API Documentation
     #
@@ -4980,7 +5043,7 @@ module Aws::EKS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-eks'
-      context[:gem_version] = '1.102.0'
+      context[:gem_version] = '1.104.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

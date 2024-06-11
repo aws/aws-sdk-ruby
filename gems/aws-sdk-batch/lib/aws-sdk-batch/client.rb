@@ -2517,6 +2517,38 @@ module Aws::Batch
       req.send_request(options)
     end
 
+    # Provides a list of the first 100 `RUNNABLE` jobs associated to a
+    # single job queue.
+    #
+    # @option params [required, String] :job_queue
+    #   The job queue’s name or full queue Amazon Resource Name (ARN).
+    #
+    # @return [Types::GetJobQueueSnapshotResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetJobQueueSnapshotResponse#front_of_queue #front_of_queue} => Types::FrontOfQueueDetail
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_job_queue_snapshot({
+    #     job_queue: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.front_of_queue.jobs #=> Array
+    #   resp.front_of_queue.jobs[0].job_arn #=> String
+    #   resp.front_of_queue.jobs[0].earliest_time_at_position #=> Integer
+    #   resp.front_of_queue.last_updated_at #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/GetJobQueueSnapshot AWS API Documentation
+    #
+    # @overload get_job_queue_snapshot(params = {})
+    # @param [Hash] params ({})
+    def get_job_queue_snapshot(params = {}, options = {})
+      req = build_request(:get_job_queue_snapshot, params)
+      req.send_request(options)
+    end
+
     # Returns a list of Batch jobs.
     #
     # You must specify only one of the following items:
@@ -2551,14 +2583,24 @@ module Aws::Batch
     #   only `RUNNING` jobs are returned.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results returned by `ListJobs` in paginated
-    #   output. When this parameter is used, `ListJobs` only returns
+    #   The maximum number of results returned by `ListJobs` in a paginated
+    #   output. When this parameter is used, `ListJobs` returns up to
     #   `maxResults` results in a single page and a `nextToken` response
-    #   element. The remaining results of the initial request can be seen by
-    #   sending another `ListJobs` request with the returned `nextToken`
-    #   value. This value can be between 1 and 100. If this parameter isn't
-    #   used, then `ListJobs` returns up to 100 results and a `nextToken`
-    #   value if applicable.
+    #   element, if applicable. The remaining results of the initial request
+    #   can be seen by sending another `ListJobs` request with the returned
+    #   `nextToken` value.
+    #
+    #   The following outlines key parameters and limitations:
+    #
+    #   * The minimum value is 1.
+    #
+    #   * When `--job-status` is used, Batch returns up to 1000 values.
+    #
+    #   * When `--filters` is used, Batch returns up to 100 values.
+    #
+    #   * If neither parameter is used, then `ListJobs` returns up to 1000
+    #     results (jobs that are in the `RUNNING` status) and a `nextToken`
+    #     value, if applicable.
     #
     # @option params [String] :next_token
     #   The `nextToken` value returned from a previous paginated `ListJobs`
@@ -4519,7 +4561,7 @@ module Aws::Batch
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-batch'
-      context[:gem_version] = '1.87.0'
+      context[:gem_version] = '1.89.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1711,11 +1711,13 @@ module Aws::Athena
 
     # Returns query execution runtime statistics related to a single
     # execution of a query if you have access to the workgroup in which the
-    # query ran. Query execution runtime statistics are returned only when
-    # QueryExecutionStatus$State is in a SUCCEEDED or FAILED state.
-    # Stage-level input and output row count and data size statistics are
-    # not shown when a query has row-level filters defined in Lake
-    # Formation.
+    # query ran. Statistics from the `Timeline` section of the response
+    # object are available as soon as QueryExecutionStatus$State is in a
+    # SUCCEEDED or FAILED state. The remaining non-timeline statistics in
+    # the response (like stage-level input and output row count and data
+    # size) are updated asynchronously and may not be available immediately
+    # after a query completes. The non-timeline statistics are also not
+    # included when a query has row-level filters defined in Lake Formation.
     #
     # @option params [required, String] :query_execution_id
     #   The unique ID of the query execution.
@@ -3683,7 +3685,7 @@ module Aws::Athena
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-athena'
-      context[:gem_version] = '1.83.0'
+      context[:gem_version] = '1.85.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

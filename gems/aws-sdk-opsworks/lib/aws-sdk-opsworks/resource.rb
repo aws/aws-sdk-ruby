@@ -75,28 +75,29 @@ module Aws::OpsWorks
     #   })
     # @param [Hash] options ({})
     # @option options [required, String] :name
-    #   The stack name.
+    #   The stack name. Stack names can be a maximum of 64 characters.
     # @option options [required, String] :region
-    #   The stack's AWS region, such as `ap-south-1`. For more information
-    #   about Amazon regions, see [Regions and Endpoints][1].
+    #   The stack's Amazon Web Services Region, such as `ap-south-1`. For
+    #   more information about Amazon Web Services Regions, see [Regions and
+    #   Endpoints][1].
     #
-    #   <note markdown="1"> In the AWS CLI, this API maps to the `--stack-region` parameter. If
-    #   the `--stack-region` parameter and the AWS CLI common parameter
-    #   `--region` are set to the same value, the stack uses a *regional*
-    #   endpoint. If the `--stack-region` parameter is not set, but the AWS
-    #   CLI `--region` parameter is, this also results in a stack with a
-    #   *regional* endpoint. However, if the `--region` parameter is set to
-    #   `us-east-1`, and the `--stack-region` parameter is set to one of the
-    #   following, then the stack uses a legacy or *classic* region:
-    #   `us-west-1, us-west-2, sa-east-1, eu-central-1, eu-west-1,
-    #   ap-northeast-1, ap-southeast-1, ap-southeast-2`. In this case, the
-    #   actual API endpoint of the stack is in `us-east-1`. Only the preceding
-    #   regions are supported as classic regions in the `us-east-1` API
-    #   endpoint. Because it is a best practice to choose the regional
-    #   endpoint that is closest to where you manage AWS, we recommend that
-    #   you use regional endpoints for new stacks. The AWS CLI common
-    #   `--region` parameter always specifies a regional API endpoint; it
-    #   cannot be used to specify a classic AWS OpsWorks Stacks region.
+    #   <note markdown="1"> In the CLI, this API maps to the `--stack-region` parameter. If the
+    #   `--stack-region` parameter and the CLI common parameter `--region` are
+    #   set to the same value, the stack uses a *regional* endpoint. If the
+    #   `--stack-region` parameter is not set, but the CLI `--region`
+    #   parameter is, this also results in a stack with a *regional* endpoint.
+    #   However, if the `--region` parameter is set to `us-east-1`, and the
+    #   `--stack-region` parameter is set to one of the following, then the
+    #   stack uses a legacy or *classic* region: `us-west-1, us-west-2,
+    #   sa-east-1, eu-central-1, eu-west-1, ap-northeast-1, ap-southeast-1,
+    #   ap-southeast-2`. In this case, the actual API endpoint of the stack is
+    #   in `us-east-1`. Only the preceding regions are supported as classic
+    #   regions in the `us-east-1` API endpoint. Because it is a best practice
+    #   to choose the regional endpoint that is closest to where you manage
+    #   Amazon Web Services, we recommend that you use regional endpoints for
+    #   new stacks. The CLI common `--region` parameter always specifies a
+    #   regional API endpoint; it cannot be used to specify a classic OpsWorks
+    #   Stacks region.
     #
     #    </note>
     #
@@ -115,8 +116,8 @@ module Aws::OpsWorks
     #
     #   If the VPC ID corresponds to a default VPC and you have specified
     #   either the `DefaultAvailabilityZone` or the `DefaultSubnetId`
-    #   parameter only, AWS OpsWorks Stacks infers the value of the other
-    #   parameter. If you specify neither parameter, AWS OpsWorks Stacks sets
+    #   parameter only, OpsWorks Stacks infers the value of the other
+    #   parameter. If you specify neither parameter, OpsWorks Stacks sets
     #   these parameters to the first valid Availability Zone for the
     #   specified region and the corresponding default VPC subnet ID,
     #   respectively.
@@ -128,9 +129,9 @@ module Aws::OpsWorks
     #
     #   * You must specify a value for `DefaultSubnetId`.
     #
-    #   For more information about how to use AWS OpsWorks Stacks with a VPC,
-    #   see [Running a Stack in a VPC][1]. For more information about default
-    #   VPC and EC2-Classic, see [Supported Platforms][2].
+    #   For more information about how to use OpsWorks Stacks with a VPC, see
+    #   [Running a Stack in a VPC][1]. For more information about default VPC
+    #   and EC2-Classic, see [Supported Platforms][2].
     #
     #
     #
@@ -140,11 +141,10 @@ module Aws::OpsWorks
     #   One or more user-defined key-value pairs to be added to the stack
     #   attributes.
     # @option options [required, String] :service_role_arn
-    #   The stack's AWS Identity and Access Management (IAM) role, which
-    #   allows AWS OpsWorks Stacks to work with AWS resources on your behalf.
-    #   You must set this parameter to the Amazon Resource Name (ARN) for an
-    #   existing IAM role. For more information about IAM ARNs, see [Using
-    #   Identifiers][1].
+    #   The stack's IAM role, which allows OpsWorks Stacks to work with
+    #   Amazon Web Services resources on your behalf. You must set this
+    #   parameter to the Amazon Resource Name (ARN) for an existing IAM role.
+    #   For more information about IAM ARNs, see [Using Identifiers][1].
     #
     #
     #
@@ -163,12 +163,12 @@ module Aws::OpsWorks
     #   create the instance. You can specify one of the following.
     #
     #   * A supported Linux operating system: An Amazon Linux version, such as
-    #     `Amazon Linux 2018.03`, `Amazon Linux 2017.09`, `Amazon Linux
-    #     2017.03`, `Amazon Linux 2016.09`, `Amazon Linux 2016.03`, `Amazon
-    #     Linux 2015.09`, or `Amazon Linux 2015.03`.
+    #     `Amazon Linux 2`, `Amazon Linux 2018.03`, `Amazon Linux 2017.09`,
+    #     `Amazon Linux 2017.03`, `Amazon Linux 2016.09`, `Amazon Linux
+    #     2016.03`, `Amazon Linux 2015.09`, or `Amazon Linux 2015.03`.
     #
-    #   * A supported Ubuntu operating system, such as `Ubuntu 16.04 LTS`,
-    #     `Ubuntu 14.04 LTS`, or `Ubuntu 12.04 LTS`.
+    #   * A supported Ubuntu operating system, such as `Ubuntu 18.04 LTS`,
+    #     `Ubuntu 16.04 LTS`, `Ubuntu 14.04 LTS`, or `Ubuntu 12.04 LTS`.
     #
     #   * `CentOS Linux 7`
     #
@@ -184,9 +184,10 @@ module Aws::OpsWorks
     #     when you create instances. For more information, see [ Using Custom
     #     AMIs][1].
     #
-    #   The default option is the current Amazon Linux version. For more
-    #   information about supported operating systems, see [AWS OpsWorks
-    #   Stacks Operating Systems][2].
+    #   The default option is the current Amazon Linux version. Not all
+    #   operating systems are supported with all versions of Chef. For more
+    #   information about supported operating systems, see [OpsWorks Stacks
+    #   Operating Systems][2].
     #
     #
     #
@@ -271,26 +272,26 @@ module Aws::OpsWorks
     # @option options [Boolean] :use_custom_cookbooks
     #   Whether the stack uses custom cookbooks.
     # @option options [Boolean] :use_opsworks_security_groups
-    #   Whether to associate the AWS OpsWorks Stacks built-in security groups
-    #   with the stack's layers.
+    #   Whether to associate the OpsWorks Stacks built-in security groups with
+    #   the stack's layers.
     #
-    #   AWS OpsWorks Stacks provides a standard set of built-in security
-    #   groups, one for each layer, which are associated with layers by
-    #   default. With `UseOpsworksSecurityGroups` you can instead provide your
-    #   own custom security groups. `UseOpsworksSecurityGroups` has the
-    #   following settings:
+    #   OpsWorks Stacks provides a standard set of built-in security groups,
+    #   one for each layer, which are associated with layers by default. With
+    #   `UseOpsworksSecurityGroups` you can instead provide your own custom
+    #   security groups. `UseOpsworksSecurityGroups` has the following
+    #   settings:
     #
-    #   * True - AWS OpsWorks Stacks automatically associates the appropriate
+    #   * True - OpsWorks Stacks automatically associates the appropriate
     #     built-in security group with each layer (default setting). You can
     #     associate additional security groups with a layer after you create
     #     it, but you cannot delete the built-in security group.
     #
-    #   * False - AWS OpsWorks Stacks does not associate built-in security
-    #     groups with layers. You must create appropriate EC2 security groups
-    #     and associate a security group with each layer that you create.
-    #     However, you can still manually associate a built-in security group
-    #     with a layer on creation; custom security groups are required only
-    #     for those layers that need custom settings.
+    #   * False - OpsWorks Stacks does not associate built-in security groups
+    #     with layers. You must create appropriate EC2 security groups and
+    #     associate a security group with each layer that you create. However,
+    #     you can still manually associate a built-in security group with a
+    #     layer on creation; custom security groups are required only for
+    #     those layers that need custom settings.
     #
     #   For more information, see [Create a New Stack][1].
     #
@@ -308,7 +309,7 @@ module Aws::OpsWorks
     #   [2]: https://docs.aws.amazon.com/opsworks/latest/userguide/workingcookbook.html
     # @option options [String] :default_ssh_key_name
     #   A default Amazon EC2 key pair name. The default value is none. If you
-    #   specify a key pair name, AWS OpsWorks installs the public key on the
+    #   specify a key pair name, OpsWorks installs the public key on the
     #   instance and you can use the private key with an SSH client to log in
     #   to the instance. For more information, see [ Using SSH to Communicate
     #   with an Instance][1] and [ Managing SSH Access][2]. You can override
@@ -330,17 +331,17 @@ module Aws::OpsWorks
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ComponentsAMIs.html#storage-for-the-root-device
     # @option options [String] :agent_version
-    #   The default AWS OpsWorks Stacks agent version. You have the following
+    #   The default OpsWorks Stacks agent version. You have the following
     #   options:
     #
-    #   * Auto-update - Set this parameter to `LATEST`. AWS OpsWorks Stacks
+    #   * Auto-update - Set this parameter to `LATEST`. OpsWorks Stacks
     #     automatically installs new agent versions on the stack's instances
     #     as soon as they are available.
     #
     #   * Fixed version - Set this parameter to your preferred agent version.
     #     To update the agent version, you must edit the stack configuration
-    #     and specify a new version. AWS OpsWorks Stacks then automatically
-    #     installs that version on the stack's instances.
+    #     and specify a new version. OpsWorks Stacks installs that version on
+    #     the stack's instances.
     #
     #   The default setting is the most recent release of the agent. To
     #   specify an agent version, you must use the complete version number,
@@ -354,7 +355,7 @@ module Aws::OpsWorks
     #    </note>
     # @return [Stack]
     def create_stack(options = {})
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.create_stack(options)
       end
       Stack.new(
@@ -391,13 +392,17 @@ module Aws::OpsWorks
     # @param [Hash] options ({})
     # @option options [Array<String>] :stack_ids
     #   An array of stack IDs that specify the stacks to be described. If you
-    #   omit this parameter, `DescribeStacks` returns a description of every
-    #   stack.
+    #   omit this parameter, and have permissions to get information about all
+    #   stacks, `DescribeStacks` returns a description of every stack. If the
+    #   IAM policy that is attached to an IAM user limits the `DescribeStacks`
+    #   action to specific stack ARNs, this parameter is required, and the
+    #   user must specify a stack ARN that is allowed by the policy.
+    #   Otherwise, `DescribeStacks` returns an `AccessDenied` error.
     # @return [Stack::Collection]
     def stacks(options = {})
       batches = Enumerator.new do |y|
         batch = []
-        resp = Aws::Plugins::UserAgent.feature('resource') do
+        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
           @client.describe_stacks(options)
         end
         resp.data.stacks.each do |s|

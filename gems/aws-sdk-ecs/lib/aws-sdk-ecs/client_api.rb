@@ -107,6 +107,7 @@ module Aws::ECS
     DeploymentConfiguration = Shapes::StructureShape.new(name: 'DeploymentConfiguration')
     DeploymentController = Shapes::StructureShape.new(name: 'DeploymentController')
     DeploymentControllerType = Shapes::StringShape.new(name: 'DeploymentControllerType')
+    DeploymentEphemeralStorage = Shapes::StructureShape.new(name: 'DeploymentEphemeralStorage')
     DeploymentRolloutState = Shapes::StringShape.new(name: 'DeploymentRolloutState')
     Deployments = Shapes::ListShape.new(name: 'Deployments')
     DeregisterContainerInstanceRequest = Shapes::StructureShape.new(name: 'DeregisterContainerInstanceRequest')
@@ -228,6 +229,7 @@ module Aws::ECS
     ManagedScalingStatus = Shapes::StringShape.new(name: 'ManagedScalingStatus')
     ManagedScalingStepSize = Shapes::IntegerShape.new(name: 'ManagedScalingStepSize')
     ManagedScalingTargetCapacity = Shapes::IntegerShape.new(name: 'ManagedScalingTargetCapacity')
+    ManagedStorageConfiguration = Shapes::StructureShape.new(name: 'ManagedStorageConfiguration')
     ManagedTerminationProtection = Shapes::StringShape.new(name: 'ManagedTerminationProtection')
     MissingVersionException = Shapes::StructureShape.new(name: 'MissingVersionException')
     MountPoint = Shapes::StructureShape.new(name: 'MountPoint')
@@ -360,6 +362,7 @@ module Aws::ECS
     TaskDefinitionPlacementConstraintType = Shapes::StringShape.new(name: 'TaskDefinitionPlacementConstraintType')
     TaskDefinitionPlacementConstraints = Shapes::ListShape.new(name: 'TaskDefinitionPlacementConstraints')
     TaskDefinitionStatus = Shapes::StringShape.new(name: 'TaskDefinitionStatus')
+    TaskEphemeralStorage = Shapes::StructureShape.new(name: 'TaskEphemeralStorage')
     TaskField = Shapes::StringShape.new(name: 'TaskField')
     TaskFieldList = Shapes::ListShape.new(name: 'TaskFieldList')
     TaskFilesystemType = Shapes::StringShape.new(name: 'TaskFilesystemType')
@@ -499,6 +502,7 @@ module Aws::ECS
     Cluster.struct_class = Types::Cluster
 
     ClusterConfiguration.add_member(:execute_command_configuration, Shapes::ShapeRef.new(shape: ExecuteCommandConfiguration, location_name: "executeCommandConfiguration"))
+    ClusterConfiguration.add_member(:managed_storage_configuration, Shapes::ShapeRef.new(shape: ManagedStorageConfiguration, location_name: "managedStorageConfiguration"))
     ClusterConfiguration.struct_class = Types::ClusterConfiguration
 
     ClusterContainsContainerInstancesException.struct_class = Types::ClusterContainsContainerInstancesException
@@ -788,6 +792,7 @@ module Aws::ECS
     Deployment.add_member(:service_connect_configuration, Shapes::ShapeRef.new(shape: ServiceConnectConfiguration, location_name: "serviceConnectConfiguration"))
     Deployment.add_member(:service_connect_resources, Shapes::ShapeRef.new(shape: ServiceConnectServiceResourceList, location_name: "serviceConnectResources"))
     Deployment.add_member(:volume_configurations, Shapes::ShapeRef.new(shape: ServiceVolumeConfigurations, location_name: "volumeConfigurations"))
+    Deployment.add_member(:fargate_ephemeral_storage, Shapes::ShapeRef.new(shape: DeploymentEphemeralStorage, location_name: "fargateEphemeralStorage"))
     Deployment.struct_class = Types::Deployment
 
     DeploymentAlarms.add_member(:alarm_names, Shapes::ShapeRef.new(shape: StringList, required: true, location_name: "alarmNames"))
@@ -807,6 +812,9 @@ module Aws::ECS
 
     DeploymentController.add_member(:type, Shapes::ShapeRef.new(shape: DeploymentControllerType, required: true, location_name: "type"))
     DeploymentController.struct_class = Types::DeploymentController
+
+    DeploymentEphemeralStorage.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "kmsKeyId"))
+    DeploymentEphemeralStorage.struct_class = Types::DeploymentEphemeralStorage
 
     Deployments.member = Shapes::ShapeRef.new(shape: Deployment)
 
@@ -1205,6 +1213,10 @@ module Aws::ECS
     ManagedScaling.add_member(:maximum_scaling_step_size, Shapes::ShapeRef.new(shape: ManagedScalingStepSize, location_name: "maximumScalingStepSize"))
     ManagedScaling.add_member(:instance_warmup_period, Shapes::ShapeRef.new(shape: ManagedScalingInstanceWarmupPeriod, location_name: "instanceWarmupPeriod"))
     ManagedScaling.struct_class = Types::ManagedScaling
+
+    ManagedStorageConfiguration.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "kmsKeyId"))
+    ManagedStorageConfiguration.add_member(:fargate_ephemeral_storage_kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "fargateEphemeralStorageKmsKeyId"))
+    ManagedStorageConfiguration.struct_class = Types::ManagedStorageConfiguration
 
     MissingVersionException.struct_class = Types::MissingVersionException
 
@@ -1673,6 +1685,7 @@ module Aws::ECS
     Task.add_member(:task_definition_arn, Shapes::ShapeRef.new(shape: String, location_name: "taskDefinitionArn"))
     Task.add_member(:version, Shapes::ShapeRef.new(shape: Long, location_name: "version"))
     Task.add_member(:ephemeral_storage, Shapes::ShapeRef.new(shape: EphemeralStorage, location_name: "ephemeralStorage"))
+    Task.add_member(:fargate_ephemeral_storage, Shapes::ShapeRef.new(shape: TaskEphemeralStorage, location_name: "fargateEphemeralStorage"))
     Task.struct_class = Types::Task
 
     TaskDefinition.add_member(:task_definition_arn, Shapes::ShapeRef.new(shape: String, location_name: "taskDefinitionArn"))
@@ -1710,6 +1723,10 @@ module Aws::ECS
     TaskDefinitionPlacementConstraint.struct_class = Types::TaskDefinitionPlacementConstraint
 
     TaskDefinitionPlacementConstraints.member = Shapes::ShapeRef.new(shape: TaskDefinitionPlacementConstraint)
+
+    TaskEphemeralStorage.add_member(:size_in_gi_b, Shapes::ShapeRef.new(shape: Integer, location_name: "sizeInGiB"))
+    TaskEphemeralStorage.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "kmsKeyId"))
+    TaskEphemeralStorage.struct_class = Types::TaskEphemeralStorage
 
     TaskFieldList.member = Shapes::ShapeRef.new(shape: TaskField)
 
@@ -1762,6 +1779,7 @@ module Aws::ECS
     TaskSet.add_member(:stability_status, Shapes::ShapeRef.new(shape: StabilityStatus, location_name: "stabilityStatus"))
     TaskSet.add_member(:stability_status_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "stabilityStatusAt"))
     TaskSet.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    TaskSet.add_member(:fargate_ephemeral_storage, Shapes::ShapeRef.new(shape: DeploymentEphemeralStorage, location_name: "fargateEphemeralStorage"))
     TaskSet.struct_class = Types::TaskSet
 
     TaskSetFieldList.member = Shapes::ShapeRef.new(shape: TaskSetField)
@@ -1925,9 +1943,11 @@ module Aws::ECS
 
       api.metadata = {
         "apiVersion" => "2014-11-13",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "ecs",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "protocols" => ["json"],
         "serviceAbbreviation" => "Amazon ECS",
         "serviceFullName" => "Amazon EC2 Container Service",
         "serviceId" => "ECS",

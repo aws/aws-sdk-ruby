@@ -454,17 +454,21 @@ module Aws::ManagedBlockchain
     # @option params [String] :network_type
     #   The blockchain network that the `Accessor` token is created for.
     #
-    #   <note markdown="1"> We recommend using the appropriate `networkType` value for the
-    #   blockchain network that you are creating the `Accessor` token for. You
-    #   cannnot use the value `ETHEREUM_MAINNET_AND_GOERLI` to specify a
-    #   `networkType` for your Accessor token.
+    #   <note markdown="1"> * Use the actual `networkType` value for the blockchain network that
+    #     you are creating the `Accessor` token for.
     #
-    #    The default value of `ETHEREUM_MAINNET_AND_GOERLI` is only applied:
+    #   * With the shut down of the *Ethereum Goerli* and *Polygon Mumbai
+    #     Testnet* networks the following `networkType` values are no longer
+    #     available for selection and use.
     #
-    #    * when the `CreateAccessor` action does not set a `networkType`.
+    #     * `ETHEREUM_MAINNET_AND_GOERLI`
     #
-    #   * to all existing `Accessor` tokens that were created before the
-    #     `networkType` property was introduced.
+    #     * `ETHEREUM_GOERLI`
+    #
+    #     * `POLYGON_MUMBAI`
+    #
+    #     However, your existing `Accessor` tokens with these `networkType`
+    #     values will remain unchanged.
     #
     #    </note>
     #
@@ -714,7 +718,7 @@ module Aws::ManagedBlockchain
     #
     #   * `n-ethereum-mainnet`
     #
-    #   * `n-ethereum-goerli`
+    #   ^
     #
     # @option params [String] :member_id
     #   The unique identifier of the member that owns this node.
@@ -958,7 +962,7 @@ module Aws::ManagedBlockchain
     #
     #   * `n-ethereum-mainnet`
     #
-    #   * `n-ethereum-goerli`
+    #   ^
     #
     # @option params [String] :member_id
     #   The unique identifier of the member that owns this node.
@@ -1943,7 +1947,7 @@ module Aws::ManagedBlockchain
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-managedblockchain'
-      context[:gem_version] = '1.51.0'
+      context[:gem_version] = '1.53.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

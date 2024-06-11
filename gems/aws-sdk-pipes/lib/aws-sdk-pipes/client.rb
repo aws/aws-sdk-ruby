@@ -417,26 +417,14 @@ module Aws::Pipes
     # targets and reduces the need for specialized knowledge and integration
     # code.
     #
+    # @option params [required, String] :name
+    #   The name of the pipe.
+    #
     # @option params [String] :description
     #   A description of the pipe.
     #
     # @option params [String] :desired_state
     #   The state the pipe should be in.
-    #
-    # @option params [String] :enrichment
-    #   The ARN of the enrichment resource.
-    #
-    # @option params [Types::PipeEnrichmentParameters] :enrichment_parameters
-    #   The parameters required to set up enrichment on your pipe.
-    #
-    # @option params [Types::PipeLogConfigurationParameters] :log_configuration
-    #   The logging configuration settings for the pipe.
-    #
-    # @option params [required, String] :name
-    #   The name of the pipe.
-    #
-    # @option params [required, String] :role_arn
-    #   The ARN of the role that allows the pipe to send data to the target.
     #
     # @option params [required, String] :source
     #   The ARN of the source resource.
@@ -444,8 +432,11 @@ module Aws::Pipes
     # @option params [Types::PipeSourceParameters] :source_parameters
     #   The parameters required to set up a source for your pipe.
     #
-    # @option params [Hash<String,String>] :tags
-    #   The list of key-value pairs to associate with the pipe.
+    # @option params [String] :enrichment
+    #   The ARN of the enrichment resource.
+    #
+    # @option params [Types::PipeEnrichmentParameters] :enrichment_parameters
+    #   The parameters required to set up enrichment on your pipe.
     #
     # @option params [required, String] :target
     #   The ARN of the target resource.
@@ -461,73 +452,32 @@ module Aws::Pipes
     #
     #   [1]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes-event-target.html
     #
+    # @option params [required, String] :role_arn
+    #   The ARN of the role that allows the pipe to send data to the target.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The list of key-value pairs to associate with the pipe.
+    #
+    # @option params [Types::PipeLogConfigurationParameters] :log_configuration
+    #   The logging configuration settings for the pipe.
+    #
     # @return [Types::CreatePipeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreatePipeResponse#arn #arn} => String
-    #   * {Types::CreatePipeResponse#creation_time #creation_time} => Time
-    #   * {Types::CreatePipeResponse#current_state #current_state} => String
-    #   * {Types::CreatePipeResponse#desired_state #desired_state} => String
-    #   * {Types::CreatePipeResponse#last_modified_time #last_modified_time} => Time
     #   * {Types::CreatePipeResponse#name #name} => String
+    #   * {Types::CreatePipeResponse#desired_state #desired_state} => String
+    #   * {Types::CreatePipeResponse#current_state #current_state} => String
+    #   * {Types::CreatePipeResponse#creation_time #creation_time} => Time
+    #   * {Types::CreatePipeResponse#last_modified_time #last_modified_time} => Time
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_pipe({
+    #     name: "PipeName", # required
     #     description: "PipeDescription",
     #     desired_state: "RUNNING", # accepts RUNNING, STOPPED
-    #     enrichment: "OptionalArn",
-    #     enrichment_parameters: {
-    #       http_parameters: {
-    #         header_parameters: {
-    #           "HeaderKey" => "HeaderValue",
-    #         },
-    #         path_parameter_values: ["PathParameter"],
-    #         query_string_parameters: {
-    #           "QueryStringKey" => "QueryStringValue",
-    #         },
-    #       },
-    #       input_template: "InputTemplate",
-    #     },
-    #     log_configuration: {
-    #       cloudwatch_logs_log_destination: {
-    #         log_group_arn: "CloudwatchLogGroupArn", # required
-    #       },
-    #       firehose_log_destination: {
-    #         delivery_stream_arn: "FirehoseArn", # required
-    #       },
-    #       include_execution_data: ["ALL"], # accepts ALL
-    #       level: "OFF", # required, accepts OFF, ERROR, INFO, TRACE
-    #       s3_log_destination: {
-    #         bucket_name: "S3LogDestinationParametersBucketNameString", # required
-    #         bucket_owner: "S3LogDestinationParametersBucketOwnerString", # required
-    #         output_format: "json", # accepts json, plain, w3c
-    #         prefix: "S3LogDestinationParametersPrefixString",
-    #       },
-    #     },
-    #     name: "PipeName", # required
-    #     role_arn: "RoleArn", # required
     #     source: "ArnOrUrl", # required
     #     source_parameters: {
-    #       active_mq_broker_parameters: {
-    #         batch_size: 1,
-    #         credentials: { # required
-    #           basic_auth: "SecretManagerArn",
-    #         },
-    #         maximum_batching_window_in_seconds: 1,
-    #         queue_name: "MQBrokerQueueName", # required
-    #       },
-    #       dynamo_db_stream_parameters: {
-    #         batch_size: 1,
-    #         dead_letter_config: {
-    #           arn: "Arn",
-    #         },
-    #         maximum_batching_window_in_seconds: 1,
-    #         maximum_record_age_in_seconds: 1,
-    #         maximum_retry_attempts: 1,
-    #         on_partial_batch_item_failure: "AUTOMATIC_BISECT", # accepts AUTOMATIC_BISECT
-    #         parallelization_factor: 1,
-    #         starting_position: "TRIM_HORIZON", # required, accepts TRIM_HORIZON, LATEST
-    #       },
     #       filter_criteria: {
     #         filters: [
     #           {
@@ -540,121 +490,139 @@ module Aws::Pipes
     #         dead_letter_config: {
     #           arn: "Arn",
     #         },
+    #         on_partial_batch_item_failure: "AUTOMATIC_BISECT", # accepts AUTOMATIC_BISECT
     #         maximum_batching_window_in_seconds: 1,
     #         maximum_record_age_in_seconds: 1,
     #         maximum_retry_attempts: 1,
-    #         on_partial_batch_item_failure: "AUTOMATIC_BISECT", # accepts AUTOMATIC_BISECT
     #         parallelization_factor: 1,
     #         starting_position: "TRIM_HORIZON", # required, accepts TRIM_HORIZON, LATEST, AT_TIMESTAMP
     #         starting_position_timestamp: Time.now,
     #       },
-    #       managed_streaming_kafka_parameters: {
+    #       dynamo_db_stream_parameters: {
     #         batch_size: 1,
-    #         consumer_group_id: "URI",
-    #         credentials: {
-    #           client_certificate_tls_auth: "SecretManagerArn",
-    #           sasl_scram_512_auth: "SecretManagerArn",
+    #         dead_letter_config: {
+    #           arn: "Arn",
     #         },
+    #         on_partial_batch_item_failure: "AUTOMATIC_BISECT", # accepts AUTOMATIC_BISECT
     #         maximum_batching_window_in_seconds: 1,
-    #         starting_position: "TRIM_HORIZON", # accepts TRIM_HORIZON, LATEST
-    #         topic_name: "KafkaTopicName", # required
-    #       },
-    #       rabbit_mq_broker_parameters: {
-    #         batch_size: 1,
-    #         credentials: { # required
-    #           basic_auth: "SecretManagerArn",
-    #         },
-    #         maximum_batching_window_in_seconds: 1,
-    #         queue_name: "MQBrokerQueueName", # required
-    #         virtual_host: "URI",
-    #       },
-    #       self_managed_kafka_parameters: {
-    #         additional_bootstrap_servers: ["EndpointString"],
-    #         batch_size: 1,
-    #         consumer_group_id: "URI",
-    #         credentials: {
-    #           basic_auth: "SecretManagerArn",
-    #           client_certificate_tls_auth: "SecretManagerArn",
-    #           sasl_scram_256_auth: "SecretManagerArn",
-    #           sasl_scram_512_auth: "SecretManagerArn",
-    #         },
-    #         maximum_batching_window_in_seconds: 1,
-    #         server_root_ca_certificate: "SecretManagerArn",
-    #         starting_position: "TRIM_HORIZON", # accepts TRIM_HORIZON, LATEST
-    #         topic_name: "KafkaTopicName", # required
-    #         vpc: {
-    #           security_group: ["SecurityGroupId"],
-    #           subnets: ["SubnetId"],
-    #         },
+    #         maximum_record_age_in_seconds: 1,
+    #         maximum_retry_attempts: 1,
+    #         parallelization_factor: 1,
+    #         starting_position: "TRIM_HORIZON", # required, accepts TRIM_HORIZON, LATEST
     #       },
     #       sqs_queue_parameters: {
     #         batch_size: 1,
     #         maximum_batching_window_in_seconds: 1,
     #       },
+    #       active_mq_broker_parameters: {
+    #         credentials: { # required
+    #           basic_auth: "SecretManagerArn",
+    #         },
+    #         queue_name: "MQBrokerQueueName", # required
+    #         batch_size: 1,
+    #         maximum_batching_window_in_seconds: 1,
+    #       },
+    #       rabbit_mq_broker_parameters: {
+    #         credentials: { # required
+    #           basic_auth: "SecretManagerArn",
+    #         },
+    #         queue_name: "MQBrokerQueueName", # required
+    #         virtual_host: "URI",
+    #         batch_size: 1,
+    #         maximum_batching_window_in_seconds: 1,
+    #       },
+    #       managed_streaming_kafka_parameters: {
+    #         topic_name: "KafkaTopicName", # required
+    #         starting_position: "TRIM_HORIZON", # accepts TRIM_HORIZON, LATEST
+    #         batch_size: 1,
+    #         maximum_batching_window_in_seconds: 1,
+    #         consumer_group_id: "URI",
+    #         credentials: {
+    #           sasl_scram_512_auth: "SecretManagerArn",
+    #           client_certificate_tls_auth: "SecretManagerArn",
+    #         },
+    #       },
+    #       self_managed_kafka_parameters: {
+    #         topic_name: "KafkaTopicName", # required
+    #         starting_position: "TRIM_HORIZON", # accepts TRIM_HORIZON, LATEST
+    #         additional_bootstrap_servers: ["EndpointString"],
+    #         batch_size: 1,
+    #         maximum_batching_window_in_seconds: 1,
+    #         consumer_group_id: "URI",
+    #         credentials: {
+    #           basic_auth: "SecretManagerArn",
+    #           sasl_scram_512_auth: "SecretManagerArn",
+    #           sasl_scram_256_auth: "SecretManagerArn",
+    #           client_certificate_tls_auth: "SecretManagerArn",
+    #         },
+    #         server_root_ca_certificate: "SecretManagerArn",
+    #         vpc: {
+    #           subnets: ["SubnetId"],
+    #           security_group: ["SecurityGroupId"],
+    #         },
+    #       },
     #     },
-    #     tags: {
-    #       "TagKey" => "TagValue",
+    #     enrichment: "OptionalArn",
+    #     enrichment_parameters: {
+    #       input_template: "InputTemplate",
+    #       http_parameters: {
+    #         path_parameter_values: ["PathParameter"],
+    #         header_parameters: {
+    #           "HeaderKey" => "HeaderValue",
+    #         },
+    #         query_string_parameters: {
+    #           "QueryStringKey" => "QueryStringValue",
+    #         },
+    #       },
     #     },
     #     target: "Arn", # required
     #     target_parameters: {
-    #       batch_job_parameters: {
-    #         array_properties: {
-    #           size: 1,
-    #         },
-    #         container_overrides: {
-    #           command: ["String"],
-    #           environment: [
-    #             {
-    #               name: "String",
-    #               value: "String",
-    #             },
-    #           ],
-    #           instance_type: "String",
-    #           resource_requirements: [
-    #             {
-    #               type: "GPU", # required, accepts GPU, MEMORY, VCPU
-    #               value: "String", # required
-    #             },
-    #           ],
-    #         },
-    #         depends_on: [
-    #           {
-    #             job_id: "String",
-    #             type: "N_TO_N", # accepts N_TO_N, SEQUENTIAL
-    #           },
-    #         ],
-    #         job_definition: "String", # required
-    #         job_name: "String", # required
-    #         parameters: {
-    #           "String" => "String",
-    #         },
-    #         retry_strategy: {
-    #           attempts: 1,
-    #         },
+    #       input_template: "InputTemplate",
+    #       lambda_function_parameters: {
+    #         invocation_type: "REQUEST_RESPONSE", # accepts REQUEST_RESPONSE, FIRE_AND_FORGET
     #       },
-    #       cloud_watch_logs_parameters: {
-    #         log_stream_name: "LogStreamName",
-    #         timestamp: "JsonPath",
+    #       step_function_state_machine_parameters: {
+    #         invocation_type: "REQUEST_RESPONSE", # accepts REQUEST_RESPONSE, FIRE_AND_FORGET
+    #       },
+    #       kinesis_stream_parameters: {
+    #         partition_key: "KinesisPartitionKey", # required
     #       },
     #       ecs_task_parameters: {
+    #         task_definition_arn: "ArnOrJsonPath", # required
+    #         task_count: 1,
+    #         launch_type: "EC2", # accepts EC2, FARGATE, EXTERNAL
+    #         network_configuration: {
+    #           awsvpc_configuration: {
+    #             subnets: ["Subnet"], # required
+    #             security_groups: ["SecurityGroup"],
+    #             assign_public_ip: "ENABLED", # accepts ENABLED, DISABLED
+    #           },
+    #         },
+    #         platform_version: "String",
+    #         group: "String",
     #         capacity_provider_strategy: [
     #           {
-    #             base: 1,
     #             capacity_provider: "CapacityProvider", # required
     #             weight: 1,
+    #             base: 1,
     #           },
     #         ],
     #         enable_ecs_managed_tags: false,
     #         enable_execute_command: false,
-    #         group: "String",
-    #         launch_type: "EC2", # accepts EC2, FARGATE, EXTERNAL
-    #         network_configuration: {
-    #           awsvpc_configuration: {
-    #             assign_public_ip: "ENABLED", # accepts ENABLED, DISABLED
-    #             security_groups: ["SecurityGroup"],
-    #             subnets: ["Subnet"], # required
+    #         placement_constraints: [
+    #           {
+    #             type: "distinctInstance", # accepts distinctInstance, memberOf
+    #             expression: "PlacementConstraintExpression",
     #           },
-    #         },
+    #         ],
+    #         placement_strategy: [
+    #           {
+    #             type: "random", # accepts random, spread, binpack
+    #             field: "PlacementStrategyField",
+    #           },
+    #         ],
+    #         propagate_tags: "TASK_DEFINITION", # accepts TASK_DEFINITION
+    #         reference_id: "ReferenceId",
     #         overrides: {
     #           container_overrides: [
     #             {
@@ -697,60 +665,68 @@ module Aws::Pipes
     #           memory: "String",
     #           task_role_arn: "ArnOrJsonPath",
     #         },
-    #         placement_constraints: [
-    #           {
-    #             expression: "PlacementConstraintExpression",
-    #             type: "distinctInstance", # accepts distinctInstance, memberOf
-    #           },
-    #         ],
-    #         placement_strategy: [
-    #           {
-    #             field: "PlacementStrategyField",
-    #             type: "random", # accepts random, spread, binpack
-    #           },
-    #         ],
-    #         platform_version: "String",
-    #         propagate_tags: "TASK_DEFINITION", # accepts TASK_DEFINITION
-    #         reference_id: "ReferenceId",
     #         tags: [
     #           {
     #             key: "TagKey", # required
     #             value: "TagValue", # required
     #           },
     #         ],
-    #         task_count: 1,
-    #         task_definition_arn: "ArnOrJsonPath", # required
     #       },
-    #       event_bridge_event_bus_parameters: {
-    #         detail_type: "EventBridgeDetailType",
-    #         endpoint_id: "EventBridgeEndpointId",
-    #         resources: ["ArnOrJsonPath"],
-    #         source: "EventBridgeEventSource",
-    #         time: "JsonPath",
+    #       batch_job_parameters: {
+    #         job_definition: "String", # required
+    #         job_name: "String", # required
+    #         array_properties: {
+    #           size: 1,
+    #         },
+    #         retry_strategy: {
+    #           attempts: 1,
+    #         },
+    #         container_overrides: {
+    #           command: ["String"],
+    #           environment: [
+    #             {
+    #               name: "String",
+    #               value: "String",
+    #             },
+    #           ],
+    #           instance_type: "String",
+    #           resource_requirements: [
+    #             {
+    #               type: "GPU", # required, accepts GPU, MEMORY, VCPU
+    #               value: "String", # required
+    #             },
+    #           ],
+    #         },
+    #         depends_on: [
+    #           {
+    #             job_id: "String",
+    #             type: "N_TO_N", # accepts N_TO_N, SEQUENTIAL
+    #           },
+    #         ],
+    #         parameters: {
+    #           "String" => "String",
+    #         },
+    #       },
+    #       sqs_queue_parameters: {
+    #         message_group_id: "MessageGroupId",
+    #         message_deduplication_id: "MessageDeduplicationId",
     #       },
     #       http_parameters: {
+    #         path_parameter_values: ["PathParameter"],
     #         header_parameters: {
     #           "HeaderKey" => "HeaderValue",
     #         },
-    #         path_parameter_values: ["PathParameter"],
     #         query_string_parameters: {
     #           "QueryStringKey" => "QueryStringValue",
     #         },
     #       },
-    #       input_template: "InputTemplate",
-    #       kinesis_stream_parameters: {
-    #         partition_key: "KinesisPartitionKey", # required
-    #       },
-    #       lambda_function_parameters: {
-    #         invocation_type: "REQUEST_RESPONSE", # accepts REQUEST_RESPONSE, FIRE_AND_FORGET
-    #       },
     #       redshift_data_parameters: {
+    #         secret_manager_arn: "SecretManagerArnOrJsonPath",
     #         database: "Database", # required
     #         db_user: "DbUser",
-    #         secret_manager_arn: "SecretManagerArnOrJsonPath",
-    #         sqls: ["Sql"], # required
     #         statement_name: "StatementName",
     #         with_event: false,
+    #         sqls: ["Sql"], # required
     #       },
     #       sage_maker_pipeline_parameters: {
     #         pipeline_parameter_list: [
@@ -760,24 +736,81 @@ module Aws::Pipes
     #           },
     #         ],
     #       },
-    #       sqs_queue_parameters: {
-    #         message_deduplication_id: "MessageDeduplicationId",
-    #         message_group_id: "MessageGroupId",
+    #       event_bridge_event_bus_parameters: {
+    #         endpoint_id: "EventBridgeEndpointId",
+    #         detail_type: "EventBridgeDetailType",
+    #         source: "EventBridgeEventSource",
+    #         resources: ["ArnOrJsonPath"],
+    #         time: "JsonPath",
     #       },
-    #       step_function_state_machine_parameters: {
-    #         invocation_type: "REQUEST_RESPONSE", # accepts REQUEST_RESPONSE, FIRE_AND_FORGET
+    #       cloud_watch_logs_parameters: {
+    #         log_stream_name: "LogStreamName",
+    #         timestamp: "JsonPath",
     #       },
+    #       timestream_parameters: {
+    #         time_value: "TimeValue", # required
+    #         epoch_time_unit: "MILLISECONDS", # accepts MILLISECONDS, SECONDS, MICROSECONDS, NANOSECONDS
+    #         time_field_type: "EPOCH", # accepts EPOCH, TIMESTAMP_FORMAT
+    #         timestamp_format: "TimestampFormat",
+    #         version_value: "VersionValue", # required
+    #         dimension_mappings: [ # required
+    #           {
+    #             dimension_value: "DimensionValue", # required
+    #             dimension_value_type: "VARCHAR", # required, accepts VARCHAR
+    #             dimension_name: "DimensionName", # required
+    #           },
+    #         ],
+    #         single_measure_mappings: [
+    #           {
+    #             measure_value: "MeasureValue", # required
+    #             measure_value_type: "DOUBLE", # required, accepts DOUBLE, BIGINT, VARCHAR, BOOLEAN, TIMESTAMP
+    #             measure_name: "MeasureName", # required
+    #           },
+    #         ],
+    #         multi_measure_mappings: [
+    #           {
+    #             multi_measure_name: "MultiMeasureName", # required
+    #             multi_measure_attribute_mappings: [ # required
+    #               {
+    #                 measure_value: "MeasureValue", # required
+    #                 measure_value_type: "DOUBLE", # required, accepts DOUBLE, BIGINT, VARCHAR, BOOLEAN, TIMESTAMP
+    #                 multi_measure_attribute_name: "MultiMeasureAttributeName", # required
+    #               },
+    #             ],
+    #           },
+    #         ],
+    #       },
+    #     },
+    #     role_arn: "RoleArn", # required
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #     log_configuration: {
+    #       s3_log_destination: {
+    #         bucket_name: "S3LogDestinationParametersBucketNameString", # required
+    #         bucket_owner: "S3LogDestinationParametersBucketOwnerString", # required
+    #         output_format: "json", # accepts json, plain, w3c
+    #         prefix: "S3LogDestinationParametersPrefixString",
+    #       },
+    #       firehose_log_destination: {
+    #         delivery_stream_arn: "FirehoseArn", # required
+    #       },
+    #       cloudwatch_logs_log_destination: {
+    #         log_group_arn: "CloudwatchLogGroupArn", # required
+    #       },
+    #       level: "OFF", # required, accepts OFF, ERROR, INFO, TRACE
+    #       include_execution_data: ["ALL"], # accepts ALL
     #     },
     #   })
     #
     # @example Response structure
     #
     #   resp.arn #=> String
-    #   resp.creation_time #=> Time
-    #   resp.current_state #=> String, one of "RUNNING", "STOPPED", "CREATING", "UPDATING", "DELETING", "STARTING", "STOPPING", "CREATE_FAILED", "UPDATE_FAILED", "START_FAILED", "STOP_FAILED", "DELETE_FAILED", "CREATE_ROLLBACK_FAILED", "DELETE_ROLLBACK_FAILED", "UPDATE_ROLLBACK_FAILED"
-    #   resp.desired_state #=> String, one of "RUNNING", "STOPPED"
-    #   resp.last_modified_time #=> Time
     #   resp.name #=> String
+    #   resp.desired_state #=> String, one of "RUNNING", "STOPPED"
+    #   resp.current_state #=> String, one of "RUNNING", "STOPPED", "CREATING", "UPDATING", "DELETING", "STARTING", "STOPPING", "CREATE_FAILED", "UPDATE_FAILED", "START_FAILED", "STOP_FAILED", "DELETE_FAILED", "CREATE_ROLLBACK_FAILED", "DELETE_ROLLBACK_FAILED", "UPDATE_ROLLBACK_FAILED"
+    #   resp.creation_time #=> Time
+    #   resp.last_modified_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pipes-2015-10-07/CreatePipe AWS API Documentation
     #
@@ -801,11 +834,11 @@ module Aws::Pipes
     # @return [Types::DeletePipeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DeletePipeResponse#arn #arn} => String
-    #   * {Types::DeletePipeResponse#creation_time #creation_time} => Time
-    #   * {Types::DeletePipeResponse#current_state #current_state} => String
-    #   * {Types::DeletePipeResponse#desired_state #desired_state} => String
-    #   * {Types::DeletePipeResponse#last_modified_time #last_modified_time} => Time
     #   * {Types::DeletePipeResponse#name #name} => String
+    #   * {Types::DeletePipeResponse#desired_state #desired_state} => String
+    #   * {Types::DeletePipeResponse#current_state #current_state} => String
+    #   * {Types::DeletePipeResponse#creation_time #creation_time} => Time
+    #   * {Types::DeletePipeResponse#last_modified_time #last_modified_time} => Time
     #
     # @example Request syntax with placeholder values
     #
@@ -816,11 +849,11 @@ module Aws::Pipes
     # @example Response structure
     #
     #   resp.arn #=> String
-    #   resp.creation_time #=> Time
-    #   resp.current_state #=> String, one of "RUNNING", "STOPPED", "CREATING", "UPDATING", "DELETING", "STARTING", "STOPPING", "CREATE_FAILED", "UPDATE_FAILED", "START_FAILED", "STOP_FAILED", "DELETE_FAILED", "CREATE_ROLLBACK_FAILED", "DELETE_ROLLBACK_FAILED", "UPDATE_ROLLBACK_FAILED"
-    #   resp.desired_state #=> String, one of "RUNNING", "STOPPED", "DELETED"
-    #   resp.last_modified_time #=> Time
     #   resp.name #=> String
+    #   resp.desired_state #=> String, one of "RUNNING", "STOPPED", "DELETED"
+    #   resp.current_state #=> String, one of "RUNNING", "STOPPED", "CREATING", "UPDATING", "DELETING", "STARTING", "STOPPING", "CREATE_FAILED", "UPDATE_FAILED", "START_FAILED", "STOP_FAILED", "DELETE_FAILED", "CREATE_ROLLBACK_FAILED", "DELETE_ROLLBACK_FAILED", "UPDATE_ROLLBACK_FAILED"
+    #   resp.creation_time #=> Time
+    #   resp.last_modified_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pipes-2015-10-07/DeletePipe AWS API Documentation
     #
@@ -845,22 +878,22 @@ module Aws::Pipes
     # @return [Types::DescribePipeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribePipeResponse#arn #arn} => String
-    #   * {Types::DescribePipeResponse#creation_time #creation_time} => Time
-    #   * {Types::DescribePipeResponse#current_state #current_state} => String
+    #   * {Types::DescribePipeResponse#name #name} => String
     #   * {Types::DescribePipeResponse#description #description} => String
     #   * {Types::DescribePipeResponse#desired_state #desired_state} => String
-    #   * {Types::DescribePipeResponse#enrichment #enrichment} => String
-    #   * {Types::DescribePipeResponse#enrichment_parameters #enrichment_parameters} => Types::PipeEnrichmentParameters
-    #   * {Types::DescribePipeResponse#last_modified_time #last_modified_time} => Time
-    #   * {Types::DescribePipeResponse#log_configuration #log_configuration} => Types::PipeLogConfiguration
-    #   * {Types::DescribePipeResponse#name #name} => String
-    #   * {Types::DescribePipeResponse#role_arn #role_arn} => String
+    #   * {Types::DescribePipeResponse#current_state #current_state} => String
+    #   * {Types::DescribePipeResponse#state_reason #state_reason} => String
     #   * {Types::DescribePipeResponse#source #source} => String
     #   * {Types::DescribePipeResponse#source_parameters #source_parameters} => Types::PipeSourceParameters
-    #   * {Types::DescribePipeResponse#state_reason #state_reason} => String
-    #   * {Types::DescribePipeResponse#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::DescribePipeResponse#enrichment #enrichment} => String
+    #   * {Types::DescribePipeResponse#enrichment_parameters #enrichment_parameters} => Types::PipeEnrichmentParameters
     #   * {Types::DescribePipeResponse#target #target} => String
     #   * {Types::DescribePipeResponse#target_parameters #target_parameters} => Types::PipeTargetParameters
+    #   * {Types::DescribePipeResponse#role_arn #role_arn} => String
+    #   * {Types::DescribePipeResponse#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::DescribePipeResponse#creation_time #creation_time} => Time
+    #   * {Types::DescribePipeResponse#last_modified_time #last_modified_time} => Time
+    #   * {Types::DescribePipeResponse#log_configuration #log_configuration} => Types::PipeLogConfiguration
     #
     # @example Request syntax with placeholder values
     #
@@ -871,121 +904,102 @@ module Aws::Pipes
     # @example Response structure
     #
     #   resp.arn #=> String
-    #   resp.creation_time #=> Time
-    #   resp.current_state #=> String, one of "RUNNING", "STOPPED", "CREATING", "UPDATING", "DELETING", "STARTING", "STOPPING", "CREATE_FAILED", "UPDATE_FAILED", "START_FAILED", "STOP_FAILED", "DELETE_FAILED", "CREATE_ROLLBACK_FAILED", "DELETE_ROLLBACK_FAILED", "UPDATE_ROLLBACK_FAILED"
+    #   resp.name #=> String
     #   resp.description #=> String
     #   resp.desired_state #=> String, one of "RUNNING", "STOPPED", "DELETED"
-    #   resp.enrichment #=> String
-    #   resp.enrichment_parameters.http_parameters.header_parameters #=> Hash
-    #   resp.enrichment_parameters.http_parameters.header_parameters["HeaderKey"] #=> String
-    #   resp.enrichment_parameters.http_parameters.path_parameter_values #=> Array
-    #   resp.enrichment_parameters.http_parameters.path_parameter_values[0] #=> String
-    #   resp.enrichment_parameters.http_parameters.query_string_parameters #=> Hash
-    #   resp.enrichment_parameters.http_parameters.query_string_parameters["QueryStringKey"] #=> String
-    #   resp.enrichment_parameters.input_template #=> String
-    #   resp.last_modified_time #=> Time
-    #   resp.log_configuration.cloudwatch_logs_log_destination.log_group_arn #=> String
-    #   resp.log_configuration.firehose_log_destination.delivery_stream_arn #=> String
-    #   resp.log_configuration.include_execution_data #=> Array
-    #   resp.log_configuration.include_execution_data[0] #=> String, one of "ALL"
-    #   resp.log_configuration.level #=> String, one of "OFF", "ERROR", "INFO", "TRACE"
-    #   resp.log_configuration.s3_log_destination.bucket_name #=> String
-    #   resp.log_configuration.s3_log_destination.bucket_owner #=> String
-    #   resp.log_configuration.s3_log_destination.output_format #=> String, one of "json", "plain", "w3c"
-    #   resp.log_configuration.s3_log_destination.prefix #=> String
-    #   resp.name #=> String
-    #   resp.role_arn #=> String
+    #   resp.current_state #=> String, one of "RUNNING", "STOPPED", "CREATING", "UPDATING", "DELETING", "STARTING", "STOPPING", "CREATE_FAILED", "UPDATE_FAILED", "START_FAILED", "STOP_FAILED", "DELETE_FAILED", "CREATE_ROLLBACK_FAILED", "DELETE_ROLLBACK_FAILED", "UPDATE_ROLLBACK_FAILED"
+    #   resp.state_reason #=> String
     #   resp.source #=> String
-    #   resp.source_parameters.active_mq_broker_parameters.batch_size #=> Integer
-    #   resp.source_parameters.active_mq_broker_parameters.credentials.basic_auth #=> String
-    #   resp.source_parameters.active_mq_broker_parameters.maximum_batching_window_in_seconds #=> Integer
-    #   resp.source_parameters.active_mq_broker_parameters.queue_name #=> String
-    #   resp.source_parameters.dynamo_db_stream_parameters.batch_size #=> Integer
-    #   resp.source_parameters.dynamo_db_stream_parameters.dead_letter_config.arn #=> String
-    #   resp.source_parameters.dynamo_db_stream_parameters.maximum_batching_window_in_seconds #=> Integer
-    #   resp.source_parameters.dynamo_db_stream_parameters.maximum_record_age_in_seconds #=> Integer
-    #   resp.source_parameters.dynamo_db_stream_parameters.maximum_retry_attempts #=> Integer
-    #   resp.source_parameters.dynamo_db_stream_parameters.on_partial_batch_item_failure #=> String, one of "AUTOMATIC_BISECT"
-    #   resp.source_parameters.dynamo_db_stream_parameters.parallelization_factor #=> Integer
-    #   resp.source_parameters.dynamo_db_stream_parameters.starting_position #=> String, one of "TRIM_HORIZON", "LATEST"
     #   resp.source_parameters.filter_criteria.filters #=> Array
     #   resp.source_parameters.filter_criteria.filters[0].pattern #=> String
     #   resp.source_parameters.kinesis_stream_parameters.batch_size #=> Integer
     #   resp.source_parameters.kinesis_stream_parameters.dead_letter_config.arn #=> String
+    #   resp.source_parameters.kinesis_stream_parameters.on_partial_batch_item_failure #=> String, one of "AUTOMATIC_BISECT"
     #   resp.source_parameters.kinesis_stream_parameters.maximum_batching_window_in_seconds #=> Integer
     #   resp.source_parameters.kinesis_stream_parameters.maximum_record_age_in_seconds #=> Integer
     #   resp.source_parameters.kinesis_stream_parameters.maximum_retry_attempts #=> Integer
-    #   resp.source_parameters.kinesis_stream_parameters.on_partial_batch_item_failure #=> String, one of "AUTOMATIC_BISECT"
     #   resp.source_parameters.kinesis_stream_parameters.parallelization_factor #=> Integer
     #   resp.source_parameters.kinesis_stream_parameters.starting_position #=> String, one of "TRIM_HORIZON", "LATEST", "AT_TIMESTAMP"
     #   resp.source_parameters.kinesis_stream_parameters.starting_position_timestamp #=> Time
-    #   resp.source_parameters.managed_streaming_kafka_parameters.batch_size #=> Integer
-    #   resp.source_parameters.managed_streaming_kafka_parameters.consumer_group_id #=> String
-    #   resp.source_parameters.managed_streaming_kafka_parameters.credentials.client_certificate_tls_auth #=> String
-    #   resp.source_parameters.managed_streaming_kafka_parameters.credentials.sasl_scram_512_auth #=> String
-    #   resp.source_parameters.managed_streaming_kafka_parameters.maximum_batching_window_in_seconds #=> Integer
-    #   resp.source_parameters.managed_streaming_kafka_parameters.starting_position #=> String, one of "TRIM_HORIZON", "LATEST"
-    #   resp.source_parameters.managed_streaming_kafka_parameters.topic_name #=> String
-    #   resp.source_parameters.rabbit_mq_broker_parameters.batch_size #=> Integer
+    #   resp.source_parameters.dynamo_db_stream_parameters.batch_size #=> Integer
+    #   resp.source_parameters.dynamo_db_stream_parameters.dead_letter_config.arn #=> String
+    #   resp.source_parameters.dynamo_db_stream_parameters.on_partial_batch_item_failure #=> String, one of "AUTOMATIC_BISECT"
+    #   resp.source_parameters.dynamo_db_stream_parameters.maximum_batching_window_in_seconds #=> Integer
+    #   resp.source_parameters.dynamo_db_stream_parameters.maximum_record_age_in_seconds #=> Integer
+    #   resp.source_parameters.dynamo_db_stream_parameters.maximum_retry_attempts #=> Integer
+    #   resp.source_parameters.dynamo_db_stream_parameters.parallelization_factor #=> Integer
+    #   resp.source_parameters.dynamo_db_stream_parameters.starting_position #=> String, one of "TRIM_HORIZON", "LATEST"
+    #   resp.source_parameters.sqs_queue_parameters.batch_size #=> Integer
+    #   resp.source_parameters.sqs_queue_parameters.maximum_batching_window_in_seconds #=> Integer
+    #   resp.source_parameters.active_mq_broker_parameters.credentials.basic_auth #=> String
+    #   resp.source_parameters.active_mq_broker_parameters.queue_name #=> String
+    #   resp.source_parameters.active_mq_broker_parameters.batch_size #=> Integer
+    #   resp.source_parameters.active_mq_broker_parameters.maximum_batching_window_in_seconds #=> Integer
     #   resp.source_parameters.rabbit_mq_broker_parameters.credentials.basic_auth #=> String
-    #   resp.source_parameters.rabbit_mq_broker_parameters.maximum_batching_window_in_seconds #=> Integer
     #   resp.source_parameters.rabbit_mq_broker_parameters.queue_name #=> String
     #   resp.source_parameters.rabbit_mq_broker_parameters.virtual_host #=> String
+    #   resp.source_parameters.rabbit_mq_broker_parameters.batch_size #=> Integer
+    #   resp.source_parameters.rabbit_mq_broker_parameters.maximum_batching_window_in_seconds #=> Integer
+    #   resp.source_parameters.managed_streaming_kafka_parameters.topic_name #=> String
+    #   resp.source_parameters.managed_streaming_kafka_parameters.starting_position #=> String, one of "TRIM_HORIZON", "LATEST"
+    #   resp.source_parameters.managed_streaming_kafka_parameters.batch_size #=> Integer
+    #   resp.source_parameters.managed_streaming_kafka_parameters.maximum_batching_window_in_seconds #=> Integer
+    #   resp.source_parameters.managed_streaming_kafka_parameters.consumer_group_id #=> String
+    #   resp.source_parameters.managed_streaming_kafka_parameters.credentials.sasl_scram_512_auth #=> String
+    #   resp.source_parameters.managed_streaming_kafka_parameters.credentials.client_certificate_tls_auth #=> String
+    #   resp.source_parameters.self_managed_kafka_parameters.topic_name #=> String
+    #   resp.source_parameters.self_managed_kafka_parameters.starting_position #=> String, one of "TRIM_HORIZON", "LATEST"
     #   resp.source_parameters.self_managed_kafka_parameters.additional_bootstrap_servers #=> Array
     #   resp.source_parameters.self_managed_kafka_parameters.additional_bootstrap_servers[0] #=> String
     #   resp.source_parameters.self_managed_kafka_parameters.batch_size #=> Integer
+    #   resp.source_parameters.self_managed_kafka_parameters.maximum_batching_window_in_seconds #=> Integer
     #   resp.source_parameters.self_managed_kafka_parameters.consumer_group_id #=> String
     #   resp.source_parameters.self_managed_kafka_parameters.credentials.basic_auth #=> String
-    #   resp.source_parameters.self_managed_kafka_parameters.credentials.client_certificate_tls_auth #=> String
-    #   resp.source_parameters.self_managed_kafka_parameters.credentials.sasl_scram_256_auth #=> String
     #   resp.source_parameters.self_managed_kafka_parameters.credentials.sasl_scram_512_auth #=> String
-    #   resp.source_parameters.self_managed_kafka_parameters.maximum_batching_window_in_seconds #=> Integer
+    #   resp.source_parameters.self_managed_kafka_parameters.credentials.sasl_scram_256_auth #=> String
+    #   resp.source_parameters.self_managed_kafka_parameters.credentials.client_certificate_tls_auth #=> String
     #   resp.source_parameters.self_managed_kafka_parameters.server_root_ca_certificate #=> String
-    #   resp.source_parameters.self_managed_kafka_parameters.starting_position #=> String, one of "TRIM_HORIZON", "LATEST"
-    #   resp.source_parameters.self_managed_kafka_parameters.topic_name #=> String
-    #   resp.source_parameters.self_managed_kafka_parameters.vpc.security_group #=> Array
-    #   resp.source_parameters.self_managed_kafka_parameters.vpc.security_group[0] #=> String
     #   resp.source_parameters.self_managed_kafka_parameters.vpc.subnets #=> Array
     #   resp.source_parameters.self_managed_kafka_parameters.vpc.subnets[0] #=> String
-    #   resp.source_parameters.sqs_queue_parameters.batch_size #=> Integer
-    #   resp.source_parameters.sqs_queue_parameters.maximum_batching_window_in_seconds #=> Integer
-    #   resp.state_reason #=> String
-    #   resp.tags #=> Hash
-    #   resp.tags["TagKey"] #=> String
+    #   resp.source_parameters.self_managed_kafka_parameters.vpc.security_group #=> Array
+    #   resp.source_parameters.self_managed_kafka_parameters.vpc.security_group[0] #=> String
+    #   resp.enrichment #=> String
+    #   resp.enrichment_parameters.input_template #=> String
+    #   resp.enrichment_parameters.http_parameters.path_parameter_values #=> Array
+    #   resp.enrichment_parameters.http_parameters.path_parameter_values[0] #=> String
+    #   resp.enrichment_parameters.http_parameters.header_parameters #=> Hash
+    #   resp.enrichment_parameters.http_parameters.header_parameters["HeaderKey"] #=> String
+    #   resp.enrichment_parameters.http_parameters.query_string_parameters #=> Hash
+    #   resp.enrichment_parameters.http_parameters.query_string_parameters["QueryStringKey"] #=> String
     #   resp.target #=> String
-    #   resp.target_parameters.batch_job_parameters.array_properties.size #=> Integer
-    #   resp.target_parameters.batch_job_parameters.container_overrides.command #=> Array
-    #   resp.target_parameters.batch_job_parameters.container_overrides.command[0] #=> String
-    #   resp.target_parameters.batch_job_parameters.container_overrides.environment #=> Array
-    #   resp.target_parameters.batch_job_parameters.container_overrides.environment[0].name #=> String
-    #   resp.target_parameters.batch_job_parameters.container_overrides.environment[0].value #=> String
-    #   resp.target_parameters.batch_job_parameters.container_overrides.instance_type #=> String
-    #   resp.target_parameters.batch_job_parameters.container_overrides.resource_requirements #=> Array
-    #   resp.target_parameters.batch_job_parameters.container_overrides.resource_requirements[0].type #=> String, one of "GPU", "MEMORY", "VCPU"
-    #   resp.target_parameters.batch_job_parameters.container_overrides.resource_requirements[0].value #=> String
-    #   resp.target_parameters.batch_job_parameters.depends_on #=> Array
-    #   resp.target_parameters.batch_job_parameters.depends_on[0].job_id #=> String
-    #   resp.target_parameters.batch_job_parameters.depends_on[0].type #=> String, one of "N_TO_N", "SEQUENTIAL"
-    #   resp.target_parameters.batch_job_parameters.job_definition #=> String
-    #   resp.target_parameters.batch_job_parameters.job_name #=> String
-    #   resp.target_parameters.batch_job_parameters.parameters #=> Hash
-    #   resp.target_parameters.batch_job_parameters.parameters["String"] #=> String
-    #   resp.target_parameters.batch_job_parameters.retry_strategy.attempts #=> Integer
-    #   resp.target_parameters.cloud_watch_logs_parameters.log_stream_name #=> String
-    #   resp.target_parameters.cloud_watch_logs_parameters.timestamp #=> String
-    #   resp.target_parameters.ecs_task_parameters.capacity_provider_strategy #=> Array
-    #   resp.target_parameters.ecs_task_parameters.capacity_provider_strategy[0].base #=> Integer
-    #   resp.target_parameters.ecs_task_parameters.capacity_provider_strategy[0].capacity_provider #=> String
-    #   resp.target_parameters.ecs_task_parameters.capacity_provider_strategy[0].weight #=> Integer
-    #   resp.target_parameters.ecs_task_parameters.enable_ecs_managed_tags #=> Boolean
-    #   resp.target_parameters.ecs_task_parameters.enable_execute_command #=> Boolean
-    #   resp.target_parameters.ecs_task_parameters.group #=> String
+    #   resp.target_parameters.input_template #=> String
+    #   resp.target_parameters.lambda_function_parameters.invocation_type #=> String, one of "REQUEST_RESPONSE", "FIRE_AND_FORGET"
+    #   resp.target_parameters.step_function_state_machine_parameters.invocation_type #=> String, one of "REQUEST_RESPONSE", "FIRE_AND_FORGET"
+    #   resp.target_parameters.kinesis_stream_parameters.partition_key #=> String
+    #   resp.target_parameters.ecs_task_parameters.task_definition_arn #=> String
+    #   resp.target_parameters.ecs_task_parameters.task_count #=> Integer
     #   resp.target_parameters.ecs_task_parameters.launch_type #=> String, one of "EC2", "FARGATE", "EXTERNAL"
-    #   resp.target_parameters.ecs_task_parameters.network_configuration.awsvpc_configuration.assign_public_ip #=> String, one of "ENABLED", "DISABLED"
-    #   resp.target_parameters.ecs_task_parameters.network_configuration.awsvpc_configuration.security_groups #=> Array
-    #   resp.target_parameters.ecs_task_parameters.network_configuration.awsvpc_configuration.security_groups[0] #=> String
     #   resp.target_parameters.ecs_task_parameters.network_configuration.awsvpc_configuration.subnets #=> Array
     #   resp.target_parameters.ecs_task_parameters.network_configuration.awsvpc_configuration.subnets[0] #=> String
+    #   resp.target_parameters.ecs_task_parameters.network_configuration.awsvpc_configuration.security_groups #=> Array
+    #   resp.target_parameters.ecs_task_parameters.network_configuration.awsvpc_configuration.security_groups[0] #=> String
+    #   resp.target_parameters.ecs_task_parameters.network_configuration.awsvpc_configuration.assign_public_ip #=> String, one of "ENABLED", "DISABLED"
+    #   resp.target_parameters.ecs_task_parameters.platform_version #=> String
+    #   resp.target_parameters.ecs_task_parameters.group #=> String
+    #   resp.target_parameters.ecs_task_parameters.capacity_provider_strategy #=> Array
+    #   resp.target_parameters.ecs_task_parameters.capacity_provider_strategy[0].capacity_provider #=> String
+    #   resp.target_parameters.ecs_task_parameters.capacity_provider_strategy[0].weight #=> Integer
+    #   resp.target_parameters.ecs_task_parameters.capacity_provider_strategy[0].base #=> Integer
+    #   resp.target_parameters.ecs_task_parameters.enable_ecs_managed_tags #=> Boolean
+    #   resp.target_parameters.ecs_task_parameters.enable_execute_command #=> Boolean
+    #   resp.target_parameters.ecs_task_parameters.placement_constraints #=> Array
+    #   resp.target_parameters.ecs_task_parameters.placement_constraints[0].type #=> String, one of "distinctInstance", "memberOf"
+    #   resp.target_parameters.ecs_task_parameters.placement_constraints[0].expression #=> String
+    #   resp.target_parameters.ecs_task_parameters.placement_strategy #=> Array
+    #   resp.target_parameters.ecs_task_parameters.placement_strategy[0].type #=> String, one of "random", "spread", "binpack"
+    #   resp.target_parameters.ecs_task_parameters.placement_strategy[0].field #=> String
+    #   resp.target_parameters.ecs_task_parameters.propagate_tags #=> String, one of "TASK_DEFINITION"
+    #   resp.target_parameters.ecs_task_parameters.reference_id #=> String
     #   resp.target_parameters.ecs_task_parameters.overrides.container_overrides #=> Array
     #   resp.target_parameters.ecs_task_parameters.overrides.container_overrides[0].command #=> Array
     #   resp.target_parameters.ecs_task_parameters.overrides.container_overrides[0].command[0] #=> String
@@ -1010,48 +1024,86 @@ module Aws::Pipes
     #   resp.target_parameters.ecs_task_parameters.overrides.inference_accelerator_overrides[0].device_type #=> String
     #   resp.target_parameters.ecs_task_parameters.overrides.memory #=> String
     #   resp.target_parameters.ecs_task_parameters.overrides.task_role_arn #=> String
-    #   resp.target_parameters.ecs_task_parameters.placement_constraints #=> Array
-    #   resp.target_parameters.ecs_task_parameters.placement_constraints[0].expression #=> String
-    #   resp.target_parameters.ecs_task_parameters.placement_constraints[0].type #=> String, one of "distinctInstance", "memberOf"
-    #   resp.target_parameters.ecs_task_parameters.placement_strategy #=> Array
-    #   resp.target_parameters.ecs_task_parameters.placement_strategy[0].field #=> String
-    #   resp.target_parameters.ecs_task_parameters.placement_strategy[0].type #=> String, one of "random", "spread", "binpack"
-    #   resp.target_parameters.ecs_task_parameters.platform_version #=> String
-    #   resp.target_parameters.ecs_task_parameters.propagate_tags #=> String, one of "TASK_DEFINITION"
-    #   resp.target_parameters.ecs_task_parameters.reference_id #=> String
     #   resp.target_parameters.ecs_task_parameters.tags #=> Array
     #   resp.target_parameters.ecs_task_parameters.tags[0].key #=> String
     #   resp.target_parameters.ecs_task_parameters.tags[0].value #=> String
-    #   resp.target_parameters.ecs_task_parameters.task_count #=> Integer
-    #   resp.target_parameters.ecs_task_parameters.task_definition_arn #=> String
-    #   resp.target_parameters.event_bridge_event_bus_parameters.detail_type #=> String
-    #   resp.target_parameters.event_bridge_event_bus_parameters.endpoint_id #=> String
-    #   resp.target_parameters.event_bridge_event_bus_parameters.resources #=> Array
-    #   resp.target_parameters.event_bridge_event_bus_parameters.resources[0] #=> String
-    #   resp.target_parameters.event_bridge_event_bus_parameters.source #=> String
-    #   resp.target_parameters.event_bridge_event_bus_parameters.time #=> String
-    #   resp.target_parameters.http_parameters.header_parameters #=> Hash
-    #   resp.target_parameters.http_parameters.header_parameters["HeaderKey"] #=> String
+    #   resp.target_parameters.batch_job_parameters.job_definition #=> String
+    #   resp.target_parameters.batch_job_parameters.job_name #=> String
+    #   resp.target_parameters.batch_job_parameters.array_properties.size #=> Integer
+    #   resp.target_parameters.batch_job_parameters.retry_strategy.attempts #=> Integer
+    #   resp.target_parameters.batch_job_parameters.container_overrides.command #=> Array
+    #   resp.target_parameters.batch_job_parameters.container_overrides.command[0] #=> String
+    #   resp.target_parameters.batch_job_parameters.container_overrides.environment #=> Array
+    #   resp.target_parameters.batch_job_parameters.container_overrides.environment[0].name #=> String
+    #   resp.target_parameters.batch_job_parameters.container_overrides.environment[0].value #=> String
+    #   resp.target_parameters.batch_job_parameters.container_overrides.instance_type #=> String
+    #   resp.target_parameters.batch_job_parameters.container_overrides.resource_requirements #=> Array
+    #   resp.target_parameters.batch_job_parameters.container_overrides.resource_requirements[0].type #=> String, one of "GPU", "MEMORY", "VCPU"
+    #   resp.target_parameters.batch_job_parameters.container_overrides.resource_requirements[0].value #=> String
+    #   resp.target_parameters.batch_job_parameters.depends_on #=> Array
+    #   resp.target_parameters.batch_job_parameters.depends_on[0].job_id #=> String
+    #   resp.target_parameters.batch_job_parameters.depends_on[0].type #=> String, one of "N_TO_N", "SEQUENTIAL"
+    #   resp.target_parameters.batch_job_parameters.parameters #=> Hash
+    #   resp.target_parameters.batch_job_parameters.parameters["String"] #=> String
+    #   resp.target_parameters.sqs_queue_parameters.message_group_id #=> String
+    #   resp.target_parameters.sqs_queue_parameters.message_deduplication_id #=> String
     #   resp.target_parameters.http_parameters.path_parameter_values #=> Array
     #   resp.target_parameters.http_parameters.path_parameter_values[0] #=> String
+    #   resp.target_parameters.http_parameters.header_parameters #=> Hash
+    #   resp.target_parameters.http_parameters.header_parameters["HeaderKey"] #=> String
     #   resp.target_parameters.http_parameters.query_string_parameters #=> Hash
     #   resp.target_parameters.http_parameters.query_string_parameters["QueryStringKey"] #=> String
-    #   resp.target_parameters.input_template #=> String
-    #   resp.target_parameters.kinesis_stream_parameters.partition_key #=> String
-    #   resp.target_parameters.lambda_function_parameters.invocation_type #=> String, one of "REQUEST_RESPONSE", "FIRE_AND_FORGET"
+    #   resp.target_parameters.redshift_data_parameters.secret_manager_arn #=> String
     #   resp.target_parameters.redshift_data_parameters.database #=> String
     #   resp.target_parameters.redshift_data_parameters.db_user #=> String
-    #   resp.target_parameters.redshift_data_parameters.secret_manager_arn #=> String
-    #   resp.target_parameters.redshift_data_parameters.sqls #=> Array
-    #   resp.target_parameters.redshift_data_parameters.sqls[0] #=> String
     #   resp.target_parameters.redshift_data_parameters.statement_name #=> String
     #   resp.target_parameters.redshift_data_parameters.with_event #=> Boolean
+    #   resp.target_parameters.redshift_data_parameters.sqls #=> Array
+    #   resp.target_parameters.redshift_data_parameters.sqls[0] #=> String
     #   resp.target_parameters.sage_maker_pipeline_parameters.pipeline_parameter_list #=> Array
     #   resp.target_parameters.sage_maker_pipeline_parameters.pipeline_parameter_list[0].name #=> String
     #   resp.target_parameters.sage_maker_pipeline_parameters.pipeline_parameter_list[0].value #=> String
-    #   resp.target_parameters.sqs_queue_parameters.message_deduplication_id #=> String
-    #   resp.target_parameters.sqs_queue_parameters.message_group_id #=> String
-    #   resp.target_parameters.step_function_state_machine_parameters.invocation_type #=> String, one of "REQUEST_RESPONSE", "FIRE_AND_FORGET"
+    #   resp.target_parameters.event_bridge_event_bus_parameters.endpoint_id #=> String
+    #   resp.target_parameters.event_bridge_event_bus_parameters.detail_type #=> String
+    #   resp.target_parameters.event_bridge_event_bus_parameters.source #=> String
+    #   resp.target_parameters.event_bridge_event_bus_parameters.resources #=> Array
+    #   resp.target_parameters.event_bridge_event_bus_parameters.resources[0] #=> String
+    #   resp.target_parameters.event_bridge_event_bus_parameters.time #=> String
+    #   resp.target_parameters.cloud_watch_logs_parameters.log_stream_name #=> String
+    #   resp.target_parameters.cloud_watch_logs_parameters.timestamp #=> String
+    #   resp.target_parameters.timestream_parameters.time_value #=> String
+    #   resp.target_parameters.timestream_parameters.epoch_time_unit #=> String, one of "MILLISECONDS", "SECONDS", "MICROSECONDS", "NANOSECONDS"
+    #   resp.target_parameters.timestream_parameters.time_field_type #=> String, one of "EPOCH", "TIMESTAMP_FORMAT"
+    #   resp.target_parameters.timestream_parameters.timestamp_format #=> String
+    #   resp.target_parameters.timestream_parameters.version_value #=> String
+    #   resp.target_parameters.timestream_parameters.dimension_mappings #=> Array
+    #   resp.target_parameters.timestream_parameters.dimension_mappings[0].dimension_value #=> String
+    #   resp.target_parameters.timestream_parameters.dimension_mappings[0].dimension_value_type #=> String, one of "VARCHAR"
+    #   resp.target_parameters.timestream_parameters.dimension_mappings[0].dimension_name #=> String
+    #   resp.target_parameters.timestream_parameters.single_measure_mappings #=> Array
+    #   resp.target_parameters.timestream_parameters.single_measure_mappings[0].measure_value #=> String
+    #   resp.target_parameters.timestream_parameters.single_measure_mappings[0].measure_value_type #=> String, one of "DOUBLE", "BIGINT", "VARCHAR", "BOOLEAN", "TIMESTAMP"
+    #   resp.target_parameters.timestream_parameters.single_measure_mappings[0].measure_name #=> String
+    #   resp.target_parameters.timestream_parameters.multi_measure_mappings #=> Array
+    #   resp.target_parameters.timestream_parameters.multi_measure_mappings[0].multi_measure_name #=> String
+    #   resp.target_parameters.timestream_parameters.multi_measure_mappings[0].multi_measure_attribute_mappings #=> Array
+    #   resp.target_parameters.timestream_parameters.multi_measure_mappings[0].multi_measure_attribute_mappings[0].measure_value #=> String
+    #   resp.target_parameters.timestream_parameters.multi_measure_mappings[0].multi_measure_attribute_mappings[0].measure_value_type #=> String, one of "DOUBLE", "BIGINT", "VARCHAR", "BOOLEAN", "TIMESTAMP"
+    #   resp.target_parameters.timestream_parameters.multi_measure_mappings[0].multi_measure_attribute_mappings[0].multi_measure_attribute_name #=> String
+    #   resp.role_arn #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #   resp.creation_time #=> Time
+    #   resp.last_modified_time #=> Time
+    #   resp.log_configuration.s3_log_destination.bucket_name #=> String
+    #   resp.log_configuration.s3_log_destination.prefix #=> String
+    #   resp.log_configuration.s3_log_destination.bucket_owner #=> String
+    #   resp.log_configuration.s3_log_destination.output_format #=> String, one of "json", "plain", "w3c"
+    #   resp.log_configuration.firehose_log_destination.delivery_stream_arn #=> String
+    #   resp.log_configuration.cloudwatch_logs_log_destination.log_group_arn #=> String
+    #   resp.log_configuration.level #=> String, one of "OFF", "ERROR", "INFO", "TRACE"
+    #   resp.log_configuration.include_execution_data #=> Array
+    #   resp.log_configuration.include_execution_data[0] #=> String, one of "ALL"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pipes-2015-10-07/DescribePipe AWS API Documentation
     #
@@ -1070,19 +1122,22 @@ module Aws::Pipes
     #
     # [1]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes.html
     #
-    # @option params [String] :current_state
-    #   The state the pipe is in.
-    #
-    # @option params [String] :desired_state
-    #   The state the pipe should be in.
-    #
-    # @option params [Integer] :limit
-    #   The maximum number of pipes to include in the response.
-    #
     # @option params [String] :name_prefix
     #   A value that will return a subset of the pipes associated with this
     #   account. For example, `"NamePrefix": "ABC"` will return all endpoints
     #   with "ABC" in the name.
+    #
+    # @option params [String] :desired_state
+    #   The state the pipe should be in.
+    #
+    # @option params [String] :current_state
+    #   The state the pipe is in.
+    #
+    # @option params [String] :source_prefix
+    #   The prefix matching the pipe source.
+    #
+    # @option params [String] :target_prefix
+    #   The prefix matching the pipe target.
     #
     # @option params [String] :next_token
     #   If `nextToken` is returned, there are more results available. The
@@ -1092,45 +1147,42 @@ module Aws::Pipes
     #   after 24 hours. Using an expired pagination token will return an HTTP
     #   400 InvalidToken error.
     #
-    # @option params [String] :source_prefix
-    #   The prefix matching the pipe source.
-    #
-    # @option params [String] :target_prefix
-    #   The prefix matching the pipe target.
+    # @option params [Integer] :limit
+    #   The maximum number of pipes to include in the response.
     #
     # @return [Types::ListPipesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::ListPipesResponse#next_token #next_token} => String
     #   * {Types::ListPipesResponse#pipes #pipes} => Array&lt;Types::Pipe&gt;
+    #   * {Types::ListPipesResponse#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_pipes({
-    #     current_state: "RUNNING", # accepts RUNNING, STOPPED, CREATING, UPDATING, DELETING, STARTING, STOPPING, CREATE_FAILED, UPDATE_FAILED, START_FAILED, STOP_FAILED, DELETE_FAILED, CREATE_ROLLBACK_FAILED, DELETE_ROLLBACK_FAILED, UPDATE_ROLLBACK_FAILED
-    #     desired_state: "RUNNING", # accepts RUNNING, STOPPED
-    #     limit: 1,
     #     name_prefix: "PipeName",
-    #     next_token: "NextToken",
+    #     desired_state: "RUNNING", # accepts RUNNING, STOPPED
+    #     current_state: "RUNNING", # accepts RUNNING, STOPPED, CREATING, UPDATING, DELETING, STARTING, STOPPING, CREATE_FAILED, UPDATE_FAILED, START_FAILED, STOP_FAILED, DELETE_FAILED, CREATE_ROLLBACK_FAILED, DELETE_ROLLBACK_FAILED, UPDATE_ROLLBACK_FAILED
     #     source_prefix: "ResourceArn",
     #     target_prefix: "ResourceArn",
+    #     next_token: "NextToken",
+    #     limit: 1,
     #   })
     #
     # @example Response structure
     #
-    #   resp.next_token #=> String
     #   resp.pipes #=> Array
-    #   resp.pipes[0].arn #=> String
-    #   resp.pipes[0].creation_time #=> Time
-    #   resp.pipes[0].current_state #=> String, one of "RUNNING", "STOPPED", "CREATING", "UPDATING", "DELETING", "STARTING", "STOPPING", "CREATE_FAILED", "UPDATE_FAILED", "START_FAILED", "STOP_FAILED", "DELETE_FAILED", "CREATE_ROLLBACK_FAILED", "DELETE_ROLLBACK_FAILED", "UPDATE_ROLLBACK_FAILED"
-    #   resp.pipes[0].desired_state #=> String, one of "RUNNING", "STOPPED"
-    #   resp.pipes[0].enrichment #=> String
-    #   resp.pipes[0].last_modified_time #=> Time
     #   resp.pipes[0].name #=> String
-    #   resp.pipes[0].source #=> String
+    #   resp.pipes[0].arn #=> String
+    #   resp.pipes[0].desired_state #=> String, one of "RUNNING", "STOPPED"
+    #   resp.pipes[0].current_state #=> String, one of "RUNNING", "STOPPED", "CREATING", "UPDATING", "DELETING", "STARTING", "STOPPING", "CREATE_FAILED", "UPDATE_FAILED", "START_FAILED", "STOP_FAILED", "DELETE_FAILED", "CREATE_ROLLBACK_FAILED", "DELETE_ROLLBACK_FAILED", "UPDATE_ROLLBACK_FAILED"
     #   resp.pipes[0].state_reason #=> String
+    #   resp.pipes[0].creation_time #=> Time
+    #   resp.pipes[0].last_modified_time #=> Time
+    #   resp.pipes[0].source #=> String
     #   resp.pipes[0].target #=> String
+    #   resp.pipes[0].enrichment #=> String
+    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pipes-2015-10-07/ListPipes AWS API Documentation
     #
@@ -1178,11 +1230,11 @@ module Aws::Pipes
     # @return [Types::StartPipeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartPipeResponse#arn #arn} => String
-    #   * {Types::StartPipeResponse#creation_time #creation_time} => Time
-    #   * {Types::StartPipeResponse#current_state #current_state} => String
-    #   * {Types::StartPipeResponse#desired_state #desired_state} => String
-    #   * {Types::StartPipeResponse#last_modified_time #last_modified_time} => Time
     #   * {Types::StartPipeResponse#name #name} => String
+    #   * {Types::StartPipeResponse#desired_state #desired_state} => String
+    #   * {Types::StartPipeResponse#current_state #current_state} => String
+    #   * {Types::StartPipeResponse#creation_time #creation_time} => Time
+    #   * {Types::StartPipeResponse#last_modified_time #last_modified_time} => Time
     #
     # @example Request syntax with placeholder values
     #
@@ -1193,11 +1245,11 @@ module Aws::Pipes
     # @example Response structure
     #
     #   resp.arn #=> String
-    #   resp.creation_time #=> Time
-    #   resp.current_state #=> String, one of "RUNNING", "STOPPED", "CREATING", "UPDATING", "DELETING", "STARTING", "STOPPING", "CREATE_FAILED", "UPDATE_FAILED", "START_FAILED", "STOP_FAILED", "DELETE_FAILED", "CREATE_ROLLBACK_FAILED", "DELETE_ROLLBACK_FAILED", "UPDATE_ROLLBACK_FAILED"
-    #   resp.desired_state #=> String, one of "RUNNING", "STOPPED"
-    #   resp.last_modified_time #=> Time
     #   resp.name #=> String
+    #   resp.desired_state #=> String, one of "RUNNING", "STOPPED"
+    #   resp.current_state #=> String, one of "RUNNING", "STOPPED", "CREATING", "UPDATING", "DELETING", "STARTING", "STOPPING", "CREATE_FAILED", "UPDATE_FAILED", "START_FAILED", "STOP_FAILED", "DELETE_FAILED", "CREATE_ROLLBACK_FAILED", "DELETE_ROLLBACK_FAILED", "UPDATE_ROLLBACK_FAILED"
+    #   resp.creation_time #=> Time
+    #   resp.last_modified_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pipes-2015-10-07/StartPipe AWS API Documentation
     #
@@ -1216,11 +1268,11 @@ module Aws::Pipes
     # @return [Types::StopPipeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StopPipeResponse#arn #arn} => String
-    #   * {Types::StopPipeResponse#creation_time #creation_time} => Time
-    #   * {Types::StopPipeResponse#current_state #current_state} => String
-    #   * {Types::StopPipeResponse#desired_state #desired_state} => String
-    #   * {Types::StopPipeResponse#last_modified_time #last_modified_time} => Time
     #   * {Types::StopPipeResponse#name #name} => String
+    #   * {Types::StopPipeResponse#desired_state #desired_state} => String
+    #   * {Types::StopPipeResponse#current_state #current_state} => String
+    #   * {Types::StopPipeResponse#creation_time #creation_time} => Time
+    #   * {Types::StopPipeResponse#last_modified_time #last_modified_time} => Time
     #
     # @example Request syntax with placeholder values
     #
@@ -1231,11 +1283,11 @@ module Aws::Pipes
     # @example Response structure
     #
     #   resp.arn #=> String
-    #   resp.creation_time #=> Time
-    #   resp.current_state #=> String, one of "RUNNING", "STOPPED", "CREATING", "UPDATING", "DELETING", "STARTING", "STOPPING", "CREATE_FAILED", "UPDATE_FAILED", "START_FAILED", "STOP_FAILED", "DELETE_FAILED", "CREATE_ROLLBACK_FAILED", "DELETE_ROLLBACK_FAILED", "UPDATE_ROLLBACK_FAILED"
-    #   resp.desired_state #=> String, one of "RUNNING", "STOPPED"
-    #   resp.last_modified_time #=> Time
     #   resp.name #=> String
+    #   resp.desired_state #=> String, one of "RUNNING", "STOPPED"
+    #   resp.current_state #=> String, one of "RUNNING", "STOPPED", "CREATING", "UPDATING", "DELETING", "STARTING", "STOPPING", "CREATE_FAILED", "UPDATE_FAILED", "START_FAILED", "STOP_FAILED", "DELETE_FAILED", "CREATE_ROLLBACK_FAILED", "DELETE_ROLLBACK_FAILED", "UPDATE_ROLLBACK_FAILED"
+    #   resp.creation_time #=> Time
+    #   resp.last_modified_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pipes-2015-10-07/StopPipe AWS API Documentation
     #
@@ -1333,29 +1385,23 @@ module Aws::Pipes
     #
     # [1]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes.html
     #
+    # @option params [required, String] :name
+    #   The name of the pipe.
+    #
     # @option params [String] :description
     #   A description of the pipe.
     #
     # @option params [String] :desired_state
     #   The state the pipe should be in.
     #
+    # @option params [Types::UpdatePipeSourceParameters] :source_parameters
+    #   The parameters required to set up a source for your pipe.
+    #
     # @option params [String] :enrichment
     #   The ARN of the enrichment resource.
     #
     # @option params [Types::PipeEnrichmentParameters] :enrichment_parameters
     #   The parameters required to set up enrichment on your pipe.
-    #
-    # @option params [Types::PipeLogConfigurationParameters] :log_configuration
-    #   The logging configuration settings for the pipe.
-    #
-    # @option params [required, String] :name
-    #   The name of the pipe.
-    #
-    # @option params [required, String] :role_arn
-    #   The ARN of the role that allows the pipe to send data to the target.
-    #
-    # @option params [Types::UpdatePipeSourceParameters] :source_parameters
-    #   The parameters required to set up a source for your pipe.
     #
     # @option params [String] :target
     #   The ARN of the target resource.
@@ -1371,70 +1417,28 @@ module Aws::Pipes
     #
     #   [1]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes-event-target.html
     #
+    # @option params [required, String] :role_arn
+    #   The ARN of the role that allows the pipe to send data to the target.
+    #
+    # @option params [Types::PipeLogConfigurationParameters] :log_configuration
+    #   The logging configuration settings for the pipe.
+    #
     # @return [Types::UpdatePipeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdatePipeResponse#arn #arn} => String
-    #   * {Types::UpdatePipeResponse#creation_time #creation_time} => Time
-    #   * {Types::UpdatePipeResponse#current_state #current_state} => String
-    #   * {Types::UpdatePipeResponse#desired_state #desired_state} => String
-    #   * {Types::UpdatePipeResponse#last_modified_time #last_modified_time} => Time
     #   * {Types::UpdatePipeResponse#name #name} => String
+    #   * {Types::UpdatePipeResponse#desired_state #desired_state} => String
+    #   * {Types::UpdatePipeResponse#current_state #current_state} => String
+    #   * {Types::UpdatePipeResponse#creation_time #creation_time} => Time
+    #   * {Types::UpdatePipeResponse#last_modified_time #last_modified_time} => Time
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_pipe({
+    #     name: "PipeName", # required
     #     description: "PipeDescription",
     #     desired_state: "RUNNING", # accepts RUNNING, STOPPED
-    #     enrichment: "OptionalArn",
-    #     enrichment_parameters: {
-    #       http_parameters: {
-    #         header_parameters: {
-    #           "HeaderKey" => "HeaderValue",
-    #         },
-    #         path_parameter_values: ["PathParameter"],
-    #         query_string_parameters: {
-    #           "QueryStringKey" => "QueryStringValue",
-    #         },
-    #       },
-    #       input_template: "InputTemplate",
-    #     },
-    #     log_configuration: {
-    #       cloudwatch_logs_log_destination: {
-    #         log_group_arn: "CloudwatchLogGroupArn", # required
-    #       },
-    #       firehose_log_destination: {
-    #         delivery_stream_arn: "FirehoseArn", # required
-    #       },
-    #       include_execution_data: ["ALL"], # accepts ALL
-    #       level: "OFF", # required, accepts OFF, ERROR, INFO, TRACE
-    #       s3_log_destination: {
-    #         bucket_name: "S3LogDestinationParametersBucketNameString", # required
-    #         bucket_owner: "S3LogDestinationParametersBucketOwnerString", # required
-    #         output_format: "json", # accepts json, plain, w3c
-    #         prefix: "S3LogDestinationParametersPrefixString",
-    #       },
-    #     },
-    #     name: "PipeName", # required
-    #     role_arn: "RoleArn", # required
     #     source_parameters: {
-    #       active_mq_broker_parameters: {
-    #         batch_size: 1,
-    #         credentials: { # required
-    #           basic_auth: "SecretManagerArn",
-    #         },
-    #         maximum_batching_window_in_seconds: 1,
-    #       },
-    #       dynamo_db_stream_parameters: {
-    #         batch_size: 1,
-    #         dead_letter_config: {
-    #           arn: "Arn",
-    #         },
-    #         maximum_batching_window_in_seconds: 1,
-    #         maximum_record_age_in_seconds: 1,
-    #         maximum_retry_attempts: 1,
-    #         on_partial_batch_item_failure: "AUTOMATIC_BISECT", # accepts AUTOMATIC_BISECT
-    #         parallelization_factor: 1,
-    #       },
     #       filter_criteria: {
     #         filters: [
     #           {
@@ -1447,107 +1451,126 @@ module Aws::Pipes
     #         dead_letter_config: {
     #           arn: "Arn",
     #         },
+    #         on_partial_batch_item_failure: "AUTOMATIC_BISECT", # accepts AUTOMATIC_BISECT
     #         maximum_batching_window_in_seconds: 1,
     #         maximum_record_age_in_seconds: 1,
     #         maximum_retry_attempts: 1,
-    #         on_partial_batch_item_failure: "AUTOMATIC_BISECT", # accepts AUTOMATIC_BISECT
     #         parallelization_factor: 1,
     #       },
-    #       managed_streaming_kafka_parameters: {
+    #       dynamo_db_stream_parameters: {
     #         batch_size: 1,
-    #         credentials: {
-    #           client_certificate_tls_auth: "SecretManagerArn",
-    #           sasl_scram_512_auth: "SecretManagerArn",
+    #         dead_letter_config: {
+    #           arn: "Arn",
     #         },
+    #         on_partial_batch_item_failure: "AUTOMATIC_BISECT", # accepts AUTOMATIC_BISECT
     #         maximum_batching_window_in_seconds: 1,
-    #       },
-    #       rabbit_mq_broker_parameters: {
-    #         batch_size: 1,
-    #         credentials: { # required
-    #           basic_auth: "SecretManagerArn",
-    #         },
-    #         maximum_batching_window_in_seconds: 1,
-    #       },
-    #       self_managed_kafka_parameters: {
-    #         batch_size: 1,
-    #         credentials: {
-    #           basic_auth: "SecretManagerArn",
-    #           client_certificate_tls_auth: "SecretManagerArn",
-    #           sasl_scram_256_auth: "SecretManagerArn",
-    #           sasl_scram_512_auth: "SecretManagerArn",
-    #         },
-    #         maximum_batching_window_in_seconds: 1,
-    #         server_root_ca_certificate: "SecretManagerArn",
-    #         vpc: {
-    #           security_group: ["SecurityGroupId"],
-    #           subnets: ["SubnetId"],
-    #         },
+    #         maximum_record_age_in_seconds: 1,
+    #         maximum_retry_attempts: 1,
+    #         parallelization_factor: 1,
     #       },
     #       sqs_queue_parameters: {
     #         batch_size: 1,
     #         maximum_batching_window_in_seconds: 1,
     #       },
+    #       active_mq_broker_parameters: {
+    #         credentials: { # required
+    #           basic_auth: "SecretManagerArn",
+    #         },
+    #         batch_size: 1,
+    #         maximum_batching_window_in_seconds: 1,
+    #       },
+    #       rabbit_mq_broker_parameters: {
+    #         credentials: { # required
+    #           basic_auth: "SecretManagerArn",
+    #         },
+    #         batch_size: 1,
+    #         maximum_batching_window_in_seconds: 1,
+    #       },
+    #       managed_streaming_kafka_parameters: {
+    #         batch_size: 1,
+    #         credentials: {
+    #           sasl_scram_512_auth: "SecretManagerArn",
+    #           client_certificate_tls_auth: "SecretManagerArn",
+    #         },
+    #         maximum_batching_window_in_seconds: 1,
+    #       },
+    #       self_managed_kafka_parameters: {
+    #         batch_size: 1,
+    #         maximum_batching_window_in_seconds: 1,
+    #         credentials: {
+    #           basic_auth: "SecretManagerArn",
+    #           sasl_scram_512_auth: "SecretManagerArn",
+    #           sasl_scram_256_auth: "SecretManagerArn",
+    #           client_certificate_tls_auth: "SecretManagerArn",
+    #         },
+    #         server_root_ca_certificate: "SecretManagerArn",
+    #         vpc: {
+    #           subnets: ["SubnetId"],
+    #           security_group: ["SecurityGroupId"],
+    #         },
+    #       },
+    #     },
+    #     enrichment: "OptionalArn",
+    #     enrichment_parameters: {
+    #       input_template: "InputTemplate",
+    #       http_parameters: {
+    #         path_parameter_values: ["PathParameter"],
+    #         header_parameters: {
+    #           "HeaderKey" => "HeaderValue",
+    #         },
+    #         query_string_parameters: {
+    #           "QueryStringKey" => "QueryStringValue",
+    #         },
+    #       },
     #     },
     #     target: "Arn",
     #     target_parameters: {
-    #       batch_job_parameters: {
-    #         array_properties: {
-    #           size: 1,
-    #         },
-    #         container_overrides: {
-    #           command: ["String"],
-    #           environment: [
-    #             {
-    #               name: "String",
-    #               value: "String",
-    #             },
-    #           ],
-    #           instance_type: "String",
-    #           resource_requirements: [
-    #             {
-    #               type: "GPU", # required, accepts GPU, MEMORY, VCPU
-    #               value: "String", # required
-    #             },
-    #           ],
-    #         },
-    #         depends_on: [
-    #           {
-    #             job_id: "String",
-    #             type: "N_TO_N", # accepts N_TO_N, SEQUENTIAL
-    #           },
-    #         ],
-    #         job_definition: "String", # required
-    #         job_name: "String", # required
-    #         parameters: {
-    #           "String" => "String",
-    #         },
-    #         retry_strategy: {
-    #           attempts: 1,
-    #         },
+    #       input_template: "InputTemplate",
+    #       lambda_function_parameters: {
+    #         invocation_type: "REQUEST_RESPONSE", # accepts REQUEST_RESPONSE, FIRE_AND_FORGET
     #       },
-    #       cloud_watch_logs_parameters: {
-    #         log_stream_name: "LogStreamName",
-    #         timestamp: "JsonPath",
+    #       step_function_state_machine_parameters: {
+    #         invocation_type: "REQUEST_RESPONSE", # accepts REQUEST_RESPONSE, FIRE_AND_FORGET
+    #       },
+    #       kinesis_stream_parameters: {
+    #         partition_key: "KinesisPartitionKey", # required
     #       },
     #       ecs_task_parameters: {
+    #         task_definition_arn: "ArnOrJsonPath", # required
+    #         task_count: 1,
+    #         launch_type: "EC2", # accepts EC2, FARGATE, EXTERNAL
+    #         network_configuration: {
+    #           awsvpc_configuration: {
+    #             subnets: ["Subnet"], # required
+    #             security_groups: ["SecurityGroup"],
+    #             assign_public_ip: "ENABLED", # accepts ENABLED, DISABLED
+    #           },
+    #         },
+    #         platform_version: "String",
+    #         group: "String",
     #         capacity_provider_strategy: [
     #           {
-    #             base: 1,
     #             capacity_provider: "CapacityProvider", # required
     #             weight: 1,
+    #             base: 1,
     #           },
     #         ],
     #         enable_ecs_managed_tags: false,
     #         enable_execute_command: false,
-    #         group: "String",
-    #         launch_type: "EC2", # accepts EC2, FARGATE, EXTERNAL
-    #         network_configuration: {
-    #           awsvpc_configuration: {
-    #             assign_public_ip: "ENABLED", # accepts ENABLED, DISABLED
-    #             security_groups: ["SecurityGroup"],
-    #             subnets: ["Subnet"], # required
+    #         placement_constraints: [
+    #           {
+    #             type: "distinctInstance", # accepts distinctInstance, memberOf
+    #             expression: "PlacementConstraintExpression",
     #           },
-    #         },
+    #         ],
+    #         placement_strategy: [
+    #           {
+    #             type: "random", # accepts random, spread, binpack
+    #             field: "PlacementStrategyField",
+    #           },
+    #         ],
+    #         propagate_tags: "TASK_DEFINITION", # accepts TASK_DEFINITION
+    #         reference_id: "ReferenceId",
     #         overrides: {
     #           container_overrides: [
     #             {
@@ -1590,60 +1613,68 @@ module Aws::Pipes
     #           memory: "String",
     #           task_role_arn: "ArnOrJsonPath",
     #         },
-    #         placement_constraints: [
-    #           {
-    #             expression: "PlacementConstraintExpression",
-    #             type: "distinctInstance", # accepts distinctInstance, memberOf
-    #           },
-    #         ],
-    #         placement_strategy: [
-    #           {
-    #             field: "PlacementStrategyField",
-    #             type: "random", # accepts random, spread, binpack
-    #           },
-    #         ],
-    #         platform_version: "String",
-    #         propagate_tags: "TASK_DEFINITION", # accepts TASK_DEFINITION
-    #         reference_id: "ReferenceId",
     #         tags: [
     #           {
     #             key: "TagKey", # required
     #             value: "TagValue", # required
     #           },
     #         ],
-    #         task_count: 1,
-    #         task_definition_arn: "ArnOrJsonPath", # required
     #       },
-    #       event_bridge_event_bus_parameters: {
-    #         detail_type: "EventBridgeDetailType",
-    #         endpoint_id: "EventBridgeEndpointId",
-    #         resources: ["ArnOrJsonPath"],
-    #         source: "EventBridgeEventSource",
-    #         time: "JsonPath",
+    #       batch_job_parameters: {
+    #         job_definition: "String", # required
+    #         job_name: "String", # required
+    #         array_properties: {
+    #           size: 1,
+    #         },
+    #         retry_strategy: {
+    #           attempts: 1,
+    #         },
+    #         container_overrides: {
+    #           command: ["String"],
+    #           environment: [
+    #             {
+    #               name: "String",
+    #               value: "String",
+    #             },
+    #           ],
+    #           instance_type: "String",
+    #           resource_requirements: [
+    #             {
+    #               type: "GPU", # required, accepts GPU, MEMORY, VCPU
+    #               value: "String", # required
+    #             },
+    #           ],
+    #         },
+    #         depends_on: [
+    #           {
+    #             job_id: "String",
+    #             type: "N_TO_N", # accepts N_TO_N, SEQUENTIAL
+    #           },
+    #         ],
+    #         parameters: {
+    #           "String" => "String",
+    #         },
+    #       },
+    #       sqs_queue_parameters: {
+    #         message_group_id: "MessageGroupId",
+    #         message_deduplication_id: "MessageDeduplicationId",
     #       },
     #       http_parameters: {
+    #         path_parameter_values: ["PathParameter"],
     #         header_parameters: {
     #           "HeaderKey" => "HeaderValue",
     #         },
-    #         path_parameter_values: ["PathParameter"],
     #         query_string_parameters: {
     #           "QueryStringKey" => "QueryStringValue",
     #         },
     #       },
-    #       input_template: "InputTemplate",
-    #       kinesis_stream_parameters: {
-    #         partition_key: "KinesisPartitionKey", # required
-    #       },
-    #       lambda_function_parameters: {
-    #         invocation_type: "REQUEST_RESPONSE", # accepts REQUEST_RESPONSE, FIRE_AND_FORGET
-    #       },
     #       redshift_data_parameters: {
+    #         secret_manager_arn: "SecretManagerArnOrJsonPath",
     #         database: "Database", # required
     #         db_user: "DbUser",
-    #         secret_manager_arn: "SecretManagerArnOrJsonPath",
-    #         sqls: ["Sql"], # required
     #         statement_name: "StatementName",
     #         with_event: false,
+    #         sqls: ["Sql"], # required
     #       },
     #       sage_maker_pipeline_parameters: {
     #         pipeline_parameter_list: [
@@ -1653,24 +1684,78 @@ module Aws::Pipes
     #           },
     #         ],
     #       },
-    #       sqs_queue_parameters: {
-    #         message_deduplication_id: "MessageDeduplicationId",
-    #         message_group_id: "MessageGroupId",
+    #       event_bridge_event_bus_parameters: {
+    #         endpoint_id: "EventBridgeEndpointId",
+    #         detail_type: "EventBridgeDetailType",
+    #         source: "EventBridgeEventSource",
+    #         resources: ["ArnOrJsonPath"],
+    #         time: "JsonPath",
     #       },
-    #       step_function_state_machine_parameters: {
-    #         invocation_type: "REQUEST_RESPONSE", # accepts REQUEST_RESPONSE, FIRE_AND_FORGET
+    #       cloud_watch_logs_parameters: {
+    #         log_stream_name: "LogStreamName",
+    #         timestamp: "JsonPath",
     #       },
+    #       timestream_parameters: {
+    #         time_value: "TimeValue", # required
+    #         epoch_time_unit: "MILLISECONDS", # accepts MILLISECONDS, SECONDS, MICROSECONDS, NANOSECONDS
+    #         time_field_type: "EPOCH", # accepts EPOCH, TIMESTAMP_FORMAT
+    #         timestamp_format: "TimestampFormat",
+    #         version_value: "VersionValue", # required
+    #         dimension_mappings: [ # required
+    #           {
+    #             dimension_value: "DimensionValue", # required
+    #             dimension_value_type: "VARCHAR", # required, accepts VARCHAR
+    #             dimension_name: "DimensionName", # required
+    #           },
+    #         ],
+    #         single_measure_mappings: [
+    #           {
+    #             measure_value: "MeasureValue", # required
+    #             measure_value_type: "DOUBLE", # required, accepts DOUBLE, BIGINT, VARCHAR, BOOLEAN, TIMESTAMP
+    #             measure_name: "MeasureName", # required
+    #           },
+    #         ],
+    #         multi_measure_mappings: [
+    #           {
+    #             multi_measure_name: "MultiMeasureName", # required
+    #             multi_measure_attribute_mappings: [ # required
+    #               {
+    #                 measure_value: "MeasureValue", # required
+    #                 measure_value_type: "DOUBLE", # required, accepts DOUBLE, BIGINT, VARCHAR, BOOLEAN, TIMESTAMP
+    #                 multi_measure_attribute_name: "MultiMeasureAttributeName", # required
+    #               },
+    #             ],
+    #           },
+    #         ],
+    #       },
+    #     },
+    #     role_arn: "RoleArn", # required
+    #     log_configuration: {
+    #       s3_log_destination: {
+    #         bucket_name: "S3LogDestinationParametersBucketNameString", # required
+    #         bucket_owner: "S3LogDestinationParametersBucketOwnerString", # required
+    #         output_format: "json", # accepts json, plain, w3c
+    #         prefix: "S3LogDestinationParametersPrefixString",
+    #       },
+    #       firehose_log_destination: {
+    #         delivery_stream_arn: "FirehoseArn", # required
+    #       },
+    #       cloudwatch_logs_log_destination: {
+    #         log_group_arn: "CloudwatchLogGroupArn", # required
+    #       },
+    #       level: "OFF", # required, accepts OFF, ERROR, INFO, TRACE
+    #       include_execution_data: ["ALL"], # accepts ALL
     #     },
     #   })
     #
     # @example Response structure
     #
     #   resp.arn #=> String
-    #   resp.creation_time #=> Time
-    #   resp.current_state #=> String, one of "RUNNING", "STOPPED", "CREATING", "UPDATING", "DELETING", "STARTING", "STOPPING", "CREATE_FAILED", "UPDATE_FAILED", "START_FAILED", "STOP_FAILED", "DELETE_FAILED", "CREATE_ROLLBACK_FAILED", "DELETE_ROLLBACK_FAILED", "UPDATE_ROLLBACK_FAILED"
-    #   resp.desired_state #=> String, one of "RUNNING", "STOPPED"
-    #   resp.last_modified_time #=> Time
     #   resp.name #=> String
+    #   resp.desired_state #=> String, one of "RUNNING", "STOPPED"
+    #   resp.current_state #=> String, one of "RUNNING", "STOPPED", "CREATING", "UPDATING", "DELETING", "STARTING", "STOPPING", "CREATE_FAILED", "UPDATE_FAILED", "START_FAILED", "STOP_FAILED", "DELETE_FAILED", "CREATE_ROLLBACK_FAILED", "DELETE_ROLLBACK_FAILED", "UPDATE_ROLLBACK_FAILED"
+    #   resp.creation_time #=> Time
+    #   resp.last_modified_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pipes-2015-10-07/UpdatePipe AWS API Documentation
     #
@@ -1694,7 +1779,7 @@ module Aws::Pipes
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-pipes'
-      context[:gem_version] = '1.18.0'
+      context[:gem_version] = '1.20.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

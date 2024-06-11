@@ -1527,7 +1527,13 @@ module Aws::CodeBuild
     #   @return [Types::VpcConfig]
     #
     # @!attribute [rw] fleet_service_role
-    #   The service role associated with the compute fleet.
+    #   The service role associated with the compute fleet. For more
+    #   information, see [ Allow a user to add a permission policy for a
+    #   fleet service role][1] in the *CodeBuild User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codebuild/latest/userguide/auth-and-access-control-iam-identity-based-access-control.html#customer-managed-policies-example-permission-policy-fleet-service-role.html
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -1835,13 +1841,25 @@ module Aws::CodeBuild
     #   Specifies the type of build this webhook will trigger.
     #   @return [String]
     #
+    # @!attribute [rw] manual_creation
+    #   If manualCreation is true, CodeBuild doesn't create a webhook in
+    #   GitHub and instead returns `payloadUrl` and `secret` values for the
+    #   webhook. The `payloadUrl` and `secret` values in the output can be
+    #   used to manually create a webhook within GitHub.
+    #
+    #   <note markdown="1"> `manualCreation` is only available for GitHub webhooks.
+    #
+    #    </note>
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/CreateWebhookInput AWS API Documentation
     #
     class CreateWebhookInput < Struct.new(
       :project_name,
       :branch_filter,
       :filter_groups,
-      :build_type)
+      :build_type,
+      :manual_creation)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2498,7 +2516,13 @@ module Aws::CodeBuild
     #   @return [Types::VpcConfig]
     #
     # @!attribute [rw] fleet_service_role
-    #   The service role associated with the compute fleet.
+    #   The service role associated with the compute fleet. For more
+    #   information, see [ Allow a user to add a permission policy for a
+    #   fleet service role][1] in the *CodeBuild User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codebuild/latest/userguide/auth-and-access-control-iam-identity-based-access-control.html#customer-managed-policies-example-permission-policy-fleet-service-role.html
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -6447,7 +6471,13 @@ module Aws::CodeBuild
     #   @return [Types::VpcConfig]
     #
     # @!attribute [rw] fleet_service_role
-    #   The service role associated with the compute fleet.
+    #   The service role associated with the compute fleet. For more
+    #   information, see [ Allow a user to add a permission policy for a
+    #   fleet service role][1] in the *CodeBuild User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codebuild/latest/userguide/auth-and-access-control-iam-identity-based-access-control.html#customer-managed-policies-example-permission-policy-fleet-service-role.html
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -6915,6 +6945,17 @@ module Aws::CodeBuild
     #   Specifies the type of build this webhook will trigger.
     #   @return [String]
     #
+    # @!attribute [rw] manual_creation
+    #   If manualCreation is true, CodeBuild doesn't create a webhook in
+    #   GitHub and instead returns `payloadUrl` and `secret` values for the
+    #   webhook. The `payloadUrl` and `secret` values in the output can be
+    #   used to manually create a webhook within GitHub.
+    #
+    #   <note markdown="1"> manualCreation is only available for GitHub webhooks.
+    #
+    #    </note>
+    #   @return [Boolean]
+    #
     # @!attribute [rw] last_modified_secret
     #   A timestamp that indicates the last time a repository's secret
     #   token was modified.
@@ -6929,6 +6970,7 @@ module Aws::CodeBuild
       :branch_filter,
       :filter_groups,
       :build_type,
+      :manual_creation,
       :last_modified_secret)
       SENSITIVE = []
       include Aws::Structure
@@ -6952,9 +6994,9 @@ module Aws::CodeBuild
     #       PULL_REQUEST_CREATED, PULL_REQUEST_UPDATED` filters all push,
     #       pull request created, and pull request updated events.
     #
-    #       <note markdown="1"> The `PULL_REQUEST_REOPENED` works with GitHub and GitHub
-    #       Enterprise only. The `RELEASED`, `PRERELEASED`, and
-    #       `WORKFLOW_JOB_QUEUED` work with GitHub only.
+    #       <note markdown="1"> Types `PULL_REQUEST_REOPENED` and `WORKFLOW_JOB_QUEUED` work
+    #       with GitHub and GitHub Enterprise only. Types `RELEASED` and
+    #       `PRERELEASED` work with GitHub only.
     #
     #        </note>
     #

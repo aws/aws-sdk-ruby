@@ -404,6 +404,20 @@ module Aws::LocationService
       end
     end
 
+    class ForecastGeofenceEvents
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::LocationService::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class GetDevicePosition
       def self.build(context)
         unless context.config.regional_endpoint
@@ -811,6 +825,20 @@ module Aws::LocationService
     end
 
     class UpdateTracker
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::LocationService::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class VerifyDevicePosition
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s

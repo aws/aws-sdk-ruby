@@ -680,6 +680,7 @@ module Aws::ManagedBlockchain
         "endpointPrefix" => "managedblockchain",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceAbbreviation" => "ManagedBlockchain",
         "serviceFullName" => "Amazon Managed Blockchain",
         "serviceId" => "ManagedBlockchain",

@@ -3924,7 +3924,7 @@ module Aws::IoTWireless
     #   resp.wireless_device_list[0].sidewalk.device_certificates[0].value #=> String
     #   resp.wireless_device_list[0].sidewalk.device_profile_id #=> String
     #   resp.wireless_device_list[0].sidewalk.status #=> String, one of "PROVISIONED", "REGISTERED", "ACTIVATED", "UNKNOWN"
-    #   resp.wireless_device_list[0].fuota_device_status #=> String, one of "Initial", "Package_Not_Supported", "FragAlgo_unsupported", "Not_enough_memory", "FragIndex_unsupported", "Wrong_descriptor", "SessionCnt_replay", "MissingFrag", "MemoryError", "MICError", "Successful"
+    #   resp.wireless_device_list[0].fuota_device_status #=> String, one of "Initial", "Package_Not_Supported", "FragAlgo_unsupported", "Not_enough_memory", "FragIndex_unsupported", "Wrong_descriptor", "SessionCnt_replay", "MissingFrag", "MemoryError", "MICError", "Successful", "Device_exist_in_conflict_fuota_task"
     #   resp.wireless_device_list[0].multicast_device_status #=> String
     #   resp.wireless_device_list[0].mc_group_id #=> Integer
     #
@@ -5282,7 +5282,7 @@ module Aws::IoTWireless
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iotwireless'
-      context[:gem_version] = '1.47.0'
+      context[:gem_version] = '1.49.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -392,7 +392,7 @@ module Aws::DynamoDB
     #
     # @return [self]
     def load
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.describe_table(table_name: @name)
       end
       @data = resp.table
@@ -509,7 +509,7 @@ module Aws::DynamoDB
           :retry
         end
       end
-      Aws::Plugins::UserAgent.feature('resource') do
+      Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         Aws::Waiters::Waiter.new(options).wait({})
       end
     end
@@ -523,7 +523,7 @@ module Aws::DynamoDB
     # @return [Types::DeleteTableOutput]
     def delete(options = {})
       options = options.merge(table_name: @name)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.delete_table(options)
       end
       resp.data
@@ -727,7 +727,7 @@ module Aws::DynamoDB
     # @return [Types::DeleteItemOutput]
     def delete_item(options = {})
       options = options.merge(table_name: @name)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.delete_item(options)
       end
       resp.data
@@ -852,7 +852,7 @@ module Aws::DynamoDB
     # @return [Types::GetItemOutput]
     def get_item(options = {})
       options = options.merge(table_name: @name)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.get_item(options)
       end
       resp.data
@@ -1077,7 +1077,7 @@ module Aws::DynamoDB
     # @return [Types::PutItemOutput]
     def put_item(options = {})
       options = options.merge(table_name: @name)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.put_item(options)
       end
       resp.data
@@ -1467,7 +1467,7 @@ module Aws::DynamoDB
     # @return [Types::QueryOutput]
     def query(options = {})
       options = options.merge(table_name: @name)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.query(options)
       end
       resp.data
@@ -1784,7 +1784,7 @@ module Aws::DynamoDB
     # @return [Types::ScanOutput]
     def scan(options = {})
       options = options.merge(table_name: @name)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.scan(options)
       end
       resp.data
@@ -1926,16 +1926,16 @@ module Aws::DynamoDB
     #
     #   * `PROVISIONED` - We recommend using `PROVISIONED` for predictable
     #     workloads. `PROVISIONED` sets the billing mode to [Provisioned
-    #     Mode][1].
+    #     capacity mode][1].
     #
     #   * `PAY_PER_REQUEST` - We recommend using `PAY_PER_REQUEST` for
     #     unpredictable workloads. `PAY_PER_REQUEST` sets the billing mode to
-    #     [On-Demand Mode][2].
+    #     [On-demand capacity mode][2].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadWriteCapacityMode.html#HowItWorks.ProvisionedThroughput.Manual
-    #   [2]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadWriteCapacityMode.html#HowItWorks.OnDemand
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/provisioned-capacity-mode.html
+    #   [2]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/on-demand-capacity-mode.html
     # @option options [Types::ProvisionedThroughput] :provisioned_throughput
     #   The new provisioned throughput settings for the specified table or
     #   index.
@@ -1973,14 +1973,10 @@ module Aws::DynamoDB
     #   A list of replica update actions (create, delete, or update) for the
     #   table.
     #
-    #   <note markdown="1"> This property only applies to [Version 2019.11.21 (Current)][1] of
-    #   global tables.
+    #   <note markdown="1"> For global tables, this property only applies to global tables using
+    #   Version 2019.11.21 (Current version).
     #
     #    </note>
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V2.html
     # @option options [String] :table_class
     #   The table class of the table to be updated. Valid values are
     #   `STANDARD` and `STANDARD_INFREQUENT_ACCESS`.
@@ -1994,7 +1990,7 @@ module Aws::DynamoDB
     # @return [Table]
     def update(options = {})
       options = options.merge(table_name: @name)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.update_table(options)
       end
       Table.new(
@@ -2310,7 +2306,7 @@ module Aws::DynamoDB
     # @return [Types::UpdateItemOutput]
     def update_item(options = {})
       options = options.merge(table_name: @name)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.update_item(options)
       end
       resp.data

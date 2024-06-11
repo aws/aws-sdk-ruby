@@ -1965,6 +1965,7 @@ module Aws::DynamoDB
         "endpointPrefix" => "dynamodb",
         "jsonVersion" => "1.0",
         "protocol" => "json",
+        "protocols" => ["json"],
         "serviceAbbreviation" => "DynamoDB",
         "serviceFullName" => "Amazon DynamoDB",
         "serviceId" => "DynamoDB",

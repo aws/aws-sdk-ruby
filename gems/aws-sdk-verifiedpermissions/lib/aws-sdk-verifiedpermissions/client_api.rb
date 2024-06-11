@@ -19,6 +19,8 @@ module Aws::VerifiedPermissions
     ActionIdentifierList = Shapes::ListShape.new(name: 'ActionIdentifierList')
     ActionType = Shapes::StringShape.new(name: 'ActionType')
     AttributeValue = Shapes::UnionShape.new(name: 'AttributeValue')
+    Audience = Shapes::StringShape.new(name: 'Audience')
+    Audiences = Shapes::ListShape.new(name: 'Audiences')
     BatchIsAuthorizedInput = Shapes::StructureShape.new(name: 'BatchIsAuthorizedInput')
     BatchIsAuthorizedInputItem = Shapes::StructureShape.new(name: 'BatchIsAuthorizedInputItem')
     BatchIsAuthorizedInputList = Shapes::ListShape.new(name: 'BatchIsAuthorizedInputList')
@@ -33,6 +35,7 @@ module Aws::VerifiedPermissions
     BatchIsAuthorizedWithTokenOutputList = Shapes::ListShape.new(name: 'BatchIsAuthorizedWithTokenOutputList')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     BooleanAttribute = Shapes::BooleanShape.new(name: 'BooleanAttribute')
+    Claim = Shapes::StringShape.new(name: 'Claim')
     ClientId = Shapes::StringShape.new(name: 'ClientId')
     ClientIds = Shapes::ListShape.new(name: 'ClientIds')
     CognitoGroupConfiguration = Shapes::StructureShape.new(name: 'CognitoGroupConfiguration')
@@ -70,6 +73,7 @@ module Aws::VerifiedPermissions
     EntitiesDefinition = Shapes::UnionShape.new(name: 'EntitiesDefinition')
     EntityAttributes = Shapes::MapShape.new(name: 'EntityAttributes')
     EntityId = Shapes::StringShape.new(name: 'EntityId')
+    EntityIdPrefix = Shapes::StringShape.new(name: 'EntityIdPrefix')
     EntityIdentifier = Shapes::StructureShape.new(name: 'EntityIdentifier')
     EntityItem = Shapes::StructureShape.new(name: 'EntityItem')
     EntityList = Shapes::ListShape.new(name: 'EntityList')
@@ -116,6 +120,21 @@ module Aws::VerifiedPermissions
     Namespace = Shapes::StringShape.new(name: 'Namespace')
     NamespaceList = Shapes::ListShape.new(name: 'NamespaceList')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
+    OpenIdConnectAccessTokenConfiguration = Shapes::StructureShape.new(name: 'OpenIdConnectAccessTokenConfiguration')
+    OpenIdConnectAccessTokenConfigurationDetail = Shapes::StructureShape.new(name: 'OpenIdConnectAccessTokenConfigurationDetail')
+    OpenIdConnectAccessTokenConfigurationItem = Shapes::StructureShape.new(name: 'OpenIdConnectAccessTokenConfigurationItem')
+    OpenIdConnectConfiguration = Shapes::StructureShape.new(name: 'OpenIdConnectConfiguration')
+    OpenIdConnectConfigurationDetail = Shapes::StructureShape.new(name: 'OpenIdConnectConfigurationDetail')
+    OpenIdConnectConfigurationItem = Shapes::StructureShape.new(name: 'OpenIdConnectConfigurationItem')
+    OpenIdConnectGroupConfiguration = Shapes::StructureShape.new(name: 'OpenIdConnectGroupConfiguration')
+    OpenIdConnectGroupConfigurationDetail = Shapes::StructureShape.new(name: 'OpenIdConnectGroupConfigurationDetail')
+    OpenIdConnectGroupConfigurationItem = Shapes::StructureShape.new(name: 'OpenIdConnectGroupConfigurationItem')
+    OpenIdConnectIdentityTokenConfiguration = Shapes::StructureShape.new(name: 'OpenIdConnectIdentityTokenConfiguration')
+    OpenIdConnectIdentityTokenConfigurationDetail = Shapes::StructureShape.new(name: 'OpenIdConnectIdentityTokenConfigurationDetail')
+    OpenIdConnectIdentityTokenConfigurationItem = Shapes::StructureShape.new(name: 'OpenIdConnectIdentityTokenConfigurationItem')
+    OpenIdConnectTokenSelection = Shapes::UnionShape.new(name: 'OpenIdConnectTokenSelection')
+    OpenIdConnectTokenSelectionDetail = Shapes::UnionShape.new(name: 'OpenIdConnectTokenSelectionDetail')
+    OpenIdConnectTokenSelectionItem = Shapes::UnionShape.new(name: 'OpenIdConnectTokenSelectionItem')
     OpenIdIssuer = Shapes::StringShape.new(name: 'OpenIdIssuer')
     ParentList = Shapes::ListShape.new(name: 'ParentList')
     PolicyDefinition = Shapes::UnionShape.new(name: 'PolicyDefinition')
@@ -166,6 +185,11 @@ module Aws::VerifiedPermissions
     UpdateConfiguration = Shapes::UnionShape.new(name: 'UpdateConfiguration')
     UpdateIdentitySourceInput = Shapes::StructureShape.new(name: 'UpdateIdentitySourceInput')
     UpdateIdentitySourceOutput = Shapes::StructureShape.new(name: 'UpdateIdentitySourceOutput')
+    UpdateOpenIdConnectAccessTokenConfiguration = Shapes::StructureShape.new(name: 'UpdateOpenIdConnectAccessTokenConfiguration')
+    UpdateOpenIdConnectConfiguration = Shapes::StructureShape.new(name: 'UpdateOpenIdConnectConfiguration')
+    UpdateOpenIdConnectGroupConfiguration = Shapes::StructureShape.new(name: 'UpdateOpenIdConnectGroupConfiguration')
+    UpdateOpenIdConnectIdentityTokenConfiguration = Shapes::StructureShape.new(name: 'UpdateOpenIdConnectIdentityTokenConfiguration')
+    UpdateOpenIdConnectTokenSelection = Shapes::UnionShape.new(name: 'UpdateOpenIdConnectTokenSelection')
     UpdatePolicyDefinition = Shapes::UnionShape.new(name: 'UpdatePolicyDefinition')
     UpdatePolicyInput = Shapes::StructureShape.new(name: 'UpdatePolicyInput')
     UpdatePolicyOutput = Shapes::StructureShape.new(name: 'UpdatePolicyOutput')
@@ -205,6 +229,8 @@ module Aws::VerifiedPermissions
     AttributeValue.add_member_subclass(:record, Types::AttributeValue::Record)
     AttributeValue.add_member_subclass(:unknown, Types::AttributeValue::Unknown)
     AttributeValue.struct_class = Types::AttributeValue
+
+    Audiences.member = Shapes::ShapeRef.new(shape: Audience)
 
     BatchIsAuthorizedInput.add_member(:policy_store_id, Shapes::ShapeRef.new(shape: PolicyStoreId, required: true, location_name: "policyStoreId"))
     BatchIsAuthorizedInput.add_member(:entities, Shapes::ShapeRef.new(shape: EntitiesDefinition, location_name: "entities"))
@@ -285,20 +311,26 @@ module Aws::VerifiedPermissions
     CognitoUserPoolConfigurationItem.struct_class = Types::CognitoUserPoolConfigurationItem
 
     Configuration.add_member(:cognito_user_pool_configuration, Shapes::ShapeRef.new(shape: CognitoUserPoolConfiguration, location_name: "cognitoUserPoolConfiguration"))
+    Configuration.add_member(:open_id_connect_configuration, Shapes::ShapeRef.new(shape: OpenIdConnectConfiguration, location_name: "openIdConnectConfiguration"))
     Configuration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     Configuration.add_member_subclass(:cognito_user_pool_configuration, Types::Configuration::CognitoUserPoolConfiguration)
+    Configuration.add_member_subclass(:open_id_connect_configuration, Types::Configuration::OpenIdConnectConfiguration)
     Configuration.add_member_subclass(:unknown, Types::Configuration::Unknown)
     Configuration.struct_class = Types::Configuration
 
     ConfigurationDetail.add_member(:cognito_user_pool_configuration, Shapes::ShapeRef.new(shape: CognitoUserPoolConfigurationDetail, location_name: "cognitoUserPoolConfiguration"))
+    ConfigurationDetail.add_member(:open_id_connect_configuration, Shapes::ShapeRef.new(shape: OpenIdConnectConfigurationDetail, location_name: "openIdConnectConfiguration"))
     ConfigurationDetail.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     ConfigurationDetail.add_member_subclass(:cognito_user_pool_configuration, Types::ConfigurationDetail::CognitoUserPoolConfiguration)
+    ConfigurationDetail.add_member_subclass(:open_id_connect_configuration, Types::ConfigurationDetail::OpenIdConnectConfiguration)
     ConfigurationDetail.add_member_subclass(:unknown, Types::ConfigurationDetail::Unknown)
     ConfigurationDetail.struct_class = Types::ConfigurationDetail
 
     ConfigurationItem.add_member(:cognito_user_pool_configuration, Shapes::ShapeRef.new(shape: CognitoUserPoolConfigurationItem, location_name: "cognitoUserPoolConfiguration"))
+    ConfigurationItem.add_member(:open_id_connect_configuration, Shapes::ShapeRef.new(shape: OpenIdConnectConfigurationItem, location_name: "openIdConnectConfiguration"))
     ConfigurationItem.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     ConfigurationItem.add_member_subclass(:cognito_user_pool_configuration, Types::ConfigurationItem::CognitoUserPoolConfiguration)
+    ConfigurationItem.add_member_subclass(:open_id_connect_configuration, Types::ConfigurationItem::OpenIdConnectConfiguration)
     ConfigurationItem.add_member_subclass(:unknown, Types::ConfigurationItem::Unknown)
     ConfigurationItem.struct_class = Types::ConfigurationItem
 
@@ -587,6 +619,84 @@ module Aws::VerifiedPermissions
 
     NamespaceList.member = Shapes::ShapeRef.new(shape: Namespace)
 
+    OpenIdConnectAccessTokenConfiguration.add_member(:principal_id_claim, Shapes::ShapeRef.new(shape: Claim, location_name: "principalIdClaim"))
+    OpenIdConnectAccessTokenConfiguration.add_member(:audiences, Shapes::ShapeRef.new(shape: Audiences, location_name: "audiences"))
+    OpenIdConnectAccessTokenConfiguration.struct_class = Types::OpenIdConnectAccessTokenConfiguration
+
+    OpenIdConnectAccessTokenConfigurationDetail.add_member(:principal_id_claim, Shapes::ShapeRef.new(shape: Claim, location_name: "principalIdClaim"))
+    OpenIdConnectAccessTokenConfigurationDetail.add_member(:audiences, Shapes::ShapeRef.new(shape: Audiences, location_name: "audiences"))
+    OpenIdConnectAccessTokenConfigurationDetail.struct_class = Types::OpenIdConnectAccessTokenConfigurationDetail
+
+    OpenIdConnectAccessTokenConfigurationItem.add_member(:principal_id_claim, Shapes::ShapeRef.new(shape: Claim, location_name: "principalIdClaim"))
+    OpenIdConnectAccessTokenConfigurationItem.add_member(:audiences, Shapes::ShapeRef.new(shape: Audiences, location_name: "audiences"))
+    OpenIdConnectAccessTokenConfigurationItem.struct_class = Types::OpenIdConnectAccessTokenConfigurationItem
+
+    OpenIdConnectConfiguration.add_member(:issuer, Shapes::ShapeRef.new(shape: Issuer, required: true, location_name: "issuer"))
+    OpenIdConnectConfiguration.add_member(:entity_id_prefix, Shapes::ShapeRef.new(shape: EntityIdPrefix, location_name: "entityIdPrefix"))
+    OpenIdConnectConfiguration.add_member(:group_configuration, Shapes::ShapeRef.new(shape: OpenIdConnectGroupConfiguration, location_name: "groupConfiguration"))
+    OpenIdConnectConfiguration.add_member(:token_selection, Shapes::ShapeRef.new(shape: OpenIdConnectTokenSelection, required: true, location_name: "tokenSelection"))
+    OpenIdConnectConfiguration.struct_class = Types::OpenIdConnectConfiguration
+
+    OpenIdConnectConfigurationDetail.add_member(:issuer, Shapes::ShapeRef.new(shape: Issuer, required: true, location_name: "issuer"))
+    OpenIdConnectConfigurationDetail.add_member(:entity_id_prefix, Shapes::ShapeRef.new(shape: EntityIdPrefix, location_name: "entityIdPrefix"))
+    OpenIdConnectConfigurationDetail.add_member(:group_configuration, Shapes::ShapeRef.new(shape: OpenIdConnectGroupConfigurationDetail, location_name: "groupConfiguration"))
+    OpenIdConnectConfigurationDetail.add_member(:token_selection, Shapes::ShapeRef.new(shape: OpenIdConnectTokenSelectionDetail, required: true, location_name: "tokenSelection"))
+    OpenIdConnectConfigurationDetail.struct_class = Types::OpenIdConnectConfigurationDetail
+
+    OpenIdConnectConfigurationItem.add_member(:issuer, Shapes::ShapeRef.new(shape: Issuer, required: true, location_name: "issuer"))
+    OpenIdConnectConfigurationItem.add_member(:entity_id_prefix, Shapes::ShapeRef.new(shape: EntityIdPrefix, location_name: "entityIdPrefix"))
+    OpenIdConnectConfigurationItem.add_member(:group_configuration, Shapes::ShapeRef.new(shape: OpenIdConnectGroupConfigurationItem, location_name: "groupConfiguration"))
+    OpenIdConnectConfigurationItem.add_member(:token_selection, Shapes::ShapeRef.new(shape: OpenIdConnectTokenSelectionItem, required: true, location_name: "tokenSelection"))
+    OpenIdConnectConfigurationItem.struct_class = Types::OpenIdConnectConfigurationItem
+
+    OpenIdConnectGroupConfiguration.add_member(:group_claim, Shapes::ShapeRef.new(shape: Claim, required: true, location_name: "groupClaim"))
+    OpenIdConnectGroupConfiguration.add_member(:group_entity_type, Shapes::ShapeRef.new(shape: GroupEntityType, required: true, location_name: "groupEntityType"))
+    OpenIdConnectGroupConfiguration.struct_class = Types::OpenIdConnectGroupConfiguration
+
+    OpenIdConnectGroupConfigurationDetail.add_member(:group_claim, Shapes::ShapeRef.new(shape: Claim, required: true, location_name: "groupClaim"))
+    OpenIdConnectGroupConfigurationDetail.add_member(:group_entity_type, Shapes::ShapeRef.new(shape: GroupEntityType, required: true, location_name: "groupEntityType"))
+    OpenIdConnectGroupConfigurationDetail.struct_class = Types::OpenIdConnectGroupConfigurationDetail
+
+    OpenIdConnectGroupConfigurationItem.add_member(:group_claim, Shapes::ShapeRef.new(shape: Claim, required: true, location_name: "groupClaim"))
+    OpenIdConnectGroupConfigurationItem.add_member(:group_entity_type, Shapes::ShapeRef.new(shape: GroupEntityType, required: true, location_name: "groupEntityType"))
+    OpenIdConnectGroupConfigurationItem.struct_class = Types::OpenIdConnectGroupConfigurationItem
+
+    OpenIdConnectIdentityTokenConfiguration.add_member(:principal_id_claim, Shapes::ShapeRef.new(shape: Claim, location_name: "principalIdClaim"))
+    OpenIdConnectIdentityTokenConfiguration.add_member(:client_ids, Shapes::ShapeRef.new(shape: ClientIds, location_name: "clientIds"))
+    OpenIdConnectIdentityTokenConfiguration.struct_class = Types::OpenIdConnectIdentityTokenConfiguration
+
+    OpenIdConnectIdentityTokenConfigurationDetail.add_member(:principal_id_claim, Shapes::ShapeRef.new(shape: Claim, location_name: "principalIdClaim"))
+    OpenIdConnectIdentityTokenConfigurationDetail.add_member(:client_ids, Shapes::ShapeRef.new(shape: ClientIds, location_name: "clientIds"))
+    OpenIdConnectIdentityTokenConfigurationDetail.struct_class = Types::OpenIdConnectIdentityTokenConfigurationDetail
+
+    OpenIdConnectIdentityTokenConfigurationItem.add_member(:principal_id_claim, Shapes::ShapeRef.new(shape: Claim, location_name: "principalIdClaim"))
+    OpenIdConnectIdentityTokenConfigurationItem.add_member(:client_ids, Shapes::ShapeRef.new(shape: ClientIds, location_name: "clientIds"))
+    OpenIdConnectIdentityTokenConfigurationItem.struct_class = Types::OpenIdConnectIdentityTokenConfigurationItem
+
+    OpenIdConnectTokenSelection.add_member(:access_token_only, Shapes::ShapeRef.new(shape: OpenIdConnectAccessTokenConfiguration, location_name: "accessTokenOnly"))
+    OpenIdConnectTokenSelection.add_member(:identity_token_only, Shapes::ShapeRef.new(shape: OpenIdConnectIdentityTokenConfiguration, location_name: "identityTokenOnly"))
+    OpenIdConnectTokenSelection.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    OpenIdConnectTokenSelection.add_member_subclass(:access_token_only, Types::OpenIdConnectTokenSelection::AccessTokenOnly)
+    OpenIdConnectTokenSelection.add_member_subclass(:identity_token_only, Types::OpenIdConnectTokenSelection::IdentityTokenOnly)
+    OpenIdConnectTokenSelection.add_member_subclass(:unknown, Types::OpenIdConnectTokenSelection::Unknown)
+    OpenIdConnectTokenSelection.struct_class = Types::OpenIdConnectTokenSelection
+
+    OpenIdConnectTokenSelectionDetail.add_member(:access_token_only, Shapes::ShapeRef.new(shape: OpenIdConnectAccessTokenConfigurationDetail, location_name: "accessTokenOnly"))
+    OpenIdConnectTokenSelectionDetail.add_member(:identity_token_only, Shapes::ShapeRef.new(shape: OpenIdConnectIdentityTokenConfigurationDetail, location_name: "identityTokenOnly"))
+    OpenIdConnectTokenSelectionDetail.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    OpenIdConnectTokenSelectionDetail.add_member_subclass(:access_token_only, Types::OpenIdConnectTokenSelectionDetail::AccessTokenOnly)
+    OpenIdConnectTokenSelectionDetail.add_member_subclass(:identity_token_only, Types::OpenIdConnectTokenSelectionDetail::IdentityTokenOnly)
+    OpenIdConnectTokenSelectionDetail.add_member_subclass(:unknown, Types::OpenIdConnectTokenSelectionDetail::Unknown)
+    OpenIdConnectTokenSelectionDetail.struct_class = Types::OpenIdConnectTokenSelectionDetail
+
+    OpenIdConnectTokenSelectionItem.add_member(:access_token_only, Shapes::ShapeRef.new(shape: OpenIdConnectAccessTokenConfigurationItem, location_name: "accessTokenOnly"))
+    OpenIdConnectTokenSelectionItem.add_member(:identity_token_only, Shapes::ShapeRef.new(shape: OpenIdConnectIdentityTokenConfigurationItem, location_name: "identityTokenOnly"))
+    OpenIdConnectTokenSelectionItem.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    OpenIdConnectTokenSelectionItem.add_member_subclass(:access_token_only, Types::OpenIdConnectTokenSelectionItem::AccessTokenOnly)
+    OpenIdConnectTokenSelectionItem.add_member_subclass(:identity_token_only, Types::OpenIdConnectTokenSelectionItem::IdentityTokenOnly)
+    OpenIdConnectTokenSelectionItem.add_member_subclass(:unknown, Types::OpenIdConnectTokenSelectionItem::Unknown)
+    OpenIdConnectTokenSelectionItem.struct_class = Types::OpenIdConnectTokenSelectionItem
+
     ParentList.member = Shapes::ShapeRef.new(shape: EntityIdentifier)
 
     PolicyDefinition.add_member(:static, Shapes::ShapeRef.new(shape: StaticPolicyDefinition, location_name: "static"))
@@ -730,8 +840,10 @@ module Aws::VerifiedPermissions
     UpdateCognitoUserPoolConfiguration.struct_class = Types::UpdateCognitoUserPoolConfiguration
 
     UpdateConfiguration.add_member(:cognito_user_pool_configuration, Shapes::ShapeRef.new(shape: UpdateCognitoUserPoolConfiguration, location_name: "cognitoUserPoolConfiguration"))
+    UpdateConfiguration.add_member(:open_id_connect_configuration, Shapes::ShapeRef.new(shape: UpdateOpenIdConnectConfiguration, location_name: "openIdConnectConfiguration"))
     UpdateConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     UpdateConfiguration.add_member_subclass(:cognito_user_pool_configuration, Types::UpdateConfiguration::CognitoUserPoolConfiguration)
+    UpdateConfiguration.add_member_subclass(:open_id_connect_configuration, Types::UpdateConfiguration::OpenIdConnectConfiguration)
     UpdateConfiguration.add_member_subclass(:unknown, Types::UpdateConfiguration::Unknown)
     UpdateConfiguration.struct_class = Types::UpdateConfiguration
 
@@ -746,6 +858,32 @@ module Aws::VerifiedPermissions
     UpdateIdentitySourceOutput.add_member(:last_updated_date, Shapes::ShapeRef.new(shape: TimestampFormat, required: true, location_name: "lastUpdatedDate"))
     UpdateIdentitySourceOutput.add_member(:policy_store_id, Shapes::ShapeRef.new(shape: PolicyStoreId, required: true, location_name: "policyStoreId"))
     UpdateIdentitySourceOutput.struct_class = Types::UpdateIdentitySourceOutput
+
+    UpdateOpenIdConnectAccessTokenConfiguration.add_member(:principal_id_claim, Shapes::ShapeRef.new(shape: Claim, location_name: "principalIdClaim"))
+    UpdateOpenIdConnectAccessTokenConfiguration.add_member(:audiences, Shapes::ShapeRef.new(shape: Audiences, location_name: "audiences"))
+    UpdateOpenIdConnectAccessTokenConfiguration.struct_class = Types::UpdateOpenIdConnectAccessTokenConfiguration
+
+    UpdateOpenIdConnectConfiguration.add_member(:issuer, Shapes::ShapeRef.new(shape: Issuer, required: true, location_name: "issuer"))
+    UpdateOpenIdConnectConfiguration.add_member(:entity_id_prefix, Shapes::ShapeRef.new(shape: EntityIdPrefix, location_name: "entityIdPrefix"))
+    UpdateOpenIdConnectConfiguration.add_member(:group_configuration, Shapes::ShapeRef.new(shape: UpdateOpenIdConnectGroupConfiguration, location_name: "groupConfiguration"))
+    UpdateOpenIdConnectConfiguration.add_member(:token_selection, Shapes::ShapeRef.new(shape: UpdateOpenIdConnectTokenSelection, required: true, location_name: "tokenSelection"))
+    UpdateOpenIdConnectConfiguration.struct_class = Types::UpdateOpenIdConnectConfiguration
+
+    UpdateOpenIdConnectGroupConfiguration.add_member(:group_claim, Shapes::ShapeRef.new(shape: Claim, required: true, location_name: "groupClaim"))
+    UpdateOpenIdConnectGroupConfiguration.add_member(:group_entity_type, Shapes::ShapeRef.new(shape: GroupEntityType, required: true, location_name: "groupEntityType"))
+    UpdateOpenIdConnectGroupConfiguration.struct_class = Types::UpdateOpenIdConnectGroupConfiguration
+
+    UpdateOpenIdConnectIdentityTokenConfiguration.add_member(:principal_id_claim, Shapes::ShapeRef.new(shape: Claim, location_name: "principalIdClaim"))
+    UpdateOpenIdConnectIdentityTokenConfiguration.add_member(:client_ids, Shapes::ShapeRef.new(shape: ClientIds, location_name: "clientIds"))
+    UpdateOpenIdConnectIdentityTokenConfiguration.struct_class = Types::UpdateOpenIdConnectIdentityTokenConfiguration
+
+    UpdateOpenIdConnectTokenSelection.add_member(:access_token_only, Shapes::ShapeRef.new(shape: UpdateOpenIdConnectAccessTokenConfiguration, location_name: "accessTokenOnly"))
+    UpdateOpenIdConnectTokenSelection.add_member(:identity_token_only, Shapes::ShapeRef.new(shape: UpdateOpenIdConnectIdentityTokenConfiguration, location_name: "identityTokenOnly"))
+    UpdateOpenIdConnectTokenSelection.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    UpdateOpenIdConnectTokenSelection.add_member_subclass(:access_token_only, Types::UpdateOpenIdConnectTokenSelection::AccessTokenOnly)
+    UpdateOpenIdConnectTokenSelection.add_member_subclass(:identity_token_only, Types::UpdateOpenIdConnectTokenSelection::IdentityTokenOnly)
+    UpdateOpenIdConnectTokenSelection.add_member_subclass(:unknown, Types::UpdateOpenIdConnectTokenSelection::Unknown)
+    UpdateOpenIdConnectTokenSelection.struct_class = Types::UpdateOpenIdConnectTokenSelection
 
     UpdatePolicyDefinition.add_member(:static, Shapes::ShapeRef.new(shape: UpdateStaticPolicyDefinition, location_name: "static"))
     UpdatePolicyDefinition.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))

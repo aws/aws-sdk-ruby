@@ -32,7 +32,7 @@ require_relative 'aws-sdk-account/customizations'
 # structure.
 #
 #     account = Aws::Account::Client.new
-#     resp = account.delete_alternate_contact(params)
+#     resp = account.accept_primary_email_update(params)
 #
 # See {Client} for more information.
 #
@@ -52,6 +52,6 @@ require_relative 'aws-sdk-account/customizations'
 # @!group service
 module Aws::Account
 
-  GEM_VERSION = '1.23.0'
+  GEM_VERSION = '1.25.0'
 
 end

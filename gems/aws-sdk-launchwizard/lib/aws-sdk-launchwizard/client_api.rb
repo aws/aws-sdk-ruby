@@ -13,11 +13,13 @@ module Aws::LaunchWizard
 
     include Seahorse::Model
 
+    AllowedValues = Shapes::ListShape.new(name: 'AllowedValues')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     CreateDeploymentInput = Shapes::StructureShape.new(name: 'CreateDeploymentInput')
     CreateDeploymentOutput = Shapes::StructureShape.new(name: 'CreateDeploymentOutput')
     DeleteDeploymentInput = Shapes::StructureShape.new(name: 'DeleteDeploymentInput')
     DeleteDeploymentOutput = Shapes::StructureShape.new(name: 'DeleteDeploymentOutput')
+    DeploymentConditionalField = Shapes::StructureShape.new(name: 'DeploymentConditionalField')
     DeploymentData = Shapes::StructureShape.new(name: 'DeploymentData')
     DeploymentDataSummary = Shapes::StructureShape.new(name: 'DeploymentDataSummary')
     DeploymentDataSummaryList = Shapes::ListShape.new(name: 'DeploymentDataSummaryList')
@@ -32,10 +34,14 @@ module Aws::LaunchWizard
     DeploymentName = Shapes::StringShape.new(name: 'DeploymentName')
     DeploymentPatternName = Shapes::StringShape.new(name: 'DeploymentPatternName')
     DeploymentSpecifications = Shapes::MapShape.new(name: 'DeploymentSpecifications')
+    DeploymentSpecificationsData = Shapes::ListShape.new(name: 'DeploymentSpecificationsData')
+    DeploymentSpecificationsField = Shapes::StructureShape.new(name: 'DeploymentSpecificationsField')
     DeploymentStatus = Shapes::StringShape.new(name: 'DeploymentStatus')
     EventStatus = Shapes::StringShape.new(name: 'EventStatus')
     GetDeploymentInput = Shapes::StructureShape.new(name: 'GetDeploymentInput')
     GetDeploymentOutput = Shapes::StructureShape.new(name: 'GetDeploymentOutput')
+    GetWorkloadDeploymentPatternInput = Shapes::StructureShape.new(name: 'GetWorkloadDeploymentPatternInput')
+    GetWorkloadDeploymentPatternOutput = Shapes::StructureShape.new(name: 'GetWorkloadDeploymentPatternOutput')
     GetWorkloadInput = Shapes::StructureShape.new(name: 'GetWorkloadInput')
     GetWorkloadOutput = Shapes::StructureShape.new(name: 'GetWorkloadOutput')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
@@ -44,6 +50,8 @@ module Aws::LaunchWizard
     ListDeploymentEventsOutput = Shapes::StructureShape.new(name: 'ListDeploymentEventsOutput')
     ListDeploymentsInput = Shapes::StructureShape.new(name: 'ListDeploymentsInput')
     ListDeploymentsOutput = Shapes::StructureShape.new(name: 'ListDeploymentsOutput')
+    ListTagsForResourceInput = Shapes::StructureShape.new(name: 'ListTagsForResourceInput')
+    ListTagsForResourceOutput = Shapes::StructureShape.new(name: 'ListTagsForResourceOutput')
     ListWorkloadDeploymentPatternsInput = Shapes::StructureShape.new(name: 'ListWorkloadDeploymentPatternsInput')
     ListWorkloadDeploymentPatternsOutput = Shapes::StructureShape.new(name: 'ListWorkloadDeploymentPatternsOutput')
     ListWorkloadsInput = Shapes::StructureShape.new(name: 'ListWorkloadsInput')
@@ -55,13 +63,23 @@ module Aws::LaunchWizard
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     ResourceLimitException = Shapes::StructureShape.new(name: 'ResourceLimitException')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
+    SpecificationsConditionalData = Shapes::ListShape.new(name: 'SpecificationsConditionalData')
     String = Shapes::StringShape.new(name: 'String')
+    TagKey = Shapes::StringShape.new(name: 'TagKey')
+    TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
+    TagResourceInput = Shapes::StructureShape.new(name: 'TagResourceInput')
+    TagResourceOutput = Shapes::StructureShape.new(name: 'TagResourceOutput')
+    TagValue = Shapes::StringShape.new(name: 'TagValue')
+    Tags = Shapes::MapShape.new(name: 'Tags')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
+    UntagResourceInput = Shapes::StructureShape.new(name: 'UntagResourceInput')
+    UntagResourceOutput = Shapes::StructureShape.new(name: 'UntagResourceOutput')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     ValueString = Shapes::StringShape.new(name: 'ValueString')
     WorkloadData = Shapes::StructureShape.new(name: 'WorkloadData')
     WorkloadDataSummary = Shapes::StructureShape.new(name: 'WorkloadDataSummary')
     WorkloadDataSummaryList = Shapes::ListShape.new(name: 'WorkloadDataSummaryList')
+    WorkloadDeploymentPatternData = Shapes::StructureShape.new(name: 'WorkloadDeploymentPatternData')
     WorkloadDeploymentPatternDataSummary = Shapes::StructureShape.new(name: 'WorkloadDeploymentPatternDataSummary')
     WorkloadDeploymentPatternDataSummaryList = Shapes::ListShape.new(name: 'WorkloadDeploymentPatternDataSummaryList')
     WorkloadDeploymentPatternStatus = Shapes::StringShape.new(name: 'WorkloadDeploymentPatternStatus')
@@ -69,10 +87,13 @@ module Aws::LaunchWizard
     WorkloadStatus = Shapes::StringShape.new(name: 'WorkloadStatus')
     WorkloadVersionName = Shapes::StringShape.new(name: 'WorkloadVersionName')
 
+    AllowedValues.member = Shapes::ShapeRef.new(shape: ValueString)
+
     CreateDeploymentInput.add_member(:deployment_pattern_name, Shapes::ShapeRef.new(shape: DeploymentPatternName, required: true, location_name: "deploymentPatternName"))
     CreateDeploymentInput.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     CreateDeploymentInput.add_member(:name, Shapes::ShapeRef.new(shape: DeploymentName, required: true, location_name: "name"))
     CreateDeploymentInput.add_member(:specifications, Shapes::ShapeRef.new(shape: DeploymentSpecifications, required: true, location_name: "specifications"))
+    CreateDeploymentInput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateDeploymentInput.add_member(:workload_name, Shapes::ShapeRef.new(shape: WorkloadName, required: true, location_name: "workloadName"))
     CreateDeploymentInput.struct_class = Types::CreateDeploymentInput
 
@@ -86,14 +107,21 @@ module Aws::LaunchWizard
     DeleteDeploymentOutput.add_member(:status_reason, Shapes::ShapeRef.new(shape: String, location_name: "statusReason"))
     DeleteDeploymentOutput.struct_class = Types::DeleteDeploymentOutput
 
+    DeploymentConditionalField.add_member(:comparator, Shapes::ShapeRef.new(shape: String, location_name: "comparator"))
+    DeploymentConditionalField.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
+    DeploymentConditionalField.add_member(:value, Shapes::ShapeRef.new(shape: String, location_name: "value"))
+    DeploymentConditionalField.struct_class = Types::DeploymentConditionalField
+
     DeploymentData.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
     DeploymentData.add_member(:deleted_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "deletedAt"))
+    DeploymentData.add_member(:deployment_arn, Shapes::ShapeRef.new(shape: String, location_name: "deploymentArn"))
     DeploymentData.add_member(:id, Shapes::ShapeRef.new(shape: DeploymentId, location_name: "id"))
     DeploymentData.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
     DeploymentData.add_member(:pattern_name, Shapes::ShapeRef.new(shape: DeploymentPatternName, location_name: "patternName"))
     DeploymentData.add_member(:resource_group, Shapes::ShapeRef.new(shape: String, location_name: "resourceGroup"))
     DeploymentData.add_member(:specifications, Shapes::ShapeRef.new(shape: DeploymentSpecifications, location_name: "specifications"))
     DeploymentData.add_member(:status, Shapes::ShapeRef.new(shape: DeploymentStatus, location_name: "status"))
+    DeploymentData.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     DeploymentData.add_member(:workload_name, Shapes::ShapeRef.new(shape: WorkloadName, location_name: "workloadName"))
     DeploymentData.struct_class = Types::DeploymentData
 
@@ -127,11 +155,27 @@ module Aws::LaunchWizard
     DeploymentSpecifications.key = Shapes::ShapeRef.new(shape: KeyString)
     DeploymentSpecifications.value = Shapes::ShapeRef.new(shape: ValueString)
 
+    DeploymentSpecificationsData.member = Shapes::ShapeRef.new(shape: DeploymentSpecificationsField)
+
+    DeploymentSpecificationsField.add_member(:allowed_values, Shapes::ShapeRef.new(shape: AllowedValues, location_name: "allowedValues"))
+    DeploymentSpecificationsField.add_member(:conditionals, Shapes::ShapeRef.new(shape: SpecificationsConditionalData, location_name: "conditionals"))
+    DeploymentSpecificationsField.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
+    DeploymentSpecificationsField.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
+    DeploymentSpecificationsField.add_member(:required, Shapes::ShapeRef.new(shape: String, location_name: "required"))
+    DeploymentSpecificationsField.struct_class = Types::DeploymentSpecificationsField
+
     GetDeploymentInput.add_member(:deployment_id, Shapes::ShapeRef.new(shape: DeploymentId, required: true, location_name: "deploymentId"))
     GetDeploymentInput.struct_class = Types::GetDeploymentInput
 
     GetDeploymentOutput.add_member(:deployment, Shapes::ShapeRef.new(shape: DeploymentData, location_name: "deployment"))
     GetDeploymentOutput.struct_class = Types::GetDeploymentOutput
+
+    GetWorkloadDeploymentPatternInput.add_member(:deployment_pattern_name, Shapes::ShapeRef.new(shape: DeploymentPatternName, required: true, location_name: "deploymentPatternName"))
+    GetWorkloadDeploymentPatternInput.add_member(:workload_name, Shapes::ShapeRef.new(shape: WorkloadName, required: true, location_name: "workloadName"))
+    GetWorkloadDeploymentPatternInput.struct_class = Types::GetWorkloadDeploymentPatternInput
+
+    GetWorkloadDeploymentPatternOutput.add_member(:workload_deployment_pattern, Shapes::ShapeRef.new(shape: WorkloadDeploymentPatternData, location_name: "workloadDeploymentPattern"))
+    GetWorkloadDeploymentPatternOutput.struct_class = Types::GetWorkloadDeploymentPatternOutput
 
     GetWorkloadInput.add_member(:workload_name, Shapes::ShapeRef.new(shape: WorkloadName, required: true, location_name: "workloadName"))
     GetWorkloadInput.struct_class = Types::GetWorkloadInput
@@ -160,6 +204,12 @@ module Aws::LaunchWizard
     ListDeploymentsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListDeploymentsOutput.struct_class = Types::ListDeploymentsOutput
 
+    ListTagsForResourceInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "resourceArn"))
+    ListTagsForResourceInput.struct_class = Types::ListTagsForResourceInput
+
+    ListTagsForResourceOutput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    ListTagsForResourceOutput.struct_class = Types::ListTagsForResourceOutput
+
     ListWorkloadDeploymentPatternsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxWorkloadDeploymentPatternResults, location_name: "maxResults"))
     ListWorkloadDeploymentPatternsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListWorkloadDeploymentPatternsInput.add_member(:workload_name, Shapes::ShapeRef.new(shape: WorkloadName, required: true, location_name: "workloadName"))
@@ -183,6 +233,25 @@ module Aws::LaunchWizard
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
+    SpecificationsConditionalData.member = Shapes::ShapeRef.new(shape: DeploymentConditionalField)
+
+    TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
+
+    TagResourceInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "resourceArn"))
+    TagResourceInput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, required: true, location_name: "tags"))
+    TagResourceInput.struct_class = Types::TagResourceInput
+
+    TagResourceOutput.struct_class = Types::TagResourceOutput
+
+    Tags.key = Shapes::ShapeRef.new(shape: TagKey)
+    Tags.value = Shapes::ShapeRef.new(shape: TagValue)
+
+    UntagResourceInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "resourceArn"))
+    UntagResourceInput.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location: "querystring", location_name: "tagKeys"))
+    UntagResourceInput.struct_class = Types::UntagResourceInput
+
+    UntagResourceOutput.struct_class = Types::UntagResourceOutput
+
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     ValidationException.struct_class = Types::ValidationException
 
@@ -200,6 +269,16 @@ module Aws::LaunchWizard
     WorkloadDataSummary.struct_class = Types::WorkloadDataSummary
 
     WorkloadDataSummaryList.member = Shapes::ShapeRef.new(shape: WorkloadDataSummary)
+
+    WorkloadDeploymentPatternData.add_member(:deployment_pattern_name, Shapes::ShapeRef.new(shape: DeploymentPatternName, location_name: "deploymentPatternName"))
+    WorkloadDeploymentPatternData.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
+    WorkloadDeploymentPatternData.add_member(:display_name, Shapes::ShapeRef.new(shape: String, location_name: "displayName"))
+    WorkloadDeploymentPatternData.add_member(:specifications, Shapes::ShapeRef.new(shape: DeploymentSpecificationsData, location_name: "specifications"))
+    WorkloadDeploymentPatternData.add_member(:status, Shapes::ShapeRef.new(shape: WorkloadDeploymentPatternStatus, location_name: "status"))
+    WorkloadDeploymentPatternData.add_member(:status_message, Shapes::ShapeRef.new(shape: String, location_name: "statusMessage"))
+    WorkloadDeploymentPatternData.add_member(:workload_name, Shapes::ShapeRef.new(shape: WorkloadName, location_name: "workloadName"))
+    WorkloadDeploymentPatternData.add_member(:workload_version_name, Shapes::ShapeRef.new(shape: WorkloadVersionName, location_name: "workloadVersionName"))
+    WorkloadDeploymentPatternData.struct_class = Types::WorkloadDeploymentPatternData
 
     WorkloadDeploymentPatternDataSummary.add_member(:deployment_pattern_name, Shapes::ShapeRef.new(shape: DeploymentPatternName, location_name: "deploymentPatternName"))
     WorkloadDeploymentPatternDataSummary.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
@@ -223,6 +302,7 @@ module Aws::LaunchWizard
         "endpointPrefix" => "launchwizard",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceFullName" => "AWS Launch Wizard",
         "serviceId" => "Launch Wizard",
         "signatureVersion" => "v4",
@@ -248,6 +328,7 @@ module Aws::LaunchWizard
         o.http_request_uri = "/deleteDeployment"
         o.input = Shapes::ShapeRef.new(shape: DeleteDeploymentInput)
         o.output = Shapes::ShapeRef.new(shape: DeleteDeploymentOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceLimitException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -270,6 +351,17 @@ module Aws::LaunchWizard
         o.http_request_uri = "/getWorkload"
         o.input = Shapes::ShapeRef.new(shape: GetWorkloadInput)
         o.output = Shapes::ShapeRef.new(shape: GetWorkloadOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:get_workload_deployment_pattern, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetWorkloadDeploymentPattern"
+        o.http_method = "POST"
+        o.http_request_uri = "/getWorkloadDeploymentPattern"
+        o.input = Shapes::ShapeRef.new(shape: GetWorkloadDeploymentPatternInput)
+        o.output = Shapes::ShapeRef.new(shape: GetWorkloadDeploymentPatternOutput)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -308,6 +400,17 @@ module Aws::LaunchWizard
         )
       end)
 
+      api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTagsForResource"
+        o.http_method = "GET"
+        o.http_request_uri = "/tags/{resourceArn}"
+        o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceInput)
+        o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
       api.add_operation(:list_workload_deployment_patterns, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListWorkloadDeploymentPatterns"
         o.http_method = "POST"
@@ -339,6 +442,28 @@ module Aws::LaunchWizard
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/tags/{resourceArn}"
+        o.input = Shapes::ShapeRef.new(shape: TagResourceInput)
+        o.output = Shapes::ShapeRef.new(shape: TagResourceOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UntagResource"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/tags/{resourceArn}"
+        o.input = Shapes::ShapeRef.new(shape: UntagResourceInput)
+        o.output = Shapes::ShapeRef.new(shape: UntagResourceOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
     end
 

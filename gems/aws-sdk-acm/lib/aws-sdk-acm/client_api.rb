@@ -392,6 +392,7 @@ module Aws::ACM
         "endpointPrefix" => "acm",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "protocols" => ["json"],
         "serviceAbbreviation" => "ACM",
         "serviceFullName" => "AWS Certificate Manager",
         "serviceId" => "ACM",

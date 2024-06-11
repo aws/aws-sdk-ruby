@@ -158,6 +158,7 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::GetScanResponse]
         def analysis_type: () -> ("Security" | "All")
         def created_at: () -> ::Time
+        def error_message: () -> ::String
         def number_of_revisions: () -> ::Integer
         def run_id: () -> ::String
         def scan_name: () -> ::String

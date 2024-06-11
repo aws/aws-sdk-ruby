@@ -1,0 +1,326 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module TaxSettings
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TaxSettings/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _BatchDeleteTaxRegistrationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchDeleteTaxRegistrationResponse]
+        def errors: () -> ::Array[Types::BatchDeleteTaxRegistrationError]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TaxSettings/Client.html#batch_delete_tax_registration-instance_method
+      def batch_delete_tax_registration: (
+                                           account_ids: Array[::String]
+                                         ) -> _BatchDeleteTaxRegistrationResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchDeleteTaxRegistrationResponseSuccess
+
+      interface _BatchPutTaxRegistrationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchPutTaxRegistrationResponse]
+        def errors: () -> ::Array[Types::BatchPutTaxRegistrationError]
+        def status: () -> ("Verified" | "Pending" | "Deleted" | "Rejected")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TaxSettings/Client.html#batch_put_tax_registration-instance_method
+      def batch_put_tax_registration: (
+                                        account_ids: Array[::String],
+                                        tax_registration_entry: {
+                                          additional_tax_information: {
+                                            canada_additional_info: {
+                                              canada_quebec_sales_tax_number: ::String?,
+                                              canada_retail_sales_tax_number: ::String?,
+                                              is_reseller_account: bool?,
+                                              provincial_sales_tax_id: ::String?
+                                            }?,
+                                            estonia_additional_info: {
+                                              registry_commercial_code: ::String
+                                            }?,
+                                            georgia_additional_info: {
+                                              person_type: ("Legal Person" | "Physical Person" | "Business")
+                                            }?,
+                                            israel_additional_info: {
+                                              customer_type: ("Business" | "Individual"),
+                                              dealer_type: ("Authorized" | "Non-authorized")
+                                            }?,
+                                            italy_additional_info: {
+                                              cig_number: ::String?,
+                                              cup_number: ::String?,
+                                              sdi_account_id: ::String?,
+                                              tax_code: ::String?
+                                            }?,
+                                            kenya_additional_info: {
+                                              person_type: ("Legal Person" | "Physical Person" | "Business")
+                                            }?,
+                                            malaysia_additional_info: {
+                                              service_tax_codes: Array[("Consultancy" | "Digital Service And Electronic Medium" | "IT Services" | "Training Or Coaching")]
+                                            }?,
+                                            poland_additional_info: {
+                                              individual_registration_number: ::String?,
+                                              is_group_vat_enabled: bool?
+                                            }?,
+                                            romania_additional_info: {
+                                              tax_registration_number_type: ("TaxRegistrationNumber" | "LocalRegistrationNumber")
+                                            }?,
+                                            saudi_arabia_additional_info: {
+                                              tax_registration_number_type: ("TaxRegistrationNumber" | "TaxIdentificationNumber" | "CommercialRegistrationNumber")?
+                                            }?,
+                                            south_korea_additional_info: {
+                                              business_representative_name: ::String,
+                                              item_of_business: ::String,
+                                              line_of_business: ::String
+                                            }?,
+                                            spain_additional_info: {
+                                              registration_type: ("Intra-EU" | "Local")
+                                            }?,
+                                            turkey_additional_info: {
+                                              industries: ("CirculatingOrg" | "ProfessionalOrg" | "Banks" | "Insurance" | "PensionAndBenefitFunds" | "DevelopmentAgencies")?,
+                                              kep_email_id: ::String?,
+                                              secondary_tax_id: ::String?,
+                                              tax_office: ::String?
+                                            }?,
+                                            ukraine_additional_info: {
+                                              ukraine_trn_type: ("Business" | "Individual")
+                                            }?
+                                          }?,
+                                          certified_email_id: ::String?,
+                                          legal_address: {
+                                            address_line_1: ::String,
+                                            address_line_2: ::String?,
+                                            address_line_3: ::String?,
+                                            city: ::String,
+                                            country_code: ::String,
+                                            district_or_county: ::String?,
+                                            postal_code: ::String,
+                                            state_or_region: ::String?
+                                          }?,
+                                          legal_name: ::String?,
+                                          registration_id: ::String,
+                                          registration_type: ("VAT" | "GST" | "CPF" | "CNPJ" | "SST"),
+                                          sector: ("Business" | "Individual" | "Government")?,
+                                          verification_details: {
+                                            date_of_birth: ::String?,
+                                            tax_registration_documents: Array[
+                                              {
+                                                s3_location: {
+                                                  bucket: ::String,
+                                                  key: ::String
+                                                }
+                                              },
+                                            ]?
+                                          }?
+                                        }
+                                      ) -> _BatchPutTaxRegistrationResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchPutTaxRegistrationResponseSuccess
+
+      interface _DeleteTaxRegistrationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteTaxRegistrationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TaxSettings/Client.html#delete_tax_registration-instance_method
+      def delete_tax_registration: (
+                                     ?account_id: ::String
+                                   ) -> _DeleteTaxRegistrationResponseSuccess
+                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteTaxRegistrationResponseSuccess
+
+      interface _GetTaxRegistrationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetTaxRegistrationResponse]
+        def tax_registration: () -> Types::TaxRegistration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TaxSettings/Client.html#get_tax_registration-instance_method
+      def get_tax_registration: (
+                                  ?account_id: ::String
+                                ) -> _GetTaxRegistrationResponseSuccess
+                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTaxRegistrationResponseSuccess
+
+      interface _GetTaxRegistrationDocumentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetTaxRegistrationDocumentResponse]
+        def destination_file_path: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TaxSettings/Client.html#get_tax_registration_document-instance_method
+      def get_tax_registration_document: (
+                                           destination_s3_location: {
+                                             bucket: ::String,
+                                             prefix: ::String?
+                                           },
+                                           tax_document_metadata: {
+                                             tax_document_access_token: ::String,
+                                             tax_document_name: ::String
+                                           }
+                                         ) -> _GetTaxRegistrationDocumentResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTaxRegistrationDocumentResponseSuccess
+
+      interface _ListTaxRegistrationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTaxRegistrationsResponse]
+        def account_details: () -> ::Array[Types::AccountDetails]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TaxSettings/Client.html#list_tax_registrations-instance_method
+      def list_tax_registrations: (
+                                    ?max_results: ::Integer,
+                                    ?next_token: ::String
+                                  ) -> _ListTaxRegistrationsResponseSuccess
+                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTaxRegistrationsResponseSuccess
+
+      interface _PutTaxRegistrationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutTaxRegistrationResponse]
+        def status: () -> ("Verified" | "Pending" | "Deleted" | "Rejected")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TaxSettings/Client.html#put_tax_registration-instance_method
+      def put_tax_registration: (
+                                  ?account_id: ::String,
+                                  tax_registration_entry: {
+                                    additional_tax_information: {
+                                      canada_additional_info: {
+                                        canada_quebec_sales_tax_number: ::String?,
+                                        canada_retail_sales_tax_number: ::String?,
+                                        is_reseller_account: bool?,
+                                        provincial_sales_tax_id: ::String?
+                                      }?,
+                                      estonia_additional_info: {
+                                        registry_commercial_code: ::String
+                                      }?,
+                                      georgia_additional_info: {
+                                        person_type: ("Legal Person" | "Physical Person" | "Business")
+                                      }?,
+                                      israel_additional_info: {
+                                        customer_type: ("Business" | "Individual"),
+                                        dealer_type: ("Authorized" | "Non-authorized")
+                                      }?,
+                                      italy_additional_info: {
+                                        cig_number: ::String?,
+                                        cup_number: ::String?,
+                                        sdi_account_id: ::String?,
+                                        tax_code: ::String?
+                                      }?,
+                                      kenya_additional_info: {
+                                        person_type: ("Legal Person" | "Physical Person" | "Business")
+                                      }?,
+                                      malaysia_additional_info: {
+                                        service_tax_codes: Array[("Consultancy" | "Digital Service And Electronic Medium" | "IT Services" | "Training Or Coaching")]
+                                      }?,
+                                      poland_additional_info: {
+                                        individual_registration_number: ::String?,
+                                        is_group_vat_enabled: bool?
+                                      }?,
+                                      romania_additional_info: {
+                                        tax_registration_number_type: ("TaxRegistrationNumber" | "LocalRegistrationNumber")
+                                      }?,
+                                      saudi_arabia_additional_info: {
+                                        tax_registration_number_type: ("TaxRegistrationNumber" | "TaxIdentificationNumber" | "CommercialRegistrationNumber")?
+                                      }?,
+                                      south_korea_additional_info: {
+                                        business_representative_name: ::String,
+                                        item_of_business: ::String,
+                                        line_of_business: ::String
+                                      }?,
+                                      spain_additional_info: {
+                                        registration_type: ("Intra-EU" | "Local")
+                                      }?,
+                                      turkey_additional_info: {
+                                        industries: ("CirculatingOrg" | "ProfessionalOrg" | "Banks" | "Insurance" | "PensionAndBenefitFunds" | "DevelopmentAgencies")?,
+                                        kep_email_id: ::String?,
+                                        secondary_tax_id: ::String?,
+                                        tax_office: ::String?
+                                      }?,
+                                      ukraine_additional_info: {
+                                        ukraine_trn_type: ("Business" | "Individual")
+                                      }?
+                                    }?,
+                                    certified_email_id: ::String?,
+                                    legal_address: {
+                                      address_line_1: ::String,
+                                      address_line_2: ::String?,
+                                      address_line_3: ::String?,
+                                      city: ::String,
+                                      country_code: ::String,
+                                      district_or_county: ::String?,
+                                      postal_code: ::String,
+                                      state_or_region: ::String?
+                                    }?,
+                                    legal_name: ::String?,
+                                    registration_id: ::String,
+                                    registration_type: ("VAT" | "GST" | "CPF" | "CNPJ" | "SST"),
+                                    sector: ("Business" | "Individual" | "Government")?,
+                                    verification_details: {
+                                      date_of_birth: ::String?,
+                                      tax_registration_documents: Array[
+                                        {
+                                          s3_location: {
+                                            bucket: ::String,
+                                            key: ::String
+                                          }
+                                        },
+                                      ]?
+                                    }?
+                                  }
+                                ) -> _PutTaxRegistrationResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutTaxRegistrationResponseSuccess
+    end
+  end
+end
+

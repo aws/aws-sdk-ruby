@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.61.0 (2024-06-05)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.60.0 (2024-06-03)
+------------------
+
+* Feature - This doc-only update identifies fields that are specific to Gen 1 and Gen 2 applications.
+
 1.59.0 (2024-05-13)
 ------------------
 

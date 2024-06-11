@@ -37,6 +37,7 @@ module Aws::StorageGateway
     AutomaticTapeCreationPolicyInfos = Shapes::ListShape.new(name: 'AutomaticTapeCreationPolicyInfos')
     AutomaticTapeCreationRule = Shapes::StructureShape.new(name: 'AutomaticTapeCreationRule')
     AutomaticTapeCreationRules = Shapes::ListShape.new(name: 'AutomaticTapeCreationRules')
+    AutomaticUpdatePolicy = Shapes::StringShape.new(name: 'AutomaticUpdatePolicy')
     AvailabilityMonitorTestStatus = Shapes::StringShape.new(name: 'AvailabilityMonitorTestStatus')
     BandwidthDownloadRateLimit = Shapes::IntegerShape.new(name: 'BandwidthDownloadRateLimit')
     BandwidthRateLimitInterval = Shapes::StructureShape.new(name: 'BandwidthRateLimitInterval')
@@ -300,6 +301,7 @@ module Aws::StorageGateway
     ShutdownGatewayOutput = Shapes::StructureShape.new(name: 'ShutdownGatewayOutput')
     SnapshotDescription = Shapes::StringShape.new(name: 'SnapshotDescription')
     SnapshotId = Shapes::StringShape.new(name: 'SnapshotId')
+    SoftwareUpdatePreferences = Shapes::StructureShape.new(name: 'SoftwareUpdatePreferences')
     SoftwareUpdatesEndDate = Shapes::StringShape.new(name: 'SoftwareUpdatesEndDate')
     SoftwareVersion = Shapes::StringShape.new(name: 'SoftwareVersion')
     Squash = Shapes::StringShape.new(name: 'Squash')
@@ -844,6 +846,7 @@ module Aws::StorageGateway
     DescribeMaintenanceStartTimeOutput.add_member(:day_of_week, Shapes::ShapeRef.new(shape: DayOfWeek, location_name: "DayOfWeek"))
     DescribeMaintenanceStartTimeOutput.add_member(:day_of_month, Shapes::ShapeRef.new(shape: DayOfMonth, location_name: "DayOfMonth"))
     DescribeMaintenanceStartTimeOutput.add_member(:timezone, Shapes::ShapeRef.new(shape: GatewayTimezone, location_name: "Timezone"))
+    DescribeMaintenanceStartTimeOutput.add_member(:software_update_preferences, Shapes::ShapeRef.new(shape: SoftwareUpdatePreferences, location_name: "SoftwareUpdatePreferences"))
     DescribeMaintenanceStartTimeOutput.struct_class = Types::DescribeMaintenanceStartTimeOutput
 
     DescribeNFSFileSharesInput.add_member(:file_share_arn_list, Shapes::ShapeRef.new(shape: FileShareARNList, required: true, location_name: "FileShareARNList"))
@@ -1323,6 +1326,9 @@ module Aws::StorageGateway
     ShutdownGatewayOutput.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN"))
     ShutdownGatewayOutput.struct_class = Types::ShutdownGatewayOutput
 
+    SoftwareUpdatePreferences.add_member(:automatic_update_policy, Shapes::ShapeRef.new(shape: AutomaticUpdatePolicy, location_name: "AutomaticUpdatePolicy"))
+    SoftwareUpdatePreferences.struct_class = Types::SoftwareUpdatePreferences
+
     StartAvailabilityMonitorTestInput.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayARN, required: true, location_name: "GatewayARN"))
     StartAvailabilityMonitorTestInput.struct_class = Types::StartAvailabilityMonitorTestInput
 
@@ -1484,10 +1490,11 @@ module Aws::StorageGateway
     UpdateGatewaySoftwareNowOutput.struct_class = Types::UpdateGatewaySoftwareNowOutput
 
     UpdateMaintenanceStartTimeInput.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayARN, required: true, location_name: "GatewayARN"))
-    UpdateMaintenanceStartTimeInput.add_member(:hour_of_day, Shapes::ShapeRef.new(shape: HourOfDay, required: true, location_name: "HourOfDay"))
-    UpdateMaintenanceStartTimeInput.add_member(:minute_of_hour, Shapes::ShapeRef.new(shape: MinuteOfHour, required: true, location_name: "MinuteOfHour"))
+    UpdateMaintenanceStartTimeInput.add_member(:hour_of_day, Shapes::ShapeRef.new(shape: HourOfDay, location_name: "HourOfDay"))
+    UpdateMaintenanceStartTimeInput.add_member(:minute_of_hour, Shapes::ShapeRef.new(shape: MinuteOfHour, location_name: "MinuteOfHour"))
     UpdateMaintenanceStartTimeInput.add_member(:day_of_week, Shapes::ShapeRef.new(shape: DayOfWeek, location_name: "DayOfWeek"))
     UpdateMaintenanceStartTimeInput.add_member(:day_of_month, Shapes::ShapeRef.new(shape: DayOfMonth, location_name: "DayOfMonth"))
+    UpdateMaintenanceStartTimeInput.add_member(:software_update_preferences, Shapes::ShapeRef.new(shape: SoftwareUpdatePreferences, location_name: "SoftwareUpdatePreferences"))
     UpdateMaintenanceStartTimeInput.struct_class = Types::UpdateMaintenanceStartTimeInput
 
     UpdateMaintenanceStartTimeOutput.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN"))
@@ -1627,9 +1634,11 @@ module Aws::StorageGateway
 
       api.metadata = {
         "apiVersion" => "2013-06-30",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "storagegateway",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "protocols" => ["json"],
         "serviceFullName" => "AWS Storage Gateway",
         "serviceId" => "Storage Gateway",
         "signatureVersion" => "v4",

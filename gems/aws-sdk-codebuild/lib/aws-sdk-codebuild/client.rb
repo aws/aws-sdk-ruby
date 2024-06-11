@@ -942,6 +942,7 @@ module Aws::CodeBuild
     #   resp.projects[0].webhook.filter_groups[0][0].pattern #=> String
     #   resp.projects[0].webhook.filter_groups[0][0].exclude_matched_pattern #=> Boolean
     #   resp.projects[0].webhook.build_type #=> String, one of "BUILD", "BUILD_BATCH"
+    #   resp.projects[0].webhook.manual_creation #=> Boolean
     #   resp.projects[0].webhook.last_modified_secret #=> Time
     #   resp.projects[0].vpc_config.vpc_id #=> String
     #   resp.projects[0].vpc_config.subnets #=> Array
@@ -1216,7 +1217,13 @@ module Aws::CodeBuild
     #   Information about the VPC configuration that CodeBuild accesses.
     #
     # @option params [String] :fleet_service_role
-    #   The service role associated with the compute fleet.
+    #   The service role associated with the compute fleet. For more
+    #   information, see [ Allow a user to add a permission policy for a fleet
+    #   service role][1] in the *CodeBuild User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codebuild/latest/userguide/auth-and-access-control-iam-identity-based-access-control.html#customer-managed-policies-example-permission-policy-fleet-service-role.html
     #
     # @option params [Array<Types::Tag>] :tags
     #   A list of tag key and value pairs associated with this compute fleet.
@@ -1686,6 +1693,7 @@ module Aws::CodeBuild
     #   resp.project.webhook.filter_groups[0][0].pattern #=> String
     #   resp.project.webhook.filter_groups[0][0].exclude_matched_pattern #=> Boolean
     #   resp.project.webhook.build_type #=> String, one of "BUILD", "BUILD_BATCH"
+    #   resp.project.webhook.manual_creation #=> Boolean
     #   resp.project.webhook.last_modified_secret #=> Time
     #   resp.project.vpc_config.vpc_id #=> String
     #   resp.project.vpc_config.subnets #=> Array
@@ -1847,6 +1855,16 @@ module Aws::CodeBuild
     # @option params [String] :build_type
     #   Specifies the type of build this webhook will trigger.
     #
+    # @option params [Boolean] :manual_creation
+    #   If manualCreation is true, CodeBuild doesn't create a webhook in
+    #   GitHub and instead returns `payloadUrl` and `secret` values for the
+    #   webhook. The `payloadUrl` and `secret` values in the output can be
+    #   used to manually create a webhook within GitHub.
+    #
+    #   <note markdown="1"> `manualCreation` is only available for GitHub webhooks.
+    #
+    #    </note>
+    #
     # @return [Types::CreateWebhookOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateWebhookOutput#webhook #webhook} => Types::Webhook
@@ -1866,6 +1884,7 @@ module Aws::CodeBuild
     #       ],
     #     ],
     #     build_type: "BUILD", # accepts BUILD, BUILD_BATCH
+    #     manual_creation: false,
     #   })
     #
     # @example Response structure
@@ -1880,6 +1899,7 @@ module Aws::CodeBuild
     #   resp.webhook.filter_groups[0][0].pattern #=> String
     #   resp.webhook.filter_groups[0][0].exclude_matched_pattern #=> Boolean
     #   resp.webhook.build_type #=> String, one of "BUILD", "BUILD_BATCH"
+    #   resp.webhook.manual_creation #=> Boolean
     #   resp.webhook.last_modified_secret #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/CreateWebhook AWS API Documentation
@@ -4986,7 +5006,13 @@ module Aws::CodeBuild
     #   Information about the VPC configuration that CodeBuild accesses.
     #
     # @option params [String] :fleet_service_role
-    #   The service role associated with the compute fleet.
+    #   The service role associated with the compute fleet. For more
+    #   information, see [ Allow a user to add a permission policy for a fleet
+    #   service role][1] in the *CodeBuild User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codebuild/latest/userguide/auth-and-access-control-iam-identity-based-access-control.html#customer-managed-policies-example-permission-policy-fleet-service-role.html
     #
     # @option params [Array<Types::Tag>] :tags
     #   A list of tag key and value pairs associated with this compute fleet.
@@ -5459,6 +5485,7 @@ module Aws::CodeBuild
     #   resp.project.webhook.filter_groups[0][0].pattern #=> String
     #   resp.project.webhook.filter_groups[0][0].exclude_matched_pattern #=> Boolean
     #   resp.project.webhook.build_type #=> String, one of "BUILD", "BUILD_BATCH"
+    #   resp.project.webhook.manual_creation #=> Boolean
     #   resp.project.webhook.last_modified_secret #=> Time
     #   resp.project.vpc_config.vpc_id #=> String
     #   resp.project.vpc_config.subnets #=> Array
@@ -5727,6 +5754,7 @@ module Aws::CodeBuild
     #   resp.webhook.filter_groups[0][0].pattern #=> String
     #   resp.webhook.filter_groups[0][0].exclude_matched_pattern #=> Boolean
     #   resp.webhook.build_type #=> String, one of "BUILD", "BUILD_BATCH"
+    #   resp.webhook.manual_creation #=> Boolean
     #   resp.webhook.last_modified_secret #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/UpdateWebhook AWS API Documentation
@@ -5751,7 +5779,7 @@ module Aws::CodeBuild
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codebuild'
-      context[:gem_version] = '1.114.0'
+      context[:gem_version] = '1.117.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -52,6 +52,6 @@ require_relative 'aws-sdk-organizations/customizations'
 # @!group service
 module Aws::Organizations
 
-  GEM_VERSION = '1.89.0'
+  GEM_VERSION = '1.90.0'
 
 end

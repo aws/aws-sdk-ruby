@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.24.0 (2024-06-07)
+------------------
+
+* Feature - This release adds OpenIdConnect (OIDC) configuration support for IdentitySources, allowing for external IDPs to be used in authorization requests.
+
+1.23.0 (2024-06-05)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.22.0 (2024-05-13)
 ------------------
 

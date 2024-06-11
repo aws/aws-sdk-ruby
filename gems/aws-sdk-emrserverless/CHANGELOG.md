@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.26.0 (2024-06-05)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.25.0 (2024-05-30)
+------------------
+
+* Feature - The release adds support for spark structured streaming.
+
+1.24.0 (2024-05-23)
+------------------
+
+* Feature - This release adds the capability to run interactive workloads using Apache Livy Endpoint.
+
 1.23.0 (2024-05-13)
 ------------------
 

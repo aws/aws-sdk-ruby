@@ -13,6 +13,166 @@ module Aws::BedrockRuntime
       SENSITIVE: []
     end
 
+    class AnyToolChoice < Aws::EmptyStructure
+    end
+
+    class AutoToolChoice < Aws::EmptyStructure
+    end
+
+    class ContentBlock
+      attr_accessor text: ::String
+      attr_accessor image: Types::ImageBlock
+      attr_accessor tool_use: Types::ToolUseBlock
+      attr_accessor tool_result: Types::ToolResultBlock
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Text < ContentBlock
+      end
+      class Image < ContentBlock
+      end
+      class ToolUse < ContentBlock
+      end
+      class ToolResult < ContentBlock
+      end
+      class Unknown < ContentBlock
+      end
+    end
+
+    class ContentBlockDelta
+      attr_accessor text: ::String
+      attr_accessor tool_use: Types::ToolUseBlockDelta
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Text < ContentBlockDelta
+      end
+      class ToolUse < ContentBlockDelta
+      end
+      class Unknown < ContentBlockDelta
+      end
+    end
+
+    class ContentBlockDeltaEvent
+      attr_accessor delta: Types::ContentBlockDelta
+      attr_accessor content_block_index: ::Integer
+      attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class ContentBlockStart
+      attr_accessor tool_use: Types::ToolUseBlockStart
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class ToolUse < ContentBlockStart
+      end
+      class Unknown < ContentBlockStart
+      end
+    end
+
+    class ContentBlockStartEvent
+      attr_accessor start: Types::ContentBlockStart
+      attr_accessor content_block_index: ::Integer
+      attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class ContentBlockStopEvent
+      attr_accessor content_block_index: ::Integer
+      attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class ConverseMetrics
+      attr_accessor latency_ms: ::Integer
+      SENSITIVE: []
+    end
+
+    class ConverseOutput
+      attr_accessor message: Types::Message
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Message < ConverseOutput
+      end
+      class Unknown < ConverseOutput
+      end
+    end
+
+    class ConverseRequest
+      attr_accessor model_id: ::String
+      attr_accessor messages: ::Array[Types::Message]
+      attr_accessor system: ::Array[Types::SystemContentBlock]
+      attr_accessor inference_config: Types::InferenceConfiguration
+      attr_accessor tool_config: Types::ToolConfiguration
+      attr_accessor additional_model_request_fields: untyped
+      attr_accessor additional_model_response_field_paths: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ConverseResponse
+      attr_accessor output: Types::ConverseOutput
+      attr_accessor stop_reason: ("end_turn" | "tool_use" | "max_tokens" | "stop_sequence" | "content_filtered")
+      attr_accessor usage: Types::TokenUsage
+      attr_accessor metrics: Types::ConverseMetrics
+      attr_accessor additional_model_response_fields: untyped
+      SENSITIVE: []
+    end
+
+    class ConverseStreamMetadataEvent
+      attr_accessor usage: Types::TokenUsage
+      attr_accessor metrics: Types::ConverseStreamMetrics
+      attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class ConverseStreamMetrics
+      attr_accessor latency_ms: ::Integer
+      SENSITIVE: []
+    end
+
+    class ConverseStreamRequest
+      attr_accessor model_id: ::String
+      attr_accessor messages: ::Array[Types::Message]
+      attr_accessor system: ::Array[Types::SystemContentBlock]
+      attr_accessor inference_config: Types::InferenceConfiguration
+      attr_accessor tool_config: Types::ToolConfiguration
+      attr_accessor additional_model_request_fields: untyped
+      attr_accessor additional_model_response_field_paths: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ConverseStreamResponse
+      attr_accessor stream: Types::ConverseStreamOutput
+      SENSITIVE: []
+    end
+
+    class ImageBlock
+      attr_accessor format: ("png" | "jpeg" | "gif" | "webp")
+      attr_accessor source: Types::ImageSource
+      SENSITIVE: []
+    end
+
+    class ImageSource
+      attr_accessor bytes: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Bytes < ImageSource
+      end
+      class Unknown < ImageSource
+      end
+    end
+
+    class InferenceConfiguration
+      attr_accessor max_tokens: ::Integer
+      attr_accessor temperature: ::Float
+      attr_accessor top_p: ::Float
+      attr_accessor stop_sequences: ::Array[::String]
+      SENSITIVE: []
+    end
+
     class InternalServerException
       attr_accessor message: ::String
       attr_accessor event_type: untyped
@@ -50,6 +210,25 @@ module Aws::BedrockRuntime
     class InvokeModelWithResponseStreamResponse
       attr_accessor body: Types::ResponseStream
       attr_accessor content_type: ::String
+      SENSITIVE: []
+    end
+
+    class Message
+      attr_accessor role: ("user" | "assistant")
+      attr_accessor content: ::Array[Types::ContentBlock]
+      SENSITIVE: []
+    end
+
+    class MessageStartEvent
+      attr_accessor role: ("user" | "assistant")
+      attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class MessageStopEvent
+      attr_accessor stop_reason: ("end_turn" | "tool_use" | "max_tokens" | "stop_sequence" | "content_filtered")
+      attr_accessor additional_model_response_fields: untyped
+      attr_accessor event_type: untyped
       SENSITIVE: []
     end
 
@@ -95,9 +274,126 @@ module Aws::BedrockRuntime
       SENSITIVE: []
     end
 
+    class SpecificToolChoice
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class SystemContentBlock
+      attr_accessor text: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Text < SystemContentBlock
+      end
+      class Unknown < SystemContentBlock
+      end
+    end
+
     class ThrottlingException
       attr_accessor message: ::String
       attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class TokenUsage
+      attr_accessor input_tokens: ::Integer
+      attr_accessor output_tokens: ::Integer
+      attr_accessor total_tokens: ::Integer
+      SENSITIVE: []
+    end
+
+    class Tool
+      attr_accessor tool_spec: Types::ToolSpecification
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class ToolSpec < Tool
+      end
+      class Unknown < Tool
+      end
+    end
+
+    class ToolChoice
+      attr_accessor auto: Types::AutoToolChoice
+      attr_accessor any: Types::AnyToolChoice
+      attr_accessor tool: Types::SpecificToolChoice
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Auto < ToolChoice
+      end
+      class Any < ToolChoice
+      end
+      class Tool < ToolChoice
+      end
+      class Unknown < ToolChoice
+      end
+    end
+
+    class ToolConfiguration
+      attr_accessor tools: ::Array[Types::Tool]
+      attr_accessor tool_choice: Types::ToolChoice
+      SENSITIVE: []
+    end
+
+    class ToolInputSchema
+      attr_accessor json: untyped
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Json < ToolInputSchema
+      end
+      class Unknown < ToolInputSchema
+      end
+    end
+
+    class ToolResultBlock
+      attr_accessor tool_use_id: ::String
+      attr_accessor content: ::Array[Types::ToolResultContentBlock]
+      attr_accessor status: ("success" | "error")
+      SENSITIVE: []
+    end
+
+    class ToolResultContentBlock
+      attr_accessor json: untyped
+      attr_accessor text: ::String
+      attr_accessor image: Types::ImageBlock
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Json < ToolResultContentBlock
+      end
+      class Text < ToolResultContentBlock
+      end
+      class Image < ToolResultContentBlock
+      end
+      class Unknown < ToolResultContentBlock
+      end
+    end
+
+    class ToolSpecification
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor input_schema: Types::ToolInputSchema
+      SENSITIVE: []
+    end
+
+    class ToolUseBlock
+      attr_accessor tool_use_id: ::String
+      attr_accessor name: ::String
+      attr_accessor input: untyped
+      SENSITIVE: []
+    end
+
+    class ToolUseBlockDelta
+      attr_accessor input: ::String
+      SENSITIVE: []
+    end
+
+    class ToolUseBlockStart
+      attr_accessor tool_use_id: ::String
+      attr_accessor name: ::String
       SENSITIVE: []
     end
 
@@ -105,6 +401,10 @@ module Aws::BedrockRuntime
       attr_accessor message: ::String
       attr_accessor event_type: untyped
       SENSITIVE: []
+    end
+
+    class ConverseStreamOutput < Enumerator[untyped, untyped]
+      def event_types: () -> [:message_start, :content_block_start, :content_block_delta, :content_block_stop, :message_stop, :metadata, :internal_server_exception, :model_stream_error_exception, :validation_exception, :throttling_exception]
     end
 
     class ResponseStream < Enumerator[untyped, untyped]

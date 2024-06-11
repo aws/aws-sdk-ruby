@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.109.0 (2024-06-05)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.108.0 (2024-05-29)
+------------------
+
+* Feature - Add ROOT type for TargetType model
+
 1.107.0 (2024-05-15)
 ------------------
 

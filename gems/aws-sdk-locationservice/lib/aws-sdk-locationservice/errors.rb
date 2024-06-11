@@ -149,11 +149,6 @@ module Aws::LocationService
       end
 
       # @return [String]
-      def field_list
-        @data[:field_list]
-      end
-
-      # @return [String]
       def message
         @message || @data[:message]
       end
@@ -161,6 +156,11 @@ module Aws::LocationService
       # @return [String]
       def reason
         @data[:reason]
+      end
+
+      # @return [String]
+      def field_list
+        @data[:field_list]
       end
     end
 
