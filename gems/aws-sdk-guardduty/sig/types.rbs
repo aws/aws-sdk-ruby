@@ -349,6 +349,20 @@ module Aws::GuardDuty
       SENSITIVE: []
     end
 
+    class CreateMalwareProtectionPlanRequest
+      attr_accessor client_token: ::String
+      attr_accessor role: ::String
+      attr_accessor protected_resource: Types::CreateProtectedResource
+      attr_accessor actions: Types::MalwareProtectionPlanActions
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateMalwareProtectionPlanResponse
+      attr_accessor malware_protection_plan_id: ::String
+      SENSITIVE: []
+    end
+
     class CreateMembersRequest
       attr_accessor detector_id: ::String
       attr_accessor account_details: ::Array[Types::AccountDetail]
@@ -357,6 +371,11 @@ module Aws::GuardDuty
 
     class CreateMembersResponse
       attr_accessor unprocessed_accounts: ::Array[Types::UnprocessedAccount]
+      SENSITIVE: []
+    end
+
+    class CreateProtectedResource
+      attr_accessor s3_bucket: Types::CreateS3BucketResource
       SENSITIVE: []
     end
 
@@ -370,6 +389,12 @@ module Aws::GuardDuty
 
     class CreatePublishingDestinationResponse
       attr_accessor destination_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateS3BucketResource
+      attr_accessor bucket_name: ::String
+      attr_accessor object_prefixes: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -484,6 +509,11 @@ module Aws::GuardDuty
 
     class DeleteInvitationsResponse
       attr_accessor unprocessed_accounts: ::Array[Types::UnprocessedAccount]
+      SENSITIVE: []
+    end
+
+    class DeleteMalwareProtectionPlanRequest
+      attr_accessor malware_protection_plan_id: ::String
       SENSITIVE: []
     end
 
@@ -901,6 +931,23 @@ module Aws::GuardDuty
       SENSITIVE: []
     end
 
+    class GetMalwareProtectionPlanRequest
+      attr_accessor malware_protection_plan_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetMalwareProtectionPlanResponse
+      attr_accessor arn: ::String
+      attr_accessor role: ::String
+      attr_accessor protected_resource: Types::CreateProtectedResource
+      attr_accessor actions: Types::MalwareProtectionPlanActions
+      attr_accessor created_at: ::Time
+      attr_accessor status: ("ACTIVE" | "WARNING" | "ERROR")
+      attr_accessor status_reasons: ::Array[Types::MalwareProtectionPlanStatusReason]
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
     class GetMalwareScanSettingsRequest
       attr_accessor detector_id: ::String
       SENSITIVE: []
@@ -1059,6 +1106,12 @@ module Aws::GuardDuty
 
     class InviteMembersResponse
       attr_accessor unprocessed_accounts: ::Array[Types::UnprocessedAccount]
+      SENSITIVE: []
+    end
+
+    class ItemPath
+      attr_accessor nested_item_path: ::String
+      attr_accessor hash: ::String
       SENSITIVE: []
     end
 
@@ -1261,6 +1314,17 @@ module Aws::GuardDuty
       SENSITIVE: []
     end
 
+    class ListMalwareProtectionPlansRequest
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListMalwareProtectionPlansResponse
+      attr_accessor malware_protection_plans: ::Array[Types::MalwareProtectionPlanSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListMembersRequest
       attr_accessor detector_id: ::String
       attr_accessor max_results: ::Integer
@@ -1356,6 +1420,32 @@ module Aws::GuardDuty
 
     class MalwareProtectionDataSourceFreeTrial
       attr_accessor scan_ec2_instance_with_findings: Types::DataSourceFreeTrial
+      SENSITIVE: []
+    end
+
+    class MalwareProtectionPlanActions
+      attr_accessor tagging: Types::MalwareProtectionPlanTaggingAction
+      SENSITIVE: []
+    end
+
+    class MalwareProtectionPlanStatusReason
+      attr_accessor code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class MalwareProtectionPlanSummary
+      attr_accessor malware_protection_plan_id: ::String
+      SENSITIVE: []
+    end
+
+    class MalwareProtectionPlanTaggingAction
+      attr_accessor status: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class MalwareScanDetails
+      attr_accessor threats: ::Array[Types::Threat]
       SENSITIVE: []
     end
 
@@ -1707,6 +1797,12 @@ module Aws::GuardDuty
       SENSITIVE: []
     end
 
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      attr_accessor type: ::String
+      SENSITIVE: []
+    end
+
     class RuntimeContext
       attr_accessor modifying_process: Types::ProcessDetails
       attr_accessor modified_at: ::Time
@@ -1751,6 +1847,7 @@ module Aws::GuardDuty
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor default_server_side_encryption: Types::DefaultServerSideEncryption
       attr_accessor public_access: Types::PublicAccess
+      attr_accessor s3_object_details: ::Array[Types::S3ObjectDetail]
       SENSITIVE: []
     end
 
@@ -1761,6 +1858,15 @@ module Aws::GuardDuty
 
     class S3LogsConfigurationResult
       attr_accessor status: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class S3ObjectDetail
+      attr_accessor object_arn: ::String
+      attr_accessor key: ::String
+      attr_accessor etag: ::String
+      attr_accessor hash: ::String
+      attr_accessor version_id: ::String
       SENSITIVE: []
     end
 
@@ -1874,6 +1980,7 @@ module Aws::GuardDuty
       attr_accessor ebs_volume_scan_details: Types::EbsVolumeScanDetails
       attr_accessor runtime_details: Types::RuntimeDetails
       attr_accessor detection: Types::Detection
+      attr_accessor malware_scan_details: Types::MalwareScanDetails
       SENSITIVE: []
     end
 
@@ -1934,6 +2041,13 @@ module Aws::GuardDuty
     end
 
     class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class Threat
+      attr_accessor name: ::String
+      attr_accessor source: ::String
+      attr_accessor item_paths: ::Array[Types::ItemPath]
+      SENSITIVE: []
     end
 
     class ThreatDetectedByName
@@ -2047,6 +2161,14 @@ module Aws::GuardDuty
     class UpdateIPSetResponse < Aws::EmptyStructure
     end
 
+    class UpdateMalwareProtectionPlanRequest
+      attr_accessor malware_protection_plan_id: ::String
+      attr_accessor role: ::String
+      attr_accessor actions: Types::MalwareProtectionPlanActions
+      attr_accessor protected_resource: Types::UpdateProtectedResource
+      SENSITIVE: []
+    end
+
     class UpdateMalwareScanSettingsRequest
       attr_accessor detector_id: ::String
       attr_accessor scan_resource_criteria: Types::ScanResourceCriteria
@@ -2082,6 +2204,11 @@ module Aws::GuardDuty
     class UpdateOrganizationConfigurationResponse < Aws::EmptyStructure
     end
 
+    class UpdateProtectedResource
+      attr_accessor s3_bucket: Types::UpdateS3BucketResource
+      SENSITIVE: []
+    end
+
     class UpdatePublishingDestinationRequest
       attr_accessor detector_id: ::String
       attr_accessor destination_id: ::String
@@ -2090,6 +2217,11 @@ module Aws::GuardDuty
     end
 
     class UpdatePublishingDestinationResponse < Aws::EmptyStructure
+    end
+
+    class UpdateS3BucketResource
+      attr_accessor object_prefixes: ::Array[::String]
+      SENSITIVE: []
     end
 
     class UpdateThreatIntelSetRequest

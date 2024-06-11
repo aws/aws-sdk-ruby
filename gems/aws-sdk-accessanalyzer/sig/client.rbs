@@ -100,7 +100,8 @@ module Aws
                                       policy_document: ::String,
                                       access: Array[
                                         {
-                                          actions: Array[::String]
+                                          actions: Array[::String]?,
+                                          resources: Array[::String]?
                                         },
                                       ],
                                       policy_type: ("IDENTITY_POLICY" | "RESOURCE_POLICY")
@@ -120,6 +121,19 @@ module Aws
                                  policy_type: ("IDENTITY_POLICY" | "RESOURCE_POLICY")
                                ) -> _CheckNoNewAccessResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CheckNoNewAccessResponseSuccess
+
+      interface _CheckNoPublicAccessResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CheckNoPublicAccessResponse]
+        def result: () -> ("PASS" | "FAIL")
+        def message: () -> ::String
+        def reasons: () -> ::Array[Types::ReasonSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AccessAnalyzer/Client.html#check_no_public_access-instance_method
+      def check_no_public_access: (
+                                    policy_document: ::String,
+                                    resource_type: ("AWS::DynamoDB::Table" | "AWS::DynamoDB::Stream" | "AWS::EFS::FileSystem" | "AWS::OpenSearchService::Domain" | "AWS::Kinesis::Stream" | "AWS::Kinesis::StreamConsumer" | "AWS::KMS::Key" | "AWS::Lambda::Function" | "AWS::S3::Bucket" | "AWS::S3::AccessPoint" | "AWS::S3Express::DirectoryBucket" | "AWS::S3::Glacier" | "AWS::S3Outposts::Bucket" | "AWS::S3Outposts::AccessPoint" | "AWS::SecretsManager::Secret" | "AWS::SNS::Topic" | "AWS::SQS::Queue" | "AWS::IAM::AssumeRolePolicyDocument")
+                                  ) -> _CheckNoPublicAccessResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CheckNoPublicAccessResponseSuccess
 
       interface _CreateAccessPreviewResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateAccessPreviewResponse]
@@ -282,6 +296,13 @@ module Aws
                                ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AccessAnalyzer/Client.html#generate_finding_recommendation-instance_method
+      def generate_finding_recommendation: (
+                                             analyzer_arn: ::String,
+                                             id: ::String
+                                           ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
       interface _GetAccessPreviewResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetAccessPreviewResponse]
         def access_preview: () -> Types::AccessPreview
@@ -335,6 +356,25 @@ module Aws
                          id: ::String
                        ) -> _GetFindingResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetFindingResponseSuccess
+
+      interface _GetFindingRecommendationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetFindingRecommendationResponse]
+        def started_at: () -> ::Time
+        def completed_at: () -> ::Time
+        def next_token: () -> ::String
+        def resource_arn: () -> ::String
+        def recommended_steps: () -> ::Array[Types::RecommendedStep]
+        def recommendation_type: () -> ("UnusedPermissionRecommendation")
+        def status: () -> ("SUCCEEDED" | "FAILED" | "IN_PROGRESS")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AccessAnalyzer/Client.html#get_finding_recommendation-instance_method
+      def get_finding_recommendation: (
+                                        analyzer_arn: ::String,
+                                        id: ::String,
+                                        ?max_results: ::Integer,
+                                        ?next_token: ::String
+                                      ) -> _GetFindingRecommendationResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetFindingRecommendationResponseSuccess
 
       interface _GetFindingV2ResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetFindingV2Response]

@@ -1006,6 +1006,77 @@ module Aws::GuardDuty
       req.send_request(options)
     end
 
+    # Creates a new Malware Protection plan for the protected resource.
+    #
+    # When you create a Malware Protection plan, the Amazon Web Services
+    # service terms for GuardDuty Malware Protection apply. For more
+    # information, see [Amazon Web Services service terms for GuardDuty
+    # Malware Protection][1].
+    #
+    #
+    #
+    # [1]: http://aws.amazon.com/service-terms/#87._Amazon_GuardDuty
+    #
+    # @option params [String] :client_token
+    #   The idempotency token for the create request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :role
+    #   IAM role with permissions required to scan and add tags to the
+    #   associated protected resource.
+    #
+    # @option params [required, Types::CreateProtectedResource] :protected_resource
+    #   Information about the protected resource that is associated with the
+    #   created Malware Protection plan. Presently, `S3Bucket` is the only
+    #   supported protected resource.
+    #
+    # @option params [Types::MalwareProtectionPlanActions] :actions
+    #   Information about whether the tags will be added to the S3 object
+    #   after scanning.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   Tags added to the Malware Protection plan resource.
+    #
+    # @return [Types::CreateMalwareProtectionPlanResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateMalwareProtectionPlanResponse#malware_protection_plan_id #malware_protection_plan_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_malware_protection_plan({
+    #     client_token: "ClientToken",
+    #     role: "String", # required
+    #     protected_resource: { # required
+    #       s3_bucket: {
+    #         bucket_name: "String",
+    #         object_prefixes: ["String"],
+    #       },
+    #     },
+    #     actions: {
+    #       tagging: {
+    #         status: "ENABLED", # accepts ENABLED, DISABLED
+    #       },
+    #     },
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.malware_protection_plan_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CreateMalwareProtectionPlan AWS API Documentation
+    #
+    # @overload create_malware_protection_plan(params = {})
+    # @param [Hash] params ({})
+    def create_malware_protection_plan(params = {}, options = {})
+      req = build_request(:create_malware_protection_plan, params)
+      req.send_request(options)
+    end
+
     # Creates member accounts of the current Amazon Web Services account by
     # specifying a list of Amazon Web Services account IDs. This step is a
     # prerequisite for managing the associated member accounts either by
@@ -1362,6 +1433,30 @@ module Aws::GuardDuty
     # @param [Hash] params ({})
     def delete_invitations(params = {}, options = {})
       req = build_request(:delete_invitations, params)
+      req.send_request(options)
+    end
+
+    # Deletes the Malware Protection plan ID associated with the Malware
+    # Protection plan resource. Use this API only when you no longer want to
+    # protect the resource associated with this Malware Protection plan ID.
+    #
+    # @option params [required, String] :malware_protection_plan_id
+    #   A unique identifier associated with Malware Protection plan resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_malware_protection_plan({
+    #     malware_protection_plan_id: "String", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeleteMalwareProtectionPlan AWS API Documentation
+    #
+    # @overload delete_malware_protection_plan(params = {})
+    # @param [Hash] params ({})
+    def delete_malware_protection_plan(params = {}, options = {})
+      req = build_request(:delete_malware_protection_plan, params)
       req.send_request(options)
     end
 
@@ -2164,6 +2259,12 @@ module Aws::GuardDuty
     #   resp.findings[0].resource.s3_bucket_details[0].public_access.permission_configuration.account_level_permissions.block_public_access.block_public_acls #=> Boolean
     #   resp.findings[0].resource.s3_bucket_details[0].public_access.permission_configuration.account_level_permissions.block_public_access.block_public_policy #=> Boolean
     #   resp.findings[0].resource.s3_bucket_details[0].public_access.effective_permission #=> String
+    #   resp.findings[0].resource.s3_bucket_details[0].s3_object_details #=> Array
+    #   resp.findings[0].resource.s3_bucket_details[0].s3_object_details[0].object_arn #=> String
+    #   resp.findings[0].resource.s3_bucket_details[0].s3_object_details[0].key #=> String
+    #   resp.findings[0].resource.s3_bucket_details[0].s3_object_details[0].etag #=> String
+    #   resp.findings[0].resource.s3_bucket_details[0].s3_object_details[0].hash #=> String
+    #   resp.findings[0].resource.s3_bucket_details[0].s3_object_details[0].version_id #=> String
     #   resp.findings[0].resource.instance_details.availability_zone #=> String
     #   resp.findings[0].resource.instance_details.iam_instance_profile.arn #=> String
     #   resp.findings[0].resource.instance_details.iam_instance_profile.id #=> String
@@ -2585,6 +2686,12 @@ module Aws::GuardDuty
     #   resp.findings[0].service.detection.anomaly.unusual.behavior["String"]["String"].profile_subtype #=> String, one of "FREQUENT", "INFREQUENT", "UNSEEN", "RARE"
     #   resp.findings[0].service.detection.anomaly.unusual.behavior["String"]["String"].observations.text #=> Array
     #   resp.findings[0].service.detection.anomaly.unusual.behavior["String"]["String"].observations.text[0] #=> String
+    #   resp.findings[0].service.malware_scan_details.threats #=> Array
+    #   resp.findings[0].service.malware_scan_details.threats[0].name #=> String
+    #   resp.findings[0].service.malware_scan_details.threats[0].source #=> String
+    #   resp.findings[0].service.malware_scan_details.threats[0].item_paths #=> Array
+    #   resp.findings[0].service.malware_scan_details.threats[0].item_paths[0].nested_item_path #=> String
+    #   resp.findings[0].service.malware_scan_details.threats[0].item_paths[0].hash #=> String
     #   resp.findings[0].severity #=> Float
     #   resp.findings[0].title #=> String
     #   resp.findings[0].type #=> String
@@ -2722,6 +2829,54 @@ module Aws::GuardDuty
     # @param [Hash] params ({})
     def get_invitations_count(params = {}, options = {})
       req = build_request(:get_invitations_count, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the Malware Protection plan details associated with a
+    # Malware Protection plan ID.
+    #
+    # @option params [required, String] :malware_protection_plan_id
+    #   A unique identifier associated with Malware Protection plan resource.
+    #
+    # @return [Types::GetMalwareProtectionPlanResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetMalwareProtectionPlanResponse#arn #arn} => String
+    #   * {Types::GetMalwareProtectionPlanResponse#role #role} => String
+    #   * {Types::GetMalwareProtectionPlanResponse#protected_resource #protected_resource} => Types::CreateProtectedResource
+    #   * {Types::GetMalwareProtectionPlanResponse#actions #actions} => Types::MalwareProtectionPlanActions
+    #   * {Types::GetMalwareProtectionPlanResponse#created_at #created_at} => Time
+    #   * {Types::GetMalwareProtectionPlanResponse#status #status} => String
+    #   * {Types::GetMalwareProtectionPlanResponse#status_reasons #status_reasons} => Array&lt;Types::MalwareProtectionPlanStatusReason&gt;
+    #   * {Types::GetMalwareProtectionPlanResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_malware_protection_plan({
+    #     malware_protection_plan_id: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.role #=> String
+    #   resp.protected_resource.s3_bucket.bucket_name #=> String
+    #   resp.protected_resource.s3_bucket.object_prefixes #=> Array
+    #   resp.protected_resource.s3_bucket.object_prefixes[0] #=> String
+    #   resp.actions.tagging.status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.created_at #=> Time
+    #   resp.status #=> String, one of "ACTIVE", "WARNING", "ERROR"
+    #   resp.status_reasons #=> Array
+    #   resp.status_reasons[0].code #=> String
+    #   resp.status_reasons[0].message #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetMalwareProtectionPlan AWS API Documentation
+    #
+    # @overload get_malware_protection_plan(params = {})
+    # @param [Hash] params ({})
+    def get_malware_protection_plan(params = {}, options = {})
+      req = build_request(:get_malware_protection_plan, params)
       req.send_request(options)
     end
 
@@ -3698,6 +3853,42 @@ module Aws::GuardDuty
       req.send_request(options)
     end
 
+    # Lists the Malware Protection plan IDs associated with the protected
+    # resources in your Amazon Web Services account.
+    #
+    # @option params [String] :next_token
+    #   You can use this parameter when paginating results. Set the value of
+    #   this parameter to null on your first call to the list action. For
+    #   subsequent calls to the action, fill nextToken in the request with the
+    #   value of `NextToken` from the previous response to continue listing
+    #   data.
+    #
+    # @return [Types::ListMalwareProtectionPlansResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListMalwareProtectionPlansResponse#malware_protection_plans #malware_protection_plans} => Array&lt;Types::MalwareProtectionPlanSummary&gt;
+    #   * {Types::ListMalwareProtectionPlansResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_malware_protection_plans({
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.malware_protection_plans #=> Array
+    #   resp.malware_protection_plans[0].malware_protection_plan_id #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListMalwareProtectionPlans AWS API Documentation
+    #
+    # @overload list_malware_protection_plans(params = {})
+    # @param [Hash] params ({})
+    def list_malware_protection_plans(params = {}, options = {})
+      req = build_request(:list_malware_protection_plans, params)
+      req.send_request(options)
+    end
+
     # Lists details about all member accounts for the current GuardDuty
     # administrator account.
     #
@@ -4378,6 +4569,52 @@ module Aws::GuardDuty
     # @param [Hash] params ({})
     def update_ip_set(params = {}, options = {})
       req = build_request(:update_ip_set, params)
+      req.send_request(options)
+    end
+
+    # Updates an existing Malware Protection plan resource.
+    #
+    # @option params [required, String] :malware_protection_plan_id
+    #   A unique identifier associated with the Malware Protection plan.
+    #
+    # @option params [String] :role
+    #   IAM role with permissions required to scan and add tags to the
+    #   associated protected resource.
+    #
+    # @option params [Types::MalwareProtectionPlanActions] :actions
+    #   Information about whether the tags will be added to the S3 object
+    #   after scanning.
+    #
+    # @option params [Types::UpdateProtectedResource] :protected_resource
+    #   Information about the protected resource that is associated with the
+    #   created Malware Protection plan. Presently, `S3Bucket` is the only
+    #   supported protected resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_malware_protection_plan({
+    #     malware_protection_plan_id: "String", # required
+    #     role: "String",
+    #     actions: {
+    #       tagging: {
+    #         status: "ENABLED", # accepts ENABLED, DISABLED
+    #       },
+    #     },
+    #     protected_resource: {
+    #       s3_bucket: {
+    #         object_prefixes: ["String"],
+    #       },
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateMalwareProtectionPlan AWS API Documentation
+    #
+    # @overload update_malware_protection_plan(params = {})
+    # @param [Hash] params ({})
+    def update_malware_protection_plan(params = {}, options = {})
+      req = build_request(:update_malware_protection_plan, params)
       req.send_request(options)
     end
 

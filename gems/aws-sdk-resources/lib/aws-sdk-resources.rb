@@ -280,6 +280,7 @@ module Aws
   autoload :PaymentCryptography, 'aws-sdk-paymentcryptography'
   autoload :PaymentCryptographyData, 'aws-sdk-paymentcryptographydata'
   autoload :PcaConnectorAd, 'aws-sdk-pcaconnectorad'
+  autoload :PcaConnectorScep, 'aws-sdk-pcaconnectorscep'
   autoload :Personalize, 'aws-sdk-personalize'
   autoload :PersonalizeEvents, 'aws-sdk-personalizeevents'
   autoload :PersonalizeRuntime, 'aws-sdk-personalizeruntime'

@@ -17,6 +17,7 @@ module Aws::AccessAnalyzer
     AccessActionsList = Shapes::ListShape.new(name: 'AccessActionsList')
     AccessCheckPolicyDocument = Shapes::StringShape.new(name: 'AccessCheckPolicyDocument')
     AccessCheckPolicyType = Shapes::StringShape.new(name: 'AccessCheckPolicyType')
+    AccessCheckResourceType = Shapes::StringShape.new(name: 'AccessCheckResourceType')
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     AccessPointArn = Shapes::StringShape.new(name: 'AccessPointArn')
     AccessPointPolicy = Shapes::StringShape.new(name: 'AccessPointPolicy')
@@ -30,6 +31,7 @@ module Aws::AccessAnalyzer
     AccessPreviewStatusReasonCode = Shapes::StringShape.new(name: 'AccessPreviewStatusReasonCode')
     AccessPreviewSummary = Shapes::StructureShape.new(name: 'AccessPreviewSummary')
     AccessPreviewsList = Shapes::ListShape.new(name: 'AccessPreviewsList')
+    AccessResourcesList = Shapes::ListShape.new(name: 'AccessResourcesList')
     AclCanonicalId = Shapes::StringShape.new(name: 'AclCanonicalId')
     AclGrantee = Shapes::UnionShape.new(name: 'AclGrantee')
     AclPermission = Shapes::StringShape.new(name: 'AclPermission')
@@ -57,6 +59,9 @@ module Aws::AccessAnalyzer
     CheckNoNewAccessRequest = Shapes::StructureShape.new(name: 'CheckNoNewAccessRequest')
     CheckNoNewAccessResponse = Shapes::StructureShape.new(name: 'CheckNoNewAccessResponse')
     CheckNoNewAccessResult = Shapes::StringShape.new(name: 'CheckNoNewAccessResult')
+    CheckNoPublicAccessRequest = Shapes::StructureShape.new(name: 'CheckNoPublicAccessRequest')
+    CheckNoPublicAccessResponse = Shapes::StructureShape.new(name: 'CheckNoPublicAccessResponse')
+    CheckNoPublicAccessResult = Shapes::StringShape.new(name: 'CheckNoPublicAccessResult')
     CloudTrailArn = Shapes::StringShape.new(name: 'CloudTrailArn')
     CloudTrailDetails = Shapes::StructureShape.new(name: 'CloudTrailDetails')
     CloudTrailProperties = Shapes::StructureShape.new(name: 'CloudTrailProperties')
@@ -106,6 +111,8 @@ module Aws::AccessAnalyzer
     FindingType = Shapes::StringShape.new(name: 'FindingType')
     FindingsList = Shapes::ListShape.new(name: 'FindingsList')
     FindingsListV2 = Shapes::ListShape.new(name: 'FindingsListV2')
+    GenerateFindingRecommendationRequest = Shapes::StructureShape.new(name: 'GenerateFindingRecommendationRequest')
+    GenerateFindingRecommendationRequestIdString = Shapes::StringShape.new(name: 'GenerateFindingRecommendationRequestIdString')
     GeneratedPolicy = Shapes::StructureShape.new(name: 'GeneratedPolicy')
     GeneratedPolicyList = Shapes::ListShape.new(name: 'GeneratedPolicyList')
     GeneratedPolicyProperties = Shapes::StructureShape.new(name: 'GeneratedPolicyProperties')
@@ -118,6 +125,10 @@ module Aws::AccessAnalyzer
     GetAnalyzerResponse = Shapes::StructureShape.new(name: 'GetAnalyzerResponse')
     GetArchiveRuleRequest = Shapes::StructureShape.new(name: 'GetArchiveRuleRequest')
     GetArchiveRuleResponse = Shapes::StructureShape.new(name: 'GetArchiveRuleResponse')
+    GetFindingRecommendationRequest = Shapes::StructureShape.new(name: 'GetFindingRecommendationRequest')
+    GetFindingRecommendationRequestIdString = Shapes::StringShape.new(name: 'GetFindingRecommendationRequestIdString')
+    GetFindingRecommendationRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'GetFindingRecommendationRequestMaxResultsInteger')
+    GetFindingRecommendationResponse = Shapes::StructureShape.new(name: 'GetFindingRecommendationResponse')
     GetFindingRequest = Shapes::StructureShape.new(name: 'GetFindingRequest')
     GetFindingResponse = Shapes::StructureShape.new(name: 'GetFindingResponse')
     GetFindingV2Request = Shapes::StructureShape.new(name: 'GetFindingV2Request')
@@ -205,7 +216,13 @@ module Aws::AccessAnalyzer
     ReasonCode = Shapes::StringShape.new(name: 'ReasonCode')
     ReasonSummary = Shapes::StructureShape.new(name: 'ReasonSummary')
     ReasonSummaryList = Shapes::ListShape.new(name: 'ReasonSummaryList')
+    RecommendationError = Shapes::StructureShape.new(name: 'RecommendationError')
+    RecommendationType = Shapes::StringShape.new(name: 'RecommendationType')
+    RecommendedRemediationAction = Shapes::StringShape.new(name: 'RecommendedRemediationAction')
+    RecommendedStep = Shapes::UnionShape.new(name: 'RecommendedStep')
+    RecommendedStepList = Shapes::ListShape.new(name: 'RecommendedStepList')
     RegionList = Shapes::ListShape.new(name: 'RegionList')
+    Resource = Shapes::StringShape.new(name: 'Resource')
     ResourceArn = Shapes::StringShape.new(name: 'ResourceArn')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResourceType = Shapes::StringShape.new(name: 'ResourceType')
@@ -234,6 +251,7 @@ module Aws::AccessAnalyzer
     StartPolicyGenerationRequest = Shapes::StructureShape.new(name: 'StartPolicyGenerationRequest')
     StartPolicyGenerationResponse = Shapes::StructureShape.new(name: 'StartPolicyGenerationResponse')
     StartResourceScanRequest = Shapes::StructureShape.new(name: 'StartResourceScanRequest')
+    Status = Shapes::StringShape.new(name: 'Status')
     StatusReason = Shapes::StructureShape.new(name: 'StatusReason')
     String = Shapes::StringShape.new(name: 'String')
     Substring = Shapes::StructureShape.new(name: 'Substring')
@@ -259,6 +277,7 @@ module Aws::AccessAnalyzer
     UnusedIamUserAccessKeyDetails = Shapes::StructureShape.new(name: 'UnusedIamUserAccessKeyDetails')
     UnusedIamUserPasswordDetails = Shapes::StructureShape.new(name: 'UnusedIamUserPasswordDetails')
     UnusedPermissionDetails = Shapes::StructureShape.new(name: 'UnusedPermissionDetails')
+    UnusedPermissionsRecommendedStep = Shapes::StructureShape.new(name: 'UnusedPermissionsRecommendedStep')
     UpdateArchiveRuleRequest = Shapes::StructureShape.new(name: 'UpdateArchiveRuleRequest')
     UpdateFindingsRequest = Shapes::StructureShape.new(name: 'UpdateFindingsRequest')
     ValidatePolicyFinding = Shapes::StructureShape.new(name: 'ValidatePolicyFinding')
@@ -275,7 +294,8 @@ module Aws::AccessAnalyzer
     VpcConfiguration = Shapes::StructureShape.new(name: 'VpcConfiguration')
     VpcId = Shapes::StringShape.new(name: 'VpcId')
 
-    Access.add_member(:actions, Shapes::ShapeRef.new(shape: AccessActionsList, required: true, location_name: "actions"))
+    Access.add_member(:actions, Shapes::ShapeRef.new(shape: AccessActionsList, location_name: "actions"))
+    Access.add_member(:resources, Shapes::ShapeRef.new(shape: AccessResourcesList, location_name: "resources"))
     Access.struct_class = Types::Access
 
     AccessActionsList.member = Shapes::ShapeRef.new(shape: Action)
@@ -321,6 +341,8 @@ module Aws::AccessAnalyzer
     AccessPreviewSummary.struct_class = Types::AccessPreviewSummary
 
     AccessPreviewsList.member = Shapes::ShapeRef.new(shape: AccessPreviewSummary)
+
+    AccessResourcesList.member = Shapes::ShapeRef.new(shape: Resource)
 
     AclGrantee.add_member(:id, Shapes::ShapeRef.new(shape: AclCanonicalId, location_name: "id"))
     AclGrantee.add_member(:uri, Shapes::ShapeRef.new(shape: AclUri, location_name: "uri"))
@@ -411,6 +433,15 @@ module Aws::AccessAnalyzer
     CheckNoNewAccessResponse.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     CheckNoNewAccessResponse.add_member(:reasons, Shapes::ShapeRef.new(shape: ReasonSummaryList, location_name: "reasons"))
     CheckNoNewAccessResponse.struct_class = Types::CheckNoNewAccessResponse
+
+    CheckNoPublicAccessRequest.add_member(:policy_document, Shapes::ShapeRef.new(shape: AccessCheckPolicyDocument, required: true, location_name: "policyDocument"))
+    CheckNoPublicAccessRequest.add_member(:resource_type, Shapes::ShapeRef.new(shape: AccessCheckResourceType, required: true, location_name: "resourceType"))
+    CheckNoPublicAccessRequest.struct_class = Types::CheckNoPublicAccessRequest
+
+    CheckNoPublicAccessResponse.add_member(:result, Shapes::ShapeRef.new(shape: CheckNoPublicAccessResult, location_name: "result"))
+    CheckNoPublicAccessResponse.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    CheckNoPublicAccessResponse.add_member(:reasons, Shapes::ShapeRef.new(shape: ReasonSummaryList, location_name: "reasons"))
+    CheckNoPublicAccessResponse.struct_class = Types::CheckNoPublicAccessResponse
 
     CloudTrailDetails.add_member(:trails, Shapes::ShapeRef.new(shape: TrailList, required: true, location_name: "trails"))
     CloudTrailDetails.add_member(:access_role, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "accessRole"))
@@ -613,6 +644,10 @@ module Aws::AccessAnalyzer
 
     FindingsListV2.member = Shapes::ShapeRef.new(shape: FindingSummaryV2)
 
+    GenerateFindingRecommendationRequest.add_member(:analyzer_arn, Shapes::ShapeRef.new(shape: AnalyzerArn, required: true, location: "querystring", location_name: "analyzerArn"))
+    GenerateFindingRecommendationRequest.add_member(:id, Shapes::ShapeRef.new(shape: GenerateFindingRecommendationRequestIdString, required: true, location: "uri", location_name: "id"))
+    GenerateFindingRecommendationRequest.struct_class = Types::GenerateFindingRecommendationRequest
+
     GeneratedPolicy.add_member(:policy, Shapes::ShapeRef.new(shape: String, required: true, location_name: "policy"))
     GeneratedPolicy.struct_class = Types::GeneratedPolicy
 
@@ -653,6 +688,22 @@ module Aws::AccessAnalyzer
 
     GetArchiveRuleResponse.add_member(:archive_rule, Shapes::ShapeRef.new(shape: ArchiveRuleSummary, required: true, location_name: "archiveRule"))
     GetArchiveRuleResponse.struct_class = Types::GetArchiveRuleResponse
+
+    GetFindingRecommendationRequest.add_member(:analyzer_arn, Shapes::ShapeRef.new(shape: AnalyzerArn, required: true, location: "querystring", location_name: "analyzerArn"))
+    GetFindingRecommendationRequest.add_member(:id, Shapes::ShapeRef.new(shape: GetFindingRecommendationRequestIdString, required: true, location: "uri", location_name: "id"))
+    GetFindingRecommendationRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: GetFindingRecommendationRequestMaxResultsInteger, location: "querystring", location_name: "maxResults"))
+    GetFindingRecommendationRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location: "querystring", location_name: "nextToken"))
+    GetFindingRecommendationRequest.struct_class = Types::GetFindingRecommendationRequest
+
+    GetFindingRecommendationResponse.add_member(:started_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "startedAt"))
+    GetFindingRecommendationResponse.add_member(:completed_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "completedAt"))
+    GetFindingRecommendationResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "nextToken"))
+    GetFindingRecommendationResponse.add_member(:error, Shapes::ShapeRef.new(shape: RecommendationError, location_name: "error"))
+    GetFindingRecommendationResponse.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "resourceArn"))
+    GetFindingRecommendationResponse.add_member(:recommended_steps, Shapes::ShapeRef.new(shape: RecommendedStepList, location_name: "recommendedSteps"))
+    GetFindingRecommendationResponse.add_member(:recommendation_type, Shapes::ShapeRef.new(shape: RecommendationType, required: true, location_name: "recommendationType"))
+    GetFindingRecommendationResponse.add_member(:status, Shapes::ShapeRef.new(shape: Status, required: true, location_name: "status"))
+    GetFindingRecommendationResponse.struct_class = Types::GetFindingRecommendationResponse
 
     GetFindingRequest.add_member(:analyzer_arn, Shapes::ShapeRef.new(shape: AnalyzerArn, required: true, location: "querystring", location_name: "analyzerArn"))
     GetFindingRequest.add_member(:id, Shapes::ShapeRef.new(shape: FindingId, required: true, location: "uri", location_name: "id"))
@@ -914,6 +965,18 @@ module Aws::AccessAnalyzer
 
     ReasonSummaryList.member = Shapes::ShapeRef.new(shape: ReasonSummary)
 
+    RecommendationError.add_member(:code, Shapes::ShapeRef.new(shape: String, required: true, location_name: "code"))
+    RecommendationError.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
+    RecommendationError.struct_class = Types::RecommendationError
+
+    RecommendedStep.add_member(:unused_permissions_recommended_step, Shapes::ShapeRef.new(shape: UnusedPermissionsRecommendedStep, location_name: "unusedPermissionsRecommendedStep"))
+    RecommendedStep.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    RecommendedStep.add_member_subclass(:unused_permissions_recommended_step, Types::RecommendedStep::UnusedPermissionsRecommendedStep)
+    RecommendedStep.add_member_subclass(:unknown, Types::RecommendedStep::Unknown)
+    RecommendedStep.struct_class = Types::RecommendedStep
+
+    RecommendedStepList.member = Shapes::ShapeRef.new(shape: RecommendedStep)
+
     RegionList.member = Shapes::ShapeRef.new(shape: String)
 
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
@@ -1055,6 +1118,12 @@ module Aws::AccessAnalyzer
     UnusedPermissionDetails.add_member(:last_accessed, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastAccessed"))
     UnusedPermissionDetails.struct_class = Types::UnusedPermissionDetails
 
+    UnusedPermissionsRecommendedStep.add_member(:policy_updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "policyUpdatedAt"))
+    UnusedPermissionsRecommendedStep.add_member(:recommended_action, Shapes::ShapeRef.new(shape: RecommendedRemediationAction, required: true, location_name: "recommendedAction"))
+    UnusedPermissionsRecommendedStep.add_member(:recommended_policy, Shapes::ShapeRef.new(shape: String, location_name: "recommendedPolicy"))
+    UnusedPermissionsRecommendedStep.add_member(:existing_policy_id, Shapes::ShapeRef.new(shape: String, location_name: "existingPolicyId"))
+    UnusedPermissionsRecommendedStep.struct_class = Types::UnusedPermissionsRecommendedStep
+
     UpdateArchiveRuleRequest.add_member(:analyzer_name, Shapes::ShapeRef.new(shape: Name, required: true, location: "uri", location_name: "analyzerName"))
     UpdateArchiveRuleRequest.add_member(:rule_name, Shapes::ShapeRef.new(shape: Name, required: true, location: "uri", location_name: "ruleName"))
     UpdateArchiveRuleRequest.add_member(:filter, Shapes::ShapeRef.new(shape: FilterCriteriaMap, required: true, location_name: "filter"))
@@ -1114,8 +1183,8 @@ module Aws::AccessAnalyzer
       api.metadata = {
         "apiVersion" => "2019-11-01",
         "endpointPrefix" => "access-analyzer",
-        "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceFullName" => "Access Analyzer",
         "serviceId" => "AccessAnalyzer",
         "signatureVersion" => "v4",
@@ -1168,6 +1237,20 @@ module Aws::AccessAnalyzer
         o.http_request_uri = "/policy/check-no-new-access"
         o.input = Shapes::ShapeRef.new(shape: CheckNoNewAccessRequest)
         o.output = Shapes::ShapeRef.new(shape: CheckNoNewAccessResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: UnprocessableEntityException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:check_no_public_access, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CheckNoPublicAccess"
+        o.http_method = "POST"
+        o.http_request_uri = "/policy/check-no-public-access"
+        o.input = Shapes::ShapeRef.new(shape: CheckNoPublicAccessRequest)
+        o.output = Shapes::ShapeRef.new(shape: CheckNoPublicAccessResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
@@ -1246,6 +1329,18 @@ module Aws::AccessAnalyzer
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
+      api.add_operation(:generate_finding_recommendation, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GenerateFindingRecommendation"
+        o.http_method = "POST"
+        o.http_request_uri = "/recommendation/{id}"
+        o.input = Shapes::ShapeRef.new(shape: GenerateFindingRecommendationRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
       api.add_operation(:get_access_preview, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetAccessPreview"
         o.http_method = "GET"
@@ -1309,6 +1404,25 @@ module Aws::AccessAnalyzer
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:get_finding_recommendation, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetFindingRecommendation"
+        o.http_method = "GET"
+        o.http_request_uri = "/recommendation/{id}"
+        o.input = Shapes::ShapeRef.new(shape: GetFindingRecommendationRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetFindingRecommendationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:get_finding_v2, Seahorse::Model::Operation.new.tap do |o|

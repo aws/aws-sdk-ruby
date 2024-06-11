@@ -28173,6 +28173,14 @@ module Aws::SageMaker
     #   The sort order for results. The default is `Ascending`.
     #   @return [String]
     #
+    # @!attribute [rw] cross_account_filter_option
+    #   A filter that returns either model groups shared with you or model
+    #   groups in your own account. When the value is `CrossAccount`, the
+    #   results show the resources made discoverable to you from other
+    #   accounts. When the value is `SameAccount` or `null`, the results
+    #   show resources from your account. The default is `SameAccount`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListModelPackageGroupsInput AWS API Documentation
     #
     class ListModelPackageGroupsInput < Struct.new(
@@ -28182,7 +28190,8 @@ module Aws::SageMaker
       :name_contains,
       :next_token,
       :sort_by,
-      :sort_order)
+      :sort_order,
+      :cross_account_filter_option)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -33700,6 +33709,16 @@ module Aws::SageMaker
     #   private workforce.
     #   @return [String]
     #
+    # @!attribute [rw] scope
+    #   An array of string identifiers used to refer to the specific pieces
+    #   of user data or claims that the client application wants to access.
+    #   @return [String]
+    #
+    # @!attribute [rw] authentication_request_extra_params
+    #   A string to string map of identifiers specific to the custom
+    #   identity provider (IdP) being used.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/OidcConfig AWS API Documentation
     #
     class OidcConfig < Struct.new(
@@ -33710,7 +33729,9 @@ module Aws::SageMaker
       :token_endpoint,
       :user_info_endpoint,
       :logout_endpoint,
-      :jwks_uri)
+      :jwks_uri,
+      :scope,
+      :authentication_request_extra_params)
       SENSITIVE = [:client_secret]
       include Aws::Structure
     end
@@ -33750,6 +33771,16 @@ module Aws::SageMaker
     #   private workforce.
     #   @return [String]
     #
+    # @!attribute [rw] scope
+    #   An array of string identifiers used to refer to the specific pieces
+    #   of user data or claims that the client application wants to access.
+    #   @return [String]
+    #
+    # @!attribute [rw] authentication_request_extra_params
+    #   A string to string map of identifiers specific to the custom
+    #   identity provider (IdP) being used.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/OidcConfigForResponse AWS API Documentation
     #
     class OidcConfigForResponse < Struct.new(
@@ -33759,7 +33790,9 @@ module Aws::SageMaker
       :token_endpoint,
       :user_info_endpoint,
       :logout_endpoint,
-      :jwks_uri)
+      :jwks_uri,
+      :scope,
+      :authentication_request_extra_params)
       SENSITIVE = []
       include Aws::Structure
     end

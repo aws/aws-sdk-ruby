@@ -479,7 +479,12 @@ module Aws::AccessAnalyzer
     #
     # @option params [required, Array<Types::Access>] :access
     #   An access object containing the permissions that shouldn't be granted
-    #   by the specified policy.
+    #   by the specified policy. If only actions are specified, IAM Access
+    #   Analyzer checks for access of the actions on all resources in the
+    #   policy. If only resources are specified, then IAM Access Analyzer
+    #   checks which actions have access to the specified resources. If both
+    #   actions and resources are specified, then IAM Access Analyzer checks
+    #   which of the specified actions have access to the specified resources.
     #
     # @option params [required, String] :policy_type
     #   The type of policy. Identity policies grant permissions to IAM
@@ -498,13 +503,82 @@ module Aws::AccessAnalyzer
     #   * {Types::CheckAccessNotGrantedResponse#message #message} => String
     #   * {Types::CheckAccessNotGrantedResponse#reasons #reasons} => Array&lt;Types::ReasonSummary&gt;
     #
+    #
+    # @example Example: Passing check. Restrictive identity policy.
+    #
+    #   resp = client.check_access_not_granted({
+    #     access: [
+    #       {
+    #         actions: [
+    #           "s3:PutObject", 
+    #         ], 
+    #       }, 
+    #     ], 
+    #     policy_document: "{\"Version\":\"2012-10-17\",\"Id\":\"123\",\"Statement\":[{\"Sid\":\"AllowJohnDoe\",\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"arn:aws:iam::123456789012:user/JohnDoe\"},\"Action\":\"s3:GetObject\",\"Resource\":\"*\"}]}", 
+    #     policy_type: "RESOURCE_POLICY", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     message: "The policy document does not grant access to perform the listed actions or resources.", 
+    #     result: "PASS", 
+    #   }
+    #
+    # @example Example: Passing check. Restrictive S3 Bucket resource policy.
+    #
+    #   resp = client.check_access_not_granted({
+    #     access: [
+    #       {
+    #         resources: [
+    #           "arn:aws:s3:::sensitive-bucket/*", 
+    #         ], 
+    #       }, 
+    #     ], 
+    #     policy_document: "{\"Version\":\"2012-10-17\",\"Id\":\"123\",\"Statement\":[{\"Sid\":\"AllowJohnDoe\",\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"arn:aws:iam::123456789012:user/JohnDoe\"},\"Action\":\"s3:PutObject\",\"Resource\":\"arn:aws:s3:::non-sensitive-bucket/*\"}]}", 
+    #     policy_type: "RESOURCE_POLICY", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     message: "The policy document does not grant access to perform the listed actions or resources.", 
+    #     result: "PASS", 
+    #   }
+    #
+    # @example Example: Failing check. Permissive S3 Bucket resource policy.
+    #
+    #   resp = client.check_access_not_granted({
+    #     access: [
+    #       {
+    #         resources: [
+    #           "arn:aws:s3:::my-bucket/*", 
+    #         ], 
+    #       }, 
+    #     ], 
+    #     policy_document: "{\"Version\":\"2012-10-17\",\"Id\":\"123\",\"Statement\":[{\"Sid\":\"AllowJohnDoe\",\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"arn:aws:iam::123456789012:user/JohnDoe\"},\"Action\":\"s3:PutObject\",\"Resource\":\"arn:aws:s3:::my-bucket/*\"}]}", 
+    #     policy_type: "RESOURCE_POLICY", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     message: "The policy document grants access to perform one or more of the listed actions or resources.", 
+    #     reasons: [
+    #       {
+    #         description: "One or more of the listed actions or resources in the statement with sid: AllowJohnDoe.", 
+    #         statement_id: "AllowJohnDoe", 
+    #         statement_index: 0, 
+    #       }, 
+    #     ], 
+    #     result: "FAIL", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.check_access_not_granted({
     #     policy_document: "AccessCheckPolicyDocument", # required
     #     access: [ # required
     #       {
-    #         actions: ["Action"], # required
+    #         actions: ["Action"],
+    #         resources: ["Resource"],
     #       },
     #     ],
     #     policy_type: "IDENTITY_POLICY", # required, accepts IDENTITY_POLICY, RESOURCE_POLICY
@@ -588,6 +662,85 @@ module Aws::AccessAnalyzer
     # @param [Hash] params ({})
     def check_no_new_access(params = {}, options = {})
       req = build_request(:check_no_new_access, params)
+      req.send_request(options)
+    end
+
+    # Checks whether a resource policy can grant public access to the
+    # specified resource type.
+    #
+    # @option params [required, String] :policy_document
+    #   The JSON policy document to evaluate for public access.
+    #
+    # @option params [required, String] :resource_type
+    #   The type of resource to evaluate for public access. For example, to
+    #   check for public access to Amazon S3 buckets, you can choose
+    #   `AWS::S3::Bucket` for the resource type.
+    #
+    #   For resource types not supported as valid values, IAM Access Analyzer
+    #   will return an error.
+    #
+    # @return [Types::CheckNoPublicAccessResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CheckNoPublicAccessResponse#result #result} => String
+    #   * {Types::CheckNoPublicAccessResponse#message #message} => String
+    #   * {Types::CheckNoPublicAccessResponse#reasons #reasons} => Array&lt;Types::ReasonSummary&gt;
+    #
+    #
+    # @example Example: Passing check. S3 Bucket policy without public access.
+    #
+    #   resp = client.check_no_public_access({
+    #     policy_document: "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Sid\":\"Bob\",\"Effect\":\"Allow\",\"Principal\":{\"AWS\":\"arn:aws:iam::111122223333:user/JohnDoe\"},\"Action\":[\"s3:GetObject\"]}]}", 
+    #     resource_type: "AWS::S3::Bucket", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     message: "The resource policy does not grant public access for the given resource type.", 
+    #     result: "PASS", 
+    #   }
+    #
+    # @example Example: Failing check. S3 Bucket policy with public access.
+    #
+    #   resp = client.check_no_public_access({
+    #     policy_document: "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Sid\":\"Bob\",\"Effect\":\"Allow\",\"Principal\":\"*\",\"Action\":[\"s3:GetObject\"]}]}", 
+    #     resource_type: "AWS::S3::Bucket", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     message: "The resource policy grants public access for the given resource type.", 
+    #     reasons: [
+    #       {
+    #         description: "Public access granted in the following statement with sid: Bob.", 
+    #         statement_id: "Bob", 
+    #         statement_index: 0, 
+    #       }, 
+    #     ], 
+    #     result: "FAIL", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.check_no_public_access({
+    #     policy_document: "AccessCheckPolicyDocument", # required
+    #     resource_type: "AWS::DynamoDB::Table", # required, accepts AWS::DynamoDB::Table, AWS::DynamoDB::Stream, AWS::EFS::FileSystem, AWS::OpenSearchService::Domain, AWS::Kinesis::Stream, AWS::Kinesis::StreamConsumer, AWS::KMS::Key, AWS::Lambda::Function, AWS::S3::Bucket, AWS::S3::AccessPoint, AWS::S3Express::DirectoryBucket, AWS::S3::Glacier, AWS::S3Outposts::Bucket, AWS::S3Outposts::AccessPoint, AWS::SecretsManager::Secret, AWS::SNS::Topic, AWS::SQS::Queue, AWS::IAM::AssumeRolePolicyDocument
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.result #=> String, one of "PASS", "FAIL"
+    #   resp.message #=> String
+    #   resp.reasons #=> Array
+    #   resp.reasons[0].description #=> String
+    #   resp.reasons[0].statement_index #=> Integer
+    #   resp.reasons[0].statement_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/CheckNoPublicAccess AWS API Documentation
+    #
+    # @overload check_no_public_access(params = {})
+    # @param [Hash] params ({})
+    def check_no_public_access(params = {}, options = {})
+      req = build_request(:check_no_public_access, params)
       req.send_request(options)
     end
 
@@ -943,6 +1096,56 @@ module Aws::AccessAnalyzer
       req.send_request(options)
     end
 
+    # Creates a recommendation for an unused permissions finding.
+    #
+    # @option params [required, String] :analyzer_arn
+    #   The [ARN of the analyzer][1] used to generate the finding
+    #   recommendation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-getting-started.html#permission-resources
+    #
+    # @option params [required, String] :id
+    #   The unique ID for the finding recommendation.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: Successfully started generating finding recommendation
+    #
+    #   resp = client.generate_finding_recommendation({
+    #     analyzer_arn: "arn:aws:access-analyzer:us-east-1:111122223333:analyzer/a", 
+    #     id: "finding-id", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
+    # @example Example: Failed field validation for id value
+    #
+    #   resp = client.generate_finding_recommendation({
+    #     analyzer_arn: "arn:aws:access-analyzer:us-east-1:111122223333:analyzer/a", 
+    #     id: "!", 
+    #   })
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.generate_finding_recommendation({
+    #     analyzer_arn: "AnalyzerArn", # required
+    #     id: "GenerateFindingRecommendationRequestIdString", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/GenerateFindingRecommendation AWS API Documentation
+    #
+    # @overload generate_finding_recommendation(params = {})
+    # @param [Hash] params ({})
+    def generate_finding_recommendation(params = {}, options = {})
+      req = build_request(:generate_finding_recommendation, params)
+      req.send_request(options)
+    end
+
     # Retrieves information about an access preview for the specified
     # analyzer.
     #
@@ -1222,6 +1425,151 @@ module Aws::AccessAnalyzer
     # @param [Hash] params ({})
     def get_finding(params = {}, options = {})
       req = build_request(:get_finding, params)
+      req.send_request(options)
+    end
+
+    # Retrieves information about a finding recommendation for the specified
+    # analyzer.
+    #
+    # @option params [required, String] :analyzer_arn
+    #   The [ARN of the analyzer][1] used to generate the finding
+    #   recommendation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-getting-started.html#permission-resources
+    #
+    # @option params [required, String] :id
+    #   The unique ID for the finding recommendation.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in the response.
+    #
+    # @option params [String] :next_token
+    #   A token used for pagination of results returned.
+    #
+    # @return [Types::GetFindingRecommendationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetFindingRecommendationResponse#started_at #started_at} => Time
+    #   * {Types::GetFindingRecommendationResponse#completed_at #completed_at} => Time
+    #   * {Types::GetFindingRecommendationResponse#next_token #next_token} => String
+    #   * {Types::GetFindingRecommendationResponse#error #error} => Types::RecommendationError
+    #   * {Types::GetFindingRecommendationResponse#resource_arn #resource_arn} => String
+    #   * {Types::GetFindingRecommendationResponse#recommended_steps #recommended_steps} => Array&lt;Types::RecommendedStep&gt;
+    #   * {Types::GetFindingRecommendationResponse#recommendation_type #recommendation_type} => String
+    #   * {Types::GetFindingRecommendationResponse#status #status} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: Successfully fetched finding recommendation
+    #
+    #   resp = client.get_finding_recommendation({
+    #     analyzer_arn: "arn:aws:access-analyzer:us-east-1:111122223333:analyzer/a", 
+    #     id: "finding-id", 
+    #     max_results: 3, 
+    #     next_token: "token", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     completed_at: Time.parse("2000-01-01T00:00:01Z"), 
+    #     recommendation_type: "UnusedPermissionRecommendation", 
+    #     recommended_steps: [
+    #       {
+    #         unused_permissions_recommended_step: {
+    #           existing_policy_id: "policy-id", 
+    #           recommended_action: "DETACH_POLICY", 
+    #         }, 
+    #       }, 
+    #       {
+    #         unused_permissions_recommended_step: {
+    #           existing_policy_id: "policy-id", 
+    #           recommended_action: "CREATE_POLICY", 
+    #           recommended_policy: "policy-content", 
+    #         }, 
+    #       }, 
+    #     ], 
+    #     resource_arn: "arn:aws:iam::111122223333:role/test", 
+    #     started_at: Time.parse("2000-01-01T00:00:00Z"), 
+    #     status: "SUCCEEDED", 
+    #   }
+    #
+    # @example Example: In progress finding recommendation
+    #
+    #   resp = client.get_finding_recommendation({
+    #     analyzer_arn: "arn:aws:access-analyzer:us-east-1:111122223333:analyzer/a", 
+    #     id: "finding-id", 
+    #     max_results: 3, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     recommendation_type: "UnusedPermissionRecommendation", 
+    #     resource_arn: "arn:aws:iam::111122223333:role/test", 
+    #     started_at: Time.parse("2000-01-01T00:00:00Z"), 
+    #     status: "IN_PROGRESS", 
+    #   }
+    #
+    # @example Example: Failed finding recommendation
+    #
+    #   resp = client.get_finding_recommendation({
+    #     analyzer_arn: "arn:aws:access-analyzer:us-east-1:111122223333:analyzer/a", 
+    #     id: "finding-id", 
+    #     max_results: 3, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     completed_at: Time.parse("2000-01-01T00:00:01Z"), 
+    #     error: {
+    #       code: "SERVICE_ERROR", 
+    #       message: "Service error. Please try again.", 
+    #     }, 
+    #     recommendation_type: "UnusedPermissionRecommendation", 
+    #     resource_arn: "arn:aws:iam::111122223333:role/test", 
+    #     started_at: Time.parse("2000-01-01T00:00:00Z"), 
+    #     status: "FAILED", 
+    #   }
+    #
+    # @example Example: Failed field validation for id value
+    #
+    #   resp = client.get_finding_recommendation({
+    #     analyzer_arn: "arn:aws:access-analyzer:us-east-1:111122223333:analyzer/a", 
+    #     id: "!", 
+    #   })
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_finding_recommendation({
+    #     analyzer_arn: "AnalyzerArn", # required
+    #     id: "GetFindingRecommendationRequestIdString", # required
+    #     max_results: 1,
+    #     next_token: "Token",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.started_at #=> Time
+    #   resp.completed_at #=> Time
+    #   resp.next_token #=> String
+    #   resp.error.code #=> String
+    #   resp.error.message #=> String
+    #   resp.resource_arn #=> String
+    #   resp.recommended_steps #=> Array
+    #   resp.recommended_steps[0].unused_permissions_recommended_step.policy_updated_at #=> Time
+    #   resp.recommended_steps[0].unused_permissions_recommended_step.recommended_action #=> String, one of "CREATE_POLICY", "DETACH_POLICY"
+    #   resp.recommended_steps[0].unused_permissions_recommended_step.recommended_policy #=> String
+    #   resp.recommended_steps[0].unused_permissions_recommended_step.existing_policy_id #=> String
+    #   resp.recommendation_type #=> String, one of "UnusedPermissionRecommendation"
+    #   resp.status #=> String, one of "SUCCEEDED", "FAILED", "IN_PROGRESS"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/GetFindingRecommendation AWS API Documentation
+    #
+    # @overload get_finding_recommendation(params = {})
+    # @param [Hash] params ({})
+    def get_finding_recommendation(params = {}, options = {})
+      req = build_request(:get_finding_recommendation, params)
       req.send_request(options)
     end
 
@@ -2276,7 +2624,7 @@ module Aws::AccessAnalyzer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-accessanalyzer'
-      context[:gem_version] = '1.50.0'
+      context[:gem_version] = '1.51.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

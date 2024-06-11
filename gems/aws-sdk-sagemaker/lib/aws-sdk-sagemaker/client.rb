@@ -9070,6 +9070,10 @@ module Aws::SageMaker
     #       user_info_endpoint: "OidcEndpoint", # required
     #       logout_endpoint: "OidcEndpoint", # required
     #       jwks_uri: "OidcEndpoint", # required
+    #       scope: "Scope",
+    #       authentication_request_extra_params: {
+    #         "AuthenticationRequestExtraParamsKey" => "AuthenticationRequestExtraParamsValue",
+    #       },
     #     },
     #     source_ip_config: {
     #       cidrs: ["Cidr"], # required
@@ -15978,6 +15982,9 @@ module Aws::SageMaker
     #   resp.workforce.oidc_config.user_info_endpoint #=> String
     #   resp.workforce.oidc_config.logout_endpoint #=> String
     #   resp.workforce.oidc_config.jwks_uri #=> String
+    #   resp.workforce.oidc_config.scope #=> String
+    #   resp.workforce.oidc_config.authentication_request_extra_params #=> Hash
+    #   resp.workforce.oidc_config.authentication_request_extra_params["AuthenticationRequestExtraParamsKey"] #=> String
     #   resp.workforce.create_date #=> Time
     #   resp.workforce.workforce_vpc_config.vpc_id #=> String
     #   resp.workforce.workforce_vpc_config.security_group_ids #=> Array
@@ -20022,6 +20029,13 @@ module Aws::SageMaker
     # @option params [String] :sort_order
     #   The sort order for results. The default is `Ascending`.
     #
+    # @option params [String] :cross_account_filter_option
+    #   A filter that returns either model groups shared with you or model
+    #   groups in your own account. When the value is `CrossAccount`, the
+    #   results show the resources made discoverable to you from other
+    #   accounts. When the value is `SameAccount` or `null`, the results show
+    #   resources from your account. The default is `SameAccount`.
+    #
     # @return [Types::ListModelPackageGroupsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListModelPackageGroupsOutput#model_package_group_summary_list #model_package_group_summary_list} => Array&lt;Types::ModelPackageGroupSummary&gt;
@@ -20039,6 +20053,7 @@ module Aws::SageMaker
     #     next_token: "NextToken",
     #     sort_by: "Name", # accepts Name, CreationTime
     #     sort_order: "Ascending", # accepts Ascending, Descending
+    #     cross_account_filter_option: "SameAccount", # accepts SameAccount, CrossAccount
     #   })
     #
     # @example Response structure
@@ -22194,6 +22209,9 @@ module Aws::SageMaker
     #   resp.workforces[0].oidc_config.user_info_endpoint #=> String
     #   resp.workforces[0].oidc_config.logout_endpoint #=> String
     #   resp.workforces[0].oidc_config.jwks_uri #=> String
+    #   resp.workforces[0].oidc_config.scope #=> String
+    #   resp.workforces[0].oidc_config.authentication_request_extra_params #=> Hash
+    #   resp.workforces[0].oidc_config.authentication_request_extra_params["AuthenticationRequestExtraParamsKey"] #=> String
     #   resp.workforces[0].create_date #=> Time
     #   resp.workforces[0].workforce_vpc_config.vpc_id #=> String
     #   resp.workforces[0].workforce_vpc_config.security_group_ids #=> Array
@@ -26280,6 +26298,10 @@ module Aws::SageMaker
     #       user_info_endpoint: "OidcEndpoint", # required
     #       logout_endpoint: "OidcEndpoint", # required
     #       jwks_uri: "OidcEndpoint", # required
+    #       scope: "Scope",
+    #       authentication_request_extra_params: {
+    #         "AuthenticationRequestExtraParamsKey" => "AuthenticationRequestExtraParamsValue",
+    #       },
     #     },
     #     workforce_vpc_config: {
     #       vpc_id: "WorkforceVpcId",
@@ -26305,6 +26327,9 @@ module Aws::SageMaker
     #   resp.workforce.oidc_config.user_info_endpoint #=> String
     #   resp.workforce.oidc_config.logout_endpoint #=> String
     #   resp.workforce.oidc_config.jwks_uri #=> String
+    #   resp.workforce.oidc_config.scope #=> String
+    #   resp.workforce.oidc_config.authentication_request_extra_params #=> Hash
+    #   resp.workforce.oidc_config.authentication_request_extra_params["AuthenticationRequestExtraParamsKey"] #=> String
     #   resp.workforce.create_date #=> Time
     #   resp.workforce.workforce_vpc_config.vpc_id #=> String
     #   resp.workforce.workforce_vpc_config.security_group_ids #=> Array

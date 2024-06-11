@@ -290,6 +290,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-paymentcryptography', '~> 1')
   spec.add_dependency('aws-sdk-paymentcryptographydata', '~> 1')
   spec.add_dependency('aws-sdk-pcaconnectorad', '~> 1')
+  spec.add_dependency('aws-sdk-pcaconnectorscep', '~> 1')
   spec.add_dependency('aws-sdk-personalize', '~> 1')
   spec.add_dependency('aws-sdk-personalizeevents', '~> 1')
   spec.add_dependency('aws-sdk-personalizeruntime', '~> 1')

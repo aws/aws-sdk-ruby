@@ -873,6 +873,9 @@
   "PcaConnectorAd": {
     "models": "pca-connector-ad/2018-05-10"
   },
+  "PcaConnectorScep": {
+    "models": "pca-connector-scep/2018-05-10"
+  },
   "Personalize": {
     "models": "personalize/2018-05-22"
   },

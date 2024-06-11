@@ -517,6 +517,7 @@ module Aws
             'PaymentCryptography' => 'controlplane.payment-cryptography',
             'PaymentCryptographyData' => 'dataplane.payment-cryptography',
             'PcaConnectorAd' => 'pca-connector-ad',
+            'PcaConnectorScep' => 'pca-connector-scep',
             'Personalize' => 'personalize',
             'PersonalizeEvents' => 'personalize-events',
             'PersonalizeRuntime' => 'personalize-runtime',

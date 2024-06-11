@@ -1528,6 +1528,58 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # @!attribute [rw] client_token
+    #   The idempotency token for the create request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] role
+    #   IAM role with permissions required to scan and add tags to the
+    #   associated protected resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] protected_resource
+    #   Information about the protected resource that is associated with the
+    #   created Malware Protection plan. Presently, `S3Bucket` is the only
+    #   supported protected resource.
+    #   @return [Types::CreateProtectedResource]
+    #
+    # @!attribute [rw] actions
+    #   Information about whether the tags will be added to the S3 object
+    #   after scanning.
+    #   @return [Types::MalwareProtectionPlanActions]
+    #
+    # @!attribute [rw] tags
+    #   Tags added to the Malware Protection plan resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CreateMalwareProtectionPlanRequest AWS API Documentation
+    #
+    class CreateMalwareProtectionPlanRequest < Struct.new(
+      :client_token,
+      :role,
+      :protected_resource,
+      :actions,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] malware_protection_plan_id
+    #   A unique identifier associated with the Malware Protection plan
+    #   resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CreateMalwareProtectionPlanResponse AWS API Documentation
+    #
+    class CreateMalwareProtectionPlanResponse < Struct.new(
+      :malware_protection_plan_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] detector_id
     #   The unique ID of the detector of the GuardDuty account that you want
     #   to associate member accounts with.
@@ -1556,6 +1608,22 @@ module Aws::GuardDuty
     #
     class CreateMembersResponse < Struct.new(
       :unprocessed_accounts)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the protected resource that is associated with the
+    # created Malware Protection plan. Presently, `S3Bucket` is the only
+    # supported protected resource.
+    #
+    # @!attribute [rw] s3_bucket
+    #   Information about the protected S3 bucket resource.
+    #   @return [Types::CreateS3BucketResource]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CreateProtectedResource AWS API Documentation
+    #
+    class CreateProtectedResource < Struct.new(
+      :s3_bucket)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1601,6 +1669,27 @@ module Aws::GuardDuty
     #
     class CreatePublishingDestinationResponse < Struct.new(
       :destination_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the protected S3 bucket resource.
+    #
+    # @!attribute [rw] bucket_name
+    #   Name of the S3 bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] object_prefixes
+    #   Information about the specified object prefixes. The S3 object will
+    #   be scanned only if it belongs to any of the specified object
+    #   prefixes.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CreateS3BucketResource AWS API Documentation
+    #
+    class CreateS3BucketResource < Struct.new(
+      :bucket_name,
+      :object_prefixes)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1960,6 +2049,19 @@ module Aws::GuardDuty
     #
     class DeleteInvitationsResponse < Struct.new(
       :unprocessed_accounts)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] malware_protection_plan_id
+    #   A unique identifier associated with Malware Protection plan
+    #   resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeleteMalwareProtectionPlanRequest AWS API Documentation
+    #
+    class DeleteMalwareProtectionPlanRequest < Struct.new(
+      :malware_protection_plan_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3419,6 +3521,71 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # @!attribute [rw] malware_protection_plan_id
+    #   A unique identifier associated with Malware Protection plan
+    #   resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetMalwareProtectionPlanRequest AWS API Documentation
+    #
+    class GetMalwareProtectionPlanRequest < Struct.new(
+      :malware_protection_plan_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   Amazon Resource Name (ARN) of the protected resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] role
+    #   IAM role that includes the permissions required to scan and add tags
+    #   to the associated protected resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] protected_resource
+    #   Information about the protected resource that is associated with the
+    #   created Malware Protection plan. Presently, `S3Bucket` is the only
+    #   supported protected resource.
+    #   @return [Types::CreateProtectedResource]
+    #
+    # @!attribute [rw] actions
+    #   Information about whether the tags will be added to the S3 object
+    #   after scanning.
+    #   @return [Types::MalwareProtectionPlanActions]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when the Malware Protection plan resource was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   Malware Protection plan status.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reasons
+    #   Information about the issue code and message associated to the
+    #   status of your Malware Protection plan.
+    #   @return [Array<Types::MalwareProtectionPlanStatusReason>]
+    #
+    # @!attribute [rw] tags
+    #   Tags added to the Malware Protection plan resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetMalwareProtectionPlanResponse AWS API Documentation
+    #
+    class GetMalwareProtectionPlanResponse < Struct.new(
+      :arn,
+      :role,
+      :protected_resource,
+      :actions,
+      :created_at,
+      :status,
+      :status_reasons,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] detector_id
     #   The unique ID of the detector that the scan setting is associated
     #   with.
@@ -3955,6 +4122,26 @@ module Aws::GuardDuty
     #
     class InviteMembersResponse < Struct.new(
       :unprocessed_accounts)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the nested item path and hash of the protected
+    # resource.
+    #
+    # @!attribute [rw] nested_item_path
+    #   The nested item path where the infected file was found.
+    #   @return [String]
+    #
+    # @!attribute [rw] hash
+    #   The hash value of the infected resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ItemPath AWS API Documentation
+    #
+    class ItemPath < Struct.new(
+      :nested_item_path,
+      :hash)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4819,6 +5006,44 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # @!attribute [rw] next_token
+    #   You can use this parameter when paginating results. Set the value of
+    #   this parameter to null on your first call to the list action. For
+    #   subsequent calls to the action, fill nextToken in the request with
+    #   the value of `NextToken` from the previous response to continue
+    #   listing data.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListMalwareProtectionPlansRequest AWS API Documentation
+    #
+    class ListMalwareProtectionPlansRequest < Struct.new(
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] malware_protection_plans
+    #   A list of unique identifiers associated with each Malware Protection
+    #   plan.
+    #   @return [Array<Types::MalwareProtectionPlanSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   You can use this parameter when paginating results. Set the value of
+    #   this parameter to null on your first call to the list action. For
+    #   subsequent calls to the action, fill nextToken in the request with
+    #   the value of `NextToken` from the previous response to continue
+    #   listing data.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListMalwareProtectionPlansResponse AWS API Documentation
+    #
+    class ListMalwareProtectionPlansResponse < Struct.new(
+      :malware_protection_plans,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] detector_id
     #   The unique ID of the detector the member is associated with.
     #   @return [String]
@@ -5158,6 +5383,92 @@ module Aws::GuardDuty
     #
     class MalwareProtectionDataSourceFreeTrial < Struct.new(
       :scan_ec2_instance_with_findings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about whether the tags will be added to the S3 object
+    # after scanning.
+    #
+    # @!attribute [rw] tagging
+    #   Indicates whether the scanned S3 object will have tags about the
+    #   scan result.
+    #   @return [Types::MalwareProtectionPlanTaggingAction]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/MalwareProtectionPlanActions AWS API Documentation
+    #
+    class MalwareProtectionPlanActions < Struct.new(
+      :tagging)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the issue code and message associated to the status
+    # of your Malware Protection plan.
+    #
+    # @!attribute [rw] code
+    #   Issue code.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   Issue message that specifies the reason. For information about
+    #   potential troubleshooting steps, see [Troubleshooting Malware
+    #   Protection for S3 status issues][1] in the *GuardDuty User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/guardduty/latest/ug/troubleshoot-s3-malware-protection-status-errors.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/MalwareProtectionPlanStatusReason AWS API Documentation
+    #
+    class MalwareProtectionPlanStatusReason < Struct.new(
+      :code,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the Malware Protection plan resource.
+    #
+    # @!attribute [rw] malware_protection_plan_id
+    #   A unique identifier associated with Malware Protection plan.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/MalwareProtectionPlanSummary AWS API Documentation
+    #
+    class MalwareProtectionPlanSummary < Struct.new(
+      :malware_protection_plan_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about adding tags to the scanned S3 object after the scan
+    # result.
+    #
+    # @!attribute [rw] status
+    #   Indicates whether or not the tags will added.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/MalwareProtectionPlanTaggingAction AWS API Documentation
+    #
+    class MalwareProtectionPlanTaggingAction < Struct.new(
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the malware scan that generated a GuardDuty finding.
+    #
+    # @!attribute [rw] threats
+    #   Information about the detected threats associated with the generated
+    #   GuardDuty finding.
+    #   @return [Array<Types::Threat>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/MalwareScanDetails AWS API Documentation
+    #
+    class MalwareScanDetails < Struct.new(
+      :threats)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6515,13 +6826,32 @@ module Aws::GuardDuty
     # Represents the resources that were scanned in the scan entry.
     #
     # @!attribute [rw] instance_arn
-    #   InstanceArn that was scanned in the scan entry.
+    #   Instance ARN that was scanned in the scan entry.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ResourceDetails AWS API Documentation
     #
     class ResourceDetails < Struct.new(
       :instance_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The requested resource can't be found.
+    #
+    # @!attribute [rw] message
+    #   The error message.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The error type.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ResourceNotFoundException AWS API Documentation
+    #
+    class ResourceNotFoundException < Struct.new(
+      :message,
+      :type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6726,6 +7056,10 @@ module Aws::GuardDuty
     #   Describes the public access policies that apply to the S3 bucket.
     #   @return [Types::PublicAccess]
     #
+    # @!attribute [rw] s3_object_details
+    #   Information about the S3 object that was scanned.
+    #   @return [Array<Types::S3ObjectDetail>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/S3BucketDetail AWS API Documentation
     #
     class S3BucketDetail < Struct.new(
@@ -6736,7 +7070,8 @@ module Aws::GuardDuty
       :owner,
       :tags,
       :default_server_side_encryption,
-      :public_access)
+      :public_access,
+      :s3_object_details)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6766,6 +7101,41 @@ module Aws::GuardDuty
     #
     class S3LogsConfigurationResult < Struct.new(
       :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the S3 object that was scanned
+    #
+    # @!attribute [rw] object_arn
+    #   Amazon Resource Name (ARN) of the S3 object.
+    #   @return [String]
+    #
+    # @!attribute [rw] key
+    #   Key of the S3 object.
+    #   @return [String]
+    #
+    # @!attribute [rw] etag
+    #   The entity tag is a hash of the S3 object. The ETag reflects changes
+    #   only to the contents of an object, and not its metadata.
+    #   @return [String]
+    #
+    # @!attribute [rw] hash
+    #   Hash of the threat detected in this finding.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_id
+    #   Version ID of the object.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/S3ObjectDetail AWS API Documentation
+    #
+    class S3ObjectDetail < Struct.new(
+      :object_arn,
+      :key,
+      :etag,
+      :hash,
+      :version_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6962,7 +7332,7 @@ module Aws::GuardDuty
     #   @return [String]
     #
     # @!attribute [rw] volume_arn
-    #   EBS volume Arn details of the infected file.
+    #   EBS volume ARN details of the infected file.
     #   @return [String]
     #
     # @!attribute [rw] hash
@@ -7180,6 +7550,11 @@ module Aws::GuardDuty
     #   Contains information about the detected unusual behavior.
     #   @return [Types::Detection]
     #
+    # @!attribute [rw] malware_scan_details
+    #   Returns details from the malware scan that generated a GuardDuty
+    #   finding.
+    #   @return [Types::MalwareScanDetails]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Service AWS API Documentation
     #
     class Service < Struct.new(
@@ -7197,7 +7572,8 @@ module Aws::GuardDuty
       :feature_name,
       :ebs_volume_scan_details,
       :runtime_details,
-      :detection)
+      :detection,
+      :malware_scan_details)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7372,6 +7748,33 @@ module Aws::GuardDuty
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/TagResourceResponse AWS API Documentation
     #
     class TagResourceResponse < Aws::EmptyStructure; end
+
+    # Information about the detected threats associated with the generated
+    # finding.
+    #
+    # @!attribute [rw] name
+    #   Name of the detected threat that caused GuardDuty to generate this
+    #   finding.
+    #   @return [String]
+    #
+    # @!attribute [rw] source
+    #   Source of the threat that generated this finding.
+    #   @return [String]
+    #
+    # @!attribute [rw] item_paths
+    #   Information about the nested item path and hash of the protected
+    #   resource.
+    #   @return [Array<Types::ItemPath>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Threat AWS API Documentation
+    #
+    class Threat < Struct.new(
+      :name,
+      :source,
+      :item_paths)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # Contains details about identified threats organized by threat name.
     #
@@ -7734,6 +8137,37 @@ module Aws::GuardDuty
     #
     class UpdateIPSetResponse < Aws::EmptyStructure; end
 
+    # @!attribute [rw] malware_protection_plan_id
+    #   A unique identifier associated with the Malware Protection plan.
+    #   @return [String]
+    #
+    # @!attribute [rw] role
+    #   IAM role with permissions required to scan and add tags to the
+    #   associated protected resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] actions
+    #   Information about whether the tags will be added to the S3 object
+    #   after scanning.
+    #   @return [Types::MalwareProtectionPlanActions]
+    #
+    # @!attribute [rw] protected_resource
+    #   Information about the protected resource that is associated with the
+    #   created Malware Protection plan. Presently, `S3Bucket` is the only
+    #   supported protected resource.
+    #   @return [Types::UpdateProtectedResource]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateMalwareProtectionPlanRequest AWS API Documentation
+    #
+    class UpdateMalwareProtectionPlanRequest < Struct.new(
+      :malware_protection_plan_id,
+      :role,
+      :actions,
+      :protected_resource)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] detector_id
     #   The unique ID of the detector that specifies the GuardDuty service
     #   where you want to update scan settings.
@@ -7872,6 +8306,22 @@ module Aws::GuardDuty
     #
     class UpdateOrganizationConfigurationResponse < Aws::EmptyStructure; end
 
+    # Information about the protected resource that is associated with the
+    # created Malware Protection plan. Presently, `S3Bucket` is the only
+    # supported protected resource.
+    #
+    # @!attribute [rw] s3_bucket
+    #   Information about the protected S3 bucket resource.
+    #   @return [Types::UpdateS3BucketResource]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateProtectedResource AWS API Documentation
+    #
+    class UpdateProtectedResource < Struct.new(
+      :s3_bucket)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] detector_id
     #   The ID of the detector associated with the publishing destinations
     #   to update.
@@ -7899,6 +8349,22 @@ module Aws::GuardDuty
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdatePublishingDestinationResponse AWS API Documentation
     #
     class UpdatePublishingDestinationResponse < Aws::EmptyStructure; end
+
+    # Information about the protected S3 bucket resource.
+    #
+    # @!attribute [rw] object_prefixes
+    #   Information about the specified object prefixes. The S3 object will
+    #   be scanned only if it belongs to any of the specified object
+    #   prefixes.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateS3BucketResource AWS API Documentation
+    #
+    class UpdateS3BucketResource < Struct.new(
+      :object_prefixes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @!attribute [rw] detector_id
     #   The detectorID that specifies the GuardDuty service whose
@@ -8161,7 +8627,7 @@ module Aws::GuardDuty
     # Contains EBS volume details.
     #
     # @!attribute [rw] volume_arn
-    #   EBS volume Arn information.
+    #   EBS volume ARN information.
     #   @return [String]
     #
     # @!attribute [rw] volume_type
@@ -8181,11 +8647,11 @@ module Aws::GuardDuty
     #   @return [String]
     #
     # @!attribute [rw] snapshot_arn
-    #   Snapshot Arn of the EBS volume.
+    #   Snapshot ARN of the EBS volume.
     #   @return [String]
     #
     # @!attribute [rw] kms_key_arn
-    #   KMS key Arn used to encrypt the EBS volume.
+    #   KMS key ARN used to encrypt the EBS volume.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/VolumeDetail AWS API Documentation

@@ -5814,6 +5814,7 @@ module Aws::SageMaker
       attr_accessor next_token: ::String
       attr_accessor sort_by: ("Name" | "CreationTime")
       attr_accessor sort_order: ("Ascending" | "Descending")
+      attr_accessor cross_account_filter_option: ("SameAccount" | "CrossAccount")
       SENSITIVE: []
     end
 
@@ -7116,6 +7117,8 @@ module Aws::SageMaker
       attr_accessor user_info_endpoint: ::String
       attr_accessor logout_endpoint: ::String
       attr_accessor jwks_uri: ::String
+      attr_accessor scope: ::String
+      attr_accessor authentication_request_extra_params: ::Hash[::String, ::String]
       SENSITIVE: [:client_secret]
     end
 
@@ -7127,6 +7130,8 @@ module Aws::SageMaker
       attr_accessor user_info_endpoint: ::String
       attr_accessor logout_endpoint: ::String
       attr_accessor jwks_uri: ::String
+      attr_accessor scope: ::String
+      attr_accessor authentication_request_extra_params: ::Hash[::String, ::String]
       SENSITIVE: []
     end
 

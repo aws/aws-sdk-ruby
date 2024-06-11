@@ -10,6 +10,7 @@ module Aws::AccessAnalyzer
 
     class Access
       attr_accessor actions: ::Array[::String]
+      attr_accessor resources: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -167,6 +168,19 @@ module Aws::AccessAnalyzer
     end
 
     class CheckNoNewAccessResponse
+      attr_accessor result: ("PASS" | "FAIL")
+      attr_accessor message: ::String
+      attr_accessor reasons: ::Array[Types::ReasonSummary]
+      SENSITIVE: []
+    end
+
+    class CheckNoPublicAccessRequest
+      attr_accessor policy_document: ::String
+      attr_accessor resource_type: ("AWS::DynamoDB::Table" | "AWS::DynamoDB::Stream" | "AWS::EFS::FileSystem" | "AWS::OpenSearchService::Domain" | "AWS::Kinesis::Stream" | "AWS::Kinesis::StreamConsumer" | "AWS::KMS::Key" | "AWS::Lambda::Function" | "AWS::S3::Bucket" | "AWS::S3::AccessPoint" | "AWS::S3Express::DirectoryBucket" | "AWS::S3::Glacier" | "AWS::S3Outposts::Bucket" | "AWS::S3Outposts::AccessPoint" | "AWS::SecretsManager::Secret" | "AWS::SNS::Topic" | "AWS::SQS::Queue" | "AWS::IAM::AssumeRolePolicyDocument")
+      SENSITIVE: [:policy_document]
+    end
+
+    class CheckNoPublicAccessResponse
       attr_accessor result: ("PASS" | "FAIL")
       attr_accessor message: ::String
       attr_accessor reasons: ::Array[Types::ReasonSummary]
@@ -422,6 +436,12 @@ module Aws::AccessAnalyzer
       SENSITIVE: []
     end
 
+    class GenerateFindingRecommendationRequest
+      attr_accessor analyzer_arn: ::String
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
     class GeneratedPolicy
       attr_accessor policy: ::String
       SENSITIVE: []
@@ -480,6 +500,26 @@ module Aws::AccessAnalyzer
 
     class GetArchiveRuleResponse
       attr_accessor archive_rule: Types::ArchiveRuleSummary
+      SENSITIVE: []
+    end
+
+    class GetFindingRecommendationRequest
+      attr_accessor analyzer_arn: ::String
+      attr_accessor id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetFindingRecommendationResponse
+      attr_accessor started_at: ::Time
+      attr_accessor completed_at: ::Time
+      attr_accessor next_token: ::String
+      attr_accessor error: Types::RecommendationError
+      attr_accessor resource_arn: ::String
+      attr_accessor recommended_steps: ::Array[Types::RecommendedStep]
+      attr_accessor recommendation_type: ("UnusedPermissionRecommendation")
+      attr_accessor status: ("SUCCEEDED" | "FAILED" | "IN_PROGRESS")
       SENSITIVE: []
     end
 
@@ -815,6 +855,23 @@ module Aws::AccessAnalyzer
       SENSITIVE: []
     end
 
+    class RecommendationError
+      attr_accessor code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class RecommendedStep
+      attr_accessor unused_permissions_recommended_step: Types::UnusedPermissionsRecommendedStep
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class UnusedPermissionsRecommendedStep < RecommendedStep
+      end
+      class Unknown < RecommendedStep
+      end
+    end
+
     class ResourceNotFoundException
       attr_accessor message: ::String
       attr_accessor resource_id: ::String
@@ -996,6 +1053,14 @@ module Aws::AccessAnalyzer
       SENSITIVE: []
     end
 
+    class UnusedPermissionsRecommendedStep
+      attr_accessor policy_updated_at: ::Time
+      attr_accessor recommended_action: ("CREATE_POLICY" | "DETACH_POLICY")
+      attr_accessor recommended_policy: ::String
+      attr_accessor existing_policy_id: ::String
+      SENSITIVE: []
+    end
+
     class UpdateArchiveRuleRequest
       attr_accessor analyzer_name: ::String
       attr_accessor rule_name: ::String
@@ -1040,7 +1105,7 @@ module Aws::AccessAnalyzer
 
     class ValidationException
       attr_accessor message: ::String
-      attr_accessor reason: ("unknownOperation" | "cannotParse" | "fieldValidationFailed" | "other")
+      attr_accessor reason: ("unknownOperation" | "cannotParse" | "fieldValidationFailed" | "other" | "notSupported")
       attr_accessor field_list: ::Array[Types::ValidationExceptionField]
       SENSITIVE: []
     end

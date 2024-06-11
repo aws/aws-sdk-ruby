@@ -193,6 +193,29 @@ module Aws
                          ) -> _CreateIPSetResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateIPSetResponseSuccess
 
+      interface _CreateMalwareProtectionPlanResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateMalwareProtectionPlanResponse]
+        def malware_protection_plan_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GuardDuty/Client.html#create_malware_protection_plan-instance_method
+      def create_malware_protection_plan: (
+                                            ?client_token: ::String,
+                                            role: ::String,
+                                            protected_resource: {
+                                              s3_bucket: {
+                                                bucket_name: ::String?,
+                                                object_prefixes: Array[::String]?
+                                              }?
+                                            },
+                                            ?actions: {
+                                              tagging: {
+                                                status: ("ENABLED" | "DISABLED")?
+                                              }?
+                                            },
+                                            ?tags: Hash[::String, ::String]
+                                          ) -> _CreateMalwareProtectionPlanResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateMalwareProtectionPlanResponseSuccess
+
       interface _CreateMembersResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateMembersResponse]
         def unprocessed_accounts: () -> ::Array[Types::UnprocessedAccount]
@@ -299,6 +322,12 @@ module Aws
                                 account_ids: Array[::String]
                               ) -> _DeleteInvitationsResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteInvitationsResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GuardDuty/Client.html#delete_malware_protection_plan-instance_method
+      def delete_malware_protection_plan: (
+                                            malware_protection_plan_id: ::String
+                                          ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
       interface _DeleteMembersResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteMembersResponse]
@@ -570,6 +599,23 @@ module Aws
                                  ) -> _GetInvitationsCountResponseSuccess
                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetInvitationsCountResponseSuccess
 
+      interface _GetMalwareProtectionPlanResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetMalwareProtectionPlanResponse]
+        def arn: () -> ::String
+        def role: () -> ::String
+        def protected_resource: () -> Types::CreateProtectedResource
+        def actions: () -> Types::MalwareProtectionPlanActions
+        def created_at: () -> ::Time
+        def status: () -> ("ACTIVE" | "WARNING" | "ERROR")
+        def status_reasons: () -> ::Array[Types::MalwareProtectionPlanStatusReason]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GuardDuty/Client.html#get_malware_protection_plan-instance_method
+      def get_malware_protection_plan: (
+                                         malware_protection_plan_id: ::String
+                                       ) -> _GetMalwareProtectionPlanResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetMalwareProtectionPlanResponseSuccess
+
       interface _GetMalwareScanSettingsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetMalwareScanSettingsResponse]
         def scan_resource_criteria: () -> Types::ScanResourceCriteria
@@ -795,6 +841,17 @@ module Aws
                             ) -> _ListInvitationsResponseSuccess
                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListInvitationsResponseSuccess
 
+      interface _ListMalwareProtectionPlansResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListMalwareProtectionPlansResponse]
+        def malware_protection_plans: () -> ::Array[Types::MalwareProtectionPlanSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GuardDuty/Client.html#list_malware_protection_plans-instance_method
+      def list_malware_protection_plans: (
+                                           ?next_token: ::String
+                                         ) -> _ListMalwareProtectionPlansResponseSuccess
+                                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListMalwareProtectionPlansResponseSuccess
+
       interface _ListMembersResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListMembersResponse]
         def members: () -> ::Array[Types::Member]
@@ -1011,6 +1068,23 @@ module Aws
                            ?activate: bool
                          ) -> _UpdateIPSetResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateIPSetResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GuardDuty/Client.html#update_malware_protection_plan-instance_method
+      def update_malware_protection_plan: (
+                                            malware_protection_plan_id: ::String,
+                                            ?role: ::String,
+                                            ?actions: {
+                                              tagging: {
+                                                status: ("ENABLED" | "DISABLED")?
+                                              }?
+                                            },
+                                            ?protected_resource: {
+                                              s3_bucket: {
+                                                object_prefixes: Array[::String]?
+                                              }?
+                                            }
+                                          ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
       interface _UpdateMalwareScanSettingsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateMalwareScanSettingsResponse]
