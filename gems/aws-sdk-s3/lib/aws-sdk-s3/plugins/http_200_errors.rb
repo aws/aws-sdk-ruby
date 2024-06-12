@@ -38,7 +38,8 @@ module Aws
           end
 
           def members_in_body?(output)
-            output.shape.members.any? { |_, k| k.location.nil? }
+            output[:payload].nil? &&
+              output.shape.members.any? { |_, k| k.location.nil? }
           end
 
           def check_for_error(context)
