@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Revert Handling of 200 errors for all S3 operations.
+
 1.152.1 (2024-06-10)
 ------------------
 
