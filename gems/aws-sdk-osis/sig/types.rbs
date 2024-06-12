@@ -166,6 +166,7 @@ module Aws::OSIS
       attr_accessor vpc_endpoints: ::Array[Types::VpcEndpoint]
       attr_accessor buffer_options: Types::BufferOptions
       attr_accessor encryption_at_rest_options: Types::EncryptionAtRestOptions
+      attr_accessor vpc_endpoint_service: ::String
       attr_accessor service_vpc_endpoints: ::Array[Types::ServiceVpcEndpoint]
       attr_accessor destinations: ::Array[Types::PipelineDestination]
       attr_accessor tags: ::Array[Types::Tag]
@@ -324,6 +325,7 @@ module Aws::OSIS
       attr_accessor subnet_ids: ::Array[::String]
       attr_accessor security_group_ids: ::Array[::String]
       attr_accessor vpc_attachment_options: Types::VpcAttachmentOptions
+      attr_accessor vpc_endpoint_management: ("CUSTOMER" | "SERVICE")
       SENSITIVE: []
     end
   end

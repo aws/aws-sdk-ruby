@@ -268,7 +268,8 @@ module Aws::SecretsManager
       attr_accessor secret_binary: ::String
       attr_accessor secret_string: ::String
       attr_accessor version_stages: ::Array[::String]
-      SENSITIVE: [:secret_binary, :secret_string]
+      attr_accessor rotation_token: ::String
+      SENSITIVE: [:secret_binary, :secret_string, :rotation_token]
     end
 
     class PutSecretValueResponse

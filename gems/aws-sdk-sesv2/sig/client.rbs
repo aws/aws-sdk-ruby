@@ -167,6 +167,9 @@ module Aws
                                                           sns_destination: {
                                                             topic_arn: ::String
                                                           }?,
+                                                          event_bridge_destination: {
+                                                            event_bus_arn: ::String
+                                                          }?,
                                                           pinpoint_destination: {
                                                             application_arn: ::String?
                                                           }?
@@ -1426,6 +1429,9 @@ module Aws
                                                           }?,
                                                           sns_destination: {
                                                             topic_arn: ::String
+                                                          }?,
+                                                          event_bridge_destination: {
+                                                            event_bus_arn: ::String
                                                           }?,
                                                           pinpoint_destination: {
                                                             application_arn: ::String?

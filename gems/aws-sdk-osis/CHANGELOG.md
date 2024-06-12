@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.17.0 (2024-06-12)
+------------------
+
+* Feature - SDK changes for self-managed vpc endpoint to OpenSearch ingestion pipelines.
+
 1.16.0 (2024-06-05)
 ------------------
 

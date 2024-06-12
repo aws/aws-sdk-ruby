@@ -1042,6 +1042,8 @@ module Aws::EC2
     DescribeSubnetsResult = Shapes::StructureShape.new(name: 'DescribeSubnetsResult')
     DescribeTagsRequest = Shapes::StructureShape.new(name: 'DescribeTagsRequest')
     DescribeTagsResult = Shapes::StructureShape.new(name: 'DescribeTagsResult')
+    DescribeTrafficMirrorFilterRulesRequest = Shapes::StructureShape.new(name: 'DescribeTrafficMirrorFilterRulesRequest')
+    DescribeTrafficMirrorFilterRulesResult = Shapes::StructureShape.new(name: 'DescribeTrafficMirrorFilterRulesResult')
     DescribeTrafficMirrorFiltersRequest = Shapes::StructureShape.new(name: 'DescribeTrafficMirrorFiltersRequest')
     DescribeTrafficMirrorFiltersResult = Shapes::StructureShape.new(name: 'DescribeTrafficMirrorFiltersResult')
     DescribeTrafficMirrorSessionsRequest = Shapes::StructureShape.new(name: 'DescribeTrafficMirrorSessionsRequest')
@@ -2875,8 +2877,10 @@ module Aws::EC2
     TrafficMirrorFilterRule = Shapes::StructureShape.new(name: 'TrafficMirrorFilterRule')
     TrafficMirrorFilterRuleField = Shapes::StringShape.new(name: 'TrafficMirrorFilterRuleField')
     TrafficMirrorFilterRuleFieldList = Shapes::ListShape.new(name: 'TrafficMirrorFilterRuleFieldList')
+    TrafficMirrorFilterRuleIdList = Shapes::ListShape.new(name: 'TrafficMirrorFilterRuleIdList')
     TrafficMirrorFilterRuleIdWithResolver = Shapes::StringShape.new(name: 'TrafficMirrorFilterRuleIdWithResolver')
     TrafficMirrorFilterRuleList = Shapes::ListShape.new(name: 'TrafficMirrorFilterRuleList')
+    TrafficMirrorFilterRuleSet = Shapes::ListShape.new(name: 'TrafficMirrorFilterRuleSet')
     TrafficMirrorFilterSet = Shapes::ListShape.new(name: 'TrafficMirrorFilterSet')
     TrafficMirrorNetworkService = Shapes::StringShape.new(name: 'TrafficMirrorNetworkService')
     TrafficMirrorNetworkServiceList = Shapes::ListShape.new(name: 'TrafficMirrorNetworkServiceList')
@@ -5196,6 +5200,7 @@ module Aws::EC2
     CreateTrafficMirrorFilterRuleRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
     CreateTrafficMirrorFilterRuleRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     CreateTrafficMirrorFilterRuleRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateTrafficMirrorFilterRuleRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
     CreateTrafficMirrorFilterRuleRequest.struct_class = Types::CreateTrafficMirrorFilterRuleRequest
 
     CreateTrafficMirrorFilterRuleResult.add_member(:traffic_mirror_filter_rule, Shapes::ShapeRef.new(shape: TrafficMirrorFilterRule, location_name: "trafficMirrorFilterRule"))
@@ -7472,6 +7477,18 @@ module Aws::EC2
     DescribeTagsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     DescribeTagsResult.add_member(:tags, Shapes::ShapeRef.new(shape: TagDescriptionList, location_name: "tagSet"))
     DescribeTagsResult.struct_class = Types::DescribeTagsResult
+
+    DescribeTrafficMirrorFilterRulesRequest.add_member(:traffic_mirror_filter_rule_ids, Shapes::ShapeRef.new(shape: TrafficMirrorFilterRuleIdList, location_name: "TrafficMirrorFilterRuleId"))
+    DescribeTrafficMirrorFilterRulesRequest.add_member(:traffic_mirror_filter_id, Shapes::ShapeRef.new(shape: TrafficMirrorFilterId, location_name: "TrafficMirrorFilterId"))
+    DescribeTrafficMirrorFilterRulesRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DescribeTrafficMirrorFilterRulesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
+    DescribeTrafficMirrorFilterRulesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: TrafficMirroringMaxResults, location_name: "MaxResults"))
+    DescribeTrafficMirrorFilterRulesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeTrafficMirrorFilterRulesRequest.struct_class = Types::DescribeTrafficMirrorFilterRulesRequest
+
+    DescribeTrafficMirrorFilterRulesResult.add_member(:traffic_mirror_filter_rules, Shapes::ShapeRef.new(shape: TrafficMirrorFilterRuleSet, location_name: "trafficMirrorFilterRuleSet"))
+    DescribeTrafficMirrorFilterRulesResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    DescribeTrafficMirrorFilterRulesResult.struct_class = Types::DescribeTrafficMirrorFilterRulesResult
 
     DescribeTrafficMirrorFiltersRequest.add_member(:traffic_mirror_filter_ids, Shapes::ShapeRef.new(shape: TrafficMirrorFilterIdList, location_name: "TrafficMirrorFilterId"))
     DescribeTrafficMirrorFiltersRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
@@ -14595,11 +14612,16 @@ module Aws::EC2
     TrafficMirrorFilterRule.add_member(:destination_cidr_block, Shapes::ShapeRef.new(shape: String, location_name: "destinationCidrBlock"))
     TrafficMirrorFilterRule.add_member(:source_cidr_block, Shapes::ShapeRef.new(shape: String, location_name: "sourceCidrBlock"))
     TrafficMirrorFilterRule.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
+    TrafficMirrorFilterRule.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
     TrafficMirrorFilterRule.struct_class = Types::TrafficMirrorFilterRule
 
     TrafficMirrorFilterRuleFieldList.member = Shapes::ShapeRef.new(shape: TrafficMirrorFilterRuleField)
 
+    TrafficMirrorFilterRuleIdList.member = Shapes::ShapeRef.new(shape: TrafficMirrorFilterRuleIdWithResolver, location_name: "item")
+
     TrafficMirrorFilterRuleList.member = Shapes::ShapeRef.new(shape: TrafficMirrorFilterRule, location_name: "item")
+
+    TrafficMirrorFilterRuleSet.member = Shapes::ShapeRef.new(shape: TrafficMirrorFilterRule, location_name: "item")
 
     TrafficMirrorFilterSet.member = Shapes::ShapeRef.new(shape: TrafficMirrorFilter, location_name: "item")
 
@@ -15714,6 +15736,7 @@ module Aws::EC2
 
       api.metadata = {
         "apiVersion" => "2016-11-15",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "ec2",
         "protocol" => "ec2",
         "protocols" => ["query"],
@@ -18890,6 +18913,14 @@ module Aws::EC2
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:describe_traffic_mirror_filter_rules, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeTrafficMirrorFilterRules"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeTrafficMirrorFilterRulesRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeTrafficMirrorFilterRulesResult)
       end)
 
       api.add_operation(:describe_traffic_mirror_filters, Seahorse::Model::Operation.new.tap do |o|

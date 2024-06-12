@@ -479,6 +479,7 @@ module Aws::OSIS
     #         attach_to_vpc: false, # required
     #         cidr_block: "CidrBlock",
     #       },
+    #       vpc_endpoint_management: "CUSTOMER", # accepts CUSTOMER, SERVICE
     #     },
     #     buffer_options: {
     #       persistent_buffer_enabled: false, # required
@@ -518,8 +519,10 @@ module Aws::OSIS
     #   resp.pipeline.vpc_endpoints[0].vpc_options.security_group_ids[0] #=> String
     #   resp.pipeline.vpc_endpoints[0].vpc_options.vpc_attachment_options.attach_to_vpc #=> Boolean
     #   resp.pipeline.vpc_endpoints[0].vpc_options.vpc_attachment_options.cidr_block #=> String
+    #   resp.pipeline.vpc_endpoints[0].vpc_options.vpc_endpoint_management #=> String, one of "CUSTOMER", "SERVICE"
     #   resp.pipeline.buffer_options.persistent_buffer_enabled #=> Boolean
     #   resp.pipeline.encryption_at_rest_options.kms_key_arn #=> String
+    #   resp.pipeline.vpc_endpoint_service #=> String
     #   resp.pipeline.service_vpc_endpoints #=> Array
     #   resp.pipeline.service_vpc_endpoints[0].service_name #=> String, one of "OPENSEARCH_SERVERLESS"
     #   resp.pipeline.service_vpc_endpoints[0].vpc_endpoint_id #=> String
@@ -605,8 +608,10 @@ module Aws::OSIS
     #   resp.pipeline.vpc_endpoints[0].vpc_options.security_group_ids[0] #=> String
     #   resp.pipeline.vpc_endpoints[0].vpc_options.vpc_attachment_options.attach_to_vpc #=> Boolean
     #   resp.pipeline.vpc_endpoints[0].vpc_options.vpc_attachment_options.cidr_block #=> String
+    #   resp.pipeline.vpc_endpoints[0].vpc_options.vpc_endpoint_management #=> String, one of "CUSTOMER", "SERVICE"
     #   resp.pipeline.buffer_options.persistent_buffer_enabled #=> Boolean
     #   resp.pipeline.encryption_at_rest_options.kms_key_arn #=> String
+    #   resp.pipeline.vpc_endpoint_service #=> String
     #   resp.pipeline.service_vpc_endpoints #=> Array
     #   resp.pipeline.service_vpc_endpoints[0].service_name #=> String, one of "OPENSEARCH_SERVERLESS"
     #   resp.pipeline.service_vpc_endpoints[0].vpc_endpoint_id #=> String
@@ -885,8 +890,10 @@ module Aws::OSIS
     #   resp.pipeline.vpc_endpoints[0].vpc_options.security_group_ids[0] #=> String
     #   resp.pipeline.vpc_endpoints[0].vpc_options.vpc_attachment_options.attach_to_vpc #=> Boolean
     #   resp.pipeline.vpc_endpoints[0].vpc_options.vpc_attachment_options.cidr_block #=> String
+    #   resp.pipeline.vpc_endpoints[0].vpc_options.vpc_endpoint_management #=> String, one of "CUSTOMER", "SERVICE"
     #   resp.pipeline.buffer_options.persistent_buffer_enabled #=> Boolean
     #   resp.pipeline.encryption_at_rest_options.kms_key_arn #=> String
+    #   resp.pipeline.vpc_endpoint_service #=> String
     #   resp.pipeline.service_vpc_endpoints #=> Array
     #   resp.pipeline.service_vpc_endpoints[0].service_name #=> String, one of "OPENSEARCH_SERVERLESS"
     #   resp.pipeline.service_vpc_endpoints[0].vpc_endpoint_id #=> String
@@ -950,8 +957,10 @@ module Aws::OSIS
     #   resp.pipeline.vpc_endpoints[0].vpc_options.security_group_ids[0] #=> String
     #   resp.pipeline.vpc_endpoints[0].vpc_options.vpc_attachment_options.attach_to_vpc #=> Boolean
     #   resp.pipeline.vpc_endpoints[0].vpc_options.vpc_attachment_options.cidr_block #=> String
+    #   resp.pipeline.vpc_endpoints[0].vpc_options.vpc_endpoint_management #=> String, one of "CUSTOMER", "SERVICE"
     #   resp.pipeline.buffer_options.persistent_buffer_enabled #=> Boolean
     #   resp.pipeline.encryption_at_rest_options.kms_key_arn #=> String
+    #   resp.pipeline.vpc_endpoint_service #=> String
     #   resp.pipeline.service_vpc_endpoints #=> Array
     #   resp.pipeline.service_vpc_endpoints[0].service_name #=> String, one of "OPENSEARCH_SERVERLESS"
     #   resp.pipeline.service_vpc_endpoints[0].vpc_endpoint_id #=> String
@@ -1120,8 +1129,10 @@ module Aws::OSIS
     #   resp.pipeline.vpc_endpoints[0].vpc_options.security_group_ids[0] #=> String
     #   resp.pipeline.vpc_endpoints[0].vpc_options.vpc_attachment_options.attach_to_vpc #=> Boolean
     #   resp.pipeline.vpc_endpoints[0].vpc_options.vpc_attachment_options.cidr_block #=> String
+    #   resp.pipeline.vpc_endpoints[0].vpc_options.vpc_endpoint_management #=> String, one of "CUSTOMER", "SERVICE"
     #   resp.pipeline.buffer_options.persistent_buffer_enabled #=> Boolean
     #   resp.pipeline.encryption_at_rest_options.kms_key_arn #=> String
+    #   resp.pipeline.vpc_endpoint_service #=> String
     #   resp.pipeline.service_vpc_endpoints #=> Array
     #   resp.pipeline.service_vpc_endpoints[0].service_name #=> String, one of "OPENSEARCH_SERVERLESS"
     #   resp.pipeline.service_vpc_endpoints[0].vpc_endpoint_id #=> String
@@ -1194,7 +1205,7 @@ module Aws::OSIS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-osis'
-      context[:gem_version] = '1.16.0'
+      context[:gem_version] = '1.17.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

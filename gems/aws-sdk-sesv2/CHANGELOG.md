@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.51.0 (2024-06-12)
+------------------
+
+* Feature - This release adds support for Amazon EventBridge as an email sending events destination.
+
 1.50.0 (2024-06-05)
 ------------------
 

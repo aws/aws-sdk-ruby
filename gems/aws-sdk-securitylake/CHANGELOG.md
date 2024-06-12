@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.21.0 (2024-06-12)
+------------------
+
+* Feature - This release updates request validation regex to account for non-commercial aws partitions.
+
 1.20.0 (2024-06-05)
 ------------------
 

@@ -172,6 +172,7 @@ module Aws::SESV2
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     Esp = Shapes::StringShape.new(name: 'Esp')
     Esps = Shapes::ListShape.new(name: 'Esps')
+    EventBridgeDestination = Shapes::StructureShape.new(name: 'EventBridgeDestination')
     EventDestination = Shapes::StructureShape.new(name: 'EventDestination')
     EventDestinationDefinition = Shapes::StructureShape.new(name: 'EventDestinationDefinition')
     EventDestinationName = Shapes::StringShape.new(name: 'EventDestinationName')
@@ -905,12 +906,16 @@ module Aws::SESV2
 
     Esps.member = Shapes::ShapeRef.new(shape: Esp)
 
+    EventBridgeDestination.add_member(:event_bus_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "EventBusArn"))
+    EventBridgeDestination.struct_class = Types::EventBridgeDestination
+
     EventDestination.add_member(:name, Shapes::ShapeRef.new(shape: EventDestinationName, required: true, location_name: "Name"))
     EventDestination.add_member(:enabled, Shapes::ShapeRef.new(shape: Enabled, location_name: "Enabled"))
     EventDestination.add_member(:matching_event_types, Shapes::ShapeRef.new(shape: EventTypes, required: true, location_name: "MatchingEventTypes"))
     EventDestination.add_member(:kinesis_firehose_destination, Shapes::ShapeRef.new(shape: KinesisFirehoseDestination, location_name: "KinesisFirehoseDestination"))
     EventDestination.add_member(:cloud_watch_destination, Shapes::ShapeRef.new(shape: CloudWatchDestination, location_name: "CloudWatchDestination"))
     EventDestination.add_member(:sns_destination, Shapes::ShapeRef.new(shape: SnsDestination, location_name: "SnsDestination"))
+    EventDestination.add_member(:event_bridge_destination, Shapes::ShapeRef.new(shape: EventBridgeDestination, location_name: "EventBridgeDestination"))
     EventDestination.add_member(:pinpoint_destination, Shapes::ShapeRef.new(shape: PinpointDestination, location_name: "PinpointDestination"))
     EventDestination.struct_class = Types::EventDestination
 
@@ -919,6 +924,7 @@ module Aws::SESV2
     EventDestinationDefinition.add_member(:kinesis_firehose_destination, Shapes::ShapeRef.new(shape: KinesisFirehoseDestination, location_name: "KinesisFirehoseDestination"))
     EventDestinationDefinition.add_member(:cloud_watch_destination, Shapes::ShapeRef.new(shape: CloudWatchDestination, location_name: "CloudWatchDestination"))
     EventDestinationDefinition.add_member(:sns_destination, Shapes::ShapeRef.new(shape: SnsDestination, location_name: "SnsDestination"))
+    EventDestinationDefinition.add_member(:event_bridge_destination, Shapes::ShapeRef.new(shape: EventBridgeDestination, location_name: "EventBridgeDestination"))
     EventDestinationDefinition.add_member(:pinpoint_destination, Shapes::ShapeRef.new(shape: PinpointDestination, location_name: "PinpointDestination"))
     EventDestinationDefinition.struct_class = Types::EventDestinationDefinition
 
@@ -1833,6 +1839,7 @@ module Aws::SESV2
 
       api.metadata = {
         "apiVersion" => "2019-09-27",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "email",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",

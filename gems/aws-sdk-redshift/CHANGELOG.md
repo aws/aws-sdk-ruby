@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.116.0 (2024-06-12)
+------------------
+
+* Feature - Updates to remove DC1 and DS2 node types.
+
 1.115.0 (2024-06-05)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.97.0 (2024-06-12)
+------------------
+
+* Feature - Introducing RotationToken parameter for PutSecretValue API
+
 1.96.0 (2024-06-05)
 ------------------
 

@@ -815,6 +815,11 @@ module Aws::SecretsManager
     #
     #   This parameter is not available in the Secrets Manager console.
     #
+    #   Sensitive: This field contains sensitive information, so the service
+    #   does not include it in CloudTrail log entries. If you create your own
+    #   log entries, you must also avoid logging the information in this
+    #   field.
+    #
     # @option params [String] :secret_string
     #   The text data to encrypt and store in this new version of the secret.
     #   We recommend you use a JSON structure of key/value pairs for your
@@ -828,6 +833,11 @@ module Aws::SecretsManager
     #   `SecretString` parameter. The Secrets Manager console stores the
     #   information as a JSON structure of key/value pairs that a Lambda
     #   rotation function can parse.
+    #
+    #   Sensitive: This field contains sensitive information, so the service
+    #   does not include it in CloudTrail log entries. If you create your own
+    #   log entries, you must also avoid logging the information in this
+    #   field.
     #
     # @option params [Array<Types::Tag>] :tags
     #   A list of tags to attach to the secret. Each tag is a key and value
@@ -1501,7 +1511,8 @@ module Aws::SecretsManager
     # [5]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html
     #
     # @option params [required, String] :secret_id
-    #   The ARN or name of the secret to retrieve.
+    #   The ARN or name of the secret to retrieve. To retrieve a secret from
+    #   another account, you must use an ARN.
     #
     #   For an ARN, we recommend that you specify a complete ARN rather than a
     #   partial ARN. See [Finding a secret from a partial ARN][1].
@@ -2009,9 +2020,9 @@ module Aws::SecretsManager
     #
     # Secrets Manager generates a CloudTrail log entry when you call this
     # action. Do not include sensitive information in request parameters
-    # except `SecretBinary` or `SecretString` because it might be logged.
-    # For more information, see [Logging Secrets Manager events with
-    # CloudTrail][1].
+    # except `SecretBinary`, `SecretString`, or `RotationToken` because it
+    # might be logged. For more information, see [Logging Secrets Manager
+    # events with CloudTrail][1].
     #
     # <b>Required permissions: </b> `secretsmanager:PutSecretValue`. For
     # more information, see [ IAM policy actions for Secrets Manager][2] and
@@ -2087,6 +2098,11 @@ module Aws::SecretsManager
     #
     #   You can't access this value from the Secrets Manager console.
     #
+    #   Sensitive: This field contains sensitive information, so the service
+    #   does not include it in CloudTrail log entries. If you create your own
+    #   log entries, you must also avoid logging the information in this
+    #   field.
+    #
     # @option params [String] :secret_string
     #   The text to encrypt and store in the new version of the secret.
     #
@@ -2094,6 +2110,11 @@ module Aws::SecretsManager
     #
     #   We recommend you create the secret string as JSON key/value pairs, as
     #   shown in the example.
+    #
+    #   Sensitive: This field contains sensitive information, so the service
+    #   does not include it in CloudTrail log entries. If you create your own
+    #   log entries, you must also avoid logging the information in this
+    #   field.
     #
     # @option params [Array<String>] :version_stages
     #   A list of staging labels to attach to this version of the secret.
@@ -2109,6 +2130,23 @@ module Aws::SecretsManager
     #
     #   If you don't include `VersionStages`, then Secrets Manager
     #   automatically moves the staging label `AWSCURRENT` to this version.
+    #
+    # @option params [String] :rotation_token
+    #   A unique identifier that indicates the source of the request. For
+    #   cross-account rotation (when you rotate a secret in one account by
+    #   using a Lambda rotation function in another account) and the Lambda
+    #   rotation function assumes an IAM role to call Secrets Manager, Secrets
+    #   Manager validates the identity with the rotation token. For more
+    #   information, see [How rotation works][1].
+    #
+    #   Sensitive: This field contains sensitive information, so the service
+    #   does not include it in CloudTrail log entries. If you create your own
+    #   log entries, you must also avoid logging the information in this
+    #   field.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/rotating-secrets.html
     #
     # @return [Types::PutSecretValueResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2147,6 +2185,7 @@ module Aws::SecretsManager
     #     secret_binary: "data",
     #     secret_string: "SecretStringType",
     #     version_stages: ["SecretVersionStageType"],
+    #     rotation_token: "RotationTokenType",
     #   })
     #
     # @example Response structure
@@ -2940,6 +2979,11 @@ module Aws::SecretsManager
     #
     #   You can't access this parameter in the Secrets Manager console.
     #
+    #   Sensitive: This field contains sensitive information, so the service
+    #   does not include it in CloudTrail log entries. If you create your own
+    #   log entries, you must also avoid logging the information in this
+    #   field.
+    #
     # @option params [String] :secret_string
     #   The text data to encrypt and store in the new version of the secret.
     #   We recommend you use a JSON structure of key/value pairs for your
@@ -2947,6 +2991,11 @@ module Aws::SecretsManager
     #
     #   Either `SecretBinary` or `SecretString` must have a value, but not
     #   both.
+    #
+    #   Sensitive: This field contains sensitive information, so the service
+    #   does not include it in CloudTrail log entries. If you create your own
+    #   log entries, you must also avoid logging the information in this
+    #   field.
     #
     # @return [Types::UpdateSecretResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3217,7 +3266,8 @@ module Aws::SecretsManager
     # [4]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html
     #
     # @option params [String] :secret_id
-    #   This field is reserved for internal use.
+    #   The ARN or name of the secret with the resource-based policy you want
+    #   to validate.
     #
     # @option params [required, String] :resource_policy
     #   A JSON-formatted string that contains an Amazon Web Services
@@ -3287,7 +3337,7 @@ module Aws::SecretsManager
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-secretsmanager'
-      context[:gem_version] = '1.96.0'
+      context[:gem_version] = '1.97.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

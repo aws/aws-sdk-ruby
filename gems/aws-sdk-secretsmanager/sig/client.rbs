@@ -297,7 +297,8 @@ module Aws
                               ?client_request_token: ::String,
                               ?secret_binary: ::String,
                               ?secret_string: ::String,
-                              ?version_stages: Array[::String]
+                              ?version_stages: Array[::String],
+                              ?rotation_token: ::String
                             ) -> _PutSecretValueResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutSecretValueResponseSuccess
 

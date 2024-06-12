@@ -597,9 +597,11 @@ module Aws::SecurityLake
 
       api.metadata = {
         "apiVersion" => "2018-05-10",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "securitylake",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceFullName" => "Amazon Security Lake",
         "serviceId" => "SecurityLake",
         "signatureVersion" => "v4",

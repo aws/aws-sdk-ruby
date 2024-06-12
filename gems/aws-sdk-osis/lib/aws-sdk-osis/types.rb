@@ -502,6 +502,10 @@ module Aws::OSIS
     #   Options to control how OpenSearch encrypts buffer data.
     #   @return [Types::EncryptionAtRestOptions]
     #
+    # @!attribute [rw] vpc_endpoint_service
+    #   The VPC endpoint service name for the pipeline.
+    #   @return [String]
+    #
     # @!attribute [rw] service_vpc_endpoints
     #   A list of VPC endpoints that OpenSearch Ingestion has created to
     #   other Amazon Web Services services.
@@ -532,6 +536,7 @@ module Aws::OSIS
       :vpc_endpoints,
       :buffer_options,
       :encryption_at_rest_options,
+      :vpc_endpoint_service,
       :service_vpc_endpoints,
       :destinations,
       :tags)
@@ -1023,12 +1028,18 @@ module Aws::OSIS
     #   Options for attaching a VPC to a pipeline.
     #   @return [Types::VpcAttachmentOptions]
     #
+    # @!attribute [rw] vpc_endpoint_management
+    #   Defines whether you or Amazon OpenSearch Ingestion service create
+    #   and manage the VPC endpoint configured for the pipeline.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/osis-2022-01-01/VpcOptions AWS API Documentation
     #
     class VpcOptions < Struct.new(
       :subnet_ids,
       :security_group_ids,
-      :vpc_attachment_options)
+      :vpc_attachment_options,
+      :vpc_endpoint_management)
       SENSITIVE = []
       include Aws::Structure
     end

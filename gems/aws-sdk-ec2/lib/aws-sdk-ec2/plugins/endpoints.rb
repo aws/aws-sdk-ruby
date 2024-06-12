@@ -724,6 +724,8 @@ module Aws::EC2
             Aws::EC2::Endpoints::DescribeSubnets.build(context)
           when :describe_tags
             Aws::EC2::Endpoints::DescribeTags.build(context)
+          when :describe_traffic_mirror_filter_rules
+            Aws::EC2::Endpoints::DescribeTrafficMirrorFilterRules.build(context)
           when :describe_traffic_mirror_filters
             Aws::EC2::Endpoints::DescribeTrafficMirrorFilters.build(context)
           when :describe_traffic_mirror_sessions
