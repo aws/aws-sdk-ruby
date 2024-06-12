@@ -111,10 +111,6 @@
   "BackupGateway": {
     "models": "backup-gateway/2021-01-01"
   },
-  "BackupStorage": {
-    "models": "backupstorage/2018-04-10",
-    "deprecated": true
-  },
   "Batch": {
     "models": "batch/2016-08-10"
   },
