@@ -68,6 +68,14 @@ module Aws::CloudHSMV2
     #   The list of tags for the backup.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] hsm_type
+    #   The HSM type of the cluster that was backed up.
+    #   @return [String]
+    #
+    # @!attribute [rw] mode
+    #   The mode of the cluster that was backed up.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/Backup AWS API Documentation
     #
     class Backup < Struct.new(
@@ -81,7 +89,9 @@ module Aws::CloudHSMV2
       :source_backup,
       :source_cluster,
       :delete_timestamp,
-      :tag_list)
+      :tag_list,
+      :hsm_type,
+      :mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -293,6 +303,10 @@ module Aws::CloudHSMV2
     #   The list of tags for the cluster.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] mode
+    #   The mode of the cluster.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/Cluster AWS API Documentation
     #
     class Cluster < Struct.new(
@@ -310,7 +324,8 @@ module Aws::CloudHSMV2
       :subnet_mapping,
       :vpc_id,
       :certificates,
-      :tag_list)
+      :tag_list,
+      :mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -365,8 +380,8 @@ module Aws::CloudHSMV2
     #   @return [Types::BackupRetentionPolicy]
     #
     # @!attribute [rw] hsm_type
-    #   The type of HSM to use in the cluster. Currently the only allowed
-    #   value is `hsm1.medium`.
+    #   The type of HSM to use in the cluster. The allowed values are
+    #   `hsm1.medium` and `hsm2m.medium`.
     #   @return [String]
     #
     # @!attribute [rw] source_backup_id
@@ -389,6 +404,11 @@ module Aws::CloudHSMV2
     #   Tags to apply to the CloudHSM cluster during creation.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] mode
+    #   The mode to use in the cluster. The allowed values are `FIPS` and
+    #   `NON_FIPS`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/CreateClusterRequest AWS API Documentation
     #
     class CreateClusterRequest < Struct.new(
@@ -396,7 +416,8 @@ module Aws::CloudHSMV2
       :hsm_type,
       :source_backup_id,
       :subnet_ids,
-      :tag_list)
+      :tag_list,
+      :mode)
       SENSITIVE = []
       include Aws::Structure
     end

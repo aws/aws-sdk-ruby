@@ -33,6 +33,7 @@ module Aws::CloudHSMV2
     CloudHsmTagException = Shapes::StructureShape.new(name: 'CloudHsmTagException')
     Cluster = Shapes::StructureShape.new(name: 'Cluster')
     ClusterId = Shapes::StringShape.new(name: 'ClusterId')
+    ClusterMode = Shapes::StringShape.new(name: 'ClusterMode')
     ClusterState = Shapes::StringShape.new(name: 'ClusterState')
     Clusters = Shapes::ListShape.new(name: 'Clusters')
     ClustersMaxSize = Shapes::IntegerShape.new(name: 'ClustersMaxSize')
@@ -109,6 +110,8 @@ module Aws::CloudHSMV2
     Backup.add_member(:source_cluster, Shapes::ShapeRef.new(shape: ClusterId, location_name: "SourceCluster"))
     Backup.add_member(:delete_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "DeleteTimestamp"))
     Backup.add_member(:tag_list, Shapes::ShapeRef.new(shape: TagList, location_name: "TagList"))
+    Backup.add_member(:hsm_type, Shapes::ShapeRef.new(shape: HsmType, location_name: "HsmType"))
+    Backup.add_member(:mode, Shapes::ShapeRef.new(shape: ClusterMode, location_name: "Mode"))
     Backup.struct_class = Types::Backup
 
     BackupRetentionPolicy.add_member(:type, Shapes::ShapeRef.new(shape: BackupRetentionType, location_name: "Type"))
@@ -157,6 +160,7 @@ module Aws::CloudHSMV2
     Cluster.add_member(:vpc_id, Shapes::ShapeRef.new(shape: VpcId, location_name: "VpcId"))
     Cluster.add_member(:certificates, Shapes::ShapeRef.new(shape: Certificates, location_name: "Certificates"))
     Cluster.add_member(:tag_list, Shapes::ShapeRef.new(shape: TagList, location_name: "TagList"))
+    Cluster.add_member(:mode, Shapes::ShapeRef.new(shape: ClusterMode, location_name: "Mode"))
     Cluster.struct_class = Types::Cluster
 
     Clusters.member = Shapes::ShapeRef.new(shape: Cluster)
@@ -174,6 +178,7 @@ module Aws::CloudHSMV2
     CreateClusterRequest.add_member(:source_backup_id, Shapes::ShapeRef.new(shape: BackupId, location_name: "SourceBackupId"))
     CreateClusterRequest.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: SubnetIds, required: true, location_name: "SubnetIds"))
     CreateClusterRequest.add_member(:tag_list, Shapes::ShapeRef.new(shape: TagList, location_name: "TagList"))
+    CreateClusterRequest.add_member(:mode, Shapes::ShapeRef.new(shape: ClusterMode, location_name: "Mode"))
     CreateClusterRequest.struct_class = Types::CreateClusterRequest
 
     CreateClusterResponse.add_member(:cluster, Shapes::ShapeRef.new(shape: Cluster, location_name: "Cluster"))
@@ -324,6 +329,7 @@ module Aws::CloudHSMV2
         "endpointPrefix" => "cloudhsmv2",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "protocols" => ["json"],
         "serviceAbbreviation" => "CloudHSM V2",
         "serviceFullName" => "AWS CloudHSM V2",
         "serviceId" => "CloudHSM V2",

@@ -1450,6 +1450,7 @@ module Aws::Glue
     class DataQualityEvaluationRunAdditionalRunOptions
       attr_accessor cloud_watch_metrics_enabled: bool
       attr_accessor results_s3_prefix: ::String
+      attr_accessor composite_rule_evaluation_method: ("COLUMN" | "ROW")
       SENSITIVE: []
     end
 

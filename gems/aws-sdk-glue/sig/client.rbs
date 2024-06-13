@@ -4519,7 +4519,8 @@ module Aws
                                                        ?client_token: ::String,
                                                        ?additional_run_options: {
                                                          cloud_watch_metrics_enabled: bool?,
-                                                         results_s3_prefix: ::String?
+                                                         results_s3_prefix: ::String?,
+                                                         composite_rule_evaluation_method: ("COLUMN" | "ROW")?
                                                        },
                                                        ruleset_names: Array[::String],
                                                        ?additional_data_sources: Hash[::String, {

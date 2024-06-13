@@ -131,7 +131,7 @@ module Aws
                           key_id: ::String,
                           grantee_principal: ::String,
                           ?retiring_principal: ::String,
-                          operations: Array[("Decrypt" | "Encrypt" | "GenerateDataKey" | "GenerateDataKeyWithoutPlaintext" | "ReEncryptFrom" | "ReEncryptTo" | "Sign" | "Verify" | "GetPublicKey" | "CreateGrant" | "RetireGrant" | "DescribeKey" | "GenerateDataKeyPair" | "GenerateDataKeyPairWithoutPlaintext" | "GenerateMac" | "VerifyMac")],
+                          operations: Array[("Decrypt" | "Encrypt" | "GenerateDataKey" | "GenerateDataKeyWithoutPlaintext" | "ReEncryptFrom" | "ReEncryptTo" | "Sign" | "Verify" | "GetPublicKey" | "CreateGrant" | "RetireGrant" | "DescribeKey" | "GenerateDataKeyPair" | "GenerateDataKeyPairWithoutPlaintext" | "GenerateMac" | "VerifyMac" | "DeriveSharedSecret")],
                           ?constraints: {
                             encryption_context_subset: Hash[::String, ::String]?,
                             encryption_context_equals: Hash[::String, ::String]?
@@ -150,7 +150,7 @@ module Aws
       def create_key: (
                         ?policy: ::String,
                         ?description: ::String,
-                        ?key_usage: ("SIGN_VERIFY" | "ENCRYPT_DECRYPT" | "GENERATE_VERIFY_MAC"),
+                        ?key_usage: ("SIGN_VERIFY" | "ENCRYPT_DECRYPT" | "GENERATE_VERIFY_MAC" | "KEY_AGREEMENT"),
                         ?customer_master_key_spec: ("RSA_2048" | "RSA_3072" | "RSA_4096" | "ECC_NIST_P256" | "ECC_NIST_P384" | "ECC_NIST_P521" | "ECC_SECG_P256K1" | "SYMMETRIC_DEFAULT" | "HMAC_224" | "HMAC_256" | "HMAC_384" | "HMAC_512" | "SM2"),
                         ?key_spec: ("RSA_2048" | "RSA_3072" | "RSA_4096" | "ECC_NIST_P256" | "ECC_NIST_P384" | "ECC_NIST_P521" | "ECC_SECG_P256K1" | "SYMMETRIC_DEFAULT" | "HMAC_224" | "HMAC_256" | "HMAC_384" | "HMAC_512" | "SM2"),
                         ?origin: ("AWS_KMS" | "EXTERNAL" | "AWS_CLOUDHSM" | "EXTERNAL_KEY_STORE"),
@@ -209,6 +209,28 @@ module Aws
                                           key_id: ::String
                                         ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _DeriveSharedSecretResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeriveSharedSecretResponse]
+        def key_id: () -> ::String
+        def shared_secret: () -> ::String
+        def ciphertext_for_recipient: () -> ::String
+        def key_agreement_algorithm: () -> ("ECDH")
+        def key_origin: () -> ("AWS_KMS" | "EXTERNAL" | "AWS_CLOUDHSM" | "EXTERNAL_KEY_STORE")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KMS/Client.html#derive_shared_secret-instance_method
+      def derive_shared_secret: (
+                                  key_id: ::String,
+                                  key_agreement_algorithm: ("ECDH"),
+                                  public_key: ::String,
+                                  ?grant_tokens: Array[::String],
+                                  ?dry_run: bool,
+                                  ?recipient: {
+                                    key_encryption_algorithm: ("RSAES_OAEP_SHA_256")?,
+                                    attestation_document: ::String?
+                                  }
+                                ) -> _DeriveSharedSecretResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeriveSharedSecretResponseSuccess
 
       interface _DescribeCustomKeyStoresResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeCustomKeyStoresResponse]
@@ -444,9 +466,10 @@ module Aws
         def public_key: () -> ::String
         def customer_master_key_spec: () -> ("RSA_2048" | "RSA_3072" | "RSA_4096" | "ECC_NIST_P256" | "ECC_NIST_P384" | "ECC_NIST_P521" | "ECC_SECG_P256K1" | "SYMMETRIC_DEFAULT" | "HMAC_224" | "HMAC_256" | "HMAC_384" | "HMAC_512" | "SM2")
         def key_spec: () -> ("RSA_2048" | "RSA_3072" | "RSA_4096" | "ECC_NIST_P256" | "ECC_NIST_P384" | "ECC_NIST_P521" | "ECC_SECG_P256K1" | "SYMMETRIC_DEFAULT" | "HMAC_224" | "HMAC_256" | "HMAC_384" | "HMAC_512" | "SM2")
-        def key_usage: () -> ("SIGN_VERIFY" | "ENCRYPT_DECRYPT" | "GENERATE_VERIFY_MAC")
+        def key_usage: () -> ("SIGN_VERIFY" | "ENCRYPT_DECRYPT" | "GENERATE_VERIFY_MAC" | "KEY_AGREEMENT")
         def encryption_algorithms: () -> ::Array[("SYMMETRIC_DEFAULT" | "RSAES_OAEP_SHA_1" | "RSAES_OAEP_SHA_256" | "SM2PKE")]
         def signing_algorithms: () -> ::Array[("RSASSA_PSS_SHA_256" | "RSASSA_PSS_SHA_384" | "RSASSA_PSS_SHA_512" | "RSASSA_PKCS1_V1_5_SHA_256" | "RSASSA_PKCS1_V1_5_SHA_384" | "RSASSA_PKCS1_V1_5_SHA_512" | "ECDSA_SHA_256" | "ECDSA_SHA_384" | "ECDSA_SHA_512" | "SM2DSA")]
+        def key_agreement_algorithms: () -> ::Array[("ECDH")]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KMS/Client.html#get_public_key-instance_method
       def get_public_key: (

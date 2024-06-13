@@ -108,7 +108,8 @@ module Aws
                                 key: ::String,
                                 value: ::String
                               },
-                            ]
+                            ],
+                            ?mode: ("FIPS" | "NON_FIPS")
                           ) -> _CreateClusterResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateClusterResponseSuccess
 

@@ -99,7 +99,7 @@ module Aws::KMS
       attr_accessor key_id: ::String
       attr_accessor grantee_principal: ::String
       attr_accessor retiring_principal: ::String
-      attr_accessor operations: ::Array[("Decrypt" | "Encrypt" | "GenerateDataKey" | "GenerateDataKeyWithoutPlaintext" | "ReEncryptFrom" | "ReEncryptTo" | "Sign" | "Verify" | "GetPublicKey" | "CreateGrant" | "RetireGrant" | "DescribeKey" | "GenerateDataKeyPair" | "GenerateDataKeyPairWithoutPlaintext" | "GenerateMac" | "VerifyMac")]
+      attr_accessor operations: ::Array[("Decrypt" | "Encrypt" | "GenerateDataKey" | "GenerateDataKeyWithoutPlaintext" | "ReEncryptFrom" | "ReEncryptTo" | "Sign" | "Verify" | "GetPublicKey" | "CreateGrant" | "RetireGrant" | "DescribeKey" | "GenerateDataKeyPair" | "GenerateDataKeyPairWithoutPlaintext" | "GenerateMac" | "VerifyMac" | "DeriveSharedSecret")]
       attr_accessor constraints: Types::GrantConstraints
       attr_accessor grant_tokens: ::Array[::String]
       attr_accessor name: ::String
@@ -116,7 +116,7 @@ module Aws::KMS
     class CreateKeyRequest
       attr_accessor policy: ::String
       attr_accessor description: ::String
-      attr_accessor key_usage: ("SIGN_VERIFY" | "ENCRYPT_DECRYPT" | "GENERATE_VERIFY_MAC")
+      attr_accessor key_usage: ("SIGN_VERIFY" | "ENCRYPT_DECRYPT" | "GENERATE_VERIFY_MAC" | "KEY_AGREEMENT")
       attr_accessor customer_master_key_spec: ("RSA_2048" | "RSA_3072" | "RSA_4096" | "ECC_NIST_P256" | "ECC_NIST_P384" | "ECC_NIST_P521" | "ECC_SECG_P256K1" | "SYMMETRIC_DEFAULT" | "HMAC_224" | "HMAC_256" | "HMAC_384" | "HMAC_512" | "SM2")
       attr_accessor key_spec: ("RSA_2048" | "RSA_3072" | "RSA_4096" | "ECC_NIST_P256" | "ECC_NIST_P384" | "ECC_NIST_P521" | "ECC_SECG_P256K1" | "SYMMETRIC_DEFAULT" | "HMAC_224" | "HMAC_256" | "HMAC_384" | "HMAC_512" | "SM2")
       attr_accessor origin: ("AWS_KMS" | "EXTERNAL" | "AWS_CLOUDHSM" | "EXTERNAL_KEY_STORE")
@@ -206,6 +206,25 @@ module Aws::KMS
     class DependencyTimeoutException
       attr_accessor message: ::String
       SENSITIVE: []
+    end
+
+    class DeriveSharedSecretRequest
+      attr_accessor key_id: ::String
+      attr_accessor key_agreement_algorithm: ("ECDH")
+      attr_accessor public_key: ::String
+      attr_accessor grant_tokens: ::Array[::String]
+      attr_accessor dry_run: bool
+      attr_accessor recipient: Types::RecipientInfo
+      SENSITIVE: []
+    end
+
+    class DeriveSharedSecretResponse
+      attr_accessor key_id: ::String
+      attr_accessor shared_secret: ::String
+      attr_accessor ciphertext_for_recipient: ::String
+      attr_accessor key_agreement_algorithm: ("ECDH")
+      attr_accessor key_origin: ("AWS_KMS" | "EXTERNAL" | "AWS_CLOUDHSM" | "EXTERNAL_KEY_STORE")
+      SENSITIVE: [:shared_secret]
     end
 
     class DescribeCustomKeyStoresRequest
@@ -448,9 +467,10 @@ module Aws::KMS
       attr_accessor public_key: ::String
       attr_accessor customer_master_key_spec: ("RSA_2048" | "RSA_3072" | "RSA_4096" | "ECC_NIST_P256" | "ECC_NIST_P384" | "ECC_NIST_P521" | "ECC_SECG_P256K1" | "SYMMETRIC_DEFAULT" | "HMAC_224" | "HMAC_256" | "HMAC_384" | "HMAC_512" | "SM2")
       attr_accessor key_spec: ("RSA_2048" | "RSA_3072" | "RSA_4096" | "ECC_NIST_P256" | "ECC_NIST_P384" | "ECC_NIST_P521" | "ECC_SECG_P256K1" | "SYMMETRIC_DEFAULT" | "HMAC_224" | "HMAC_256" | "HMAC_384" | "HMAC_512" | "SM2")
-      attr_accessor key_usage: ("SIGN_VERIFY" | "ENCRYPT_DECRYPT" | "GENERATE_VERIFY_MAC")
+      attr_accessor key_usage: ("SIGN_VERIFY" | "ENCRYPT_DECRYPT" | "GENERATE_VERIFY_MAC" | "KEY_AGREEMENT")
       attr_accessor encryption_algorithms: ::Array[("SYMMETRIC_DEFAULT" | "RSAES_OAEP_SHA_1" | "RSAES_OAEP_SHA_256" | "SM2PKE")]
       attr_accessor signing_algorithms: ::Array[("RSASSA_PSS_SHA_256" | "RSASSA_PSS_SHA_384" | "RSASSA_PSS_SHA_512" | "RSASSA_PKCS1_V1_5_SHA_256" | "RSASSA_PKCS1_V1_5_SHA_384" | "RSASSA_PKCS1_V1_5_SHA_512" | "ECDSA_SHA_256" | "ECDSA_SHA_384" | "ECDSA_SHA_512" | "SM2DSA")]
+      attr_accessor key_agreement_algorithms: ::Array[("ECDH")]
       SENSITIVE: []
     end
 
@@ -468,7 +488,7 @@ module Aws::KMS
       attr_accessor grantee_principal: ::String
       attr_accessor retiring_principal: ::String
       attr_accessor issuing_account: ::String
-      attr_accessor operations: ::Array[("Decrypt" | "Encrypt" | "GenerateDataKey" | "GenerateDataKeyWithoutPlaintext" | "ReEncryptFrom" | "ReEncryptTo" | "Sign" | "Verify" | "GetPublicKey" | "CreateGrant" | "RetireGrant" | "DescribeKey" | "GenerateDataKeyPair" | "GenerateDataKeyPairWithoutPlaintext" | "GenerateMac" | "VerifyMac")]
+      attr_accessor operations: ::Array[("Decrypt" | "Encrypt" | "GenerateDataKey" | "GenerateDataKeyWithoutPlaintext" | "ReEncryptFrom" | "ReEncryptTo" | "Sign" | "Verify" | "GetPublicKey" | "CreateGrant" | "RetireGrant" | "DescribeKey" | "GenerateDataKeyPair" | "GenerateDataKeyPairWithoutPlaintext" | "GenerateMac" | "VerifyMac" | "DeriveSharedSecret")]
       attr_accessor constraints: Types::GrantConstraints
       SENSITIVE: []
     end
@@ -573,7 +593,7 @@ module Aws::KMS
       attr_accessor creation_date: ::Time
       attr_accessor enabled: bool
       attr_accessor description: ::String
-      attr_accessor key_usage: ("SIGN_VERIFY" | "ENCRYPT_DECRYPT" | "GENERATE_VERIFY_MAC")
+      attr_accessor key_usage: ("SIGN_VERIFY" | "ENCRYPT_DECRYPT" | "GENERATE_VERIFY_MAC" | "KEY_AGREEMENT")
       attr_accessor key_state: ("Creating" | "Enabled" | "Disabled" | "PendingDeletion" | "PendingImport" | "PendingReplicaDeletion" | "Unavailable" | "Updating")
       attr_accessor deletion_date: ::Time
       attr_accessor valid_to: ::Time
@@ -586,6 +606,7 @@ module Aws::KMS
       attr_accessor key_spec: ("RSA_2048" | "RSA_3072" | "RSA_4096" | "ECC_NIST_P256" | "ECC_NIST_P384" | "ECC_NIST_P521" | "ECC_SECG_P256K1" | "SYMMETRIC_DEFAULT" | "HMAC_224" | "HMAC_256" | "HMAC_384" | "HMAC_512" | "SM2")
       attr_accessor encryption_algorithms: ::Array[("SYMMETRIC_DEFAULT" | "RSAES_OAEP_SHA_1" | "RSAES_OAEP_SHA_256" | "SM2PKE")]
       attr_accessor signing_algorithms: ::Array[("RSASSA_PSS_SHA_256" | "RSASSA_PSS_SHA_384" | "RSASSA_PSS_SHA_512" | "RSASSA_PKCS1_V1_5_SHA_256" | "RSASSA_PKCS1_V1_5_SHA_384" | "RSASSA_PKCS1_V1_5_SHA_512" | "ECDSA_SHA_256" | "ECDSA_SHA_384" | "ECDSA_SHA_512" | "SM2DSA")]
+      attr_accessor key_agreement_algorithms: ::Array[("ECDH")]
       attr_accessor multi_region: bool
       attr_accessor multi_region_configuration: Types::MultiRegionConfiguration
       attr_accessor pending_deletion_window_in_days: ::Integer

@@ -6375,11 +6375,17 @@ module Aws::Glue
     #   Prefix for Amazon S3 to store results.
     #   @return [String]
     #
+    # @!attribute [rw] composite_rule_evaluation_method
+    #   Set the evaluation method for composite rules in the ruleset to
+    #   ROW/COLUMN
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DataQualityEvaluationRunAdditionalRunOptions AWS API Documentation
     #
     class DataQualityEvaluationRunAdditionalRunOptions < Struct.new(
       :cloud_watch_metrics_enabled,
-      :results_s3_prefix)
+      :results_s3_prefix,
+      :composite_rule_evaluation_method)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9992,7 +9998,8 @@ module Aws::Glue
     #   @return [Integer]
     #
     # @!attribute [rw] ruleset_names
-    #   A list of ruleset names for the run.
+    #   A list of ruleset names for the run. Currently, this parameter takes
+    #   only one Ruleset name.
     #   @return [Array<String>]
     #
     # @!attribute [rw] result_ids

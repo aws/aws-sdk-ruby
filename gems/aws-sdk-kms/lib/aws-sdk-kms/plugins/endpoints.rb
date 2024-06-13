@@ -78,6 +78,8 @@ module Aws::KMS
             Aws::KMS::Endpoints::DeleteCustomKeyStore.build(context)
           when :delete_imported_key_material
             Aws::KMS::Endpoints::DeleteImportedKeyMaterial.build(context)
+          when :derive_shared_secret
+            Aws::KMS::Endpoints::DeriveSharedSecret.build(context)
           when :describe_custom_key_stores
             Aws::KMS::Endpoints::DescribeCustomKeyStores.build(context)
           when :describe_key

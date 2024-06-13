@@ -2157,7 +2157,7 @@ module Aws::IoTWireless
     #     summary_metric_queries: [
     #       {
     #         query_id: "MetricQueryId",
-    #         metric_name: "DeviceRSSI", # accepts DeviceRSSI, DeviceSNR, DeviceUplinkCount, DeviceDownlinkCount, DeviceUplinkLostCount, DeviceUplinkLostRate, DeviceJoinRequestCount, DeviceJoinAcceptCount, DeviceRoamingUplinkCount, DeviceRoamingDownlinkCount, GatewayUpTime, GatewayDownTime, GatewayRSSI, GatewaySNR, GatewayUplinkCount, GatewayDownlinkCount, GatewayJoinRequestCount, GatewayJoinAcceptCount, AwsAccountUplinkCount, AwsAccountDownlinkCount, AwsAccountUplinkLostCount, AwsAccountUplinkLostRate, AwsAccountJoinRequestCount, AwsAccountJoinAcceptCount, AwsAccountRoamingUplinkCount, AwsAccountRoamingDownlinkCount, AwsAccountDeviceCount, AwsAccountGatewayCount, AwsAccountActiveDeviceCount, AwsAccountActiveGatewayCount
+    #         metric_name: "DeviceRSSI", # accepts DeviceRSSI, DeviceSNR, DeviceRoamingRSSI, DeviceRoamingSNR, DeviceUplinkCount, DeviceDownlinkCount, DeviceUplinkLostCount, DeviceUplinkLostRate, DeviceJoinRequestCount, DeviceJoinAcceptCount, DeviceRoamingUplinkCount, DeviceRoamingDownlinkCount, GatewayUpTime, GatewayDownTime, GatewayRSSI, GatewaySNR, GatewayUplinkCount, GatewayDownlinkCount, GatewayJoinRequestCount, GatewayJoinAcceptCount, AwsAccountUplinkCount, AwsAccountDownlinkCount, AwsAccountUplinkLostCount, AwsAccountUplinkLostRate, AwsAccountJoinRequestCount, AwsAccountJoinAcceptCount, AwsAccountRoamingUplinkCount, AwsAccountRoamingDownlinkCount, AwsAccountDeviceCount, AwsAccountGatewayCount, AwsAccountActiveDeviceCount, AwsAccountActiveGatewayCount
     #         dimensions: [
     #           {
     #             name: "DeviceId", # accepts DeviceId, GatewayId
@@ -2177,7 +2177,7 @@ module Aws::IoTWireless
     #   resp.summary_metric_query_results[0].query_id #=> String
     #   resp.summary_metric_query_results[0].query_status #=> String, one of "Succeeded", "Failed"
     #   resp.summary_metric_query_results[0].error #=> String
-    #   resp.summary_metric_query_results[0].metric_name #=> String, one of "DeviceRSSI", "DeviceSNR", "DeviceUplinkCount", "DeviceDownlinkCount", "DeviceUplinkLostCount", "DeviceUplinkLostRate", "DeviceJoinRequestCount", "DeviceJoinAcceptCount", "DeviceRoamingUplinkCount", "DeviceRoamingDownlinkCount", "GatewayUpTime", "GatewayDownTime", "GatewayRSSI", "GatewaySNR", "GatewayUplinkCount", "GatewayDownlinkCount", "GatewayJoinRequestCount", "GatewayJoinAcceptCount", "AwsAccountUplinkCount", "AwsAccountDownlinkCount", "AwsAccountUplinkLostCount", "AwsAccountUplinkLostRate", "AwsAccountJoinRequestCount", "AwsAccountJoinAcceptCount", "AwsAccountRoamingUplinkCount", "AwsAccountRoamingDownlinkCount", "AwsAccountDeviceCount", "AwsAccountGatewayCount", "AwsAccountActiveDeviceCount", "AwsAccountActiveGatewayCount"
+    #   resp.summary_metric_query_results[0].metric_name #=> String, one of "DeviceRSSI", "DeviceSNR", "DeviceRoamingRSSI", "DeviceRoamingSNR", "DeviceUplinkCount", "DeviceDownlinkCount", "DeviceUplinkLostCount", "DeviceUplinkLostRate", "DeviceJoinRequestCount", "DeviceJoinAcceptCount", "DeviceRoamingUplinkCount", "DeviceRoamingDownlinkCount", "GatewayUpTime", "GatewayDownTime", "GatewayRSSI", "GatewaySNR", "GatewayUplinkCount", "GatewayDownlinkCount", "GatewayJoinRequestCount", "GatewayJoinAcceptCount", "AwsAccountUplinkCount", "AwsAccountDownlinkCount", "AwsAccountUplinkLostCount", "AwsAccountUplinkLostRate", "AwsAccountJoinRequestCount", "AwsAccountJoinAcceptCount", "AwsAccountRoamingUplinkCount", "AwsAccountRoamingDownlinkCount", "AwsAccountDeviceCount", "AwsAccountGatewayCount", "AwsAccountActiveDeviceCount", "AwsAccountActiveGatewayCount"
     #   resp.summary_metric_query_results[0].dimensions #=> Array
     #   resp.summary_metric_query_results[0].dimensions[0].name #=> String, one of "DeviceId", "GatewayId"
     #   resp.summary_metric_query_results[0].dimensions[0].value #=> String
@@ -5282,7 +5282,7 @@ module Aws::IoTWireless
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iotwireless'
-      context[:gem_version] = '1.49.0'
+      context[:gem_version] = '1.50.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

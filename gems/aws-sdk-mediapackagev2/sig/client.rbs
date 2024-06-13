@@ -81,6 +81,7 @@ module Aws
         def modified_at: () -> ::Time
         def description: () -> ::String
         def ingest_endpoints: () -> ::Array[Types::IngestEndpoint]
+        def input_type: () -> ("HLS" | "CMAF")
         def etag: () -> ::String
         def tags: () -> ::Hash[::String, ::String]
       end
@@ -89,6 +90,7 @@ module Aws
                             channel_group_name: ::String,
                             channel_name: ::String,
                             ?client_token: ::String,
+                            ?input_type: ("HLS" | "CMAF"),
                             ?description: ::String,
                             ?tags: Hash[::String, ::String]
                           ) -> _CreateChannelResponseSuccess
@@ -129,6 +131,7 @@ module Aws
         def hls_manifests: () -> ::Array[Types::GetHlsManifestConfiguration]
         def low_latency_hls_manifests: () -> ::Array[Types::GetLowLatencyHlsManifestConfiguration]
         def dash_manifests: () -> ::Array[Types::GetDashManifestConfiguration]
+        def force_endpoint_error_configuration: () -> Types::ForceEndpointErrorConfiguration
         def etag: () -> ::String
         def tags: () -> ::Hash[::String, ::String]
       end
@@ -228,6 +231,9 @@ module Aws
                                         }?
                                       },
                                     ],
+                                    ?force_endpoint_error_configuration: {
+                                      endpoint_error_conditions: Array[("STALE_MANIFEST" | "INCOMPLETE_MANIFEST" | "MISSING_DRM_KEY" | "SLATE_INPUT")]?
+                                    },
                                     ?tags: Hash[::String, ::String]
                                   ) -> _CreateOriginEndpointResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateOriginEndpointResponseSuccess
@@ -292,6 +298,7 @@ module Aws
         def modified_at: () -> ::Time
         def description: () -> ::String
         def ingest_endpoints: () -> ::Array[Types::IngestEndpoint]
+        def input_type: () -> ("HLS" | "CMAF")
         def etag: () -> ::String
         def tags: () -> ::Hash[::String, ::String]
       end
@@ -346,9 +353,10 @@ module Aws
         def startover_window_seconds: () -> ::Integer
         def hls_manifests: () -> ::Array[Types::GetHlsManifestConfiguration]
         def low_latency_hls_manifests: () -> ::Array[Types::GetLowLatencyHlsManifestConfiguration]
+        def dash_manifests: () -> ::Array[Types::GetDashManifestConfiguration]
+        def force_endpoint_error_configuration: () -> Types::ForceEndpointErrorConfiguration
         def etag: () -> ::String
         def tags: () -> ::Hash[::String, ::String]
-        def dash_manifests: () -> ::Array[Types::GetDashManifestConfiguration]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaPackageV2/Client.html#get_origin_endpoint-instance_method
       def get_origin_endpoint: (
@@ -468,6 +476,7 @@ module Aws
         def modified_at: () -> ::Time
         def description: () -> ::String
         def ingest_endpoints: () -> ::Array[Types::IngestEndpoint]
+        def input_type: () -> ("HLS" | "CMAF")
         def etag: () -> ::String
         def tags: () -> ::Hash[::String, ::String]
       end
@@ -513,6 +522,7 @@ module Aws
         def startover_window_seconds: () -> ::Integer
         def hls_manifests: () -> ::Array[Types::GetHlsManifestConfiguration]
         def low_latency_hls_manifests: () -> ::Array[Types::GetLowLatencyHlsManifestConfiguration]
+        def force_endpoint_error_configuration: () -> Types::ForceEndpointErrorConfiguration
         def etag: () -> ::String
         def tags: () -> ::Hash[::String, ::String]
         def dash_manifests: () -> ::Array[Types::GetDashManifestConfiguration]
@@ -612,6 +622,9 @@ module Aws
                                         }?
                                       },
                                     ],
+                                    ?force_endpoint_error_configuration: {
+                                      endpoint_error_conditions: Array[("STALE_MANIFEST" | "INCOMPLETE_MANIFEST" | "MISSING_DRM_KEY" | "SLATE_INPUT")]?
+                                    },
                                     ?etag: ::String
                                   ) -> _UpdateOriginEndpointResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateOriginEndpointResponseSuccess

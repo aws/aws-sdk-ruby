@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.18.0 (2024-06-13)
+------------------
+
+* Feature - This release adds support for CMAF ingest (DASH-IF live media ingest protocol interface 1)
+
 1.17.0 (2024-06-05)
 ------------------
 

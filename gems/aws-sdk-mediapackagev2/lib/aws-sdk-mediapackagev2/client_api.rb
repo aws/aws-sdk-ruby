@@ -69,10 +69,13 @@ module Aws::MediaPackageV2
     EncryptionContractConfiguration = Shapes::StructureShape.new(name: 'EncryptionContractConfiguration')
     EncryptionKeyRotationIntervalSecondsInteger = Shapes::IntegerShape.new(name: 'EncryptionKeyRotationIntervalSecondsInteger')
     EncryptionMethod = Shapes::StructureShape.new(name: 'EncryptionMethod')
+    EndpointErrorCondition = Shapes::StringShape.new(name: 'EndpointErrorCondition')
+    EndpointErrorConditions = Shapes::ListShape.new(name: 'EndpointErrorConditions')
     EntityTag = Shapes::StringShape.new(name: 'EntityTag')
     FilterConfiguration = Shapes::StructureShape.new(name: 'FilterConfiguration')
     FilterConfigurationManifestFilterString = Shapes::StringShape.new(name: 'FilterConfigurationManifestFilterString')
     FilterConfigurationTimeDelaySecondsInteger = Shapes::IntegerShape.new(name: 'FilterConfigurationTimeDelaySecondsInteger')
+    ForceEndpointErrorConfiguration = Shapes::StructureShape.new(name: 'ForceEndpointErrorConfiguration')
     GetChannelGroupRequest = Shapes::StructureShape.new(name: 'GetChannelGroupRequest')
     GetChannelGroupResponse = Shapes::StructureShape.new(name: 'GetChannelGroupResponse')
     GetChannelPolicyRequest = Shapes::StructureShape.new(name: 'GetChannelPolicyRequest')
@@ -92,6 +95,7 @@ module Aws::MediaPackageV2
     IdempotencyToken = Shapes::StringShape.new(name: 'IdempotencyToken')
     IngestEndpoint = Shapes::StructureShape.new(name: 'IngestEndpoint')
     IngestEndpointList = Shapes::ListShape.new(name: 'IngestEndpointList')
+    InputType = Shapes::StringShape.new(name: 'InputType')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     ListChannelGroupsRequest = Shapes::StructureShape.new(name: 'ListChannelGroupsRequest')
@@ -178,6 +182,7 @@ module Aws::MediaPackageV2
     ChannelListConfiguration.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreatedAt"))
     ChannelListConfiguration.add_member(:modified_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "ModifiedAt"))
     ChannelListConfiguration.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "Description"))
+    ChannelListConfiguration.add_member(:input_type, Shapes::ShapeRef.new(shape: InputType, location_name: "InputType"))
     ChannelListConfiguration.struct_class = Types::ChannelListConfiguration
 
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
@@ -203,6 +208,7 @@ module Aws::MediaPackageV2
     CreateChannelRequest.add_member(:channel_group_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "ChannelGroupName"))
     CreateChannelRequest.add_member(:channel_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "ChannelName"))
     CreateChannelRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location: "header", location_name: "x-amzn-client-token", metadata: {"idempotencyToken"=>true}))
+    CreateChannelRequest.add_member(:input_type, Shapes::ShapeRef.new(shape: InputType, location_name: "InputType"))
     CreateChannelRequest.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "Description"))
     CreateChannelRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateChannelRequest.struct_class = Types::CreateChannelRequest
@@ -214,6 +220,7 @@ module Aws::MediaPackageV2
     CreateChannelResponse.add_member(:modified_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "ModifiedAt"))
     CreateChannelResponse.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "Description"))
     CreateChannelResponse.add_member(:ingest_endpoints, Shapes::ShapeRef.new(shape: IngestEndpointList, location_name: "IngestEndpoints"))
+    CreateChannelResponse.add_member(:input_type, Shapes::ShapeRef.new(shape: InputType, location_name: "InputType"))
     CreateChannelResponse.add_member(:etag, Shapes::ShapeRef.new(shape: EntityTag, location_name: "ETag"))
     CreateChannelResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     CreateChannelResponse.struct_class = Types::CreateChannelResponse
@@ -264,6 +271,7 @@ module Aws::MediaPackageV2
     CreateOriginEndpointRequest.add_member(:hls_manifests, Shapes::ShapeRef.new(shape: CreateHlsManifests, location_name: "HlsManifests"))
     CreateOriginEndpointRequest.add_member(:low_latency_hls_manifests, Shapes::ShapeRef.new(shape: CreateLowLatencyHlsManifests, location_name: "LowLatencyHlsManifests"))
     CreateOriginEndpointRequest.add_member(:dash_manifests, Shapes::ShapeRef.new(shape: CreateDashManifests, location_name: "DashManifests"))
+    CreateOriginEndpointRequest.add_member(:force_endpoint_error_configuration, Shapes::ShapeRef.new(shape: ForceEndpointErrorConfiguration, location_name: "ForceEndpointErrorConfiguration"))
     CreateOriginEndpointRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     CreateOriginEndpointRequest.struct_class = Types::CreateOriginEndpointRequest
 
@@ -280,6 +288,7 @@ module Aws::MediaPackageV2
     CreateOriginEndpointResponse.add_member(:hls_manifests, Shapes::ShapeRef.new(shape: GetHlsManifests, location_name: "HlsManifests"))
     CreateOriginEndpointResponse.add_member(:low_latency_hls_manifests, Shapes::ShapeRef.new(shape: GetLowLatencyHlsManifests, location_name: "LowLatencyHlsManifests"))
     CreateOriginEndpointResponse.add_member(:dash_manifests, Shapes::ShapeRef.new(shape: GetDashManifests, location_name: "DashManifests"))
+    CreateOriginEndpointResponse.add_member(:force_endpoint_error_configuration, Shapes::ShapeRef.new(shape: ForceEndpointErrorConfiguration, location_name: "ForceEndpointErrorConfiguration"))
     CreateOriginEndpointResponse.add_member(:etag, Shapes::ShapeRef.new(shape: EntityTag, location_name: "ETag"))
     CreateOriginEndpointResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     CreateOriginEndpointResponse.struct_class = Types::CreateOriginEndpointResponse
@@ -335,11 +344,16 @@ module Aws::MediaPackageV2
     EncryptionMethod.add_member(:cmaf_encryption_method, Shapes::ShapeRef.new(shape: CmafEncryptionMethod, location_name: "CmafEncryptionMethod"))
     EncryptionMethod.struct_class = Types::EncryptionMethod
 
+    EndpointErrorConditions.member = Shapes::ShapeRef.new(shape: EndpointErrorCondition)
+
     FilterConfiguration.add_member(:manifest_filter, Shapes::ShapeRef.new(shape: FilterConfigurationManifestFilterString, location_name: "ManifestFilter"))
     FilterConfiguration.add_member(:start, Shapes::ShapeRef.new(shape: Timestamp, location_name: "Start"))
     FilterConfiguration.add_member(:end, Shapes::ShapeRef.new(shape: Timestamp, location_name: "End"))
     FilterConfiguration.add_member(:time_delay_seconds, Shapes::ShapeRef.new(shape: FilterConfigurationTimeDelaySecondsInteger, location_name: "TimeDelaySeconds"))
     FilterConfiguration.struct_class = Types::FilterConfiguration
+
+    ForceEndpointErrorConfiguration.add_member(:endpoint_error_conditions, Shapes::ShapeRef.new(shape: EndpointErrorConditions, location_name: "EndpointErrorConditions"))
+    ForceEndpointErrorConfiguration.struct_class = Types::ForceEndpointErrorConfiguration
 
     GetChannelGroupRequest.add_member(:channel_group_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "ChannelGroupName"))
     GetChannelGroupRequest.struct_class = Types::GetChannelGroupRequest
@@ -374,6 +388,7 @@ module Aws::MediaPackageV2
     GetChannelResponse.add_member(:modified_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "ModifiedAt"))
     GetChannelResponse.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "Description"))
     GetChannelResponse.add_member(:ingest_endpoints, Shapes::ShapeRef.new(shape: IngestEndpointList, location_name: "IngestEndpoints"))
+    GetChannelResponse.add_member(:input_type, Shapes::ShapeRef.new(shape: InputType, location_name: "InputType"))
     GetChannelResponse.add_member(:etag, Shapes::ShapeRef.new(shape: EntityTag, location_name: "ETag"))
     GetChannelResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     GetChannelResponse.struct_class = Types::GetChannelResponse
@@ -444,9 +459,10 @@ module Aws::MediaPackageV2
     GetOriginEndpointResponse.add_member(:startover_window_seconds, Shapes::ShapeRef.new(shape: Integer, location_name: "StartoverWindowSeconds"))
     GetOriginEndpointResponse.add_member(:hls_manifests, Shapes::ShapeRef.new(shape: GetHlsManifests, location_name: "HlsManifests"))
     GetOriginEndpointResponse.add_member(:low_latency_hls_manifests, Shapes::ShapeRef.new(shape: GetLowLatencyHlsManifests, location_name: "LowLatencyHlsManifests"))
+    GetOriginEndpointResponse.add_member(:dash_manifests, Shapes::ShapeRef.new(shape: GetDashManifests, location_name: "DashManifests"))
+    GetOriginEndpointResponse.add_member(:force_endpoint_error_configuration, Shapes::ShapeRef.new(shape: ForceEndpointErrorConfiguration, location_name: "ForceEndpointErrorConfiguration"))
     GetOriginEndpointResponse.add_member(:etag, Shapes::ShapeRef.new(shape: EntityTag, location_name: "ETag"))
     GetOriginEndpointResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
-    GetOriginEndpointResponse.add_member(:dash_manifests, Shapes::ShapeRef.new(shape: GetDashManifests, location_name: "DashManifests"))
     GetOriginEndpointResponse.struct_class = Types::GetOriginEndpointResponse
 
     IngestEndpoint.add_member(:id, Shapes::ShapeRef.new(shape: String, location_name: "Id"))
@@ -522,6 +538,7 @@ module Aws::MediaPackageV2
     OriginEndpointListConfiguration.add_member(:hls_manifests, Shapes::ShapeRef.new(shape: ListHlsManifests, location_name: "HlsManifests"))
     OriginEndpointListConfiguration.add_member(:low_latency_hls_manifests, Shapes::ShapeRef.new(shape: ListLowLatencyHlsManifests, location_name: "LowLatencyHlsManifests"))
     OriginEndpointListConfiguration.add_member(:dash_manifests, Shapes::ShapeRef.new(shape: ListDashManifests, location_name: "DashManifests"))
+    OriginEndpointListConfiguration.add_member(:force_endpoint_error_configuration, Shapes::ShapeRef.new(shape: ForceEndpointErrorConfiguration, location_name: "ForceEndpointErrorConfiguration"))
     OriginEndpointListConfiguration.struct_class = Types::OriginEndpointListConfiguration
 
     OriginEndpointsList.member = Shapes::ShapeRef.new(shape: OriginEndpointListConfiguration)
@@ -621,6 +638,7 @@ module Aws::MediaPackageV2
     UpdateChannelResponse.add_member(:modified_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "ModifiedAt"))
     UpdateChannelResponse.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "Description"))
     UpdateChannelResponse.add_member(:ingest_endpoints, Shapes::ShapeRef.new(shape: IngestEndpointList, location_name: "IngestEndpoints"))
+    UpdateChannelResponse.add_member(:input_type, Shapes::ShapeRef.new(shape: InputType, location_name: "InputType"))
     UpdateChannelResponse.add_member(:etag, Shapes::ShapeRef.new(shape: EntityTag, location_name: "ETag"))
     UpdateChannelResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     UpdateChannelResponse.struct_class = Types::UpdateChannelResponse
@@ -635,6 +653,7 @@ module Aws::MediaPackageV2
     UpdateOriginEndpointRequest.add_member(:hls_manifests, Shapes::ShapeRef.new(shape: CreateHlsManifests, location_name: "HlsManifests"))
     UpdateOriginEndpointRequest.add_member(:low_latency_hls_manifests, Shapes::ShapeRef.new(shape: CreateLowLatencyHlsManifests, location_name: "LowLatencyHlsManifests"))
     UpdateOriginEndpointRequest.add_member(:dash_manifests, Shapes::ShapeRef.new(shape: CreateDashManifests, location_name: "DashManifests"))
+    UpdateOriginEndpointRequest.add_member(:force_endpoint_error_configuration, Shapes::ShapeRef.new(shape: ForceEndpointErrorConfiguration, location_name: "ForceEndpointErrorConfiguration"))
     UpdateOriginEndpointRequest.add_member(:etag, Shapes::ShapeRef.new(shape: EntityTag, location: "header", location_name: "x-amzn-update-if-match"))
     UpdateOriginEndpointRequest.struct_class = Types::UpdateOriginEndpointRequest
 
@@ -650,6 +669,7 @@ module Aws::MediaPackageV2
     UpdateOriginEndpointResponse.add_member(:startover_window_seconds, Shapes::ShapeRef.new(shape: Integer, location_name: "StartoverWindowSeconds"))
     UpdateOriginEndpointResponse.add_member(:hls_manifests, Shapes::ShapeRef.new(shape: GetHlsManifests, location_name: "HlsManifests"))
     UpdateOriginEndpointResponse.add_member(:low_latency_hls_manifests, Shapes::ShapeRef.new(shape: GetLowLatencyHlsManifests, location_name: "LowLatencyHlsManifests"))
+    UpdateOriginEndpointResponse.add_member(:force_endpoint_error_configuration, Shapes::ShapeRef.new(shape: ForceEndpointErrorConfiguration, location_name: "ForceEndpointErrorConfiguration"))
     UpdateOriginEndpointResponse.add_member(:etag, Shapes::ShapeRef.new(shape: EntityTag, location_name: "ETag"))
     UpdateOriginEndpointResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     UpdateOriginEndpointResponse.add_member(:dash_manifests, Shapes::ShapeRef.new(shape: GetDashManifests, location_name: "DashManifests"))
@@ -667,9 +687,10 @@ module Aws::MediaPackageV2
 
       api.metadata = {
         "apiVersion" => "2022-12-25",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "mediapackagev2",
-        "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceAbbreviation" => "mediapackagev2",
         "serviceFullName" => "AWS Elemental MediaPackage v2",
         "serviceId" => "MediaPackageV2",

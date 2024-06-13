@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.58.0 (2024-06-13)
+------------------
+
+* Feature - Added support for hsm type hsm2m.medium. Added supported for creating a cluster in FIPS or NON_FIPS mode.
+
 1.57.0 (2024-06-05)
 ------------------
 

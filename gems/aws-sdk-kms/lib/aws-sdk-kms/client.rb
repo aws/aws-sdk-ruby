@@ -1421,7 +1421,7 @@ module Aws::KMS
     #     key_id: "KeyIdType", # required
     #     grantee_principal: "PrincipalIdType", # required
     #     retiring_principal: "PrincipalIdType",
-    #     operations: ["Decrypt"], # required, accepts Decrypt, Encrypt, GenerateDataKey, GenerateDataKeyWithoutPlaintext, ReEncryptFrom, ReEncryptTo, Sign, Verify, GetPublicKey, CreateGrant, RetireGrant, DescribeKey, GenerateDataKeyPair, GenerateDataKeyPairWithoutPlaintext, GenerateMac, VerifyMac
+    #     operations: ["Decrypt"], # required, accepts Decrypt, Encrypt, GenerateDataKey, GenerateDataKeyWithoutPlaintext, ReEncryptFrom, ReEncryptTo, Sign, Verify, GetPublicKey, CreateGrant, RetireGrant, DescribeKey, GenerateDataKeyPair, GenerateDataKeyPairWithoutPlaintext, GenerateMac, VerifyMac, DeriveSharedSecret
     #     constraints: {
     #       encryption_context_subset: {
     #         "EncryptionContextKey" => "EncryptionContextValue",
@@ -1508,12 +1508,17 @@ module Aws::KMS
     #   key pair, or an SM2 key pair (China Regions only). The private key
     #   in an asymmetric KMS key never leaves KMS unencrypted. However, you
     #   can use the GetPublicKey operation to download the public key so it
-    #   can be used outside of KMS. KMS keys with RSA or SM2 key pairs can
-    #   be used to encrypt or decrypt data or sign and verify messages (but
-    #   not both). KMS keys with ECC key pairs can be used only to sign and
-    #   verify messages. For information about asymmetric KMS keys, see
-    #   [Asymmetric KMS keys][3] in the *Key Management Service Developer
-    #   Guide*.
+    #   can be used outside of KMS. Each KMS key can have only one key
+    #   usage. KMS keys with RSA key pairs can be used to encrypt and
+    #   decrypt data or sign and verify messages (but not both). KMS keys
+    #   with NIST-recommended ECC key pairs can be used to sign and verify
+    #   messages or derive shared secrets (but not both). KMS keys with
+    #   `ECC_SECG_P256K1` can be used only to sign and verify messages. KMS
+    #   keys with SM2 key pairs (China Regions only) can be used to either
+    #   encrypt and decrypt data, sign and verify messages, or derive shared
+    #   secrets (you must choose one key usage type). For information about
+    #   asymmetric KMS keys, see [Asymmetric KMS keys][3] in the *Key
+    #   Management Service Developer Guide*.
     #
     #
     #
@@ -1735,14 +1740,17 @@ module Aws::KMS
     #
     #   * For HMAC KMS keys (symmetric), specify `GENERATE_VERIFY_MAC`.
     #
-    #   * For asymmetric KMS keys with RSA key material, specify
+    #   * For asymmetric KMS keys with RSA key pairs, specify
     #     `ENCRYPT_DECRYPT` or `SIGN_VERIFY`.
     #
-    #   * For asymmetric KMS keys with ECC key material, specify
+    #   * For asymmetric KMS keys with NIST-recommended elliptic curve key
+    #     pairs, specify `SIGN_VERIFY` or `KEY_AGREEMENT`.
+    #
+    #   * For asymmetric KMS keys with `ECC_SECG_P256K1` key pairs specify
     #     `SIGN_VERIFY`.
     #
-    #   * For asymmetric KMS keys with SM2 key material (China Regions only),
-    #     specify `ENCRYPT_DECRYPT` or `SIGN_VERIFY`.
+    #   * For asymmetric KMS keys with SM2 key pairs (China Regions only),
+    #     specify `ENCRYPT_DECRYPT`, `SIGN_VERIFY`, or `KEY_AGREEMENT`.
     #
     #
     #
@@ -1795,7 +1803,8 @@ module Aws::KMS
     #
     #     * `HMAC_512`
     #
-    #   * Asymmetric RSA key pairs
+    #   * Asymmetric RSA key pairs (encryption and decryption -or- signing and
+    #     verification)
     #
     #     * `RSA_2048`
     #
@@ -1803,7 +1812,8 @@ module Aws::KMS
     #
     #     * `RSA_4096`
     #
-    #   * Asymmetric NIST-recommended elliptic curve key pairs
+    #   * Asymmetric NIST-recommended elliptic curve key pairs (signing and
+    #     verification -or- deriving shared secrets)
     #
     #     * `ECC_NIST_P256` (secp256r1)
     #
@@ -1811,15 +1821,16 @@ module Aws::KMS
     #
     #     * `ECC_NIST_P521` (secp521r1)
     #
-    #   * Other asymmetric elliptic curve key pairs
+    #   * Other asymmetric elliptic curve key pairs (signing and verification)
     #
     #     * `ECC_SECG_P256K1` (secp256k1), commonly used for cryptocurrencies.
     #
     #     ^
     #
-    #   * SM2 key pairs (China Regions only)
+    #   * SM2 key pairs (encryption and decryption -or- signing and
+    #     verification -or- deriving shared secrets)
     #
-    #     * `SM2`
+    #     * `SM2` (China Regions only)
     #
     #     ^
     #
@@ -2283,7 +2294,7 @@ module Aws::KMS
     #   resp = client.create_key({
     #     policy: "PolicyType",
     #     description: "DescriptionType",
-    #     key_usage: "SIGN_VERIFY", # accepts SIGN_VERIFY, ENCRYPT_DECRYPT, GENERATE_VERIFY_MAC
+    #     key_usage: "SIGN_VERIFY", # accepts SIGN_VERIFY, ENCRYPT_DECRYPT, GENERATE_VERIFY_MAC, KEY_AGREEMENT
     #     customer_master_key_spec: "RSA_2048", # accepts RSA_2048, RSA_3072, RSA_4096, ECC_NIST_P256, ECC_NIST_P384, ECC_NIST_P521, ECC_SECG_P256K1, SYMMETRIC_DEFAULT, HMAC_224, HMAC_256, HMAC_384, HMAC_512, SM2
     #     key_spec: "RSA_2048", # accepts RSA_2048, RSA_3072, RSA_4096, ECC_NIST_P256, ECC_NIST_P384, ECC_NIST_P521, ECC_SECG_P256K1, SYMMETRIC_DEFAULT, HMAC_224, HMAC_256, HMAC_384, HMAC_512, SM2
     #     origin: "AWS_KMS", # accepts AWS_KMS, EXTERNAL, AWS_CLOUDHSM, EXTERNAL_KEY_STORE
@@ -2307,7 +2318,7 @@ module Aws::KMS
     #   resp.key_metadata.creation_date #=> Time
     #   resp.key_metadata.enabled #=> Boolean
     #   resp.key_metadata.description #=> String
-    #   resp.key_metadata.key_usage #=> String, one of "SIGN_VERIFY", "ENCRYPT_DECRYPT", "GENERATE_VERIFY_MAC"
+    #   resp.key_metadata.key_usage #=> String, one of "SIGN_VERIFY", "ENCRYPT_DECRYPT", "GENERATE_VERIFY_MAC", "KEY_AGREEMENT"
     #   resp.key_metadata.key_state #=> String, one of "Creating", "Enabled", "Disabled", "PendingDeletion", "PendingImport", "PendingReplicaDeletion", "Unavailable", "Updating"
     #   resp.key_metadata.deletion_date #=> Time
     #   resp.key_metadata.valid_to #=> Time
@@ -2322,6 +2333,8 @@ module Aws::KMS
     #   resp.key_metadata.encryption_algorithms[0] #=> String, one of "SYMMETRIC_DEFAULT", "RSAES_OAEP_SHA_1", "RSAES_OAEP_SHA_256", "SM2PKE"
     #   resp.key_metadata.signing_algorithms #=> Array
     #   resp.key_metadata.signing_algorithms[0] #=> String, one of "RSASSA_PSS_SHA_256", "RSASSA_PSS_SHA_384", "RSASSA_PSS_SHA_512", "RSASSA_PKCS1_V1_5_SHA_256", "RSASSA_PKCS1_V1_5_SHA_384", "RSASSA_PKCS1_V1_5_SHA_512", "ECDSA_SHA_256", "ECDSA_SHA_384", "ECDSA_SHA_512", "SM2DSA"
+    #   resp.key_metadata.key_agreement_algorithms #=> Array
+    #   resp.key_metadata.key_agreement_algorithms[0] #=> String, one of "ECDH"
     #   resp.key_metadata.multi_region #=> Boolean
     #   resp.key_metadata.multi_region_configuration.multi_region_key_type #=> String, one of "PRIMARY", "REPLICA"
     #   resp.key_metadata.multi_region_configuration.primary_key.arn #=> String
@@ -2918,6 +2931,269 @@ module Aws::KMS
       req.send_request(options)
     end
 
+    # Derives a shared secret using a key agreement algorithm.
+    #
+    # <note markdown="1"> You must use an asymmetric NIST-recommended elliptic curve (ECC) or
+    # SM2 (China Regions only) KMS key pair with a `KeyUsage` value of
+    # `KEY_AGREEMENT` to call DeriveSharedSecret.
+    #
+    #  </note>
+    #
+    # DeriveSharedSecret uses the [Elliptic Curve Cryptography Cofactor
+    # Diffie-Hellman Primitive][1] (ECDH) to establish a key agreement
+    # between two peers by deriving a shared secret from their elliptic
+    # curve public-private key pairs. You can use the raw shared secret that
+    # DeriveSharedSecret returns to derive a symmetric key that can encrypt
+    # and decrypt data that is sent between the two peers, or that can
+    # generate and verify HMACs. KMS recommends that you follow [NIST
+    # recommendations for key derivation][2] when using the raw shared
+    # secret to derive a symmetric key.
+    #
+    # The following workflow demonstrates how to establish key agreement
+    # over an insecure communication channel using DeriveSharedSecret.
+    #
+    # 1.  **Alice** calls CreateKey to create an asymmetric KMS key pair
+    #     with a `KeyUsage` value of `KEY_AGREEMENT`.
+    #
+    #     The asymmetric KMS key must use a NIST-recommended elliptic curve
+    #     (ECC) or SM2 (China Regions only) key spec.
+    #
+    # 2.  **Bob** creates an elliptic curve key pair.
+    #
+    #     Bob can call CreateKey to create an asymmetric KMS key pair or
+    #     generate a key pair outside of KMS. Bob's key pair must use the
+    #     same NIST-recommended elliptic curve (ECC) or SM2 (China Regions
+    #     ony) curve as Alice.
+    #
+    # 3.  Alice and Bob **exchange their public keys** through an insecure
+    #     communication channel (like the internet).
+    #
+    #     Use GetPublicKey to download the public key of your asymmetric KMS
+    #     key pair.
+    #
+    #     <note markdown="1"> KMS strongly recommends verifying that the public key you receive
+    #     came from the expected party before using it to derive a shared
+    #     secret.
+    #
+    #      </note>
+    #
+    # 4.  **Alice** calls DeriveSharedSecret.
+    #
+    #     KMS uses the private key from the KMS key pair generated in **Step
+    #     1**, Bob's public key, and the Elliptic Curve Cryptography
+    #     Cofactor Diffie-Hellman Primitive to derive the shared secret. The
+    #     private key in your KMS key pair never leaves KMS unencrypted.
+    #     DeriveSharedSecret returns the raw shared secret.
+    #
+    # 5.  **Bob** uses the Elliptic Curve Cryptography Cofactor
+    #     Diffie-Hellman Primitive to calculate the same raw secret using
+    #     his private key and Alice's public key.
+    #
+    # To derive a shared secret you must provide a key agreement algorithm,
+    # the private key of the caller's asymmetric NIST-recommended elliptic
+    # curve or SM2 (China Regions only) KMS key pair, and the public key
+    # from your peer's NIST-recommended elliptic curve or SM2 (China
+    # Regions only) key pair. The public key can be from another asymmetric
+    # KMS key pair or from a key pair generated outside of KMS, but both key
+    # pairs must be on the same elliptic curve.
+    #
+    # The KMS key that you use for this operation must be in a compatible
+    # key state. For details, see [Key states of KMS keys][3] in the *Key
+    # Management Service Developer Guide*.
+    #
+    # **Cross-account use**: Yes. To perform this operation with a KMS key
+    # in a different Amazon Web Services account, specify the key ARN or
+    # alias ARN in the value of the `KeyId` parameter.
+    #
+    # **Required permissions**: [kms:DeriveSharedSecret][4] (key policy)
+    #
+    # **Related operations:**
+    #
+    # * CreateKey
+    #
+    # * GetPublicKey
+    #
+    # * DescribeKey
+    #
+    # **Eventual consistency**: The KMS API follows an eventual consistency
+    # model. For more information, see [KMS eventual consistency][5].
+    #
+    #
+    #
+    # [1]: https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-56Ar3.pdf#page=60
+    # [2]: https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-56Cr2.pdf
+    # [3]: https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html
+    # [4]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html
+    # [5]: https://docs.aws.amazon.com/kms/latest/developerguide/programming-eventual-consistency.html
+    #
+    # @option params [required, String] :key_id
+    #   Identifies an asymmetric NIST-recommended ECC or SM2 (China Regions
+    #   only) KMS key. KMS uses the private key in the specified key pair to
+    #   derive the shared secret. The key usage of the KMS key must be
+    #   `KEY_AGREEMENT`. To find the `KeyUsage` of a KMS key, use the
+    #   DescribeKey operation.
+    #
+    #   To specify a KMS key, use its key ID, key ARN, alias name, or alias
+    #   ARN. When using an alias name, prefix it with `"alias/"`. To specify a
+    #   KMS key in a different Amazon Web Services account, you must use the
+    #   key ARN or alias ARN.
+    #
+    #   For example:
+    #
+    #   * Key ID: `1234abcd-12ab-34cd-56ef-1234567890ab`
+    #
+    #   * Key ARN:
+    #     `arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
+    #
+    #   * Alias name: `alias/ExampleAlias`
+    #
+    #   * Alias ARN: `arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias`
+    #
+    #   To get the key ID and key ARN for a KMS key, use ListKeys or
+    #   DescribeKey. To get the alias name and alias ARN, use ListAliases.
+    #
+    # @option params [required, String] :key_agreement_algorithm
+    #   Specifies the key agreement algorithm used to derive the shared
+    #   secret. The only valid value is `ECDH`.
+    #
+    # @option params [required, String, StringIO, File] :public_key
+    #   Specifies the public key in your peer's NIST-recommended elliptic
+    #   curve (ECC) or SM2 (China Regions only) key pair.
+    #
+    #   The public key must be a DER-encoded X.509 public key, also known as
+    #   `SubjectPublicKeyInfo` (SPKI), as defined in [RFC 5280][1].
+    #
+    #   GetPublicKey returns the public key of an asymmetric KMS key pair in
+    #   the required DER-encoded format.
+    #
+    #   <note markdown="1"> If you use [Amazon Web Services CLI version 1][2], you must provide
+    #   the DER-encoded X.509 public key in a file. Otherwise, the Amazon Web
+    #   Services CLI Base64-encodes the public key a second time, resulting in
+    #   a `ValidationException`.
+    #
+    #    </note>
+    #
+    #   You can specify the public key as binary data in a file using fileb
+    #   (`fileb://<path-to-file>`) or in-line using a Base64 encoded string.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc5280
+    #   [2]: https://docs.aws.amazon.com/cli/v1/userguide/cli-chap-welcome.html
+    #
+    # @option params [Array<String>] :grant_tokens
+    #   A list of grant tokens.
+    #
+    #   Use a grant token when your permission to call this operation comes
+    #   from a new grant that has not yet achieved *eventual consistency*. For
+    #   more information, see [Grant token][1] and [Using a grant token][2] in
+    #   the *Key Management Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/grants.html#grant_token
+    #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/grant-manage.html#using-grant-token
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks if your request will succeed. `DryRun` is an optional
+    #   parameter.
+    #
+    #   To learn more about how to use this parameter, see [Testing your KMS
+    #   API calls][1] in the *Key Management Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/programming-dryrun.html
+    #
+    # @option params [Types::RecipientInfo] :recipient
+    #   A signed [attestation document][1] from an Amazon Web Services Nitro
+    #   enclave and the encryption algorithm to use with the enclave's public
+    #   key. The only valid encryption algorithm is `RSAES_OAEP_SHA_256`.
+    #
+    #   This parameter only supports attestation documents for Amazon Web
+    #   Services Nitro Enclaves. To call DeriveSharedSecret for an Amazon Web
+    #   Services Nitro Enclaves, use the [Amazon Web Services Nitro Enclaves
+    #   SDK][2] to generate the attestation document and then use the
+    #   Recipient parameter from any Amazon Web Services SDK to provide the
+    #   attestation document for the enclave.
+    #
+    #   When you use this parameter, instead of returning a plaintext copy of
+    #   the shared secret, KMS encrypts the plaintext shared secret under the
+    #   public key in the attestation document, and returns the resulting
+    #   ciphertext in the `CiphertextForRecipient` field in the response. This
+    #   ciphertext can be decrypted only with the private key in the enclave.
+    #   The `CiphertextBlob` field in the response contains the encrypted
+    #   shared secret derived from the KMS key specified by the `KeyId`
+    #   parameter and public key specified by the `PublicKey` parameter. The
+    #   `SharedSecret` field in the response is null or empty.
+    #
+    #   For information about the interaction between KMS and Amazon Web
+    #   Services Nitro Enclaves, see [How Amazon Web Services Nitro Enclaves
+    #   uses KMS][3] in the *Key Management Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitro-enclave-how.html#term-attestdoc
+    #   [2]: https://docs.aws.amazon.com/enclaves/latest/user/developing-applications.html#sdk
+    #   [3]: https://docs.aws.amazon.com/kms/latest/developerguide/services-nitro-enclaves.html
+    #
+    # @return [Types::DeriveSharedSecretResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeriveSharedSecretResponse#key_id #key_id} => String
+    #   * {Types::DeriveSharedSecretResponse#shared_secret #shared_secret} => String
+    #   * {Types::DeriveSharedSecretResponse#ciphertext_for_recipient #ciphertext_for_recipient} => String
+    #   * {Types::DeriveSharedSecretResponse#key_agreement_algorithm #key_agreement_algorithm} => String
+    #   * {Types::DeriveSharedSecretResponse#key_origin #key_origin} => String
+    #
+    #
+    # @example Example: To derive a shared secret
+    #
+    #   # The following example derives a shared secret using a key agreement algorithm.
+    #
+    #   resp = client.derive_shared_secret({
+    #     key_agreement_algorithm: "ECDH", # The key agreement algorithm used to derive the shared secret. The only valid value is ECDH.
+    #     key_id: "1234abcd-12ab-34cd-56ef-1234567890ab", # The key identifier for an asymmetric KMS key pair. The private key in the specified key pair is used to derive the shared secret.
+    #     public_key: "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAvH3Yj0wbkLEpUl95Cv1cJVjsVNSjwGq3tCLnzXfhVwVvmzGN8pYj3U8nKwgouaHbBWNJYjP5VutbbkKS4Kv4GojwZBJyHN17kmxo8yTjRmjR15SKIQ8cqRA2uaERMLnpztIXdZp232PQPbWGxDyXYJ0aJ5EFSag+iSK341kr2kFTpINN7T1ZaX9vfXBdGR+VtkRKMWoHQeWzHrPZ+3irvpXNCKxGUxmPNsJSjPUhuSXT5+0VrY/LEYLQ5lUTrhU6z5/OK0kzaCc66DXc5ipSloS4Xyg+QcYSMxe9xuqO5HtzFImUSKBm1W6eDT6lHnSbpi7vXzNbIX7pWxKw9nmQvQIDAQAB", # The public key in your peer's asymmetric key pair.
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     key_agreement_algorithm: "ECDH", # The key agreement algorithm used to derive the shared secret.
+    #     key_id: "1234abcd-12ab-34cd-56ef-1234567890ab", # The asymmetric KMS key pair used to derive the shared secret.
+    #     shared_secret: "MEYCIQCKZLWyTk5runarx6XiAkU9gv3lbwPO/pHa+DXFehzdDwIhANwpsIV2g/9SPWLLsF6p/hiSskuIXMTRwqrMdVKWTMHG", # The raw secret derived from the specified key agreement algorithm, private key in the asymmetric KMS key, and your peer's public key.
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.derive_shared_secret({
+    #     key_id: "KeyIdType", # required
+    #     key_agreement_algorithm: "ECDH", # required, accepts ECDH
+    #     public_key: "data", # required
+    #     grant_tokens: ["GrantTokenType"],
+    #     dry_run: false,
+    #     recipient: {
+    #       key_encryption_algorithm: "RSAES_OAEP_SHA_256", # accepts RSAES_OAEP_SHA_256
+    #       attestation_document: "data",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.key_id #=> String
+    #   resp.shared_secret #=> String
+    #   resp.ciphertext_for_recipient #=> String
+    #   resp.key_agreement_algorithm #=> String, one of "ECDH"
+    #   resp.key_origin #=> String, one of "AWS_KMS", "EXTERNAL", "AWS_CLOUDHSM", "EXTERNAL_KEY_STORE"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/DeriveSharedSecret AWS API Documentation
+    #
+    # @overload derive_shared_secret(params = {})
+    # @param [Hash] params ({})
+    def derive_shared_secret(params = {}, options = {})
+      req = build_request(:derive_shared_secret, params)
+      req.send_request(options)
+    end
+
     # Gets information about [custom key stores][1] in the account and
     # Region.
     #
@@ -3502,7 +3778,7 @@ module Aws::KMS
     #   resp.key_metadata.creation_date #=> Time
     #   resp.key_metadata.enabled #=> Boolean
     #   resp.key_metadata.description #=> String
-    #   resp.key_metadata.key_usage #=> String, one of "SIGN_VERIFY", "ENCRYPT_DECRYPT", "GENERATE_VERIFY_MAC"
+    #   resp.key_metadata.key_usage #=> String, one of "SIGN_VERIFY", "ENCRYPT_DECRYPT", "GENERATE_VERIFY_MAC", "KEY_AGREEMENT"
     #   resp.key_metadata.key_state #=> String, one of "Creating", "Enabled", "Disabled", "PendingDeletion", "PendingImport", "PendingReplicaDeletion", "Unavailable", "Updating"
     #   resp.key_metadata.deletion_date #=> Time
     #   resp.key_metadata.valid_to #=> Time
@@ -3517,6 +3793,8 @@ module Aws::KMS
     #   resp.key_metadata.encryption_algorithms[0] #=> String, one of "SYMMETRIC_DEFAULT", "RSAES_OAEP_SHA_1", "RSAES_OAEP_SHA_256", "SM2PKE"
     #   resp.key_metadata.signing_algorithms #=> Array
     #   resp.key_metadata.signing_algorithms[0] #=> String, one of "RSASSA_PSS_SHA_256", "RSASSA_PSS_SHA_384", "RSASSA_PSS_SHA_512", "RSASSA_PKCS1_V1_5_SHA_256", "RSASSA_PKCS1_V1_5_SHA_384", "RSASSA_PKCS1_V1_5_SHA_512", "ECDSA_SHA_256", "ECDSA_SHA_384", "ECDSA_SHA_512", "SM2DSA"
+    #   resp.key_metadata.key_agreement_algorithms #=> Array
+    #   resp.key_metadata.key_agreement_algorithms[0] #=> String, one of "ECDH"
     #   resp.key_metadata.multi_region #=> Boolean
     #   resp.key_metadata.multi_region_configuration.multi_region_key_type #=> String, one of "PRIMARY", "REPLICA"
     #   resp.key_metadata.multi_region_configuration.primary_key.arn #=> String
@@ -4783,8 +5061,11 @@ module Aws::KMS
     #   key. The only valid encryption algorithm is `RSAES_OAEP_SHA_256`.
     #
     #   This parameter only supports attestation documents for Amazon Web
-    #   Services Nitro Enclaves. To include this parameter, use the [Amazon
-    #   Web Services Nitro Enclaves SDK][2] or any Amazon Web Services SDK.
+    #   Services Nitro Enclaves. To call DeriveSharedSecret for an Amazon Web
+    #   Services Nitro Enclaves, use the [Amazon Web Services Nitro Enclaves
+    #   SDK][2] to generate the attestation document and then use the
+    #   Recipient parameter from any Amazon Web Services SDK to provide the
+    #   attestation document for the enclave.
     #
     #   When you use this parameter, instead of returning a plaintext copy of
     #   the private data key, KMS encrypts the plaintext private data key
@@ -5872,8 +6153,8 @@ module Aws::KMS
     # `GetParametersForImport` returns the items that you need to import
     # your key material.
     #
-    # * The public key (or "wrapping key") of an asymmetric key pair that
-    #   KMS generates.
+    # * The public key (or "wrapping key") of an RSA key pair that KMS
+    #   generates.
     #
     #   You will use this public key to encrypt ("wrap") your key material
     #   while it's in transit to KMS.
@@ -5951,28 +6232,20 @@ module Aws::KMS
     #   DescribeKey.
     #
     # @option params [required, String] :wrapping_algorithm
-    #   The algorithm you will use with the asymmetric public key
-    #   (`PublicKey`) in the response to protect your key material during
-    #   import. For more information, see [Select a wrapping
+    #   The algorithm you will use with the RSA public key (`PublicKey`) in
+    #   the response to protect your key material during import. For more
+    #   information, see [Select a wrapping
     #   algorithm](kms/latest/developerguide/importing-keys-get-public-key-and-token.html#select-wrapping-algorithm)
     #   in the *Key Management Service Developer Guide*.
     #
     #   For RSA\_AES wrapping algorithms, you encrypt your key material with
     #   an AES key that you generate, then encrypt your AES key with the RSA
     #   public key from KMS. For RSAES wrapping algorithms, you encrypt your
-    #   key material directly with the RSA public key from KMS. For SM2PKE
-    #   wrapping algorithms, you encrypt your key material directly with the
-    #   SM2 public key from KMS.
+    #   key material directly with the RSA public key from KMS.
     #
     #   The wrapping algorithms that you can use depend on the type of key
     #   material that you are importing. To import an RSA private key, you
-    #   must use an RSA\_AES wrapping algorithm, except in China Regions,
-    #   where you must use the SM2PKE wrapping algorithm to import an RSA
-    #   private key.
-    #
-    #   The SM2PKE wrapping algorithm is available only in China Regions. The
-    #   `RSA_AES_KEY_WRAP_SHA_256` and `RSA_AES_KEY_WRAP_SHA_1` wrapping
-    #   algorithms are not supported in China Regions.
+    #   must use an RSA\_AES wrapping algorithm.
     #
     #   * **RSA\_AES\_KEY\_WRAP\_SHA\_256** — Supported for wrapping RSA and
     #     ECC key material.
@@ -5995,21 +6268,16 @@ module Aws::KMS
     #   * **RSAES\_PKCS1\_V1\_5** (Deprecated) — As of October 10, 2023, KMS
     #     does not support the RSAES\_PKCS1\_V1\_5 wrapping algorithm.
     #
-    #   * **SM2PKE** (China Regions only) — supported for wrapping RSA, ECC,
-    #     and SM2 key material.
-    #
     # @option params [required, String] :wrapping_key_spec
-    #   The type of public key to return in the response. You will use this
-    #   wrapping key with the specified wrapping algorithm to protect your key
-    #   material during import.
+    #   The type of RSA public key to return in the response. You will use
+    #   this wrapping key with the specified wrapping algorithm to protect
+    #   your key material during import.
     #
-    #   Use the longest wrapping key that is practical.
+    #   Use the longest RSA wrapping key that is practical.
     #
     #   You cannot use an RSA\_2048 public key to directly wrap an
     #   ECC\_NIST\_P521 private key. Instead, use an RSA\_AES wrapping
     #   algorithm or choose a longer RSA public key.
-    #
-    #   The SM2 wrapping key spec is available only in China Regions.
     #
     # @return [Types::GetParametersForImportResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6144,7 +6412,8 @@ module Aws::KMS
     # * [KeySpec][2]: The type of key material in the public key, such as
     #   `RSA_4096` or `ECC_NIST_P521`.
     #
-    # * [KeyUsage][3]: Whether the key is used for encryption or signing.
+    # * [KeyUsage][3]: Whether the key is used for encryption, signing, or
+    #   deriving a shared secret.
     #
     # * [EncryptionAlgorithms][4] or [SigningAlgorithms][5]: A list of the
     #   encryption algorithms or the signing algorithms for the key.
@@ -6233,6 +6502,7 @@ module Aws::KMS
     #   * {Types::GetPublicKeyResponse#key_usage #key_usage} => String
     #   * {Types::GetPublicKeyResponse#encryption_algorithms #encryption_algorithms} => Array&lt;String&gt;
     #   * {Types::GetPublicKeyResponse#signing_algorithms #signing_algorithms} => Array&lt;String&gt;
+    #   * {Types::GetPublicKeyResponse#key_agreement_algorithms #key_agreement_algorithms} => Array&lt;String&gt;
     #
     #
     # @example Example: To download the public key of an asymmetric KMS key
@@ -6270,11 +6540,13 @@ module Aws::KMS
     #   resp.public_key #=> String
     #   resp.customer_master_key_spec #=> String, one of "RSA_2048", "RSA_3072", "RSA_4096", "ECC_NIST_P256", "ECC_NIST_P384", "ECC_NIST_P521", "ECC_SECG_P256K1", "SYMMETRIC_DEFAULT", "HMAC_224", "HMAC_256", "HMAC_384", "HMAC_512", "SM2"
     #   resp.key_spec #=> String, one of "RSA_2048", "RSA_3072", "RSA_4096", "ECC_NIST_P256", "ECC_NIST_P384", "ECC_NIST_P521", "ECC_SECG_P256K1", "SYMMETRIC_DEFAULT", "HMAC_224", "HMAC_256", "HMAC_384", "HMAC_512", "SM2"
-    #   resp.key_usage #=> String, one of "SIGN_VERIFY", "ENCRYPT_DECRYPT", "GENERATE_VERIFY_MAC"
+    #   resp.key_usage #=> String, one of "SIGN_VERIFY", "ENCRYPT_DECRYPT", "GENERATE_VERIFY_MAC", "KEY_AGREEMENT"
     #   resp.encryption_algorithms #=> Array
     #   resp.encryption_algorithms[0] #=> String, one of "SYMMETRIC_DEFAULT", "RSAES_OAEP_SHA_1", "RSAES_OAEP_SHA_256", "SM2PKE"
     #   resp.signing_algorithms #=> Array
     #   resp.signing_algorithms[0] #=> String, one of "RSASSA_PSS_SHA_256", "RSASSA_PSS_SHA_384", "RSASSA_PSS_SHA_512", "RSASSA_PKCS1_V1_5_SHA_256", "RSASSA_PKCS1_V1_5_SHA_384", "RSASSA_PKCS1_V1_5_SHA_512", "ECDSA_SHA_256", "ECDSA_SHA_384", "ECDSA_SHA_512", "SM2DSA"
+    #   resp.key_agreement_algorithms #=> Array
+    #   resp.key_agreement_algorithms[0] #=> String, one of "ECDH"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/GetPublicKey AWS API Documentation
     #
@@ -6877,7 +7149,7 @@ module Aws::KMS
     #   resp.grants[0].retiring_principal #=> String
     #   resp.grants[0].issuing_account #=> String
     #   resp.grants[0].operations #=> Array
-    #   resp.grants[0].operations[0] #=> String, one of "Decrypt", "Encrypt", "GenerateDataKey", "GenerateDataKeyWithoutPlaintext", "ReEncryptFrom", "ReEncryptTo", "Sign", "Verify", "GetPublicKey", "CreateGrant", "RetireGrant", "DescribeKey", "GenerateDataKeyPair", "GenerateDataKeyPairWithoutPlaintext", "GenerateMac", "VerifyMac"
+    #   resp.grants[0].operations[0] #=> String, one of "Decrypt", "Encrypt", "GenerateDataKey", "GenerateDataKeyWithoutPlaintext", "ReEncryptFrom", "ReEncryptTo", "Sign", "Verify", "GetPublicKey", "CreateGrant", "RetireGrant", "DescribeKey", "GenerateDataKeyPair", "GenerateDataKeyPairWithoutPlaintext", "GenerateMac", "VerifyMac", "DeriveSharedSecret"
     #   resp.grants[0].constraints.encryption_context_subset #=> Hash
     #   resp.grants[0].constraints.encryption_context_subset["EncryptionContextKey"] #=> String
     #   resp.grants[0].constraints.encryption_context_equals #=> Hash
@@ -7499,7 +7771,7 @@ module Aws::KMS
     #   resp.grants[0].retiring_principal #=> String
     #   resp.grants[0].issuing_account #=> String
     #   resp.grants[0].operations #=> Array
-    #   resp.grants[0].operations[0] #=> String, one of "Decrypt", "Encrypt", "GenerateDataKey", "GenerateDataKeyWithoutPlaintext", "ReEncryptFrom", "ReEncryptTo", "Sign", "Verify", "GetPublicKey", "CreateGrant", "RetireGrant", "DescribeKey", "GenerateDataKeyPair", "GenerateDataKeyPairWithoutPlaintext", "GenerateMac", "VerifyMac"
+    #   resp.grants[0].operations[0] #=> String, one of "Decrypt", "Encrypt", "GenerateDataKey", "GenerateDataKeyWithoutPlaintext", "ReEncryptFrom", "ReEncryptTo", "Sign", "Verify", "GetPublicKey", "CreateGrant", "RetireGrant", "DescribeKey", "GenerateDataKeyPair", "GenerateDataKeyPairWithoutPlaintext", "GenerateMac", "VerifyMac", "DeriveSharedSecret"
     #   resp.grants[0].constraints.encryption_context_subset #=> Hash
     #   resp.grants[0].constraints.encryption_context_subset["EncryptionContextKey"] #=> String
     #   resp.grants[0].constraints.encryption_context_equals #=> Hash
@@ -8337,7 +8609,7 @@ module Aws::KMS
     #   resp.replica_key_metadata.creation_date #=> Time
     #   resp.replica_key_metadata.enabled #=> Boolean
     #   resp.replica_key_metadata.description #=> String
-    #   resp.replica_key_metadata.key_usage #=> String, one of "SIGN_VERIFY", "ENCRYPT_DECRYPT", "GENERATE_VERIFY_MAC"
+    #   resp.replica_key_metadata.key_usage #=> String, one of "SIGN_VERIFY", "ENCRYPT_DECRYPT", "GENERATE_VERIFY_MAC", "KEY_AGREEMENT"
     #   resp.replica_key_metadata.key_state #=> String, one of "Creating", "Enabled", "Disabled", "PendingDeletion", "PendingImport", "PendingReplicaDeletion", "Unavailable", "Updating"
     #   resp.replica_key_metadata.deletion_date #=> Time
     #   resp.replica_key_metadata.valid_to #=> Time
@@ -8352,6 +8624,8 @@ module Aws::KMS
     #   resp.replica_key_metadata.encryption_algorithms[0] #=> String, one of "SYMMETRIC_DEFAULT", "RSAES_OAEP_SHA_1", "RSAES_OAEP_SHA_256", "SM2PKE"
     #   resp.replica_key_metadata.signing_algorithms #=> Array
     #   resp.replica_key_metadata.signing_algorithms[0] #=> String, one of "RSASSA_PSS_SHA_256", "RSASSA_PSS_SHA_384", "RSASSA_PSS_SHA_512", "RSASSA_PKCS1_V1_5_SHA_256", "RSASSA_PKCS1_V1_5_SHA_384", "RSASSA_PKCS1_V1_5_SHA_512", "ECDSA_SHA_256", "ECDSA_SHA_384", "ECDSA_SHA_512", "SM2DSA"
+    #   resp.replica_key_metadata.key_agreement_algorithms #=> Array
+    #   resp.replica_key_metadata.key_agreement_algorithms[0] #=> String, one of "ECDH"
     #   resp.replica_key_metadata.multi_region #=> Boolean
     #   resp.replica_key_metadata.multi_region_configuration.multi_region_key_type #=> String, one of "PRIMARY", "REPLICA"
     #   resp.replica_key_metadata.multi_region_configuration.primary_key.arn #=> String
@@ -10471,7 +10745,7 @@ module Aws::KMS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kms'
-      context[:gem_version] = '1.83.0'
+      context[:gem_version] = '1.84.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
