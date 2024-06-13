@@ -28,8 +28,10 @@ module Aws
 
           private
 
+          # Streaming outputs are not subject to 200 errors.
           def streaming_output?(output)
-            if (payload = output[:payload_member]) # checking ref and shape
+            if (payload = output[:payload_member])
+              # checking ref and shape
               payload['streaming'] || payload.shape['streaming'] ||
                 payload.eventstream
             else
@@ -37,19 +39,45 @@ module Aws
             end
           end
 
+          # Payloads that are strings will not have serialized XML unless
+          # its an error. The error case will have been caught before this
+          # method is called.
+          def string_payload?(output)
+            if (payload = output[:payload_member])
+              payload.shape.is_a?(Seahorse::Model::Shapes::StringShape)
+            else
+              false
+            end
+          end
+
+          # Checks if the output shape has members that are in the body for
+          # the case of a payload and a normal structure. This is called
+          # after string_payload? so that it will be a structure.
           def members_in_body?(output)
-            output.shape.members.any? { |_, k| k.location.nil? }
+            if (payload = output[:payload_member])
+              payload.shape.members.any? { |_, k| k.location.nil? }
+            else
+              output.shape.members.any? { |_, k| k.location.nil? }
+            end
+          end
+
+          # Must be a structure, have a body member, and have the start of an
+          # XML Tag. Other incomplete xml bodies will result in an XML
+          # ParsingError.
+          def incomplete_xml_body?(xml, output)
+            !string_payload?(output) &&
+              members_in_body?(output) &&
+              !xml.match(/<\w/)
           end
 
           def check_for_error(context)
             xml = context.http_response.body_contents
+            output = context.operation.output
             if xml.match(/\?>\s*<Error>/)
               error_code = xml.match(/<Code>(.+?)<\/Code>/)[1]
               error_message = xml.match(/<Message>(.+?)<\/Message>/)[1]
               S3::Errors.error_class(error_code).new(context, error_message)
-            elsif members_in_body?(context.operation.output) && !xml.match(/<\w/)
-              # Must have a body member and have the start of an XML Tag
-              # Other incomplete xml bodies will result in XML ParsingError
+            elsif incomplete_xml_body?(xml, output)
               Seahorse::Client::NetworkingError.new(
                 S3::Errors
                   .error_class('InternalError')
