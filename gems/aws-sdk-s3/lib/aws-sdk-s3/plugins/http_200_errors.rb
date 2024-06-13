@@ -39,45 +39,43 @@ module Aws
             end
           end
 
-          # Payloads that are strings will not have serialized XML unless
-          # its an error. The error case will have been caught before this
-          # method is called.
-          def string_payload?(output)
-            if (payload = output[:payload_member])
-              payload.shape.is_a?(Seahorse::Model::Shapes::StringShape)
+          # Checks if the output shape is a structure shape and has members that
+          # are in the body for the case of a payload and a normal structure. A
+          # non-structure shape will not have members in the body. In the case
+          # of a string or blob, the body contents would have been checked first
+          # before this method is called in incomplete_xml_body?.
+          def members_in_body?(output)
+            shape =
+              if output[:payload_member]
+                output[:payload_member].shape
+              else
+                output.shape
+              end
+
+            if structure_shape?(shape)
+              shape.members.any? { |_, k| k.location.nil? }
             else
               false
             end
           end
 
-          # Checks if the output shape has members that are in the body for
-          # the case of a payload and a normal structure. This is called
-          # after string_payload? so that it will be a structure.
-          def members_in_body?(output)
-            if (payload = output[:payload_member])
-              payload.shape.members.any? { |_, k| k.location.nil? }
-            else
-              output.shape.members.any? { |_, k| k.location.nil? }
-            end
+          def structure_shape?(shape)
+            shape.is_a?(Seahorse::Model::Shapes::StructureShape)
           end
 
-          # Must be a structure, have a body member, and have the start of an
-          # XML Tag. Other incomplete xml bodies will result in an XML
-          # ParsingError.
+          # Must have a member in the body and have the start of an XML Tag.
+          # Other incomplete xml bodies will result in an XML ParsingError.
           def incomplete_xml_body?(xml, output)
-            !string_payload?(output) &&
-              members_in_body?(output) &&
-              !xml.match(/<\w/)
+            members_in_body?(output) && !xml.match(/<\w/)
           end
 
           def check_for_error(context)
             xml = context.http_response.body_contents
-            output = context.operation.output
             if xml.match(/\?>\s*<Error>/)
               error_code = xml.match(/<Code>(.+?)<\/Code>/)[1]
               error_message = xml.match(/<Message>(.+?)<\/Message>/)[1]
               S3::Errors.error_class(error_code).new(context, error_message)
-            elsif incomplete_xml_body?(xml, output)
+            elsif incomplete_xml_body?(xml, context.operation.output)
               Seahorse::Client::NetworkingError.new(
                 S3::Errors
                   .error_class('InternalError')
