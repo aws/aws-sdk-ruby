@@ -243,6 +243,11 @@ module Aws::SecretsManager
     #   both.
     #
     #   This parameter is not available in the Secrets Manager console.
+    #
+    #   Sensitive: This field contains sensitive information, so the service
+    #   does not include it in CloudTrail log entries. If you create your
+    #   own log entries, you must also avoid logging the information in this
+    #   field.
     #   @return [String]
     #
     # @!attribute [rw] secret_string
@@ -258,6 +263,11 @@ module Aws::SecretsManager
     #   `SecretString` parameter. The Secrets Manager console stores the
     #   information as a JSON structure of key/value pairs that a Lambda
     #   rotation function can parse.
+    #
+    #   Sensitive: This field contains sensitive information, so the service
+    #   does not include it in CloudTrail log entries. If you create your
+    #   own log entries, you must also avoid logging the information in this
+    #   field.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -527,6 +537,8 @@ module Aws::SecretsManager
     #
     # @!attribute [rw] rotation_enabled
     #   Specifies whether automatic rotation is turned on for this secret.
+    #   If the secret has never been configured for rotation, Secrets
+    #   Manager returns null.
     #
     #   To turn on rotation, use RotateSecret. To turn off rotation, use
     #   CancelRotateSecret.
@@ -861,7 +873,8 @@ module Aws::SecretsManager
     end
 
     # @!attribute [rw] secret_id
-    #   The ARN or name of the secret to retrieve.
+    #   The ARN or name of the secret to retrieve. To retrieve a secret from
+    #   another account, you must use an ARN.
     #
     #   For an ARN, we recommend that you specify a complete ARN rather than
     #   a partial ARN. See [Finding a secret from a partial ARN][1].
@@ -929,6 +942,11 @@ module Aws::SecretsManager
     #   if the secret value was originally provided as a string, then this
     #   field is omitted. The secret value appears in `SecretString`
     #   instead.
+    #
+    #   Sensitive: This field contains sensitive information, so the service
+    #   does not include it in CloudTrail log entries. If you create your
+    #   own log entries, you must also avoid logging the information in this
+    #   field.
     #   @return [String]
     #
     # @!attribute [rw] secret_string
@@ -938,6 +956,11 @@ module Aws::SecretsManager
     #   If this secret was created by using the console, then Secrets
     #   Manager stores the information as a JSON structure of key/value
     #   pairs.
+    #
+    #   Sensitive: This field contains sensitive information, so the service
+    #   does not include it in CloudTrail log entries. If you create your
+    #   own log entries, you must also avoid logging the information in this
+    #   field.
     #   @return [String]
     #
     # @!attribute [rw] version_stages
@@ -1363,6 +1386,11 @@ module Aws::SecretsManager
     #   You must include `SecretBinary` or `SecretString`, but not both.
     #
     #   You can't access this value from the Secrets Manager console.
+    #
+    #   Sensitive: This field contains sensitive information, so the service
+    #   does not include it in CloudTrail log entries. If you create your
+    #   own log entries, you must also avoid logging the information in this
+    #   field.
     #   @return [String]
     #
     # @!attribute [rw] secret_string
@@ -1372,6 +1400,11 @@ module Aws::SecretsManager
     #
     #   We recommend you create the secret string as JSON key/value pairs,
     #   as shown in the example.
+    #
+    #   Sensitive: This field contains sensitive information, so the service
+    #   does not include it in CloudTrail log entries. If you create your
+    #   own log entries, you must also avoid logging the information in this
+    #   field.
     #   @return [String]
     #
     # @!attribute [rw] version_stages
@@ -1390,6 +1423,24 @@ module Aws::SecretsManager
     #   automatically moves the staging label `AWSCURRENT` to this version.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] rotation_token
+    #   A unique identifier that indicates the source of the request. For
+    #   cross-account rotation (when you rotate a secret in one account by
+    #   using a Lambda rotation function in another account) and the Lambda
+    #   rotation function assumes an IAM role to call Secrets Manager,
+    #   Secrets Manager validates the identity with the rotation token. For
+    #   more information, see [How rotation works][1].
+    #
+    #   Sensitive: This field contains sensitive information, so the service
+    #   does not include it in CloudTrail log entries. If you create your
+    #   own log entries, you must also avoid logging the information in this
+    #   field.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/rotating-secrets.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/PutSecretValueRequest AWS API Documentation
     #
     class PutSecretValueRequest < Struct.new(
@@ -1397,8 +1448,9 @@ module Aws::SecretsManager
       :client_request_token,
       :secret_binary,
       :secret_string,
-      :version_stages)
-      SENSITIVE = [:secret_binary, :secret_string]
+      :version_stages,
+      :rotation_token)
+      SENSITIVE = [:secret_binary, :secret_string, :rotation_token]
       include Aws::Structure
     end
 
@@ -2253,6 +2305,11 @@ module Aws::SecretsManager
     #   both.
     #
     #   You can't access this parameter in the Secrets Manager console.
+    #
+    #   Sensitive: This field contains sensitive information, so the service
+    #   does not include it in CloudTrail log entries. If you create your
+    #   own log entries, you must also avoid logging the information in this
+    #   field.
     #   @return [String]
     #
     # @!attribute [rw] secret_string
@@ -2262,6 +2319,11 @@ module Aws::SecretsManager
     #
     #   Either `SecretBinary` or `SecretString` must have a value, but not
     #   both.
+    #
+    #   Sensitive: This field contains sensitive information, so the service
+    #   does not include it in CloudTrail log entries. If you create your
+    #   own log entries, you must also avoid logging the information in this
+    #   field.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/UpdateSecretRequest AWS API Documentation
@@ -2365,7 +2427,8 @@ module Aws::SecretsManager
     end
 
     # @!attribute [rw] secret_id
-    #   This field is reserved for internal use.
+    #   The ARN or name of the secret with the resource-based policy you
+    #   want to validate.
     #   @return [String]
     #
     # @!attribute [rw] resource_policy

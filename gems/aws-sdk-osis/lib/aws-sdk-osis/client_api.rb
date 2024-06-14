@@ -100,6 +100,7 @@ module Aws::OSIS
     ValidationMessageList = Shapes::ListShape.new(name: 'ValidationMessageList')
     VpcAttachmentOptions = Shapes::StructureShape.new(name: 'VpcAttachmentOptions')
     VpcEndpoint = Shapes::StructureShape.new(name: 'VpcEndpoint')
+    VpcEndpointManagement = Shapes::StringShape.new(name: 'VpcEndpointManagement')
     VpcEndpointServiceName = Shapes::StringShape.new(name: 'VpcEndpointServiceName')
     VpcEndpointsList = Shapes::ListShape.new(name: 'VpcEndpointsList')
     VpcOptions = Shapes::StructureShape.new(name: 'VpcOptions')
@@ -219,6 +220,7 @@ module Aws::OSIS
     Pipeline.add_member(:vpc_endpoints, Shapes::ShapeRef.new(shape: VpcEndpointsList, location_name: "VpcEndpoints"))
     Pipeline.add_member(:buffer_options, Shapes::ShapeRef.new(shape: BufferOptions, location_name: "BufferOptions"))
     Pipeline.add_member(:encryption_at_rest_options, Shapes::ShapeRef.new(shape: EncryptionAtRestOptions, location_name: "EncryptionAtRestOptions"))
+    Pipeline.add_member(:vpc_endpoint_service, Shapes::ShapeRef.new(shape: String, location_name: "VpcEndpointService"))
     Pipeline.add_member(:service_vpc_endpoints, Shapes::ShapeRef.new(shape: ServiceVpcEndpointsList, location_name: "ServiceVpcEndpoints"))
     Pipeline.add_member(:destinations, Shapes::ShapeRef.new(shape: PipelineDestinationList, location_name: "Destinations"))
     Pipeline.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
@@ -350,6 +352,7 @@ module Aws::OSIS
     VpcOptions.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: SubnetIds, required: true, location_name: "SubnetIds"))
     VpcOptions.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: SecurityGroupIds, location_name: "SecurityGroupIds"))
     VpcOptions.add_member(:vpc_attachment_options, Shapes::ShapeRef.new(shape: VpcAttachmentOptions, location_name: "VpcAttachmentOptions"))
+    VpcOptions.add_member(:vpc_endpoint_management, Shapes::ShapeRef.new(shape: VpcEndpointManagement, location_name: "VpcEndpointManagement"))
     VpcOptions.struct_class = Types::VpcOptions
 
 
@@ -360,6 +363,7 @@ module Aws::OSIS
 
       api.metadata = {
         "apiVersion" => "2022-01-01",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "osis",
         "protocol" => "rest-json",
         "protocols" => ["rest-json"],

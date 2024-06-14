@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+3.197.0 (2024-06-12)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-apptest` gem.
+
+3.196.0 (2024-06-11)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-pcaconnectorscep` gem.
+
 3.195.0 (2024-06-10)
 ------------------
 

@@ -513,6 +513,11 @@ module Aws::SESV2
       SENSITIVE: []
     end
 
+    class EventBridgeDestination
+      attr_accessor event_bus_arn: ::String
+      SENSITIVE: []
+    end
+
     class EventDestination
       attr_accessor name: ::String
       attr_accessor enabled: bool
@@ -520,6 +525,7 @@ module Aws::SESV2
       attr_accessor kinesis_firehose_destination: Types::KinesisFirehoseDestination
       attr_accessor cloud_watch_destination: Types::CloudWatchDestination
       attr_accessor sns_destination: Types::SnsDestination
+      attr_accessor event_bridge_destination: Types::EventBridgeDestination
       attr_accessor pinpoint_destination: Types::PinpointDestination
       SENSITIVE: []
     end
@@ -530,6 +536,7 @@ module Aws::SESV2
       attr_accessor kinesis_firehose_destination: Types::KinesisFirehoseDestination
       attr_accessor cloud_watch_destination: Types::CloudWatchDestination
       attr_accessor sns_destination: Types::SnsDestination
+      attr_accessor event_bridge_destination: Types::EventBridgeDestination
       attr_accessor pinpoint_destination: Types::PinpointDestination
       SENSITIVE: []
     end

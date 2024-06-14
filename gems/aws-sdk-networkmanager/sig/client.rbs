@@ -798,7 +798,7 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::GetNetworkRoutesResponse]
         def route_table_arn: () -> ::String
         def core_network_segment_edge: () -> Types::CoreNetworkSegmentEdgeIdentifier
-        def route_table_type: () -> ("TRANSIT_GATEWAY_ROUTE_TABLE" | "CORE_NETWORK_SEGMENT")
+        def route_table_type: () -> ("TRANSIT_GATEWAY_ROUTE_TABLE" | "CORE_NETWORK_SEGMENT" | "NETWORK_FUNCTION_GROUP")
         def route_table_timestamp: () -> ::Time
         def network_routes: () -> ::Array[Types::NetworkRoute]
       end
@@ -810,6 +810,11 @@ module Aws
                                   core_network_segment_edge: {
                                     core_network_id: ::String?,
                                     segment_name: ::String?,
+                                    edge_location: ::String?
+                                  }?,
+                                  core_network_network_function_group: {
+                                    core_network_id: ::String?,
+                                    network_function_group_name: ::String?,
                                     edge_location: ::String?
                                   }?
                                 },

@@ -68,6 +68,20 @@ module Aws::AccessAnalyzer
       end
     end
 
+    class CheckNoPublicAccess
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::AccessAnalyzer::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class CreateAccessPreview
       def self.build(context)
         unless context.config.regional_endpoint
@@ -138,6 +152,20 @@ module Aws::AccessAnalyzer
       end
     end
 
+    class GenerateFindingRecommendation
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::AccessAnalyzer::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class GetAccessPreview
       def self.build(context)
         unless context.config.regional_endpoint
@@ -195,6 +223,20 @@ module Aws::AccessAnalyzer
     end
 
     class GetFinding
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::AccessAnalyzer::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class GetFindingRecommendation
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s

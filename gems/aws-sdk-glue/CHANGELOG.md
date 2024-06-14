@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.178.0 (2024-06-13)
+------------------
+
+* Feature - This release adds support for configuration of evaluation method for composite rules in Glue Data Quality rulesets.
+
 1.177.0 (2024-06-06)
 ------------------
 

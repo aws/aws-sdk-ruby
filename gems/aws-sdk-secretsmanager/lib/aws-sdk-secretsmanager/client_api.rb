@@ -107,6 +107,7 @@ module Aws::SecretsManager
     RotationEnabledType = Shapes::BooleanShape.new(name: 'RotationEnabledType')
     RotationLambdaARNType = Shapes::StringShape.new(name: 'RotationLambdaARNType')
     RotationRulesType = Shapes::StructureShape.new(name: 'RotationRulesType')
+    RotationTokenType = Shapes::StringShape.new(name: 'RotationTokenType')
     ScheduleExpressionType = Shapes::StringShape.new(name: 'ScheduleExpressionType')
     SecretARNType = Shapes::StringShape.new(name: 'SecretARNType')
     SecretBinaryType = Shapes::BlobShape.new(name: 'SecretBinaryType')
@@ -343,6 +344,7 @@ module Aws::SecretsManager
     PutSecretValueRequest.add_member(:secret_binary, Shapes::ShapeRef.new(shape: SecretBinaryType, location_name: "SecretBinary"))
     PutSecretValueRequest.add_member(:secret_string, Shapes::ShapeRef.new(shape: SecretStringType, location_name: "SecretString"))
     PutSecretValueRequest.add_member(:version_stages, Shapes::ShapeRef.new(shape: SecretVersionStagesType, location_name: "VersionStages"))
+    PutSecretValueRequest.add_member(:rotation_token, Shapes::ShapeRef.new(shape: RotationTokenType, location_name: "RotationToken"))
     PutSecretValueRequest.struct_class = Types::PutSecretValueRequest
 
     PutSecretValueResponse.add_member(:arn, Shapes::ShapeRef.new(shape: SecretARNType, location_name: "ARN"))
@@ -528,6 +530,7 @@ module Aws::SecretsManager
 
       api.metadata = {
         "apiVersion" => "2017-10-17",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "secretsmanager",
         "jsonVersion" => "1.1",
         "protocol" => "json",

@@ -2189,6 +2189,23 @@ module Aws::SESV2
       include Aws::Structure
     end
 
+    # An object that defines an Amazon EventBridge destination for email
+    # events. You can use Amazon EventBridge to send notifications when
+    # certain email events occur.
+    #
+    # @!attribute [rw] event_bus_arn
+    #   The Amazon Resource Name (ARN) of the Amazon EventBridge bus to
+    #   publish email events to. Only the default bus is supported.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/EventBridgeDestination AWS API Documentation
+    #
+    class EventBridgeDestination < Struct.new(
+      :event_bus_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # In the Amazon SES API v2, *events* include message sends, deliveries,
     # opens, clicks, bounces, complaints and delivery delays. *Event
     # destinations* are places that you can send information about these
@@ -2278,9 +2295,15 @@ module Aws::SESV2
     #
     # @!attribute [rw] sns_destination
     #   An object that defines an Amazon SNS destination for email events.
-    #   You can use Amazon SNS to send notification when certain email
+    #   You can use Amazon SNS to send notifications when certain email
     #   events occur.
     #   @return [Types::SnsDestination]
+    #
+    # @!attribute [rw] event_bridge_destination
+    #   An object that defines an Amazon EventBridge destination for email
+    #   events. You can use Amazon EventBridge to send notifications when
+    #   certain email events occur.
+    #   @return [Types::EventBridgeDestination]
     #
     # @!attribute [rw] pinpoint_destination
     #   An object that defines an Amazon Pinpoint project destination for
@@ -2304,6 +2327,7 @@ module Aws::SESV2
       :kinesis_firehose_destination,
       :cloud_watch_destination,
       :sns_destination,
+      :event_bridge_destination,
       :pinpoint_destination)
       SENSITIVE = []
       include Aws::Structure
@@ -2343,9 +2367,15 @@ module Aws::SESV2
     #
     # @!attribute [rw] sns_destination
     #   An object that defines an Amazon SNS destination for email events.
-    #   You can use Amazon SNS to send notification when certain email
+    #   You can use Amazon SNS to send notifications when certain email
     #   events occur.
     #   @return [Types::SnsDestination]
+    #
+    # @!attribute [rw] event_bridge_destination
+    #   An object that defines an Amazon EventBridge destination for email
+    #   events. You can use Amazon EventBridge to send notifications when
+    #   certain email events occur.
+    #   @return [Types::EventBridgeDestination]
     #
     # @!attribute [rw] pinpoint_destination
     #   An object that defines an Amazon Pinpoint project destination for
@@ -2368,6 +2398,7 @@ module Aws::SESV2
       :kinesis_firehose_destination,
       :cloud_watch_destination,
       :sns_destination,
+      :event_bridge_destination,
       :pinpoint_destination)
       SENSITIVE = []
       include Aws::Structure
@@ -6579,7 +6610,7 @@ module Aws::SESV2
     class SendingPausedException < Aws::EmptyStructure; end
 
     # An object that defines an Amazon SNS destination for email events. You
-    # can use Amazon SNS to send notification when certain email events
+    # can use Amazon SNS to send notifications when certain email events
     # occur.
     #
     # @!attribute [rw] topic_arn

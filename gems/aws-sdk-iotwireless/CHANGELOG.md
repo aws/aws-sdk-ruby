@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.50.0 (2024-06-13)
+------------------
+
+* Feature - Add RoamingDeviceSNR and RoamingDeviceRSSI to Customer Metrics.
+
 1.49.0 (2024-06-06)
 ------------------
 

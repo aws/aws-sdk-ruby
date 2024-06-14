@@ -66,6 +66,8 @@ module Aws::AccessAnalyzer
             Aws::AccessAnalyzer::Endpoints::CheckAccessNotGranted.build(context)
           when :check_no_new_access
             Aws::AccessAnalyzer::Endpoints::CheckNoNewAccess.build(context)
+          when :check_no_public_access
+            Aws::AccessAnalyzer::Endpoints::CheckNoPublicAccess.build(context)
           when :create_access_preview
             Aws::AccessAnalyzer::Endpoints::CreateAccessPreview.build(context)
           when :create_analyzer
@@ -76,6 +78,8 @@ module Aws::AccessAnalyzer
             Aws::AccessAnalyzer::Endpoints::DeleteAnalyzer.build(context)
           when :delete_archive_rule
             Aws::AccessAnalyzer::Endpoints::DeleteArchiveRule.build(context)
+          when :generate_finding_recommendation
+            Aws::AccessAnalyzer::Endpoints::GenerateFindingRecommendation.build(context)
           when :get_access_preview
             Aws::AccessAnalyzer::Endpoints::GetAccessPreview.build(context)
           when :get_analyzed_resource
@@ -86,6 +90,8 @@ module Aws::AccessAnalyzer
             Aws::AccessAnalyzer::Endpoints::GetArchiveRule.build(context)
           when :get_finding
             Aws::AccessAnalyzer::Endpoints::GetFinding.build(context)
+          when :get_finding_recommendation
+            Aws::AccessAnalyzer::Endpoints::GetFindingRecommendation.build(context)
           when :get_finding_v2
             Aws::AccessAnalyzer::Endpoints::GetFindingV2.build(context)
           when :get_generated_policy

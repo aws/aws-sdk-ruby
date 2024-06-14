@@ -1974,8 +1974,7 @@ module Aws::Redshift
     #   about node types, go to [ Working with Clusters][1] in the *Amazon
     #   Redshift Cluster Management Guide*.
     #
-    #   Valid Values: `ds2.xlarge` \| `ds2.8xlarge` \| `dc1.large` \|
-    #   `dc1.8xlarge` \| `dc2.large` \| `dc2.8xlarge` \| `ra3.xlplus` \|
+    #   Valid Values: `dc2.large` \| `dc2.8xlarge` \| `ra3.xlplus` \|
     #   `ra3.4xlarge` \| `ra3.16xlarge`
     #
     #
@@ -2145,8 +2144,8 @@ module Aws::Redshift
     #     ra3 nodes, it isn't required that you change the port to these
     #     ranges.)
     #
-    #   * For clusters with ds2 or dc2 nodes - Select a port within the
-    #     range `1150-65535`.
+    #   * For clusters with dc2 nodes - Select a port within the range
+    #     `1150-65535`.
     #   @return [Integer]
     #
     # @!attribute [rw] cluster_version
@@ -7898,8 +7897,7 @@ module Aws::Redshift
     #   Clusters in Amazon Redshift][1] in the *Amazon Redshift Cluster
     #   Management Guide*.
     #
-    #   Valid Values: `ds2.xlarge` \| `ds2.8xlarge` \| `dc1.large` \|
-    #   `dc1.8xlarge` \| `dc2.large` \| `dc2.8xlarge` \| `ra3.xlplus` \|
+    #   Valid Values: `dc2.large` \| `dc2.8xlarge` \| `ra3.xlplus` \|
     #   `ra3.4xlarge` \| `ra3.16xlarge`
     #
     #
@@ -8171,8 +8169,8 @@ module Aws::Redshift
     #     ra3 nodes, it isn't required that you change the port to these
     #     ranges.)
     #
-    #   * For clusters with ds2 or dc2 nodes - Select a port within the
-    #     range `1150-65535`.
+    #   * For clusters with dc2 nodes - Select a port within the range
+    #     `1150-65535`.
     #   @return [Integer]
     #
     # @!attribute [rw] manage_master_password
@@ -8783,7 +8781,7 @@ module Aws::Redshift
     # A list of node configurations.
     #
     # @!attribute [rw] node_type
-    #   The node type, such as, "ds2.8xlarge".
+    #   The node type, such as, "ra3.4xlarge".
     #   @return [String]
     #
     # @!attribute [rw] number_of_nodes
@@ -9700,7 +9698,7 @@ module Aws::Redshift
     #   @return [String]
     #
     # @!attribute [rw] source_reserved_node_type
-    #   The source reserved-node type, for example ds2.xlarge.
+    #   The source reserved-node type, for example ra3.4xlarge.
     #   @return [String]
     #
     # @!attribute [rw] source_reserved_node_count
@@ -10168,9 +10166,9 @@ module Aws::Redshift
     #
     #   Default: The same port as the original cluster.
     #
-    #   Valid values: For clusters with ds2 or dc2 nodes, must be within the
-    #   range `1150`-`65535`. For clusters with ra3 nodes, must be within
-    #   the ranges `5431`-`5455` or `8191`-`8215`.
+    #   Valid values: For clusters with DC2 nodes, must be within the range
+    #   `1150`-`65535`. For clusters with ra3 nodes, must be within the
+    #   ranges `5431`-`5455` or `8191`-`8215`.
     #   @return [Integer]
     #
     # @!attribute [rw] availability_zone
@@ -10318,18 +10316,11 @@ module Aws::Redshift
     # @!attribute [rw] node_type
     #   The node type that the restored cluster will be provisioned with.
     #
-    #   Default: The node type of the cluster from which the snapshot was
-    #   taken. You can modify this if you are using any DS node type. In
-    #   that case, you can choose to restore into another DS node type of
-    #   the same size. For example, you can restore ds1.8xlarge into
-    #   ds2.8xlarge, or ds1.xlarge into ds2.xlarge. If you have a DC
-    #   instance type, you must restore into that same instance type and
-    #   size. In other words, you can only restore a dc1.large instance type
-    #   into another dc1.large instance type or dc2.large instance type. You
-    #   can't restore dc1.8xlarge to dc2.8xlarge. First restore to a
-    #   dc1.8xlarge cluster, then resize to a dc2.8large cluster. For more
-    #   information about node types, see [ About Clusters and Nodes][1] in
-    #   the *Amazon Redshift Cluster Management Guide*.
+    #   If you have a DC instance type, you must restore into that same
+    #   instance type and size. In other words, you can only restore a
+    #   dc2.large node type into another dc2 type. For more information
+    #   about node types, see [ About Clusters and Nodes][1] in the *Amazon
+    #   Redshift Cluster Management Guide*.
     #
     #
     #
@@ -10512,31 +10503,30 @@ module Aws::Redshift
     # @!attribute [rw] current_restore_rate_in_mega_bytes_per_second
     #   The number of megabytes per second being transferred from the backup
     #   storage. Returns the average rate for a completed backup. This field
-    #   is only updated when you restore to DC2 and DS2 node types.
+    #   is only updated when you restore to DC2 node types.
     #   @return [Float]
     #
     # @!attribute [rw] snapshot_size_in_mega_bytes
     #   The size of the set of snapshot data used to restore the cluster.
-    #   This field is only updated when you restore to DC2 and DS2 node
-    #   types.
+    #   This field is only updated when you restore to DC2 node types.
     #   @return [Integer]
     #
     # @!attribute [rw] progress_in_mega_bytes
     #   The number of megabytes that have been transferred from snapshot
-    #   storage. This field is only updated when you restore to DC2 and DS2
-    #   node types.
+    #   storage. This field is only updated when you restore to DC2 node
+    #   types.
     #   @return [Integer]
     #
     # @!attribute [rw] elapsed_time_in_seconds
     #   The amount of time an in-progress restore has been running, or the
     #   amount of time it took a completed restore to finish. This field is
-    #   only updated when you restore to DC2 and DS2 node types.
+    #   only updated when you restore to DC2 node types.
     #   @return [Integer]
     #
     # @!attribute [rw] estimated_time_to_completion_in_seconds
     #   The estimate of the time remaining before the restore will complete.
     #   Returns 0 for a completed restore. This field is only updated when
-    #   you restore to DC2 and DS2 node types.
+    #   you restore to DC2 node types.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RestoreStatus AWS API Documentation
@@ -10872,7 +10862,7 @@ module Aws::Redshift
     #   A JSON format string of the Amazon Redshift API operation with input
     #   parameters.
     #
-    #   "`\{"ResizeCluster":\{"NodeType":"ds2.8xlarge","ClusterIdentifier":"my-test-cluster","NumberOfNodes":3\}\}`".
+    #   "`\{"ResizeCluster":\{"NodeType":"ra3.4xlarge","ClusterIdentifier":"my-test-cluster","NumberOfNodes":3\}\}`".
     #   @return [Types::ScheduledActionType]
     #
     # @!attribute [rw] schedule

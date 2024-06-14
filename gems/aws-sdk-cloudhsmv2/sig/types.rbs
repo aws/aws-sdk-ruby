@@ -20,6 +20,8 @@ module Aws::CloudHSMV2
       attr_accessor source_cluster: ::String
       attr_accessor delete_timestamp: ::Time
       attr_accessor tag_list: ::Array[Types::Tag]
+      attr_accessor hsm_type: ::String
+      attr_accessor mode: ("FIPS" | "NON_FIPS")
       SENSITIVE: []
     end
 
@@ -84,6 +86,7 @@ module Aws::CloudHSMV2
       attr_accessor vpc_id: ::String
       attr_accessor certificates: Types::Certificates
       attr_accessor tag_list: ::Array[Types::Tag]
+      attr_accessor mode: ("FIPS" | "NON_FIPS")
       SENSITIVE: []
     end
 
@@ -105,6 +108,7 @@ module Aws::CloudHSMV2
       attr_accessor source_backup_id: ::String
       attr_accessor subnet_ids: ::Array[::String]
       attr_accessor tag_list: ::Array[Types::Tag]
+      attr_accessor mode: ("FIPS" | "NON_FIPS")
       SENSITIVE: []
     end
 

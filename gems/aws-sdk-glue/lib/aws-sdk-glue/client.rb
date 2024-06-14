@@ -7078,6 +7078,7 @@ module Aws::Glue
     #   resp.timeout #=> Integer
     #   resp.additional_run_options.cloud_watch_metrics_enabled #=> Boolean
     #   resp.additional_run_options.results_s3_prefix #=> String
+    #   resp.additional_run_options.composite_rule_evaluation_method #=> String, one of "COLUMN", "ROW"
     #   resp.status #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT"
     #   resp.error_string #=> String
     #   resp.started_on #=> Time
@@ -14902,6 +14903,7 @@ module Aws::Glue
     #     additional_run_options: {
     #       cloud_watch_metrics_enabled: false,
     #       results_s3_prefix: "UriString",
+    #       composite_rule_evaluation_method: "COLUMN", # accepts COLUMN, ROW
     #     },
     #     ruleset_names: ["NameString"], # required
     #     additional_data_sources: {
@@ -17312,7 +17314,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.177.0'
+      context[:gem_version] = '1.178.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

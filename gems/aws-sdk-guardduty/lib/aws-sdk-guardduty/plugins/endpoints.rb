@@ -70,6 +70,8 @@ module Aws::GuardDuty
             Aws::GuardDuty::Endpoints::CreateFilter.build(context)
           when :create_ip_set
             Aws::GuardDuty::Endpoints::CreateIPSet.build(context)
+          when :create_malware_protection_plan
+            Aws::GuardDuty::Endpoints::CreateMalwareProtectionPlan.build(context)
           when :create_members
             Aws::GuardDuty::Endpoints::CreateMembers.build(context)
           when :create_publishing_destination
@@ -88,6 +90,8 @@ module Aws::GuardDuty
             Aws::GuardDuty::Endpoints::DeleteIPSet.build(context)
           when :delete_invitations
             Aws::GuardDuty::Endpoints::DeleteInvitations.build(context)
+          when :delete_malware_protection_plan
+            Aws::GuardDuty::Endpoints::DeleteMalwareProtectionPlan.build(context)
           when :delete_members
             Aws::GuardDuty::Endpoints::DeleteMembers.build(context)
           when :delete_publishing_destination
@@ -126,6 +130,8 @@ module Aws::GuardDuty
             Aws::GuardDuty::Endpoints::GetIPSet.build(context)
           when :get_invitations_count
             Aws::GuardDuty::Endpoints::GetInvitationsCount.build(context)
+          when :get_malware_protection_plan
+            Aws::GuardDuty::Endpoints::GetMalwareProtectionPlan.build(context)
           when :get_malware_scan_settings
             Aws::GuardDuty::Endpoints::GetMalwareScanSettings.build(context)
           when :get_master_account
@@ -156,6 +162,8 @@ module Aws::GuardDuty
             Aws::GuardDuty::Endpoints::ListIPSets.build(context)
           when :list_invitations
             Aws::GuardDuty::Endpoints::ListInvitations.build(context)
+          when :list_malware_protection_plans
+            Aws::GuardDuty::Endpoints::ListMalwareProtectionPlans.build(context)
           when :list_members
             Aws::GuardDuty::Endpoints::ListMembers.build(context)
           when :list_organization_admin_accounts
@@ -186,6 +194,8 @@ module Aws::GuardDuty
             Aws::GuardDuty::Endpoints::UpdateFindingsFeedback.build(context)
           when :update_ip_set
             Aws::GuardDuty::Endpoints::UpdateIPSet.build(context)
+          when :update_malware_protection_plan
+            Aws::GuardDuty::Endpoints::UpdateMalwareProtectionPlan.build(context)
           when :update_malware_scan_settings
             Aws::GuardDuty::Endpoints::UpdateMalwareScanSettings.build(context)
           when :update_member_detectors

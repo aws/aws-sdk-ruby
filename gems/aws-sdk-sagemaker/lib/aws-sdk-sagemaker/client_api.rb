@@ -103,6 +103,9 @@ module Aws::SageMaker
     AttributeName = Shapes::StringShape.new(name: 'AttributeName')
     AttributeNames = Shapes::ListShape.new(name: 'AttributeNames')
     AuthMode = Shapes::StringShape.new(name: 'AuthMode')
+    AuthenticationRequestExtraParams = Shapes::MapShape.new(name: 'AuthenticationRequestExtraParams')
+    AuthenticationRequestExtraParamsKey = Shapes::StringShape.new(name: 'AuthenticationRequestExtraParamsKey')
+    AuthenticationRequestExtraParamsValue = Shapes::StringShape.new(name: 'AuthenticationRequestExtraParamsValue')
     AutoGenerateEndpointName = Shapes::BooleanShape.new(name: 'AutoGenerateEndpointName')
     AutoMLAlgorithm = Shapes::StringShape.new(name: 'AutoMLAlgorithm')
     AutoMLAlgorithmConfig = Shapes::StructureShape.new(name: 'AutoMLAlgorithmConfig')
@@ -1862,6 +1865,7 @@ module Aws::SageMaker
     ScheduleConfig = Shapes::StructureShape.new(name: 'ScheduleConfig')
     ScheduleExpression = Shapes::StringShape.new(name: 'ScheduleExpression')
     ScheduleStatus = Shapes::StringShape.new(name: 'ScheduleStatus')
+    Scope = Shapes::StringShape.new(name: 'Scope')
     SearchExpression = Shapes::StructureShape.new(name: 'SearchExpression')
     SearchExpressionList = Shapes::ListShape.new(name: 'SearchExpressionList')
     SearchRecord = Shapes::StructureShape.new(name: 'SearchRecord')
@@ -2480,6 +2484,9 @@ module Aws::SageMaker
     AthenaDatasetDefinition.struct_class = Types::AthenaDatasetDefinition
 
     AttributeNames.member = Shapes::ShapeRef.new(shape: AttributeName)
+
+    AuthenticationRequestExtraParams.key = Shapes::ShapeRef.new(shape: AuthenticationRequestExtraParamsKey)
+    AuthenticationRequestExtraParams.value = Shapes::ShapeRef.new(shape: AuthenticationRequestExtraParamsValue)
 
     AutoMLAlgorithmConfig.add_member(:auto_ml_algorithms, Shapes::ShapeRef.new(shape: AutoMLAlgorithms, required: true, location_name: "AutoMLAlgorithms"))
     AutoMLAlgorithmConfig.struct_class = Types::AutoMLAlgorithmConfig
@@ -6981,6 +6988,7 @@ module Aws::SageMaker
     ListModelPackageGroupsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListModelPackageGroupsInput.add_member(:sort_by, Shapes::ShapeRef.new(shape: ModelPackageGroupSortBy, location_name: "SortBy"))
     ListModelPackageGroupsInput.add_member(:sort_order, Shapes::ShapeRef.new(shape: SortOrder, location_name: "SortOrder"))
+    ListModelPackageGroupsInput.add_member(:cross_account_filter_option, Shapes::ShapeRef.new(shape: CrossAccountFilterOption, location_name: "CrossAccountFilterOption"))
     ListModelPackageGroupsInput.struct_class = Types::ListModelPackageGroupsInput
 
     ListModelPackageGroupsOutput.add_member(:model_package_group_summary_list, Shapes::ShapeRef.new(shape: ModelPackageGroupSummaryList, required: true, location_name: "ModelPackageGroupSummaryList"))
@@ -8045,6 +8053,8 @@ module Aws::SageMaker
     OidcConfig.add_member(:user_info_endpoint, Shapes::ShapeRef.new(shape: OidcEndpoint, required: true, location_name: "UserInfoEndpoint"))
     OidcConfig.add_member(:logout_endpoint, Shapes::ShapeRef.new(shape: OidcEndpoint, required: true, location_name: "LogoutEndpoint"))
     OidcConfig.add_member(:jwks_uri, Shapes::ShapeRef.new(shape: OidcEndpoint, required: true, location_name: "JwksUri"))
+    OidcConfig.add_member(:scope, Shapes::ShapeRef.new(shape: Scope, location_name: "Scope"))
+    OidcConfig.add_member(:authentication_request_extra_params, Shapes::ShapeRef.new(shape: AuthenticationRequestExtraParams, location_name: "AuthenticationRequestExtraParams"))
     OidcConfig.struct_class = Types::OidcConfig
 
     OidcConfigForResponse.add_member(:client_id, Shapes::ShapeRef.new(shape: ClientId, location_name: "ClientId"))
@@ -8054,6 +8064,8 @@ module Aws::SageMaker
     OidcConfigForResponse.add_member(:user_info_endpoint, Shapes::ShapeRef.new(shape: OidcEndpoint, location_name: "UserInfoEndpoint"))
     OidcConfigForResponse.add_member(:logout_endpoint, Shapes::ShapeRef.new(shape: OidcEndpoint, location_name: "LogoutEndpoint"))
     OidcConfigForResponse.add_member(:jwks_uri, Shapes::ShapeRef.new(shape: OidcEndpoint, location_name: "JwksUri"))
+    OidcConfigForResponse.add_member(:scope, Shapes::ShapeRef.new(shape: Scope, location_name: "Scope"))
+    OidcConfigForResponse.add_member(:authentication_request_extra_params, Shapes::ShapeRef.new(shape: AuthenticationRequestExtraParams, location_name: "AuthenticationRequestExtraParams"))
     OidcConfigForResponse.struct_class = Types::OidcConfigForResponse
 
     OidcMemberDefinition.add_member(:groups, Shapes::ShapeRef.new(shape: Groups, location_name: "Groups"))

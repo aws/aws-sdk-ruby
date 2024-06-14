@@ -63,6 +63,8 @@ module Aws::KMS
     DeleteCustomKeyStoreResponse = Shapes::StructureShape.new(name: 'DeleteCustomKeyStoreResponse')
     DeleteImportedKeyMaterialRequest = Shapes::StructureShape.new(name: 'DeleteImportedKeyMaterialRequest')
     DependencyTimeoutException = Shapes::StructureShape.new(name: 'DependencyTimeoutException')
+    DeriveSharedSecretRequest = Shapes::StructureShape.new(name: 'DeriveSharedSecretRequest')
+    DeriveSharedSecretResponse = Shapes::StructureShape.new(name: 'DeriveSharedSecretResponse')
     DescribeCustomKeyStoresRequest = Shapes::StructureShape.new(name: 'DescribeCustomKeyStoresRequest')
     DescribeCustomKeyStoresResponse = Shapes::StructureShape.new(name: 'DescribeCustomKeyStoresResponse')
     DescribeKeyRequest = Shapes::StructureShape.new(name: 'DescribeKeyRequest')
@@ -132,6 +134,8 @@ module Aws::KMS
     KMSInvalidMacException = Shapes::StructureShape.new(name: 'KMSInvalidMacException')
     KMSInvalidSignatureException = Shapes::StructureShape.new(name: 'KMSInvalidSignatureException')
     KMSInvalidStateException = Shapes::StructureShape.new(name: 'KMSInvalidStateException')
+    KeyAgreementAlgorithmSpec = Shapes::StringShape.new(name: 'KeyAgreementAlgorithmSpec')
+    KeyAgreementAlgorithmSpecList = Shapes::ListShape.new(name: 'KeyAgreementAlgorithmSpecList')
     KeyEncryptionMechanism = Shapes::StringShape.new(name: 'KeyEncryptionMechanism')
     KeyIdType = Shapes::StringShape.new(name: 'KeyIdType')
     KeyList = Shapes::ListShape.new(name: 'KeyList')
@@ -386,6 +390,21 @@ module Aws::KMS
     DependencyTimeoutException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessageType, location_name: "message"))
     DependencyTimeoutException.struct_class = Types::DependencyTimeoutException
 
+    DeriveSharedSecretRequest.add_member(:key_id, Shapes::ShapeRef.new(shape: KeyIdType, required: true, location_name: "KeyId"))
+    DeriveSharedSecretRequest.add_member(:key_agreement_algorithm, Shapes::ShapeRef.new(shape: KeyAgreementAlgorithmSpec, required: true, location_name: "KeyAgreementAlgorithm"))
+    DeriveSharedSecretRequest.add_member(:public_key, Shapes::ShapeRef.new(shape: PublicKeyType, required: true, location_name: "PublicKey"))
+    DeriveSharedSecretRequest.add_member(:grant_tokens, Shapes::ShapeRef.new(shape: GrantTokenList, location_name: "GrantTokens"))
+    DeriveSharedSecretRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: NullableBooleanType, location_name: "DryRun"))
+    DeriveSharedSecretRequest.add_member(:recipient, Shapes::ShapeRef.new(shape: RecipientInfo, location_name: "Recipient"))
+    DeriveSharedSecretRequest.struct_class = Types::DeriveSharedSecretRequest
+
+    DeriveSharedSecretResponse.add_member(:key_id, Shapes::ShapeRef.new(shape: KeyIdType, location_name: "KeyId"))
+    DeriveSharedSecretResponse.add_member(:shared_secret, Shapes::ShapeRef.new(shape: PlaintextType, location_name: "SharedSecret"))
+    DeriveSharedSecretResponse.add_member(:ciphertext_for_recipient, Shapes::ShapeRef.new(shape: CiphertextType, location_name: "CiphertextForRecipient"))
+    DeriveSharedSecretResponse.add_member(:key_agreement_algorithm, Shapes::ShapeRef.new(shape: KeyAgreementAlgorithmSpec, location_name: "KeyAgreementAlgorithm"))
+    DeriveSharedSecretResponse.add_member(:key_origin, Shapes::ShapeRef.new(shape: OriginType, location_name: "KeyOrigin"))
+    DeriveSharedSecretResponse.struct_class = Types::DeriveSharedSecretResponse
+
     DescribeCustomKeyStoresRequest.add_member(:custom_key_store_id, Shapes::ShapeRef.new(shape: CustomKeyStoreIdType, location_name: "CustomKeyStoreId"))
     DescribeCustomKeyStoresRequest.add_member(:custom_key_store_name, Shapes::ShapeRef.new(shape: CustomKeyStoreNameType, location_name: "CustomKeyStoreName"))
     DescribeCustomKeyStoresRequest.add_member(:limit, Shapes::ShapeRef.new(shape: LimitType, location_name: "Limit"))
@@ -566,6 +585,7 @@ module Aws::KMS
     GetPublicKeyResponse.add_member(:key_usage, Shapes::ShapeRef.new(shape: KeyUsageType, location_name: "KeyUsage"))
     GetPublicKeyResponse.add_member(:encryption_algorithms, Shapes::ShapeRef.new(shape: EncryptionAlgorithmSpecList, location_name: "EncryptionAlgorithms"))
     GetPublicKeyResponse.add_member(:signing_algorithms, Shapes::ShapeRef.new(shape: SigningAlgorithmSpecList, location_name: "SigningAlgorithms"))
+    GetPublicKeyResponse.add_member(:key_agreement_algorithms, Shapes::ShapeRef.new(shape: KeyAgreementAlgorithmSpecList, location_name: "KeyAgreementAlgorithms"))
     GetPublicKeyResponse.struct_class = Types::GetPublicKeyResponse
 
     GrantConstraints.add_member(:encryption_context_subset, Shapes::ShapeRef.new(shape: EncryptionContextType, location_name: "EncryptionContextSubset"))
@@ -643,6 +663,8 @@ module Aws::KMS
     KMSInvalidStateException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessageType, location_name: "message"))
     KMSInvalidStateException.struct_class = Types::KMSInvalidStateException
 
+    KeyAgreementAlgorithmSpecList.member = Shapes::ShapeRef.new(shape: KeyAgreementAlgorithmSpec)
+
     KeyList.member = Shapes::ShapeRef.new(shape: KeyListEntry)
 
     KeyListEntry.add_member(:key_id, Shapes::ShapeRef.new(shape: KeyIdType, location_name: "KeyId"))
@@ -668,6 +690,7 @@ module Aws::KMS
     KeyMetadata.add_member(:key_spec, Shapes::ShapeRef.new(shape: KeySpec, location_name: "KeySpec"))
     KeyMetadata.add_member(:encryption_algorithms, Shapes::ShapeRef.new(shape: EncryptionAlgorithmSpecList, location_name: "EncryptionAlgorithms"))
     KeyMetadata.add_member(:signing_algorithms, Shapes::ShapeRef.new(shape: SigningAlgorithmSpecList, location_name: "SigningAlgorithms"))
+    KeyMetadata.add_member(:key_agreement_algorithms, Shapes::ShapeRef.new(shape: KeyAgreementAlgorithmSpecList, location_name: "KeyAgreementAlgorithms"))
     KeyMetadata.add_member(:multi_region, Shapes::ShapeRef.new(shape: NullableBooleanType, location_name: "MultiRegion"))
     KeyMetadata.add_member(:multi_region_configuration, Shapes::ShapeRef.new(shape: MultiRegionConfiguration, location_name: "MultiRegionConfiguration"))
     KeyMetadata.add_member(:pending_deletion_window_in_days, Shapes::ShapeRef.new(shape: PendingWindowInDaysType, location_name: "PendingDeletionWindowInDays"))
@@ -990,6 +1013,7 @@ module Aws::KMS
 
       api.metadata = {
         "apiVersion" => "2014-11-01",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "kms",
         "jsonVersion" => "1.1",
         "protocol" => "json",
@@ -1161,6 +1185,23 @@ module Aws::KMS
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: KMSInternalException)
         o.errors << Shapes::ShapeRef.new(shape: KMSInvalidStateException)
+      end)
+
+      api.add_operation(:derive_shared_secret, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeriveSharedSecret"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeriveSharedSecretRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeriveSharedSecretResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: DisabledException)
+        o.errors << Shapes::ShapeRef.new(shape: KeyUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: DependencyTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidGrantTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidKeyUsageException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSInternalException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSInvalidStateException)
+        o.errors << Shapes::ShapeRef.new(shape: DryRunOperationException)
       end)
 
       api.add_operation(:describe_custom_key_stores, Seahorse::Model::Operation.new.tap do |o|

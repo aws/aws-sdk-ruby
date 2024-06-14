@@ -29,6 +29,7 @@ module Aws::MediaPackageV2
       attr_accessor created_at: ::Time
       attr_accessor modified_at: ::Time
       attr_accessor description: ::String
+      attr_accessor input_type: ("HLS" | "CMAF")
       SENSITIVE: []
     end
 
@@ -62,6 +63,7 @@ module Aws::MediaPackageV2
       attr_accessor channel_group_name: ::String
       attr_accessor channel_name: ::String
       attr_accessor client_token: ::String
+      attr_accessor input_type: ("HLS" | "CMAF")
       attr_accessor description: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
@@ -75,6 +77,7 @@ module Aws::MediaPackageV2
       attr_accessor modified_at: ::Time
       attr_accessor description: ::String
       attr_accessor ingest_endpoints: ::Array[Types::IngestEndpoint]
+      attr_accessor input_type: ("HLS" | "CMAF")
       attr_accessor etag: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
@@ -127,6 +130,7 @@ module Aws::MediaPackageV2
       attr_accessor hls_manifests: ::Array[Types::CreateHlsManifestConfiguration]
       attr_accessor low_latency_hls_manifests: ::Array[Types::CreateLowLatencyHlsManifestConfiguration]
       attr_accessor dash_manifests: ::Array[Types::CreateDashManifestConfiguration]
+      attr_accessor force_endpoint_error_configuration: Types::ForceEndpointErrorConfiguration
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
@@ -145,6 +149,7 @@ module Aws::MediaPackageV2
       attr_accessor hls_manifests: ::Array[Types::GetHlsManifestConfiguration]
       attr_accessor low_latency_hls_manifests: ::Array[Types::GetLowLatencyHlsManifestConfiguration]
       attr_accessor dash_manifests: ::Array[Types::GetDashManifestConfiguration]
+      attr_accessor force_endpoint_error_configuration: Types::ForceEndpointErrorConfiguration
       attr_accessor etag: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
@@ -230,6 +235,11 @@ module Aws::MediaPackageV2
       SENSITIVE: []
     end
 
+    class ForceEndpointErrorConfiguration
+      attr_accessor endpoint_error_conditions: ::Array[("STALE_MANIFEST" | "INCOMPLETE_MANIFEST" | "MISSING_DRM_KEY" | "SLATE_INPUT")]
+      SENSITIVE: []
+    end
+
     class GetChannelGroupRequest
       attr_accessor channel_group_name: ::String
       SENSITIVE: []
@@ -274,6 +284,7 @@ module Aws::MediaPackageV2
       attr_accessor modified_at: ::Time
       attr_accessor description: ::String
       attr_accessor ingest_endpoints: ::Array[Types::IngestEndpoint]
+      attr_accessor input_type: ("HLS" | "CMAF")
       attr_accessor etag: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
@@ -352,9 +363,10 @@ module Aws::MediaPackageV2
       attr_accessor startover_window_seconds: ::Integer
       attr_accessor hls_manifests: ::Array[Types::GetHlsManifestConfiguration]
       attr_accessor low_latency_hls_manifests: ::Array[Types::GetLowLatencyHlsManifestConfiguration]
+      attr_accessor dash_manifests: ::Array[Types::GetDashManifestConfiguration]
+      attr_accessor force_endpoint_error_configuration: Types::ForceEndpointErrorConfiguration
       attr_accessor etag: ::String
       attr_accessor tags: ::Hash[::String, ::String]
-      attr_accessor dash_manifests: ::Array[Types::GetDashManifestConfiguration]
       SENSITIVE: []
     end
 
@@ -450,6 +462,7 @@ module Aws::MediaPackageV2
       attr_accessor hls_manifests: ::Array[Types::ListHlsManifestConfiguration]
       attr_accessor low_latency_hls_manifests: ::Array[Types::ListLowLatencyHlsManifestConfiguration]
       attr_accessor dash_manifests: ::Array[Types::ListDashManifestConfiguration]
+      attr_accessor force_endpoint_error_configuration: Types::ForceEndpointErrorConfiguration
       SENSITIVE: []
     end
 
@@ -572,6 +585,7 @@ module Aws::MediaPackageV2
       attr_accessor modified_at: ::Time
       attr_accessor description: ::String
       attr_accessor ingest_endpoints: ::Array[Types::IngestEndpoint]
+      attr_accessor input_type: ("HLS" | "CMAF")
       attr_accessor etag: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
@@ -588,6 +602,7 @@ module Aws::MediaPackageV2
       attr_accessor hls_manifests: ::Array[Types::CreateHlsManifestConfiguration]
       attr_accessor low_latency_hls_manifests: ::Array[Types::CreateLowLatencyHlsManifestConfiguration]
       attr_accessor dash_manifests: ::Array[Types::CreateDashManifestConfiguration]
+      attr_accessor force_endpoint_error_configuration: Types::ForceEndpointErrorConfiguration
       attr_accessor etag: ::String
       SENSITIVE: []
     end
@@ -605,6 +620,7 @@ module Aws::MediaPackageV2
       attr_accessor startover_window_seconds: ::Integer
       attr_accessor hls_manifests: ::Array[Types::GetHlsManifestConfiguration]
       attr_accessor low_latency_hls_manifests: ::Array[Types::GetLowLatencyHlsManifestConfiguration]
+      attr_accessor force_endpoint_error_configuration: Types::ForceEndpointErrorConfiguration
       attr_accessor etag: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor dash_manifests: ::Array[Types::GetDashManifestConfiguration]
@@ -613,7 +629,7 @@ module Aws::MediaPackageV2
 
     class ValidationException
       attr_accessor message: ::String
-      attr_accessor validation_exception_type: ("CONTAINER_TYPE_IMMUTABLE" | "INVALID_PAGINATION_TOKEN" | "INVALID_PAGINATION_MAX_RESULTS" | "INVALID_POLICY" | "INVALID_ROLE_ARN" | "MANIFEST_NAME_COLLISION" | "ENCRYPTION_METHOD_CONTAINER_TYPE_MISMATCH" | "CENC_IV_INCOMPATIBLE" | "ENCRYPTION_CONTRACT_WITHOUT_AUDIO_RENDITION_INCOMPATIBLE" | "ENCRYPTION_CONTRACT_UNENCRYPTED" | "ENCRYPTION_CONTRACT_SHARED" | "NUM_MANIFESTS_LOW" | "NUM_MANIFESTS_HIGH" | "MANIFEST_DRM_SYSTEMS_INCOMPATIBLE" | "DRM_SYSTEMS_ENCRYPTION_METHOD_INCOMPATIBLE" | "ROLE_ARN_NOT_ASSUMABLE" | "ROLE_ARN_LENGTH_OUT_OF_RANGE" | "ROLE_ARN_INVALID_FORMAT" | "URL_INVALID" | "URL_SCHEME" | "URL_USER_INFO" | "URL_PORT" | "URL_UNKNOWN_HOST" | "URL_LOCAL_ADDRESS" | "URL_LOOPBACK_ADDRESS" | "URL_LINK_LOCAL_ADDRESS" | "URL_MULTICAST_ADDRESS" | "MEMBER_INVALID" | "MEMBER_MISSING" | "MEMBER_MIN_VALUE" | "MEMBER_MAX_VALUE" | "MEMBER_MIN_LENGTH" | "MEMBER_MAX_LENGTH" | "MEMBER_INVALID_ENUM_VALUE" | "MEMBER_DOES_NOT_MATCH_PATTERN" | "INVALID_MANIFEST_FILTER" | "INVALID_TIME_DELAY_SECONDS" | "END_TIME_EARLIER_THAN_START_TIME" | "TS_CONTAINER_TYPE_WITH_DASH_MANIFEST" | "DIRECT_MODE_WITH_TIMING_SOURCE" | "NONE_MODE_WITH_TIMING_SOURCE" | "TIMING_SOURCE_MISSING" | "UPDATE_PERIOD_SMALLER_THAN_SEGMENT_DURATION" | "PERIOD_TRIGGERS_NONE_SPECIFIED_WITH_ADDITIONAL_VALUES" | "DRM_SIGNALING_MISMATCH_SEGMENT_ENCRYPTION_STATUS")
+      attr_accessor validation_exception_type: ("CONTAINER_TYPE_IMMUTABLE" | "INVALID_PAGINATION_TOKEN" | "INVALID_PAGINATION_MAX_RESULTS" | "INVALID_POLICY" | "INVALID_ROLE_ARN" | "MANIFEST_NAME_COLLISION" | "ENCRYPTION_METHOD_CONTAINER_TYPE_MISMATCH" | "CENC_IV_INCOMPATIBLE" | "ENCRYPTION_CONTRACT_WITHOUT_AUDIO_RENDITION_INCOMPATIBLE" | "ENCRYPTION_CONTRACT_UNENCRYPTED" | "ENCRYPTION_CONTRACT_SHARED" | "NUM_MANIFESTS_LOW" | "NUM_MANIFESTS_HIGH" | "MANIFEST_DRM_SYSTEMS_INCOMPATIBLE" | "DRM_SYSTEMS_ENCRYPTION_METHOD_INCOMPATIBLE" | "ROLE_ARN_NOT_ASSUMABLE" | "ROLE_ARN_LENGTH_OUT_OF_RANGE" | "ROLE_ARN_INVALID_FORMAT" | "URL_INVALID" | "URL_SCHEME" | "URL_USER_INFO" | "URL_PORT" | "URL_UNKNOWN_HOST" | "URL_LOCAL_ADDRESS" | "URL_LOOPBACK_ADDRESS" | "URL_LINK_LOCAL_ADDRESS" | "URL_MULTICAST_ADDRESS" | "MEMBER_INVALID" | "MEMBER_MISSING" | "MEMBER_MIN_VALUE" | "MEMBER_MAX_VALUE" | "MEMBER_MIN_LENGTH" | "MEMBER_MAX_LENGTH" | "MEMBER_INVALID_ENUM_VALUE" | "MEMBER_DOES_NOT_MATCH_PATTERN" | "INVALID_MANIFEST_FILTER" | "INVALID_TIME_DELAY_SECONDS" | "END_TIME_EARLIER_THAN_START_TIME" | "TS_CONTAINER_TYPE_WITH_DASH_MANIFEST" | "DIRECT_MODE_WITH_TIMING_SOURCE" | "NONE_MODE_WITH_TIMING_SOURCE" | "TIMING_SOURCE_MISSING" | "UPDATE_PERIOD_SMALLER_THAN_SEGMENT_DURATION" | "PERIOD_TRIGGERS_NONE_SPECIFIED_WITH_ADDITIONAL_VALUES" | "DRM_SIGNALING_MISMATCH_SEGMENT_ENCRYPTION_STATUS" | "ONLY_CMAF_INPUT_TYPE_ALLOW_FORCE_ENDPOINT_ERROR_CONFIGURATION" | "SOURCE_DISRUPTIONS_ENABLED_INCORRECTLY")
       SENSITIVE: []
     end
   end

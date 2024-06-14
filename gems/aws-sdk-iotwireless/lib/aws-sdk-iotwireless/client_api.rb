@@ -2473,6 +2473,7 @@ module Aws::IoTWireless
 
       api.metadata = {
         "apiVersion" => "2020-11-22",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "api.iotwireless",
         "protocol" => "rest-json",
         "protocols" => ["rest-json"],

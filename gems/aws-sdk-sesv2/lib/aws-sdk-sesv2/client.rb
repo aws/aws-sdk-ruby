@@ -588,10 +588,8 @@ module Aws::SESV2
     # Create an event destination. *Events* include message sends,
     # deliveries, opens, clicks, bounces, and complaints. *Event
     # destinations* are places that you can send information about these
-    # events to. For example, you can send event data to Amazon SNS to
-    # receive notifications when you receive bounces or complaints, or you
-    # can use Amazon Kinesis Data Firehose to stream data to Amazon S3 for
-    # long-term storage.
+    # events to. For example, you can send event data to Amazon EventBridge
+    # and associate a rule to send the event to the specified target.
     #
     # A single configuration set can include more than one event
     # destination.
@@ -631,6 +629,9 @@ module Aws::SESV2
     #       },
     #       sns_destination: {
     #         topic_arn: "AmazonResourceName", # required
+    #       },
+    #       event_bridge_destination: {
+    #         event_bus_arn: "AmazonResourceName", # required
     #       },
     #       pinpoint_destination: {
     #         application_arn: "AmazonResourceName",
@@ -1366,9 +1367,8 @@ module Aws::SESV2
     # *Events* include message sends, deliveries, opens, clicks, bounces,
     # and complaints. *Event destinations* are places that you can send
     # information about these events to. For example, you can send event
-    # data to Amazon SNS to receive notifications when you receive bounces
-    # or complaints, or you can use Amazon Kinesis Data Firehose to stream
-    # data to Amazon S3 for long-term storage.
+    # data to Amazon EventBridge and associate a rule to send the event to
+    # the specified target.
     #
     # @option params [required, String] :configuration_set_name
     #   The name of the configuration set that contains the event destination
@@ -1757,9 +1757,8 @@ module Aws::SESV2
     # *Events* include message sends, deliveries, opens, clicks, bounces,
     # and complaints. *Event destinations* are places that you can send
     # information about these events to. For example, you can send event
-    # data to Amazon SNS to receive notifications when you receive bounces
-    # or complaints, or you can use Amazon Kinesis Data Firehose to stream
-    # data to Amazon S3 for long-term storage.
+    # data to Amazon EventBridge and associate a rule to send the event to
+    # the specified target.
     #
     # @option params [required, String] :configuration_set_name
     #   The name of the configuration set that contains the event destination.
@@ -1788,6 +1787,7 @@ module Aws::SESV2
     #   resp.event_destinations[0].cloud_watch_destination.dimension_configurations[0].dimension_value_source #=> String, one of "MESSAGE_TAG", "EMAIL_HEADER", "LINK_TAG"
     #   resp.event_destinations[0].cloud_watch_destination.dimension_configurations[0].default_dimension_value #=> String
     #   resp.event_destinations[0].sns_destination.topic_arn #=> String
+    #   resp.event_destinations[0].event_bridge_destination.event_bus_arn #=> String
     #   resp.event_destinations[0].pinpoint_destination.application_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/GetConfigurationSetEventDestinations AWS API Documentation
@@ -4807,9 +4807,8 @@ module Aws::SESV2
     # *Events* include message sends, deliveries, opens, clicks, bounces,
     # and complaints. *Event destinations* are places that you can send
     # information about these events to. For example, you can send event
-    # data to Amazon SNS to receive notifications when you receive bounces
-    # or complaints, or you can use Amazon Kinesis Data Firehose to stream
-    # data to Amazon S3 for long-term storage.
+    # data to Amazon EventBridge and associate a rule to send the event to
+    # the specified target.
     #
     # @option params [required, String] :configuration_set_name
     #   The name of the configuration set that contains the event destination
@@ -4846,6 +4845,9 @@ module Aws::SESV2
     #       },
     #       sns_destination: {
     #         topic_arn: "AmazonResourceName", # required
+    #       },
+    #       event_bridge_destination: {
+    #         event_bus_arn: "AmazonResourceName", # required
     #       },
     #       pinpoint_destination: {
     #         application_arn: "AmazonResourceName",
@@ -5124,7 +5126,7 @@ module Aws::SESV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sesv2'
-      context[:gem_version] = '1.50.0'
+      context[:gem_version] = '1.51.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

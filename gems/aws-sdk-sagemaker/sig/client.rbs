@@ -3983,7 +3983,9 @@ module Aws
                                 token_endpoint: ::String,
                                 user_info_endpoint: ::String,
                                 logout_endpoint: ::String,
-                                jwks_uri: ::String
+                                jwks_uri: ::String,
+                                scope: ::String?,
+                                authentication_request_extra_params: Hash[::String, ::String]?
                               },
                               ?source_ip_config: {
                                 cidrs: Array[::String]
@@ -6731,7 +6733,8 @@ module Aws
                                        ?name_contains: ::String,
                                        ?next_token: ::String,
                                        ?sort_by: ("Name" | "CreationTime"),
-                                       ?sort_order: ("Ascending" | "Descending")
+                                       ?sort_order: ("Ascending" | "Descending"),
+                                       ?cross_account_filter_option: ("SameAccount" | "CrossAccount")
                                      ) -> _ListModelPackageGroupsResponseSuccess
                                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListModelPackageGroupsResponseSuccess
 
@@ -8964,7 +8967,9 @@ module Aws
                                 token_endpoint: ::String,
                                 user_info_endpoint: ::String,
                                 logout_endpoint: ::String,
-                                jwks_uri: ::String
+                                jwks_uri: ::String,
+                                scope: ::String?,
+                                authentication_request_extra_params: Hash[::String, ::String]?
                               },
                               ?workforce_vpc_config: {
                                 vpc_id: ::String?,

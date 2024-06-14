@@ -94,7 +94,8 @@ module Aws
                                vpc_attachment_options: {
                                  attach_to_vpc: bool,
                                  cidr_block: ::String?
-                               }?
+                               }?,
+                               vpc_endpoint_management: ("CUSTOMER" | "SERVICE")?
                              },
                              ?buffer_options: {
                                persistent_buffer_enabled: bool

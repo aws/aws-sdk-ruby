@@ -443,6 +443,7 @@ module Aws::NetworkManager
     #   resp.attachment.resource_arn #=> String
     #   resp.attachment.attachment_policy_rule_number #=> Integer
     #   resp.attachment.segment_name #=> String
+    #   resp.attachment.network_function_group_name #=> String
     #   resp.attachment.tags #=> Array
     #   resp.attachment.tags[0].key #=> String
     #   resp.attachment.tags[0].value #=> String
@@ -451,6 +452,11 @@ module Aws::NetworkManager
     #   resp.attachment.proposed_segment_change.tags[0].value #=> String
     #   resp.attachment.proposed_segment_change.attachment_policy_rule_number #=> Integer
     #   resp.attachment.proposed_segment_change.segment_name #=> String
+    #   resp.attachment.proposed_network_function_group_change.tags #=> Array
+    #   resp.attachment.proposed_network_function_group_change.tags[0].key #=> String
+    #   resp.attachment.proposed_network_function_group_change.tags[0].value #=> String
+    #   resp.attachment.proposed_network_function_group_change.attachment_policy_rule_number #=> Integer
+    #   resp.attachment.proposed_network_function_group_change.network_function_group_name #=> String
     #   resp.attachment.created_at #=> Time
     #   resp.attachment.updated_at #=> Time
     #
@@ -731,6 +737,7 @@ module Aws::NetworkManager
     #   resp.connect_attachment.attachment.resource_arn #=> String
     #   resp.connect_attachment.attachment.attachment_policy_rule_number #=> Integer
     #   resp.connect_attachment.attachment.segment_name #=> String
+    #   resp.connect_attachment.attachment.network_function_group_name #=> String
     #   resp.connect_attachment.attachment.tags #=> Array
     #   resp.connect_attachment.attachment.tags[0].key #=> String
     #   resp.connect_attachment.attachment.tags[0].value #=> String
@@ -739,6 +746,11 @@ module Aws::NetworkManager
     #   resp.connect_attachment.attachment.proposed_segment_change.tags[0].value #=> String
     #   resp.connect_attachment.attachment.proposed_segment_change.attachment_policy_rule_number #=> Integer
     #   resp.connect_attachment.attachment.proposed_segment_change.segment_name #=> String
+    #   resp.connect_attachment.attachment.proposed_network_function_group_change.tags #=> Array
+    #   resp.connect_attachment.attachment.proposed_network_function_group_change.tags[0].key #=> String
+    #   resp.connect_attachment.attachment.proposed_network_function_group_change.tags[0].value #=> String
+    #   resp.connect_attachment.attachment.proposed_network_function_group_change.attachment_policy_rule_number #=> Integer
+    #   resp.connect_attachment.attachment.proposed_network_function_group_change.network_function_group_name #=> String
     #   resp.connect_attachment.attachment.created_at #=> Time
     #   resp.connect_attachment.attachment.updated_at #=> Time
     #   resp.connect_attachment.transport_attachment_id #=> String
@@ -762,13 +774,15 @@ module Aws::NetworkManager
     #   The ID of the connection attachment.
     #
     # @option params [String] :core_network_address
-    #   A Connect peer core network address.
+    #   A Connect peer core network address. This only applies only when the
+    #   protocol is `GRE`.
     #
     # @option params [required, String] :peer_address
     #   The Connect peer address.
     #
     # @option params [Types::BgpOptions] :bgp_options
-    #   The Connect peer BGP options.
+    #   The Connect peer BGP options. This only applies only when the protocol
+    #   is `GRE`.
     #
     # @option params [Array<String>] :inside_cidr_blocks
     #   The inside IP addresses used for BGP peering.
@@ -783,7 +797,8 @@ module Aws::NetworkManager
     #   not need to pass this option.**
     #
     # @option params [String] :subnet_arn
-    #   The subnet ARN for the Connect peer.
+    #   The subnet ARN for the Connect peer. This only applies only when the
+    #   protocol is NO\_ENCAP.
     #
     # @return [Types::CreateConnectPeerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -969,6 +984,14 @@ module Aws::NetworkManager
     #   resp.core_network.segments[0].edge_locations[0] #=> String
     #   resp.core_network.segments[0].shared_segments #=> Array
     #   resp.core_network.segments[0].shared_segments[0] #=> String
+    #   resp.core_network.network_function_groups #=> Array
+    #   resp.core_network.network_function_groups[0].name #=> String
+    #   resp.core_network.network_function_groups[0].edge_locations #=> Array
+    #   resp.core_network.network_function_groups[0].edge_locations[0] #=> String
+    #   resp.core_network.network_function_groups[0].segments.send_via #=> Array
+    #   resp.core_network.network_function_groups[0].segments.send_via[0] #=> String
+    #   resp.core_network.network_function_groups[0].segments.send_to #=> Array
+    #   resp.core_network.network_function_groups[0].segments.send_to[0] #=> String
     #   resp.core_network.edges #=> Array
     #   resp.core_network.edges[0].edge_location #=> String
     #   resp.core_network.edges[0].asn #=> Integer
@@ -1338,6 +1361,7 @@ module Aws::NetworkManager
     #   resp.site_to_site_vpn_attachment.attachment.resource_arn #=> String
     #   resp.site_to_site_vpn_attachment.attachment.attachment_policy_rule_number #=> Integer
     #   resp.site_to_site_vpn_attachment.attachment.segment_name #=> String
+    #   resp.site_to_site_vpn_attachment.attachment.network_function_group_name #=> String
     #   resp.site_to_site_vpn_attachment.attachment.tags #=> Array
     #   resp.site_to_site_vpn_attachment.attachment.tags[0].key #=> String
     #   resp.site_to_site_vpn_attachment.attachment.tags[0].value #=> String
@@ -1346,6 +1370,11 @@ module Aws::NetworkManager
     #   resp.site_to_site_vpn_attachment.attachment.proposed_segment_change.tags[0].value #=> String
     #   resp.site_to_site_vpn_attachment.attachment.proposed_segment_change.attachment_policy_rule_number #=> Integer
     #   resp.site_to_site_vpn_attachment.attachment.proposed_segment_change.segment_name #=> String
+    #   resp.site_to_site_vpn_attachment.attachment.proposed_network_function_group_change.tags #=> Array
+    #   resp.site_to_site_vpn_attachment.attachment.proposed_network_function_group_change.tags[0].key #=> String
+    #   resp.site_to_site_vpn_attachment.attachment.proposed_network_function_group_change.tags[0].value #=> String
+    #   resp.site_to_site_vpn_attachment.attachment.proposed_network_function_group_change.attachment_policy_rule_number #=> Integer
+    #   resp.site_to_site_vpn_attachment.attachment.proposed_network_function_group_change.network_function_group_name #=> String
     #   resp.site_to_site_vpn_attachment.attachment.created_at #=> Time
     #   resp.site_to_site_vpn_attachment.attachment.updated_at #=> Time
     #   resp.site_to_site_vpn_attachment.vpn_connection_arn #=> String
@@ -1469,6 +1498,7 @@ module Aws::NetworkManager
     #   resp.transit_gateway_route_table_attachment.attachment.resource_arn #=> String
     #   resp.transit_gateway_route_table_attachment.attachment.attachment_policy_rule_number #=> Integer
     #   resp.transit_gateway_route_table_attachment.attachment.segment_name #=> String
+    #   resp.transit_gateway_route_table_attachment.attachment.network_function_group_name #=> String
     #   resp.transit_gateway_route_table_attachment.attachment.tags #=> Array
     #   resp.transit_gateway_route_table_attachment.attachment.tags[0].key #=> String
     #   resp.transit_gateway_route_table_attachment.attachment.tags[0].value #=> String
@@ -1477,6 +1507,11 @@ module Aws::NetworkManager
     #   resp.transit_gateway_route_table_attachment.attachment.proposed_segment_change.tags[0].value #=> String
     #   resp.transit_gateway_route_table_attachment.attachment.proposed_segment_change.attachment_policy_rule_number #=> Integer
     #   resp.transit_gateway_route_table_attachment.attachment.proposed_segment_change.segment_name #=> String
+    #   resp.transit_gateway_route_table_attachment.attachment.proposed_network_function_group_change.tags #=> Array
+    #   resp.transit_gateway_route_table_attachment.attachment.proposed_network_function_group_change.tags[0].key #=> String
+    #   resp.transit_gateway_route_table_attachment.attachment.proposed_network_function_group_change.tags[0].value #=> String
+    #   resp.transit_gateway_route_table_attachment.attachment.proposed_network_function_group_change.attachment_policy_rule_number #=> Integer
+    #   resp.transit_gateway_route_table_attachment.attachment.proposed_network_function_group_change.network_function_group_name #=> String
     #   resp.transit_gateway_route_table_attachment.attachment.created_at #=> Time
     #   resp.transit_gateway_route_table_attachment.attachment.updated_at #=> Time
     #   resp.transit_gateway_route_table_attachment.peering_id #=> String
@@ -1549,6 +1584,7 @@ module Aws::NetworkManager
     #   resp.vpc_attachment.attachment.resource_arn #=> String
     #   resp.vpc_attachment.attachment.attachment_policy_rule_number #=> Integer
     #   resp.vpc_attachment.attachment.segment_name #=> String
+    #   resp.vpc_attachment.attachment.network_function_group_name #=> String
     #   resp.vpc_attachment.attachment.tags #=> Array
     #   resp.vpc_attachment.attachment.tags[0].key #=> String
     #   resp.vpc_attachment.attachment.tags[0].value #=> String
@@ -1557,6 +1593,11 @@ module Aws::NetworkManager
     #   resp.vpc_attachment.attachment.proposed_segment_change.tags[0].value #=> String
     #   resp.vpc_attachment.attachment.proposed_segment_change.attachment_policy_rule_number #=> Integer
     #   resp.vpc_attachment.attachment.proposed_segment_change.segment_name #=> String
+    #   resp.vpc_attachment.attachment.proposed_network_function_group_change.tags #=> Array
+    #   resp.vpc_attachment.attachment.proposed_network_function_group_change.tags[0].key #=> String
+    #   resp.vpc_attachment.attachment.proposed_network_function_group_change.tags[0].value #=> String
+    #   resp.vpc_attachment.attachment.proposed_network_function_group_change.attachment_policy_rule_number #=> Integer
+    #   resp.vpc_attachment.attachment.proposed_network_function_group_change.network_function_group_name #=> String
     #   resp.vpc_attachment.attachment.created_at #=> Time
     #   resp.vpc_attachment.attachment.updated_at #=> Time
     #   resp.vpc_attachment.subnet_arns #=> Array
@@ -1600,6 +1641,7 @@ module Aws::NetworkManager
     #   resp.attachment.resource_arn #=> String
     #   resp.attachment.attachment_policy_rule_number #=> Integer
     #   resp.attachment.segment_name #=> String
+    #   resp.attachment.network_function_group_name #=> String
     #   resp.attachment.tags #=> Array
     #   resp.attachment.tags[0].key #=> String
     #   resp.attachment.tags[0].value #=> String
@@ -1608,6 +1650,11 @@ module Aws::NetworkManager
     #   resp.attachment.proposed_segment_change.tags[0].value #=> String
     #   resp.attachment.proposed_segment_change.attachment_policy_rule_number #=> Integer
     #   resp.attachment.proposed_segment_change.segment_name #=> String
+    #   resp.attachment.proposed_network_function_group_change.tags #=> Array
+    #   resp.attachment.proposed_network_function_group_change.tags[0].key #=> String
+    #   resp.attachment.proposed_network_function_group_change.tags[0].value #=> String
+    #   resp.attachment.proposed_network_function_group_change.attachment_policy_rule_number #=> Integer
+    #   resp.attachment.proposed_network_function_group_change.network_function_group_name #=> String
     #   resp.attachment.created_at #=> Time
     #   resp.attachment.updated_at #=> Time
     #
@@ -1741,6 +1788,14 @@ module Aws::NetworkManager
     #   resp.core_network.segments[0].edge_locations[0] #=> String
     #   resp.core_network.segments[0].shared_segments #=> Array
     #   resp.core_network.segments[0].shared_segments[0] #=> String
+    #   resp.core_network.network_function_groups #=> Array
+    #   resp.core_network.network_function_groups[0].name #=> String
+    #   resp.core_network.network_function_groups[0].edge_locations #=> Array
+    #   resp.core_network.network_function_groups[0].edge_locations[0] #=> String
+    #   resp.core_network.network_function_groups[0].segments.send_via #=> Array
+    #   resp.core_network.network_function_groups[0].segments.send_via[0] #=> String
+    #   resp.core_network.network_function_groups[0].segments.send_to #=> Array
+    #   resp.core_network.network_function_groups[0].segments.send_to[0] #=> String
     #   resp.core_network.edges #=> Array
     #   resp.core_network.edges[0].edge_location #=> String
     #   resp.core_network.edges[0].asn #=> Integer
@@ -2333,6 +2388,7 @@ module Aws::NetworkManager
     #   resp.connect_attachment.attachment.resource_arn #=> String
     #   resp.connect_attachment.attachment.attachment_policy_rule_number #=> Integer
     #   resp.connect_attachment.attachment.segment_name #=> String
+    #   resp.connect_attachment.attachment.network_function_group_name #=> String
     #   resp.connect_attachment.attachment.tags #=> Array
     #   resp.connect_attachment.attachment.tags[0].key #=> String
     #   resp.connect_attachment.attachment.tags[0].value #=> String
@@ -2341,6 +2397,11 @@ module Aws::NetworkManager
     #   resp.connect_attachment.attachment.proposed_segment_change.tags[0].value #=> String
     #   resp.connect_attachment.attachment.proposed_segment_change.attachment_policy_rule_number #=> Integer
     #   resp.connect_attachment.attachment.proposed_segment_change.segment_name #=> String
+    #   resp.connect_attachment.attachment.proposed_network_function_group_change.tags #=> Array
+    #   resp.connect_attachment.attachment.proposed_network_function_group_change.tags[0].key #=> String
+    #   resp.connect_attachment.attachment.proposed_network_function_group_change.tags[0].value #=> String
+    #   resp.connect_attachment.attachment.proposed_network_function_group_change.attachment_policy_rule_number #=> Integer
+    #   resp.connect_attachment.attachment.proposed_network_function_group_change.network_function_group_name #=> String
     #   resp.connect_attachment.attachment.created_at #=> Time
     #   resp.connect_attachment.attachment.updated_at #=> Time
     #   resp.connect_attachment.transport_attachment_id #=> String
@@ -2542,6 +2603,14 @@ module Aws::NetworkManager
     #   resp.core_network.segments[0].edge_locations[0] #=> String
     #   resp.core_network.segments[0].shared_segments #=> Array
     #   resp.core_network.segments[0].shared_segments[0] #=> String
+    #   resp.core_network.network_function_groups #=> Array
+    #   resp.core_network.network_function_groups[0].name #=> String
+    #   resp.core_network.network_function_groups[0].edge_locations #=> Array
+    #   resp.core_network.network_function_groups[0].edge_locations[0] #=> String
+    #   resp.core_network.network_function_groups[0].segments.send_via #=> Array
+    #   resp.core_network.network_function_groups[0].segments.send_via[0] #=> String
+    #   resp.core_network.network_function_groups[0].segments.send_to #=> Array
+    #   resp.core_network.network_function_groups[0].segments.send_to[0] #=> String
     #   resp.core_network.edges #=> Array
     #   resp.core_network.edges[0].edge_location #=> String
     #   resp.core_network.edges[0].asn #=> Integer
@@ -2593,13 +2662,14 @@ module Aws::NetworkManager
     # @example Response structure
     #
     #   resp.core_network_change_events #=> Array
-    #   resp.core_network_change_events[0].type #=> String, one of "CORE_NETWORK_SEGMENT", "CORE_NETWORK_EDGE", "ATTACHMENT_MAPPING", "ATTACHMENT_ROUTE_PROPAGATION", "ATTACHMENT_ROUTE_STATIC", "CORE_NETWORK_CONFIGURATION", "SEGMENTS_CONFIGURATION", "SEGMENT_ACTIONS_CONFIGURATION", "ATTACHMENT_POLICIES_CONFIGURATION"
+    #   resp.core_network_change_events[0].type #=> String, one of "CORE_NETWORK_SEGMENT", "NETWORK_FUNCTION_GROUP", "CORE_NETWORK_EDGE", "ATTACHMENT_MAPPING", "ATTACHMENT_ROUTE_PROPAGATION", "ATTACHMENT_ROUTE_STATIC", "CORE_NETWORK_CONFIGURATION", "SEGMENTS_CONFIGURATION", "SEGMENT_ACTIONS_CONFIGURATION", "ATTACHMENT_POLICIES_CONFIGURATION"
     #   resp.core_network_change_events[0].action #=> String, one of "ADD", "MODIFY", "REMOVE"
     #   resp.core_network_change_events[0].identifier_path #=> String
     #   resp.core_network_change_events[0].event_time #=> Time
     #   resp.core_network_change_events[0].status #=> String, one of "NOT_STARTED", "IN_PROGRESS", "COMPLETE", "FAILED"
     #   resp.core_network_change_events[0].values.edge_location #=> String
     #   resp.core_network_change_events[0].values.segment_name #=> String
+    #   resp.core_network_change_events[0].values.network_function_group_name #=> String
     #   resp.core_network_change_events[0].values.attachment_id #=> String
     #   resp.core_network_change_events[0].values.cidr #=> String
     #   resp.next_token #=> String
@@ -2647,10 +2717,11 @@ module Aws::NetworkManager
     # @example Response structure
     #
     #   resp.core_network_changes #=> Array
-    #   resp.core_network_changes[0].type #=> String, one of "CORE_NETWORK_SEGMENT", "CORE_NETWORK_EDGE", "ATTACHMENT_MAPPING", "ATTACHMENT_ROUTE_PROPAGATION", "ATTACHMENT_ROUTE_STATIC", "CORE_NETWORK_CONFIGURATION", "SEGMENTS_CONFIGURATION", "SEGMENT_ACTIONS_CONFIGURATION", "ATTACHMENT_POLICIES_CONFIGURATION"
+    #   resp.core_network_changes[0].type #=> String, one of "CORE_NETWORK_SEGMENT", "NETWORK_FUNCTION_GROUP", "CORE_NETWORK_EDGE", "ATTACHMENT_MAPPING", "ATTACHMENT_ROUTE_PROPAGATION", "ATTACHMENT_ROUTE_STATIC", "CORE_NETWORK_CONFIGURATION", "SEGMENTS_CONFIGURATION", "SEGMENT_ACTIONS_CONFIGURATION", "ATTACHMENT_POLICIES_CONFIGURATION"
     #   resp.core_network_changes[0].action #=> String, one of "ADD", "MODIFY", "REMOVE"
     #   resp.core_network_changes[0].identifier #=> String
     #   resp.core_network_changes[0].previous_values.segment_name #=> String
+    #   resp.core_network_changes[0].previous_values.network_function_group_name #=> String
     #   resp.core_network_changes[0].previous_values.edge_locations #=> Array
     #   resp.core_network_changes[0].previous_values.edge_locations[0] #=> String
     #   resp.core_network_changes[0].previous_values.asn #=> Integer
@@ -2660,7 +2731,20 @@ module Aws::NetworkManager
     #   resp.core_network_changes[0].previous_values.inside_cidr_blocks[0] #=> String
     #   resp.core_network_changes[0].previous_values.shared_segments #=> Array
     #   resp.core_network_changes[0].previous_values.shared_segments[0] #=> String
+    #   resp.core_network_changes[0].previous_values.service_insertion_actions #=> Array
+    #   resp.core_network_changes[0].previous_values.service_insertion_actions[0].action #=> String, one of "send-via", "send-to"
+    #   resp.core_network_changes[0].previous_values.service_insertion_actions[0].mode #=> String, one of "dual-hop", "single-hop"
+    #   resp.core_network_changes[0].previous_values.service_insertion_actions[0].when_sent_to.when_sent_to_segments_list #=> Array
+    #   resp.core_network_changes[0].previous_values.service_insertion_actions[0].when_sent_to.when_sent_to_segments_list[0] #=> String
+    #   resp.core_network_changes[0].previous_values.service_insertion_actions[0].via.network_function_groups #=> Array
+    #   resp.core_network_changes[0].previous_values.service_insertion_actions[0].via.network_function_groups[0].name #=> String
+    #   resp.core_network_changes[0].previous_values.service_insertion_actions[0].via.with_edge_overrides #=> Array
+    #   resp.core_network_changes[0].previous_values.service_insertion_actions[0].via.with_edge_overrides[0].edge_sets #=> Array
+    #   resp.core_network_changes[0].previous_values.service_insertion_actions[0].via.with_edge_overrides[0].edge_sets[0] #=> Array
+    #   resp.core_network_changes[0].previous_values.service_insertion_actions[0].via.with_edge_overrides[0].edge_sets[0][0] #=> String
+    #   resp.core_network_changes[0].previous_values.service_insertion_actions[0].via.with_edge_overrides[0].use_edge #=> String
     #   resp.core_network_changes[0].new_values.segment_name #=> String
+    #   resp.core_network_changes[0].new_values.network_function_group_name #=> String
     #   resp.core_network_changes[0].new_values.edge_locations #=> Array
     #   resp.core_network_changes[0].new_values.edge_locations[0] #=> String
     #   resp.core_network_changes[0].new_values.asn #=> Integer
@@ -2670,6 +2754,18 @@ module Aws::NetworkManager
     #   resp.core_network_changes[0].new_values.inside_cidr_blocks[0] #=> String
     #   resp.core_network_changes[0].new_values.shared_segments #=> Array
     #   resp.core_network_changes[0].new_values.shared_segments[0] #=> String
+    #   resp.core_network_changes[0].new_values.service_insertion_actions #=> Array
+    #   resp.core_network_changes[0].new_values.service_insertion_actions[0].action #=> String, one of "send-via", "send-to"
+    #   resp.core_network_changes[0].new_values.service_insertion_actions[0].mode #=> String, one of "dual-hop", "single-hop"
+    #   resp.core_network_changes[0].new_values.service_insertion_actions[0].when_sent_to.when_sent_to_segments_list #=> Array
+    #   resp.core_network_changes[0].new_values.service_insertion_actions[0].when_sent_to.when_sent_to_segments_list[0] #=> String
+    #   resp.core_network_changes[0].new_values.service_insertion_actions[0].via.network_function_groups #=> Array
+    #   resp.core_network_changes[0].new_values.service_insertion_actions[0].via.network_function_groups[0].name #=> String
+    #   resp.core_network_changes[0].new_values.service_insertion_actions[0].via.with_edge_overrides #=> Array
+    #   resp.core_network_changes[0].new_values.service_insertion_actions[0].via.with_edge_overrides[0].edge_sets #=> Array
+    #   resp.core_network_changes[0].new_values.service_insertion_actions[0].via.with_edge_overrides[0].edge_sets[0] #=> Array
+    #   resp.core_network_changes[0].new_values.service_insertion_actions[0].via.with_edge_overrides[0].edge_sets[0][0] #=> String
+    #   resp.core_network_changes[0].new_values.service_insertion_actions[0].via.with_edge_overrides[0].use_edge #=> String
     #   resp.core_network_changes[0].identifier_path #=> String
     #   resp.next_token #=> String
     #
@@ -2995,11 +3091,19 @@ module Aws::NetworkManager
     #
     #   The following are the supported resource types for Network Manager:
     #
+    #   * `attachment`
+    #
+    #   * `connect-peer`
+    #
     #   * `connection`
+    #
+    #   * `core-network`
     #
     #   * `device`
     #
     #   * `link`
+    #
+    #   * `peering`
     #
     #   * `site`
     #
@@ -3086,11 +3190,19 @@ module Aws::NetworkManager
     #
     #   The following are the supported resource types for Network Manager:
     #
+    #   * `attachment`
+    #
+    #   * `connect-peer`
+    #
     #   * `connection`
+    #
+    #   * `core-network`
     #
     #   * `device`
     #
     #   * `link`
+    #
+    #   * `peering`
     #
     #   * `site`
     #
@@ -3180,54 +3292,43 @@ module Aws::NetworkManager
     #
     #   The following are the supported resource types for Direct Connect:
     #
-    #   * `dxcon` - The definition model is [Connection][1].
+    #   * `dxcon`
     #
-    #   * `dx-gateway` - The definition model is [DirectConnectGateway][2].
+    #   * `dx-gateway`
     #
-    #   * `dx-vif` - The definition model is [VirtualInterface][3].
+    #   * `dx-vif`
     #
     #   The following are the supported resource types for Network Manager:
     #
-    #   * `connection` - The definition model is [Connection][4].
+    #   * `attachment`
     #
-    #   * `device` - The definition model is [Device][5].
+    #   * `connect-peer`
     #
-    #   * `link` - The definition model is [Link][6].
+    #   * `connection`
     #
-    #   * `site` - The definition model is [Site][7].
+    #   * `core-network`
+    #
+    #   * `device`
+    #
+    #   * `link`
+    #
+    #   * `peering`
+    #
+    #   * `site`
     #
     #   The following are the supported resource types for Amazon VPC:
     #
-    #   * `customer-gateway` - The definition model is [CustomerGateway][8].
+    #   * `customer-gateway`
     #
-    #   * `transit-gateway` - The definition model is [TransitGateway][9].
+    #   * `transit-gateway`
     #
-    #   * `transit-gateway-attachment` - The definition model is
-    #     [TransitGatewayAttachment][10].
+    #   * `transit-gateway-attachment`
     #
-    #   * `transit-gateway-connect-peer` - The definition model is
-    #     [TransitGatewayConnectPeer][11].
+    #   * `transit-gateway-connect-peer`
     #
-    #   * `transit-gateway-route-table` - The definition model is
-    #     [TransitGatewayRouteTable][12].
+    #   * `transit-gateway-route-table`
     #
-    #   * `vpn-connection` - The definition model is [VpnConnection][13].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/directconnect/latest/APIReference/API_Connection.html
-    #   [2]: https://docs.aws.amazon.com/directconnect/latest/APIReference/API_DirectConnectGateway.html
-    #   [3]: https://docs.aws.amazon.com/directconnect/latest/APIReference/API_VirtualInterface.html
-    #   [4]: https://docs.aws.amazon.com/networkmanager/latest/APIReference/API_Connection.html
-    #   [5]: https://docs.aws.amazon.com/networkmanager/latest/APIReference/API_Device.html
-    #   [6]: https://docs.aws.amazon.com/networkmanager/latest/APIReference/API_Link.html
-    #   [7]: https://docs.aws.amazon.com/networkmanager/latest/APIReference/API_Site.html
-    #   [8]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CustomerGateway.html
-    #   [9]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_TransitGateway.html
-    #   [10]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_TransitGatewayAttachment.html
-    #   [11]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_TransitGatewayConnectPeer.html
-    #   [12]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_TransitGatewayRouteTable.html
-    #   [13]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_VpnConnection.html
+    #   * `vpn-connection`
     #
     # @option params [String] :resource_arn
     #   The ARN of the resource.
@@ -3341,6 +3442,11 @@ module Aws::NetworkManager
     #         segment_name: "ConstrainedString",
     #         edge_location: "ExternalRegionCode",
     #       },
+    #       core_network_network_function_group: {
+    #         core_network_id: "CoreNetworkId",
+    #         network_function_group_name: "ConstrainedString",
+    #         edge_location: "ExternalRegionCode",
+    #       },
     #     },
     #     exact_cidr_matches: ["ConstrainedString"],
     #     longest_prefix_matches: ["ConstrainedString"],
@@ -3360,7 +3466,7 @@ module Aws::NetworkManager
     #   resp.core_network_segment_edge.core_network_id #=> String
     #   resp.core_network_segment_edge.segment_name #=> String
     #   resp.core_network_segment_edge.edge_location #=> String
-    #   resp.route_table_type #=> String, one of "TRANSIT_GATEWAY_ROUTE_TABLE", "CORE_NETWORK_SEGMENT"
+    #   resp.route_table_type #=> String, one of "TRANSIT_GATEWAY_ROUTE_TABLE", "CORE_NETWORK_SEGMENT", "NETWORK_FUNCTION_GROUP"
     #   resp.route_table_timestamp #=> Time
     #   resp.network_routes #=> Array
     #   resp.network_routes[0].destination_cidr_block #=> String
@@ -3368,6 +3474,7 @@ module Aws::NetworkManager
     #   resp.network_routes[0].destinations[0].core_network_attachment_id #=> String
     #   resp.network_routes[0].destinations[0].transit_gateway_attachment_id #=> String
     #   resp.network_routes[0].destinations[0].segment_name #=> String
+    #   resp.network_routes[0].destinations[0].network_function_group_name #=> String
     #   resp.network_routes[0].destinations[0].edge_location #=> String
     #   resp.network_routes[0].destinations[0].resource_type #=> String
     #   resp.network_routes[0].destinations[0].resource_id #=> String
@@ -3402,37 +3509,11 @@ module Aws::NetworkManager
     #   The Amazon Web Services account ID.
     #
     # @option params [String] :resource_type
-    #   The resource type.
+    #   The resource type. The following are the supported resource types:
     #
-    #   The following are the supported resource types for Direct Connect:
-    #
-    #   * `dxcon`
-    #
-    #   * `dx-gateway`
-    #
-    #   * `dx-vif`
-    #
-    #   The following are the supported resource types for Network Manager:
-    #
-    #   * `connection`
-    #
-    #   * `device`
-    #
-    #   * `link`
-    #
-    #   * `site`
-    #
-    #   The following are the supported resource types for Amazon VPC:
-    #
-    #   * `customer-gateway`
-    #
-    #   * `transit-gateway`
-    #
-    #   * `transit-gateway-attachment`
+    #   * `connect-peer`
     #
     #   * `transit-gateway-connect-peer`
-    #
-    #   * `transit-gateway-route-table`
     #
     #   * `vpn-connection`
     #
@@ -3616,6 +3697,7 @@ module Aws::NetworkManager
     #   resp.site_to_site_vpn_attachment.attachment.resource_arn #=> String
     #   resp.site_to_site_vpn_attachment.attachment.attachment_policy_rule_number #=> Integer
     #   resp.site_to_site_vpn_attachment.attachment.segment_name #=> String
+    #   resp.site_to_site_vpn_attachment.attachment.network_function_group_name #=> String
     #   resp.site_to_site_vpn_attachment.attachment.tags #=> Array
     #   resp.site_to_site_vpn_attachment.attachment.tags[0].key #=> String
     #   resp.site_to_site_vpn_attachment.attachment.tags[0].value #=> String
@@ -3624,6 +3706,11 @@ module Aws::NetworkManager
     #   resp.site_to_site_vpn_attachment.attachment.proposed_segment_change.tags[0].value #=> String
     #   resp.site_to_site_vpn_attachment.attachment.proposed_segment_change.attachment_policy_rule_number #=> Integer
     #   resp.site_to_site_vpn_attachment.attachment.proposed_segment_change.segment_name #=> String
+    #   resp.site_to_site_vpn_attachment.attachment.proposed_network_function_group_change.tags #=> Array
+    #   resp.site_to_site_vpn_attachment.attachment.proposed_network_function_group_change.tags[0].key #=> String
+    #   resp.site_to_site_vpn_attachment.attachment.proposed_network_function_group_change.tags[0].value #=> String
+    #   resp.site_to_site_vpn_attachment.attachment.proposed_network_function_group_change.attachment_policy_rule_number #=> Integer
+    #   resp.site_to_site_vpn_attachment.attachment.proposed_network_function_group_change.network_function_group_name #=> String
     #   resp.site_to_site_vpn_attachment.attachment.created_at #=> Time
     #   resp.site_to_site_vpn_attachment.attachment.updated_at #=> Time
     #   resp.site_to_site_vpn_attachment.vpn_connection_arn #=> String
@@ -3861,6 +3948,7 @@ module Aws::NetworkManager
     #   resp.transit_gateway_route_table_attachment.attachment.resource_arn #=> String
     #   resp.transit_gateway_route_table_attachment.attachment.attachment_policy_rule_number #=> Integer
     #   resp.transit_gateway_route_table_attachment.attachment.segment_name #=> String
+    #   resp.transit_gateway_route_table_attachment.attachment.network_function_group_name #=> String
     #   resp.transit_gateway_route_table_attachment.attachment.tags #=> Array
     #   resp.transit_gateway_route_table_attachment.attachment.tags[0].key #=> String
     #   resp.transit_gateway_route_table_attachment.attachment.tags[0].value #=> String
@@ -3869,6 +3957,11 @@ module Aws::NetworkManager
     #   resp.transit_gateway_route_table_attachment.attachment.proposed_segment_change.tags[0].value #=> String
     #   resp.transit_gateway_route_table_attachment.attachment.proposed_segment_change.attachment_policy_rule_number #=> Integer
     #   resp.transit_gateway_route_table_attachment.attachment.proposed_segment_change.segment_name #=> String
+    #   resp.transit_gateway_route_table_attachment.attachment.proposed_network_function_group_change.tags #=> Array
+    #   resp.transit_gateway_route_table_attachment.attachment.proposed_network_function_group_change.tags[0].key #=> String
+    #   resp.transit_gateway_route_table_attachment.attachment.proposed_network_function_group_change.tags[0].value #=> String
+    #   resp.transit_gateway_route_table_attachment.attachment.proposed_network_function_group_change.attachment_policy_rule_number #=> Integer
+    #   resp.transit_gateway_route_table_attachment.attachment.proposed_network_function_group_change.network_function_group_name #=> String
     #   resp.transit_gateway_route_table_attachment.attachment.created_at #=> Time
     #   resp.transit_gateway_route_table_attachment.attachment.updated_at #=> Time
     #   resp.transit_gateway_route_table_attachment.peering_id #=> String
@@ -3910,6 +4003,7 @@ module Aws::NetworkManager
     #   resp.vpc_attachment.attachment.resource_arn #=> String
     #   resp.vpc_attachment.attachment.attachment_policy_rule_number #=> Integer
     #   resp.vpc_attachment.attachment.segment_name #=> String
+    #   resp.vpc_attachment.attachment.network_function_group_name #=> String
     #   resp.vpc_attachment.attachment.tags #=> Array
     #   resp.vpc_attachment.attachment.tags[0].key #=> String
     #   resp.vpc_attachment.attachment.tags[0].value #=> String
@@ -3918,6 +4012,11 @@ module Aws::NetworkManager
     #   resp.vpc_attachment.attachment.proposed_segment_change.tags[0].value #=> String
     #   resp.vpc_attachment.attachment.proposed_segment_change.attachment_policy_rule_number #=> Integer
     #   resp.vpc_attachment.attachment.proposed_segment_change.segment_name #=> String
+    #   resp.vpc_attachment.attachment.proposed_network_function_group_change.tags #=> Array
+    #   resp.vpc_attachment.attachment.proposed_network_function_group_change.tags[0].key #=> String
+    #   resp.vpc_attachment.attachment.proposed_network_function_group_change.tags[0].value #=> String
+    #   resp.vpc_attachment.attachment.proposed_network_function_group_change.attachment_policy_rule_number #=> Integer
+    #   resp.vpc_attachment.attachment.proposed_network_function_group_change.network_function_group_name #=> String
     #   resp.vpc_attachment.attachment.created_at #=> Time
     #   resp.vpc_attachment.attachment.updated_at #=> Time
     #   resp.vpc_attachment.subnet_arns #=> Array
@@ -3985,6 +4084,7 @@ module Aws::NetworkManager
     #   resp.attachments[0].resource_arn #=> String
     #   resp.attachments[0].attachment_policy_rule_number #=> Integer
     #   resp.attachments[0].segment_name #=> String
+    #   resp.attachments[0].network_function_group_name #=> String
     #   resp.attachments[0].tags #=> Array
     #   resp.attachments[0].tags[0].key #=> String
     #   resp.attachments[0].tags[0].value #=> String
@@ -3993,6 +4093,11 @@ module Aws::NetworkManager
     #   resp.attachments[0].proposed_segment_change.tags[0].value #=> String
     #   resp.attachments[0].proposed_segment_change.attachment_policy_rule_number #=> Integer
     #   resp.attachments[0].proposed_segment_change.segment_name #=> String
+    #   resp.attachments[0].proposed_network_function_group_change.tags #=> Array
+    #   resp.attachments[0].proposed_network_function_group_change.tags[0].key #=> String
+    #   resp.attachments[0].proposed_network_function_group_change.tags[0].value #=> String
+    #   resp.attachments[0].proposed_network_function_group_change.attachment_policy_rule_number #=> Integer
+    #   resp.attachments[0].proposed_network_function_group_change.network_function_group_name #=> String
     #   resp.attachments[0].created_at #=> Time
     #   resp.attachments[0].updated_at #=> Time
     #   resp.next_token #=> String
@@ -4451,6 +4556,7 @@ module Aws::NetworkManager
     #   resp.attachment.resource_arn #=> String
     #   resp.attachment.attachment_policy_rule_number #=> Integer
     #   resp.attachment.segment_name #=> String
+    #   resp.attachment.network_function_group_name #=> String
     #   resp.attachment.tags #=> Array
     #   resp.attachment.tags[0].key #=> String
     #   resp.attachment.tags[0].value #=> String
@@ -4459,6 +4565,11 @@ module Aws::NetworkManager
     #   resp.attachment.proposed_segment_change.tags[0].value #=> String
     #   resp.attachment.proposed_segment_change.attachment_policy_rule_number #=> Integer
     #   resp.attachment.proposed_segment_change.segment_name #=> String
+    #   resp.attachment.proposed_network_function_group_change.tags #=> Array
+    #   resp.attachment.proposed_network_function_group_change.tags[0].key #=> String
+    #   resp.attachment.proposed_network_function_group_change.tags[0].value #=> String
+    #   resp.attachment.proposed_network_function_group_change.attachment_policy_rule_number #=> Integer
+    #   resp.attachment.proposed_network_function_group_change.network_function_group_name #=> String
     #   resp.attachment.created_at #=> Time
     #   resp.attachment.updated_at #=> Time
     #
@@ -4794,6 +4905,14 @@ module Aws::NetworkManager
     #   resp.core_network.segments[0].edge_locations[0] #=> String
     #   resp.core_network.segments[0].shared_segments #=> Array
     #   resp.core_network.segments[0].shared_segments[0] #=> String
+    #   resp.core_network.network_function_groups #=> Array
+    #   resp.core_network.network_function_groups[0].name #=> String
+    #   resp.core_network.network_function_groups[0].edge_locations #=> Array
+    #   resp.core_network.network_function_groups[0].edge_locations[0] #=> String
+    #   resp.core_network.network_function_groups[0].segments.send_via #=> Array
+    #   resp.core_network.network_function_groups[0].segments.send_via[0] #=> String
+    #   resp.core_network.network_function_groups[0].segments.send_to #=> Array
+    #   resp.core_network.network_function_groups[0].segments.send_to[0] #=> String
     #   resp.core_network.edges #=> Array
     #   resp.core_network.edges[0].edge_location #=> String
     #   resp.core_network.edges[0].asn #=> Integer
@@ -5171,6 +5290,7 @@ module Aws::NetworkManager
     #   resp.vpc_attachment.attachment.resource_arn #=> String
     #   resp.vpc_attachment.attachment.attachment_policy_rule_number #=> Integer
     #   resp.vpc_attachment.attachment.segment_name #=> String
+    #   resp.vpc_attachment.attachment.network_function_group_name #=> String
     #   resp.vpc_attachment.attachment.tags #=> Array
     #   resp.vpc_attachment.attachment.tags[0].key #=> String
     #   resp.vpc_attachment.attachment.tags[0].value #=> String
@@ -5179,6 +5299,11 @@ module Aws::NetworkManager
     #   resp.vpc_attachment.attachment.proposed_segment_change.tags[0].value #=> String
     #   resp.vpc_attachment.attachment.proposed_segment_change.attachment_policy_rule_number #=> Integer
     #   resp.vpc_attachment.attachment.proposed_segment_change.segment_name #=> String
+    #   resp.vpc_attachment.attachment.proposed_network_function_group_change.tags #=> Array
+    #   resp.vpc_attachment.attachment.proposed_network_function_group_change.tags[0].key #=> String
+    #   resp.vpc_attachment.attachment.proposed_network_function_group_change.tags[0].value #=> String
+    #   resp.vpc_attachment.attachment.proposed_network_function_group_change.attachment_policy_rule_number #=> Integer
+    #   resp.vpc_attachment.attachment.proposed_network_function_group_change.network_function_group_name #=> String
     #   resp.vpc_attachment.attachment.created_at #=> Time
     #   resp.vpc_attachment.attachment.updated_at #=> Time
     #   resp.vpc_attachment.subnet_arns #=> Array
@@ -5208,7 +5333,7 @@ module Aws::NetworkManager
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-networkmanager'
-      context[:gem_version] = '1.44.0'
+      context[:gem_version] = '1.45.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -10971,7 +10971,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateTrafficMirrorFilterRequest AWS API Documentation
@@ -10996,7 +10996,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateTrafficMirrorFilterResult AWS API Documentation
@@ -11074,8 +11074,12 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #   @return [String]
+    #
+    # @!attribute [rw] tag_specifications
+    #   Traffic Mirroring tags specifications.
+    #   @return [Array<Types::TagSpecification>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateTrafficMirrorFilterRuleRequest AWS API Documentation
     #
@@ -11091,7 +11095,8 @@ module Aws::EC2
       :source_cidr_block,
       :description,
       :dry_run,
-      :client_token)
+      :client_token,
+      :tag_specifications)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11107,7 +11112,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateTrafficMirrorFilterRuleResult AWS API Documentation
@@ -11160,11 +11165,11 @@ module Aws::EC2
     # @!attribute [rw] virtual_network_id
     #   The VXLAN ID for the Traffic Mirror session. For more information
     #   about the VXLAN protocol, see [RFC 7348][1]. If you do not specify a
-    #   `VirtualNetworkId`, an account-wide unique id is chosen at random.
+    #   `VirtualNetworkId`, an account-wide unique ID is chosen at random.
     #
     #
     #
-    #   [1]: https://tools.ietf.org/html/rfc7348
+    #   [1]: https://datatracker.ietf.org/doc/html/rfc7348
     #   @return [Integer]
     #
     # @!attribute [rw] description
@@ -11192,7 +11197,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateTrafficMirrorSessionRequest AWS API Documentation
@@ -11223,7 +11228,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateTrafficMirrorSessionResult AWS API Documentation
@@ -11269,7 +11274,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #   @return [String]
     #
     # @!attribute [rw] gateway_load_balancer_endpoint_id
@@ -11301,7 +11306,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateTrafficMirrorTargetResult AWS API Documentation
@@ -25579,6 +25584,91 @@ module Aws::EC2
     class DescribeTagsResult < Struct.new(
       :next_token,
       :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] traffic_mirror_filter_rule_ids
+    #   Traffic filter rule IDs.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] traffic_mirror_filter_id
+    #   Traffic filter ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] filters
+    #   Traffic mirror filters.
+    #
+    #   * `traffic-mirror-filter-rule-id`: The ID of the Traffic Mirror
+    #     rule.
+    #
+    #   * `traffic-mirror-filter-id`: The ID of the filter that this rule is
+    #     associated with.
+    #
+    #   * `rule-number`: The number of the Traffic Mirror rule.
+    #
+    #   * `rule-action`: The action taken on the filtered traffic. Possible
+    #     actions are `accept` and `reject`.
+    #
+    #   * `traffic-direction`: The traffic direction. Possible directions
+    #     are `ingress` and `egress`.
+    #
+    #   * `protocol`: The protocol, for example UDP, assigned to the Traffic
+    #     Mirror rule.
+    #
+    #   * `source-cidr-block`: The source CIDR block assigned to the Traffic
+    #     Mirror rule.
+    #
+    #   * `destination-cidr-block`: The destination CIDR block assigned to
+    #     the Traffic Mirror rule.
+    #
+    #   * `description`: The description of the Traffic Mirror rule.
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeTrafficMirrorFilterRulesRequest AWS API Documentation
+    #
+    class DescribeTrafficMirrorFilterRulesRequest < Struct.new(
+      :traffic_mirror_filter_rule_ids,
+      :traffic_mirror_filter_id,
+      :dry_run,
+      :filters,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] traffic_mirror_filter_rules
+    #   Traffic mirror rules.
+    #   @return [Array<Types::TrafficMirrorFilterRule>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. The value is
+    #   `null` when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeTrafficMirrorFilterRulesResult AWS API Documentation
+    #
+    class DescribeTrafficMirrorFilterRulesResult < Struct.new(
+      :traffic_mirror_filter_rules,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -49459,7 +49549,11 @@ module Aws::EC2
     end
 
     # @!attribute [rw] traffic_mirror_filter_rule
-    #   Modifies a Traffic Mirror rule.
+    #   <note markdown="1"> Tags are not returned for ModifyTrafficMirrorFilterRule.
+    #
+    #    </note>
+    #
+    #   A Traffic Mirror rule.
     #   @return [Types::TrafficMirrorFilterRule]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyTrafficMirrorFilterRuleResult AWS API Documentation
@@ -64263,6 +64357,10 @@ module Aws::EC2
     #   The description of the Traffic Mirror rule.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   Tags on Traffic Mirroring filter rules.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TrafficMirrorFilterRule AWS API Documentation
     #
     class TrafficMirrorFilterRule < Struct.new(
@@ -64276,7 +64374,8 @@ module Aws::EC2
       :source_port_range,
       :destination_cidr_block,
       :source_cidr_block,
-      :description)
+      :description,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.944.0 (2024-06-12)
+------------------
+
+* Feature - Added support for enumerating regions for  `Aws::AppTest`.
+
+1.943.0 (2024-06-11)
+------------------
+
+* Feature - Added support for enumerating regions for  `Aws::PcaConnectorScep`.
+
 1.942.0 (2024-06-10)
 ------------------
 

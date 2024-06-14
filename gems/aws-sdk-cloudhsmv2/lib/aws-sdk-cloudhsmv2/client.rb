@@ -476,8 +476,8 @@ module Aws::CloudHSMV2
     #   A policy that defines how the service retains backups.
     #
     # @option params [required, String] :hsm_type
-    #   The type of HSM to use in the cluster. Currently the only allowed
-    #   value is `hsm1.medium`.
+    #   The type of HSM to use in the cluster. The allowed values are
+    #   `hsm1.medium` and `hsm2m.medium`.
     #
     # @option params [String] :source_backup_id
     #   The identifier (ID) of the cluster backup to restore. Use this value
@@ -495,6 +495,10 @@ module Aws::CloudHSMV2
     #
     # @option params [Array<Types::Tag>] :tag_list
     #   Tags to apply to the CloudHSM cluster during creation.
+    #
+    # @option params [String] :mode
+    #   The mode to use in the cluster. The allowed values are `FIPS` and
+    #   `NON_FIPS`.
     #
     # @return [Types::CreateClusterResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -516,6 +520,7 @@ module Aws::CloudHSMV2
     #         value: "TagValue", # required
     #       },
     #     ],
+    #     mode: "FIPS", # accepts FIPS, NON_FIPS
     #   })
     #
     # @example Response structure
@@ -551,6 +556,7 @@ module Aws::CloudHSMV2
     #   resp.cluster.tag_list #=> Array
     #   resp.cluster.tag_list[0].key #=> String
     #   resp.cluster.tag_list[0].value #=> String
+    #   resp.cluster.mode #=> String, one of "FIPS", "NON_FIPS"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/CreateCluster AWS API Documentation
     #
@@ -643,6 +649,8 @@ module Aws::CloudHSMV2
     #   resp.backup.tag_list #=> Array
     #   resp.backup.tag_list[0].key #=> String
     #   resp.backup.tag_list[0].value #=> String
+    #   resp.backup.hsm_type #=> String
+    #   resp.backup.mode #=> String, one of "FIPS", "NON_FIPS"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/DeleteBackup AWS API Documentation
     #
@@ -705,6 +713,7 @@ module Aws::CloudHSMV2
     #   resp.cluster.tag_list #=> Array
     #   resp.cluster.tag_list[0].key #=> String
     #   resp.cluster.tag_list[0].value #=> String
+    #   resp.cluster.mode #=> String, one of "FIPS", "NON_FIPS"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/DeleteCluster AWS API Documentation
     #
@@ -838,6 +847,8 @@ module Aws::CloudHSMV2
     #   resp.backups[0].tag_list #=> Array
     #   resp.backups[0].tag_list[0].key #=> String
     #   resp.backups[0].tag_list[0].value #=> String
+    #   resp.backups[0].hsm_type #=> String
+    #   resp.backups[0].mode #=> String, one of "FIPS", "NON_FIPS"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/DescribeBackups AWS API Documentation
@@ -931,6 +942,7 @@ module Aws::CloudHSMV2
     #   resp.clusters[0].tag_list #=> Array
     #   resp.clusters[0].tag_list[0].key #=> String
     #   resp.clusters[0].tag_list[0].value #=> String
+    #   resp.clusters[0].mode #=> String, one of "FIPS", "NON_FIPS"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/DescribeClusters AWS API Documentation
@@ -1082,6 +1094,8 @@ module Aws::CloudHSMV2
     #   resp.backup.tag_list #=> Array
     #   resp.backup.tag_list[0].key #=> String
     #   resp.backup.tag_list[0].value #=> String
+    #   resp.backup.hsm_type #=> String
+    #   resp.backup.mode #=> String, one of "FIPS", "NON_FIPS"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/ModifyBackupAttributes AWS API Documentation
     #
@@ -1148,6 +1162,7 @@ module Aws::CloudHSMV2
     #   resp.cluster.tag_list #=> Array
     #   resp.cluster.tag_list[0].key #=> String
     #   resp.cluster.tag_list[0].value #=> String
+    #   resp.cluster.mode #=> String, one of "FIPS", "NON_FIPS"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/ModifyCluster AWS API Documentation
     #
@@ -1191,6 +1206,8 @@ module Aws::CloudHSMV2
     #   resp.backup.tag_list #=> Array
     #   resp.backup.tag_list[0].key #=> String
     #   resp.backup.tag_list[0].value #=> String
+    #   resp.backup.hsm_type #=> String
+    #   resp.backup.mode #=> String, one of "FIPS", "NON_FIPS"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/RestoreBackup AWS API Documentation
     #
@@ -1276,7 +1293,7 @@ module Aws::CloudHSMV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudhsmv2'
-      context[:gem_version] = '1.57.0'
+      context[:gem_version] = '1.58.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

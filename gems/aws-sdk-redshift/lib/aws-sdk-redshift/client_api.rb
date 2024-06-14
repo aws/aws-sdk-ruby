@@ -2893,8 +2893,10 @@ module Aws::Redshift
 
       api.metadata = {
         "apiVersion" => "2012-12-01",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "redshift",
         "protocol" => "query",
+        "protocols" => ["query"],
         "serviceFullName" => "Amazon Redshift",
         "serviceId" => "Redshift",
         "signatureVersion" => "v4",

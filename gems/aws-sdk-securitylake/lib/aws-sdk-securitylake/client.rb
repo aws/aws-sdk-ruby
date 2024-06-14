@@ -772,7 +772,7 @@ module Aws::SecurityLake
     #   The description for your subscriber account in Security Lake.
     #
     # @option params [required, Types::AwsIdentity] :subscriber_identity
-    #   The AWS identity used to access your data.
+    #   The Amazon Web Services identity used to access your data.
     #
     # @option params [required, String] :subscriber_name
     #   The name of your Security Lake subscriber account.
@@ -1958,7 +1958,7 @@ module Aws::SecurityLake
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-securitylake'
-      context[:gem_version] = '1.20.0'
+      context[:gem_version] = '1.21.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

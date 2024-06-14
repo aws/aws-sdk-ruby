@@ -97,8 +97,10 @@ module Aws::NetworkManager
       attr_accessor resource_arn: ::String
       attr_accessor attachment_policy_rule_number: ::Integer
       attr_accessor segment_name: ::String
+      attr_accessor network_function_group_name: ::String
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor proposed_segment_change: Types::ProposedSegmentChange
+      attr_accessor proposed_network_function_group_change: Types::ProposedNetworkFunctionGroupChange
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       SENSITIVE: []
@@ -215,13 +217,14 @@ module Aws::NetworkManager
       attr_accessor created_at: ::Time
       attr_accessor state: ("CREATING" | "UPDATING" | "AVAILABLE" | "DELETING")
       attr_accessor segments: ::Array[Types::CoreNetworkSegment]
+      attr_accessor network_function_groups: ::Array[Types::CoreNetworkNetworkFunctionGroup]
       attr_accessor edges: ::Array[Types::CoreNetworkEdge]
       attr_accessor tags: ::Array[Types::Tag]
       SENSITIVE: []
     end
 
     class CoreNetworkChange
-      attr_accessor type: ("CORE_NETWORK_SEGMENT" | "CORE_NETWORK_EDGE" | "ATTACHMENT_MAPPING" | "ATTACHMENT_ROUTE_PROPAGATION" | "ATTACHMENT_ROUTE_STATIC" | "CORE_NETWORK_CONFIGURATION" | "SEGMENTS_CONFIGURATION" | "SEGMENT_ACTIONS_CONFIGURATION" | "ATTACHMENT_POLICIES_CONFIGURATION")
+      attr_accessor type: ("CORE_NETWORK_SEGMENT" | "NETWORK_FUNCTION_GROUP" | "CORE_NETWORK_EDGE" | "ATTACHMENT_MAPPING" | "ATTACHMENT_ROUTE_PROPAGATION" | "ATTACHMENT_ROUTE_STATIC" | "CORE_NETWORK_CONFIGURATION" | "SEGMENTS_CONFIGURATION" | "SEGMENT_ACTIONS_CONFIGURATION" | "ATTACHMENT_POLICIES_CONFIGURATION")
       attr_accessor action: ("ADD" | "MODIFY" | "REMOVE")
       attr_accessor identifier: ::String
       attr_accessor previous_values: Types::CoreNetworkChangeValues
@@ -231,7 +234,7 @@ module Aws::NetworkManager
     end
 
     class CoreNetworkChangeEvent
-      attr_accessor type: ("CORE_NETWORK_SEGMENT" | "CORE_NETWORK_EDGE" | "ATTACHMENT_MAPPING" | "ATTACHMENT_ROUTE_PROPAGATION" | "ATTACHMENT_ROUTE_STATIC" | "CORE_NETWORK_CONFIGURATION" | "SEGMENTS_CONFIGURATION" | "SEGMENT_ACTIONS_CONFIGURATION" | "ATTACHMENT_POLICIES_CONFIGURATION")
+      attr_accessor type: ("CORE_NETWORK_SEGMENT" | "NETWORK_FUNCTION_GROUP" | "CORE_NETWORK_EDGE" | "ATTACHMENT_MAPPING" | "ATTACHMENT_ROUTE_PROPAGATION" | "ATTACHMENT_ROUTE_STATIC" | "CORE_NETWORK_CONFIGURATION" | "SEGMENTS_CONFIGURATION" | "SEGMENT_ACTIONS_CONFIGURATION" | "ATTACHMENT_POLICIES_CONFIGURATION")
       attr_accessor action: ("ADD" | "MODIFY" | "REMOVE")
       attr_accessor identifier_path: ::String
       attr_accessor event_time: ::Time
@@ -243,6 +246,7 @@ module Aws::NetworkManager
     class CoreNetworkChangeEventValues
       attr_accessor edge_location: ::String
       attr_accessor segment_name: ::String
+      attr_accessor network_function_group_name: ::String
       attr_accessor attachment_id: ::String
       attr_accessor cidr: ::String
       SENSITIVE: []
@@ -250,12 +254,14 @@ module Aws::NetworkManager
 
     class CoreNetworkChangeValues
       attr_accessor segment_name: ::String
+      attr_accessor network_function_group_name: ::String
       attr_accessor edge_locations: ::Array[::String]
       attr_accessor asn: ::Integer
       attr_accessor cidr: ::String
       attr_accessor destination_identifier: ::String
       attr_accessor inside_cidr_blocks: ::Array[::String]
       attr_accessor shared_segments: ::Array[::String]
+      attr_accessor service_insertion_actions: ::Array[Types::ServiceInsertionAction]
       SENSITIVE: []
     end
 
@@ -263,6 +269,20 @@ module Aws::NetworkManager
       attr_accessor edge_location: ::String
       attr_accessor asn: ::Integer
       attr_accessor inside_cidr_blocks: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class CoreNetworkNetworkFunctionGroup
+      attr_accessor name: ::String
+      attr_accessor edge_locations: ::Array[::String]
+      attr_accessor segments: Types::ServiceInsertionSegments
+      SENSITIVE: []
+    end
+
+    class CoreNetworkNetworkFunctionGroupIdentifier
+      attr_accessor core_network_id: ::String
+      attr_accessor network_function_group_name: ::String
+      attr_accessor edge_location: ::String
       SENSITIVE: []
     end
 
@@ -710,6 +730,12 @@ module Aws::NetworkManager
       SENSITIVE: []
     end
 
+    class EdgeOverride
+      attr_accessor edge_sets: ::Array[::Array[::String]]
+      attr_accessor use_edge: ::String
+      SENSITIVE: []
+    end
+
     class ExecuteCoreNetworkChangeSetRequest
       attr_accessor core_network_id: ::String
       attr_accessor policy_version_id: ::Integer
@@ -948,7 +974,7 @@ module Aws::NetworkManager
     class GetNetworkRoutesResponse
       attr_accessor route_table_arn: ::String
       attr_accessor core_network_segment_edge: Types::CoreNetworkSegmentEdgeIdentifier
-      attr_accessor route_table_type: ("TRANSIT_GATEWAY_ROUTE_TABLE" | "CORE_NETWORK_SEGMENT")
+      attr_accessor route_table_type: ("TRANSIT_GATEWAY_ROUTE_TABLE" | "CORE_NETWORK_SEGMENT" | "NETWORK_FUNCTION_GROUP")
       attr_accessor route_table_timestamp: ::Time
       attr_accessor network_routes: ::Array[Types::NetworkRoute]
       SENSITIVE: []
@@ -1215,6 +1241,11 @@ module Aws::NetworkManager
       SENSITIVE: []
     end
 
+    class NetworkFunctionGroup
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
     class NetworkResource
       attr_accessor registered_gateway_arn: ::String
       attr_accessor core_network_id: ::String
@@ -1259,6 +1290,7 @@ module Aws::NetworkManager
       attr_accessor core_network_attachment_id: ::String
       attr_accessor transit_gateway_attachment_id: ::String
       attr_accessor segment_name: ::String
+      attr_accessor network_function_group_name: ::String
       attr_accessor edge_location: ::String
       attr_accessor resource_type: ::String
       attr_accessor resource_id: ::String
@@ -1304,6 +1336,13 @@ module Aws::NetworkManager
       attr_accessor resource_arn: ::String
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor created_at: ::Time
+      SENSITIVE: []
+    end
+
+    class ProposedNetworkFunctionGroupChange
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor attachment_policy_rule_number: ::Integer
+      attr_accessor network_function_group_name: ::String
       SENSITIVE: []
     end
 
@@ -1427,6 +1466,21 @@ module Aws::NetworkManager
     class RouteTableIdentifier
       attr_accessor transit_gateway_route_table_arn: ::String
       attr_accessor core_network_segment_edge: Types::CoreNetworkSegmentEdgeIdentifier
+      attr_accessor core_network_network_function_group: Types::CoreNetworkNetworkFunctionGroupIdentifier
+      SENSITIVE: []
+    end
+
+    class ServiceInsertionAction
+      attr_accessor action: ("send-via" | "send-to")
+      attr_accessor mode: ("dual-hop" | "single-hop")
+      attr_accessor when_sent_to: Types::WhenSentTo
+      attr_accessor via: Types::Via
+      SENSITIVE: []
+    end
+
+    class ServiceInsertionSegments
+      attr_accessor send_via: ::Array[::String]
+      attr_accessor send_to: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -1669,6 +1723,12 @@ module Aws::NetworkManager
       SENSITIVE: []
     end
 
+    class Via
+      attr_accessor network_function_groups: ::Array[Types::NetworkFunctionGroup]
+      attr_accessor with_edge_overrides: ::Array[Types::EdgeOverride]
+      SENSITIVE: []
+    end
+
     class VpcAttachment
       attr_accessor attachment: Types::Attachment
       attr_accessor subnet_arns: ::Array[::String]
@@ -1679,6 +1739,11 @@ module Aws::NetworkManager
     class VpcOptions
       attr_accessor ipv_6_support: bool
       attr_accessor appliance_mode_support: bool
+      SENSITIVE: []
+    end
+
+    class WhenSentTo
+      attr_accessor when_sent_to_segments_list: ::Array[::String]
       SENSITIVE: []
     end
   end

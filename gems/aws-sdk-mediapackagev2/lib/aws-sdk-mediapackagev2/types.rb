@@ -94,6 +94,20 @@ module Aws::MediaPackageV2
     #   future identification purposes.
     #   @return [String]
     #
+    # @!attribute [rw] input_type
+    #   The input type will be an immutable field which will be used to
+    #   define whether the channel will allow CMAF ingest or HLS ingest. If
+    #   unprovided, it will default to HLS to preserve current behavior.
+    #
+    #   The allowed values are:
+    #
+    #   * `HLS` - The HLS streaming specification (which defines M3U8
+    #     manifests and TS segments).
+    #
+    #   * `CMAF` - The DASH-IF CMAF Ingest specification (which defines CMAF
+    #     segments with optional DASH manifests).
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackagev2-2022-12-25/ChannelListConfiguration AWS API Documentation
     #
     class ChannelListConfiguration < Struct.new(
@@ -102,7 +116,8 @@ module Aws::MediaPackageV2
       :channel_group_name,
       :created_at,
       :modified_at,
-      :description)
+      :description,
+      :input_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -240,6 +255,20 @@ module Aws::MediaPackageV2
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] input_type
+    #   The input type will be an immutable field which will be used to
+    #   define whether the channel will allow CMAF ingest or HLS ingest. If
+    #   unprovided, it will default to HLS to preserve current behavior.
+    #
+    #   The allowed values are:
+    #
+    #   * `HLS` - The HLS streaming specification (which defines M3U8
+    #     manifests and TS segments).
+    #
+    #   * `CMAF` - The DASH-IF CMAF Ingest specification (which defines CMAF
+    #     segments with optional DASH manifests).
+    #   @return [String]
+    #
     # @!attribute [rw] description
     #   Enter any descriptive text that helps you to identify the channel.
     #   @return [String]
@@ -259,6 +288,7 @@ module Aws::MediaPackageV2
       :channel_group_name,
       :channel_name,
       :client_token,
+      :input_type,
       :description,
       :tags)
       SENSITIVE = []
@@ -297,6 +327,20 @@ module Aws::MediaPackageV2
     #   The list of ingest endpoints.
     #   @return [Array<Types::IngestEndpoint>]
     #
+    # @!attribute [rw] input_type
+    #   The input type will be an immutable field which will be used to
+    #   define whether the channel will allow CMAF ingest or HLS ingest. If
+    #   unprovided, it will default to HLS to preserve current behavior.
+    #
+    #   The allowed values are:
+    #
+    #   * `HLS` - The HLS streaming specification (which defines M3U8
+    #     manifests and TS segments).
+    #
+    #   * `CMAF` - The DASH-IF CMAF Ingest specification (which defines CMAF
+    #     segments with optional DASH manifests).
+    #   @return [String]
+    #
     # @!attribute [rw] etag
     #   The current Entity Tag (ETag) associated with this resource. The
     #   entity tag can be used to safely make concurrent updates to the
@@ -318,6 +362,7 @@ module Aws::MediaPackageV2
       :modified_at,
       :description,
       :ingest_endpoints,
+      :input_type,
       :etag,
       :tags)
       SENSITIVE = []
@@ -605,6 +650,10 @@ module Aws::MediaPackageV2
     #   A DASH manifest configuration.
     #   @return [Array<Types::CreateDashManifestConfiguration>]
     #
+    # @!attribute [rw] force_endpoint_error_configuration
+    #   The failover settings for the endpoint.
+    #   @return [Types::ForceEndpointErrorConfiguration]
+    #
     # @!attribute [rw] tags
     #   A comma-separated list of tag key:value pairs that you define. For
     #   example:
@@ -628,6 +677,7 @@ module Aws::MediaPackageV2
       :hls_manifests,
       :low_latency_hls_manifests,
       :dash_manifests,
+      :force_endpoint_error_configuration,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -694,6 +744,10 @@ module Aws::MediaPackageV2
     #   A DASH manifest configuration.
     #   @return [Array<Types::GetDashManifestConfiguration>]
     #
+    # @!attribute [rw] force_endpoint_error_configuration
+    #   The failover settings for the endpoint.
+    #   @return [Types::ForceEndpointErrorConfiguration]
+    #
     # @!attribute [rw] etag
     #   The current Entity Tag (ETag) associated with this resource. The
     #   entity tag can be used to safely make concurrent updates to the
@@ -721,6 +775,7 @@ module Aws::MediaPackageV2
       :hls_manifests,
       :low_latency_hls_manifests,
       :dash_manifests,
+      :force_endpoint_error_configuration,
       :etag,
       :tags)
       SENSITIVE = []
@@ -1067,6 +1122,31 @@ module Aws::MediaPackageV2
       include Aws::Structure
     end
 
+    # The failover settings for the endpoint.
+    #
+    # @!attribute [rw] endpoint_error_conditions
+    #   The failover conditions for the endpoint. The options are:
+    #
+    #   * `STALE_MANIFEST` - The manifest stalled and there are no new
+    #     segments or parts.
+    #
+    #   * `INCOMPLETE_MANIFEST` - There is a gap in the manifest.
+    #
+    #   * `MISSING_DRM_KEY` - Key rotation is enabled but we're unable to
+    #     fetch the key for the current key period.
+    #
+    #   * `SLATE_INPUT` - The segments which contain slate content are
+    #     considered to be missing content.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackagev2-2022-12-25/ForceEndpointErrorConfiguration AWS API Documentation
+    #
+    class ForceEndpointErrorConfiguration < Struct.new(
+      :endpoint_error_conditions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] channel_group_name
     #   The name that describes the channel group. The name is the primary
     #   identifier for the channel group, and must be unique for your
@@ -1235,6 +1315,20 @@ module Aws::MediaPackageV2
     #   The list of ingest endpoints.
     #   @return [Array<Types::IngestEndpoint>]
     #
+    # @!attribute [rw] input_type
+    #   The input type will be an immutable field which will be used to
+    #   define whether the channel will allow CMAF ingest or HLS ingest. If
+    #   unprovided, it will default to HLS to preserve current behavior.
+    #
+    #   The allowed values are:
+    #
+    #   * `HLS` - The HLS streaming specification (which defines M3U8
+    #     manifests and TS segments).
+    #
+    #   * `CMAF` - The DASH-IF CMAF Ingest specification (which defines CMAF
+    #     segments with optional DASH manifests).
+    #   @return [String]
+    #
     # @!attribute [rw] etag
     #   The current Entity Tag (ETag) associated with this resource. The
     #   entity tag can be used to safely make concurrent updates to the
@@ -1256,6 +1350,7 @@ module Aws::MediaPackageV2
       :modified_at,
       :description,
       :ingest_endpoints,
+      :input_type,
       :etag,
       :tags)
       SENSITIVE = []
@@ -1638,6 +1733,14 @@ module Aws::MediaPackageV2
     #   A low-latency HLS manifest configuration.
     #   @return [Array<Types::GetLowLatencyHlsManifestConfiguration>]
     #
+    # @!attribute [rw] dash_manifests
+    #   A DASH manifest configuration.
+    #   @return [Array<Types::GetDashManifestConfiguration>]
+    #
+    # @!attribute [rw] force_endpoint_error_configuration
+    #   The failover settings for the endpoint.
+    #   @return [Types::ForceEndpointErrorConfiguration]
+    #
     # @!attribute [rw] etag
     #   The current Entity Tag (ETag) associated with this resource. The
     #   entity tag can be used to safely make concurrent updates to the
@@ -1648,10 +1751,6 @@ module Aws::MediaPackageV2
     #   The comma-separated list of tag key:value pairs assigned to the
     #   origin endpoint.
     #   @return [Hash<String,String>]
-    #
-    # @!attribute [rw] dash_manifests
-    #   A DASH manifest configuration.
-    #   @return [Array<Types::GetDashManifestConfiguration>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackagev2-2022-12-25/GetOriginEndpointResponse AWS API Documentation
     #
@@ -1668,9 +1767,10 @@ module Aws::MediaPackageV2
       :startover_window_seconds,
       :hls_manifests,
       :low_latency_hls_manifests,
+      :dash_manifests,
+      :force_endpoint_error_configuration,
       :etag,
-      :tags,
-      :dash_manifests)
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2007,6 +2107,10 @@ module Aws::MediaPackageV2
     #   A DASH manifest configuration.
     #   @return [Array<Types::ListDashManifestConfiguration>]
     #
+    # @!attribute [rw] force_endpoint_error_configuration
+    #   The failover settings for the endpoint.
+    #   @return [Types::ForceEndpointErrorConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackagev2-2022-12-25/OriginEndpointListConfiguration AWS API Documentation
     #
     class OriginEndpointListConfiguration < Struct.new(
@@ -2020,7 +2124,8 @@ module Aws::MediaPackageV2
       :modified_at,
       :hls_manifests,
       :low_latency_hls_manifests,
-      :dash_manifests)
+      :dash_manifests,
+      :force_endpoint_error_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2511,6 +2616,20 @@ module Aws::MediaPackageV2
     #   The list of ingest endpoints.
     #   @return [Array<Types::IngestEndpoint>]
     #
+    # @!attribute [rw] input_type
+    #   The input type will be an immutable field which will be used to
+    #   define whether the channel will allow CMAF ingest or HLS ingest. If
+    #   unprovided, it will default to HLS to preserve current behavior.
+    #
+    #   The allowed values are:
+    #
+    #   * `HLS` - The HLS streaming specification (which defines M3U8
+    #     manifests and TS segments).
+    #
+    #   * `CMAF` - The DASH-IF CMAF Ingest specification (which defines CMAF
+    #     segments with optional DASH manifests).
+    #   @return [String]
+    #
     # @!attribute [rw] etag
     #   The current Entity Tag (ETag) associated with this resource. The
     #   entity tag can be used to safely make concurrent updates to the
@@ -2532,6 +2651,7 @@ module Aws::MediaPackageV2
       :modified_at,
       :description,
       :ingest_endpoints,
+      :input_type,
       :etag,
       :tags)
       SENSITIVE = []
@@ -2591,6 +2711,10 @@ module Aws::MediaPackageV2
     #   A DASH manifest configuration.
     #   @return [Array<Types::CreateDashManifestConfiguration>]
     #
+    # @!attribute [rw] force_endpoint_error_configuration
+    #   The failover settings for the endpoint.
+    #   @return [Types::ForceEndpointErrorConfiguration]
+    #
     # @!attribute [rw] etag
     #   The expected current Entity Tag (ETag) for the resource. If the
     #   specified ETag does not match the resource's current entity tag,
@@ -2610,6 +2734,7 @@ module Aws::MediaPackageV2
       :hls_manifests,
       :low_latency_hls_manifests,
       :dash_manifests,
+      :force_endpoint_error_configuration,
       :etag)
       SENSITIVE = []
       include Aws::Structure
@@ -2672,6 +2797,10 @@ module Aws::MediaPackageV2
     #   A low-latency HLS manifest configuration.
     #   @return [Array<Types::GetLowLatencyHlsManifestConfiguration>]
     #
+    # @!attribute [rw] force_endpoint_error_configuration
+    #   The failover settings for the endpoint.
+    #   @return [Types::ForceEndpointErrorConfiguration]
+    #
     # @!attribute [rw] etag
     #   The current Entity Tag (ETag) associated with this resource. The
     #   entity tag can be used to safely make concurrent updates to the
@@ -2702,6 +2831,7 @@ module Aws::MediaPackageV2
       :startover_window_seconds,
       :hls_manifests,
       :low_latency_hls_manifests,
+      :force_endpoint_error_configuration,
       :etag,
       :tags,
       :dash_manifests)

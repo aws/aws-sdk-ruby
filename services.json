@@ -62,6 +62,9 @@
   "AppSync": {
     "models": "appsync/2017-07-25"
   },
+  "AppTest": {
+    "models": "apptest/2022-12-06"
+  },
   "Appflow": {
     "models": "appflow/2020-08-23"
   },
@@ -110,10 +113,6 @@
   },
   "BackupGateway": {
     "models": "backup-gateway/2021-01-01"
-  },
-  "BackupStorage": {
-    "models": "backupstorage/2018-04-10",
-    "deprecated": true
   },
   "Batch": {
     "models": "batch/2016-08-10"
@@ -872,6 +871,9 @@
   },
   "PcaConnectorAd": {
     "models": "pca-connector-ad/2018-05-10"
+  },
+  "PcaConnectorScep": {
+    "models": "pca-connector-scep/2018-05-10"
   },
   "Personalize": {
     "models": "personalize/2018-05-22"

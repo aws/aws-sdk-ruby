@@ -10,8 +10,8 @@
 module Aws::AccessAnalyzer
   module Types
 
-    # Contains information about actions that define permissions to check
-    # against a policy.
+    # Contains information about actions and resources that define
+    # permissions to check against a policy.
     #
     # @!attribute [rw] actions
     #   A list of actions for the access permissions. Any strings that can
@@ -19,10 +19,17 @@ module Aws::AccessAnalyzer
     #   actions to check.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] resources
+    #   A list of resources for the access permissions. Any strings that can
+    #   be used as a resource in an IAM policy can be used in the list of
+    #   resources to check.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/Access AWS API Documentation
     #
     class Access < Struct.new(
-      :actions)
+      :actions,
+      :resources)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -575,7 +582,13 @@ module Aws::AccessAnalyzer
     #
     # @!attribute [rw] access
     #   An access object containing the permissions that shouldn't be
-    #   granted by the specified policy.
+    #   granted by the specified policy. If only actions are specified, IAM
+    #   Access Analyzer checks for access of the actions on all resources in
+    #   the policy. If only resources are specified, then IAM Access
+    #   Analyzer checks which actions have access to the specified
+    #   resources. If both actions and resources are specified, then IAM
+    #   Access Analyzer checks which of the specified actions have access to
+    #   the specified resources.
     #   @return [Array<Types::Access>]
     #
     # @!attribute [rw] policy_type
@@ -675,6 +688,55 @@ module Aws::AccessAnalyzer
     # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/CheckNoNewAccessResponse AWS API Documentation
     #
     class CheckNoNewAccessResponse < Struct.new(
+      :result,
+      :message,
+      :reasons)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] policy_document
+    #   The JSON policy document to evaluate for public access.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The type of resource to evaluate for public access. For example, to
+    #   check for public access to Amazon S3 buckets, you can choose
+    #   `AWS::S3::Bucket` for the resource type.
+    #
+    #   For resource types not supported as valid values, IAM Access
+    #   Analyzer will return an error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/CheckNoPublicAccessRequest AWS API Documentation
+    #
+    class CheckNoPublicAccessRequest < Struct.new(
+      :policy_document,
+      :resource_type)
+      SENSITIVE = [:policy_document]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] result
+    #   The result of the check for public access to the specified resource
+    #   type. If the result is `PASS`, the policy doesn't allow public
+    #   access to the specified resource type. If the result is `FAIL`, the
+    #   policy might allow public access to the specified resource type.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The message indicating whether the specified policy allows public
+    #   access to resources.
+    #   @return [String]
+    #
+    # @!attribute [rw] reasons
+    #   A list of reasons why the specified resource policy grants public
+    #   access for the resource type.
+    #   @return [Array<Types::ReasonSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/CheckNoPublicAccessResponse AWS API Documentation
+    #
+    class CheckNoPublicAccessResponse < Struct.new(
       :result,
       :message,
       :reasons)
@@ -1687,6 +1749,28 @@ module Aws::AccessAnalyzer
       include Aws::Structure
     end
 
+    # @!attribute [rw] analyzer_arn
+    #   The [ARN of the analyzer][1] used to generate the finding
+    #   recommendation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-getting-started.html#permission-resources
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The unique ID for the finding recommendation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/GenerateFindingRecommendationRequest AWS API Documentation
+    #
+    class GenerateFindingRecommendationRequest < Struct.new(
+      :analyzer_arn,
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains the text for the generated policy.
     #
     # @!attribute [rw] policy
@@ -1887,6 +1971,88 @@ module Aws::AccessAnalyzer
     #
     class GetArchiveRuleResponse < Struct.new(
       :archive_rule)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] analyzer_arn
+    #   The [ARN of the analyzer][1] used to generate the finding
+    #   recommendation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-getting-started.html#permission-resources
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The unique ID for the finding recommendation.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in the response.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A token used for pagination of results returned.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/GetFindingRecommendationRequest AWS API Documentation
+    #
+    class GetFindingRecommendationRequest < Struct.new(
+      :analyzer_arn,
+      :id,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] started_at
+    #   The time at which the retrieval of the finding recommendation was
+    #   started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] completed_at
+    #   The time at which the retrieval of the finding recommendation was
+    #   completed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] next_token
+    #   A token used for pagination of results returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] error
+    #   Detailed information about the reason that the retrieval of a
+    #   recommendation for the finding failed.
+    #   @return [Types::RecommendationError]
+    #
+    # @!attribute [rw] resource_arn
+    #   The ARN of the resource of the finding.
+    #   @return [String]
+    #
+    # @!attribute [rw] recommended_steps
+    #   A group of recommended steps for the finding.
+    #   @return [Array<Types::RecommendedStep>]
+    #
+    # @!attribute [rw] recommendation_type
+    #   The type of recommendation for the finding.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the retrieval of the finding recommendation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/GetFindingRecommendationResponse AWS API Documentation
+    #
+    class GetFindingRecommendationResponse < Struct.new(
+      :started_at,
+      :completed_at,
+      :next_token,
+      :error,
+      :resource_arn,
+      :recommended_steps,
+      :recommendation_type,
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3167,6 +3333,50 @@ module Aws::AccessAnalyzer
       include Aws::Structure
     end
 
+    # Contains information about the reason that the retrieval of a
+    # recommendation for a finding failed.
+    #
+    # @!attribute [rw] code
+    #   The error code for a failed retrieval of a recommendation for a
+    #   finding.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The error message for a failed retrieval of a recommendation for a
+    #   finding.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/RecommendationError AWS API Documentation
+    #
+    class RecommendationError < Struct.new(
+      :code,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about a recommended step for an unused access
+    # analyzer finding.
+    #
+    # @note RecommendedStep is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of RecommendedStep corresponding to the set member.
+    #
+    # @!attribute [rw] unused_permissions_recommended_step
+    #   A recommended step for an unused permissions finding.
+    #   @return [Types::UnusedPermissionsRecommendedStep]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/RecommendedStep AWS API Documentation
+    #
+    class RecommendedStep < Struct.new(
+      :unused_permissions_recommended_step,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class UnusedPermissionsRecommendedStep < RecommendedStep; end
+      class Unknown < RecommendedStep; end
+    end
+
     # The specified resource could not be found.
     #
     # @!attribute [rw] message
@@ -3930,7 +4140,7 @@ module Aws::AccessAnalyzer
     #   @return [String]
     #
     # @!attribute [rw] last_accessed
-    #   The time at which the permission last accessed.
+    #   The time at which the permission was last accessed.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/UnusedPermissionDetails AWS API Documentation
@@ -3939,6 +4149,41 @@ module Aws::AccessAnalyzer
       :actions,
       :service_namespace,
       :last_accessed)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about the action to take for a policy in an
+    # unused permissions finding.
+    #
+    # @!attribute [rw] policy_updated_at
+    #   The time at which the existing policy for the unused permissions
+    #   finding was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] recommended_action
+    #   A recommendation of whether to create or detach a policy for an
+    #   unused permissions finding.
+    #   @return [String]
+    #
+    # @!attribute [rw] recommended_policy
+    #   If the recommended action for the unused permissions finding is to
+    #   replace the existing policy, the contents of the recommended policy
+    #   to replace the policy specified in the `existingPolicyId` field.
+    #   @return [String]
+    #
+    # @!attribute [rw] existing_policy_id
+    #   If the recommended action for the unused permissions finding is to
+    #   detach a policy, the ID of an existing policy to be detached.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/UnusedPermissionsRecommendedStep AWS API Documentation
+    #
+    class UnusedPermissionsRecommendedStep < Struct.new(
+      :policy_updated_at,
+      :recommended_action,
+      :recommended_policy,
+      :existing_policy_id)
       SENSITIVE = []
       include Aws::Structure
     end
