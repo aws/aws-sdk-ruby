@@ -66,6 +66,17 @@ module Aws::DataZone
       SENSITIVE: []
     end
 
+    class ActionParameters
+      attr_accessor aws_console_link: Types::AwsConsoleLinkParameters
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class AwsConsoleLink < ActionParameters
+      end
+      class Unknown < ActionParameters
+      end
+    end
+
     class AssetItem
       attr_accessor additional_attributes: Types::AssetItemAdditionalAttributes
       attr_accessor created_at: ::Time
@@ -161,6 +172,21 @@ module Aws::DataZone
       attr_accessor updated_at: ::Time
       attr_accessor updated_by: ::String
       SENSITIVE: [:description]
+    end
+
+    class AssociateEnvironmentRoleInput
+      attr_accessor domain_identifier: ::String
+      attr_accessor environment_identifier: ::String
+      attr_accessor environment_role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateEnvironmentRoleOutput < Aws::EmptyStructure
+    end
+
+    class AwsConsoleLinkParameters
+      attr_accessor uri: ::String
+      SENSITIVE: []
     end
 
     class BusinessNameGenerationConfiguration
@@ -386,9 +412,31 @@ module Aws::DataZone
       SENSITIVE: []
     end
 
+    class CreateEnvironmentActionInput
+      attr_accessor description: ::String
+      attr_accessor domain_identifier: ::String
+      attr_accessor environment_identifier: ::String
+      attr_accessor name: ::String
+      attr_accessor parameters: Types::ActionParameters
+      SENSITIVE: []
+    end
+
+    class CreateEnvironmentActionOutput
+      attr_accessor description: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor environment_id: ::String
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor parameters: Types::ActionParameters
+      SENSITIVE: []
+    end
+
     class CreateEnvironmentInput
       attr_accessor description: ::String
       attr_accessor domain_identifier: ::String
+      attr_accessor environment_account_identifier: ::String
+      attr_accessor environment_account_region: ::String
+      attr_accessor environment_blueprint_identifier: ::String
       attr_accessor environment_profile_identifier: ::String
       attr_accessor glossary_terms: ::Array[::String]
       attr_accessor name: ::String
@@ -814,6 +862,7 @@ module Aws::DataZone
       attr_accessor client_token: ::String
       attr_accessor domain_identifier: ::String
       attr_accessor identifier: ::String
+      attr_accessor retain_permissions_on_revoke_failure: bool
       SENSITIVE: []
     end
 
@@ -833,7 +882,9 @@ module Aws::DataZone
       attr_accessor name: ::String
       attr_accessor project_id: ::String
       attr_accessor publish_on_import: bool
+      attr_accessor retain_permissions_on_revoke_failure: bool
       attr_accessor schedule: Types::ScheduleConfiguration
+      attr_accessor self_grant_status: Types::SelfGrantStatusOutput
       attr_accessor status: ("CREATING" | "FAILED_CREATION" | "READY" | "UPDATING" | "FAILED_UPDATE" | "RUNNING" | "DELETING" | "FAILED_DELETION")
       attr_accessor type: ::String
       attr_accessor updated_at: ::Time
@@ -849,6 +900,13 @@ module Aws::DataZone
 
     class DeleteDomainOutput
       attr_accessor status: ("CREATING" | "AVAILABLE" | "CREATION_FAILED" | "DELETING" | "DELETED" | "DELETION_FAILED")
+      SENSITIVE: []
+    end
+
+    class DeleteEnvironmentActionInput
+      attr_accessor domain_identifier: ::String
+      attr_accessor environment_identifier: ::String
+      attr_accessor identifier: ::String
       SENSITIVE: []
     end
 
@@ -997,6 +1055,16 @@ module Aws::DataZone
       SENSITIVE: [:name, :short_description]
     end
 
+    class DisassociateEnvironmentRoleInput
+      attr_accessor domain_identifier: ::String
+      attr_accessor environment_identifier: ::String
+      attr_accessor environment_role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateEnvironmentRoleOutput < Aws::EmptyStructure
+    end
+
     class DomainSummary
       attr_accessor arn: ::String
       attr_accessor created_at: ::Time
@@ -1008,6 +1076,16 @@ module Aws::DataZone
       attr_accessor portal_url: ::String
       attr_accessor status: ("CREATING" | "AVAILABLE" | "CREATION_FAILED" | "DELETING" | "DELETED" | "DELETION_FAILED")
       SENSITIVE: [:description, :name]
+    end
+
+    class EnvironmentActionSummary
+      attr_accessor description: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor environment_id: ::String
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor parameters: Types::ActionParameters
+      SENSITIVE: []
     end
 
     class EnvironmentBlueprintConfigurationItem
@@ -1234,6 +1312,7 @@ module Aws::DataZone
       attr_accessor publish_on_import: bool
       attr_accessor recommendation: Types::RecommendationConfiguration
       attr_accessor schedule: Types::ScheduleConfiguration
+      attr_accessor self_grant_status: Types::SelfGrantStatusOutput
       attr_accessor status: ("CREATING" | "FAILED_CREATION" | "READY" | "UPDATING" | "FAILED_UPDATE" | "RUNNING" | "DELETING" | "FAILED_DELETION")
       attr_accessor type: ::String
       attr_accessor updated_at: ::Time
@@ -1281,6 +1360,23 @@ module Aws::DataZone
       attr_accessor single_sign_on: Types::SingleSignOn
       attr_accessor status: ("CREATING" | "AVAILABLE" | "CREATION_FAILED" | "DELETING" | "DELETED" | "DELETION_FAILED")
       attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class GetEnvironmentActionInput
+      attr_accessor domain_identifier: ::String
+      attr_accessor environment_identifier: ::String
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetEnvironmentActionOutput
+      attr_accessor description: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor environment_id: ::String
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor parameters: Types::ActionParameters
       SENSITIVE: []
     end
 
@@ -1695,6 +1791,11 @@ module Aws::DataZone
       SENSITIVE: []
     end
 
+    class GlueSelfGrantStatusOutput
+      attr_accessor self_grant_status_details: ::Array[Types::SelfGrantStatusDetail]
+      SENSITIVE: []
+    end
+
     class GrantedEntity
       attr_accessor listing: Types::ListingRevision
       attr_accessor unknown: untyped
@@ -1817,6 +1918,20 @@ module Aws::DataZone
 
     class ListDomainsOutput
       attr_accessor items: ::Array[Types::DomainSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListEnvironmentActionsInput
+      attr_accessor domain_identifier: ::String
+      attr_accessor environment_identifier: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListEnvironmentActionsOutput
+      attr_accessor items: ::Array[Types::EnvironmentActionSummary]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
@@ -2271,6 +2386,11 @@ module Aws::DataZone
       SENSITIVE: []
     end
 
+    class RedshiftSelfGrantStatusOutput
+      attr_accessor self_grant_status_details: ::Array[Types::SelfGrantStatusDetail]
+      SENSITIVE: []
+    end
+
     class RedshiftServerlessStorage
       attr_accessor workgroup_name: ::String
       SENSITIVE: []
@@ -2543,6 +2663,28 @@ module Aws::DataZone
       attr_accessor items: ::Array[Types::UserProfileSummary]
       attr_accessor next_token: ::String
       SENSITIVE: []
+    end
+
+    class SelfGrantStatusDetail
+      attr_accessor database_name: ::String
+      attr_accessor failure_cause: ::String
+      attr_accessor schema_name: ::String
+      attr_accessor status: ("GRANT_PENDING" | "REVOKE_PENDING" | "GRANT_IN_PROGRESS" | "REVOKE_IN_PROGRESS" | "GRANTED" | "GRANT_FAILED" | "REVOKE_FAILED")
+      SENSITIVE: []
+    end
+
+    class SelfGrantStatusOutput
+      attr_accessor glue_self_grant_status: Types::GlueSelfGrantStatusOutput
+      attr_accessor redshift_self_grant_status: Types::RedshiftSelfGrantStatusOutput
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class GlueSelfGrantStatus < SelfGrantStatusOutput
+      end
+      class RedshiftSelfGrantStatus < SelfGrantStatusOutput
+      end
+      class Unknown < SelfGrantStatusOutput
+      end
     end
 
     class ServiceQuotaExceededException
@@ -2838,6 +2980,7 @@ module Aws::DataZone
       attr_accessor name: ::String
       attr_accessor publish_on_import: bool
       attr_accessor recommendation: Types::RecommendationConfiguration
+      attr_accessor retain_permissions_on_revoke_failure: bool
       attr_accessor schedule: Types::ScheduleConfiguration
       SENSITIVE: [:asset_forms_input, :description, :name, :schedule]
     end
@@ -2859,7 +3002,9 @@ module Aws::DataZone
       attr_accessor project_id: ::String
       attr_accessor publish_on_import: bool
       attr_accessor recommendation: Types::RecommendationConfiguration
+      attr_accessor retain_permissions_on_revoke_failure: bool
       attr_accessor schedule: Types::ScheduleConfiguration
+      attr_accessor self_grant_status: Types::SelfGrantStatusOutput
       attr_accessor status: ("CREATING" | "FAILED_CREATION" | "READY" | "UPDATING" | "FAILED_UPDATE" | "RUNNING" | "DELETING" | "FAILED_DELETION")
       attr_accessor type: ::String
       attr_accessor updated_at: ::Time
@@ -2883,6 +3028,26 @@ module Aws::DataZone
       attr_accessor last_updated_at: ::Time
       attr_accessor name: ::String
       attr_accessor single_sign_on: Types::SingleSignOn
+      SENSITIVE: []
+    end
+
+    class UpdateEnvironmentActionInput
+      attr_accessor description: ::String
+      attr_accessor domain_identifier: ::String
+      attr_accessor environment_identifier: ::String
+      attr_accessor identifier: ::String
+      attr_accessor name: ::String
+      attr_accessor parameters: Types::ActionParameters
+      SENSITIVE: []
+    end
+
+    class UpdateEnvironmentActionOutput
+      attr_accessor description: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor environment_id: ::String
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor parameters: Types::ActionParameters
       SENSITIVE: []
     end
 

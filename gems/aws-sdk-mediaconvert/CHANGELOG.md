@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.130.0 (2024-06-14)
+------------------
+
+* Feature - This release adds the ability to search for historical job records within the management console using a search box and/or via the SDK/CLI with partial string matching search on input file name.
+
 1.129.0 (2024-06-05)
 ------------------
 

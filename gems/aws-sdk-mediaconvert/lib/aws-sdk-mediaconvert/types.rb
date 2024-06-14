@@ -3697,8 +3697,10 @@ module Aws::MediaConvert
     #
     class DeleteQueueResponse < Aws::EmptyStructure; end
 
-    # Send an request with an empty body to the regional API endpoint to get
-    # your account API endpoint.
+    # Send a request with an empty body to the regional API endpoint to get
+    # your account API endpoint. Note that DescribeEndpoints is no longer
+    # required. We recommend that you send your requests directly to the
+    # regional endpoint instead.
     #
     # @!attribute [rw] max_results
     #   Optional. Max number of endpoints, up to twenty, that will be
@@ -11644,6 +11646,76 @@ module Aws::MediaConvert
     #
     class SccDestinationSettings < Struct.new(
       :framerate)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Retrieve a JSON array that includes job details for up to twenty of
+    # your most recent jobs. Optionally filter results further according to
+    # input file, queue, or status. To retrieve the twenty next most recent
+    # jobs, use the nextToken string returned with the array.
+    #
+    # @!attribute [rw] input_file
+    #   Optional. Provide your input file URL or your partial input file
+    #   name. The maximum length for an input file is 300 characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Optional. Number of jobs, up to twenty, that will be returned at one
+    #   time.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   Optional. Use this string, provided with the response to a previous
+    #   request, to request the next batch of jobs.
+    #   @return [String]
+    #
+    # @!attribute [rw] order
+    #   Optional. When you request lists of resources, you can specify
+    #   whether they are sorted in ASCENDING or DESCENDING order. Default
+    #   varies by resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] queue
+    #   Optional. Provide a queue name, or a queue ARN, to return only jobs
+    #   from that queue.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Optional. A job's status can be SUBMITTED, PROGRESSING, COMPLETE,
+    #   CANCELED, or ERROR.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/SearchJobsRequest AWS API Documentation
+    #
+    class SearchJobsRequest < Struct.new(
+      :input_file,
+      :max_results,
+      :next_token,
+      :order,
+      :queue,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Successful search jobs requests return a JSON array of jobs. If you
+    # don't specify how they are ordered, you will receive the most
+    # recently created first.
+    #
+    # @!attribute [rw] jobs
+    #   List of jobs.
+    #   @return [Array<Types::Job>]
+    #
+    # @!attribute [rw] next_token
+    #   Use this string to request the next batch of jobs.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/SearchJobsResponse AWS API Documentation
+    #
+    class SearchJobsResponse < Struct.new(
+      :jobs,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end

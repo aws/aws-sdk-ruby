@@ -2247,8 +2247,10 @@ module Aws::MediaConvert
       req.send_request(options)
     end
 
-    # Send an request with an empty body to the regional API endpoint to get
-    # your account API endpoint.
+    # Send a request with an empty body to the regional API endpoint to get
+    # your account API endpoint. Note that DescribeEndpoints is no longer
+    # required. We recommend that you send your requests directly to the
+    # regional endpoint instead.
     #
     # @option params [Integer] :max_results
     #   Optional. Max number of endpoints, up to twenty, that will be returned
@@ -4018,6 +4020,63 @@ module Aws::MediaConvert
       req.send_request(options)
     end
 
+    # Retrieve a JSON array that includes job details for up to twenty of
+    # your most recent jobs. Optionally filter results further according to
+    # input file, queue, or status. To retrieve the twenty next most recent
+    # jobs, use the nextToken string returned with the array.
+    #
+    # @option params [String] :input_file
+    #   Optional. Provide your input file URL or your partial input file name.
+    #   The maximum length for an input file is 300 characters.
+    #
+    # @option params [Integer] :max_results
+    #   Optional. Number of jobs, up to twenty, that will be returned at one
+    #   time.
+    #
+    # @option params [String] :next_token
+    #   Optional. Use this string, provided with the response to a previous
+    #   request, to request the next batch of jobs.
+    #
+    # @option params [String] :order
+    #   Optional. When you request lists of resources, you can specify whether
+    #   they are sorted in ASCENDING or DESCENDING order. Default varies by
+    #   resource.
+    #
+    # @option params [String] :queue
+    #   Optional. Provide a queue name, or a queue ARN, to return only jobs
+    #   from that queue.
+    #
+    # @option params [String] :status
+    #   Optional. A job's status can be SUBMITTED, PROGRESSING, COMPLETE,
+    #   CANCELED, or ERROR.
+    #
+    # @return [Types::SearchJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SearchJobsResponse#jobs #jobs} => Array&lt;Types::Job&gt;
+    #   * {Types::SearchJobsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.search_jobs({
+    #     input_file: "__string",
+    #     max_results: 1,
+    #     next_token: "__string",
+    #     order: "ASCENDING", # accepts ASCENDING, DESCENDING
+    #     queue: "__string",
+    #     status: "SUBMITTED", # accepts SUBMITTED, PROGRESSING, COMPLETE, CANCELED, ERROR
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/SearchJobs AWS API Documentation
+    #
+    # @overload search_jobs(params = {})
+    # @param [Hash] params ({})
+    def search_jobs(params = {}, options = {})
+      req = build_request(:search_jobs, params)
+      req.send_request(options)
+    end
+
     # Add tags to a MediaConvert queue, preset, or job template. For
     # information about tagging, see the User Guide at
     # https://docs.aws.amazon.com/mediaconvert/latest/ug/tagging-resources.html
@@ -5675,7 +5734,7 @@ module Aws::MediaConvert
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediaconvert'
-      context[:gem_version] = '1.129.0'
+      context[:gem_version] = '1.130.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

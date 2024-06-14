@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.9.0 (2024-06-14)
+------------------
+
+* Feature - This release introduces a new default service blueprint for custom environment creation.
+
 1.8.0 (2024-06-05)
 ------------------
 

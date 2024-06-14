@@ -3926,6 +3926,22 @@ module Aws
                       ) -> _PutPolicyResponseSuccess
                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutPolicyResponseSuccess
 
+      interface _SearchJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SearchJobsResponse]
+        def jobs: () -> ::Array[Types::Job]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaConvert/Client.html#search_jobs-instance_method
+      def search_jobs: (
+                         ?input_file: ::String,
+                         ?max_results: ::Integer,
+                         ?next_token: ::String,
+                         ?order: ("ASCENDING" | "DESCENDING"),
+                         ?queue: ::String,
+                         ?status: ("SUBMITTED" | "PROGRESSING" | "COMPLETE" | "CANCELED" | "ERROR")
+                       ) -> _SearchJobsResponseSuccess
+                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchJobsResponseSuccess
+
       interface _TagResourceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
       end

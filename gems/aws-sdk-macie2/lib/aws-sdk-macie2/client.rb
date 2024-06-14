@@ -477,6 +477,41 @@ module Aws::Macie2
       req.send_request(options)
     end
 
+    # Changes the status of automated sensitive data discovery for one or
+    # more accounts.
+    #
+    # @option params [Array<Types::AutomatedDiscoveryAccountUpdate>] :accounts
+    #
+    # @return [Types::BatchUpdateAutomatedDiscoveryAccountsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchUpdateAutomatedDiscoveryAccountsResponse#errors #errors} => Array&lt;Types::AutomatedDiscoveryAccountUpdateError&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_update_automated_discovery_accounts({
+    #     accounts: [
+    #       {
+    #         account_id: "__string",
+    #         status: "ENABLED", # accepts ENABLED, DISABLED
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.errors #=> Array
+    #   resp.errors[0].account_id #=> String
+    #   resp.errors[0].error_code #=> String, one of "ACCOUNT_PAUSED", "ACCOUNT_NOT_FOUND"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/BatchUpdateAutomatedDiscoveryAccounts AWS API Documentation
+    #
+    # @overload batch_update_automated_discovery_accounts(params = {})
+    # @param [Hash] params ({})
+    def batch_update_automated_discovery_accounts(params = {}, options = {})
+      req = build_request(:batch_update_automated_discovery_accounts, params)
+      req.send_request(options)
+    end
+
     # Creates and defines the settings for an allow list.
     #
     # @option params [required, String] :client_token
@@ -1163,6 +1198,7 @@ module Aws::Macie2
     #   resp.buckets #=> Array
     #   resp.buckets[0].account_id #=> String
     #   resp.buckets[0].allows_unencrypted_object_uploads #=> String, one of "TRUE", "FALSE", "UNKNOWN"
+    #   resp.buckets[0].automated_discovery_monitoring_status #=> String, one of "MONITORED", "NOT_MONITORED"
     #   resp.buckets[0].bucket_arn #=> String
     #   resp.buckets[0].bucket_created_at #=> Time
     #   resp.buckets[0].bucket_name #=> String
@@ -1594,10 +1630,11 @@ module Aws::Macie2
     end
 
     # Retrieves the configuration settings and status of automated sensitive
-    # data discovery for an account.
+    # data discovery for an organization or standalone account.
     #
     # @return [Types::GetAutomatedDiscoveryConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
+    #   * {Types::GetAutomatedDiscoveryConfigurationResponse#auto_enable_organization_members #auto_enable_organization_members} => String
     #   * {Types::GetAutomatedDiscoveryConfigurationResponse#classification_scope_id #classification_scope_id} => String
     #   * {Types::GetAutomatedDiscoveryConfigurationResponse#disabled_at #disabled_at} => Time
     #   * {Types::GetAutomatedDiscoveryConfigurationResponse#first_enabled_at #first_enabled_at} => Time
@@ -1607,6 +1644,7 @@ module Aws::Macie2
     #
     # @example Response structure
     #
+    #   resp.auto_enable_organization_members #=> String, one of "ALL", "NEW", "NONE"
     #   resp.classification_scope_id #=> String
     #   resp.disabled_at #=> Time
     #   resp.first_enabled_at #=> Time
@@ -2591,6 +2629,46 @@ module Aws::Macie2
       req.send_request(options)
     end
 
+    # Retrieves the status of automated sensitive data discovery for one or
+    # more accounts.
+    #
+    # @option params [Array<String>] :account_ids
+    #
+    # @option params [Integer] :max_results
+    #
+    # @option params [String] :next_token
+    #
+    # @return [Types::ListAutomatedDiscoveryAccountsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAutomatedDiscoveryAccountsResponse#items #items} => Array&lt;Types::AutomatedDiscoveryAccount&gt;
+    #   * {Types::ListAutomatedDiscoveryAccountsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_automated_discovery_accounts({
+    #     account_ids: ["__string"],
+    #     max_results: 1,
+    #     next_token: "__string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].account_id #=> String
+    #   resp.items[0].status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/ListAutomatedDiscoveryAccounts AWS API Documentation
+    #
+    # @overload list_automated_discovery_accounts(params = {})
+    # @param [Hash] params ({})
+    def list_automated_discovery_accounts(params = {}, options = {})
+      req = build_request(:list_automated_discovery_accounts, params)
+      req.send_request(options)
+    end
+
     # Retrieves a subset of information about one or more classification
     # jobs.
     #
@@ -2862,8 +2940,8 @@ module Aws::Macie2
       req.send_request(options)
     end
 
-    # Retrieves information about the Amazon Macie membership invitations
-    # that were received by an account.
+    # Retrieves information about Amazon Macie membership invitations that
+    # were received by an account.
     #
     # @option params [Integer] :max_results
     #
@@ -3020,8 +3098,8 @@ module Aws::Macie2
       req.send_request(options)
     end
 
-    # Retrieves information about objects that were selected from an S3
-    # bucket for automated sensitive data discovery.
+    # Retrieves information about objects that Amazon Macie selected from an
+    # S3 bucket for automated sensitive data discovery.
     #
     # @option params [String] :next_token
     #
@@ -3168,13 +3246,13 @@ module Aws::Macie2
       req.send_request(options)
     end
 
-    # Creates or updates the configuration settings for storing data
+    # Adds or updates the configuration settings for storing data
     # classification results.
     #
     # @option params [required, Types::ClassificationExportConfiguration] :configuration
     #   Specifies where to store data classification results, and the
     #   encryption settings to use when storing results in that location. The
-    #   location must be an S3 bucket.
+    #   location must be an S3 general purpose bucket.
     #
     # @return [Types::PutClassificationExportConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3278,7 +3356,7 @@ module Aws::Macie2
     #           {
     #             simple_criterion: {
     #               comparator: "EQ", # accepts EQ, NE
-    #               key: "ACCOUNT_ID", # accepts ACCOUNT_ID, S3_BUCKET_NAME, S3_BUCKET_EFFECTIVE_PERMISSION, S3_BUCKET_SHARED_ACCESS
+    #               key: "ACCOUNT_ID", # accepts ACCOUNT_ID, S3_BUCKET_NAME, S3_BUCKET_EFFECTIVE_PERMISSION, S3_BUCKET_SHARED_ACCESS, AUTOMATED_DISCOVERY_MONITORING_STATUS
     #               values: ["__string"],
     #             },
     #             tag_criterion: {
@@ -3298,7 +3376,7 @@ module Aws::Macie2
     #           {
     #             simple_criterion: {
     #               comparator: "EQ", # accepts EQ, NE
-    #               key: "ACCOUNT_ID", # accepts ACCOUNT_ID, S3_BUCKET_NAME, S3_BUCKET_EFFECTIVE_PERMISSION, S3_BUCKET_SHARED_ACCESS
+    #               key: "ACCOUNT_ID", # accepts ACCOUNT_ID, S3_BUCKET_NAME, S3_BUCKET_EFFECTIVE_PERMISSION, S3_BUCKET_SHARED_ACCESS, AUTOMATED_DISCOVERY_MONITORING_STATUS
     #               values: ["__string"],
     #             },
     #             tag_criterion: {
@@ -3326,6 +3404,7 @@ module Aws::Macie2
     #
     #   resp.matching_resources #=> Array
     #   resp.matching_resources[0].matching_bucket.account_id #=> String
+    #   resp.matching_resources[0].matching_bucket.automated_discovery_monitoring_status #=> String, one of "MONITORED", "NOT_MONITORED"
     #   resp.matching_resources[0].matching_bucket.bucket_name #=> String
     #   resp.matching_resources[0].matching_bucket.classifiable_object_count #=> Integer
     #   resp.matching_resources[0].matching_bucket.classifiable_size_in_bytes #=> Integer
@@ -3391,7 +3470,7 @@ module Aws::Macie2
       req.send_request(options)
     end
 
-    # Tests a custom data identifier.
+    # Tests criteria for a custom data identifier.
     #
     # @option params [Array<String>] :ignore_words
     #
@@ -3502,17 +3581,25 @@ module Aws::Macie2
       req.send_request(options)
     end
 
-    # Enables or disables automated sensitive data discovery for an account.
+    # Changes the configuration settings and status of automated sensitive
+    # data discovery for an organization or standalone account.
+    #
+    # @option params [String] :auto_enable_organization_members
+    #   Specifies whether to automatically enable automated sensitive data
+    #   discovery for accounts that are part of an organization in Amazon
+    #   Macie. Valid values are:
     #
     # @option params [required, String] :status
     #   The status of the automated sensitive data discovery configuration for
-    #   an Amazon Macie account. Valid values are:
+    #   an organization in Amazon Macie or a standalone Macie account. Valid
+    #   values are:
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_automated_discovery_configuration({
+    #     auto_enable_organization_members: "ALL", # accepts ALL, NEW, NONE
     #     status: "ENABLED", # required, accepts ENABLED, DISABLED
     #   })
     #
@@ -3849,10 +3936,9 @@ module Aws::Macie2
     #
     # @option params [Types::SensitivityInspectionTemplateExcludes] :excludes
     #   Specifies managed data identifiers to exclude (not use) when
-    #   performing automated sensitive data discovery for an Amazon Macie
-    #   account. For information about the managed data identifiers that
-    #   Amazon Macie currently provides, see [Using managed data
-    #   identifiers][1] in the *Amazon Macie User Guide*.
+    #   performing automated sensitive data discovery. For information about
+    #   the managed data identifiers that Amazon Macie currently provides, see
+    #   [Using managed data identifiers][1] in the *Amazon Macie User Guide*.
     #
     #
     #
@@ -3863,11 +3949,10 @@ module Aws::Macie2
     # @option params [Types::SensitivityInspectionTemplateIncludes] :includes
     #   Specifies the allow lists, custom data identifiers, and managed data
     #   identifiers to include (use) when performing automated sensitive data
-    #   discovery for an Amazon Macie account. The configuration must specify
-    #   at least one custom data identifier or managed data identifier. For
-    #   information about the managed data identifiers that Amazon Macie
-    #   currently provides, see [Using managed data identifiers][1] in the
-    #   *Amazon Macie User Guide*.
+    #   discovery. The configuration must specify at least one custom data
+    #   identifier or managed data identifier. For information about the
+    #   managed data identifiers that Amazon Macie currently provides, see
+    #   [Using managed data identifiers][1] in the *Amazon Macie User Guide*.
     #
     #
     #
@@ -3912,7 +3997,7 @@ module Aws::Macie2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-macie2'
-      context[:gem_version] = '1.69.0'
+      context[:gem_version] = '1.70.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

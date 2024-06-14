@@ -85,6 +85,24 @@ module Aws::Macie2
       SENSITIVE: []
     end
 
+    class AutomatedDiscoveryAccount
+      attr_accessor account_id: ::String
+      attr_accessor status: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class AutomatedDiscoveryAccountUpdate
+      attr_accessor account_id: ::String
+      attr_accessor status: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class AutomatedDiscoveryAccountUpdateError
+      attr_accessor account_id: ::String
+      attr_accessor error_code: ("ACCOUNT_PAUSED" | "ACCOUNT_NOT_FOUND")
+      SENSITIVE: []
+    end
+
     class AwsAccount
       attr_accessor account_id: ::String
       attr_accessor principal_id: ::String
@@ -114,6 +132,16 @@ module Aws::Macie2
     class BatchGetCustomDataIdentifiersResponse
       attr_accessor custom_data_identifiers: ::Array[Types::BatchGetCustomDataIdentifierSummary]
       attr_accessor not_found_identifier_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BatchUpdateAutomatedDiscoveryAccountsRequest
+      attr_accessor accounts: ::Array[Types::AutomatedDiscoveryAccountUpdate]
+      SENSITIVE: []
+    end
+
+    class BatchUpdateAutomatedDiscoveryAccountsResponse
+      attr_accessor errors: ::Array[Types::AutomatedDiscoveryAccountUpdateError]
       SENSITIVE: []
     end
 
@@ -177,6 +205,7 @@ module Aws::Macie2
     class BucketMetadata
       attr_accessor account_id: ::String
       attr_accessor allows_unencrypted_object_uploads: ("TRUE" | "FALSE" | "UNKNOWN")
+      attr_accessor automated_discovery_monitoring_status: ("MONITORED" | "NOT_MONITORED")
       attr_accessor bucket_arn: ::String
       attr_accessor bucket_created_at: ::Time
       attr_accessor bucket_name: ::String
@@ -726,6 +755,7 @@ module Aws::Macie2
     end
 
     class GetAutomatedDiscoveryConfigurationResponse
+      attr_accessor auto_enable_organization_members: ("ALL" | "NEW" | "NONE")
       attr_accessor classification_scope_id: ::String
       attr_accessor disabled_at: ::Time
       attr_accessor first_enabled_at: ::Time
@@ -1103,6 +1133,19 @@ module Aws::Macie2
       SENSITIVE: []
     end
 
+    class ListAutomatedDiscoveryAccountsRequest
+      attr_accessor account_ids: ::Array[::String]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAutomatedDiscoveryAccountsResponse
+      attr_accessor items: ::Array[Types::AutomatedDiscoveryAccount]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListClassificationJobsRequest
       attr_accessor filter_criteria: Types::ListJobsFilterCriteria
       attr_accessor max_results: ::Integer
@@ -1289,6 +1332,7 @@ module Aws::Macie2
 
     class MatchingBucket
       attr_accessor account_id: ::String
+      attr_accessor automated_discovery_monitoring_status: ("MONITORED" | "NOT_MONITORED")
       attr_accessor bucket_name: ::String
       attr_accessor classifiable_object_count: ::Integer
       attr_accessor classifiable_size_in_bytes: ::Integer
@@ -1576,7 +1620,7 @@ module Aws::Macie2
 
     class SearchResourcesSimpleCriterion
       attr_accessor comparator: ("EQ" | "NE")
-      attr_accessor key: ("ACCOUNT_ID" | "S3_BUCKET_NAME" | "S3_BUCKET_EFFECTIVE_PERMISSION" | "S3_BUCKET_SHARED_ACCESS")
+      attr_accessor key: ("ACCOUNT_ID" | "S3_BUCKET_NAME" | "S3_BUCKET_EFFECTIVE_PERMISSION" | "S3_BUCKET_SHARED_ACCESS" | "AUTOMATED_DISCOVERY_MONITORING_STATUS")
       attr_accessor values: ::Array[::String]
       SENSITIVE: []
     end
@@ -1811,6 +1855,7 @@ module Aws::Macie2
     end
 
     class UpdateAutomatedDiscoveryConfigurationRequest
+      attr_accessor auto_enable_organization_members: ("ALL" | "NEW" | "NONE")
       attr_accessor status: ("ENABLED" | "DISABLED")
       SENSITIVE: []
     end

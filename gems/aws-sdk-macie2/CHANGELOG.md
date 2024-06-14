@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.70.0 (2024-06-14)
+------------------
+
+* Feature - This release adds support for managing the status of automated sensitive data discovery for individual accounts in an organization, and determining whether individual S3 buckets are included in the scope of the analyses.
+
 1.69.0 (2024-06-05)
 ------------------
 

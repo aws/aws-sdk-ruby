@@ -40,6 +40,20 @@ module Aws::Macie2
       end
     end
 
+    class BatchUpdateAutomatedDiscoveryAccounts
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::Macie2::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class CreateAllowList
       def self.build(context)
         unless context.config.regional_endpoint
@@ -671,6 +685,20 @@ module Aws::Macie2
     end
 
     class ListAllowLists
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::Macie2::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class ListAutomatedDiscoveryAccounts
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s

@@ -385,7 +385,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     # @return [NetworkAcl]
     def create_network_acl(options = {})
       options = options.merge(vpc_id: @id)
@@ -431,7 +431,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     # @return [RouteTable]
     def create_route_table(options = {})
       options = options.merge(vpc_id: @id)
@@ -535,14 +535,14 @@ module Aws::EC2
     #
     #   To create a subnet in a Local Zone, set this value to the Local Zone
     #   ID, for example `us-west-2-lax-1a`. For information about the Regions
-    #   that support Local Zones, see [Local Zones locations][1].
+    #   that support Local Zones, see [Available Local Zones][1].
     #
     #   To create a subnet in an Outpost, set this value to the Availability
     #   Zone for the Outpost and specify the Outpost ARN.
     #
     #
     #
-    #   [1]: http://aws.amazon.com/about-aws/global-infrastructure/localzones/locations/
+    #   [1]: https://docs.aws.amazon.com/local-zones/latest/ug/available-local-zones.html
     # @option options [String] :availability_zone_id
     #   The AZ ID or the Local Zone ID of the subnet.
     # @option options [String] :cidr_block
@@ -1359,6 +1359,10 @@ module Aws::EC2
     #     (`ip-name` \| `resource-name`).
     #
     #   * `private-ip-address` - The private IPv4 address of the instance.
+    #     This can only be used to filter by the primary IP address of the
+    #     network interface attached to the instance. To filter by additional
+    #     IP addresses assigned to the network interface, use the filter
+    #     `network-interface.addresses.private-ip-address`.
     #
     #   * `product-code` - The product code associated with the AMI used to
     #     launch the instance.
@@ -1620,8 +1624,6 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @option options [Array<String>] :network_acl_ids
     #   The IDs of the network ACLs.
-    #
-    #   Default: Describes all your network ACLs.
     # @return [NetworkAcl::Collection]
     def network_acls(options = {})
       batches = Enumerator.new do |y|
@@ -1989,8 +1991,6 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @option options [Array<String>] :route_table_ids
     #   The IDs of the route tables.
-    #
-    #   Default: Describes all your route tables.
     # @return [RouteTable::Collection]
     def route_tables(options = {})
       batches = Enumerator.new do |y|

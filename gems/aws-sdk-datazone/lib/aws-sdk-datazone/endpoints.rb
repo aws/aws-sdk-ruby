@@ -38,6 +38,19 @@ module Aws::DataZone
       end
     end
 
+    class AssociateEnvironmentRole
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::DataZone::EndpointParameters.new(
+          region: context.config.region,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class CancelMetadataGenerationRun
       def self.build(context)
         unless context.config.regional_endpoint
@@ -130,6 +143,19 @@ module Aws::DataZone
     end
 
     class CreateEnvironment
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::DataZone::EndpointParameters.new(
+          region: context.config.region,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class CreateEnvironmentAction
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
@@ -363,6 +389,19 @@ module Aws::DataZone
       end
     end
 
+    class DeleteEnvironmentAction
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::DataZone::EndpointParameters.new(
+          region: context.config.region,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class DeleteEnvironmentBlueprintConfiguration
       def self.build(context)
         unless context.config.regional_endpoint
@@ -519,6 +558,19 @@ module Aws::DataZone
       end
     end
 
+    class DisassociateEnvironmentRole
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::DataZone::EndpointParameters.new(
+          region: context.config.region,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class GetAsset
       def self.build(context)
         unless context.config.regional_endpoint
@@ -585,6 +637,19 @@ module Aws::DataZone
     end
 
     class GetEnvironment
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::DataZone::EndpointParameters.new(
+          region: context.config.region,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class GetEnvironmentAction
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
@@ -871,6 +936,19 @@ module Aws::DataZone
     end
 
     class ListDomains
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::DataZone::EndpointParameters.new(
+          region: context.config.region,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class ListEnvironmentActions
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
@@ -1274,6 +1352,19 @@ module Aws::DataZone
     end
 
     class UpdateEnvironment
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::DataZone::EndpointParameters.new(
+          region: context.config.region,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class UpdateEnvironmentAction
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s

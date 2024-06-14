@@ -35,7 +35,7 @@ module Aws::EC2
     end
     alias :network_acl_id :id
 
-    # Any associations between the network ACL and one or more subnets
+    # Any associations between the network ACL and your subnets
     # @return [Array<Types::NetworkAclAssociation>]
     def associations
       data[:associations]

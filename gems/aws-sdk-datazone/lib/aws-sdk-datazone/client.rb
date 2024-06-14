@@ -558,6 +558,37 @@ module Aws::DataZone
       req.send_request(options)
     end
 
+    # Associates the environment role in Amazon DataZone.
+    #
+    # @option params [required, String] :domain_identifier
+    #   The ID of the Amazon DataZone domain in which the environment role is
+    #   associated.
+    #
+    # @option params [required, String] :environment_identifier
+    #   The ID of the Amazon DataZone environment.
+    #
+    # @option params [required, String] :environment_role_arn
+    #   The ARN of the environment role.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_environment_role({
+    #     domain_identifier: "DomainId", # required
+    #     environment_identifier: "EnvironmentId", # required
+    #     environment_role_arn: "String", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/AssociateEnvironmentRole AWS API Documentation
+    #
+    # @overload associate_environment_role(params = {})
+    # @param [Hash] params ({})
+    def associate_environment_role(params = {}, options = {})
+      req = build_request(:associate_environment_role, params)
+      req.send_request(options)
+    end
+
     # Cancels the metadata generation run.
     #
     # @option params [required, String] :domain_identifier
@@ -1295,6 +1326,15 @@ module Aws::DataZone
     #   The identifier of the Amazon DataZone domain in which the environment
     #   is created.
     #
+    # @option params [String] :environment_account_identifier
+    #   The ID of the account in which the environment is being created.
+    #
+    # @option params [String] :environment_account_region
+    #   The region of the account in which the environment is being created.
+    #
+    # @option params [String] :environment_blueprint_identifier
+    #   The ID of the blueprint with which the environment is being created.
+    #
     # @option params [required, String] :environment_profile_identifier
     #   The identifier of the environment profile that is used to create this
     #   Amazon DataZone environment.
@@ -1342,6 +1382,9 @@ module Aws::DataZone
     #   resp = client.create_environment({
     #     description: "String",
     #     domain_identifier: "DomainId", # required
+    #     environment_account_identifier: "String",
+    #     environment_account_region: "String",
+    #     environment_blueprint_identifier: "String",
     #     environment_profile_identifier: "EnvironmentProfileId", # required
     #     glossary_terms: ["GlossaryTermId"],
     #     name: "String", # required
@@ -1408,6 +1451,67 @@ module Aws::DataZone
     # @param [Hash] params ({})
     def create_environment(params = {}, options = {})
       req = build_request(:create_environment, params)
+      req.send_request(options)
+    end
+
+    # Creates an action for the environment, for example, creates a console
+    # link for an analytics tool that is available in this environment.
+    #
+    # @option params [String] :description
+    #   The description of the environment action that is being created in the
+    #   environment.
+    #
+    # @option params [required, String] :domain_identifier
+    #   The ID of the Amazon DataZone domain in which the environment action
+    #   is created.
+    #
+    # @option params [required, String] :environment_identifier
+    #   The ID of the environment in which the environment action is created.
+    #
+    # @option params [required, String] :name
+    #   The name of the environment action.
+    #
+    # @option params [required, Types::ActionParameters] :parameters
+    #   The parameters of the environment action.
+    #
+    # @return [Types::CreateEnvironmentActionOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateEnvironmentActionOutput#description #description} => String
+    #   * {Types::CreateEnvironmentActionOutput#domain_id #domain_id} => String
+    #   * {Types::CreateEnvironmentActionOutput#environment_id #environment_id} => String
+    #   * {Types::CreateEnvironmentActionOutput#id #id} => String
+    #   * {Types::CreateEnvironmentActionOutput#name #name} => String
+    #   * {Types::CreateEnvironmentActionOutput#parameters #parameters} => Types::ActionParameters
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_environment_action({
+    #     description: "String",
+    #     domain_identifier: "DomainId", # required
+    #     environment_identifier: "EnvironmentId", # required
+    #     name: "String", # required
+    #     parameters: { # required
+    #       aws_console_link: {
+    #         uri: "String",
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.description #=> String
+    #   resp.domain_id #=> String
+    #   resp.environment_id #=> String
+    #   resp.id #=> String
+    #   resp.name #=> String
+    #   resp.parameters.aws_console_link.uri #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/CreateEnvironmentAction AWS API Documentation
+    #
+    # @overload create_environment_action(params = {})
+    # @param [Hash] params ({})
+    def create_environment_action(params = {}, options = {})
+      req = build_request(:create_environment_action, params)
       req.send_request(options)
     end
 
@@ -2336,6 +2440,10 @@ module Aws::DataZone
     # @option params [required, String] :identifier
     #   The identifier of the data source that is deleted.
     #
+    # @option params [Boolean] :retain_permissions_on_revoke_failure
+    #   Specifies that the granted permissions are retained in case of a
+    #   self-subscribe functionality failure for a data source.
+    #
     # @return [Types::DeleteDataSourceOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DeleteDataSourceOutput#asset_forms_output #asset_forms_output} => Array&lt;Types::FormOutput&gt;
@@ -2353,7 +2461,9 @@ module Aws::DataZone
     #   * {Types::DeleteDataSourceOutput#name #name} => String
     #   * {Types::DeleteDataSourceOutput#project_id #project_id} => String
     #   * {Types::DeleteDataSourceOutput#publish_on_import #publish_on_import} => Boolean
+    #   * {Types::DeleteDataSourceOutput#retain_permissions_on_revoke_failure #retain_permissions_on_revoke_failure} => Boolean
     #   * {Types::DeleteDataSourceOutput#schedule #schedule} => Types::ScheduleConfiguration
+    #   * {Types::DeleteDataSourceOutput#self_grant_status #self_grant_status} => Types::SelfGrantStatusOutput
     #   * {Types::DeleteDataSourceOutput#status #status} => String
     #   * {Types::DeleteDataSourceOutput#type #type} => String
     #   * {Types::DeleteDataSourceOutput#updated_at #updated_at} => Time
@@ -2364,6 +2474,7 @@ module Aws::DataZone
     #     client_token: "String",
     #     domain_identifier: "DomainId", # required
     #     identifier: "DataSourceId", # required
+    #     retain_permissions_on_revoke_failure: false,
     #   })
     #
     # @example Response structure
@@ -2410,8 +2521,19 @@ module Aws::DataZone
     #   resp.name #=> String
     #   resp.project_id #=> String
     #   resp.publish_on_import #=> Boolean
+    #   resp.retain_permissions_on_revoke_failure #=> Boolean
     #   resp.schedule.schedule #=> String
     #   resp.schedule.timezone #=> String, one of "UTC", "AFRICA_JOHANNESBURG", "AMERICA_MONTREAL", "AMERICA_SAO_PAULO", "ASIA_BAHRAIN", "ASIA_BANGKOK", "ASIA_CALCUTTA", "ASIA_DUBAI", "ASIA_HONG_KONG", "ASIA_JAKARTA", "ASIA_KUALA_LUMPUR", "ASIA_SEOUL", "ASIA_SHANGHAI", "ASIA_SINGAPORE", "ASIA_TAIPEI", "ASIA_TOKYO", "AUSTRALIA_MELBOURNE", "AUSTRALIA_SYDNEY", "CANADA_CENTRAL", "CET", "CST6CDT", "ETC_GMT", "ETC_GMT0", "ETC_GMT_ADD_0", "ETC_GMT_ADD_1", "ETC_GMT_ADD_10", "ETC_GMT_ADD_11", "ETC_GMT_ADD_12", "ETC_GMT_ADD_2", "ETC_GMT_ADD_3", "ETC_GMT_ADD_4", "ETC_GMT_ADD_5", "ETC_GMT_ADD_6", "ETC_GMT_ADD_7", "ETC_GMT_ADD_8", "ETC_GMT_ADD_9", "ETC_GMT_NEG_0", "ETC_GMT_NEG_1", "ETC_GMT_NEG_10", "ETC_GMT_NEG_11", "ETC_GMT_NEG_12", "ETC_GMT_NEG_13", "ETC_GMT_NEG_14", "ETC_GMT_NEG_2", "ETC_GMT_NEG_3", "ETC_GMT_NEG_4", "ETC_GMT_NEG_5", "ETC_GMT_NEG_6", "ETC_GMT_NEG_7", "ETC_GMT_NEG_8", "ETC_GMT_NEG_9", "EUROPE_DUBLIN", "EUROPE_LONDON", "EUROPE_PARIS", "EUROPE_STOCKHOLM", "EUROPE_ZURICH", "ISRAEL", "MEXICO_GENERAL", "MST7MDT", "PACIFIC_AUCKLAND", "US_CENTRAL", "US_EASTERN", "US_MOUNTAIN", "US_PACIFIC"
+    #   resp.self_grant_status.glue_self_grant_status.self_grant_status_details #=> Array
+    #   resp.self_grant_status.glue_self_grant_status.self_grant_status_details[0].database_name #=> String
+    #   resp.self_grant_status.glue_self_grant_status.self_grant_status_details[0].failure_cause #=> String
+    #   resp.self_grant_status.glue_self_grant_status.self_grant_status_details[0].schema_name #=> String
+    #   resp.self_grant_status.glue_self_grant_status.self_grant_status_details[0].status #=> String, one of "GRANT_PENDING", "REVOKE_PENDING", "GRANT_IN_PROGRESS", "REVOKE_IN_PROGRESS", "GRANTED", "GRANT_FAILED", "REVOKE_FAILED"
+    #   resp.self_grant_status.redshift_self_grant_status.self_grant_status_details #=> Array
+    #   resp.self_grant_status.redshift_self_grant_status.self_grant_status_details[0].database_name #=> String
+    #   resp.self_grant_status.redshift_self_grant_status.self_grant_status_details[0].failure_cause #=> String
+    #   resp.self_grant_status.redshift_self_grant_status.self_grant_status_details[0].schema_name #=> String
+    #   resp.self_grant_status.redshift_self_grant_status.self_grant_status_details[0].status #=> String, one of "GRANT_PENDING", "REVOKE_PENDING", "GRANT_IN_PROGRESS", "REVOKE_IN_PROGRESS", "GRANTED", "GRANT_FAILED", "REVOKE_FAILED"
     #   resp.status #=> String, one of "CREATING", "FAILED_CREATION", "READY", "UPDATING", "FAILED_UPDATE", "RUNNING", "DELETING", "FAILED_DELETION"
     #   resp.type #=> String
     #   resp.updated_at #=> Time
@@ -2491,6 +2613,38 @@ module Aws::DataZone
     # @param [Hash] params ({})
     def delete_environment(params = {}, options = {})
       req = build_request(:delete_environment, params)
+      req.send_request(options)
+    end
+
+    # Deletes an action for the environment, for example, deletes a console
+    # link for an analytics tool that is available in this environment.
+    #
+    # @option params [required, String] :domain_identifier
+    #   The ID of the Amazon DataZone domain in which an environment action is
+    #   deleted.
+    #
+    # @option params [required, String] :environment_identifier
+    #   The ID of the environment where an environment action is deleted.
+    #
+    # @option params [required, String] :identifier
+    #   The ID of the environment action that is deleted.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_environment_action({
+    #     domain_identifier: "DomainId", # required
+    #     environment_identifier: "EnvironmentId", # required
+    #     identifier: "String", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/DeleteEnvironmentAction AWS API Documentation
+    #
+    # @overload delete_environment_action(params = {})
+    # @param [Hash] params ({})
+    def delete_environment_action(params = {}, options = {})
+      req = build_request(:delete_environment_action, params)
       req.send_request(options)
     end
 
@@ -2884,6 +3038,37 @@ module Aws::DataZone
       req.send_request(options)
     end
 
+    # Disassociates the environment role in Amazon DataZone.
+    #
+    # @option params [required, String] :domain_identifier
+    #   The ID of the Amazon DataZone domain in which an environment role is
+    #   disassociated.
+    #
+    # @option params [required, String] :environment_identifier
+    #   The ID of the environment.
+    #
+    # @option params [required, String] :environment_role_arn
+    #   The ARN of the environment role.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disassociate_environment_role({
+    #     domain_identifier: "DomainId", # required
+    #     environment_identifier: "EnvironmentId", # required
+    #     environment_role_arn: "String", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/DisassociateEnvironmentRole AWS API Documentation
+    #
+    # @overload disassociate_environment_role(params = {})
+    # @param [Hash] params ({})
+    def disassociate_environment_role(params = {}, options = {})
+      req = build_request(:disassociate_environment_role, params)
+      req.send_request(options)
+    end
+
     # Gets an Amazon DataZone asset.
     #
     # @option params [required, String] :domain_identifier
@@ -3059,6 +3244,7 @@ module Aws::DataZone
     #   * {Types::GetDataSourceOutput#publish_on_import #publish_on_import} => Boolean
     #   * {Types::GetDataSourceOutput#recommendation #recommendation} => Types::RecommendationConfiguration
     #   * {Types::GetDataSourceOutput#schedule #schedule} => Types::ScheduleConfiguration
+    #   * {Types::GetDataSourceOutput#self_grant_status #self_grant_status} => Types::SelfGrantStatusOutput
     #   * {Types::GetDataSourceOutput#status #status} => String
     #   * {Types::GetDataSourceOutput#type #type} => String
     #   * {Types::GetDataSourceOutput#updated_at #updated_at} => Time
@@ -3118,6 +3304,16 @@ module Aws::DataZone
     #   resp.recommendation.enable_business_name_generation #=> Boolean
     #   resp.schedule.schedule #=> String
     #   resp.schedule.timezone #=> String, one of "UTC", "AFRICA_JOHANNESBURG", "AMERICA_MONTREAL", "AMERICA_SAO_PAULO", "ASIA_BAHRAIN", "ASIA_BANGKOK", "ASIA_CALCUTTA", "ASIA_DUBAI", "ASIA_HONG_KONG", "ASIA_JAKARTA", "ASIA_KUALA_LUMPUR", "ASIA_SEOUL", "ASIA_SHANGHAI", "ASIA_SINGAPORE", "ASIA_TAIPEI", "ASIA_TOKYO", "AUSTRALIA_MELBOURNE", "AUSTRALIA_SYDNEY", "CANADA_CENTRAL", "CET", "CST6CDT", "ETC_GMT", "ETC_GMT0", "ETC_GMT_ADD_0", "ETC_GMT_ADD_1", "ETC_GMT_ADD_10", "ETC_GMT_ADD_11", "ETC_GMT_ADD_12", "ETC_GMT_ADD_2", "ETC_GMT_ADD_3", "ETC_GMT_ADD_4", "ETC_GMT_ADD_5", "ETC_GMT_ADD_6", "ETC_GMT_ADD_7", "ETC_GMT_ADD_8", "ETC_GMT_ADD_9", "ETC_GMT_NEG_0", "ETC_GMT_NEG_1", "ETC_GMT_NEG_10", "ETC_GMT_NEG_11", "ETC_GMT_NEG_12", "ETC_GMT_NEG_13", "ETC_GMT_NEG_14", "ETC_GMT_NEG_2", "ETC_GMT_NEG_3", "ETC_GMT_NEG_4", "ETC_GMT_NEG_5", "ETC_GMT_NEG_6", "ETC_GMT_NEG_7", "ETC_GMT_NEG_8", "ETC_GMT_NEG_9", "EUROPE_DUBLIN", "EUROPE_LONDON", "EUROPE_PARIS", "EUROPE_STOCKHOLM", "EUROPE_ZURICH", "ISRAEL", "MEXICO_GENERAL", "MST7MDT", "PACIFIC_AUCKLAND", "US_CENTRAL", "US_EASTERN", "US_MOUNTAIN", "US_PACIFIC"
+    #   resp.self_grant_status.glue_self_grant_status.self_grant_status_details #=> Array
+    #   resp.self_grant_status.glue_self_grant_status.self_grant_status_details[0].database_name #=> String
+    #   resp.self_grant_status.glue_self_grant_status.self_grant_status_details[0].failure_cause #=> String
+    #   resp.self_grant_status.glue_self_grant_status.self_grant_status_details[0].schema_name #=> String
+    #   resp.self_grant_status.glue_self_grant_status.self_grant_status_details[0].status #=> String, one of "GRANT_PENDING", "REVOKE_PENDING", "GRANT_IN_PROGRESS", "REVOKE_IN_PROGRESS", "GRANTED", "GRANT_FAILED", "REVOKE_FAILED"
+    #   resp.self_grant_status.redshift_self_grant_status.self_grant_status_details #=> Array
+    #   resp.self_grant_status.redshift_self_grant_status.self_grant_status_details[0].database_name #=> String
+    #   resp.self_grant_status.redshift_self_grant_status.self_grant_status_details[0].failure_cause #=> String
+    #   resp.self_grant_status.redshift_self_grant_status.self_grant_status_details[0].schema_name #=> String
+    #   resp.self_grant_status.redshift_self_grant_status.self_grant_status_details[0].status #=> String, one of "GRANT_PENDING", "REVOKE_PENDING", "GRANT_IN_PROGRESS", "REVOKE_IN_PROGRESS", "GRANTED", "GRANT_FAILED", "REVOKE_FAILED"
     #   resp.status #=> String, one of "CREATING", "FAILED_CREATION", "READY", "UPDATING", "FAILED_UPDATE", "RUNNING", "DELETING", "FAILED_DELETION"
     #   resp.type #=> String
     #   resp.updated_at #=> Time
@@ -3337,6 +3533,53 @@ module Aws::DataZone
     # @param [Hash] params ({})
     def get_environment(params = {}, options = {})
       req = build_request(:get_environment, params)
+      req.send_request(options)
+    end
+
+    # Gets the specified environment action.
+    #
+    # @option params [required, String] :domain_identifier
+    #   The ID of the Amazon DataZone domain in which the
+    #   `GetEnvironmentAction` API is invoked.
+    #
+    # @option params [required, String] :environment_identifier
+    #   The environment ID of the environment action.
+    #
+    # @option params [required, String] :identifier
+    #   The ID of the environment action
+    #
+    # @return [Types::GetEnvironmentActionOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetEnvironmentActionOutput#description #description} => String
+    #   * {Types::GetEnvironmentActionOutput#domain_id #domain_id} => String
+    #   * {Types::GetEnvironmentActionOutput#environment_id #environment_id} => String
+    #   * {Types::GetEnvironmentActionOutput#id #id} => String
+    #   * {Types::GetEnvironmentActionOutput#name #name} => String
+    #   * {Types::GetEnvironmentActionOutput#parameters #parameters} => Types::ActionParameters
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_environment_action({
+    #     domain_identifier: "DomainId", # required
+    #     environment_identifier: "EnvironmentId", # required
+    #     identifier: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.description #=> String
+    #   resp.domain_id #=> String
+    #   resp.environment_id #=> String
+    #   resp.id #=> String
+    #   resp.name #=> String
+    #   resp.parameters.aws_console_link.uri #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/GetEnvironmentAction AWS API Documentation
+    #
+    # @overload get_environment_action(params = {})
+    # @param [Hash] params ({})
+    def get_environment_action(params = {}, options = {})
+      req = build_request(:get_environment_action, params)
       req.send_request(options)
     end
 
@@ -4636,6 +4879,66 @@ module Aws::DataZone
     # @param [Hash] params ({})
     def list_domains(params = {}, options = {})
       req = build_request(:list_domains, params)
+      req.send_request(options)
+    end
+
+    # Lists existing environment actions.
+    #
+    # @option params [required, String] :domain_identifier
+    #   The ID of the Amazon DataZone domain in which the environment actions
+    #   are listed.
+    #
+    # @option params [required, String] :environment_identifier
+    #   The ID of the envrironment whose environment actions are listed.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of environment actions to return in a single call
+    #   to `ListEnvironmentActions`. When the number of environment actions to
+    #   be listed is greater than the value of `MaxResults`, the response
+    #   contains a `NextToken` value that you can use in a subsequent call to
+    #   `ListEnvironmentActions` to list the next set of environment actions.
+    #
+    # @option params [String] :next_token
+    #   When the number of environment actions is greater than the default
+    #   value for the `MaxResults` parameter, or if you explicitly specify a
+    #   value for `MaxResults` that is less than the number of environment
+    #   actions, the response includes a pagination token named `NextToken`.
+    #   You can specify this `NextToken` value in a subsequent call to
+    #   `ListEnvironmentActions` to list the next set of environment actions.
+    #
+    # @return [Types::ListEnvironmentActionsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListEnvironmentActionsOutput#items #items} => Array&lt;Types::EnvironmentActionSummary&gt;
+    #   * {Types::ListEnvironmentActionsOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_environment_actions({
+    #     domain_identifier: "DomainId", # required
+    #     environment_identifier: "EnvironmentId", # required
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].description #=> String
+    #   resp.items[0].domain_id #=> String
+    #   resp.items[0].environment_id #=> String
+    #   resp.items[0].id #=> String
+    #   resp.items[0].name #=> String
+    #   resp.items[0].parameters.aws_console_link.uri #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/ListEnvironmentActions AWS API Documentation
+    #
+    # @overload list_environment_actions(params = {})
+    # @param [Hash] params ({})
+    def list_environment_actions(params = {}, options = {})
+      req = build_request(:list_environment_actions, params)
       req.send_request(options)
     end
 
@@ -6845,6 +7148,10 @@ module Aws::DataZone
     #   The recommendation to be updated as part of the `UpdateDataSource`
     #   action.
     #
+    # @option params [Boolean] :retain_permissions_on_revoke_failure
+    #   Specifies that the granted permissions are retained in case of a
+    #   self-subscribe functionality failure for a data source.
+    #
     # @option params [Types::ScheduleConfiguration] :schedule
     #   The schedule to be updated as part of the `UpdateDataSource` action.
     #
@@ -6866,7 +7173,9 @@ module Aws::DataZone
     #   * {Types::UpdateDataSourceOutput#project_id #project_id} => String
     #   * {Types::UpdateDataSourceOutput#publish_on_import #publish_on_import} => Boolean
     #   * {Types::UpdateDataSourceOutput#recommendation #recommendation} => Types::RecommendationConfiguration
+    #   * {Types::UpdateDataSourceOutput#retain_permissions_on_revoke_failure #retain_permissions_on_revoke_failure} => Boolean
     #   * {Types::UpdateDataSourceOutput#schedule #schedule} => Types::ScheduleConfiguration
+    #   * {Types::UpdateDataSourceOutput#self_grant_status #self_grant_status} => Types::SelfGrantStatusOutput
     #   * {Types::UpdateDataSourceOutput#status #status} => String
     #   * {Types::UpdateDataSourceOutput#type #type} => String
     #   * {Types::UpdateDataSourceOutput#updated_at #updated_at} => Time
@@ -6935,6 +7244,7 @@ module Aws::DataZone
     #     recommendation: {
     #       enable_business_name_generation: false,
     #     },
+    #     retain_permissions_on_revoke_failure: false,
     #     schedule: {
     #       schedule: "CronString",
     #       timezone: "UTC", # accepts UTC, AFRICA_JOHANNESBURG, AMERICA_MONTREAL, AMERICA_SAO_PAULO, ASIA_BAHRAIN, ASIA_BANGKOK, ASIA_CALCUTTA, ASIA_DUBAI, ASIA_HONG_KONG, ASIA_JAKARTA, ASIA_KUALA_LUMPUR, ASIA_SEOUL, ASIA_SHANGHAI, ASIA_SINGAPORE, ASIA_TAIPEI, ASIA_TOKYO, AUSTRALIA_MELBOURNE, AUSTRALIA_SYDNEY, CANADA_CENTRAL, CET, CST6CDT, ETC_GMT, ETC_GMT0, ETC_GMT_ADD_0, ETC_GMT_ADD_1, ETC_GMT_ADD_10, ETC_GMT_ADD_11, ETC_GMT_ADD_12, ETC_GMT_ADD_2, ETC_GMT_ADD_3, ETC_GMT_ADD_4, ETC_GMT_ADD_5, ETC_GMT_ADD_6, ETC_GMT_ADD_7, ETC_GMT_ADD_8, ETC_GMT_ADD_9, ETC_GMT_NEG_0, ETC_GMT_NEG_1, ETC_GMT_NEG_10, ETC_GMT_NEG_11, ETC_GMT_NEG_12, ETC_GMT_NEG_13, ETC_GMT_NEG_14, ETC_GMT_NEG_2, ETC_GMT_NEG_3, ETC_GMT_NEG_4, ETC_GMT_NEG_5, ETC_GMT_NEG_6, ETC_GMT_NEG_7, ETC_GMT_NEG_8, ETC_GMT_NEG_9, EUROPE_DUBLIN, EUROPE_LONDON, EUROPE_PARIS, EUROPE_STOCKHOLM, EUROPE_ZURICH, ISRAEL, MEXICO_GENERAL, MST7MDT, PACIFIC_AUCKLAND, US_CENTRAL, US_EASTERN, US_MOUNTAIN, US_PACIFIC
@@ -6986,8 +7296,19 @@ module Aws::DataZone
     #   resp.project_id #=> String
     #   resp.publish_on_import #=> Boolean
     #   resp.recommendation.enable_business_name_generation #=> Boolean
+    #   resp.retain_permissions_on_revoke_failure #=> Boolean
     #   resp.schedule.schedule #=> String
     #   resp.schedule.timezone #=> String, one of "UTC", "AFRICA_JOHANNESBURG", "AMERICA_MONTREAL", "AMERICA_SAO_PAULO", "ASIA_BAHRAIN", "ASIA_BANGKOK", "ASIA_CALCUTTA", "ASIA_DUBAI", "ASIA_HONG_KONG", "ASIA_JAKARTA", "ASIA_KUALA_LUMPUR", "ASIA_SEOUL", "ASIA_SHANGHAI", "ASIA_SINGAPORE", "ASIA_TAIPEI", "ASIA_TOKYO", "AUSTRALIA_MELBOURNE", "AUSTRALIA_SYDNEY", "CANADA_CENTRAL", "CET", "CST6CDT", "ETC_GMT", "ETC_GMT0", "ETC_GMT_ADD_0", "ETC_GMT_ADD_1", "ETC_GMT_ADD_10", "ETC_GMT_ADD_11", "ETC_GMT_ADD_12", "ETC_GMT_ADD_2", "ETC_GMT_ADD_3", "ETC_GMT_ADD_4", "ETC_GMT_ADD_5", "ETC_GMT_ADD_6", "ETC_GMT_ADD_7", "ETC_GMT_ADD_8", "ETC_GMT_ADD_9", "ETC_GMT_NEG_0", "ETC_GMT_NEG_1", "ETC_GMT_NEG_10", "ETC_GMT_NEG_11", "ETC_GMT_NEG_12", "ETC_GMT_NEG_13", "ETC_GMT_NEG_14", "ETC_GMT_NEG_2", "ETC_GMT_NEG_3", "ETC_GMT_NEG_4", "ETC_GMT_NEG_5", "ETC_GMT_NEG_6", "ETC_GMT_NEG_7", "ETC_GMT_NEG_8", "ETC_GMT_NEG_9", "EUROPE_DUBLIN", "EUROPE_LONDON", "EUROPE_PARIS", "EUROPE_STOCKHOLM", "EUROPE_ZURICH", "ISRAEL", "MEXICO_GENERAL", "MST7MDT", "PACIFIC_AUCKLAND", "US_CENTRAL", "US_EASTERN", "US_MOUNTAIN", "US_PACIFIC"
+    #   resp.self_grant_status.glue_self_grant_status.self_grant_status_details #=> Array
+    #   resp.self_grant_status.glue_self_grant_status.self_grant_status_details[0].database_name #=> String
+    #   resp.self_grant_status.glue_self_grant_status.self_grant_status_details[0].failure_cause #=> String
+    #   resp.self_grant_status.glue_self_grant_status.self_grant_status_details[0].schema_name #=> String
+    #   resp.self_grant_status.glue_self_grant_status.self_grant_status_details[0].status #=> String, one of "GRANT_PENDING", "REVOKE_PENDING", "GRANT_IN_PROGRESS", "REVOKE_IN_PROGRESS", "GRANTED", "GRANT_FAILED", "REVOKE_FAILED"
+    #   resp.self_grant_status.redshift_self_grant_status.self_grant_status_details #=> Array
+    #   resp.self_grant_status.redshift_self_grant_status.self_grant_status_details[0].database_name #=> String
+    #   resp.self_grant_status.redshift_self_grant_status.self_grant_status_details[0].failure_cause #=> String
+    #   resp.self_grant_status.redshift_self_grant_status.self_grant_status_details[0].schema_name #=> String
+    #   resp.self_grant_status.redshift_self_grant_status.self_grant_status_details[0].status #=> String, one of "GRANT_PENDING", "REVOKE_PENDING", "GRANT_IN_PROGRESS", "REVOKE_IN_PROGRESS", "GRANTED", "GRANT_FAILED", "REVOKE_FAILED"
     #   resp.status #=> String, one of "CREATING", "FAILED_CREATION", "READY", "UPDATING", "FAILED_UPDATE", "RUNNING", "DELETING", "FAILED_DELETION"
     #   resp.type #=> String
     #   resp.updated_at #=> Time
@@ -7177,6 +7498,68 @@ module Aws::DataZone
     # @param [Hash] params ({})
     def update_environment(params = {}, options = {})
       req = build_request(:update_environment, params)
+      req.send_request(options)
+    end
+
+    # Updates an environment action.
+    #
+    # @option params [String] :description
+    #   The description of the environment action.
+    #
+    # @option params [required, String] :domain_identifier
+    #   The domain ID of the environment action.
+    #
+    # @option params [required, String] :environment_identifier
+    #   The environment ID of the environment action.
+    #
+    # @option params [required, String] :identifier
+    #   The ID of the environment action.
+    #
+    # @option params [String] :name
+    #   The name of the environment action.
+    #
+    # @option params [Types::ActionParameters] :parameters
+    #   The parameters of the environment action.
+    #
+    # @return [Types::UpdateEnvironmentActionOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateEnvironmentActionOutput#description #description} => String
+    #   * {Types::UpdateEnvironmentActionOutput#domain_id #domain_id} => String
+    #   * {Types::UpdateEnvironmentActionOutput#environment_id #environment_id} => String
+    #   * {Types::UpdateEnvironmentActionOutput#id #id} => String
+    #   * {Types::UpdateEnvironmentActionOutput#name #name} => String
+    #   * {Types::UpdateEnvironmentActionOutput#parameters #parameters} => Types::ActionParameters
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_environment_action({
+    #     description: "String",
+    #     domain_identifier: "DomainId", # required
+    #     environment_identifier: "EnvironmentId", # required
+    #     identifier: "String", # required
+    #     name: "String",
+    #     parameters: {
+    #       aws_console_link: {
+    #         uri: "String",
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.description #=> String
+    #   resp.domain_id #=> String
+    #   resp.environment_id #=> String
+    #   resp.id #=> String
+    #   resp.name #=> String
+    #   resp.parameters.aws_console_link.uri #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/UpdateEnvironmentAction AWS API Documentation
+    #
+    # @overload update_environment_action(params = {})
+    # @param [Hash] params ({})
+    def update_environment_action(params = {}, options = {})
+      req = build_request(:update_environment_action, params)
       req.send_request(options)
     end
 
@@ -7854,7 +8237,7 @@ module Aws::DataZone
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-datazone'
-      context[:gem_version] = '1.8.0'
+      context[:gem_version] = '1.9.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

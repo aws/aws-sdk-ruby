@@ -418,8 +418,8 @@ module Aws::EC2
     # @!group API Operations
 
     # Accepts an Elastic IP address transfer. For more information, see
-    # [Accept a transferred Elastic IP address][1] in the *Amazon Virtual
-    # Private Cloud User Guide*.
+    # [Accept a transferred Elastic IP address][1] in the *Amazon VPC User
+    # Guide*.
     #
     #
     #
@@ -904,8 +904,7 @@ module Aws::EC2
     # address range that you have brought to Amazon Web Services for use
     # with your Amazon Web Services resources using bring your own IP
     # addresses (BYOIP). For more information, see [Bring Your Own IP
-    # Addresses (BYOIP)][1] in the *Amazon Elastic Compute Cloud User
-    # Guide*.
+    # Addresses (BYOIP)][1] in the *Amazon EC2 User Guide*.
     #
     # If you release an Elastic IP address, you might be able to recover it.
     # You cannot recover an Elastic IP address that you released after it is
@@ -913,8 +912,8 @@ module Aws::EC2
     # recover an Elastic IP address that you released, specify it in this
     # operation.
     #
-    # For more information, see [Elastic IP Addresses][2] in the *Amazon
-    # Elastic Compute Cloud User Guide*.
+    # For more information, see [Elastic IP Addresses][2] in the *Amazon EC2
+    # User Guide*.
     #
     # You can allocate a carrier IP address which is a public IP address
     # from a telecommunication carrier, to a network interface which resides
@@ -943,12 +942,6 @@ module Aws::EC2
     #   from which Amazon Web Services advertises IP addresses. Use this
     #   parameter to limit the IP address to this location. IP addresses
     #   cannot move between network border groups.
-    #
-    #   Use [DescribeAvailabilityZones][1] to view the network border groups.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeAvailabilityZones.html
     #
     # @option params [String] :customer_owned_ipv_4_pool
     #   The ID of a customer-owned address pool. Use this parameter to let
@@ -1045,7 +1038,7 @@ module Aws::EC2
     #   information, see [ Understanding auto-placement and affinity][1] in
     #   the *Amazon EC2 User Guide*.
     #
-    #   Default: `on`
+    #   Default: `off`
     #
     #
     #
@@ -1238,14 +1231,14 @@ module Aws::EC2
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. For more information, see [Ensuring
-    #   Idempotency][1].
+    #   idempotency][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #
     # @option params [String] :description
     #   A description for the allocation.
@@ -1352,9 +1345,7 @@ module Aws::EC2
     # specify the number of IPv6 addresses to be automatically assigned from
     # within the subnet's IPv6 CIDR block range. You can assign as many
     # IPv6 addresses to a network interface as you can assign private IPv4
-    # addresses, and the limit varies per instance type. For information,
-    # see [IP Addresses Per Network Interface Per Instance Type][1] in the
-    # *Amazon Elastic Compute Cloud User Guide*.
+    # addresses, and the limit varies per instance type.
     #
     # You must specify either the IPv6 addresses or the IPv6 address count
     # in the request.
@@ -1362,13 +1353,11 @@ module Aws::EC2
     # You can optionally use Prefix Delegation on the network interface. You
     # must specify either the IPV6 Prefix Delegation prefixes, or the IPv6
     # Prefix Delegation count. For information, see [ Assigning prefixes to
-    # Amazon EC2 network interfaces][2] in the *Amazon Elastic Compute Cloud
-    # User Guide*.
+    # network interfaces][1] in the *Amazon EC2 User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html#AvailableIpPerENI
-    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-prefix-eni.html
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-prefix-eni.html
     #
     # @option params [Integer] :ipv_6_address_count
     #   The number of additional IPv6 addresses to assign to the network
@@ -1434,10 +1423,8 @@ module Aws::EC2
     # can specify the number of secondary IP addresses to be automatically
     # assigned within the subnet's CIDR block range. The number of
     # secondary IP addresses that you can assign to an instance varies by
-    # instance type. For information about instance types, see [Instance
-    # Types][1] in the *Amazon Elastic Compute Cloud User Guide*. For more
-    # information about Elastic IP addresses, see [Elastic IP Addresses][2]
-    # in the *Amazon Elastic Compute Cloud User Guide*.
+    # instance type. For more information about Elastic IP addresses, see
+    # [Elastic IP Addresses][1] in the *Amazon EC2 User Guide*.
     #
     # When you move a secondary private IP address to another network
     # interface, any Elastic IP address that is associated with the IP
@@ -1454,14 +1441,12 @@ module Aws::EC2
     # You can optionally use Prefix Delegation on the network interface. You
     # must specify either the IPv4 Prefix Delegation prefixes, or the IPv4
     # Prefix Delegation count. For information, see [ Assigning prefixes to
-    # Amazon EC2 network interfaces][3] in the *Amazon Elastic Compute Cloud
-    # User Guide*.
+    # network interfaces][2] in the *Amazon EC2 User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html
-    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html
-    # [3]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-prefix-eni.html
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html
+    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-prefix-eni.html
     #
     # @option params [Boolean] :allow_reassignment
     #   Indicates whether to allow an IP address that is already assigned to
@@ -1550,9 +1535,9 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Assigns one or more private IPv4 addresses to a private NAT gateway.
-    # For more information, see [Work with NAT gateways][1] in the *Amazon
-    # VPC User Guide*.
+    # Assigns private IPv4 addresses to a private NAT gateway. For more
+    # information, see [Work with NAT gateways][1] in the *Amazon VPC User
+    # Guide*.
     #
     #
     #
@@ -1752,7 +1737,7 @@ module Aws::EC2
     #
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request. For more information, see [How to ensure
+    #   idempotency of the request. For more information, see [Ensuring
     #   idempotency][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
@@ -1760,7 +1745,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -1807,7 +1792,7 @@ module Aws::EC2
     # the instance renews its DHCP lease. You can explicitly renew the lease
     # using the operating system on the instance.
     #
-    # For more information, see [DHCP options sets][1] in the *Amazon VPC
+    # For more information, see [DHCP option sets][1] in the *Amazon VPC
     # User Guide*.
     #
     #
@@ -2554,11 +2539,10 @@ module Aws::EC2
 
     # Associates a branch network interface with a trunk network interface.
     #
-    # Before you create the association, run the
-    # [create-network-interface][1] command and set `--interface-type` to
-    # `trunk`. You must also create a network interface for each branch
-    # network interface that you want to associate with the trunk network
-    # interface.
+    # Before you create the association, use [CreateNetworkInterface][1]
+    # command and set the interface type to `trunk`. You must also create a
+    # network interface for each branch network interface that you want to
+    # associate with the trunk network interface.
     #
     #
     #
@@ -2578,15 +2562,15 @@ module Aws::EC2
     #
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request. For more information, see [How to Ensure
-    #   Idempotency][1].
+    #   idempotency of the request. For more information, see [Ensuring
+    #   idempotency][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -2961,14 +2945,14 @@ module Aws::EC2
     # @option params [String] :client_token
     #   A unique, case-sensitive token that you provide to ensure idempotency
     #   of your modification request. For more information, see [Ensuring
-    #   Idempotency][1].
+    #   idempotency][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -3223,7 +3207,7 @@ module Aws::EC2
     #
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request. For more information, see [How to ensure
+    #   idempotency of the request. For more information, see [Ensuring
     #   idempotency][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
@@ -3231,7 +3215,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -4139,8 +4123,8 @@ module Aws::EC2
     # Cancels the specified Reserved Instance listing in the Reserved
     # Instance Marketplace.
     #
-    # For more information, see [Reserved Instance Marketplace][1] in the
-    # *Amazon EC2 User Guide*.
+    # For more information, see [Sell in the Reserved Instance
+    # Marketplace][1] in the *Amazon EC2 User Guide*.
     #
     #
     #
@@ -4452,7 +4436,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #
     # @return [Types::CopyFpgaImageResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4697,11 +4681,10 @@ module Aws::EC2
     # When copying snapshots to a Region, copies of encrypted EBS snapshots
     # remain encrypted. Copies of unencrypted snapshots remain unencrypted,
     # unless you enable encryption for the snapshot copy operation. By
-    # default, encrypted snapshot copies use the default Key Management
-    # Service (KMS) KMS key; however, you can specify a different KMS key.
-    # To copy an encrypted snapshot that has been shared from another
-    # account, you must have permissions for the KMS key used to encrypt the
-    # snapshot.
+    # default, encrypted snapshot copies use the default KMS key; however,
+    # you can specify a different KMS key. To copy an encrypted snapshot
+    # that has been shared from another account, you must have permissions
+    # for the KMS key used to encrypt the snapshot.
     #
     # Snapshots copied to an Outpost are encrypted by default using the
     # default encryption key for the Region, or a different key that you
@@ -4762,10 +4745,9 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/ebs/latest/userguide/ebs-encryption.html
     #
     # @option params [String] :kms_key_id
-    #   The identifier of the Key Management Service (KMS) KMS key to use for
-    #   Amazon EBS encryption. If this parameter is not specified, your KMS
-    #   key for Amazon EBS is used. If `KmsKeyId` is specified, the encrypted
-    #   state must be `true`.
+    #   The identifier of the KMS key to use for Amazon EBS encryption. If
+    #   this parameter is not specified, your KMS key for Amazon EBS is used.
+    #   If `KmsKeyId` is specified, the encrypted state must be `true`.
     #
     #   You can specify the KMS key using any of the following:
     #
@@ -4794,11 +4776,10 @@ module Aws::EC2
     #   `PresignedUrl` must be signed using Amazon Web Services Signature
     #   Version 4. Because EBS snapshots are stored in Amazon S3, the signing
     #   algorithm for this parameter uses the same logic that is described in
-    #   [Authenticating Requests: Using Query Parameters (Amazon Web Services
-    #   Signature Version 4)][2] in the *Amazon Simple Storage Service API
-    #   Reference*. An invalid or improperly signed `PresignedUrl` will cause
-    #   the copy operation to fail asynchronously, and the snapshot will move
-    #   to an `error` state.
+    #   [ Authenticating Requests: Using Query Parameters (Amazon Web Services
+    #   Signature Version 4)][2] in the *Amazon S3 API Reference*. An invalid
+    #   or improperly signed `PresignedUrl` will cause the copy operation to
+    #   fail asynchronously, and the snapshot will move to an `error` state.
     #
     #
     #
@@ -5136,7 +5117,8 @@ module Aws::EC2
     end
 
     # Creates a Capacity Reservation Fleet. For more information, see
-    # [Create a Capacity Reservation Fleet][1] in the Amazon EC2 User Guide.
+    # [Create a Capacity Reservation Fleet][1] in the *Amazon EC2 User
+    # Guide*.
     #
     #
     #
@@ -5146,7 +5128,7 @@ module Aws::EC2
     #   The strategy used by the Capacity Reservation Fleet to determine which
     #   of the specified instance types to use. Currently, only the
     #   `prioritized` allocation strategy is supported. For more information,
-    #   see [ Allocation strategy][1] in the Amazon EC2 User Guide.
+    #   see [ Allocation strategy][1] in the *Amazon EC2 User Guide*.
     #
     #   Valid values: `prioritized`
     #
@@ -5187,8 +5169,8 @@ module Aws::EC2
     #   that you assign to each instance type used by the Fleet determine the
     #   number of instances for which the Fleet reserves capacity. Both values
     #   are based on units that make sense for your workload. For more
-    #   information, see [ Total target capacity][1] in the Amazon EC2 User
-    #   Guide.
+    #   information, see [Total target capacity][1] in the *Amazon EC2 User
+    #   Guide*.
     #
     #
     #
@@ -5340,7 +5322,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #
     # @return [Types::CreateCarrierGatewayResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5466,7 +5448,7 @@ module Aws::EC2
     #
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request. For more information, see [How to ensure
+    #   idempotency of the request. For more information, see [Ensuring
     #   idempotency][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
@@ -5474,7 +5456,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   The tags to apply to the Client VPN endpoint during creation.
@@ -5625,7 +5607,7 @@ module Aws::EC2
     #
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request. For more information, see [How to ensure
+    #   idempotency of the request. For more information, see [Ensuring
     #   idempotency][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
@@ -5633,7 +5615,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -6059,7 +6041,7 @@ module Aws::EC2
     # use this set of DHCP options.
     #
     # The following are the individual DHCP options you can specify. For
-    # more information, see [DHCP options sets][1] in the *Amazon VPC User
+    # more information, see [DHCP option sets][1] in the *Amazon VPC User
     # Guide*.
     #
     # * `domain-name` - If you're using AmazonProvidedDNS in `us-east-1`,
@@ -6105,7 +6087,7 @@ module Aws::EC2
     #
     #
     # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/VPC_DHCP_Options.html
-    # [2]: http://www.ietf.org/rfc/rfc2132.txt
+    # [2]: https://www.ietf.org/rfc/rfc2132.txt
     #
     # @option params [required, Array<Types::NewDhcpConfiguration>] :dhcp_configurations
     #   A DHCP configuration option.
@@ -6217,7 +6199,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -6671,7 +6653,7 @@ module Aws::EC2
     # Flow log data for a monitored network interface is recorded as flow
     # log records, which are log events consisting of fields that describe
     # the traffic flow. For more information, see [Flow log records][1] in
-    # the *Amazon Virtual Private Cloud User Guide*.
+    # the *Amazon VPC User Guide*.
     #
     # When publishing to CloudWatch Logs, flow log records are published to
     # a log group, and each network interface has a unique log stream in the
@@ -6679,8 +6661,8 @@ module Aws::EC2
     # the monitored network interfaces are published to a single log file
     # object that is stored in the specified bucket.
     #
-    # For more information, see [VPC Flow Logs][2] in the *Amazon Virtual
-    # Private Cloud User Guide*.
+    # For more information, see [VPC Flow Logs][2] in the *Amazon VPC User
+    # Guide*.
     #
     #
     #
@@ -6700,7 +6682,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #
     # @option params [String] :deliver_logs_permission_arn
     #   The ARN of the IAM role that allows Amazon EC2 to publish flow logs to
@@ -6800,7 +6782,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/instancetypes/ec2-nitro-instances.html
     #
     # @option params [Types::DestinationOptionsRequest] :destination_options
     #   The destination options.
@@ -6904,7 +6886,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   The tags to apply to the FPGA image during creation.
@@ -7582,14 +7564,14 @@ module Aws::EC2
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. For more information, see [Ensuring
-    #   Idempotency][1].
+    #   idempotency][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #
     # @option params [String] :tier
     #   IPAM is offered in a Free Tier and an Advanced Tier. For more
@@ -7762,14 +7744,14 @@ module Aws::EC2
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. For more information, see [Ensuring
-    #   Idempotency][1].
+    #   idempotency][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #
     # @option params [String] :aws_service
     #   Limits which service in Amazon Web Services that the pool can be used
@@ -8000,14 +7982,14 @@ module Aws::EC2
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. For more information, see [Ensuring
-    #   Idempotency][1].
+    #   idempotency][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #
     # @return [Types::CreateIpamScopeResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -8167,13 +8149,13 @@ module Aws::EC2
     # you launch an instance using RunInstances, you can specify a launch
     # template instead of providing the launch parameters in the request.
     # For more information, see [Launch an instance from a launch
-    # template][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    # template][1] in the *Amazon EC2 User Guide*.
     #
     # To clone an existing launch template as the basis for a new launch
     # template, use the Amazon EC2 console. The API, SDKs, and CLI do not
     # support cloning a template. For more information, see [Create a launch
-    # template from an existing launch template][2] in the *Amazon Elastic
-    # Compute Cloud User Guide*.
+    # template from an existing launch template][2] in the *Amazon EC2 User
+    # Guide*.
     #
     #
     #
@@ -8554,8 +8536,7 @@ module Aws::EC2
     # launch template that includes the changes that you require.
     #
     # For more information, see [Modify a launch template (manage launch
-    # template versions)][1] in the *Amazon Elastic Compute Cloud User
-    # Guide*.
+    # template versions)][1] in the *Amazon EC2 User Guide*.
     #
     #
     #
@@ -8613,7 +8594,7 @@ module Aws::EC2
     #   If `true`, and if a Systems Manager parameter is specified for
     #   `ImageId`, the AMI ID is displayed in the response for `imageID`. For
     #   more information, see [Use a Systems Manager parameter instead of an
-    #   AMI ID][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    #   AMI ID][1] in the *Amazon EC2 User Guide*.
     #
     #   Default: `false`
     #
@@ -9374,7 +9355,7 @@ module Aws::EC2
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier you provide to ensure the
     #   idempotency of the request. For more information, see [Ensuring
-    #   Idempotency][1].
+    #   idempotency][1].
     #
     #   Constraints: Up to 255 UTF-8 characters in length.
     #
@@ -9383,7 +9364,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #
     # @return [Types::CreateManagedPrefixListResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -9492,7 +9473,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -9671,7 +9652,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #
     # @return [Types::CreateNetworkAclResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -9924,7 +9905,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   The tags to apply.
@@ -10195,7 +10176,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #
     # @option params [Types::PathRequestFilter] :filter_at_source
     #   Scopes the analysis to network paths that match specific filters at
@@ -10300,17 +10281,14 @@ module Aws::EC2
     # Creates a network interface in the specified subnet.
     #
     # The number of IP addresses you can assign to a network interface
-    # varies by instance type. For more information, see [IP Addresses Per
-    # ENI Per Instance Type][1] in the *Amazon Virtual Private Cloud User
-    # Guide*.
+    # varies by instance type.
     #
     # For more information about network interfaces, see [Elastic network
-    # interfaces][2] in the *Amazon Elastic Compute Cloud User Guide*.
+    # interfaces][1] in the *Amazon EC2 User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html#AvailableIpPerENI
-    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html
     #
     # @option params [String] :description
     #   A description for the network interface.
@@ -10412,14 +10390,14 @@ module Aws::EC2
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. For more information, see [Ensuring
-    #   Idempotency][1].
+    #   idempotency][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #
     # @option params [Boolean] :enable_primary_ipv_6
     #   If you’re creating a network interface in a dual-stack or IPv6-only
@@ -10850,7 +10828,7 @@ module Aws::EC2
     # characteristics as that of the instance.
     #
     # For more information, see [Replace a root volume][1] in the *Amazon
-    # Elastic Compute Cloud User Guide*.
+    # EC2 User Guide*.
     #
     #
     #
@@ -10879,7 +10857,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -10981,8 +10959,8 @@ module Aws::EC2
     # details of your Standard Reserved Instance listing, you can use the
     # DescribeReservedInstancesListings operation.
     #
-    # For more information, see [Reserved Instance Marketplace][1] in the
-    # *Amazon EC2 User Guide*.
+    # For more information, see [Sell in the Reserved Instance
+    # Marketplace][1] in the *Amazon EC2 User Guide*.
     #
     #
     #
@@ -11311,7 +11289,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #
     # @return [Types::CreateRouteTableResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -11566,11 +11544,10 @@ module Aws::EC2
     # snapshots always remain protected.
     #
     # You can tag your snapshots during creation. For more information, see
-    # [Tag your Amazon EC2 resources][1] in the *Amazon Elastic Compute
-    # Cloud User Guide*.
+    # [Tag your Amazon EC2 resources][1] in the *Amazon EC2 User Guide*.
     #
-    # For more information, see [Amazon Elastic Block Store][2] and [Amazon
-    # EBS encryption][3] in the *Amazon EBS User Guide*.
+    # For more information, see [Amazon EBS][2] and [Amazon EBS
+    # encryption][3] in the *Amazon EBS User Guide*.
     #
     #
     #
@@ -11829,7 +11806,7 @@ module Aws::EC2
     # Creates a data feed for Spot Instances, enabling you to view Spot
     # Instance usage logs. You can create one data feed per Amazon Web
     # Services account. For more information, see [Spot Instance data
-    # feed][1] in the *Amazon EC2 User Guide for Linux Instances*.
+    # feed][1] in the *Amazon EC2 User Guide*.
     #
     #
     #
@@ -12011,14 +11988,14 @@ module Aws::EC2
     #
     #   To create a subnet in a Local Zone, set this value to the Local Zone
     #   ID, for example `us-west-2-lax-1a`. For information about the Regions
-    #   that support Local Zones, see [Local Zones locations][1].
+    #   that support Local Zones, see [Available Local Zones][1].
     #
     #   To create a subnet in an Outpost, set this value to the Availability
     #   Zone for the Outpost and specify the Outpost ARN.
     #
     #
     #
-    #   [1]: http://aws.amazon.com/about-aws/global-infrastructure/localzones/locations/
+    #   [1]: https://docs.aws.amazon.com/local-zones/latest/ug/available-local-zones.html
     #
     # @option params [String] :availability_zone_id
     #   The AZ ID or the Local Zone ID of the subnet.
@@ -12161,9 +12138,8 @@ module Aws::EC2
     end
 
     # Creates a subnet CIDR reservation. For more information, see [Subnet
-    # CIDR reservations][1] in the *Amazon Virtual Private Cloud User Guide*
-    # and [Assign prefixes to network interfaces][2] in the *Amazon Elastic
-    # Compute Cloud User Guide*.
+    # CIDR reservations][1] in the *Amazon VPC User Guide* and [Assign
+    # prefixes to network interfaces][2] in the *Amazon EC2 User Guide*.
     #
     #
     #
@@ -12994,8 +12970,8 @@ module Aws::EC2
     # The peer address and transit gateway address must be the same IP
     # address family (IPv4 or IPv6).
     #
-    # For more information, see [Connect peers][1] in the *Transit Gateways
-    # Guide*.
+    # For more information, see [Connect peers][1] in the *Amazon Web
+    # Services Transit Gateways Guide*.
     #
     #
     #
@@ -13688,14 +13664,14 @@ module Aws::EC2
     # @option params [String] :client_token
     #   A unique, case-sensitive token that you provide to ensure idempotency
     #   of your modification request. For more information, see [Ensuring
-    #   Idempotency][1].
+    #   idempotency][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -13816,14 +13792,14 @@ module Aws::EC2
     # @option params [String] :client_token
     #   A unique, case-sensitive token that you provide to ensure idempotency
     #   of your modification request. For more information, see [Ensuring
-    #   Idempotency][1].
+    #   idempotency][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -13901,14 +13877,14 @@ module Aws::EC2
     # @option params [String] :client_token
     #   A unique, case-sensitive token that you provide to ensure idempotency
     #   of your modification request. For more information, see [Ensuring
-    #   Idempotency][1].
+    #   idempotency][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -14007,14 +13983,14 @@ module Aws::EC2
     # @option params [String] :client_token
     #   A unique, case-sensitive token that you provide to ensure idempotency
     #   of your modification request. For more information, see [Ensuring
-    #   Idempotency][1].
+    #   idempotency][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -14117,8 +14093,7 @@ module Aws::EC2
     # User Guide*.
     #
     # You can tag your volumes during creation. For more information, see
-    # [Tag your Amazon EC2 resources][2] in the *Amazon Elastic Compute
-    # Cloud User Guide*.
+    # [Tag your Amazon EC2 resources][2] in the *Amazon EC2 User Guide*.
     #
     # For more information, see [Create an Amazon EBS volume][3] in the
     # *Amazon EBS User Guide*.
@@ -14174,13 +14149,12 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/instancetypes/ec2-nitro-instances.html
     #
     # @option params [String] :kms_key_id
-    #   The identifier of the Key Management Service (KMS) KMS key to use for
-    #   Amazon EBS encryption. If this parameter is not specified, your KMS
-    #   key for Amazon EBS is used. If `KmsKeyId` is specified, the encrypted
-    #   state must be `true`.
+    #   The identifier of the KMS key to use for Amazon EBS encryption. If
+    #   this parameter is not specified, your KMS key for Amazon EBS is used.
+    #   If `KmsKeyId` is specified, the encrypted state must be `true`.
     #
     #   You can specify the KMS key using any of the following:
     #
@@ -14266,7 +14240,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/instancetypes/ec2-nitro-instances.html
     #   [2]: https://docs.aws.amazon.com/ebs/latest/userguide/ebs-volumes-multi.html
     #
     # @option params [Integer] :throughput
@@ -14287,7 +14261,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #
     # @return [Types::Volume] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -14691,7 +14665,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #
     # @option params [Boolean] :private_dns_enabled
     #   (Interface endpoint) Indicates whether to associate a private hosted
@@ -14804,8 +14778,8 @@ module Aws::EC2
     # Creates a connection notification for a specified VPC endpoint or VPC
     # endpoint service. A connection notification notifies you of specific
     # endpoint events. You must create an SNS topic to receive
-    # notifications. For more information, see [Create a Topic][1] in the
-    # *Amazon Simple Notification Service Developer Guide*.
+    # notifications. For more information, see [Creating an Amazon SNS
+    # topic][1] in the *Amazon SNS Developer Guide*.
     #
     # You can create a connection notification for interface endpoints only.
     #
@@ -14839,7 +14813,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #
     # @return [Types::CreateVpcEndpointConnectionNotificationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -14933,7 +14907,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   The tags to associate with the service.
@@ -15012,7 +14986,7 @@ module Aws::EC2
     # and accepter VPC cannot have overlapping CIDR blocks.
     #
     # <note markdown="1"> Limitations and rules apply to a VPC peering connection. For more
-    # information, see the [limitations][1] section in the *VPC Peering
+    # information, see the [VPC peering limitations][1] in the *VPC Peering
     # Guide*.
     #
     #  </note>
@@ -16520,7 +16494,7 @@ module Aws::EC2
     # versions.
     #
     # For more information, see [Delete a launch template version][1] in the
-    # *EC2 User Guide*.
+    # *Amazon EC2 User Guide*.
     #
     #
     #
@@ -18423,14 +18397,14 @@ module Aws::EC2
     # @option params [String] :client_token
     #   A unique, case-sensitive token that you provide to ensure idempotency
     #   of your modification request. For more information, see [Ensuring
-    #   Idempotency][1].
+    #   idempotency][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -18500,14 +18474,14 @@ module Aws::EC2
     # @option params [String] :client_token
     #   A unique, case-sensitive token that you provide to ensure idempotency
     #   of your modification request. For more information, see [Ensuring
-    #   Idempotency][1].
+    #   idempotency][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -18566,14 +18540,14 @@ module Aws::EC2
     # @option params [String] :client_token
     #   A unique, case-sensitive token that you provide to ensure idempotency
     #   of your modification request. For more information, see [Ensuring
-    #   Idempotency][1].
+    #   idempotency][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #
     # @return [Types::DeleteVerifiedAccessInstanceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -18627,14 +18601,14 @@ module Aws::EC2
     # @option params [String] :client_token
     #   A unique, case-sensitive token that you provide to ensure idempotency
     #   of your modification request. For more information, see [Ensuring
-    #   Idempotency][1].
+    #   idempotency][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #
     # @return [Types::DeleteVerifiedAccessTrustProviderResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -19598,8 +19572,7 @@ module Aws::EC2
     end
 
     # Describes an Elastic IP address transfer. For more information, see
-    # [Transfer Elastic IP addresses][1] in the *Amazon Virtual Private
-    # Cloud User Guide*.
+    # [Transfer Elastic IP addresses][1] in the *Amazon VPC User Guide*.
     #
     # When you transfer an Elastic IP address, there is a two-step handshake
     # between the source and transfer Amazon Web Services accounts. When the
@@ -19920,8 +19893,8 @@ module Aws::EC2
     # that zone.
     #
     # For more information about Availability Zones, Local Zones, and
-    # Wavelength Zones, see [Regions and zones][1] in the *Amazon Elastic
-    # Compute Cloud User Guide*.
+    # Wavelength Zones, see [Regions and zones][1] in the *Amazon EC2 User
+    # Guide*.
     #
     # <note markdown="1"> The order of the elements in the response, including those within
     # nested structures, might vary. Applications should not assume the
@@ -20743,10 +20716,10 @@ module Aws::EC2
     #
     #  </note>
     #
-    # Describes one or more of your linked EC2-Classic instances. This
-    # request only returns information about EC2-Classic instances linked to
-    # a VPC through ClassicLink. You cannot use this request to return
-    # information about other instances.
+    # Describes your linked EC2-Classic instances. This request only returns
+    # information about EC2-Classic instances linked to a VPC through
+    # ClassicLink. You cannot use this request to return information about
+    # other instances.
     #
     # @option params [Array<Types::Filter>] :filters
     #   The filters.
@@ -21518,9 +21491,12 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Describes one or more of your DHCP options sets.
+    # Describes your DHCP option sets. The default is to describe all your
+    # DHCP option sets. Alternatively, you can specify specific DHCP option
+    # set IDs or filter the results to include only the DHCP option sets
+    # that match specific criteria.
     #
-    # For more information, see [DHCP options sets][1] in the *Amazon VPC
+    # For more information, see [DHCP option sets][1] in the *Amazon VPC
     # User Guide*.
     #
     #
@@ -21528,9 +21504,7 @@ module Aws::EC2
     # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/VPC_DHCP_Options.html
     #
     # @option params [Array<String>] :dhcp_options_ids
-    #   The IDs of one or more DHCP options sets.
-    #
-    #   Default: Describes all your DHCP options sets.
+    #   The IDs of DHCP option sets.
     #
     # @option params [Array<Types::Filter>] :filters
     #   The filters.
@@ -21651,7 +21625,11 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Describes one or more of your egress-only internet gateways.
+    # Describes your egress-only internet gateways. The default is to
+    # describe all your egress-only internet gateways. Alternatively, you
+    # can specify specific egress-only internet gateway IDs or filter the
+    # results to include only the egress-only internet gateways that match
+    # specific criteria.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -21733,17 +21711,12 @@ module Aws::EC2
 
     # <note markdown="1"> Amazon Elastic Graphics reached end of life on January 8, 2024. For
     # workloads that require graphics acceleration, we recommend that you
-    # use Amazon EC2 G4ad, G4dn, or G5 instances.
+    # use Amazon EC2 G4, G5, or G6 instances.
     #
     #  </note>
     #
     # Describes the Elastic Graphics accelerator associated with your
-    # instances. For more information about Elastic Graphics, see [Amazon
-    # Elastic Graphics][1].
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/elastic-graphics.html
+    # instances.
     #
     # @option params [Array<String>] :elastic_gpu_ids
     #   The Elastic Graphics accelerator IDs.
@@ -25691,6 +25664,10 @@ module Aws::EC2
     #     (`ip-name` \| `resource-name`).
     #
     #   * `private-ip-address` - The private IPv4 address of the instance.
+    #     This can only be used to filter by the primary IP address of the
+    #     network interface attached to the instance. To filter by additional
+    #     IP addresses assigned to the network interface, use the filter
+    #     `network-interface.addresses.private-ip-address`.
     #
     #   * `product-code` - The product code associated with the AMI used to
     #     launch the instance.
@@ -26058,7 +26035,10 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Describes one or more of your internet gateways.
+    # Describes your internet gateways. The default is to describe all your
+    # internet gateways. Alternatively, you can specify specific internet
+    # gateway IDs or filter the results to include only the internet
+    # gateways that match specific criteria.
     #
     # @option params [Array<Types::Filter>] :filters
     #   The filters.
@@ -26935,7 +26915,7 @@ module Aws::EC2
     #   `ImageId`, the parameter is displayed in the response for `imageId`.
     #
     #   For more information, see [Use a Systems Manager parameter instead of
-    #   an AMI ID][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    #   an AMI ID][1] in the *Amazon EC2 User Guide*.
     #
     #   Default: `false`
     #
@@ -28125,7 +28105,10 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Describes one or more of your NAT gateways.
+    # Describes your NAT gateways. The default is to describe all your NAT
+    # gateways. Alternatively, you can specify specific NAT gateway IDs or
+    # filter the results to include only the NAT gateways that match
+    # specific criteria.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -28276,7 +28259,10 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Describes one or more of your network ACLs.
+    # Describes your network ACLs. The default is to describe all your
+    # network ACLs. Alternatively, you can specify specific network ACL IDs
+    # or filter the results to include only the network ACLs that match
+    # specific criteria.
     #
     # For more information, see [Network ACLs][1] in the *Amazon VPC User
     # Guide*.
@@ -28351,8 +28337,6 @@ module Aws::EC2
     #
     # @option params [Array<String>] :network_acl_ids
     #   The IDs of the network ACLs.
-    #
-    #   Default: Describes all your network ACLs.
     #
     # @option params [String] :next_token
     #   The token returned from a previous paginated request. Pagination
@@ -30513,12 +30497,13 @@ module Aws::EC2
     # Describes the Regions that are enabled for your account, or all
     # Regions.
     #
-    # For a list of the Regions supported by Amazon EC2, see [ Amazon
-    # Elastic Compute Cloud endpoints and quotas][1].
+    # For a list of the Regions supported by Amazon EC2, see [Amazon EC2
+    # service endpoints][1].
     #
     # For information about enabling and disabling Regions for your account,
-    # see [Managing Amazon Web Services Regions][2] in the *Amazon Web
-    # Services General Reference*.
+    # see [Specify which Amazon Web Services Regions your account can
+    # use][2] in the *Amazon Web Services Account Management Reference
+    # Guide*.
     #
     # <note markdown="1"> The order of the elements in the response, including those within
     # nested structures, might vary. Applications should not assume the
@@ -30528,8 +30513,8 @@ module Aws::EC2
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/general/latest/gr/ec2-service.html
-    # [2]: https://docs.aws.amazon.com/general/latest/gr/rande-manage.html
+    # [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-endpoints.html
+    # [2]: https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-regions.html
     #
     # @option params [Array<Types::Filter>] :filters
     #   The filters.
@@ -30649,8 +30634,7 @@ module Aws::EC2
     end
 
     # Describes a root volume replacement task. For more information, see
-    # [Replace a root volume][1] in the *Amazon Elastic Compute Cloud User
-    # Guide*.
+    # [Replace a root volume][1] in the *Amazon EC2 User Guide*.
     #
     #
     #
@@ -30893,8 +30877,8 @@ module Aws::EC2
     # Instance listings to you until your demand is met. You are charged
     # based on the total price of all of the listings that you purchase.
     #
-    # For more information, see [Reserved Instance Marketplace][1] in the
-    # *Amazon EC2 User Guide*.
+    # For more information, see [Sell in the Reserved Instance
+    # Marketplace][1] in the *Amazon EC2 User Guide*.
     #
     # <note markdown="1"> The order of the elements in the response, including those within
     # nested structures, might vary. Applications should not assume the
@@ -30978,7 +30962,7 @@ module Aws::EC2
     # modification requests is returned. If a modification ID is specified,
     # only information about the specific modification is returned.
     #
-    # For more information, see [Modifying Reserved Instances][1] in the
+    # For more information, see [Modify Reserved Instances][1] in the
     # *Amazon EC2 User Guide*.
     #
     # <note markdown="1"> The order of the elements in the response, including those within
@@ -31094,8 +31078,8 @@ module Aws::EC2
     # results. This is to ensure that you do not purchase your own Reserved
     # Instances.
     #
-    # For more information, see [Reserved Instance Marketplace][1] in the
-    # *Amazon EC2 User Guide*.
+    # For more information, see [Sell in the Reserved Instance
+    # Marketplace][1] in the *Amazon EC2 User Guide*.
     #
     # <note markdown="1"> The order of the elements in the response, including those within
     # nested structures, might vary. Applications should not assume the
@@ -31152,8 +31136,8 @@ module Aws::EC2
     #
     # @option params [String] :instance_type
     #   The instance type that the reservation will cover (for example,
-    #   `m1.small`). For more information, see [Instance types][1] in the
-    #   *Amazon EC2 User Guide*.
+    #   `m1.small`). For more information, see [Amazon EC2 instance types][1]
+    #   in the *Amazon EC2 User Guide*.
     #
     #
     #
@@ -31285,7 +31269,10 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Describes one or more of your route tables.
+    # Describes your route tables. The default is to describe all your route
+    # tables. Alternatively, you can specify specific route table IDs or
+    # filter the results to include only the route tables that match
+    # specific criteria.
     #
     # Each subnet in your VPC must be associated with a route table. If a
     # subnet is not explicitly associated with any route table, it is
@@ -31381,8 +31368,6 @@ module Aws::EC2
     #
     # @option params [Array<String>] :route_table_ids
     #   The IDs of the route tables.
-    #
-    #   Default: Describes all your route tables.
     #
     # @option params [String] :next_token
     #   The token returned from a previous paginated request. Pagination
@@ -32381,12 +32366,9 @@ module Aws::EC2
     #   * `volume-size` - The size of the volume, in GiB.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of snapshots to return for this request. This value
-    #   can be between 5 and 1,000; if this value is larger than 1,000, only
-    #   1,000 results are returned. If this parameter is not used, then the
-    #   request returns all snapshots. You cannot specify this parameter and
-    #   the snapshot IDs parameter in the same request. For more information,
-    #   see [Pagination][1].
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
     #
     #
     #
@@ -32544,8 +32526,7 @@ module Aws::EC2
     end
 
     # Describes the data feed for Spot Instances. For more information, see
-    # [Spot Instance data feed][1] in the *Amazon EC2 User Guide for Linux
-    # Instances*.
+    # [Spot Instance data feed][1] in the *Amazon EC2 User Guide*.
     #
     #
     #
@@ -33250,7 +33231,7 @@ module Aws::EC2
     #     \| `closed` \| `cancelled` \| `failed`). Spot request status
     #     information can help you track your Amazon EC2 Spot Instance
     #     requests. For more information, see [Spot request status][1] in the
-    #     *Amazon EC2 User Guide for Linux Instances*.
+    #     *Amazon EC2 User Guide*.
     #
     #   * `status-code` - The short code describing the most recent evaluation
     #     of your Spot Instance request.
@@ -33484,8 +33465,7 @@ module Aws::EC2
     end
 
     # Describes the Spot price history. For more information, see [Spot
-    # Instance pricing history][1] in the *Amazon EC2 User Guide for Linux
-    # Instances*.
+    # Instance pricing history][1] in the *Amazon EC2 User Guide*.
     #
     # When you specify a start and end time, the operation returns the
     # prices of the instance types within that time range. It also returns
@@ -33844,7 +33824,9 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Describes one or more of your subnets.
+    # Describes your subnets. The default is to describe all your subnets.
+    # Alternatively, you can specify specific subnet IDs or filter the
+    # results to include only the subnets that match specific criteria.
     #
     # For more information, see [Subnets][1] in the *Amazon VPC User Guide*.
     #
@@ -36078,11 +36060,7 @@ module Aws::EC2
     # @option params [Integer] :max_results
     #   The maximum number of items to return for this request. To get the
     #   next page of items, make another request with the token returned in
-    #   the output. This value can be between 5 and 1,000; if the value is
-    #   larger than 1,000, only 1,000 results are returned. If this parameter
-    #   is not used, then all items are returned. You cannot specify this
-    #   parameter and the volume IDs parameter in the same request. For more
-    #   information, see [Pagination][1].
+    #   the output. For more information, see [Pagination][1].
     #
     #
     #
@@ -36309,12 +36287,9 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of volumes to return for this request. This value
-    #   can be between 5 and 500; if you specify a value larger than 500, only
-    #   500 items are returned. If this parameter is not used, then all items
-    #   are returned. You cannot specify this parameter and the volume IDs
-    #   parameter in the same request. For more information, see
-    #   [Pagination][1].
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
     #
     #
     #
@@ -36322,8 +36297,7 @@ module Aws::EC2
     #
     # @option params [String] :next_token
     #   The token returned from a previous paginated request. Pagination
-    #   continues from the end of the items returned from the previous
-    #   request.
+    #   continues from the end of the items returned by the previous request.
     #
     # @return [Types::DescribeVolumesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -36483,16 +36457,12 @@ module Aws::EC2
     # will be null. If a volume has been modified more than once, the output
     # includes only the most recent modification request.
     #
-    # You can also use CloudWatch Events to check the status of a
-    # modification to an EBS volume. For information about CloudWatch
-    # Events, see the [Amazon CloudWatch Events User Guide][1]. For more
-    # information, see [Monitor the progress of volume modifications][2] in
-    # the *Amazon EBS User Guide*.
+    # For more information, see [ Monitor the progress of volume
+    # modifications][1] in the *Amazon EBS User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/
-    # [2]: https://docs.aws.amazon.com/ebs/latest/userguide/monitoring-volume-modifications.html
+    # [1]: https://docs.aws.amazon.com/ebs/latest/userguide/monitoring-volume-modifications.html
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -36534,7 +36504,7 @@ module Aws::EC2
     #   * `volume-id` - The ID of the volume.
     #
     # @option params [String] :next_token
-    #   The token returned by a previous paginated request. Pagination
+    #   The token returned from a previous paginated request. Pagination
     #   continues from the end of the items returned by the previous request.
     #
     # @option params [Integer] :max_results
@@ -37267,7 +37237,10 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Describes your VPC endpoints.
+    # Describes your VPC endpoints. The default is to describe all your VPC
+    # endpoints. Alternatively, you can specify specific VPC endpoint IDs or
+    # filter the results to include only the VPC endpoints that match
+    # specific criteria.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -37384,7 +37357,10 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Describes one or more of your VPC peering connections.
+    # Describes your VPC peering connections. The default is to describe all
+    # your VPC peering connections. Alternatively, you can specify specific
+    # VPC peering connection IDs or filter the results to include only the
+    # VPC peering connections that match specific criteria.
     #
     # @option params [Array<Types::Filter>] :filters
     #   The filters.
@@ -37522,7 +37498,9 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Describes one or more of your VPCs.
+    # Describes your VPCs. The default is to describe all your VPCs.
+    # Alternatively, you can specify specific VPC IDs or filter the results
+    # to include only the VPCs that match specific criteria.
     #
     # @option params [Array<Types::Filter>] :filters
     #   The filters.
@@ -37576,8 +37554,6 @@ module Aws::EC2
     #
     # @option params [Array<String>] :vpc_ids
     #   The IDs of the VPCs.
-    #
-    #   Default: Describes all your VPCs.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -38117,14 +38093,14 @@ module Aws::EC2
     # @option params [String] :client_token
     #   A unique, case-sensitive token that you provide to ensure idempotency
     #   of your modification request. For more information, see [Ensuring
-    #   Idempotency][1].
+    #   idempotency][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -38346,8 +38322,7 @@ module Aws::EC2
     end
 
     # Disables Elastic IP address transfer. For more information, see
-    # [Transfer Elastic IP addresses][1] in the *Amazon Virtual Private
-    # Cloud User Guide*.
+    # [Transfer Elastic IP addresses][1] in the *Amazon VPC User Guide*.
     #
     #
     #
@@ -39783,15 +39758,15 @@ module Aws::EC2
     #
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request. For more information, see [How to Ensure
-    #   Idempotency][1].
+    #   idempotency of the request. For more information, see [Ensuring
+    #   idempotency][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -39874,8 +39849,7 @@ module Aws::EC2
     end
 
     # Enables Elastic IP address transfer. For more information, see
-    # [Transfer Elastic IP addresses][1] in the *Amazon Virtual Private
-    # Cloud User Guide*.
+    # [Transfer Elastic IP addresses][1] in the *Amazon VPC User Guide*.
     #
     #
     #
@@ -41004,8 +40978,8 @@ module Aws::EC2
     # Alternatively, you can filter by CIDR range.
     #
     # The routes are saved to the specified bucket in a JSON file. For more
-    # information, see [Export Route Tables to Amazon S3][1] in *Transit
-    # Gateways*.
+    # information, see [Export route tables to Amazon S3][1] in the *Amazon
+    # Web Services Transit Gateways Guide*.
     #
     #
     #
@@ -42510,7 +42484,7 @@ module Aws::EC2
     #
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_AllocateIpamPoolCidr.html
     # [2]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ReleaseIpamPoolAllocation.html
-    # [3]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/query-api-troubleshooting.html#eventual-consistency
+    # [3]: https://docs.aws.amazon.com/ec2/latest/devguide/eventual-consistency.html
     #
     # @option params [Boolean] :dry_run
     #   A check for whether you have the required permissions for the action
@@ -43637,8 +43611,8 @@ module Aws::EC2
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/UsingConfig_WinAMI.html
-    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ec2launch.html
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UsingConfig_WinAMI.html
+    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2launch.html
     #
     # @option params [required, String] :instance_id
     #   The ID of the Windows instance.
@@ -43930,8 +43904,8 @@ module Aws::EC2
     # optimal instance types to fulfill your Spot request, or you can
     # specify the instance types by using `InstanceTypes`.
     #
-    # For more information, see [Spot placement score][1] in the Amazon EC2
-    # User Guide.
+    # For more information, see [Spot placement score][1] in the *Amazon EC2
+    # User Guide*.
     #
     #
     #
@@ -46015,28 +45989,17 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Changes the opt-in status of the Local Zone and Wavelength Zone group
-    # for your account.
-    #
-    # Use [ DescribeAvailabilityZones][1] to view the value for `GroupName`.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeAvailabilityZones.html
+    # Changes the opt-in status of the specified zone group for your
+    # account.
     #
     # @option params [required, String] :group_name
     #   The name of the Availability Zone group, Local Zone group, or
     #   Wavelength Zone group.
     #
     # @option params [required, String] :opt_in_status
-    #   Indicates whether you are opted in to the Local Zone group or
-    #   Wavelength Zone group. The only valid value is `opted-in`. You must
-    #   contact [Amazon Web Services Support][1] to opt out of a Local Zone or
-    #   Wavelength Zone group.
-    #
-    #
-    #
-    #   [1]: https://console.aws.amazon.com/support/home#/case/create%3FissueType=customer-service%26serviceCode=general-info%26getting-started%26categoryCode=using-aws%26services
+    #   Indicates whether to opt in to the zone group. The only valid value is
+    #   `opted-in`. You must contact Amazon Web Services Support to opt out of
+    #   a Local Zone or Wavelength Zone group.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -46172,8 +46135,8 @@ module Aws::EC2
     #   that you assign to each instance type used by the Fleet determine the
     #   number of instances for which the Fleet reserves capacity. Both values
     #   are based on units that make sense for your workload. For more
-    #   information, see [Total target capacity][1] in the Amazon EC2 User
-    #   Guide.
+    #   information, see [Total target capacity][1] in the *Amazon EC2 User
+    #   Guide*.
     #
     #
     #
@@ -46450,10 +46413,9 @@ module Aws::EC2
     # [1]: https://docs.aws.amazon.com/ebs/latest/userguide/ebs-encryption.html
     #
     # @option params [required, String] :kms_key_id
-    #   The identifier of the Key Management Service (KMS) KMS key to use for
-    #   Amazon EBS encryption. If this parameter is not specified, your KMS
-    #   key for Amazon EBS is used. If `KmsKeyId` is specified, the encrypted
-    #   state must be `true`.
+    #   The identifier of the KMS key to use for Amazon EBS encryption. If
+    #   this parameter is not specified, your KMS key for Amazon EBS is used.
+    #   If `KmsKeyId` is specified, the encrypted state must be `true`.
     #
     #   You can specify the KMS key using any of the following:
     #
@@ -46793,7 +46755,7 @@ module Aws::EC2
     #
     # @option params [String] :host_recovery
     #   Indicates whether to enable or disable host recovery for the Dedicated
-    #   Host. For more information, see [ Host recovery][1] in the *Amazon EC2
+    #   Host. For more information, see [Host recovery][1] in the *Amazon EC2
     #   User Guide*.
     #
     #
@@ -46822,8 +46784,8 @@ module Aws::EC2
     #
     # @option params [String] :host_maintenance
     #   Indicates whether to enable or disable host maintenance for the
-    #   Dedicated Host. For more information, see [ Host maintenance][1] in
-    #   the *Amazon EC2 User Guide*.
+    #   Dedicated Host. For more information, see [Host maintenance][1] in the
+    #   *Amazon EC2 User Guide*.
     #
     #
     #
@@ -47314,13 +47276,13 @@ module Aws::EC2
     #
     # @option params [Types::AttributeBooleanValue] :disable_api_stop
     #   Indicates whether an instance is enabled for stop protection. For more
-    #   information, see [Stop Protection][1].
+    #   information, see [Enable stop protection for your instance][1].
     #
     #
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Stop_Start.html#Using_StopProtection
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-stop-protection.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -48933,7 +48895,7 @@ module Aws::EC2
     # Instances to be modified must be identical, except for Availability
     # Zone, network platform, and instance type.
     #
-    # For more information, see [Modifying Reserved Instances][1] in the
+    # For more information, see [Modify Reserved Instances][1] in the
     # *Amazon EC2 User Guide*.
     #
     #
@@ -50058,14 +50020,14 @@ module Aws::EC2
     # @option params [String] :client_token
     #   A unique, case-sensitive token that you provide to ensure idempotency
     #   of your modification request. For more information, see [Ensuring
-    #   Idempotency][1].
+    #   idempotency][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -50153,14 +50115,14 @@ module Aws::EC2
     # @option params [String] :client_token
     #   A unique, case-sensitive token that you provide to ensure idempotency
     #   of your modification request. For more information, see [Ensuring
-    #   Idempotency][1].
+    #   idempotency][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -50222,14 +50184,14 @@ module Aws::EC2
     # @option params [String] :client_token
     #   A unique, case-sensitive token that you provide to ensure idempotency
     #   of your modification request. For more information, see [Ensuring
-    #   Idempotency][1].
+    #   idempotency][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -50291,14 +50253,14 @@ module Aws::EC2
     # @option params [String] :client_token
     #   A unique, case-sensitive token that you provide to ensure idempotency
     #   of your modification request. For more information, see [Ensuring
-    #   Idempotency][1].
+    #   idempotency][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -50363,14 +50325,14 @@ module Aws::EC2
     # @option params [String] :client_token
     #   A unique, case-sensitive token that you provide to ensure idempotency
     #   of your modification request. For more information, see [Ensuring
-    #   Idempotency][1].
+    #   idempotency][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #
     # @return [Types::ModifyVerifiedAccessInstanceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -50429,14 +50391,14 @@ module Aws::EC2
     # @option params [String] :client_token
     #   A unique, case-sensitive token that you provide to ensure idempotency
     #   of your modification request. For more information, see [Ensuring
-    #   Idempotency][1].
+    #   idempotency][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #
     # @return [Types::ModifyVerifiedAccessInstanceLoggingConfigurationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -50523,14 +50485,14 @@ module Aws::EC2
     # @option params [String] :client_token
     #   A unique, case-sensitive token that you provide to ensure idempotency
     #   of your modification request. For more information, see [Ensuring
-    #   Idempotency][1].
+    #   idempotency][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #
     # @option params [Types::VerifiedAccessSseSpecificationRequest] :sse_specification
     #   The options for server side encryption.
@@ -50610,12 +50572,8 @@ module Aws::EC2
     # storage capacity. For more information, see [Extend the file
     # system][2].
     #
-    # You can use CloudWatch Events to check the status of a modification to
-    # an EBS volume. For information about CloudWatch Events, see the
-    # [Amazon CloudWatch Events User Guide][3]. You can also track the
-    # status of a modification using DescribeVolumesModifications. For
-    # information about tracking status changes using either method, see
-    # [Monitor the progress of volume modifications][4].
+    # For more information, see [Monitor the progress of volume
+    # modifications][3] in the *Amazon EBS User Guide*.
     #
     # With previous-generation instance types, resizing an EBS volume might
     # require detaching and reattaching the volume or stopping and
@@ -50630,8 +50588,7 @@ module Aws::EC2
     #
     # [1]: https://docs.aws.amazon.com/ebs/latest/userguide/ebs-modify-volume.html
     # [2]: https://docs.aws.amazon.com/ebs/latest/userguide/recognize-expanded-volume-linux.html
-    # [3]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/
-    # [4]: https://docs.aws.amazon.com/ebs/latest/userguide/monitoring-volume-modifications.html
+    # [3]: https://docs.aws.amazon.com/ebs/latest/userguide/monitoring-volume-modifications.html
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -50692,7 +50649,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/instancetypes/ec2-nitro-instances.html
     #
     # @option params [Integer] :throughput
     #   The target throughput of the volume, in MiB/s. This parameter is valid
@@ -50712,7 +50669,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/instancetypes/ec2-nitro-instances.html
     #   [2]: https://docs.aws.amazon.com/ebs/latest/userguide/ebs-volumes-multi.html
     #
     # @return [Types::ModifyVolumeResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -52120,7 +52077,7 @@ module Aws::EC2
     # registered to you and that you created an RPKI ROA to authorize Amazon
     # ASNs 16509 and 14618 to advertise the address range. For more
     # information, see [Bring your own IP addresses (BYOIP)][1] in the
-    # *Amazon Elastic Compute Cloud User Guide*.
+    # *Amazon EC2 User Guide*.
     #
     # Provisioning an address range is an asynchronous operation, so the
     # call returns immediately, but the address range is not ready to use
@@ -52342,14 +52299,14 @@ module Aws::EC2
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. For more information, see [Ensuring
-    #   Idempotency][1].
+    #   idempotency][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #
     # @return [Types::ProvisionIpamPoolCidrResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -52632,8 +52589,8 @@ module Aws::EC2
     # time. If you do not specify a purchase time, the default is the
     # current time.
     #
-    # For more information, see [Reserved Instances][1] and [Reserved
-    # Instance Marketplace][2] in the *Amazon EC2 User Guide*.
+    # For more information, see [Reserved Instances][1] and [Sell in the
+    # Reserved Instance Marketplace][2] in the *Amazon EC2 User Guide*.
     #
     #
     #
@@ -53177,9 +53134,9 @@ module Aws::EC2
 
     # Registers members (network interfaces) with the transit gateway
     # multicast group. A member is a network interface associated with a
-    # supported EC2 instance that receives multicast traffic. For
-    # information about supported instances, see [Multicast
-    # Consideration][1] in *Amazon VPC Transit Gateways*.
+    # supported EC2 instance that receives multicast traffic. For more
+    # information, see [Multicast on transit gateways][1] in the *Amazon Web
+    # Services Transit Gateways Guide*.
     #
     # After you add the members, use
     # [SearchTransitGatewayMulticastGroups][2] to verify that the members
@@ -53187,7 +53144,7 @@ module Aws::EC2
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/vpc/latest/tgw/transit-gateway-limits.html#multicast-limits
+    # [1]: https://docs.aws.amazon.com/vpc/latest/tgw/tgw-multicast-overview.html
     # [2]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_SearchTransitGatewayMulticastGroups.html
     #
     # @option params [required, String] :transit_gateway_multicast_domain_id
@@ -53239,16 +53196,16 @@ module Aws::EC2
     # gateway multicast group.
     #
     # A multicast source is a network interface attached to a supported
-    # instance that sends multicast traffic. For information about supported
-    # instances, see [Multicast Considerations][1] in *Amazon VPC Transit
-    # Gateways*.
+    # instance that sends multicast traffic. For more information about
+    # supported instances, see [Multicast on transit gateways][1] in the
+    # *Amazon Web Services Transit Gateways Guide*.
     #
     # After you add the source, use [SearchTransitGatewayMulticastGroups][2]
     # to verify that the source was added to the multicast group.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/vpc/latest/tgw/transit-gateway-limits.html#multicast-limits
+    # [1]: https://docs.aws.amazon.com/vpc/latest/tgw/tgw-multicast-overview.html
     # [2]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_SearchTransitGatewayMulticastGroups.html
     #
     # @option params [required, String] :transit_gateway_multicast_domain_id
@@ -53667,7 +53624,7 @@ module Aws::EC2
     #
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyIpamResourceCidr.html
     # [2]: https://docs.aws.amazon.com/vpc/latest/ipam/release-alloc-ipam.html
-    # [3]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/query-api-troubleshooting.html#eventual-consistency
+    # [3]: https://docs.aws.amazon.com/ec2/latest/devguide/eventual-consistency.html
     #
     # @option params [Boolean] :dry_run
     #   A check for whether you have the required permissions for the action
@@ -54814,13 +54771,13 @@ module Aws::EC2
 
     # Creates a Spot Instance request.
     #
-    # For more information, see [Spot Instance requests][1] in the *Amazon
-    # EC2 User Guide for Linux Instances*.
+    # For more information, see [Work with Spot Instance][1] in the *Amazon
+    # EC2 User Guide*.
     #
     # We strongly discourage using the RequestSpotInstances API because it
     # is a legacy API with no planned investment. For options for requesting
     # Spot Instances, see [Which is the best Spot request method to use?][2]
-    # in the *Amazon EC2 User Guide for Linux Instances*.
+    # in the *Amazon EC2 User Guide*.
     #
     #
     #
@@ -54855,8 +54812,9 @@ module Aws::EC2
     #
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request. For more information, see [How to Ensure
-    #   Idempotency][1] in the *Amazon EC2 User Guide for Linux Instances*.
+    #   idempotency of the request. For more information, see [Ensuring
+    #   idempotency in Amazon EC2 API requests][1] in the *Amazon EC2 User
+    #   Guide*.
     #
     #
     #
@@ -55398,7 +55356,7 @@ module Aws::EC2
     # The `sourceDestCheck` attribute controls whether source/destination
     # checking is enabled. The default value is `true`, which means checking
     # is enabled. This value must be `false` for a NAT instance to perform
-    # NAT. For more information, see [NAT Instances][1] in the *Amazon VPC
+    # NAT. For more information, see [NAT instances][1] in the *Amazon VPC
     # User Guide*.
     #
     #
@@ -56197,7 +56155,8 @@ module Aws::EC2
     #   see [Instance types][1].
     #
     # * If you don't specify a security group ID, we use the default
-    #   security group. For more information, see [Security groups][2].
+    #   security group for the VPC. For more information, see [Security
+    #   groups][2].
     #
     # * If any of the AMIs have a product code attached for which the user
     #   has not subscribed, the request fails.
@@ -56211,29 +56170,33 @@ module Aws::EC2
     # smaller batches. For example, create five separate launch requests for
     # 100 instances each instead of one launch request for 500 instances.
     #
+    # `RunInstances` is subject to both request rate limiting and resource
+    # rate limiting. For more information, see [Request throttling][4].
+    #
     # An instance is ready for you to use when it's in the `running` state.
     # You can check the state of your instance using DescribeInstances. You
     # can tag instances and EBS volumes during launch, after launch, or
     # both. For more information, see CreateTags and [Tagging your Amazon
-    # EC2 resources][4].
+    # EC2 resources][5].
     #
     # Linux instances have access to the public key of the key pair at boot.
     # You can use this key to provide secure access to the instance. Amazon
     # EC2 public images use this feature to provide secure access without
-    # passwords. For more information, see [Key pairs][5].
+    # passwords. For more information, see [Key pairs][6].
     #
     # For troubleshooting, see [What to do if an instance immediately
-    # terminates][6], and [Troubleshooting connecting to your instance][7].
+    # terminates][7], and [Troubleshooting connecting to your instance][8].
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html
     # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-network-security.html
     # [3]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html
-    # [4]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html
-    # [5]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html
-    # [6]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_InstanceStraightToTerminated.html
-    # [7]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/TroubleshootingInstancesConnecting.html
+    # [4]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-throttling.html
+    # [5]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html
+    # [6]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html
+    # [7]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_InstanceStraightToTerminated.html
+    # [8]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/TroubleshootingInstancesConnecting.html
     #
     # @option params [Array<Types::BlockDeviceMapping>] :block_device_mappings
     #   The block device mapping, which defines the EBS volumes and instance
@@ -56250,8 +56213,8 @@ module Aws::EC2
     #   must be specified here or in a launch template.
     #
     # @option params [String] :instance_type
-    #   The instance type. For more information, see [Instance types][1] in
-    #   the *Amazon EC2 User Guide*.
+    #   The instance type. For more information, see [Amazon EC2 instance
+    #   types][1] in the *Amazon EC2 User Guide*.
     #
     #
     #
@@ -56301,33 +56264,31 @@ module Aws::EC2
     #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ImportKeyPair.html
     #
     # @option params [required, Integer] :max_count
-    #   The maximum number of instances to launch. If you specify more
-    #   instances than Amazon EC2 can launch in the target Availability Zone,
-    #   Amazon EC2 launches the largest possible number of instances above
-    #   `MinCount`.
+    #   The maximum number of instances to launch. If you specify a value that
+    #   is more capacity than Amazon EC2 can launch in the target Availability
+    #   Zone, Amazon EC2 launches the largest possible number of instances
+    #   above the specified minimum count.
     #
-    #   Constraints: Between 1 and the maximum number you're allowed for the
-    #   specified instance type. For more information about the default
-    #   limits, and how to request an increase, see [How many instances can I
-    #   run in Amazon EC2][1] in the Amazon EC2 FAQ.
-    #
+    #   Constraints: Between 1 and the quota for the specified instance type
+    #   for your account for this Region. For more information, see [Amazon
+    #   EC2 instance type quotas][1].
     #
     #
-    #   [1]: http://aws.amazon.com/ec2/faqs/#How_many_instances_can_I_run_in_Amazon_EC2
+    #
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/instancetypes/ec2-instance-quotas.html
     #
     # @option params [required, Integer] :min_count
-    #   The minimum number of instances to launch. If you specify a minimum
-    #   that is more instances than Amazon EC2 can launch in the target
-    #   Availability Zone, Amazon EC2 launches no instances.
+    #   The minimum number of instances to launch. If you specify a value that
+    #   is more capacity than Amazon EC2 can provide in the target
+    #   Availability Zone, Amazon EC2 does not launch any instances.
     #
-    #   Constraints: Between 1 and the maximum number you're allowed for the
-    #   specified instance type. For more information about the default
-    #   limits, and how to request an increase, see [How many instances can I
-    #   run in Amazon EC2][1] in the Amazon EC2 General FAQ.
-    #
+    #   Constraints: Between 1 and the quota for the specified instance type
+    #   for your account for this Region. For more information, see [Amazon
+    #   EC2 instance type quotas][1].
     #
     #
-    #   [1]: http://aws.amazon.com/ec2/faqs/#How_many_instances_can_I_run_in_Amazon_EC2
+    #
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/instancetypes/ec2-instance-quotas.html
     #
     # @option params [Types::RunInstancesMonitoringEnabled] :monitoring
     #   Specifies whether detailed monitoring is enabled for the instance.
@@ -56378,16 +56339,15 @@ module Aws::EC2
     #
     # @option params [String] :user_data
     #   The user data script to make available to the instance. For more
-    #   information, see [Run commands on your Linux instance at launch][1]
-    #   and [Run commands on your Windows instance at launch][2]. If you are
-    #   using a command line tool, base64-encoding is performed for you, and
-    #   you can load the text from a file. Otherwise, you must provide
-    #   base64-encoded text. User data is limited to 16 KB.
+    #   information, see [Run commands on your Amazon EC2 instance at
+    #   launch][1] in the *Amazon EC2 User Guide*. If you are using a command
+    #   line tool, base64-encoding is performed for you, and you can load the
+    #   text from a file. Otherwise, you must provide base64-encoded text.
+    #   User data is limited to 16 KB.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html
-    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ec2-windows-user-data.html
     #
     # @option params [String] :additional_info
     #   Reserved.
@@ -56551,8 +56511,8 @@ module Aws::EC2
     # @option params [Types::HibernationOptionsRequest] :hibernation_options
     #   Indicates whether an instance is enabled for hibernation. This
     #   parameter is valid only if the instance meets the [hibernation
-    #   prerequisites][1]. For more information, see [Hibernate your
-    #   instance][2] in the *Amazon EC2 User Guide*.
+    #   prerequisites][1]. For more information, see [Hibernate your Amazon
+    #   EC2 instance][2] in the *Amazon EC2 User Guide*.
     #
     #   You can't enable hibernation and Amazon Web Services Nitro Enclaves
     #   on the same instance.
@@ -57042,12 +57002,7 @@ module Aws::EC2
     # You can't stop or reboot a Scheduled Instance, but you can terminate
     # it as needed. If you terminate a Scheduled Instance before the current
     # scheduled time period ends, you can launch it again after a few
-    # minutes. For more information, see [Scheduled Instances][1] in the
-    # *Amazon EC2 User Guide*.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-scheduled-instances.html
+    # minutes.
     #
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier that ensures the idempotency of the
@@ -57461,14 +57416,12 @@ module Aws::EC2
     #
     # For more information about configuring your operating system to
     # generate a crash dump when a kernel panic or stop error occurs, see
-    # [Send a diagnostic interrupt (for advanced users)][1] (Linux
-    # instances) or [Send a diagnostic interrupt (for advanced users)][2]
-    # (Windows instances).
+    # [Send a diagnostic interrupt (for advanced users)][1] in the *Amazon
+    # EC2 User Guide*.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/diagnostic-interrupt.html
-    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/diagnostic-interrupt.html
     #
     # @option params [required, String] :instance_id
     #   The ID of the instance.
@@ -57521,8 +57474,8 @@ module Aws::EC2
     # the instance, either change its CPU credit option to `standard`, or
     # change its tenancy to `default` or `dedicated`.
     #
-    # For more information, see [Stop and start your instance][1] in the
-    # *Amazon EC2 User Guide*.
+    # For more information, see [Stop and start Amazon EC2 instances][1] in
+    # the *Amazon EC2 User Guide*.
     #
     #
     #
@@ -57622,7 +57575,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #
     # @return [Types::StartNetworkInsightsAccessScopeAnalysisResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -57704,7 +57657,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #
     # @return [Types::StartNetworkInsightsAnalysisResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -58630,12 +58583,12 @@ module Aws::EC2
     end
 
     # Stops an Amazon EBS-backed instance. For more information, see [Stop
-    # and start your instance][1] in the *Amazon EC2 User Guide*.
+    # and start Amazon EC2 instances][1] in the *Amazon EC2 User Guide*.
     #
     # You can use the Stop action to hibernate an instance if the instance
     # is [enabled for hibernation][2] and it meets the [hibernation
-    # prerequisites][3]. For more information, see [Hibernate your
-    # instance][4] in the *Amazon EC2 User Guide*.
+    # prerequisites][3]. For more information, see [Hibernate your Amazon
+    # EC2 instance][4] in the *Amazon EC2 User Guide*.
     #
     # We don't charge usage for a stopped instance, or data transfer fees;
     # however, your root partition Amazon EBS volume remains and continues
@@ -59515,7 +59468,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.460.0'
+      context[:gem_version] = '1.461.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

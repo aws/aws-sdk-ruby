@@ -633,9 +633,11 @@ module Aws::Route53Domains
 
       api.metadata = {
         "apiVersion" => "2014-05-15",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "route53domains",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "protocols" => ["json"],
         "serviceFullName" => "Amazon Route 53 Domains",
         "serviceId" => "Route 53 Domains",
         "signatureVersion" => "v4",

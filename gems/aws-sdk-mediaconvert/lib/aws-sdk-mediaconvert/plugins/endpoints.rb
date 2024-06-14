@@ -104,6 +104,8 @@ module Aws::MediaConvert
             Aws::MediaConvert::Endpoints::ListTagsForResource.build(context)
           when :put_policy
             Aws::MediaConvert::Endpoints::PutPolicy.build(context)
+          when :search_jobs
+            Aws::MediaConvert::Endpoints::SearchJobs.build(context)
           when :tag_resource
             Aws::MediaConvert::Endpoints::TagResource.build(context)
           when :untag_resource

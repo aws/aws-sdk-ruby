@@ -94,6 +94,21 @@ module Aws
                                              ) -> _BatchGetCustomDataIdentifiersResponseSuccess
                                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchGetCustomDataIdentifiersResponseSuccess
 
+      interface _BatchUpdateAutomatedDiscoveryAccountsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchUpdateAutomatedDiscoveryAccountsResponse]
+        def errors: () -> ::Array[Types::AutomatedDiscoveryAccountUpdateError]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Macie2/Client.html#batch_update_automated_discovery_accounts-instance_method
+      def batch_update_automated_discovery_accounts: (
+                                                       ?accounts: Array[
+                                                         {
+                                                           account_id: ::String?,
+                                                           status: ("ENABLED" | "DISABLED")?
+                                                         },
+                                                       ]
+                                                     ) -> _BatchUpdateAutomatedDiscoveryAccountsResponseSuccess
+                                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchUpdateAutomatedDiscoveryAccountsResponseSuccess
+
       interface _CreateAllowListResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateAllowListResponse]
         def arn: () -> ::String
@@ -541,6 +556,7 @@ module Aws
 
       interface _GetAutomatedDiscoveryConfigurationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetAutomatedDiscoveryConfigurationResponse]
+        def auto_enable_organization_members: () -> ("ALL" | "NEW" | "NONE")
         def classification_scope_id: () -> ::String
         def disabled_at: () -> ::Time
         def first_enabled_at: () -> ::Time
@@ -840,6 +856,19 @@ module Aws
                             ) -> _ListAllowListsResponseSuccess
                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAllowListsResponseSuccess
 
+      interface _ListAutomatedDiscoveryAccountsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAutomatedDiscoveryAccountsResponse]
+        def items: () -> ::Array[Types::AutomatedDiscoveryAccount]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Macie2/Client.html#list_automated_discovery_accounts-instance_method
+      def list_automated_discovery_accounts: (
+                                               ?account_ids: Array[::String],
+                                               ?max_results: ::Integer,
+                                               ?next_token: ::String
+                                             ) -> _ListAutomatedDiscoveryAccountsResponseSuccess
+                                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAutomatedDiscoveryAccountsResponseSuccess
+
       interface _ListClassificationJobsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListClassificationJobsResponse]
         def items: () -> ::Array[Types::JobSummary]
@@ -1072,7 +1101,7 @@ module Aws
                                     {
                                       simple_criterion: {
                                         comparator: ("EQ" | "NE")?,
-                                        key: ("ACCOUNT_ID" | "S3_BUCKET_NAME" | "S3_BUCKET_EFFECTIVE_PERMISSION" | "S3_BUCKET_SHARED_ACCESS")?,
+                                        key: ("ACCOUNT_ID" | "S3_BUCKET_NAME" | "S3_BUCKET_EFFECTIVE_PERMISSION" | "S3_BUCKET_SHARED_ACCESS" | "AUTOMATED_DISCOVERY_MONITORING_STATUS")?,
                                         values: Array[::String]?
                                       }?,
                                       tag_criterion: {
@@ -1092,7 +1121,7 @@ module Aws
                                     {
                                       simple_criterion: {
                                         comparator: ("EQ" | "NE")?,
-                                        key: ("ACCOUNT_ID" | "S3_BUCKET_NAME" | "S3_BUCKET_EFFECTIVE_PERMISSION" | "S3_BUCKET_SHARED_ACCESS")?,
+                                        key: ("ACCOUNT_ID" | "S3_BUCKET_NAME" | "S3_BUCKET_EFFECTIVE_PERMISSION" | "S3_BUCKET_SHARED_ACCESS" | "AUTOMATED_DISCOVERY_MONITORING_STATUS")?,
                                         values: Array[::String]?
                                       }?,
                                       tag_criterion: {
@@ -1176,6 +1205,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Macie2/Client.html#update_automated_discovery_configuration-instance_method
       def update_automated_discovery_configuration: (
+                                                      ?auto_enable_organization_members: ("ALL" | "NEW" | "NONE"),
                                                       status: ("ENABLED" | "DISABLED")
                                                     ) -> _UpdateAutomatedDiscoveryConfigurationResponseSuccess
                                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAutomatedDiscoveryConfigurationResponseSuccess

@@ -1904,6 +1904,22 @@ module Aws::MediaConvert
       SENSITIVE: []
     end
 
+    class SearchJobsRequest
+      attr_accessor input_file: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor order: ("ASCENDING" | "DESCENDING")
+      attr_accessor queue: ::String
+      attr_accessor status: ("SUBMITTED" | "PROGRESSING" | "COMPLETE" | "CANCELED" | "ERROR")
+      SENSITIVE: []
+    end
+
+    class SearchJobsResponse
+      attr_accessor jobs: ::Array[Types::Job]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class SpekeKeyProvider
       attr_accessor certificate_arn: ::String
       attr_accessor resource_id: ::String

@@ -62,6 +62,8 @@ module Aws::Macie2
             Aws::Macie2::Endpoints::AcceptInvitation.build(context)
           when :batch_get_custom_data_identifiers
             Aws::Macie2::Endpoints::BatchGetCustomDataIdentifiers.build(context)
+          when :batch_update_automated_discovery_accounts
+            Aws::Macie2::Endpoints::BatchUpdateAutomatedDiscoveryAccounts.build(context)
           when :create_allow_list
             Aws::Macie2::Endpoints::CreateAllowList.build(context)
           when :create_classification_job
@@ -154,6 +156,8 @@ module Aws::Macie2
             Aws::Macie2::Endpoints::GetUsageTotals.build(context)
           when :list_allow_lists
             Aws::Macie2::Endpoints::ListAllowLists.build(context)
+          when :list_automated_discovery_accounts
+            Aws::Macie2::Endpoints::ListAutomatedDiscoveryAccounts.build(context)
           when :list_classification_jobs
             Aws::Macie2::Endpoints::ListClassificationJobs.build(context)
           when :list_classification_scopes
