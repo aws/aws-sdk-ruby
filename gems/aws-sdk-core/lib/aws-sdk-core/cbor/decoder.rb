@@ -5,7 +5,7 @@ module Aws
     # Pure Ruby implementation of CBOR Decoder
     class Decoder
       def initialize(bytes)
-        @buffer = bytes.force_encoding(Encoding::BINARY)
+        @buffer = bytes
         @pos = 0
       end
 

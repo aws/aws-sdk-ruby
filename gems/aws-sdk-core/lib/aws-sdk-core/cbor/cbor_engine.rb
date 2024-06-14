@@ -12,7 +12,7 @@ module Aws
       end
 
       def self.decode(bytes)
-        Decoder.new(bytes).decode
+        Decoder.new(bytes.force_encoding(Encoding::BINARY)).decode
       end
     end
   end
