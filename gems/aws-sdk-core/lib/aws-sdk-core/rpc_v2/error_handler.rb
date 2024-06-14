@@ -32,7 +32,7 @@ module Aws
         message = data['message']
         data = parse_error_data(context, body, code)
         [code, message, data]
-      rescue Cbor::CborError
+      rescue Cbor::Error
         [http_status_error_code(context), '', EmptyStructure.new]
       end
 

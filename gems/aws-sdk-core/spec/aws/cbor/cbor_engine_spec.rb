@@ -69,7 +69,7 @@ module Aws
             input = [test_case['input']].pack('H*')
 
             expect { Aws::Cbor::CborEngine.decode(input) }
-              .to raise_error(CborError)
+              .to raise_error(Error)
           end
         end
       end

@@ -81,7 +81,7 @@ module Aws
           when 0...MAX_INTEGER
             [major_type + 27, value].pack('CQ>')
           else
-            raise CborError, "Value is too large to encode: #{d}"
+            raise Error, "Value is too large to encode: #{value}"
           end
       end
 

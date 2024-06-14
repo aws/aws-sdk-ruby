@@ -5,7 +5,7 @@ module Aws
     # Pure Ruby implementation of CBOR Decoder
     class Decoder
       def initialize(bytes)
-        @buffer = bytes
+        @buffer = bytes.force_encoding(Encoding::BINARY)
         @pos = 0
       end
 
@@ -94,7 +94,6 @@ module Aws
           when 20, 21 then :boolean
           when 22 then :nil
           when 23 then :undefined # for smithy, this should be parsed as nil
-          when 24 then :simple_value
           when 25 then :half
           when 26 then :float
           when 27 then :double
@@ -118,7 +117,7 @@ module Aws
         when 0 then val
         when 1 then -1 - val
         else
-          raise CborError,
+          raise Error,
                 "Expected Integer (0,1) got major type: #{major_type}"
         end
       end
@@ -169,7 +168,9 @@ module Aws
       end
 
       def read_reserved_undefined
-        read_info
+        _major_type, add_info = read_info
+        raise Error,
+          "Undefined reserved additional information: #{add_info}"
       end
 
       def read_boolean
@@ -178,7 +179,7 @@ module Aws
         when 20 then false
         when 21 then true
         else
-          raise CborError,
+          raise Error,
                 'Invalid Boolean simple type, expected add_info of 20 or 21, ' \
                  "got: #{add_info}"
         end
@@ -202,7 +203,25 @@ module Aws
       # precision - 10 bits
       def read_half
         read_info
-        Half.decode(take(2).unpack1('n'))
+        b16 = take(2).unpack1('n')
+        exp = (b16 >> 10) & 0x1f
+        mant = b16 & 0x3ff
+        val =
+          case exp
+          when 0
+            Math.ldexp(mant, -24)
+          when 31
+            mant.zero? ? Float::INFINITY : Float::NAN
+          else
+            # exp bias is 15, but to use ldexp we divide by 1024 (2^10) to get
+            # exp-15-10
+            Math.ldexp(1024 + mant, exp - 25)
+          end
+        if (b16[15]).zero?
+          val
+        else
+          -val
+        end
       end
 
       def read_float
@@ -227,7 +246,7 @@ module Aws
         when 2 then v
         when 3 then -1 - v
         else
-          raise CborError,
+          raise Error,
                 'Invalid Tag value for BigNum, ' \
                 "expected 2 or 3, got: #{tag_value}"
         end
@@ -239,7 +258,7 @@ module Aws
       # See: https://www.rfc-editor.org/rfc/rfc8949.html#name-decimal-fractions-and-bigfl
       def read_big_decimal
         unless (s = read_array) == 2
-          raise CborError, "Expected array of length 2 but length is: #{s}"
+          raise Error, "Expected array of length 2 but length is: #{s}"
         end
 
         e = read_integer

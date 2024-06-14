@@ -8,15 +8,22 @@ module Aws
       let(:time) { Time.parse('2020-01-01 12:21:42Z') }
 
       def cbor64_encode(value)
-        Base64.encode64(Encoder.new.add(value).bytes).strip.force_encoding('UTF-8')
+        Base64.encode64(Encoder.new.add(value).bytes)
+          .strip.force_encoding('UTF-8')
       end
 
       describe '#add' do
         it 'encodes simple numbers' do
           expect(cbor64_encode(0)).to eq('AA==')
           expect(cbor64_encode(1)).to eq('AQ==')
+          expect(cbor64_encode(-1)).to eq('IA==')
           expect(cbor64_encode(24)).to eq('GBg=')
-          expect(cbor64_encode(18_446_744_073_709_551_616)).to eq('wkkBAAAAAAAAAAA=')
+          expect(cbor64_encode(65_535)).to eq('Gf//')
+          expect(cbor64_encode(4_294_967_295)).to eq('Gv////8=')
+          expect(cbor64_encode(18_446_744_073_709_551_615))
+            .to eq('G///////////')
+          expect(cbor64_encode(18_446_744_073_709_551_616))
+            .to eq('wkkBAAAAAAAAAAA=')
         end
 
         it 'encodes floats' do
@@ -44,6 +51,19 @@ module Aws
           expect(cbor64_encode('水')).to eq('Y+awtA==')
         end
 
+        it 'encodes byte strings' do
+          expect(cbor64_encode('a'.encode(Encoding::BINARY)))
+            .to eq('QWE=')
+        end
+
+        it 'encodes Symbols' do
+          expect(cbor64_encode(:a)).to eq('YWE=')
+        end
+
+        it 'encodes Tagged items' do
+          expect(cbor64_encode(Tagged.new(0, 0))).to eq('wAA=')
+        end
+
         it 'encodes arrays' do
           expect(cbor64_encode([])).to eq('gA==')
           expect(cbor64_encode([1, 2, 3])).to eq('gwECAw==')
@@ -51,11 +71,26 @@ module Aws
         end
 
         it 'encodes maps' do
-          expect(cbor64_encode({ 'a' => 1, 'b' => [2, 3] })).to eq('omFhAWFiggID')
+          expect(cbor64_encode({ 'a' => 1,
+            'b' => [2, 3] })).to eq('omFhAWFiggID')
         end
 
         it 'encodes times' do
           expect(cbor64_encode(time)).to eq('wRsAAAFvYQ3z8A==')
+        end
+
+        it 'raises on unknown items' do
+          expect do
+            expect(cbor64_encode(Encoder.new))
+          end.to raise_error(UnknownTypeError)
+        end
+      end
+
+      describe '#head' do
+        it 'raises on values that are too large' do
+          expect do
+            Encoder.new.send(:head, 0x00, 18_446_744_073_709_551_617)
+          end.to raise_error(Error)
         end
       end
     end
