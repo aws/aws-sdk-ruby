@@ -22,6 +22,9 @@ module Aws
 
       FIVE_BIT_MASK = 0x1F
       TAG_TYPE_EPOCH = 1
+      TAG_TYPE_BIGNUM = 2
+      TAG_TYPE_NEG_BIGNUM = 3
+      TAG_TYPE_BIGDEC = 4
 
       # high level, generic decode. Based on the next type. Consumes and returns
       # the next item as a ruby object.
@@ -62,7 +65,10 @@ module Aws
             item = decode_item
             item /= 1000.0 if type == :integer
             Time.at(item)
-          # TODO: Consider handling of  BigDecimal, ect
+          when TAG_TYPE_BIGNUM, TAG_TYPE_NEG_BIGNUM
+            read_bignum(tag)
+          when TAG_TYPE_BIGDEC
+            read_big_decimal
           else
             Tagged.new(tag, decode_item)
           end

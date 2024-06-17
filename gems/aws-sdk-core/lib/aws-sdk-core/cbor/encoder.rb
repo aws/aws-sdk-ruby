@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+require 'bigdecimal'
 
 module Aws
   module Cbor
@@ -16,6 +17,7 @@ module Aws
       # generic method for adding generic Ruby data based on its type
       def add(value)
         case value
+        when BigDecimal then add_big_decimal(value)
         when Integer then add_auto_integer(value)
         when Numeric then add_auto_float(value)
         when Symbol then add_string(value.to_s)
@@ -64,6 +66,7 @@ module Aws
       # https://www.rfc-editor.org/rfc/rfc8949.html#tags
       TAG_TYPE_EPOCH = 1
       TAG_BIGNUM_BASE = 2
+      TAG_TYPE_BIGDEC = 4
 
       MAX_INTEGER = 18_446_744_073_709_551_616 # 2^64
 
@@ -114,9 +117,17 @@ module Aws
       # A decimal fraction or a bigfloat is represented as a tagged array
       # that contains exactly two integer numbers:
       # an exponent e and a mantissa m
+      # decimal fractions are always represented with a base of 10
       # See: https://www.rfc-editor.org/rfc/rfc8949.html#name-decimal-fractions-and-bigfl
       def add_big_decimal(value)
-        raise NotImplementedError
+        head(MAJOR_TYPE_TAG, TAG_TYPE_BIGDEC)
+        sign, digits, base, exp = value.split
+        # Ruby BigDecimal digits of XXX are used as 0.XXX, convert
+        exp = exp - digits.size
+        digits = sign * digits.to_i
+        start_array(2)
+        add_auto_integer(exp)
+        add_auto_integer(digits)
       end
 
       def add_auto_integer(value)

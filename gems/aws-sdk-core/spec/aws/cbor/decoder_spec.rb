@@ -10,6 +10,10 @@ module Aws
         Decoder.new(Base64.decode64(value)).decode
       end
 
+      def encode_decode(value)
+        Decoder.new(Encoder.new.add(value).bytes).decode
+      end
+
       describe '#decode' do
         it 'raises when there are extra bytes' do
           expect do
@@ -60,6 +64,21 @@ module Aws
         it 'decodes integer times' do
           expect(cbor64_decode('wRsAAAFvYQ3z8A=='))
             .to eq(Time.parse('2020-01-01 12:21:42Z'))
+        end
+
+        it 'decodes positive BigNums' do
+          value = 2 ** 64 + 1
+          expect(encode_decode(value)).to eq(value)
+        end
+
+        it 'decodes negative BigNums' do
+          value = -1*(2 ** 64 + 1)
+          expect(encode_decode(value)).to eq(value)
+        end
+
+        it 'decodes BigDecimals' do
+          value = BigDecimal("273.15")
+          expect(cbor64_decode('xIIhGWqz')).to eq(value)
         end
       end
     end

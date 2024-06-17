@@ -8,7 +8,7 @@ module Aws
       let(:time) { Time.parse('2020-01-01 12:21:42Z') }
 
       def cbor64_encode(value)
-        Base64.encode64(Encoder.new.add(value).bytes)
+        Base64.strict_encode64(Encoder.new.add(value).bytes)
           .strip.force_encoding('UTF-8')
       end
 
@@ -77,6 +77,13 @@ module Aws
 
         it 'encodes times' do
           expect(cbor64_encode(time)).to eq('wRsAAAFvYQ3z8A==')
+        end
+
+        it 'encodes BigDecimals' do
+          # see example at:
+          # https://www.rfc-editor.org/rfc/rfc8949.html#name-decimal-fractions-and-bigfl
+          expect(cbor64_encode(BigDecimal("273.15")))
+            .to eq('xIIhGWqz') # C4 82 21 19 6AB3 in hex
         end
 
         it 'raises on unknown items' do
