@@ -453,7 +453,7 @@ module Aws::ACMPCA
     #
     #
     # [1]: https://docs.aws.amazon.com/privateca/latest/userguide/crl-planning.html#s3-policies
-    # [2]: https://docs.aws.amazon.com/privateca/latest/userguide/PcaCreateCa.html#crl-encryption
+    # [2]: https://docs.aws.amazon.com/privateca/latest/userguide/crl-planning.html#crl-encryption
     #
     # @option params [required, Types::CertificateAuthorityConfiguration] :certificate_authority_configuration
     #   Name and bit size of the private key algorithm, the name of the
@@ -1518,44 +1518,46 @@ module Aws::ACMPCA
     # Amazon Web Services Private CA allows the following extensions to be
     # marked critical in the imported CA certificate or chain.
     #
-    # * Basic constraints (*must* be marked critical)
-    #
-    # * Subject alternative names
-    #
-    # * Key usage
-    #
-    # * Extended key usage
-    #
     # * Authority key identifier
     #
-    # * Subject key identifier
-    #
-    # * Issuer alternative name
-    #
-    # * Subject directory attributes
-    #
-    # * Subject information access
+    # * Basic constraints (*must* be marked critical)
     #
     # * Certificate policies
     #
-    # * Policy mappings
+    # * Extended key usage
     #
     # * Inhibit anyPolicy
+    #
+    # * Issuer alternative name
+    #
+    # * Key usage
+    #
+    # * Name constraints
+    #
+    # * Policy mappings
+    #
+    # * Subject alternative name
+    #
+    # * Subject directory attributes
+    #
+    # * Subject key identifier
+    #
+    # * Subject information access
     #
     # Amazon Web Services Private CA rejects the following extensions when
     # they are marked critical in an imported CA certificate or chain.
     #
-    # * Name constraints
-    #
-    # * Policy constraints
+    # * Authority information access
     #
     # * CRL distribution points
     #
-    # * Authority information access
-    #
     # * Freshest CRL
     #
-    # * Any other extension
+    # * Policy constraints
+    #
+    # Amazon Web Services Private Certificate Authority will also reject any
+    # other extension marked as critical not contained on the preceding list
+    # of allowed extensions.
     #
     #
     #
@@ -2622,7 +2624,7 @@ module Aws::ACMPCA
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-acmpca'
-      context[:gem_version] = '1.69.0'
+      context[:gem_version] = '1.70.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

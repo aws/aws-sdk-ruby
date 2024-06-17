@@ -2174,6 +2174,20 @@ module Aws::MediaConvert
     #   playlist generation.
     #   @return [String]
     #
+    # @!attribute [rw] dash_i_frame_trick_play_name_modifier
+    #   Specify whether MediaConvert generates I-frame only video segments
+    #   for DASH trick play, also known as trick mode. When specified, the
+    #   I-frame only video segments are included within an additional
+    #   AdaptationSet in your DASH output manifest. To generate I-frame only
+    #   video segments: Enter a name as a text string, up to 256 character
+    #   long. This name is appended to the end of this output group's base
+    #   filename, that you specify as part of your destination URI, and used
+    #   for the I-frame only video segment files. You may also include
+    #   format identifiers. For more information, see:
+    #   https://docs.aws.amazon.com/mediaconvert/latest/ug/using-variables-in-your-job-settings.html#using-settings-variables-with-streaming-outputs
+    #   To not generate I-frame only video segments: Leave blank.
+    #   @return [String]
+    #
     # @!attribute [rw] dash_manifest_style
     #   Specify how MediaConvert writes SegmentTimeline in your output DASH
     #   manifest. To write a SegmentTimeline in each video Representation:
@@ -2373,6 +2387,7 @@ module Aws::MediaConvert
       :base_url,
       :client_cache,
       :codec_specification,
+      :dash_i_frame_trick_play_name_modifier,
       :dash_manifest_style,
       :destination,
       :destination_settings,
@@ -3333,6 +3348,20 @@ module Aws::MediaConvert
     #   from a different URL than the manifest file.
     #   @return [String]
     #
+    # @!attribute [rw] dash_i_frame_trick_play_name_modifier
+    #   Specify whether MediaConvert generates I-frame only video segments
+    #   for DASH trick play, also known as trick mode. When specified, the
+    #   I-frame only video segments are included within an additional
+    #   AdaptationSet in your DASH output manifest. To generate I-frame only
+    #   video segments: Enter a name as a text string, up to 256 character
+    #   long. This name is appended to the end of this output group's base
+    #   filename, that you specify as part of your destination URI, and used
+    #   for the I-frame only video segment files. You may also include
+    #   format identifiers. For more information, see:
+    #   https://docs.aws.amazon.com/mediaconvert/latest/ug/using-variables-in-your-job-settings.html#using-settings-variables-with-streaming-outputs
+    #   To not generate I-frame only video segments: Leave blank.
+    #   @return [String]
+    #
     # @!attribute [rw] dash_manifest_style
     #   Specify how MediaConvert writes SegmentTimeline in your output DASH
     #   manifest. To write a SegmentTimeline in each video Representation:
@@ -3498,6 +3527,7 @@ module Aws::MediaConvert
       :additional_manifests,
       :audio_channel_config_scheme_id_uri,
       :base_url,
+      :dash_i_frame_trick_play_name_modifier,
       :dash_manifest_style,
       :destination,
       :destination_settings,
@@ -7640,16 +7670,46 @@ module Aws::MediaConvert
     # file, but you cannot specify both. For more information, see
     # https://docs.aws.amazon.com/mediaconvert/latest/ug/video-generator.html
     #
+    # @!attribute [rw] channels
+    #   Specify the number of audio channels to include in your video
+    #   generator input. MediaConvert creates these audio channels as silent
+    #   audio within a single audio track. Enter an integer from 1 to 32.
+    #   @return [Integer]
+    #
     # @!attribute [rw] duration
-    #   Specify an integer value for Black video duration from 50 to
-    #   86400000 to generate a black video input for that many milliseconds.
-    #   Required when you include Video generator.
+    #   Specify the duration, in milliseconds, for your video generator
+    #   input. Enter an integer from 50 to 86400000.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] framerate_denominator
+    #   Specify the denominator of the fraction that represents the frame
+    #   rate for your video generator input. When you do, you must also
+    #   specify a value for Frame rate numerator. MediaConvert uses a
+    #   default frame rate of 29.97 when you leave Frame rate numerator and
+    #   Frame rate denominator blank.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] framerate_numerator
+    #   Specify the numerator of the fraction that represents the frame rate
+    #   for your video generator input. When you do, you must also specify a
+    #   value for Frame rate denominator. MediaConvert uses a default frame
+    #   rate of 29.97 when you leave Frame rate numerator and Frame rate
+    #   denominator blank.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] sample_rate
+    #   Specify the audio sample rate, in Hz, for the silent audio in your
+    #   video generator input. Enter an integer from 32000 to 48000.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/InputVideoGenerator AWS API Documentation
     #
     class InputVideoGenerator < Struct.new(
-      :duration)
+      :channels,
+      :duration,
+      :framerate_denominator,
+      :framerate_numerator,
+      :sample_rate)
       SENSITIVE = []
       include Aws::Structure
     end

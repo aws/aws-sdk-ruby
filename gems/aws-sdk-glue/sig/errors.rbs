@@ -93,6 +93,9 @@ module Aws
       class NoScheduleException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end
+      class OperationNotSupportedException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
       class OperationTimeoutException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end

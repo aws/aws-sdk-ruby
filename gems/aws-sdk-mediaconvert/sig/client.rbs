@@ -279,7 +279,11 @@ module Aws
                               timecode_source: ("EMBEDDED" | "ZEROBASED" | "SPECIFIEDSTART")?,
                               timecode_start: ::String?,
                               video_generator: {
-                                duration: ::Integer?
+                                channels: ::Integer?,
+                                duration: ::Integer?,
+                                framerate_denominator: ::Integer?,
+                                framerate_numerator: ::Integer?,
+                                sample_rate: ::Integer?
                               }?,
                               video_overlays: Array[
                                 {
@@ -420,6 +424,7 @@ module Aws
                                   base_url: ::String?,
                                   client_cache: ("DISABLED" | "ENABLED")?,
                                   codec_specification: ("RFC_6381" | "RFC_4281")?,
+                                  dash_i_frame_trick_play_name_modifier: ::String?,
                                   dash_manifest_style: ("BASIC" | "COMPACT" | "DISTINCT")?,
                                   destination: ::String?,
                                   destination_settings: {
@@ -490,6 +495,7 @@ module Aws
                                   ]?,
                                   audio_channel_config_scheme_id_uri: ("MPEG_CHANNEL_CONFIGURATION" | "DOLBY_CHANNEL_CONFIGURATION")?,
                                   base_url: ::String?,
+                                  dash_i_frame_trick_play_name_modifier: ::String?,
                                   dash_manifest_style: ("BASIC" | "COMPACT" | "DISTINCT")?,
                                   destination: ::String?,
                                   destination_settings: {
@@ -1825,6 +1831,7 @@ module Aws
                                            base_url: ::String?,
                                            client_cache: ("DISABLED" | "ENABLED")?,
                                            codec_specification: ("RFC_6381" | "RFC_4281")?,
+                                           dash_i_frame_trick_play_name_modifier: ::String?,
                                            dash_manifest_style: ("BASIC" | "COMPACT" | "DISTINCT")?,
                                            destination: ::String?,
                                            destination_settings: {
@@ -1895,6 +1902,7 @@ module Aws
                                            ]?,
                                            audio_channel_config_scheme_id_uri: ("MPEG_CHANNEL_CONFIGURATION" | "DOLBY_CHANNEL_CONFIGURATION")?,
                                            base_url: ::String?,
+                                           dash_i_frame_trick_play_name_modifier: ::String?,
                                            dash_manifest_style: ("BASIC" | "COMPACT" | "DISTINCT")?,
                                            destination: ::String?,
                                            destination_settings: {
@@ -4280,6 +4288,7 @@ module Aws
                                            base_url: ::String?,
                                            client_cache: ("DISABLED" | "ENABLED")?,
                                            codec_specification: ("RFC_6381" | "RFC_4281")?,
+                                           dash_i_frame_trick_play_name_modifier: ::String?,
                                            dash_manifest_style: ("BASIC" | "COMPACT" | "DISTINCT")?,
                                            destination: ::String?,
                                            destination_settings: {
@@ -4350,6 +4359,7 @@ module Aws
                                            ]?,
                                            audio_channel_config_scheme_id_uri: ("MPEG_CHANNEL_CONFIGURATION" | "DOLBY_CHANNEL_CONFIGURATION")?,
                                            base_url: ::String?,
+                                           dash_i_frame_trick_play_name_modifier: ::String?,
                                            dash_manifest_style: ("BASIC" | "COMPACT" | "DISTINCT")?,
                                            destination: ::String?,
                                            destination_settings: {

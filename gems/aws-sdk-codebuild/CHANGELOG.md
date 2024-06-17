@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.118.0 (2024-06-17)
+------------------
+
+* Feature - AWS CodeBuild now supports global and organization GitHub webhooks
+
 1.117.0 (2024-06-05)
 ------------------
 

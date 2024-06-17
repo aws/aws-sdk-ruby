@@ -2061,6 +2061,7 @@ module Aws::CognitoIdentityProvider
 
       api.metadata = {
         "apiVersion" => "2016-04-18",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "cognito-idp",
         "jsonVersion" => "1.1",
         "protocol" => "json",

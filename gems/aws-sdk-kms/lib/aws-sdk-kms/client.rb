@@ -3153,13 +3153,14 @@ module Aws::KMS
     #   resp = client.derive_shared_secret({
     #     key_agreement_algorithm: "ECDH", # The key agreement algorithm used to derive the shared secret. The only valid value is ECDH.
     #     key_id: "1234abcd-12ab-34cd-56ef-1234567890ab", # The key identifier for an asymmetric KMS key pair. The private key in the specified key pair is used to derive the shared secret.
-    #     public_key: "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAvH3Yj0wbkLEpUl95Cv1cJVjsVNSjwGq3tCLnzXfhVwVvmzGN8pYj3U8nKwgouaHbBWNJYjP5VutbbkKS4Kv4GojwZBJyHN17kmxo8yTjRmjR15SKIQ8cqRA2uaERMLnpztIXdZp232PQPbWGxDyXYJ0aJ5EFSag+iSK341kr2kFTpINN7T1ZaX9vfXBdGR+VtkRKMWoHQeWzHrPZ+3irvpXNCKxGUxmPNsJSjPUhuSXT5+0VrY/LEYLQ5lUTrhU6z5/OK0kzaCc66DXc5ipSloS4Xyg+QcYSMxe9xuqO5HtzFImUSKBm1W6eDT6lHnSbpi7vXzNbIX7pWxKw9nmQvQIDAQAB", # The public key in your peer's asymmetric key pair.
+    #     public_key: "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAvH3Yj0wbkLEpUl95Cv1cJVjsVNSjwGq3tCLnzXfhVwVvmzGN8pYj3U8nKwgouaHbBWNJYjP5VutbbkKS4Kv4GojwZBJyHN17kmxo8yTjRmjR15SKIQ8cqRA2uaERMLnpztIXdZp232PQPbWGxDyXYJ0aJ5EFSag", # The public key in your peer's asymmetric key pair.
     #   })
     #
     #   resp.to_h outputs the following:
     #   {
     #     key_agreement_algorithm: "ECDH", # The key agreement algorithm used to derive the shared secret.
     #     key_id: "1234abcd-12ab-34cd-56ef-1234567890ab", # The asymmetric KMS key pair used to derive the shared secret.
+    #     key_origin: "AWS_KMS", # The source of the key material for the specified KMS key.
     #     shared_secret: "MEYCIQCKZLWyTk5runarx6XiAkU9gv3lbwPO/pHa+DXFehzdDwIhANwpsIV2g/9SPWLLsF6p/hiSskuIXMTRwqrMdVKWTMHG", # The raw secret derived from the specified key agreement algorithm, private key in the asymmetric KMS key, and your peer's public key.
     #   }
     #
@@ -10745,7 +10746,7 @@ module Aws::KMS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kms'
-      context[:gem_version] = '1.84.0'
+      context[:gem_version] = '1.85.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

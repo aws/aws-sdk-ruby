@@ -26,6 +26,7 @@ module Aws::Glue
     Aggregate = Shapes::StructureShape.new(name: 'Aggregate')
     AggregateOperation = Shapes::StructureShape.new(name: 'AggregateOperation')
     AggregateOperations = Shapes::ListShape.new(name: 'AggregateOperations')
+    AllowedValuesStringList = Shapes::ListShape.new(name: 'AllowedValuesStringList')
     AlreadyExistsException = Shapes::StructureShape.new(name: 'AlreadyExistsException')
     AmazonRedshiftAdvancedOption = Shapes::StructureShape.new(name: 'AmazonRedshiftAdvancedOption')
     AmazonRedshiftAdvancedOptions = Shapes::ListShape.new(name: 'AmazonRedshiftAdvancedOptions')
@@ -206,6 +207,9 @@ module Aws::Glue
     Condition = Shapes::StructureShape.new(name: 'Condition')
     ConditionCheckFailureException = Shapes::StructureShape.new(name: 'ConditionCheckFailureException')
     ConditionList = Shapes::ListShape.new(name: 'ConditionList')
+    ConfigValueString = Shapes::StringShape.new(name: 'ConfigValueString')
+    ConfigurationMap = Shapes::MapShape.new(name: 'ConfigurationMap')
+    ConfigurationObject = Shapes::StructureShape.new(name: 'ConfigurationObject')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     ConfusionMatrix = Shapes::StructureShape.new(name: 'ConfusionMatrix')
     Connection = Shapes::StructureShape.new(name: 'Connection')
@@ -290,6 +294,8 @@ module Aws::Glue
     CreateTableResponse = Shapes::StructureShape.new(name: 'CreateTableResponse')
     CreateTriggerRequest = Shapes::StructureShape.new(name: 'CreateTriggerRequest')
     CreateTriggerResponse = Shapes::StructureShape.new(name: 'CreateTriggerResponse')
+    CreateUsageProfileRequest = Shapes::StructureShape.new(name: 'CreateUsageProfileRequest')
+    CreateUsageProfileResponse = Shapes::StructureShape.new(name: 'CreateUsageProfileResponse')
     CreateUserDefinedFunctionRequest = Shapes::StructureShape.new(name: 'CreateUserDefinedFunctionRequest')
     CreateUserDefinedFunctionResponse = Shapes::StructureShape.new(name: 'CreateUserDefinedFunctionResponse')
     CreateWorkflowRequest = Shapes::StructureShape.new(name: 'CreateWorkflowRequest')
@@ -413,6 +419,8 @@ module Aws::Glue
     DeleteTableVersionResponse = Shapes::StructureShape.new(name: 'DeleteTableVersionResponse')
     DeleteTriggerRequest = Shapes::StructureShape.new(name: 'DeleteTriggerRequest')
     DeleteTriggerResponse = Shapes::StructureShape.new(name: 'DeleteTriggerResponse')
+    DeleteUsageProfileRequest = Shapes::StructureShape.new(name: 'DeleteUsageProfileRequest')
+    DeleteUsageProfileResponse = Shapes::StructureShape.new(name: 'DeleteUsageProfileResponse')
     DeleteUserDefinedFunctionRequest = Shapes::StructureShape.new(name: 'DeleteUserDefinedFunctionRequest')
     DeleteUserDefinedFunctionResponse = Shapes::StructureShape.new(name: 'DeleteUserDefinedFunctionResponse')
     DeleteWorkflowRequest = Shapes::StructureShape.new(name: 'DeleteWorkflowRequest')
@@ -627,6 +635,8 @@ module Aws::Glue
     GetUnfilteredPartitionsMetadataResponse = Shapes::StructureShape.new(name: 'GetUnfilteredPartitionsMetadataResponse')
     GetUnfilteredTableMetadataRequest = Shapes::StructureShape.new(name: 'GetUnfilteredTableMetadataRequest')
     GetUnfilteredTableMetadataResponse = Shapes::StructureShape.new(name: 'GetUnfilteredTableMetadataResponse')
+    GetUsageProfileRequest = Shapes::StructureShape.new(name: 'GetUsageProfileRequest')
+    GetUsageProfileResponse = Shapes::StructureShape.new(name: 'GetUsageProfileResponse')
     GetUserDefinedFunctionRequest = Shapes::StructureShape.new(name: 'GetUserDefinedFunctionRequest')
     GetUserDefinedFunctionResponse = Shapes::StructureShape.new(name: 'GetUserDefinedFunctionResponse')
     GetUserDefinedFunctionsRequest = Shapes::StructureShape.new(name: 'GetUserDefinedFunctionsRequest')
@@ -769,6 +779,8 @@ module Aws::Glue
     ListTableOptimizerRunsToken = Shapes::StringShape.new(name: 'ListTableOptimizerRunsToken')
     ListTriggersRequest = Shapes::StructureShape.new(name: 'ListTriggersRequest')
     ListTriggersResponse = Shapes::StructureShape.new(name: 'ListTriggersResponse')
+    ListUsageProfilesRequest = Shapes::StructureShape.new(name: 'ListUsageProfilesRequest')
+    ListUsageProfilesResponse = Shapes::StructureShape.new(name: 'ListUsageProfilesResponse')
     ListWorkflowsRequest = Shapes::StructureShape.new(name: 'ListWorkflowsRequest')
     ListWorkflowsResponse = Shapes::StructureShape.new(name: 'ListWorkflowsResponse')
     Location = Shapes::StructureShape.new(name: 'Location')
@@ -847,6 +859,7 @@ module Aws::Glue
     OAuth2PropertiesInput = Shapes::StructureShape.new(name: 'OAuth2PropertiesInput')
     OneInput = Shapes::ListShape.new(name: 'OneInput')
     OpenTableFormatInput = Shapes::StructureShape.new(name: 'OpenTableFormatInput')
+    OperationNotSupportedException = Shapes::StructureShape.new(name: 'OperationNotSupportedException')
     OperationTimeoutException = Shapes::StructureShape.new(name: 'OperationTimeoutException')
     Option = Shapes::StructureShape.new(name: 'Option')
     OptionList = Shapes::ListShape.new(name: 'OptionList')
@@ -909,6 +922,7 @@ module Aws::Glue
     PrincipalPermissionsList = Shapes::ListShape.new(name: 'PrincipalPermissionsList')
     PrincipalType = Shapes::StringShape.new(name: 'PrincipalType')
     Prob = Shapes::FloatShape.new(name: 'Prob')
+    ProfileConfiguration = Shapes::StructureShape.new(name: 'ProfileConfiguration')
     PropertyPredicate = Shapes::StructureShape.new(name: 'PropertyPredicate')
     PublicKeysList = Shapes::ListShape.new(name: 'PublicKeysList')
     PutDataCatalogEncryptionSettingsRequest = Shapes::StructureShape.new(name: 'PutDataCatalogEncryptionSettingsRequest')
@@ -1223,6 +1237,8 @@ module Aws::Glue
     UpdateTableResponse = Shapes::StructureShape.new(name: 'UpdateTableResponse')
     UpdateTriggerRequest = Shapes::StructureShape.new(name: 'UpdateTriggerRequest')
     UpdateTriggerResponse = Shapes::StructureShape.new(name: 'UpdateTriggerResponse')
+    UpdateUsageProfileRequest = Shapes::StructureShape.new(name: 'UpdateUsageProfileRequest')
+    UpdateUsageProfileResponse = Shapes::StructureShape.new(name: 'UpdateUsageProfileResponse')
     UpdateUserDefinedFunctionRequest = Shapes::StructureShape.new(name: 'UpdateUserDefinedFunctionRequest')
     UpdateUserDefinedFunctionResponse = Shapes::StructureShape.new(name: 'UpdateUserDefinedFunctionResponse')
     UpdateWorkflowRequest = Shapes::StructureShape.new(name: 'UpdateWorkflowRequest')
@@ -1231,6 +1247,8 @@ module Aws::Glue
     UpdatedTimestamp = Shapes::StringShape.new(name: 'UpdatedTimestamp')
     UpsertRedshiftTargetOptions = Shapes::StructureShape.new(name: 'UpsertRedshiftTargetOptions')
     UriString = Shapes::StringShape.new(name: 'UriString')
+    UsageProfileDefinition = Shapes::StructureShape.new(name: 'UsageProfileDefinition')
+    UsageProfileDefinitionList = Shapes::ListShape.new(name: 'UsageProfileDefinitionList')
     UserDefinedFunction = Shapes::StructureShape.new(name: 'UserDefinedFunction')
     UserDefinedFunctionInput = Shapes::StructureShape.new(name: 'UserDefinedFunctionInput')
     UserDefinedFunctionList = Shapes::ListShape.new(name: 'UserDefinedFunctionList')
@@ -1301,6 +1319,8 @@ module Aws::Glue
     AggregateOperation.struct_class = Types::AggregateOperation
 
     AggregateOperations.member = Shapes::ShapeRef.new(shape: AggregateOperation)
+
+    AllowedValuesStringList.member = Shapes::ShapeRef.new(shape: ConfigValueString)
 
     AlreadyExistsException.add_member(:message, Shapes::ShapeRef.new(shape: MessageString, location_name: "Message"))
     AlreadyExistsException.struct_class = Types::AlreadyExistsException
@@ -1952,6 +1972,15 @@ module Aws::Glue
 
     ConditionList.member = Shapes::ShapeRef.new(shape: Condition)
 
+    ConfigurationMap.key = Shapes::ShapeRef.new(shape: NameString)
+    ConfigurationMap.value = Shapes::ShapeRef.new(shape: ConfigurationObject)
+
+    ConfigurationObject.add_member(:default_value, Shapes::ShapeRef.new(shape: ConfigValueString, location_name: "DefaultValue"))
+    ConfigurationObject.add_member(:allowed_values, Shapes::ShapeRef.new(shape: AllowedValuesStringList, location_name: "AllowedValues"))
+    ConfigurationObject.add_member(:min_value, Shapes::ShapeRef.new(shape: ConfigValueString, location_name: "MinValue"))
+    ConfigurationObject.add_member(:max_value, Shapes::ShapeRef.new(shape: ConfigValueString, location_name: "MaxValue"))
+    ConfigurationObject.struct_class = Types::ConfigurationObject
+
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: MessageString, location_name: "Message"))
     ConflictException.struct_class = Types::ConflictException
 
@@ -2407,6 +2436,15 @@ module Aws::Glue
     CreateTriggerResponse.add_member(:name, Shapes::ShapeRef.new(shape: NameString, location_name: "Name"))
     CreateTriggerResponse.struct_class = Types::CreateTriggerResponse
 
+    CreateUsageProfileRequest.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
+    CreateUsageProfileRequest.add_member(:description, Shapes::ShapeRef.new(shape: DescriptionString, location_name: "Description"))
+    CreateUsageProfileRequest.add_member(:configuration, Shapes::ShapeRef.new(shape: ProfileConfiguration, required: true, location_name: "Configuration"))
+    CreateUsageProfileRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "Tags"))
+    CreateUsageProfileRequest.struct_class = Types::CreateUsageProfileRequest
+
+    CreateUsageProfileResponse.add_member(:name, Shapes::ShapeRef.new(shape: NameString, location_name: "Name"))
+    CreateUsageProfileResponse.struct_class = Types::CreateUsageProfileResponse
+
     CreateUserDefinedFunctionRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
     CreateUserDefinedFunctionRequest.add_member(:database_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "DatabaseName"))
     CreateUserDefinedFunctionRequest.add_member(:function_input, Shapes::ShapeRef.new(shape: UserDefinedFunctionInput, required: true, location_name: "FunctionInput"))
@@ -2826,6 +2864,11 @@ module Aws::Glue
 
     DeleteTriggerResponse.add_member(:name, Shapes::ShapeRef.new(shape: NameString, location_name: "Name"))
     DeleteTriggerResponse.struct_class = Types::DeleteTriggerResponse
+
+    DeleteUsageProfileRequest.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
+    DeleteUsageProfileRequest.struct_class = Types::DeleteUsageProfileRequest
+
+    DeleteUsageProfileResponse.struct_class = Types::DeleteUsageProfileResponse
 
     DeleteUserDefinedFunctionRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
     DeleteUserDefinedFunctionRequest.add_member(:database_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "DatabaseName"))
@@ -3744,6 +3787,16 @@ module Aws::Glue
     GetUnfilteredTableMetadataResponse.add_member(:row_filter, Shapes::ShapeRef.new(shape: PredicateString, location_name: "RowFilter"))
     GetUnfilteredTableMetadataResponse.struct_class = Types::GetUnfilteredTableMetadataResponse
 
+    GetUsageProfileRequest.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
+    GetUsageProfileRequest.struct_class = Types::GetUsageProfileRequest
+
+    GetUsageProfileResponse.add_member(:name, Shapes::ShapeRef.new(shape: NameString, location_name: "Name"))
+    GetUsageProfileResponse.add_member(:description, Shapes::ShapeRef.new(shape: DescriptionString, location_name: "Description"))
+    GetUsageProfileResponse.add_member(:configuration, Shapes::ShapeRef.new(shape: ProfileConfiguration, location_name: "Configuration"))
+    GetUsageProfileResponse.add_member(:created_on, Shapes::ShapeRef.new(shape: TimestampValue, location_name: "CreatedOn"))
+    GetUsageProfileResponse.add_member(:last_modified_on, Shapes::ShapeRef.new(shape: TimestampValue, location_name: "LastModifiedOn"))
+    GetUsageProfileResponse.struct_class = Types::GetUsageProfileResponse
+
     GetUserDefinedFunctionRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
     GetUserDefinedFunctionRequest.add_member(:database_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "DatabaseName"))
     GetUserDefinedFunctionRequest.add_member(:function_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "FunctionName"))
@@ -3970,6 +4023,7 @@ module Aws::Glue
     Job.add_member(:execution_class, Shapes::ShapeRef.new(shape: ExecutionClass, location_name: "ExecutionClass"))
     Job.add_member(:source_control_details, Shapes::ShapeRef.new(shape: SourceControlDetails, location_name: "SourceControlDetails"))
     Job.add_member(:maintenance_window, Shapes::ShapeRef.new(shape: MaintenanceWindow, location_name: "MaintenanceWindow"))
+    Job.add_member(:profile_name, Shapes::ShapeRef.new(shape: NameString, location_name: "ProfileName"))
     Job.struct_class = Types::Job
 
     JobBookmarkEntry.add_member(:job_name, Shapes::ShapeRef.new(shape: JobName, location_name: "JobName"))
@@ -4024,6 +4078,7 @@ module Aws::Glue
     JobRun.add_member(:dpu_seconds, Shapes::ShapeRef.new(shape: NullableDouble, location_name: "DPUSeconds"))
     JobRun.add_member(:execution_class, Shapes::ShapeRef.new(shape: ExecutionClass, location_name: "ExecutionClass"))
     JobRun.add_member(:maintenance_window, Shapes::ShapeRef.new(shape: MaintenanceWindow, location_name: "MaintenanceWindow"))
+    JobRun.add_member(:profile_name, Shapes::ShapeRef.new(shape: NameString, location_name: "ProfileName"))
     JobRun.struct_class = Types::JobRun
 
     JobRunList.member = Shapes::ShapeRef.new(shape: JobRun)
@@ -4334,6 +4389,14 @@ module Aws::Glue
     ListTriggersResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: GenericString, location_name: "NextToken"))
     ListTriggersResponse.struct_class = Types::ListTriggersResponse
 
+    ListUsageProfilesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: OrchestrationToken, location_name: "NextToken"))
+    ListUsageProfilesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: OrchestrationPageSize200, location_name: "MaxResults"))
+    ListUsageProfilesRequest.struct_class = Types::ListUsageProfilesRequest
+
+    ListUsageProfilesResponse.add_member(:profiles, Shapes::ShapeRef.new(shape: UsageProfileDefinitionList, location_name: "Profiles"))
+    ListUsageProfilesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: OrchestrationToken, location_name: "NextToken"))
+    ListUsageProfilesResponse.struct_class = Types::ListUsageProfilesResponse
+
     ListWorkflowsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: GenericString, location_name: "NextToken"))
     ListWorkflowsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: OrchestrationPageSize25, location_name: "MaxResults"))
     ListWorkflowsRequest.struct_class = Types::ListWorkflowsRequest
@@ -4522,6 +4585,9 @@ module Aws::Glue
     OpenTableFormatInput.add_member(:iceberg_input, Shapes::ShapeRef.new(shape: IcebergInput, location_name: "IcebergInput"))
     OpenTableFormatInput.struct_class = Types::OpenTableFormatInput
 
+    OperationNotSupportedException.add_member(:message, Shapes::ShapeRef.new(shape: MessageString, location_name: "Message"))
+    OperationNotSupportedException.struct_class = Types::OperationNotSupportedException
+
     OperationTimeoutException.add_member(:message, Shapes::ShapeRef.new(shape: MessageString, location_name: "Message"))
     OperationTimeoutException.struct_class = Types::OperationTimeoutException
 
@@ -4658,6 +4724,10 @@ module Aws::Glue
     PrincipalPermissions.struct_class = Types::PrincipalPermissions
 
     PrincipalPermissionsList.member = Shapes::ShapeRef.new(shape: PrincipalPermissions)
+
+    ProfileConfiguration.add_member(:session_configuration, Shapes::ShapeRef.new(shape: ConfigurationMap, location_name: "SessionConfiguration"))
+    ProfileConfiguration.add_member(:job_configuration, Shapes::ShapeRef.new(shape: ConfigurationMap, location_name: "JobConfiguration"))
+    ProfileConfiguration.struct_class = Types::ProfileConfiguration
 
     PropertyPredicate.add_member(:key, Shapes::ShapeRef.new(shape: ValueString, location_name: "Key"))
     PropertyPredicate.add_member(:value, Shapes::ShapeRef.new(shape: ValueString, location_name: "Value"))
@@ -5143,6 +5213,7 @@ module Aws::Glue
     Session.add_member(:execution_time, Shapes::ShapeRef.new(shape: NullableDouble, location_name: "ExecutionTime"))
     Session.add_member(:dpu_seconds, Shapes::ShapeRef.new(shape: NullableDouble, location_name: "DPUSeconds"))
     Session.add_member(:idle_timeout, Shapes::ShapeRef.new(shape: IdleTimeout, location_name: "IdleTimeout"))
+    Session.add_member(:profile_name, Shapes::ShapeRef.new(shape: NameString, location_name: "ProfileName"))
     Session.struct_class = Types::Session
 
     SessionCommand.add_member(:name, Shapes::ShapeRef.new(shape: NameString, location_name: "Name"))
@@ -5895,6 +5966,14 @@ module Aws::Glue
     UpdateTriggerResponse.add_member(:trigger, Shapes::ShapeRef.new(shape: Trigger, location_name: "Trigger"))
     UpdateTriggerResponse.struct_class = Types::UpdateTriggerResponse
 
+    UpdateUsageProfileRequest.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
+    UpdateUsageProfileRequest.add_member(:description, Shapes::ShapeRef.new(shape: DescriptionString, location_name: "Description"))
+    UpdateUsageProfileRequest.add_member(:configuration, Shapes::ShapeRef.new(shape: ProfileConfiguration, required: true, location_name: "Configuration"))
+    UpdateUsageProfileRequest.struct_class = Types::UpdateUsageProfileRequest
+
+    UpdateUsageProfileResponse.add_member(:name, Shapes::ShapeRef.new(shape: NameString, location_name: "Name"))
+    UpdateUsageProfileResponse.struct_class = Types::UpdateUsageProfileResponse
+
     UpdateUserDefinedFunctionRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
     UpdateUserDefinedFunctionRequest.add_member(:database_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "DatabaseName"))
     UpdateUserDefinedFunctionRequest.add_member(:function_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "FunctionName"))
@@ -5921,6 +6000,14 @@ module Aws::Glue
     UpsertRedshiftTargetOptions.add_member(:connection_name, Shapes::ShapeRef.new(shape: EnclosedInStringProperty, location_name: "ConnectionName"))
     UpsertRedshiftTargetOptions.add_member(:upsert_keys, Shapes::ShapeRef.new(shape: EnclosedInStringPropertiesMinOne, location_name: "UpsertKeys"))
     UpsertRedshiftTargetOptions.struct_class = Types::UpsertRedshiftTargetOptions
+
+    UsageProfileDefinition.add_member(:name, Shapes::ShapeRef.new(shape: NameString, location_name: "Name"))
+    UsageProfileDefinition.add_member(:description, Shapes::ShapeRef.new(shape: DescriptionString, location_name: "Description"))
+    UsageProfileDefinition.add_member(:created_on, Shapes::ShapeRef.new(shape: TimestampValue, location_name: "CreatedOn"))
+    UsageProfileDefinition.add_member(:last_modified_on, Shapes::ShapeRef.new(shape: TimestampValue, location_name: "LastModifiedOn"))
+    UsageProfileDefinition.struct_class = Types::UsageProfileDefinition
+
+    UsageProfileDefinitionList.member = Shapes::ShapeRef.new(shape: UsageProfileDefinition)
 
     UserDefinedFunction.add_member(:function_name, Shapes::ShapeRef.new(shape: NameString, location_name: "FunctionName"))
     UserDefinedFunction.add_member(:database_name, Shapes::ShapeRef.new(shape: NameString, location_name: "DatabaseName"))
@@ -6602,6 +6689,20 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
       end)
 
+      api.add_operation(:create_usage_profile, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateUsageProfile"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateUsageProfileRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateUsageProfileResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: AlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNumberLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotSupportedException)
+      end)
+
       api.add_operation(:create_user_defined_function, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateUserDefinedFunction"
         o.http_method = "POST"
@@ -6922,6 +7023,18 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+      end)
+
+      api.add_operation(:delete_usage_profile, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteUsageProfile"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteUsageProfileRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteUsageProfileResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotSupportedException)
       end)
 
       api.add_operation(:delete_user_defined_function, Seahorse::Model::Operation.new.tap do |o|
@@ -7827,6 +7940,19 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: FederationSourceRetryableException)
       end)
 
+      api.add_operation(:get_usage_profile, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetUsageProfile"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetUsageProfileRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetUsageProfileResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotSupportedException)
+      end)
+
       api.add_operation(:get_user_defined_function, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetUserDefinedFunction"
         o.http_method = "POST"
@@ -8234,6 +8360,24 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_usage_profiles, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListUsageProfiles"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListUsageProfilesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListUsageProfilesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotSupportedException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -8943,6 +9087,20 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+      end)
+
+      api.add_operation(:update_usage_profile, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateUsageProfile"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateUsageProfileRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateUsageProfileResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotSupportedException)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
       end)
 

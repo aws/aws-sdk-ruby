@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.70.0 (2024-06-17)
+------------------
+
+* Feature - Doc-only update that adds name constraints as an allowed extension for ImportCertificateAuthorityCertificate.
+
 1.69.0 (2024-06-05)
 ------------------
 

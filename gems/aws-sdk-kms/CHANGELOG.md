@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.85.0 (2024-06-17)
+------------------
+
+* Feature - Updating SDK example for KMS DeriveSharedSecret API.
+
 1.84.0 (2024-06-13)
 ------------------
 

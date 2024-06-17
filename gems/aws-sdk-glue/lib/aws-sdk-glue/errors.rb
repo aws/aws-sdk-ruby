@@ -53,6 +53,7 @@ module Aws::Glue
   # * {InvalidStateException}
   # * {MLTransformNotReadyException}
   # * {NoScheduleException}
+  # * {OperationNotSupportedException}
   # * {OperationTimeoutException}
   # * {PermissionTypeMismatchException}
   # * {ResourceNotReadyException}
@@ -469,6 +470,21 @@ module Aws::Glue
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::Glue::Types::NoScheduleException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class OperationNotSupportedException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Glue::Types::OperationNotSupportedException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

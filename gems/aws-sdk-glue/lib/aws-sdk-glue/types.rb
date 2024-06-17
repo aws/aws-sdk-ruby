@@ -3021,6 +3021,36 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # Specifies the values that an admin sets for each job or session
+    # parameter configured in a Glue usage profile.
+    #
+    # @!attribute [rw] default_value
+    #   A default value for the parameter.
+    #   @return [String]
+    #
+    # @!attribute [rw] allowed_values
+    #   A list of allowed values for the parameter.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] min_value
+    #   A minimum allowed value for the parameter.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_value
+    #   A maximum allowed value for the parameter.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ConfigurationObject AWS API Documentation
+    #
+    class ConfigurationObject < Struct.new(
+      :default_value,
+      :allowed_values,
+      :min_value,
+      :max_value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The `CreatePartitions` API was called on a table that has indexes
     # enabled.
     #
@@ -5996,6 +6026,46 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # @!attribute [rw] name
+    #   The name of the usage profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the usage profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] configuration
+    #   A `ProfileConfiguration` object specifying the job and session
+    #   values for the profile.
+    #   @return [Types::ProfileConfiguration]
+    #
+    # @!attribute [rw] tags
+    #   A list of tags applied to the usage profile.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateUsageProfileRequest AWS API Documentation
+    #
+    class CreateUsageProfileRequest < Struct.new(
+      :name,
+      :description,
+      :configuration,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   The name of the usage profile that was created.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateUsageProfileResponse AWS API Documentation
+    #
+    class CreateUsageProfileResponse < Struct.new(
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] catalog_id
     #   The ID of the Data Catalog in which to create the function. If none
     #   is provided, the Amazon Web Services account ID is used by default.
@@ -7737,6 +7807,22 @@ module Aws::Glue
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @!attribute [rw] name
+    #   The name of the usage profile to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteUsageProfileRequest AWS API Documentation
+    #
+    class DeleteUsageProfileRequest < Struct.new(
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteUsageProfileResponse AWS API Documentation
+    #
+    class DeleteUsageProfileResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] catalog_id
     #   The ID of the Data Catalog where the function to be deleted is
@@ -12423,6 +12509,51 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # @!attribute [rw] name
+    #   The name of the usage profile to retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetUsageProfileRequest AWS API Documentation
+    #
+    class GetUsageProfileRequest < Struct.new(
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   The name of the usage profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the usage profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] configuration
+    #   A `ProfileConfiguration` object specifying the job and session
+    #   values for the profile.
+    #   @return [Types::ProfileConfiguration]
+    #
+    # @!attribute [rw] created_on
+    #   The date and time when the usage profile was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_on
+    #   The date and time when the usage profile was last modified.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetUsageProfileResponse AWS API Documentation
+    #
+    class GetUsageProfileResponse < Struct.new(
+      :name,
+      :description,
+      :configuration,
+      :created_on,
+      :last_modified_on)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] catalog_id
     #   The ID of the Data Catalog where the function to be retrieved is
     #   located. If none is provided, the Amazon Web Services account ID is
@@ -13635,6 +13766,10 @@ module Aws::Glue
     #   between 10:00AM GMT to 1:00PM GMT.
     #   @return [String]
     #
+    # @!attribute [rw] profile_name
+    #   The name of an Glue usage profile associated with the job.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Job AWS API Documentation
     #
     class Job < Struct.new(
@@ -13662,7 +13797,8 @@ module Aws::Glue
       :code_gen_configuration_nodes,
       :execution_class,
       :source_control_details,
-      :maintenance_window)
+      :maintenance_window,
+      :profile_name)
       SENSITIVE = [:code_gen_configuration_nodes]
       include Aws::Structure
     end
@@ -14084,6 +14220,10 @@ module Aws::Glue
     #   between 10:00AM GMT to 1:00PM GMT.
     #   @return [String]
     #
+    # @!attribute [rw] profile_name
+    #   The name of an Glue usage profile associated with the job run.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/JobRun AWS API Documentation
     #
     class JobRun < Struct.new(
@@ -14112,7 +14252,8 @@ module Aws::Glue
       :glue_version,
       :dpu_seconds,
       :execution_class,
-      :maintenance_window)
+      :maintenance_window,
+      :profile_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -15798,6 +15939,41 @@ module Aws::Glue
     end
 
     # @!attribute [rw] next_token
+    #   A continuation token, included if this is a continuation call.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of usage profiles to return in a single response.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListUsageProfilesRequest AWS API Documentation
+    #
+    class ListUsageProfilesRequest < Struct.new(
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] profiles
+    #   A list of usage profile (`UsageProfileDefinition`) objects.
+    #   @return [Array<Types::UsageProfileDefinition>]
+    #
+    # @!attribute [rw] next_token
+    #   A continuation token, present if the current list segment is not the
+    #   last.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListUsageProfilesResponse AWS API Documentation
+    #
+    class ListUsageProfilesResponse < Struct.new(
+      :profiles,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
     #   A continuation token, if this is a continuation request.
     #   @return [String]
     #
@@ -16681,6 +16857,20 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # The operation is not available in the region.
+    #
+    # @!attribute [rw] message
+    #   A message describing the problem.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/OperationNotSupportedException AWS API Documentation
+    #
+    class OperationNotSupportedException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The operation timed out.
     #
     # @!attribute [rw] message
@@ -17211,6 +17401,26 @@ module Aws::Glue
     class PrincipalPermissions < Struct.new(
       :principal,
       :permissions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the job and session values that an admin configures in an
+    # Glue usage profile.
+    #
+    # @!attribute [rw] session_configuration
+    #   A key-value map of configuration parameters for Glue sessions.
+    #   @return [Hash<String,Types::ConfigurationObject>]
+    #
+    # @!attribute [rw] job_configuration
+    #   A key-value map of configuration parameters for Glue jobs.
+    #   @return [Hash<String,Types::ConfigurationObject>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ProfileConfiguration AWS API Documentation
+    #
+    class ProfileConfiguration < Struct.new(
+      :session_configuration,
+      :job_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -19606,6 +19816,10 @@ module Aws::Glue
     #   The number of minutes when idle before the session times out.
     #   @return [Integer]
     #
+    # @!attribute [rw] profile_name
+    #   The name of an Glue usage profile associated with the session.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Session AWS API Documentation
     #
     class Session < Struct.new(
@@ -19627,7 +19841,8 @@ module Aws::Glue
       :completed_on,
       :execution_time,
       :dpu_seconds,
-      :idle_timeout)
+      :idle_timeout,
+      :profile_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -23308,6 +23523,41 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # @!attribute [rw] name
+    #   The name of the usage profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the usage profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] configuration
+    #   A `ProfileConfiguration` object specifying the job and session
+    #   values for the profile.
+    #   @return [Types::ProfileConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateUsageProfileRequest AWS API Documentation
+    #
+    class UpdateUsageProfileRequest < Struct.new(
+      :name,
+      :description,
+      :configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   The name of the usage profile that was updated.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateUsageProfileResponse AWS API Documentation
+    #
+    class UpdateUsageProfileResponse < Struct.new(
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] catalog_id
     #   The ID of the Data Catalog where the function to be updated is
     #   located. If none is provided, the Amazon Web Services account ID is
@@ -23437,6 +23687,35 @@ module Aws::Glue
       :table_location,
       :connection_name,
       :upsert_keys)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes an Glue usage profile.
+    #
+    # @!attribute [rw] name
+    #   The name of the usage profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the usage profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_on
+    #   The date and time when the usage profile was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_on
+    #   The date and time when the usage profile was last modified.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UsageProfileDefinition AWS API Documentation
+    #
+    class UsageProfileDefinition < Struct.new(
+      :name,
+      :description,
+      :created_on,
+      :last_modified_on)
       SENSITIVE = []
       include Aws::Structure
     end

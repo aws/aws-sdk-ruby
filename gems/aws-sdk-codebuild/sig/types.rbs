@@ -328,6 +328,7 @@ module Aws::CodeBuild
       attr_accessor filter_groups: ::Array[::Array[Types::WebhookFilter]]
       attr_accessor build_type: ("BUILD" | "BUILD_BATCH")
       attr_accessor manual_creation: bool
+      attr_accessor scope_configuration: Types::ScopeConfiguration
       SENSITIVE: []
     end
 
@@ -1008,6 +1009,13 @@ module Aws::CodeBuild
       SENSITIVE: []
     end
 
+    class ScopeConfiguration
+      attr_accessor name: ::String
+      attr_accessor domain: ::String
+      attr_accessor scope: ("GITHUB_ORGANIZATION" | "GITHUB_GLOBAL")
+      SENSITIVE: []
+    end
+
     class SourceAuth
       attr_accessor type: ("OAUTH" | "CODECONNECTIONS")
       attr_accessor resource: ::String
@@ -1264,6 +1272,7 @@ module Aws::CodeBuild
       attr_accessor build_type: ("BUILD" | "BUILD_BATCH")
       attr_accessor manual_creation: bool
       attr_accessor last_modified_secret: ::Time
+      attr_accessor scope_configuration: Types::ScopeConfiguration
       SENSITIVE: []
     end
 

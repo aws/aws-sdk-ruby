@@ -706,9 +706,10 @@ module Aws::SecretsManager
     #
     # <b>Required permissions: </b> `secretsmanager:CreateSecret`. If you
     # include tags in the secret, you also need
-    # `secretsmanager:TagResource`. For more information, see [ IAM policy
-    # actions for Secrets Manager][5] and [Authentication and access control
-    # in Secrets Manager][6].
+    # `secretsmanager:TagResource`. To add replica Regions, you must also
+    # have `secretsmanager:ReplicateSecretToRegions`. For more information,
+    # see [ IAM policy actions for Secrets Manager][5] and [Authentication
+    # and access control in Secrets Manager][6].
     #
     # To encrypt the secret with a KMS key other than `aws/secretsmanager`,
     # you need `kms:GenerateDataKey` and `kms:Decrypt` permission to the
@@ -2536,7 +2537,7 @@ module Aws::SecretsManager
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/rotate-secrets_how.html
+    #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/rotate-secrets_lambda-functions.html#rotate-secrets_lambda-functions-code
     #
     # @return [Types::RotateSecretResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3337,7 +3338,7 @@ module Aws::SecretsManager
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-secretsmanager'
-      context[:gem_version] = '1.97.0'
+      context[:gem_version] = '1.98.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

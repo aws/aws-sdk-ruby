@@ -867,6 +867,7 @@ module Aws::MediaConvert
     __stringMin9Max19PatternAZ26EastWestCentralNorthSouthEastWest1912 = Shapes::StringShape.new(name: '__stringMin9Max19PatternAZ26EastWestCentralNorthSouthEastWest1912')
     __stringPattern = Shapes::StringShape.new(name: '__stringPattern')
     __stringPattern010920405090509092 = Shapes::StringShape.new(name: '__stringPattern010920405090509092')
+    __stringPattern010920405090509092090909 = Shapes::StringShape.new(name: '__stringPattern010920405090509092090909')
     __stringPattern01D20305D205D = Shapes::StringShape.new(name: '__stringPattern01D20305D205D')
     __stringPattern0940191020191209301 = Shapes::StringShape.new(name: '__stringPattern0940191020191209301')
     __stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12 = Shapes::StringShape.new(name: '__stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12')
@@ -1162,6 +1163,7 @@ module Aws::MediaConvert
     CmafGroupSettings.add_member(:base_url, Shapes::ShapeRef.new(shape: __string, location_name: "baseUrl"))
     CmafGroupSettings.add_member(:client_cache, Shapes::ShapeRef.new(shape: CmafClientCache, location_name: "clientCache"))
     CmafGroupSettings.add_member(:codec_specification, Shapes::ShapeRef.new(shape: CmafCodecSpecification, location_name: "codecSpecification"))
+    CmafGroupSettings.add_member(:dash_i_frame_trick_play_name_modifier, Shapes::ShapeRef.new(shape: __stringMin1Max256, location_name: "dashIFrameTrickPlayNameModifier"))
     CmafGroupSettings.add_member(:dash_manifest_style, Shapes::ShapeRef.new(shape: DashManifestStyle, location_name: "dashManifestStyle"))
     CmafGroupSettings.add_member(:destination, Shapes::ShapeRef.new(shape: __stringPatternS3, location_name: "destination"))
     CmafGroupSettings.add_member(:destination_settings, Shapes::ShapeRef.new(shape: DestinationSettings, location_name: "destinationSettings"))
@@ -1310,6 +1312,7 @@ module Aws::MediaConvert
     DashIsoGroupSettings.add_member(:additional_manifests, Shapes::ShapeRef.new(shape: __listOfDashAdditionalManifest, location_name: "additionalManifests"))
     DashIsoGroupSettings.add_member(:audio_channel_config_scheme_id_uri, Shapes::ShapeRef.new(shape: DashIsoGroupAudioChannelConfigSchemeIdUri, location_name: "audioChannelConfigSchemeIdUri"))
     DashIsoGroupSettings.add_member(:base_url, Shapes::ShapeRef.new(shape: __string, location_name: "baseUrl"))
+    DashIsoGroupSettings.add_member(:dash_i_frame_trick_play_name_modifier, Shapes::ShapeRef.new(shape: __stringMin1Max256, location_name: "dashIFrameTrickPlayNameModifier"))
     DashIsoGroupSettings.add_member(:dash_manifest_style, Shapes::ShapeRef.new(shape: DashManifestStyle, location_name: "dashManifestStyle"))
     DashIsoGroupSettings.add_member(:destination, Shapes::ShapeRef.new(shape: __stringPatternS3, location_name: "destination"))
     DashIsoGroupSettings.add_member(:destination_settings, Shapes::ShapeRef.new(shape: DestinationSettings, location_name: "destinationSettings"))
@@ -1811,8 +1814,8 @@ module Aws::MediaConvert
     Input.add_member(:video_selector, Shapes::ShapeRef.new(shape: VideoSelector, location_name: "videoSelector"))
     Input.struct_class = Types::Input
 
-    InputClipping.add_member(:end_timecode, Shapes::ShapeRef.new(shape: __stringPattern010920405090509092, location_name: "endTimecode"))
-    InputClipping.add_member(:start_timecode, Shapes::ShapeRef.new(shape: __stringPattern010920405090509092, location_name: "startTimecode"))
+    InputClipping.add_member(:end_timecode, Shapes::ShapeRef.new(shape: __stringPattern010920405090509092090909, location_name: "endTimecode"))
+    InputClipping.add_member(:start_timecode, Shapes::ShapeRef.new(shape: __stringPattern010920405090509092090909, location_name: "startTimecode"))
     InputClipping.struct_class = Types::InputClipping
 
     InputDecryptionSettings.add_member(:decryption_mode, Shapes::ShapeRef.new(shape: DecryptionMode, location_name: "decryptionMode"))
@@ -1844,7 +1847,11 @@ module Aws::MediaConvert
     InputTemplate.add_member(:video_selector, Shapes::ShapeRef.new(shape: VideoSelector, location_name: "videoSelector"))
     InputTemplate.struct_class = Types::InputTemplate
 
+    InputVideoGenerator.add_member(:channels, Shapes::ShapeRef.new(shape: __integerMin1Max32, location_name: "channels"))
     InputVideoGenerator.add_member(:duration, Shapes::ShapeRef.new(shape: __integerMin50Max86400000, location_name: "duration"))
+    InputVideoGenerator.add_member(:framerate_denominator, Shapes::ShapeRef.new(shape: __integerMin1Max1001, location_name: "framerateDenominator"))
+    InputVideoGenerator.add_member(:framerate_numerator, Shapes::ShapeRef.new(shape: __integerMin1Max60000, location_name: "framerateNumerator"))
+    InputVideoGenerator.add_member(:sample_rate, Shapes::ShapeRef.new(shape: __integerMin32000Max48000, location_name: "sampleRate"))
     InputVideoGenerator.struct_class = Types::InputVideoGenerator
 
     InsertableImage.add_member(:duration, Shapes::ShapeRef.new(shape: __integerMin0Max2147483647, location_name: "duration"))
@@ -2258,7 +2265,7 @@ module Aws::MediaConvert
     Output.add_member(:caption_descriptions, Shapes::ShapeRef.new(shape: __listOfCaptionDescription, location_name: "captionDescriptions"))
     Output.add_member(:container_settings, Shapes::ShapeRef.new(shape: ContainerSettings, location_name: "containerSettings"))
     Output.add_member(:extension, Shapes::ShapeRef.new(shape: __string, location_name: "extension"))
-    Output.add_member(:name_modifier, Shapes::ShapeRef.new(shape: __stringMin1, location_name: "nameModifier"))
+    Output.add_member(:name_modifier, Shapes::ShapeRef.new(shape: __stringMin1Max256, location_name: "nameModifier"))
     Output.add_member(:output_settings, Shapes::ShapeRef.new(shape: OutputSettings, location_name: "outputSettings"))
     Output.add_member(:preset, Shapes::ShapeRef.new(shape: __stringMin0, location_name: "preset"))
     Output.add_member(:video_description, Shapes::ShapeRef.new(shape: VideoDescription, location_name: "videoDescription"))
@@ -2821,6 +2828,7 @@ module Aws::MediaConvert
 
       api.metadata = {
         "apiVersion" => "2017-08-29",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "mediaconvert",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",

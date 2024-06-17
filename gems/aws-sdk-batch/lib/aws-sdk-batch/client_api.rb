@@ -1255,6 +1255,7 @@ module Aws::Batch
 
       api.metadata = {
         "apiVersion" => "2016-08-10",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "batch",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",

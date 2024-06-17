@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.131.0 (2024-06-17)
+------------------
+
+* Feature - This release includes support for creating I-frame only video segments for DASH trick play.
+
 1.130.0 (2024-06-14)
 ------------------
 

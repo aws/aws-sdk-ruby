@@ -1382,9 +1382,11 @@ module Aws::DirectoryService
 
       api.metadata = {
         "apiVersion" => "2015-04-16",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "ds",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "protocols" => ["json"],
         "serviceAbbreviation" => "Directory Service",
         "serviceFullName" => "AWS Directory Service",
         "serviceId" => "Directory Service",

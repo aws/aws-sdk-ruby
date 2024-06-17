@@ -803,6 +803,14 @@ module Aws::Glue
       SENSITIVE: []
     end
 
+    class ConfigurationObject
+      attr_accessor default_value: ::String
+      attr_accessor allowed_values: ::Array[::String]
+      attr_accessor min_value: ::String
+      attr_accessor max_value: ::String
+      SENSITIVE: []
+    end
+
     class ConflictException
       attr_accessor message: ::String
       SENSITIVE: []
@@ -1351,6 +1359,19 @@ module Aws::Glue
       SENSITIVE: []
     end
 
+    class CreateUsageProfileRequest
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor configuration: Types::ProfileConfiguration
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateUsageProfileResponse
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
     class CreateUserDefinedFunctionRequest
       attr_accessor catalog_id: ::String
       attr_accessor database_name: ::String
@@ -1874,6 +1895,14 @@ module Aws::Glue
     class DeleteTriggerResponse
       attr_accessor name: ::String
       SENSITIVE: []
+    end
+
+    class DeleteUsageProfileRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteUsageProfileResponse < Aws::EmptyStructure
     end
 
     class DeleteUserDefinedFunctionRequest
@@ -3089,6 +3118,20 @@ module Aws::Glue
       SENSITIVE: []
     end
 
+    class GetUsageProfileRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class GetUsageProfileResponse
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor configuration: Types::ProfileConfiguration
+      attr_accessor created_on: ::Time
+      attr_accessor last_modified_on: ::Time
+      SENSITIVE: []
+    end
+
     class GetUserDefinedFunctionRequest
       attr_accessor catalog_id: ::String
       attr_accessor database_name: ::String
@@ -3369,6 +3412,7 @@ module Aws::Glue
       attr_accessor execution_class: ("FLEX" | "STANDARD")
       attr_accessor source_control_details: Types::SourceControlDetails
       attr_accessor maintenance_window: ::String
+      attr_accessor profile_name: ::String
       SENSITIVE: [:code_gen_configuration_nodes]
     end
 
@@ -3429,6 +3473,7 @@ module Aws::Glue
       attr_accessor dpu_seconds: ::Float
       attr_accessor execution_class: ("FLEX" | "STANDARD")
       attr_accessor maintenance_window: ::String
+      attr_accessor profile_name: ::String
       SENSITIVE: []
     end
 
@@ -3828,6 +3873,18 @@ module Aws::Glue
       SENSITIVE: []
     end
 
+    class ListUsageProfilesRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListUsageProfilesResponse
+      attr_accessor profiles: ::Array[Types::UsageProfileDefinition]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListWorkflowsRequest
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
@@ -4035,6 +4092,11 @@ module Aws::Glue
       SENSITIVE: []
     end
 
+    class OperationNotSupportedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
     class OperationTimeoutException
       attr_accessor message: ::String
       SENSITIVE: []
@@ -4175,6 +4237,12 @@ module Aws::Glue
     class PrincipalPermissions
       attr_accessor principal: Types::DataLakePrincipal
       attr_accessor permissions: ::Array[("ALL" | "SELECT" | "ALTER" | "DROP" | "DELETE" | "INSERT" | "CREATE_DATABASE" | "CREATE_TABLE" | "DATA_LOCATION_ACCESS")]
+      SENSITIVE: []
+    end
+
+    class ProfileConfiguration
+      attr_accessor session_configuration: ::Hash[::String, Types::ConfigurationObject]
+      attr_accessor job_configuration: ::Hash[::String, Types::ConfigurationObject]
       SENSITIVE: []
     end
 
@@ -4783,6 +4851,7 @@ module Aws::Glue
       attr_accessor execution_time: ::Float
       attr_accessor dpu_seconds: ::Float
       attr_accessor idle_timeout: ::Integer
+      attr_accessor profile_name: ::String
       SENSITIVE: []
     end
 
@@ -5729,6 +5798,18 @@ module Aws::Glue
       SENSITIVE: []
     end
 
+    class UpdateUsageProfileRequest
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor configuration: Types::ProfileConfiguration
+      SENSITIVE: []
+    end
+
+    class UpdateUsageProfileResponse
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
     class UpdateUserDefinedFunctionRequest
       attr_accessor catalog_id: ::String
       attr_accessor database_name: ::String
@@ -5764,6 +5845,14 @@ module Aws::Glue
       attr_accessor table_location: ::String
       attr_accessor connection_name: ::String
       attr_accessor upsert_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UsageProfileDefinition
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor created_on: ::Time
+      attr_accessor last_modified_on: ::Time
       SENSITIVE: []
     end
 

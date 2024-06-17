@@ -620,8 +620,10 @@ module Aws::EFS
 
       api.metadata = {
         "apiVersion" => "2015-02-01",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "elasticfilesystem",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceAbbreviation" => "EFS",
         "serviceFullName" => "Amazon Elastic File System",
         "serviceId" => "EFS",

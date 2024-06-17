@@ -352,6 +352,7 @@ module Aws::MediaConvert
       attr_accessor base_url: ::String
       attr_accessor client_cache: ("DISABLED" | "ENABLED")
       attr_accessor codec_specification: ("RFC_6381" | "RFC_4281")
+      attr_accessor dash_i_frame_trick_play_name_modifier: ::String
       attr_accessor dash_manifest_style: ("BASIC" | "COMPACT" | "DISTINCT")
       attr_accessor destination: ::String
       attr_accessor destination_settings: Types::DestinationSettings
@@ -534,6 +535,7 @@ module Aws::MediaConvert
       attr_accessor additional_manifests: ::Array[Types::DashAdditionalManifest]
       attr_accessor audio_channel_config_scheme_id_uri: ("MPEG_CHANNEL_CONFIGURATION" | "DOLBY_CHANNEL_CONFIGURATION")
       attr_accessor base_url: ::String
+      attr_accessor dash_i_frame_trick_play_name_modifier: ::String
       attr_accessor dash_manifest_style: ("BASIC" | "COMPACT" | "DISTINCT")
       attr_accessor destination: ::String
       attr_accessor destination_settings: Types::DestinationSettings
@@ -1203,7 +1205,11 @@ module Aws::MediaConvert
     end
 
     class InputVideoGenerator
+      attr_accessor channels: ::Integer
       attr_accessor duration: ::Integer
+      attr_accessor framerate_denominator: ::Integer
+      attr_accessor framerate_numerator: ::Integer
+      attr_accessor sample_rate: ::Integer
       SENSITIVE: []
     end
 
