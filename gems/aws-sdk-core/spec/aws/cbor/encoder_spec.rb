@@ -84,6 +84,9 @@ module Aws
           # https://www.rfc-editor.org/rfc/rfc8949.html#name-decimal-fractions-and-bigfl
           expect(cbor64_encode(BigDecimal("273.15")))
             .to eq('xIIhGWqz') # C4 82 21 19 6AB3 in hex
+          # encodes as floating point numbers
+          expect(cbor64_encode(BigDecimal("Infinity"))).to eq('+n+AAAA=')
+          expect(cbor64_encode(BigDecimal("NaN"))).to eq('+n/AAAA=')
         end
 
         it 'raises on unknown items' do

@@ -121,6 +121,12 @@ module Aws
       # decimal fractions are always represented with a base of 10
       # See: https://www.rfc-editor.org/rfc/rfc8949.html#name-decimal-fractions-and-bigfl
       def add_big_decimal(value)
+        if value.infinite? == 1
+          return add_float(value.infinite? * Float::INFINITY)
+        elsif value.nan?
+          return add_float(Float::NAN)
+        end
+
         head(MAJOR_TYPE_TAG, TAG_TYPE_BIGDEC)
         sign, digits, base, exp = value.split
         # Ruby BigDecimal digits of XXX are used as 0.XXX, convert
