@@ -8,8 +8,8 @@ module Aws
         def stub_data(api, operation, data)
           resp = Seahorse::Client::Http::Response.new
           resp.status_code = 200
-          resp.headers["Content-Type"] = content_type(api)
-          resp.headers["x-amzn-RequestId"] = "stubbed-request-id"
+          resp.headers['Content-Type'] = content_type(api)
+          resp.headers['x-amzn-RequestId'] = 'stubbed-request-id'
           resp.body = build_body(operation, data)
           resp
         end

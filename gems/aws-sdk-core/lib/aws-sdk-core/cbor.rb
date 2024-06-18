@@ -80,8 +80,9 @@ module Aws
         [:cbor].each do |name|
           @engine ||= try_load_engine(name)
         end
+
         unless @engine
-          raise 'Unable to find a compatible cbor library. '
+          raise 'Unable to find a compatible cbor library.'
         end
       end
 
