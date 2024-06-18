@@ -24,7 +24,11 @@ RSpec.configure do |config|
   config.before(:each) do
     # Clear the current ENV to avoid loading credentials.
     # This was previously mocked with stub_const but was provided a hash.
+    # tempfix
+    path = ENV['PATH']
+    original_env = ENV.to_h
     ENV.clear
+    ENV['PATH'] = path
 
     # disable loading credentials from shared file
     allow(Dir).to receive(:home).and_raise(ArgumentError)
@@ -37,6 +41,11 @@ RSpec.configure do |config|
     allow_any_instance_of(Aws::InstanceProfileCredentials).to receive(:warn)
 
     Aws.shared_config.fresh
+
+    # tempfix
+    original_env.each do |key, value|
+      ENV[key] = value
+    end
   end
 
   # Thread.report_on_exception was set to default true in Ruby 2.5
