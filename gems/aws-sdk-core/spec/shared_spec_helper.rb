@@ -22,11 +22,8 @@ RSpec.configure do |config|
   config.include Sigv4Helper
 
   config.before(:each) do
-    # Clear the current ENV to avoid loading credentials and other configs.
-    path = ENV['PATH'] # necessary for JRuby
-    original_env = ENV.to_h
-    ENV.clear
-    ENV['PATH'] = path
+    # Clear the current ENV to avoid loading credentials.
+    ENV.keep_if { |k, _| k == 'PATH' }
 
     # disable loading credentials from shared file
     allow(Dir).to receive(:home).and_raise(ArgumentError)
@@ -39,11 +36,6 @@ RSpec.configure do |config|
     allow_any_instance_of(Aws::InstanceProfileCredentials).to receive(:warn)
 
     Aws.shared_config.fresh
-
-    # Restore the original ENV
-    original_env.each do |key, value|
-      ENV[key] = value
-    end
   end
 
   # Thread.report_on_exception was set to default true in Ruby 2.5
