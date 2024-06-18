@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - fix issue in Endpoint `attr` matcher when path is only an array index.
+
 3.197.0 (2024-06-05)
 ------------------
 
