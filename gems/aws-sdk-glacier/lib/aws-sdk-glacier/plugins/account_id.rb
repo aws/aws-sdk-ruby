@@ -16,8 +16,10 @@ your `:credentials` belong to.
 
         class Handler < Seahorse::Client::Handler
           def call(context)
-            context.params[:account_id] = nil if context.params[:account_id].empty?
             context.params[:account_id] ||= context.config.account_id
+            if context.params[:account_id].empty?
+              context.params[:account_id] = '-'
+            end
             @handler.call(context)
           end
         end
