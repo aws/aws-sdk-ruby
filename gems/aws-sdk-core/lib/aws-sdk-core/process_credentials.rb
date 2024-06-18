@@ -44,13 +44,12 @@ module Aws
 
     def credentials_from_process
       r, w = IO.pipe
-      system(*@process, out: w)
+      success = system(*@process, out: w)
       w.close
       raw_out = r.read
       r.close
-      process_status = $?
 
-      unless process_status&.success?
+      unless success
         raise Errors::InvalidProcessCredentialsPayload.new(
           'credential_process provider failure, the credential process had '\
           'non zero exit status and failed to provide credentials'
