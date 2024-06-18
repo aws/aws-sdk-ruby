@@ -14,9 +14,15 @@ operations. The default value of `-` uses the account
 your `:credentials` belong to.
           DOCS
 
-        handle_request(step: :initialize) do |context|
-          context.params[:account_id] ||= context.config.account_id
+        class Handler < Seahorse::Client::Handler
+          def call(context)
+            context.params[:account_id] = nil if context.params[:account_id].empty?
+            context.params[:account_id] ||= context.config.account_id
+            @handler.call(context)
+          end
         end
+
+        handler(Handler, step: :initialize)
 
       end
     end
