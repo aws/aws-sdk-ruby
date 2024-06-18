@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Fix trailing slash in endpoint URLs for rest-json and rest-xml services.
+
 3.197.0 (2024-06-05)
 ------------------
 
