@@ -22,10 +22,8 @@ RSpec.configure do |config|
   config.include Sigv4Helper
 
   config.before(:each) do
-    # Clear the current ENV to avoid loading credentials.
-    # This was previously mocked with stub_const but was provided a hash.
-    # tempfix
-    path = ENV['PATH']
+    # Clear the current ENV to avoid loading credentials and other configs.
+    path = ENV['PATH'] # necessary for JRuby
     original_env = ENV.to_h
     ENV.clear
     ENV['PATH'] = path
@@ -42,7 +40,7 @@ RSpec.configure do |config|
 
     Aws.shared_config.fresh
 
-    # tempfix
+    # Restore the original ENV
     original_env.each do |key, value|
       ENV[key] = value
     end
