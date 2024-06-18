@@ -149,6 +149,10 @@ module Aws::EKS
     ErrorDetail = Shapes::StructureShape.new(name: 'ErrorDetail')
     ErrorDetails = Shapes::ListShape.new(name: 'ErrorDetails')
     FargateProfile = Shapes::StructureShape.new(name: 'FargateProfile')
+    FargateProfileHealth = Shapes::StructureShape.new(name: 'FargateProfileHealth')
+    FargateProfileIssue = Shapes::StructureShape.new(name: 'FargateProfileIssue')
+    FargateProfileIssueCode = Shapes::StringShape.new(name: 'FargateProfileIssueCode')
+    FargateProfileIssueList = Shapes::ListShape.new(name: 'FargateProfileIssueList')
     FargateProfileLabel = Shapes::MapShape.new(name: 'FargateProfileLabel')
     FargateProfileSelector = Shapes::StructureShape.new(name: 'FargateProfileSelector')
     FargateProfileSelectors = Shapes::ListShape.new(name: 'FargateProfileSelectors')
@@ -833,7 +837,18 @@ module Aws::EKS
     FargateProfile.add_member(:selectors, Shapes::ShapeRef.new(shape: FargateProfileSelectors, location_name: "selectors"))
     FargateProfile.add_member(:status, Shapes::ShapeRef.new(shape: FargateProfileStatus, location_name: "status"))
     FargateProfile.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    FargateProfile.add_member(:health, Shapes::ShapeRef.new(shape: FargateProfileHealth, location_name: "health"))
     FargateProfile.struct_class = Types::FargateProfile
+
+    FargateProfileHealth.add_member(:issues, Shapes::ShapeRef.new(shape: FargateProfileIssueList, location_name: "issues"))
+    FargateProfileHealth.struct_class = Types::FargateProfileHealth
+
+    FargateProfileIssue.add_member(:code, Shapes::ShapeRef.new(shape: FargateProfileIssueCode, location_name: "code"))
+    FargateProfileIssue.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    FargateProfileIssue.add_member(:resource_ids, Shapes::ShapeRef.new(shape: StringList, location_name: "resourceIds"))
+    FargateProfileIssue.struct_class = Types::FargateProfileIssue
+
+    FargateProfileIssueList.member = Shapes::ShapeRef.new(shape: FargateProfileIssue)
 
     FargateProfileLabel.key = Shapes::ShapeRef.new(shape: String)
     FargateProfileLabel.value = Shapes::ShapeRef.new(shape: String)
@@ -1401,6 +1416,7 @@ module Aws::EKS
 
       api.metadata = {
         "apiVersion" => "2017-11-01",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "eks",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",

@@ -2959,6 +2959,11 @@ module Aws::EKS
     #   resources.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] health
+    #   The health status of the Fargate profile. If there are issues with
+    #   your Fargate profile's health, they are listed here.
+    #   @return [Types::FargateProfileHealth]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/FargateProfile AWS API Documentation
     #
     class FargateProfile < Struct.new(
@@ -2970,7 +2975,47 @@ module Aws::EKS
       :subnets,
       :selectors,
       :status,
-      :tags)
+      :tags,
+      :health)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The health status of the Fargate profile. If there are issues with
+    # your Fargate profile's health, they are listed here.
+    #
+    # @!attribute [rw] issues
+    #   Any issues that are associated with the Fargate profile.
+    #   @return [Array<Types::FargateProfileIssue>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/FargateProfileHealth AWS API Documentation
+    #
+    class FargateProfileHealth < Struct.new(
+      :issues)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An issue that is associated with the Fargate profile.
+    #
+    # @!attribute [rw] code
+    #   A brief description of the error.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The error message associated with the issue.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_ids
+    #   The Amazon Web Services resources that are affected by this issue.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/FargateProfileIssue AWS API Documentation
+    #
+    class FargateProfileIssue < Struct.new(
+      :code,
+      :message,
+      :resource_ids)
       SENSITIVE = []
       include Aws::Structure
     end

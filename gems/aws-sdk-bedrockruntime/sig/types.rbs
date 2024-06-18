@@ -24,6 +24,7 @@ module Aws::BedrockRuntime
       attr_accessor image: Types::ImageBlock
       attr_accessor tool_use: Types::ToolUseBlock
       attr_accessor tool_result: Types::ToolResultBlock
+      attr_accessor guard_content: Types::GuardrailConverseContentBlock
       attr_accessor unknown: untyped
       SENSITIVE: []
 
@@ -34,6 +35,8 @@ module Aws::BedrockRuntime
       class ToolUse < ContentBlock
       end
       class ToolResult < ContentBlock
+      end
+      class GuardContent < ContentBlock
       end
       class Unknown < ContentBlock
       end
@@ -106,6 +109,7 @@ module Aws::BedrockRuntime
       attr_accessor system: ::Array[Types::SystemContentBlock]
       attr_accessor inference_config: Types::InferenceConfiguration
       attr_accessor tool_config: Types::ToolConfiguration
+      attr_accessor guardrail_config: Types::GuardrailConfiguration
       attr_accessor additional_model_request_fields: untyped
       attr_accessor additional_model_response_field_paths: ::Array[::String]
       SENSITIVE: []
@@ -113,16 +117,18 @@ module Aws::BedrockRuntime
 
     class ConverseResponse
       attr_accessor output: Types::ConverseOutput
-      attr_accessor stop_reason: ("end_turn" | "tool_use" | "max_tokens" | "stop_sequence" | "content_filtered")
+      attr_accessor stop_reason: ("end_turn" | "tool_use" | "max_tokens" | "stop_sequence" | "guardrail_intervened" | "content_filtered")
       attr_accessor usage: Types::TokenUsage
       attr_accessor metrics: Types::ConverseMetrics
       attr_accessor additional_model_response_fields: untyped
+      attr_accessor trace: Types::ConverseTrace
       SENSITIVE: []
     end
 
     class ConverseStreamMetadataEvent
       attr_accessor usage: Types::TokenUsage
       attr_accessor metrics: Types::ConverseStreamMetrics
+      attr_accessor trace: Types::ConverseStreamTrace
       attr_accessor event_type: untyped
       SENSITIVE: []
     end
@@ -138,6 +144,7 @@ module Aws::BedrockRuntime
       attr_accessor system: ::Array[Types::SystemContentBlock]
       attr_accessor inference_config: Types::InferenceConfiguration
       attr_accessor tool_config: Types::ToolConfiguration
+      attr_accessor guardrail_config: Types::GuardrailStreamConfiguration
       attr_accessor additional_model_request_fields: untyped
       attr_accessor additional_model_response_field_paths: ::Array[::String]
       SENSITIVE: []
@@ -145,6 +152,126 @@ module Aws::BedrockRuntime
 
     class ConverseStreamResponse
       attr_accessor stream: Types::ConverseStreamOutput
+      SENSITIVE: []
+    end
+
+    class ConverseStreamTrace
+      attr_accessor guardrail: Types::GuardrailTraceAssessment
+      SENSITIVE: []
+    end
+
+    class ConverseTrace
+      attr_accessor guardrail: Types::GuardrailTraceAssessment
+      SENSITIVE: []
+    end
+
+    class GuardrailAssessment
+      attr_accessor topic_policy: Types::GuardrailTopicPolicyAssessment
+      attr_accessor content_policy: Types::GuardrailContentPolicyAssessment
+      attr_accessor word_policy: Types::GuardrailWordPolicyAssessment
+      attr_accessor sensitive_information_policy: Types::GuardrailSensitiveInformationPolicyAssessment
+      SENSITIVE: []
+    end
+
+    class GuardrailConfiguration
+      attr_accessor guardrail_identifier: ::String
+      attr_accessor guardrail_version: ::String
+      attr_accessor trace: ("enabled" | "disabled")
+      SENSITIVE: []
+    end
+
+    class GuardrailContentFilter
+      attr_accessor type: ("INSULTS" | "HATE" | "SEXUAL" | "VIOLENCE" | "MISCONDUCT" | "PROMPT_ATTACK")
+      attr_accessor confidence: ("NONE" | "LOW" | "MEDIUM" | "HIGH")
+      attr_accessor action: ("BLOCKED")
+      SENSITIVE: []
+    end
+
+    class GuardrailContentPolicyAssessment
+      attr_accessor filters: ::Array[Types::GuardrailContentFilter]
+      SENSITIVE: []
+    end
+
+    class GuardrailConverseContentBlock
+      attr_accessor text: Types::GuardrailConverseTextBlock
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Text < GuardrailConverseContentBlock
+      end
+      class Unknown < GuardrailConverseContentBlock
+      end
+    end
+
+    class GuardrailConverseTextBlock
+      attr_accessor text: ::String
+      SENSITIVE: []
+    end
+
+    class GuardrailCustomWord
+      attr_accessor match: ::String
+      attr_accessor action: ("BLOCKED")
+      SENSITIVE: []
+    end
+
+    class GuardrailManagedWord
+      attr_accessor match: ::String
+      attr_accessor type: ("PROFANITY")
+      attr_accessor action: ("BLOCKED")
+      SENSITIVE: []
+    end
+
+    class GuardrailPiiEntityFilter
+      attr_accessor match: ::String
+      attr_accessor type: ("ADDRESS" | "AGE" | "AWS_ACCESS_KEY" | "AWS_SECRET_KEY" | "CA_HEALTH_NUMBER" | "CA_SOCIAL_INSURANCE_NUMBER" | "CREDIT_DEBIT_CARD_CVV" | "CREDIT_DEBIT_CARD_EXPIRY" | "CREDIT_DEBIT_CARD_NUMBER" | "DRIVER_ID" | "EMAIL" | "INTERNATIONAL_BANK_ACCOUNT_NUMBER" | "IP_ADDRESS" | "LICENSE_PLATE" | "MAC_ADDRESS" | "NAME" | "PASSWORD" | "PHONE" | "PIN" | "SWIFT_CODE" | "UK_NATIONAL_HEALTH_SERVICE_NUMBER" | "UK_NATIONAL_INSURANCE_NUMBER" | "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER" | "URL" | "USERNAME" | "US_BANK_ACCOUNT_NUMBER" | "US_BANK_ROUTING_NUMBER" | "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER" | "US_PASSPORT_NUMBER" | "US_SOCIAL_SECURITY_NUMBER" | "VEHICLE_IDENTIFICATION_NUMBER")
+      attr_accessor action: ("ANONYMIZED" | "BLOCKED")
+      SENSITIVE: []
+    end
+
+    class GuardrailRegexFilter
+      attr_accessor name: ::String
+      attr_accessor match: ::String
+      attr_accessor regex: ::String
+      attr_accessor action: ("ANONYMIZED" | "BLOCKED")
+      SENSITIVE: []
+    end
+
+    class GuardrailSensitiveInformationPolicyAssessment
+      attr_accessor pii_entities: ::Array[Types::GuardrailPiiEntityFilter]
+      attr_accessor regexes: ::Array[Types::GuardrailRegexFilter]
+      SENSITIVE: []
+    end
+
+    class GuardrailStreamConfiguration
+      attr_accessor guardrail_identifier: ::String
+      attr_accessor guardrail_version: ::String
+      attr_accessor trace: ("enabled" | "disabled")
+      attr_accessor stream_processing_mode: ("sync" | "async")
+      SENSITIVE: []
+    end
+
+    class GuardrailTopic
+      attr_accessor name: ::String
+      attr_accessor type: ("DENY")
+      attr_accessor action: ("BLOCKED")
+      SENSITIVE: []
+    end
+
+    class GuardrailTopicPolicyAssessment
+      attr_accessor topics: ::Array[Types::GuardrailTopic]
+      SENSITIVE: []
+    end
+
+    class GuardrailTraceAssessment
+      attr_accessor model_output: ::Array[::String]
+      attr_accessor input_assessment: ::Hash[::String, Types::GuardrailAssessment]
+      attr_accessor output_assessments: ::Hash[::String, ::Array[Types::GuardrailAssessment]]
+      SENSITIVE: []
+    end
+
+    class GuardrailWordPolicyAssessment
+      attr_accessor custom_words: ::Array[Types::GuardrailCustomWord]
+      attr_accessor managed_word_lists: ::Array[Types::GuardrailManagedWord]
       SENSITIVE: []
     end
 
@@ -226,7 +353,7 @@ module Aws::BedrockRuntime
     end
 
     class MessageStopEvent
-      attr_accessor stop_reason: ("end_turn" | "tool_use" | "max_tokens" | "stop_sequence" | "content_filtered")
+      attr_accessor stop_reason: ("end_turn" | "tool_use" | "max_tokens" | "stop_sequence" | "guardrail_intervened" | "content_filtered")
       attr_accessor additional_model_response_fields: untyped
       attr_accessor event_type: untyped
       SENSITIVE: []
@@ -281,10 +408,13 @@ module Aws::BedrockRuntime
 
     class SystemContentBlock
       attr_accessor text: ::String
+      attr_accessor guard_content: Types::GuardrailConverseContentBlock
       attr_accessor unknown: untyped
       SENSITIVE: []
 
       class Text < SystemContentBlock
+      end
+      class GuardContent < SystemContentBlock
       end
       class Unknown < SystemContentBlock
       end
