@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.4.0 (2024-06-19)
+------------------
+
+* Feature - This release adds an acceptanceType field to the ReportSummary structure (used in the ListReports API response).
+
 1.3.0 (2024-06-05)
 ------------------
 

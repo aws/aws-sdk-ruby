@@ -1814,6 +1814,13 @@ module Aws::SageMaker
     #         },
     #         execution_role: "RoleArn", # required
     #         threads_per_core: 1,
+    #         instance_storage_configs: [
+    #           {
+    #             ebs_volume_config: {
+    #               volume_size_in_gb: 1, # required
+    #             },
+    #           },
+    #         ],
     #       },
     #     ],
     #     vpc_config: {
@@ -5401,6 +5408,103 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
+    # Creates an MLflow Tracking Server using a general purpose Amazon S3
+    # bucket as the artifact store. For more information, see [Create an
+    # MLflow Tracking Server][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/mlflow-create-tracking-server.html
+    #
+    # @option params [required, String] :tracking_server_name
+    #   A unique string identifying the tracking server name. This string is
+    #   part of the tracking server ARN.
+    #
+    # @option params [required, String] :artifact_store_uri
+    #   The S3 URI for a general purpose bucket to use as the MLflow Tracking
+    #   Server artifact store.
+    #
+    # @option params [String] :tracking_server_size
+    #   The size of the tracking server you want to create. You can choose
+    #   between `"Small"`, `"Medium"`, and `"Large"`. The default MLflow
+    #   Tracking Server configuration size is `"Small"`. You can choose a size
+    #   depending on the projected use of the tracking server such as the
+    #   volume of data logged, number of users, and frequency of use.
+    #
+    #   We recommend using a small tracking server for teams of up to 25
+    #   users, a medium tracking server for teams of up to 50 users, and a
+    #   large tracking server for teams of up to 100 users.
+    #
+    # @option params [String] :mlflow_version
+    #   The version of MLflow that the tracking server uses. To see which
+    #   MLflow versions are available to use, see [How it works][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/mlflow.html#mlflow-create-tracking-server-how-it-works
+    #
+    # @option params [required, String] :role_arn
+    #   The Amazon Resource Name (ARN) for an IAM role in your account that
+    #   the MLflow Tracking Server uses to access the artifact store in Amazon
+    #   S3. The role should have `AmazonS3FullAccess` permissions. For more
+    #   information on IAM permissions for tracking server creation, see [Set
+    #   up IAM permissions for MLflow][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/mlflow-create-tracking-server-iam.html
+    #
+    # @option params [Boolean] :automatic_model_registration
+    #   Whether to enable or disable automatic registration of new MLflow
+    #   models to the SageMaker Model Registry. To enable automatic model
+    #   registration, set this value to `True`. To disable automatic model
+    #   registration, set this value to `False`. If not specified,
+    #   `AutomaticModelRegistration` defaults to `False`.
+    #
+    # @option params [String] :weekly_maintenance_window_start
+    #   The day and time of the week in Coordinated Universal Time (UTC)
+    #   24-hour standard time that weekly maintenance updates are scheduled.
+    #   For example: TUE:03:30.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   Tags consisting of key-value pairs used to manage metadata for the
+    #   tracking server.
+    #
+    # @return [Types::CreateMlflowTrackingServerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateMlflowTrackingServerResponse#tracking_server_arn #tracking_server_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_mlflow_tracking_server({
+    #     tracking_server_name: "TrackingServerName", # required
+    #     artifact_store_uri: "S3Uri", # required
+    #     tracking_server_size: "Small", # accepts Small, Medium, Large
+    #     mlflow_version: "MlflowVersion",
+    #     role_arn: "RoleArn", # required
+    #     automatic_model_registration: false,
+    #     weekly_maintenance_window_start: "WeeklyMaintenanceWindowStart",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tracking_server_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateMlflowTrackingServer AWS API Documentation
+    #
+    # @overload create_mlflow_tracking_server(params = {})
+    # @param [Hash] params ({})
+    def create_mlflow_tracking_server(params = {}, options = {})
+      req = build_request(:create_mlflow_tracking_server, params)
+      req.send_request(options)
+    end
+
     # Creates a model in SageMaker. In the request, you name the model and
     # describe a primary container. For the primary container, you specify
     # the Docker image that contains inference code, artifacts (from prior
@@ -7330,6 +7434,49 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
+    # Returns a presigned URL that you can use to connect to the MLflow UI
+    # attached to your tracking server. For more information, see [Launch
+    # the MLflow UI using a presigned URL][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/mlflow-launch-ui.html
+    #
+    # @option params [required, String] :tracking_server_name
+    #   The name of the tracking server to connect to your MLflow UI.
+    #
+    # @option params [Integer] :expires_in_seconds
+    #   The duration in seconds that your presigned URL is valid. The
+    #   presigned URL can be used only once.
+    #
+    # @option params [Integer] :session_expiration_duration_in_seconds
+    #   The duration in seconds that your MLflow UI session is valid.
+    #
+    # @return [Types::CreatePresignedMlflowTrackingServerUrlResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreatePresignedMlflowTrackingServerUrlResponse#authorized_url #authorized_url} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_presigned_mlflow_tracking_server_url({
+    #     tracking_server_name: "TrackingServerName", # required
+    #     expires_in_seconds: 1,
+    #     session_expiration_duration_in_seconds: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.authorized_url #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreatePresignedMlflowTrackingServerUrl AWS API Documentation
+    #
+    # @overload create_presigned_mlflow_tracking_server_url(params = {})
+    # @param [Hash] params ({})
+    def create_presigned_mlflow_tracking_server_url(params = {}, options = {})
+      req = build_request(:create_presigned_mlflow_tracking_server_url, params)
+      req.send_request(options)
+    end
+
     # Returns a URL that you can use to connect to the Jupyter server from a
     # notebook instance. In the SageMaker console, when you choose `Open`
     # next to a notebook instance, SageMaker opens a new tab showing the
@@ -9032,7 +9179,7 @@ module Aws::SageMaker
     # @option params [Types::SourceIpConfig] :source_ip_config
     #   A list of IP address ranges ([CIDRs][1]). Used to create an allow list
     #   of IP addresses for a private workforce. Workers will only be able to
-    #   login to their worker portal from an IP address within this range. By
+    #   log in to their worker portal from an IP address within this range. By
     #   default, a workforce isn't restricted to specific IP addresses.
     #
     #
@@ -10036,6 +10183,39 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
+    # Deletes an MLflow Tracking Server. For more information, see [Clean up
+    # MLflow resources][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/mlflow-cleanup.html.html
+    #
+    # @option params [required, String] :tracking_server_name
+    #   The name of the the tracking server to delete.
+    #
+    # @return [Types::DeleteMlflowTrackingServerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteMlflowTrackingServerResponse#tracking_server_arn #tracking_server_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_mlflow_tracking_server({
+    #     tracking_server_name: "TrackingServerName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tracking_server_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteMlflowTrackingServer AWS API Documentation
+    #
+    # @overload delete_mlflow_tracking_server(params = {})
+    # @param [Hash] params ({})
+    def delete_mlflow_tracking_server(params = {}, options = {})
+      req = build_request(:delete_mlflow_tracking_server, params)
+      req.send_request(options)
+    end
+
     # Deletes a model. The `DeleteModel` API deletes only the model entry
     # that was created in SageMaker when you called the `CreateModel` API.
     # It does not delete model artifacts, inference code, or the IAM role
@@ -10559,7 +10739,7 @@ module Aws::SageMaker
     # If a private workforce contains one or more work teams, you must use
     # the [DeleteWorkteam][2] operation to delete all work teams before you
     # delete the workforce. If you try to delete a workforce that contains
-    # one or more work teams, you will recieve a `ResourceInUse` error.
+    # one or more work teams, you will receive a `ResourceInUse` error.
     #
     #
     #
@@ -11435,6 +11615,8 @@ module Aws::SageMaker
     #   resp.instance_groups[0].life_cycle_config.on_create #=> String
     #   resp.instance_groups[0].execution_role #=> String
     #   resp.instance_groups[0].threads_per_core #=> Integer
+    #   resp.instance_groups[0].instance_storage_configs #=> Array
+    #   resp.instance_groups[0].instance_storage_configs[0].ebs_volume_config.volume_size_in_gb #=> Integer
     #   resp.vpc_config.security_group_ids #=> Array
     #   resp.vpc_config.security_group_ids[0] #=> String
     #   resp.vpc_config.subnets #=> Array
@@ -11481,6 +11663,8 @@ module Aws::SageMaker
     #   resp.node_details.life_cycle_config.source_s3_uri #=> String
     #   resp.node_details.life_cycle_config.on_create #=> String
     #   resp.node_details.threads_per_core #=> Integer
+    #   resp.node_details.instance_storage_configs #=> Array
+    #   resp.node_details.instance_storage_configs[0].ebs_volume_config.volume_size_in_gb #=> Integer
     #   resp.node_details.private_primary_ip #=> String
     #   resp.node_details.private_dns_hostname #=> String
     #   resp.node_details.placement.availability_zone #=> String
@@ -13820,6 +14004,72 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
+    # Returns information about an MLflow Tracking Server.
+    #
+    # @option params [required, String] :tracking_server_name
+    #   The name of the MLflow Tracking Server to describe.
+    #
+    # @return [Types::DescribeMlflowTrackingServerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeMlflowTrackingServerResponse#tracking_server_arn #tracking_server_arn} => String
+    #   * {Types::DescribeMlflowTrackingServerResponse#tracking_server_name #tracking_server_name} => String
+    #   * {Types::DescribeMlflowTrackingServerResponse#artifact_store_uri #artifact_store_uri} => String
+    #   * {Types::DescribeMlflowTrackingServerResponse#tracking_server_size #tracking_server_size} => String
+    #   * {Types::DescribeMlflowTrackingServerResponse#mlflow_version #mlflow_version} => String
+    #   * {Types::DescribeMlflowTrackingServerResponse#role_arn #role_arn} => String
+    #   * {Types::DescribeMlflowTrackingServerResponse#tracking_server_status #tracking_server_status} => String
+    #   * {Types::DescribeMlflowTrackingServerResponse#is_active #is_active} => String
+    #   * {Types::DescribeMlflowTrackingServerResponse#tracking_server_url #tracking_server_url} => String
+    #   * {Types::DescribeMlflowTrackingServerResponse#weekly_maintenance_window_start #weekly_maintenance_window_start} => String
+    #   * {Types::DescribeMlflowTrackingServerResponse#automatic_model_registration #automatic_model_registration} => Boolean
+    #   * {Types::DescribeMlflowTrackingServerResponse#creation_time #creation_time} => Time
+    #   * {Types::DescribeMlflowTrackingServerResponse#created_by #created_by} => Types::UserContext
+    #   * {Types::DescribeMlflowTrackingServerResponse#last_modified_time #last_modified_time} => Time
+    #   * {Types::DescribeMlflowTrackingServerResponse#last_modified_by #last_modified_by} => Types::UserContext
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_mlflow_tracking_server({
+    #     tracking_server_name: "TrackingServerName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tracking_server_arn #=> String
+    #   resp.tracking_server_name #=> String
+    #   resp.artifact_store_uri #=> String
+    #   resp.tracking_server_size #=> String, one of "Small", "Medium", "Large"
+    #   resp.mlflow_version #=> String
+    #   resp.role_arn #=> String
+    #   resp.tracking_server_status #=> String, one of "Creating", "Created", "CreateFailed", "Updating", "Updated", "UpdateFailed", "Deleting", "DeleteFailed", "Stopping", "Stopped", "StopFailed", "Starting", "Started", "StartFailed", "MaintenanceInProgress", "MaintenanceComplete", "MaintenanceFailed"
+    #   resp.is_active #=> String, one of "Active", "Inactive"
+    #   resp.tracking_server_url #=> String
+    #   resp.weekly_maintenance_window_start #=> String
+    #   resp.automatic_model_registration #=> Boolean
+    #   resp.creation_time #=> Time
+    #   resp.created_by.user_profile_arn #=> String
+    #   resp.created_by.user_profile_name #=> String
+    #   resp.created_by.domain_id #=> String
+    #   resp.created_by.iam_identity.arn #=> String
+    #   resp.created_by.iam_identity.principal_id #=> String
+    #   resp.created_by.iam_identity.source_identity #=> String
+    #   resp.last_modified_time #=> Time
+    #   resp.last_modified_by.user_profile_arn #=> String
+    #   resp.last_modified_by.user_profile_name #=> String
+    #   resp.last_modified_by.domain_id #=> String
+    #   resp.last_modified_by.iam_identity.arn #=> String
+    #   resp.last_modified_by.iam_identity.principal_id #=> String
+    #   resp.last_modified_by.iam_identity.source_identity #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeMlflowTrackingServer AWS API Documentation
+    #
+    # @overload describe_mlflow_tracking_server(params = {})
+    # @param [Hash] params ({})
+    def describe_mlflow_tracking_server(params = {}, options = {})
+      req = build_request(:describe_mlflow_tracking_server, params)
+      req.send_request(options)
+    end
+
     # Describes a model that you created using the `CreateModel` API.
     #
     # @option params [required, String] :model_name
@@ -16005,7 +16255,7 @@ module Aws::SageMaker
     end
 
     # Gets information about a specific work team. You can see information
-    # such as the create date, the last updated date, membership
+    # such as the creation date, the last updated date, membership
     # information, and the work team's Amazon Resource Name (ARN).
     #
     # @option params [required, String] :workteam_name
@@ -19579,6 +19829,93 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
+    # Lists all MLflow Tracking Servers.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :created_after
+    #   Use the `CreatedAfter` filter to only list tracking servers created
+    #   after a specific date and time. Listed tracking servers are shown with
+    #   a date and time such as `"2024-03-16T01:46:56+00:00"`. The
+    #   `CreatedAfter` parameter takes in a Unix timestamp. To convert a date
+    #   and time into a Unix timestamp, see [EpochConverter][1].
+    #
+    #
+    #
+    #   [1]: https://www.epochconverter.com/
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :created_before
+    #   Use the `CreatedBefore` filter to only list tracking servers created
+    #   before a specific date and time. Listed tracking servers are shown
+    #   with a date and time such as `"2024-03-16T01:46:56+00:00"`. The
+    #   `CreatedBefore` parameter takes in a Unix timestamp. To convert a date
+    #   and time into a Unix timestamp, see [EpochConverter][1].
+    #
+    #
+    #
+    #   [1]: https://www.epochconverter.com/
+    #
+    # @option params [String] :tracking_server_status
+    #   Filter for tracking servers with a specified creation status.
+    #
+    # @option params [String] :mlflow_version
+    #   Filter for tracking servers using the specified MLflow version.
+    #
+    # @option params [String] :sort_by
+    #   Filter for trackings servers sorting by name, creation time, or
+    #   creation status.
+    #
+    # @option params [String] :sort_order
+    #   Change the order of the listed tracking servers. By default, tracking
+    #   servers are listed in `Descending` order by creation time. To change
+    #   the list order, you can specify `SortOrder` to be `Ascending`.
+    #
+    # @option params [String] :next_token
+    #   If the previous response was truncated, you will receive this token.
+    #   Use it in your next request to receive the next set of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of tracking servers to list.
+    #
+    # @return [Types::ListMlflowTrackingServersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListMlflowTrackingServersResponse#tracking_server_summaries #tracking_server_summaries} => Array&lt;Types::TrackingServerSummary&gt;
+    #   * {Types::ListMlflowTrackingServersResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_mlflow_tracking_servers({
+    #     created_after: Time.now,
+    #     created_before: Time.now,
+    #     tracking_server_status: "Creating", # accepts Creating, Created, CreateFailed, Updating, Updated, UpdateFailed, Deleting, DeleteFailed, Stopping, Stopped, StopFailed, Starting, Started, StartFailed, MaintenanceInProgress, MaintenanceComplete, MaintenanceFailed
+    #     mlflow_version: "MlflowVersion",
+    #     sort_by: "Name", # accepts Name, CreationTime, Status
+    #     sort_order: "Ascending", # accepts Ascending, Descending
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tracking_server_summaries #=> Array
+    #   resp.tracking_server_summaries[0].tracking_server_arn #=> String
+    #   resp.tracking_server_summaries[0].tracking_server_name #=> String
+    #   resp.tracking_server_summaries[0].creation_time #=> Time
+    #   resp.tracking_server_summaries[0].last_modified_time #=> Time
+    #   resp.tracking_server_summaries[0].tracking_server_status #=> String, one of "Creating", "Created", "CreateFailed", "Updating", "Updated", "UpdateFailed", "Deleting", "DeleteFailed", "Stopping", "Stopped", "StopFailed", "Starting", "Started", "StartFailed", "MaintenanceInProgress", "MaintenanceComplete", "MaintenanceFailed"
+    #   resp.tracking_server_summaries[0].is_active #=> String, one of "Active", "Inactive"
+    #   resp.tracking_server_summaries[0].mlflow_version #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListMlflowTrackingServers AWS API Documentation
+    #
+    # @overload list_mlflow_tracking_servers(params = {})
+    # @param [Hash] params ({})
+    def list_mlflow_tracking_servers(params = {}, options = {})
+      req = build_request(:list_mlflow_tracking_servers, params)
+      req.send_request(options)
+    end
+
     # Lists model bias jobs definitions that satisfy various filters.
     #
     # @option params [String] :endpoint_name
@@ -22863,6 +23200,34 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
+    # Programmatically start an MLflow Tracking Server.
+    #
+    # @option params [required, String] :tracking_server_name
+    #   The name of the tracking server to start.
+    #
+    # @return [Types::StartMlflowTrackingServerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartMlflowTrackingServerResponse#tracking_server_arn #tracking_server_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_mlflow_tracking_server({
+    #     tracking_server_name: "TrackingServerName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tracking_server_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/StartMlflowTrackingServer AWS API Documentation
+    #
+    # @overload start_mlflow_tracking_server(params = {})
+    # @param [Hash] params ({})
+    def start_mlflow_tracking_server(params = {}, options = {})
+      req = build_request(:start_mlflow_tracking_server, params)
+      req.send_request(options)
+    end
+
     # Starts a previously stopped monitoring schedule.
     #
     # <note markdown="1"> By default, when you successfully create a new schedule, the status of
@@ -23234,6 +23599,34 @@ module Aws::SageMaker
     # @param [Hash] params ({})
     def stop_labeling_job(params = {}, options = {})
       req = build_request(:stop_labeling_job, params)
+      req.send_request(options)
+    end
+
+    # Programmatically stop an MLflow Tracking Server.
+    #
+    # @option params [required, String] :tracking_server_name
+    #   The name of the tracking server to stop.
+    #
+    # @return [Types::StopMlflowTrackingServerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StopMlflowTrackingServerResponse#tracking_server_arn #tracking_server_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_mlflow_tracking_server({
+    #     tracking_server_name: "TrackingServerName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tracking_server_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/StopMlflowTrackingServer AWS API Documentation
+    #
+    # @overload stop_mlflow_tracking_server(params = {})
+    # @param [Hash] params ({})
+    def stop_mlflow_tracking_server(params = {}, options = {})
+      req = build_request(:stop_mlflow_tracking_server, params)
       req.send_request(options)
     end
 
@@ -23626,6 +24019,13 @@ module Aws::SageMaker
     #         },
     #         execution_role: "RoleArn", # required
     #         threads_per_core: 1,
+    #         instance_storage_configs: [
+    #           {
+    #             ebs_volume_config: {
+    #               volume_size_in_gb: 1, # required
+    #             },
+    #           },
+    #         ],
     #       },
     #     ],
     #   })
@@ -24902,6 +25302,57 @@ module Aws::SageMaker
     # @param [Hash] params ({})
     def update_inference_experiment(params = {}, options = {})
       req = build_request(:update_inference_experiment, params)
+      req.send_request(options)
+    end
+
+    # Updates properties of an existing MLflow Tracking Server.
+    #
+    # @option params [required, String] :tracking_server_name
+    #   The name of the MLflow Tracking Server to update.
+    #
+    # @option params [String] :artifact_store_uri
+    #   The new S3 URI for the general purpose bucket to use as the artifact
+    #   store for the MLflow Tracking Server.
+    #
+    # @option params [String] :tracking_server_size
+    #   The new size for the MLflow Tracking Server.
+    #
+    # @option params [Boolean] :automatic_model_registration
+    #   Whether to enable or disable automatic registration of new MLflow
+    #   models to the SageMaker Model Registry. To enable automatic model
+    #   registration, set this value to `True`. To disable automatic model
+    #   registration, set this value to `False`. If not specified,
+    #   `AutomaticModelRegistration` defaults to `False`
+    #
+    # @option params [String] :weekly_maintenance_window_start
+    #   The new weekly maintenance window start day and time to update. The
+    #   maintenance window day and time should be in Coordinated Universal
+    #   Time (UTC) 24-hour standard time. For example: TUE:03:30.
+    #
+    # @return [Types::UpdateMlflowTrackingServerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateMlflowTrackingServerResponse#tracking_server_arn #tracking_server_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_mlflow_tracking_server({
+    #     tracking_server_name: "TrackingServerName", # required
+    #     artifact_store_uri: "S3Uri",
+    #     tracking_server_size: "Small", # accepts Small, Medium, Large
+    #     automatic_model_registration: false,
+    #     weekly_maintenance_window_start: "WeeklyMaintenanceWindowStart",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tracking_server_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateMlflowTrackingServer AWS API Documentation
+    #
+    # @overload update_mlflow_tracking_server(params = {})
+    # @param [Hash] params ({})
+    def update_mlflow_tracking_server(params = {}, options = {})
+      req = build_request(:update_mlflow_tracking_server, params)
       req.send_request(options)
     end
 
@@ -26476,7 +26927,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.246.0'
+      context[:gem_version] = '1.247.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

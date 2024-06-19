@@ -684,9 +684,11 @@ module Aws::Snowball
 
       api.metadata = {
         "apiVersion" => "2016-06-30",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "snowball",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "protocols" => ["json"],
         "serviceAbbreviation" => "Amazon Snowball",
         "serviceFullName" => "Amazon Import/Export Snowball",
         "serviceId" => "Snowball",

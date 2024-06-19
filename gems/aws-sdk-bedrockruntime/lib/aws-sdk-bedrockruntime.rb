@@ -54,6 +54,6 @@ require_relative 'aws-sdk-bedrockruntime/event_streams'
 # @!group service
 module Aws::BedrockRuntime
 
-  GEM_VERSION = '1.10.0'
+  GEM_VERSION = '1.11.0'
 
 end

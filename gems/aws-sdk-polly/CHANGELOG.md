@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.87.0 (2024-06-18)
+------------------
+
+* Feature - Add v2 smoke tests and smithy smokeTests trait for SDK testing.
+
 1.86.0 (2024-06-05)
 ------------------
 

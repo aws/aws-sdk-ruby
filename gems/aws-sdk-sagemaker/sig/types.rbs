@@ -673,6 +673,11 @@ module Aws::SageMaker
       SENSITIVE: []
     end
 
+    class ClusterEbsVolumeConfig
+      attr_accessor volume_size_in_gb: ::Integer
+      SENSITIVE: []
+    end
+
     class ClusterInstanceGroupDetails
       attr_accessor current_count: ::Integer
       attr_accessor target_count: ::Integer
@@ -681,6 +686,7 @@ module Aws::SageMaker
       attr_accessor life_cycle_config: Types::ClusterLifeCycleConfig
       attr_accessor execution_role: ::String
       attr_accessor threads_per_core: ::Integer
+      attr_accessor instance_storage_configs: ::Array[Types::ClusterInstanceStorageConfig]
       SENSITIVE: []
     end
 
@@ -691,6 +697,7 @@ module Aws::SageMaker
       attr_accessor life_cycle_config: Types::ClusterLifeCycleConfig
       attr_accessor execution_role: ::String
       attr_accessor threads_per_core: ::Integer
+      attr_accessor instance_storage_configs: ::Array[Types::ClusterInstanceStorageConfig]
       SENSITIVE: []
     end
 
@@ -704,6 +711,17 @@ module Aws::SageMaker
       attr_accessor status: ("Running" | "Failure" | "Pending" | "ShuttingDown" | "SystemUpdating")
       attr_accessor message: ::String
       SENSITIVE: []
+    end
+
+    class ClusterInstanceStorageConfig
+      attr_accessor ebs_volume_config: Types::ClusterEbsVolumeConfig
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class EbsVolumeConfig < ClusterInstanceStorageConfig
+      end
+      class Unknown < ClusterInstanceStorageConfig
+      end
     end
 
     class ClusterLifeCycleConfig
@@ -720,6 +738,7 @@ module Aws::SageMaker
       attr_accessor launch_time: ::Time
       attr_accessor life_cycle_config: Types::ClusterLifeCycleConfig
       attr_accessor threads_per_core: ::Integer
+      attr_accessor instance_storage_configs: ::Array[Types::ClusterInstanceStorageConfig]
       attr_accessor private_primary_ip: ::String
       attr_accessor private_dns_hostname: ::String
       attr_accessor placement: Types::ClusterInstancePlacement
@@ -1367,6 +1386,23 @@ module Aws::SageMaker
       SENSITIVE: []
     end
 
+    class CreateMlflowTrackingServerRequest
+      attr_accessor tracking_server_name: ::String
+      attr_accessor artifact_store_uri: ::String
+      attr_accessor tracking_server_size: ("Small" | "Medium" | "Large")
+      attr_accessor mlflow_version: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor automatic_model_registration: bool
+      attr_accessor weekly_maintenance_window_start: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateMlflowTrackingServerResponse
+      attr_accessor tracking_server_arn: ::String
+      SENSITIVE: []
+    end
+
     class CreateModelBiasJobDefinitionRequest
       attr_accessor job_definition_name: ::String
       attr_accessor model_bias_baseline_config: Types::ModelBiasBaselineConfig
@@ -1589,6 +1625,18 @@ module Aws::SageMaker
     end
 
     class CreatePresignedDomainUrlResponse
+      attr_accessor authorized_url: ::String
+      SENSITIVE: []
+    end
+
+    class CreatePresignedMlflowTrackingServerUrlRequest
+      attr_accessor tracking_server_name: ::String
+      attr_accessor expires_in_seconds: ::Integer
+      attr_accessor session_expiration_duration_in_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class CreatePresignedMlflowTrackingServerUrlResponse
       attr_accessor authorized_url: ::String
       SENSITIVE: []
     end
@@ -2165,6 +2213,16 @@ module Aws::SageMaker
 
     class DeleteInferenceExperimentResponse
       attr_accessor inference_experiment_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteMlflowTrackingServerRequest
+      attr_accessor tracking_server_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteMlflowTrackingServerResponse
+      attr_accessor tracking_server_arn: ::String
       SENSITIVE: []
     end
 
@@ -3102,6 +3160,30 @@ module Aws::SageMaker
       attr_accessor lineage_group_arn: ::String
       attr_accessor display_name: ::String
       attr_accessor description: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor created_by: Types::UserContext
+      attr_accessor last_modified_time: ::Time
+      attr_accessor last_modified_by: Types::UserContext
+      SENSITIVE: []
+    end
+
+    class DescribeMlflowTrackingServerRequest
+      attr_accessor tracking_server_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeMlflowTrackingServerResponse
+      attr_accessor tracking_server_arn: ::String
+      attr_accessor tracking_server_name: ::String
+      attr_accessor artifact_store_uri: ::String
+      attr_accessor tracking_server_size: ("Small" | "Medium" | "Large")
+      attr_accessor mlflow_version: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor tracking_server_status: ("Creating" | "Created" | "CreateFailed" | "Updating" | "Updated" | "UpdateFailed" | "Deleting" | "DeleteFailed" | "Stopping" | "Stopped" | "StopFailed" | "Starting" | "Started" | "StartFailed" | "MaintenanceInProgress" | "MaintenanceComplete" | "MaintenanceFailed")
+      attr_accessor is_active: ("Active" | "Inactive")
+      attr_accessor tracking_server_url: ::String
+      attr_accessor weekly_maintenance_window_start: ::String
+      attr_accessor automatic_model_registration: bool
       attr_accessor creation_time: ::Time
       attr_accessor created_by: Types::UserContext
       attr_accessor last_modified_time: ::Time
@@ -5701,6 +5783,24 @@ module Aws::SageMaker
       SENSITIVE: []
     end
 
+    class ListMlflowTrackingServersRequest
+      attr_accessor created_after: ::Time
+      attr_accessor created_before: ::Time
+      attr_accessor tracking_server_status: ("Creating" | "Created" | "CreateFailed" | "Updating" | "Updated" | "UpdateFailed" | "Deleting" | "DeleteFailed" | "Stopping" | "Stopped" | "StopFailed" | "Starting" | "Started" | "StartFailed" | "MaintenanceInProgress" | "MaintenanceComplete" | "MaintenanceFailed")
+      attr_accessor mlflow_version: ::String
+      attr_accessor sort_by: ("Name" | "CreationTime" | "Status")
+      attr_accessor sort_order: ("Ascending" | "Descending")
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListMlflowTrackingServersResponse
+      attr_accessor tracking_server_summaries: ::Array[Types::TrackingServerSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListModelBiasJobDefinitionsRequest
       attr_accessor endpoint_name: ::String
       attr_accessor sort_by: ("Name" | "CreationTime")
@@ -8261,6 +8361,16 @@ module Aws::SageMaker
       SENSITIVE: []
     end
 
+    class StartMlflowTrackingServerRequest
+      attr_accessor tracking_server_name: ::String
+      SENSITIVE: []
+    end
+
+    class StartMlflowTrackingServerResponse
+      attr_accessor tracking_server_arn: ::String
+      SENSITIVE: []
+    end
+
     class StartMonitoringScheduleRequest
       attr_accessor monitoring_schedule_name: ::String
       SENSITIVE: []
@@ -8334,6 +8444,16 @@ module Aws::SageMaker
 
     class StopLabelingJobRequest
       attr_accessor labeling_job_name: ::String
+      SENSITIVE: []
+    end
+
+    class StopMlflowTrackingServerRequest
+      attr_accessor tracking_server_name: ::String
+      SENSITIVE: []
+    end
+
+    class StopMlflowTrackingServerResponse
+      attr_accessor tracking_server_arn: ::String
       SENSITIVE: []
     end
 
@@ -8521,6 +8641,17 @@ module Aws::SageMaker
     class TimeSeriesTransformations
       attr_accessor filling: ::Hash[::String, ::Hash[("frontfill" | "middlefill" | "backfill" | "futurefill" | "frontfill_value" | "middlefill_value" | "backfill_value" | "futurefill_value"), ::String]]
       attr_accessor aggregation: ::Hash[::String, ("sum" | "avg" | "first" | "min" | "max")]
+      SENSITIVE: []
+    end
+
+    class TrackingServerSummary
+      attr_accessor tracking_server_arn: ::String
+      attr_accessor tracking_server_name: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor last_modified_time: ::Time
+      attr_accessor tracking_server_status: ("Creating" | "Created" | "CreateFailed" | "Updating" | "Updated" | "UpdateFailed" | "Deleting" | "DeleteFailed" | "Stopping" | "Stopped" | "StopFailed" | "Starting" | "Started" | "StartFailed" | "MaintenanceInProgress" | "MaintenanceComplete" | "MaintenanceFailed")
+      attr_accessor is_active: ("Active" | "Inactive")
+      attr_accessor mlflow_version: ::String
       SENSITIVE: []
     end
 
@@ -9154,6 +9285,20 @@ module Aws::SageMaker
 
     class UpdateInferenceExperimentResponse
       attr_accessor inference_experiment_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateMlflowTrackingServerRequest
+      attr_accessor tracking_server_name: ::String
+      attr_accessor artifact_store_uri: ::String
+      attr_accessor tracking_server_size: ("Small" | "Medium" | "Large")
+      attr_accessor automatic_model_registration: bool
+      attr_accessor weekly_maintenance_window_start: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateMlflowTrackingServerResponse
+      attr_accessor tracking_server_arn: ::String
       SENSITIVE: []
     end
 

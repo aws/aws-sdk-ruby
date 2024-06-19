@@ -78,10 +78,11 @@ module Aws
       interface _ConverseResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ConverseResponse]
         def output: () -> Types::ConverseOutput
-        def stop_reason: () -> ("end_turn" | "tool_use" | "max_tokens" | "stop_sequence" | "content_filtered")
+        def stop_reason: () -> ("end_turn" | "tool_use" | "max_tokens" | "stop_sequence" | "guardrail_intervened" | "content_filtered")
         def usage: () -> Types::TokenUsage
         def metrics: () -> Types::ConverseMetrics
         def additional_model_response_fields: () -> untyped
+        def trace: () -> Types::ConverseTrace
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockRuntime/Client.html#converse-instance_method
       def converse: (
@@ -120,6 +121,11 @@ module Aws
                                   },
                                 ],
                                 status: ("success" | "error")?
+                              }?,
+                              guard_content: {
+                                text: {
+                                  text: ::String
+                                }?
                               }?
                             },
                           ]
@@ -127,7 +133,12 @@ module Aws
                       ],
                       ?system: Array[
                         {
-                          text: ::String?
+                          text: ::String?,
+                          guard_content: {
+                            text: {
+                              text: ::String
+                            }?
+                          }?
                         },
                       ],
                       ?inference_config: {
@@ -158,6 +169,11 @@ module Aws
                             name: ::String
                           }?
                         }?
+                      },
+                      ?guardrail_config: {
+                        guardrail_identifier: ::String,
+                        guardrail_version: ::String,
+                        trace: ("enabled" | "disabled")?
                       },
                       ?additional_model_request_fields: {
                       },
@@ -206,6 +222,11 @@ module Aws
                                          },
                                        ],
                                        status: ("success" | "error")?
+                                     }?,
+                                     guard_content: {
+                                       text: {
+                                         text: ::String
+                                       }?
                                      }?
                                    },
                                  ]
@@ -213,7 +234,12 @@ module Aws
                              ],
                              ?system: Array[
                                {
-                                 text: ::String?
+                                 text: ::String?,
+                                 guard_content: {
+                                   text: {
+                                     text: ::String
+                                   }?
+                                 }?
                                },
                              ],
                              ?inference_config: {
@@ -244,6 +270,12 @@ module Aws
                                    name: ::String
                                  }?
                                }?
+                             },
+                             ?guardrail_config: {
+                               guardrail_identifier: ::String,
+                               guardrail_version: ::String,
+                               trace: ("enabled" | "disabled")?,
+                               stream_processing_mode: ("sync" | "async")?
                              },
                              ?additional_model_request_fields: {
                              },

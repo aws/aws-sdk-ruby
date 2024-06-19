@@ -2238,9 +2238,11 @@ module Aws::ConfigService
 
       api.metadata = {
         "apiVersion" => "2014-11-12",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "config",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "protocols" => ["json"],
         "serviceAbbreviation" => "Config Service",
         "serviceFullName" => "AWS Config",
         "serviceId" => "Config Service",

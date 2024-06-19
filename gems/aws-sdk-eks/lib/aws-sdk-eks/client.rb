@@ -1435,6 +1435,11 @@ module Aws::EKS
     #   resp.fargate_profile.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "CREATE_FAILED", "DELETE_FAILED"
     #   resp.fargate_profile.tags #=> Hash
     #   resp.fargate_profile.tags["TagKey"] #=> String
+    #   resp.fargate_profile.health.issues #=> Array
+    #   resp.fargate_profile.health.issues[0].code #=> String, one of "PodExecutionRoleAlreadyInUse", "AccessDenied", "ClusterUnreachable", "InternalFailure"
+    #   resp.fargate_profile.health.issues[0].message #=> String
+    #   resp.fargate_profile.health.issues[0].resource_ids #=> Array
+    #   resp.fargate_profile.health.issues[0].resource_ids[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/CreateFargateProfile AWS API Documentation
     #
@@ -2162,6 +2167,11 @@ module Aws::EKS
     #   resp.fargate_profile.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "CREATE_FAILED", "DELETE_FAILED"
     #   resp.fargate_profile.tags #=> Hash
     #   resp.fargate_profile.tags["TagKey"] #=> String
+    #   resp.fargate_profile.health.issues #=> Array
+    #   resp.fargate_profile.health.issues[0].code #=> String, one of "PodExecutionRoleAlreadyInUse", "AccessDenied", "ClusterUnreachable", "InternalFailure"
+    #   resp.fargate_profile.health.issues[0].message #=> String
+    #   resp.fargate_profile.health.issues[0].resource_ids #=> Array
+    #   resp.fargate_profile.health.issues[0].resource_ids[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/DeleteFargateProfile AWS API Documentation
     #
@@ -2843,6 +2853,11 @@ module Aws::EKS
     #   resp.fargate_profile.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "CREATE_FAILED", "DELETE_FAILED"
     #   resp.fargate_profile.tags #=> Hash
     #   resp.fargate_profile.tags["TagKey"] #=> String
+    #   resp.fargate_profile.health.issues #=> Array
+    #   resp.fargate_profile.health.issues[0].code #=> String, one of "PodExecutionRoleAlreadyInUse", "AccessDenied", "ClusterUnreachable", "InternalFailure"
+    #   resp.fargate_profile.health.issues[0].message #=> String
+    #   resp.fargate_profile.health.issues[0].resource_ids #=> Array
+    #   resp.fargate_profile.health.issues[0].resource_ids[0] #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -5043,7 +5058,7 @@ module Aws::EKS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-eks'
-      context[:gem_version] = '1.104.0'
+      context[:gem_version] = '1.105.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

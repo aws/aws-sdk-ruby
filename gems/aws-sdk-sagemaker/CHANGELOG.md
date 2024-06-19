@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.247.0 (2024-06-18)
+------------------
+
+* Feature - Launched a new feature in SageMaker to provide managed MLflow Tracking Servers for customers to track ML experiments. This release also adds a new capability of attaching additional storage to SageMaker HyperPod cluster instances.
+
 1.246.0 (2024-06-07)
 ------------------
 

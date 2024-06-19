@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.11.0 (2024-06-18)
+------------------
+
+* Feature - This release adds support for using Guardrails with the Converse and ConverseStream APIs.
+
 1.10.0 (2024-06-05)
 ------------------
 

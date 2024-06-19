@@ -3982,6 +3982,26 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # Defines the configuration for attaching an additional Amazon Elastic
+    # Block Store (EBS) volume to each instance of the SageMaker HyperPod
+    # cluster instance group.
+    #
+    # @!attribute [rw] volume_size_in_gb
+    #   The size in gigabytes (GB) of the additional EBS volume to be
+    #   attached to the instances in the SageMaker HyperPod cluster instance
+    #   group. The additional EBS volume is attached to each instance within
+    #   the SageMaker HyperPod cluster instance group and mounted to
+    #   `/opt/sagemaker`.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ClusterEbsVolumeConfig AWS API Documentation
+    #
+    class ClusterEbsVolumeConfig < Struct.new(
+      :volume_size_in_gb)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Details of an instance group in a SageMaker HyperPod cluster.
     #
     # @!attribute [rw] current_count
@@ -4025,6 +4045,11 @@ module Aws::SageMaker
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/cpu-options-supported-instances-values.html
     #   @return [Integer]
     #
+    # @!attribute [rw] instance_storage_configs
+    #   The additional storage configurations for the instances in the
+    #   SageMaker HyperPod cluster instance group.
+    #   @return [Array<Types::ClusterInstanceStorageConfig>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ClusterInstanceGroupDetails AWS API Documentation
     #
     class ClusterInstanceGroupDetails < Struct.new(
@@ -4034,7 +4059,8 @@ module Aws::SageMaker
       :instance_type,
       :life_cycle_config,
       :execution_role,
-      :threads_per_core)
+      :threads_per_core,
+      :instance_storage_configs)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4076,6 +4102,11 @@ module Aws::SageMaker
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/cpu-options-supported-instances-values.html
     #   @return [Integer]
     #
+    # @!attribute [rw] instance_storage_configs
+    #   Specifies the additional storage configurations for the instances in
+    #   the SageMaker HyperPod cluster instance group.
+    #   @return [Array<Types::ClusterInstanceStorageConfig>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ClusterInstanceGroupSpecification AWS API Documentation
     #
     class ClusterInstanceGroupSpecification < Struct.new(
@@ -4084,7 +4115,8 @@ module Aws::SageMaker
       :instance_type,
       :life_cycle_config,
       :execution_role,
-      :threads_per_core)
+      :threads_per_core,
+      :instance_storage_configs)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4129,6 +4161,34 @@ module Aws::SageMaker
       :message)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # Defines the configuration for attaching additional storage to the
+    # instances in the SageMaker HyperPod cluster instance group.
+    #
+    # @note ClusterInstanceStorageConfig is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note ClusterInstanceStorageConfig is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ClusterInstanceStorageConfig corresponding to the set member.
+    #
+    # @!attribute [rw] ebs_volume_config
+    #   Defines the configuration for attaching additional Amazon Elastic
+    #   Block Store (EBS) volumes to the instances in the SageMaker HyperPod
+    #   cluster instance group. The additional EBS volume is attached to
+    #   each instance within the SageMaker HyperPod cluster instance group
+    #   and mounted to `/opt/sagemaker`.
+    #   @return [Types::ClusterEbsVolumeConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ClusterInstanceStorageConfig AWS API Documentation
+    #
+    class ClusterInstanceStorageConfig < Struct.new(
+      :ebs_volume_config,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class EbsVolumeConfig < ClusterInstanceStorageConfig; end
+      class Unknown < ClusterInstanceStorageConfig; end
     end
 
     # The lifecycle configuration for a SageMaker HyperPod cluster.
@@ -4193,6 +4253,11 @@ module Aws::SageMaker
     #   `CreateCluster`.
     #   @return [Integer]
     #
+    # @!attribute [rw] instance_storage_configs
+    #   The configurations of additional storage specified to the instance
+    #   group where the instance (node) is launched.
+    #   @return [Array<Types::ClusterInstanceStorageConfig>]
+    #
     # @!attribute [rw] private_primary_ip
     #   The private primary IP address of the SageMaker HyperPod cluster
     #   node.
@@ -4216,6 +4281,7 @@ module Aws::SageMaker
       :launch_time,
       :life_cycle_config,
       :threads_per_core,
+      :instance_storage_configs,
       :private_primary_ip,
       :private_dns_hostname,
       :placement)
@@ -7502,6 +7568,95 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # @!attribute [rw] tracking_server_name
+    #   A unique string identifying the tracking server name. This string is
+    #   part of the tracking server ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] artifact_store_uri
+    #   The S3 URI for a general purpose bucket to use as the MLflow
+    #   Tracking Server artifact store.
+    #   @return [String]
+    #
+    # @!attribute [rw] tracking_server_size
+    #   The size of the tracking server you want to create. You can choose
+    #   between `"Small"`, `"Medium"`, and `"Large"`. The default MLflow
+    #   Tracking Server configuration size is `"Small"`. You can choose a
+    #   size depending on the projected use of the tracking server such as
+    #   the volume of data logged, number of users, and frequency of use.
+    #
+    #   We recommend using a small tracking server for teams of up to 25
+    #   users, a medium tracking server for teams of up to 50 users, and a
+    #   large tracking server for teams of up to 100 users.
+    #   @return [String]
+    #
+    # @!attribute [rw] mlflow_version
+    #   The version of MLflow that the tracking server uses. To see which
+    #   MLflow versions are available to use, see [How it works][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/mlflow.html#mlflow-create-tracking-server-how-it-works
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) for an IAM role in your account that
+    #   the MLflow Tracking Server uses to access the artifact store in
+    #   Amazon S3. The role should have `AmazonS3FullAccess` permissions.
+    #   For more information on IAM permissions for tracking server
+    #   creation, see [Set up IAM permissions for MLflow][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/mlflow-create-tracking-server-iam.html
+    #   @return [String]
+    #
+    # @!attribute [rw] automatic_model_registration
+    #   Whether to enable or disable automatic registration of new MLflow
+    #   models to the SageMaker Model Registry. To enable automatic model
+    #   registration, set this value to `True`. To disable automatic model
+    #   registration, set this value to `False`. If not specified,
+    #   `AutomaticModelRegistration` defaults to `False`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] weekly_maintenance_window_start
+    #   The day and time of the week in Coordinated Universal Time (UTC)
+    #   24-hour standard time that weekly maintenance updates are scheduled.
+    #   For example: TUE:03:30.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Tags consisting of key-value pairs used to manage metadata for the
+    #   tracking server.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateMlflowTrackingServerRequest AWS API Documentation
+    #
+    class CreateMlflowTrackingServerRequest < Struct.new(
+      :tracking_server_name,
+      :artifact_store_uri,
+      :tracking_server_size,
+      :mlflow_version,
+      :role_arn,
+      :automatic_model_registration,
+      :weekly_maintenance_window_start,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tracking_server_arn
+    #   The ARN of the tracking server.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateMlflowTrackingServerResponse AWS API Documentation
+    #
+    class CreateMlflowTrackingServerResponse < Struct.new(
+      :tracking_server_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] job_definition_name
     #   The name of the bias job definition. The name must be unique within
     #   an Amazon Web Services Region in the Amazon Web Services account.
@@ -8611,6 +8766,41 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # @!attribute [rw] tracking_server_name
+    #   The name of the tracking server to connect to your MLflow UI.
+    #   @return [String]
+    #
+    # @!attribute [rw] expires_in_seconds
+    #   The duration in seconds that your presigned URL is valid. The
+    #   presigned URL can be used only once.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] session_expiration_duration_in_seconds
+    #   The duration in seconds that your MLflow UI session is valid.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreatePresignedMlflowTrackingServerUrlRequest AWS API Documentation
+    #
+    class CreatePresignedMlflowTrackingServerUrlRequest < Struct.new(
+      :tracking_server_name,
+      :expires_in_seconds,
+      :session_expiration_duration_in_seconds)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] authorized_url
+    #   A presigned URL with an authorization token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreatePresignedMlflowTrackingServerUrlResponse AWS API Documentation
+    #
+    class CreatePresignedMlflowTrackingServerUrlResponse < Struct.new(
+      :authorized_url)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] notebook_instance_name
     #   The name of the notebook instance.
     #   @return [String]
@@ -9593,7 +9783,7 @@ module Aws::SageMaker
     # @!attribute [rw] source_ip_config
     #   A list of IP address ranges ([CIDRs][1]). Used to create an allow
     #   list of IP addresses for a private workforce. Workers will only be
-    #   able to login to their worker portal from an IP address within this
+    #   able to log in to their worker portal from an IP address within this
     #   range. By default, a workforce isn't restricted to specific IP
     #   addresses.
     #
@@ -10949,6 +11139,31 @@ module Aws::SageMaker
     #
     class DeleteInferenceExperimentResponse < Struct.new(
       :inference_experiment_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tracking_server_name
+    #   The name of the the tracking server to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteMlflowTrackingServerRequest AWS API Documentation
+    #
+    class DeleteMlflowTrackingServerRequest < Struct.new(
+      :tracking_server_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tracking_server_arn
+    #   A `TrackingServerArn` object, the ARN of the tracking server that is
+    #   deleted if successfully found.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteMlflowTrackingServerResponse AWS API Documentation
+    #
+    class DeleteMlflowTrackingServerResponse < Struct.new(
+      :tracking_server_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14853,6 +15068,110 @@ module Aws::SageMaker
       :lineage_group_arn,
       :display_name,
       :description,
+      :creation_time,
+      :created_by,
+      :last_modified_time,
+      :last_modified_by)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tracking_server_name
+    #   The name of the MLflow Tracking Server to describe.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeMlflowTrackingServerRequest AWS API Documentation
+    #
+    class DescribeMlflowTrackingServerRequest < Struct.new(
+      :tracking_server_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tracking_server_arn
+    #   The ARN of the described tracking server.
+    #   @return [String]
+    #
+    # @!attribute [rw] tracking_server_name
+    #   The name of the described tracking server.
+    #   @return [String]
+    #
+    # @!attribute [rw] artifact_store_uri
+    #   The S3 URI of the general purpose bucket used as the MLflow Tracking
+    #   Server artifact store.
+    #   @return [String]
+    #
+    # @!attribute [rw] tracking_server_size
+    #   The size of the described tracking server.
+    #   @return [String]
+    #
+    # @!attribute [rw] mlflow_version
+    #   The MLflow version used for the described tracking server.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) for an IAM role in your account that
+    #   the described MLflow Tracking Server uses to access the artifact
+    #   store in Amazon S3.
+    #   @return [String]
+    #
+    # @!attribute [rw] tracking_server_status
+    #   The current creation status of the described MLflow Tracking Server.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_active
+    #   Whether the described MLflow Tracking Server is currently active.
+    #   @return [String]
+    #
+    # @!attribute [rw] tracking_server_url
+    #   The URL to connect to the MLflow user interface for the described
+    #   tracking server.
+    #   @return [String]
+    #
+    # @!attribute [rw] weekly_maintenance_window_start
+    #   The day and time of the week when weekly maintenance occurs on the
+    #   described tracking server.
+    #   @return [String]
+    #
+    # @!attribute [rw] automatic_model_registration
+    #   Whether automatic registration of new MLflow models to the SageMaker
+    #   Model Registry is enabled.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] creation_time
+    #   The timestamp of when the described MLflow Tracking Server was
+    #   created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] created_by
+    #   Information about the user who created or modified an experiment,
+    #   trial, trial component, lineage group, project, or model card.
+    #   @return [Types::UserContext]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The timestamp of when the described MLflow Tracking Server was last
+    #   modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_by
+    #   Information about the user who created or modified an experiment,
+    #   trial, trial component, lineage group, project, or model card.
+    #   @return [Types::UserContext]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeMlflowTrackingServerResponse AWS API Documentation
+    #
+    class DescribeMlflowTrackingServerResponse < Struct.new(
+      :tracking_server_arn,
+      :tracking_server_name,
+      :artifact_store_uri,
+      :tracking_server_size,
+      :mlflow_version,
+      :role_arn,
+      :tracking_server_status,
+      :is_active,
+      :tracking_server_url,
+      :weekly_maintenance_window_start,
+      :automatic_model_registration,
       :creation_time,
       :created_by,
       :last_modified_time,
@@ -27726,6 +28045,92 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # @!attribute [rw] created_after
+    #   Use the `CreatedAfter` filter to only list tracking servers created
+    #   after a specific date and time. Listed tracking servers are shown
+    #   with a date and time such as `"2024-03-16T01:46:56+00:00"`. The
+    #   `CreatedAfter` parameter takes in a Unix timestamp. To convert a
+    #   date and time into a Unix timestamp, see [EpochConverter][1].
+    #
+    #
+    #
+    #   [1]: https://www.epochconverter.com/
+    #   @return [Time]
+    #
+    # @!attribute [rw] created_before
+    #   Use the `CreatedBefore` filter to only list tracking servers created
+    #   before a specific date and time. Listed tracking servers are shown
+    #   with a date and time such as `"2024-03-16T01:46:56+00:00"`. The
+    #   `CreatedBefore` parameter takes in a Unix timestamp. To convert a
+    #   date and time into a Unix timestamp, see [EpochConverter][1].
+    #
+    #
+    #
+    #   [1]: https://www.epochconverter.com/
+    #   @return [Time]
+    #
+    # @!attribute [rw] tracking_server_status
+    #   Filter for tracking servers with a specified creation status.
+    #   @return [String]
+    #
+    # @!attribute [rw] mlflow_version
+    #   Filter for tracking servers using the specified MLflow version.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_by
+    #   Filter for trackings servers sorting by name, creation time, or
+    #   creation status.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_order
+    #   Change the order of the listed tracking servers. By default,
+    #   tracking servers are listed in `Descending` order by creation time.
+    #   To change the list order, you can specify `SortOrder` to be
+    #   `Ascending`.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   If the previous response was truncated, you will receive this token.
+    #   Use it in your next request to receive the next set of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of tracking servers to list.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListMlflowTrackingServersRequest AWS API Documentation
+    #
+    class ListMlflowTrackingServersRequest < Struct.new(
+      :created_after,
+      :created_before,
+      :tracking_server_status,
+      :mlflow_version,
+      :sort_by,
+      :sort_order,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tracking_server_summaries
+    #   A list of tracking servers according to chosen filters.
+    #   @return [Array<Types::TrackingServerSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If the previous response was truncated, you will receive this token.
+    #   Use it in your next request to receive the next set of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListMlflowTrackingServersResponse AWS API Documentation
+    #
+    class ListMlflowTrackingServersResponse < Struct.new(
+      :tracking_server_summaries,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] endpoint_name
     #   Name of the endpoint to monitor for model bias.
     #   @return [String]
@@ -39458,7 +39863,7 @@ module Aws::SageMaker
 
     # A list of IP address ranges ([CIDRs][1]). Used to create an allow list
     # of IP addresses for a private workforce. Workers will only be able to
-    # login to their worker portal from an IP address within this range. By
+    # log in to their worker portal from an IP address within this range. By
     # default, a workforce isn't restricted to specific IP addresses.
     #
     #
@@ -39755,6 +40160,30 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # @!attribute [rw] tracking_server_name
+    #   The name of the tracking server to start.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/StartMlflowTrackingServerRequest AWS API Documentation
+    #
+    class StartMlflowTrackingServerRequest < Struct.new(
+      :tracking_server_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tracking_server_arn
+    #   The ARN of the started tracking server.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/StartMlflowTrackingServerResponse AWS API Documentation
+    #
+    class StartMlflowTrackingServerResponse < Struct.new(
+      :tracking_server_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] monitoring_schedule_name
     #   The name of the schedule to start.
     #   @return [String]
@@ -39987,6 +40416,30 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # @!attribute [rw] tracking_server_name
+    #   The name of the tracking server to stop.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/StopMlflowTrackingServerRequest AWS API Documentation
+    #
+    class StopMlflowTrackingServerRequest < Struct.new(
+      :tracking_server_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tracking_server_arn
+    #   The ARN of the stopped tracking server.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/StopMlflowTrackingServerResponse AWS API Documentation
+    #
+    class StopMlflowTrackingServerResponse < Struct.new(
+      :tracking_server_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] monitoring_schedule_name
     #   The name of the schedule to stop.
     #   @return [String]
@@ -40188,7 +40641,7 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # Describes a work team of a vendor that does the a labelling job.
+    # Describes a work team of a vendor that does the labelling job.
     #
     # @!attribute [rw] workteam_arn
     #   The Amazon Resource Name (ARN) of the vendor that you have
@@ -41059,6 +41512,50 @@ module Aws::SageMaker
     class TimeSeriesTransformations < Struct.new(
       :filling,
       :aggregation)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The summary of the tracking server to list.
+    #
+    # @!attribute [rw] tracking_server_arn
+    #   The ARN of a listed tracking server.
+    #   @return [String]
+    #
+    # @!attribute [rw] tracking_server_name
+    #   The name of a listed tracking server.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The creation time of a listed tracking server.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The last modified time of a listed tracking server.
+    #   @return [Time]
+    #
+    # @!attribute [rw] tracking_server_status
+    #   The creation status of a listed tracking server.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_active
+    #   The activity status of a listed tracking server.
+    #   @return [String]
+    #
+    # @!attribute [rw] mlflow_version
+    #   The MLflow version used for a listed tracking server.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/TrackingServerSummary AWS API Documentation
+    #
+    class TrackingServerSummary < Struct.new(
+      :tracking_server_arn,
+      :tracking_server_name,
+      :creation_time,
+      :last_modified_time,
+      :tracking_server_status,
+      :is_active,
+      :mlflow_version)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -44111,6 +44608,57 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # @!attribute [rw] tracking_server_name
+    #   The name of the MLflow Tracking Server to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] artifact_store_uri
+    #   The new S3 URI for the general purpose bucket to use as the artifact
+    #   store for the MLflow Tracking Server.
+    #   @return [String]
+    #
+    # @!attribute [rw] tracking_server_size
+    #   The new size for the MLflow Tracking Server.
+    #   @return [String]
+    #
+    # @!attribute [rw] automatic_model_registration
+    #   Whether to enable or disable automatic registration of new MLflow
+    #   models to the SageMaker Model Registry. To enable automatic model
+    #   registration, set this value to `True`. To disable automatic model
+    #   registration, set this value to `False`. If not specified,
+    #   `AutomaticModelRegistration` defaults to `False`
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] weekly_maintenance_window_start
+    #   The new weekly maintenance window start day and time to update. The
+    #   maintenance window day and time should be in Coordinated Universal
+    #   Time (UTC) 24-hour standard time. For example: TUE:03:30.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateMlflowTrackingServerRequest AWS API Documentation
+    #
+    class UpdateMlflowTrackingServerRequest < Struct.new(
+      :tracking_server_name,
+      :artifact_store_uri,
+      :tracking_server_size,
+      :automatic_model_registration,
+      :weekly_maintenance_window_start)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tracking_server_arn
+    #   The ARN of the updated MLflow Tracking Server.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateMlflowTrackingServerResponse AWS API Documentation
+    #
+    class UpdateMlflowTrackingServerResponse < Struct.new(
+      :tracking_server_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] model_card_name
     #   The name or Amazon Resource Name (ARN) of the model card to update.
     #   @return [String]
@@ -45545,7 +46093,7 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] security_group_ids
-    #   The VPC security group IDs, in the form sg-xxxxxxxx. The security
+    #   The VPC security group IDs, in the form `sg-xxxxxxxx`. The security
     #   groups must be for the same VPC as specified in the subnet.
     #   @return [Array<String>]
     #

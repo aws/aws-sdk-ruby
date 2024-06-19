@@ -1030,9 +1030,11 @@ module Aws::DirectConnect
 
       api.metadata = {
         "apiVersion" => "2012-10-25",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "directconnect",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "protocols" => ["json"],
         "serviceFullName" => "AWS Direct Connect",
         "serviceId" => "Direct Connect",
         "signatureVersion" => "v4",
