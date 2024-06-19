@@ -3,6 +3,9 @@ Unreleased Changes
 
 * Feature - Support `:plugins` option on all Clients or using `Aws.config[:plugins]`.
 
+* Issue - Fix trailing slash in endpoint URLs for rest-json and rest-xml services.
+
+
 3.197.1 (2024-06-19)
 ------------------
 
