@@ -23,8 +23,7 @@ RSpec.configure do |config|
 
   config.before(:each) do
     # Clear the current ENV to avoid loading credentials.
-    # This was previously mocked with stub_const but was provided a hash.
-    ENV.clear
+    ENV.keep_if { |k, _| k == 'PATH' }
 
     # disable loading credentials from shared file
     allow(Dir).to receive(:home).and_raise(ArgumentError)

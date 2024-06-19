@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Support an array of string arguments for `Aws::ProcessCredentials` to be executed by `system`.
+
 3.197.0 (2024-06-05)
 ------------------
 
