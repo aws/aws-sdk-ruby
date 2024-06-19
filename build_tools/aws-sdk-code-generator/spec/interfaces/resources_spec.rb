@@ -5,7 +5,6 @@ require_relative '../spec_helper'
 describe 'Interfaces' do
 
   before(:all) do
-    # TODO : support Aws.config[:sample] = { ... }
     @tmpdir = SpecHelper.generate_service(['Sample'], multiple_files: true)
   end
 

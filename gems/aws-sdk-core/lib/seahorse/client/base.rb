@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'thread'
-
 module Seahorse
   module Client
     class Base
@@ -21,8 +19,9 @@ module Seahorse
       # @api private
       def initialize(plugins, options)
         @config = build_config(plugins, options)
-        @handlers = build_handler_list(plugins + @config.plugins)
-        after_initialize(plugins + @config.plugins)
+        instance_plugins = build_plugins(options.fetch(:plugins, []))
+        @handlers = build_handler_list(plugins + instance_plugins)
+        after_initialize(plugins + instance_plugins)
       end
 
       # @return [Configuration<Struct>]
@@ -61,11 +60,11 @@ module Seahorse
         config = Configuration.new
         config.add_option(:api)
         config.add_option(:plugins)
-        config_plugins = build_plugins(options.fetch(:plugins, []))
-        (plugins + config_plugins).each do |plugin|
+        instance_plugins = build_plugins(options.fetch(:plugins, []))
+        (plugins + instance_plugins).each do |plugin|
           plugin.add_options(config) if plugin.respond_to?(:add_options)
         end
-        config.build!(options.merge(api: self.class.api, plugins: config_plugins))
+        config.build!(options.merge(api: self.class.api))
       end
 
       # Builds a list of plugins from a configured list of plugins
@@ -103,9 +102,10 @@ module Seahorse
       class << self
 
         def new(options = {})
-          plugins = build_plugins
           options = options.dup
-          before_initialize(plugins, options)
+          plugins = build_plugins(self.plugins)
+          instance_plugins = build_plugins(options.fetch(:plugins, []))
+          before_initialize(plugins + instance_plugins, options)
           client = allocate
           client.send(:initialize, plugins, options)
           client
@@ -216,13 +216,20 @@ module Seahorse
           include(operations_module)
         end
 
-        def build_plugins
+        def build_plugins(plugins)
           plugins.map { |plugin| plugin.is_a?(Class) ? plugin.new : plugin }
         end
 
         def before_initialize(plugins, options)
-          plugins.each do |plugin|
+          queue = Queue.new(plugins)
+          until queue.empty?
+            plugin = queue.pop
+            # puts "executing: #{plugin.class}"
+            plugins_before = options.fetch(:plugins, [])
             plugin.before_initialize(self, options) if plugin.respond_to?(:before_initialize)
+            # puts "adding: #{build_plugins(options.fetch(:plugins, []) - plugins_before)}"
+            plugins_after = build_plugins(options.fetch(:plugins, []) - plugins_before)
+            plugins_after.each { |p| queue.push(p) }
           end
         end
 
@@ -238,12 +245,30 @@ end
 
 class TestPlugin < Seahorse::Client::Plugin
   option(:new_config, 'new_value')
+
+  def before_initialize(client_class, options)
+    puts "before initialize with: #{client_class} and #{options}"
+  end
+
+  def after_initialize(client)
+    puts "after initialize with: #{client}"
+  end
+
+  def add_handlers(handlers, config)
+    puts "add handlers method!"
+    handlers.add(Handler, step: :initialize)
+  end
+
+  def add_options(config)
+    puts "add options method!"
+    config.add_option(:another_new_config, 'another_new_value')
+    super
+  end
+
   class Handler < Seahorse::Client::Handler
     def call(context)
-      puts "I was invoked! with #{context.config.new_config}"
+      puts "I was invoked! with #{context.config.new_config} and #{context.config.another_new_config}"
       @handler.call(context)
     end
   end
-
-  handler(Handler, step: :initialize)
 end

@@ -6,18 +6,12 @@ module Aws
   module SQS
     describe Client do
 
-      let(:client) { Client.new }
-
-      before(:each) do
-        Aws.config[:sqs] = {
+      let(:client) do
+        Client.new(
           region: 'us-east-1',
           credentials: Credentials.new('akid', 'secret'),
           retry_limit: 0
-        }
-      end
-
-      after(:each) do
-        Aws.config = {}
+        )
       end
 
       describe 'empty result element' do
