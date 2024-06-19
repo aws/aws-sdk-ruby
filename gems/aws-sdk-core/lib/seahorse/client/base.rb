@@ -84,6 +84,7 @@ module Seahorse
 
       # Gives each plugin the opportunity to modify this client.
       def after_initialize(plugins)
+        # TODO: handle plugins adding more plugins case?
         plugins.reverse.each do |plugin|
           plugin.after_initialize(self) if plugin.respond_to?(:after_initialize)
         end
@@ -221,14 +222,14 @@ module Seahorse
         end
 
         def before_initialize(plugins, options)
-          queue = Queue.new(plugins)
+          queue = Queue.new
+          plugins.each { |plugin| queue.push(plugin) }
           until queue.empty?
             plugin = queue.pop
-            # puts "executing: #{plugin.class}"
             plugins_before = options.fetch(:plugins, [])
             plugin.before_initialize(self, options) if plugin.respond_to?(:before_initialize)
-            # puts "adding: #{build_plugins(options.fetch(:plugins, []) - plugins_before)}"
             plugins_after = build_plugins(options.fetch(:plugins, []) - plugins_before)
+            # Plugins with before_initialize can add other plugins
             plugins_after.each { |p| queue.push(p) }
           end
         end
