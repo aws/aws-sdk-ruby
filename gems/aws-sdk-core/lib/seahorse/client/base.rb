@@ -19,9 +19,8 @@ module Seahorse
       # @api private
       def initialize(plugins, options)
         @config = build_config(plugins, options)
-        instance_plugins = build_plugins(options.fetch(:plugins, []))
-        @handlers = build_handler_list(plugins + instance_plugins)
-        after_initialize(plugins + instance_plugins)
+        @handlers = build_handler_list(plugins)
+        after_initialize(plugins)
       end
 
       # @return [Configuration<Struct>]
@@ -60,8 +59,7 @@ module Seahorse
         config = Configuration.new
         config.add_option(:api)
         config.add_option(:plugins)
-        instance_plugins = build_plugins(options.fetch(:plugins, []))
-        (plugins + instance_plugins).each do |plugin|
+        plugins.each do |plugin|
           plugin.add_options(config) if plugin.respond_to?(:add_options)
         end
         config.build!(options.merge(api: self.class.api))
@@ -104,9 +102,8 @@ module Seahorse
 
         def new(options = {})
           options = options.dup
-          plugins = build_plugins(self.plugins)
-          instance_plugins = build_plugins(options.fetch(:plugins, []))
-          before_initialize(plugins + instance_plugins, options)
+          plugins = build_plugins(self.plugins + options.fetch(:plugins, []))
+          plugins = before_initialize(plugins, options)
           client = allocate
           client.send(:initialize, plugins, options)
           client
@@ -226,12 +223,15 @@ module Seahorse
           plugins.each { |plugin| queue.push(plugin) }
           until queue.empty?
             plugin = queue.pop
-            plugins_before = options.fetch(:plugins, [])
-            plugin.before_initialize(self, options) if plugin.respond_to?(:before_initialize)
-            plugins_after = build_plugins(options.fetch(:plugins, []) - plugins_before)
-            # Plugins with before_initialize can add other plugins
-            plugins_after.each { |p| queue.push(p) }
+            if plugin.respond_to?(:before_initialize)
+              plugins_before = options.fetch(:plugins, [])
+              plugin.before_initialize(self, options)
+              plugins_after = build_plugins(options.fetch(:plugins, []) - plugins_before)
+              # Plugins with before_initialize can add other plugins
+              plugins_after.each { |p| queue.push(p); plugins << p }
+            end
           end
+          plugins
         end
 
         def inherited(subclass)
