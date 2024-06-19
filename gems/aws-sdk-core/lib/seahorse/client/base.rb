@@ -21,8 +21,8 @@ module Seahorse
       # @api private
       def initialize(plugins, options)
         @config = build_config(plugins, options)
-        @handlers = build_handler_list(plugins)
-        after_initialize(plugins)
+        @handlers = build_handler_list(plugins + @config.plugins)
+        after_initialize(plugins + @config.plugins)
       end
 
       # @return [Configuration<Struct>]
@@ -60,10 +60,17 @@ module Seahorse
       def build_config(plugins, options)
         config = Configuration.new
         config.add_option(:api)
-        plugins.each do |plugin|
+        config.add_option(:plugins)
+        config_plugins = build_plugins(options.fetch(:plugins, []))
+        (plugins + config_plugins).each do |plugin|
           plugin.add_options(config) if plugin.respond_to?(:add_options)
         end
-        config.build!(options.merge(api: self.class.api))
+        config.build!(options.merge(api: self.class.api, plugins: config_plugins))
+      end
+
+      # Builds a list of plugins from a configured list of plugins
+      def build_plugins(plugins)
+        plugins.map { |plugin| plugin.is_a?(Class) ? plugin.new : plugin }
       end
 
       # Gives each plugin the opportunity to register handlers for this client.
@@ -220,10 +227,23 @@ module Seahorse
         end
 
         def inherited(subclass)
+          super
           subclass.instance_variable_set('@plugins', PluginList.new(@plugins))
         end
 
       end
     end
   end
+end
+
+class TestPlugin < Seahorse::Client::Plugin
+  option(:new_config, 'new_value')
+  class Handler < Seahorse::Client::Handler
+    def call(context)
+      puts "I was invoked! with #{context.config.new_config}"
+      @handler.call(context)
+    end
+  end
+
+  handler(Handler, step: :initialize)
 end
