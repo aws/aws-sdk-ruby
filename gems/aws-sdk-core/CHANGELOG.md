@@ -3,6 +3,11 @@ Unreleased Changes
 
 * Feature - Support `:plugins` option on all Clients or using `Aws.config[:plugins]`.
 
+3.197.1 (2024-06-19)
+------------------
+
+* Issue - Support an array of string arguments for `Aws::ProcessCredentials` to be executed by `system`.
+
 3.197.0 (2024-06-05)
 ------------------
 

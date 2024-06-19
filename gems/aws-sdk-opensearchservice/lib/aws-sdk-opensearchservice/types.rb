@@ -250,6 +250,11 @@ module Aws::OpenSearchService
     #   OpenSearch Dashboards.
     #   @return [Types::SAMLOptionsOutput]
     #
+    # @!attribute [rw] jwt_options
+    #   Container for information about the JWT configuration of the Amazon
+    #   OpenSearch Service.
+    #   @return [Types::JWTOptionsOutput]
+    #
     # @!attribute [rw] anonymous_auth_disable_date
     #   Date and time when the migration period will be disabled. Only
     #   necessary when [enabling fine-grained access control on an existing
@@ -276,6 +281,7 @@ module Aws::OpenSearchService
       :enabled,
       :internal_user_database_enabled,
       :saml_options,
+      :jwt_options,
       :anonymous_auth_disable_date,
       :anonymous_auth_enabled)
       SENSITIVE = []
@@ -307,6 +313,11 @@ module Aws::OpenSearchService
     #   OpenSearch Dashboards.
     #   @return [Types::SAMLOptionsInput]
     #
+    # @!attribute [rw] jwt_options
+    #   Container for information about the JWT configuration of the Amazon
+    #   OpenSearch Service.
+    #   @return [Types::JWTOptionsInput]
+    #
     # @!attribute [rw] anonymous_auth_enabled
     #   True to enable a 30-day migration period during which administrators
     #   can create role mappings. Only necessary when [enabling fine-grained
@@ -324,6 +335,7 @@ module Aws::OpenSearchService
       :internal_user_database_enabled,
       :master_user_options,
       :saml_options,
+      :jwt_options,
       :anonymous_auth_enabled)
       SENSITIVE = []
       include Aws::Structure
@@ -3508,7 +3520,7 @@ module Aws::OpenSearchService
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The status of the data source response.
+    #   The status of the data source.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/GetDataSourceResponse AWS API Documentation
@@ -3941,6 +3953,66 @@ module Aws::OpenSearchService
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/InvalidTypeException AWS API Documentation
     #
     class InvalidTypeException < Aws::EmptyStructure; end
+
+    # The JWT authentication and authorization configuration for an Amazon
+    # OpenSearch Service domain.
+    #
+    # @!attribute [rw] enabled
+    #   True to enable JWT authentication and authorization for a domain.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] subject_key
+    #   Element of the JWT assertion to use for the user name.
+    #   @return [String]
+    #
+    # @!attribute [rw] roles_key
+    #   Element of the JWT assertion to use for roles.
+    #   @return [String]
+    #
+    # @!attribute [rw] public_key
+    #   Element of the JWT assertion used by the cluster to verify JWT
+    #   signatures.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/JWTOptionsInput AWS API Documentation
+    #
+    class JWTOptionsInput < Struct.new(
+      :enabled,
+      :subject_key,
+      :roles_key,
+      :public_key)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the JWT options configured for the domain.
+    #
+    # @!attribute [rw] enabled
+    #   True if JWT use is enabled.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] subject_key
+    #   The key used for matching the JWT subject attribute.
+    #   @return [String]
+    #
+    # @!attribute [rw] roles_key
+    #   The key used for matching the JWT roles attribute.
+    #   @return [String]
+    #
+    # @!attribute [rw] public_key
+    #   The key used to verify the signature of incoming JWT requests.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/JWTOptionsOutput AWS API Documentation
+    #
+    class JWTOptionsOutput < Struct.new(
+      :enabled,
+      :subject_key,
+      :roles_key,
+      :public_key)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # An exception for trying to create more than the allowed number of
     # resources or sub-resources.
@@ -5884,7 +5956,7 @@ module Aws::OpenSearchService
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The status of the data source update request.
+    #   The status of the data source update.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/UpdateDataSourceRequest AWS API Documentation

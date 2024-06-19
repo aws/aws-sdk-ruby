@@ -653,8 +653,10 @@ module Aws::ElasticTranscoder
 
       api.metadata = {
         "apiVersion" => "2012-09-25",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "elastictranscoder",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceFullName" => "Amazon Elastic Transcoder",
         "serviceId" => "Elastic Transcoder",
         "signatureVersion" => "v4",

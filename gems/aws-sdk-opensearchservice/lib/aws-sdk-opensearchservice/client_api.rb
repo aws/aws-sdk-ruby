@@ -244,6 +244,8 @@ module Aws::OpenSearchService
     InvalidTypeException = Shapes::StructureShape.new(name: 'InvalidTypeException')
     Issue = Shapes::StringShape.new(name: 'Issue')
     Issues = Shapes::ListShape.new(name: 'Issues')
+    JWTOptionsInput = Shapes::StructureShape.new(name: 'JWTOptionsInput')
+    JWTOptionsOutput = Shapes::StructureShape.new(name: 'JWTOptionsOutput')
     KmsKeyId = Shapes::StringShape.new(name: 'KmsKeyId')
     LastUpdated = Shapes::TimestampShape.new(name: 'LastUpdated')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
@@ -356,6 +358,7 @@ module Aws::OpenSearchService
     RevokeVpcEndpointAccessRequest = Shapes::StructureShape.new(name: 'RevokeVpcEndpointAccessRequest')
     RevokeVpcEndpointAccessResponse = Shapes::StructureShape.new(name: 'RevokeVpcEndpointAccessResponse')
     RoleArn = Shapes::StringShape.new(name: 'RoleArn')
+    RolesKey = Shapes::StringShape.new(name: 'RolesKey')
     RollbackOnDisable = Shapes::StringShape.new(name: 'RollbackOnDisable')
     S3BucketName = Shapes::StringShape.new(name: 'S3BucketName')
     S3GlueDataCatalog = Shapes::StructureShape.new(name: 'S3GlueDataCatalog')
@@ -398,6 +401,7 @@ module Aws::OpenSearchService
     StorageTypeName = Shapes::StringShape.new(name: 'StorageTypeName')
     String = Shapes::StringShape.new(name: 'String')
     StringList = Shapes::ListShape.new(name: 'StringList')
+    SubjectKey = Shapes::StringShape.new(name: 'SubjectKey')
     TLSSecurityPolicy = Shapes::StringShape.new(name: 'TLSSecurityPolicy')
     Tag = Shapes::StructureShape.new(name: 'Tag')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
@@ -501,6 +505,7 @@ module Aws::OpenSearchService
     AdvancedSecurityOptions.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "Enabled"))
     AdvancedSecurityOptions.add_member(:internal_user_database_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "InternalUserDatabaseEnabled"))
     AdvancedSecurityOptions.add_member(:saml_options, Shapes::ShapeRef.new(shape: SAMLOptionsOutput, location_name: "SAMLOptions"))
+    AdvancedSecurityOptions.add_member(:jwt_options, Shapes::ShapeRef.new(shape: JWTOptionsOutput, location_name: "JWTOptions"))
     AdvancedSecurityOptions.add_member(:anonymous_auth_disable_date, Shapes::ShapeRef.new(shape: DisableTimestamp, location_name: "AnonymousAuthDisableDate"))
     AdvancedSecurityOptions.add_member(:anonymous_auth_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "AnonymousAuthEnabled"))
     AdvancedSecurityOptions.struct_class = Types::AdvancedSecurityOptions
@@ -509,6 +514,7 @@ module Aws::OpenSearchService
     AdvancedSecurityOptionsInput.add_member(:internal_user_database_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "InternalUserDatabaseEnabled"))
     AdvancedSecurityOptionsInput.add_member(:master_user_options, Shapes::ShapeRef.new(shape: MasterUserOptions, location_name: "MasterUserOptions"))
     AdvancedSecurityOptionsInput.add_member(:saml_options, Shapes::ShapeRef.new(shape: SAMLOptionsInput, location_name: "SAMLOptions"))
+    AdvancedSecurityOptionsInput.add_member(:jwt_options, Shapes::ShapeRef.new(shape: JWTOptionsInput, location_name: "JWTOptions"))
     AdvancedSecurityOptionsInput.add_member(:anonymous_auth_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "AnonymousAuthEnabled"))
     AdvancedSecurityOptionsInput.struct_class = Types::AdvancedSecurityOptionsInput
 
@@ -1217,6 +1223,18 @@ module Aws::OpenSearchService
 
     Issues.member = Shapes::ShapeRef.new(shape: Issue)
 
+    JWTOptionsInput.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "Enabled"))
+    JWTOptionsInput.add_member(:subject_key, Shapes::ShapeRef.new(shape: SubjectKey, location_name: "SubjectKey"))
+    JWTOptionsInput.add_member(:roles_key, Shapes::ShapeRef.new(shape: RolesKey, location_name: "RolesKey"))
+    JWTOptionsInput.add_member(:public_key, Shapes::ShapeRef.new(shape: String, location_name: "PublicKey"))
+    JWTOptionsInput.struct_class = Types::JWTOptionsInput
+
+    JWTOptionsOutput.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "Enabled"))
+    JWTOptionsOutput.add_member(:subject_key, Shapes::ShapeRef.new(shape: String, location_name: "SubjectKey"))
+    JWTOptionsOutput.add_member(:roles_key, Shapes::ShapeRef.new(shape: String, location_name: "RolesKey"))
+    JWTOptionsOutput.add_member(:public_key, Shapes::ShapeRef.new(shape: String, location_name: "PublicKey"))
+    JWTOptionsOutput.struct_class = Types::JWTOptionsOutput
+
     LimitExceededException.struct_class = Types::LimitExceededException
 
     LimitValueList.member = Shapes::ShapeRef.new(shape: LimitValue)
@@ -1763,6 +1781,7 @@ module Aws::OpenSearchService
 
       api.metadata = {
         "apiVersion" => "2021-01-01",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "es",
         "protocol" => "rest-json",
         "protocols" => ["rest-json"],
