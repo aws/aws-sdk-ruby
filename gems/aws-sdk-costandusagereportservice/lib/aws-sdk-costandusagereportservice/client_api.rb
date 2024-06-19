@@ -161,9 +161,11 @@ module Aws::CostandUsageReportService
 
       api.metadata = {
         "apiVersion" => "2017-01-06",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "cur",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "protocols" => ["json"],
         "serviceFullName" => "AWS Cost and Usage Report Service",
         "serviceId" => "Cost and Usage Report Service",
         "signatureVersion" => "v4",
