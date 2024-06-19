@@ -65,11 +65,6 @@ module Seahorse
         config.build!(options.merge(api: self.class.api))
       end
 
-      # Builds a list of plugins from a configured list of plugins
-      def build_plugins(plugins)
-        plugins.map { |plugin| plugin.is_a?(Class) ? plugin.new : plugin }
-      end
-
       # Gives each plugin the opportunity to register handlers for this client.
       def build_handler_list(plugins)
         plugins.inject(HandlerList.new) do |handlers, plugin|
@@ -82,7 +77,6 @@ module Seahorse
 
       # Gives each plugin the opportunity to modify this client.
       def after_initialize(plugins)
-        # TODO: handle plugins adding more plugins case?
         plugins.reverse.each do |plugin|
           plugin.after_initialize(self) if plugin.respond_to?(:after_initialize)
         end
@@ -223,13 +217,13 @@ module Seahorse
           plugins.each { |plugin| queue.push(plugin) }
           until queue.empty?
             plugin = queue.pop
-            if plugin.respond_to?(:before_initialize)
-              plugins_before = options.fetch(:plugins, [])
-              plugin.before_initialize(self, options)
-              plugins_after = build_plugins(options.fetch(:plugins, []) - plugins_before)
-              # Plugins with before_initialize can add other plugins
-              plugins_after.each { |p| queue.push(p); plugins << p }
-            end
+            next unless plugin.respond_to?(:before_initialize)
+
+            plugins_before = options.fetch(:plugins, [])
+            plugin.before_initialize(self, options)
+            plugins_after = build_plugins(options.fetch(:plugins, []) - plugins_before)
+            # Plugins with before_initialize can add other plugins
+            plugins_after.each { |p| queue.push(p); plugins << p }
           end
           plugins
         end
