@@ -17,7 +17,6 @@ be a URI formatted like:
     'http://example.com'
     'https://example.com'
     'http://example.com:123'
-
           DOCS
 
         def add_handlers(handlers, config)

@@ -113,7 +113,6 @@ Specifies which retry algorithm to use. Values are:
   functionality of `standard` mode along with automatic client side
   throttling.  This is a provisional mode that may change behavior
   in the future.
-
         DOCS
         resolve_retry_mode(cfg)
       end
