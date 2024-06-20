@@ -640,6 +640,7 @@ module Aws::SageMaker
     #   resp.model_package_summaries["ModelPackageArn"].inference_specification.containers[0].model_data_source.s3_data_source.s3_data_type #=> String, one of "S3Prefix", "S3Object"
     #   resp.model_package_summaries["ModelPackageArn"].inference_specification.containers[0].model_data_source.s3_data_source.compression_type #=> String, one of "None", "Gzip"
     #   resp.model_package_summaries["ModelPackageArn"].inference_specification.containers[0].model_data_source.s3_data_source.model_access_config.accept_eula #=> Boolean
+    #   resp.model_package_summaries["ModelPackageArn"].inference_specification.containers[0].model_data_source.s3_data_source.hub_access_config.hub_content_arn #=> String
     #   resp.model_package_summaries["ModelPackageArn"].inference_specification.containers[0].product_id #=> String
     #   resp.model_package_summaries["ModelPackageArn"].inference_specification.containers[0].environment #=> Hash
     #   resp.model_package_summaries["ModelPackageArn"].inference_specification.containers[0].environment["EnvironmentKey"] #=> String
@@ -897,6 +898,9 @@ module Aws::SageMaker
     #               compression_type: "None", # required, accepts None, Gzip
     #               model_access_config: {
     #                 accept_eula: false, # required
+    #               },
+    #               hub_access_config: {
+    #                 hub_content_arn: "HubContentArn", # required
     #               },
     #             },
     #           },
@@ -3879,10 +3883,6 @@ module Aws::SageMaker
 
     # Create a hub.
     #
-    # <note markdown="1"> Hub APIs are only callable through SageMaker Studio.
-    #
-    #  </note>
-    #
     # @option params [required, String] :hub_name
     #   The name of the hub to create.
     #
@@ -3933,6 +3933,58 @@ module Aws::SageMaker
     # @param [Hash] params ({})
     def create_hub(params = {}, options = {})
       req = build_request(:create_hub, params)
+      req.send_request(options)
+    end
+
+    # Create a hub content reference in order to add a model in the
+    # JumpStart public hub to a private hub.
+    #
+    # @option params [required, String] :hub_name
+    #   The name of the hub to add the hub content reference to.
+    #
+    # @option params [required, String] :sage_maker_public_hub_content_arn
+    #   The ARN of the public hub content to reference.
+    #
+    # @option params [String] :hub_content_name
+    #   The name of the hub content to reference.
+    #
+    # @option params [String] :min_version
+    #   The minimum version of the hub content to reference.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   Any tags associated with the hub content to reference.
+    #
+    # @return [Types::CreateHubContentReferenceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateHubContentReferenceResponse#hub_arn #hub_arn} => String
+    #   * {Types::CreateHubContentReferenceResponse#hub_content_arn #hub_content_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_hub_content_reference({
+    #     hub_name: "HubNameOrArn", # required
+    #     sage_maker_public_hub_content_arn: "SageMakerPublicHubContentArn", # required
+    #     hub_content_name: "HubContentName",
+    #     min_version: "HubContentVersion",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.hub_arn #=> String
+    #   resp.hub_content_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateHubContentReference AWS API Documentation
+    #
+    # @overload create_hub_content_reference(params = {})
+    # @param [Hash] params ({})
+    def create_hub_content_reference(params = {}, options = {})
+      req = build_request(:create_hub_content_reference, params)
       req.send_request(options)
     end
 
@@ -5616,6 +5668,9 @@ module Aws::SageMaker
     #           model_access_config: {
     #             accept_eula: false, # required
     #           },
+    #           hub_access_config: {
+    #             hub_content_arn: "HubContentArn", # required
+    #           },
     #         },
     #       },
     #       environment: {
@@ -5646,6 +5701,9 @@ module Aws::SageMaker
     #             compression_type: "None", # required, accepts None, Gzip
     #             model_access_config: {
     #               accept_eula: false, # required
+    #             },
+    #             hub_access_config: {
+    #               hub_content_arn: "HubContentArn", # required
     #             },
     #           },
     #         },
@@ -6320,6 +6378,9 @@ module Aws::SageMaker
     #               model_access_config: {
     #                 accept_eula: false, # required
     #               },
+    #               hub_access_config: {
+    #                 hub_content_arn: "HubContentArn", # required
+    #               },
     #             },
     #           },
     #           product_id: "ProductId",
@@ -6393,6 +6454,9 @@ module Aws::SageMaker
     #               compression_type: "None", # required, accepts None, Gzip
     #               model_access_config: {
     #                 accept_eula: false, # required
+    #               },
+    #               hub_access_config: {
+    #                 hub_content_arn: "HubContentArn", # required
     #               },
     #             },
     #           },
@@ -6543,6 +6607,9 @@ module Aws::SageMaker
     #                 compression_type: "None", # required, accepts None, Gzip
     #                 model_access_config: {
     #                   accept_eula: false, # required
+    #                 },
+    #                 hub_access_config: {
+    #                   hub_content_arn: "HubContentArn", # required
     #                 },
     #               },
     #             },
@@ -9953,10 +10020,6 @@ module Aws::SageMaker
 
     # Delete a hub.
     #
-    # <note markdown="1"> Hub APIs are only callable through SageMaker Studio.
-    #
-    #  </note>
-    #
     # @option params [required, String] :hub_name
     #   The name of the hub to delete.
     #
@@ -9965,7 +10028,7 @@ module Aws::SageMaker
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_hub({
-    #     hub_name: "HubName", # required
+    #     hub_name: "HubNameOrArn", # required
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteHub AWS API Documentation
@@ -9978,10 +10041,6 @@ module Aws::SageMaker
     end
 
     # Delete the contents of a hub.
-    #
-    # <note markdown="1"> Hub APIs are only callable through SageMaker Studio.
-    #
-    #  </note>
     #
     # @option params [required, String] :hub_name
     #   The name of the hub that you want to delete content in.
@@ -10000,8 +10059,8 @@ module Aws::SageMaker
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_hub_content({
-    #     hub_name: "HubName", # required
-    #     hub_content_type: "Model", # required, accepts Model, Notebook
+    #     hub_name: "HubNameOrArn", # required
+    #     hub_content_type: "Model", # required, accepts Model, Notebook, ModelReference
     #     hub_content_name: "HubContentName", # required
     #     hub_content_version: "HubContentVersion", # required
     #   })
@@ -10012,6 +10071,37 @@ module Aws::SageMaker
     # @param [Hash] params ({})
     def delete_hub_content(params = {}, options = {})
       req = build_request(:delete_hub_content, params)
+      req.send_request(options)
+    end
+
+    # Delete a hub content reference in order to remove a model from a
+    # private hub.
+    #
+    # @option params [required, String] :hub_name
+    #   The name of the hub to delete the hub content reference from.
+    #
+    # @option params [required, String] :hub_content_type
+    #   The type of hub content to delete.
+    #
+    # @option params [required, String] :hub_content_name
+    #   The name of the hub content to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_hub_content_reference({
+    #     hub_name: "HubNameOrArn", # required
+    #     hub_content_type: "Model", # required, accepts Model, Notebook, ModelReference
+    #     hub_content_name: "HubContentName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteHubContentReference AWS API Documentation
+    #
+    # @overload delete_hub_content_reference(params = {})
+    # @param [Hash] params ({})
+    def delete_hub_content_reference(params = {}, options = {})
+      req = build_request(:delete_hub_content_reference, params)
       req.send_request(options)
     end
 
@@ -10967,6 +11057,7 @@ module Aws::SageMaker
     #   resp.inference_specification.containers[0].model_data_source.s3_data_source.s3_data_type #=> String, one of "S3Prefix", "S3Object"
     #   resp.inference_specification.containers[0].model_data_source.s3_data_source.compression_type #=> String, one of "None", "Gzip"
     #   resp.inference_specification.containers[0].model_data_source.s3_data_source.model_access_config.accept_eula #=> Boolean
+    #   resp.inference_specification.containers[0].model_data_source.s3_data_source.hub_access_config.hub_content_arn #=> String
     #   resp.inference_specification.containers[0].product_id #=> String
     #   resp.inference_specification.containers[0].environment #=> Hash
     #   resp.inference_specification.containers[0].environment["EnvironmentKey"] #=> String
@@ -12998,11 +13089,7 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
-    # Describe a hub.
-    #
-    # <note markdown="1"> Hub APIs are only callable through SageMaker Studio.
-    #
-    #  </note>
+    # Describes a hub.
     #
     # @option params [required, String] :hub_name
     #   The name of the hub to describe.
@@ -13023,7 +13110,7 @@ module Aws::SageMaker
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_hub({
-    #     hub_name: "HubName", # required
+    #     hub_name: "HubNameOrArn", # required
     #   })
     #
     # @example Response structure
@@ -13051,10 +13138,6 @@ module Aws::SageMaker
 
     # Describe the content of a hub.
     #
-    # <note markdown="1"> Hub APIs are only callable through SageMaker Studio.
-    #
-    #  </note>
-    #
     # @option params [required, String] :hub_name
     #   The name of the hub that contains the content to describe.
     #
@@ -13080,6 +13163,9 @@ module Aws::SageMaker
     #   * {Types::DescribeHubContentResponse#hub_content_description #hub_content_description} => String
     #   * {Types::DescribeHubContentResponse#hub_content_markdown #hub_content_markdown} => String
     #   * {Types::DescribeHubContentResponse#hub_content_document #hub_content_document} => String
+    #   * {Types::DescribeHubContentResponse#sage_maker_public_hub_content_arn #sage_maker_public_hub_content_arn} => String
+    #   * {Types::DescribeHubContentResponse#reference_min_version #reference_min_version} => String
+    #   * {Types::DescribeHubContentResponse#support_status #support_status} => String
     #   * {Types::DescribeHubContentResponse#hub_content_search_keywords #hub_content_search_keywords} => Array&lt;String&gt;
     #   * {Types::DescribeHubContentResponse#hub_content_dependencies #hub_content_dependencies} => Array&lt;Types::HubContentDependency&gt;
     #   * {Types::DescribeHubContentResponse#hub_content_status #hub_content_status} => String
@@ -13089,8 +13175,8 @@ module Aws::SageMaker
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_hub_content({
-    #     hub_name: "HubName", # required
-    #     hub_content_type: "Model", # required, accepts Model, Notebook
+    #     hub_name: "HubNameOrArn", # required
+    #     hub_content_type: "Model", # required, accepts Model, Notebook, ModelReference
     #     hub_content_name: "HubContentName", # required
     #     hub_content_version: "HubContentVersion",
     #   })
@@ -13100,7 +13186,7 @@ module Aws::SageMaker
     #   resp.hub_content_name #=> String
     #   resp.hub_content_arn #=> String
     #   resp.hub_content_version #=> String
-    #   resp.hub_content_type #=> String, one of "Model", "Notebook"
+    #   resp.hub_content_type #=> String, one of "Model", "Notebook", "ModelReference"
     #   resp.document_schema_version #=> String
     #   resp.hub_name #=> String
     #   resp.hub_arn #=> String
@@ -13108,6 +13194,9 @@ module Aws::SageMaker
     #   resp.hub_content_description #=> String
     #   resp.hub_content_markdown #=> String
     #   resp.hub_content_document #=> String
+    #   resp.sage_maker_public_hub_content_arn #=> String
+    #   resp.reference_min_version #=> String
+    #   resp.support_status #=> String, one of "Supported", "Deprecated"
     #   resp.hub_content_search_keywords #=> Array
     #   resp.hub_content_search_keywords[0] #=> String
     #   resp.hub_content_dependencies #=> Array
@@ -14107,6 +14196,7 @@ module Aws::SageMaker
     #   resp.primary_container.model_data_source.s3_data_source.s3_data_type #=> String, one of "S3Prefix", "S3Object"
     #   resp.primary_container.model_data_source.s3_data_source.compression_type #=> String, one of "None", "Gzip"
     #   resp.primary_container.model_data_source.s3_data_source.model_access_config.accept_eula #=> Boolean
+    #   resp.primary_container.model_data_source.s3_data_source.hub_access_config.hub_content_arn #=> String
     #   resp.primary_container.environment #=> Hash
     #   resp.primary_container.environment["EnvironmentKey"] #=> String
     #   resp.primary_container.model_package_name #=> String
@@ -14123,6 +14213,7 @@ module Aws::SageMaker
     #   resp.containers[0].model_data_source.s3_data_source.s3_data_type #=> String, one of "S3Prefix", "S3Object"
     #   resp.containers[0].model_data_source.s3_data_source.compression_type #=> String, one of "None", "Gzip"
     #   resp.containers[0].model_data_source.s3_data_source.model_access_config.accept_eula #=> Boolean
+    #   resp.containers[0].model_data_source.s3_data_source.hub_access_config.hub_content_arn #=> String
     #   resp.containers[0].environment #=> Hash
     #   resp.containers[0].environment["EnvironmentKey"] #=> String
     #   resp.containers[0].model_package_name #=> String
@@ -14520,6 +14611,7 @@ module Aws::SageMaker
     #   resp.inference_specification.containers[0].model_data_source.s3_data_source.s3_data_type #=> String, one of "S3Prefix", "S3Object"
     #   resp.inference_specification.containers[0].model_data_source.s3_data_source.compression_type #=> String, one of "None", "Gzip"
     #   resp.inference_specification.containers[0].model_data_source.s3_data_source.model_access_config.accept_eula #=> Boolean
+    #   resp.inference_specification.containers[0].model_data_source.s3_data_source.hub_access_config.hub_content_arn #=> String
     #   resp.inference_specification.containers[0].product_id #=> String
     #   resp.inference_specification.containers[0].environment #=> Hash
     #   resp.inference_specification.containers[0].environment["EnvironmentKey"] #=> String
@@ -14544,6 +14636,7 @@ module Aws::SageMaker
     #   resp.source_algorithm_specification.source_algorithms[0].model_data_source.s3_data_source.s3_data_type #=> String, one of "S3Prefix", "S3Object"
     #   resp.source_algorithm_specification.source_algorithms[0].model_data_source.s3_data_source.compression_type #=> String, one of "None", "Gzip"
     #   resp.source_algorithm_specification.source_algorithms[0].model_data_source.s3_data_source.model_access_config.accept_eula #=> Boolean
+    #   resp.source_algorithm_specification.source_algorithms[0].model_data_source.s3_data_source.hub_access_config.hub_content_arn #=> String
     #   resp.source_algorithm_specification.source_algorithms[0].algorithm_name #=> String
     #   resp.validation_specification.validation_role #=> String
     #   resp.validation_specification.validation_profiles #=> Array
@@ -14662,6 +14755,7 @@ module Aws::SageMaker
     #   resp.additional_inference_specifications[0].containers[0].model_data_source.s3_data_source.s3_data_type #=> String, one of "S3Prefix", "S3Object"
     #   resp.additional_inference_specifications[0].containers[0].model_data_source.s3_data_source.compression_type #=> String, one of "None", "Gzip"
     #   resp.additional_inference_specifications[0].containers[0].model_data_source.s3_data_source.model_access_config.accept_eula #=> Boolean
+    #   resp.additional_inference_specifications[0].containers[0].model_data_source.s3_data_source.hub_access_config.hub_content_arn #=> String
     #   resp.additional_inference_specifications[0].containers[0].product_id #=> String
     #   resp.additional_inference_specifications[0].containers[0].environment #=> Hash
     #   resp.additional_inference_specifications[0].containers[0].environment["EnvironmentKey"] #=> String
@@ -16642,10 +16736,6 @@ module Aws::SageMaker
 
     # Import hub content.
     #
-    # <note markdown="1"> Hub APIs are only callable through SageMaker Studio.
-    #
-    #  </note>
-    #
     # @option params [required, String] :hub_content_name
     #   The name of the hub content to import.
     #
@@ -16691,9 +16781,9 @@ module Aws::SageMaker
     #   resp = client.import_hub_content({
     #     hub_content_name: "HubContentName", # required
     #     hub_content_version: "HubContentVersion",
-    #     hub_content_type: "Model", # required, accepts Model, Notebook
+    #     hub_content_type: "Model", # required, accepts Model, Notebook, ModelReference
     #     document_schema_version: "DocumentSchemaVersion", # required
-    #     hub_name: "HubName", # required
+    #     hub_name: "HubNameOrArn", # required
     #     hub_content_display_name: "HubContentDisplayName",
     #     hub_content_description: "HubContentDescription",
     #     hub_content_markdown: "HubContentMarkdown",
@@ -18646,10 +18736,6 @@ module Aws::SageMaker
 
     # List hub content versions.
     #
-    # <note markdown="1"> Hub APIs are only callable through SageMaker Studio.
-    #
-    #  </note>
-    #
     # @option params [required, String] :hub_name
     #   The name of the hub to list the content versions of.
     #
@@ -18695,8 +18781,8 @@ module Aws::SageMaker
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_hub_content_versions({
-    #     hub_name: "HubName", # required
-    #     hub_content_type: "Model", # required, accepts Model, Notebook
+    #     hub_name: "HubNameOrArn", # required
+    #     hub_content_type: "Model", # required, accepts Model, Notebook, ModelReference
     #     hub_content_name: "HubContentName", # required
     #     min_version: "HubContentVersion",
     #     max_schema_version: "DocumentSchemaVersion",
@@ -18713,15 +18799,18 @@ module Aws::SageMaker
     #   resp.hub_content_summaries #=> Array
     #   resp.hub_content_summaries[0].hub_content_name #=> String
     #   resp.hub_content_summaries[0].hub_content_arn #=> String
+    #   resp.hub_content_summaries[0].sage_maker_public_hub_content_arn #=> String
     #   resp.hub_content_summaries[0].hub_content_version #=> String
-    #   resp.hub_content_summaries[0].hub_content_type #=> String, one of "Model", "Notebook"
+    #   resp.hub_content_summaries[0].hub_content_type #=> String, one of "Model", "Notebook", "ModelReference"
     #   resp.hub_content_summaries[0].document_schema_version #=> String
     #   resp.hub_content_summaries[0].hub_content_display_name #=> String
     #   resp.hub_content_summaries[0].hub_content_description #=> String
+    #   resp.hub_content_summaries[0].support_status #=> String, one of "Supported", "Deprecated"
     #   resp.hub_content_summaries[0].hub_content_search_keywords #=> Array
     #   resp.hub_content_summaries[0].hub_content_search_keywords[0] #=> String
     #   resp.hub_content_summaries[0].hub_content_status #=> String, one of "Available", "Importing", "Deleting", "ImportFailed", "DeleteFailed"
     #   resp.hub_content_summaries[0].creation_time #=> Time
+    #   resp.hub_content_summaries[0].original_creation_time #=> Time
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListHubContentVersions AWS API Documentation
@@ -18734,10 +18823,6 @@ module Aws::SageMaker
     end
 
     # List the contents of a hub.
-    #
-    # <note markdown="1"> Hub APIs are only callable through SageMaker Studio.
-    #
-    #  </note>
     #
     # @option params [required, String] :hub_name
     #   The name of the hub to list the contents of.
@@ -18779,8 +18864,8 @@ module Aws::SageMaker
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_hub_contents({
-    #     hub_name: "HubName", # required
-    #     hub_content_type: "Model", # required, accepts Model, Notebook
+    #     hub_name: "HubNameOrArn", # required
+    #     hub_content_type: "Model", # required, accepts Model, Notebook, ModelReference
     #     name_contains: "NameContains",
     #     max_schema_version: "DocumentSchemaVersion",
     #     creation_time_before: Time.now,
@@ -18796,15 +18881,18 @@ module Aws::SageMaker
     #   resp.hub_content_summaries #=> Array
     #   resp.hub_content_summaries[0].hub_content_name #=> String
     #   resp.hub_content_summaries[0].hub_content_arn #=> String
+    #   resp.hub_content_summaries[0].sage_maker_public_hub_content_arn #=> String
     #   resp.hub_content_summaries[0].hub_content_version #=> String
-    #   resp.hub_content_summaries[0].hub_content_type #=> String, one of "Model", "Notebook"
+    #   resp.hub_content_summaries[0].hub_content_type #=> String, one of "Model", "Notebook", "ModelReference"
     #   resp.hub_content_summaries[0].document_schema_version #=> String
     #   resp.hub_content_summaries[0].hub_content_display_name #=> String
     #   resp.hub_content_summaries[0].hub_content_description #=> String
+    #   resp.hub_content_summaries[0].support_status #=> String, one of "Supported", "Deprecated"
     #   resp.hub_content_summaries[0].hub_content_search_keywords #=> Array
     #   resp.hub_content_summaries[0].hub_content_search_keywords[0] #=> String
     #   resp.hub_content_summaries[0].hub_content_status #=> String, one of "Available", "Importing", "Deleting", "ImportFailed", "DeleteFailed"
     #   resp.hub_content_summaries[0].creation_time #=> Time
+    #   resp.hub_content_summaries[0].original_creation_time #=> Time
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListHubContents AWS API Documentation
@@ -18817,10 +18905,6 @@ module Aws::SageMaker
     end
 
     # List all existing hubs.
-    #
-    # <note markdown="1"> Hub APIs are only callable through SageMaker Studio.
-    #
-    #  </note>
     #
     # @option params [String] :name_contains
     #   Only list hubs with names that contain the specified string.
@@ -24925,10 +25009,6 @@ module Aws::SageMaker
 
     # Update a hub.
     #
-    # <note markdown="1"> Hub APIs are only callable through SageMaker Studio.
-    #
-    #  </note>
-    #
     # @option params [required, String] :hub_name
     #   The name of the hub to update.
     #
@@ -24948,7 +25028,7 @@ module Aws::SageMaker
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_hub({
-    #     hub_name: "HubName", # required
+    #     hub_name: "HubNameOrArn", # required
     #     hub_description: "HubDescription",
     #     hub_display_name: "HubDisplayName",
     #     hub_search_keywords: ["HubSearchKeyword"],
@@ -25505,6 +25585,9 @@ module Aws::SageMaker
     #                 model_access_config: {
     #                   accept_eula: false, # required
     #                 },
+    #                 hub_access_config: {
+    #                   hub_content_arn: "HubContentArn", # required
+    #                 },
     #               },
     #             },
     #             product_id: "ProductId",
@@ -25544,6 +25627,9 @@ module Aws::SageMaker
     #               compression_type: "None", # required, accepts None, Gzip
     #               model_access_config: {
     #                 accept_eula: false, # required
+    #               },
+    #               hub_access_config: {
+    #                 hub_content_arn: "HubContentArn", # required
     #               },
     #             },
     #           },
@@ -26927,7 +27013,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.247.0'
+      context[:gem_version] = '1.248.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

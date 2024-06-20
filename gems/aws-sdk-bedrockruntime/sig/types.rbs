@@ -22,6 +22,7 @@ module Aws::BedrockRuntime
     class ContentBlock
       attr_accessor text: ::String
       attr_accessor image: Types::ImageBlock
+      attr_accessor document: Types::DocumentBlock
       attr_accessor tool_use: Types::ToolUseBlock
       attr_accessor tool_result: Types::ToolResultBlock
       attr_accessor guard_content: Types::GuardrailConverseContentBlock
@@ -31,6 +32,8 @@ module Aws::BedrockRuntime
       class Text < ContentBlock
       end
       class Image < ContentBlock
+      end
+      class Document < ContentBlock
       end
       class ToolUse < ContentBlock
       end
@@ -163,6 +166,24 @@ module Aws::BedrockRuntime
     class ConverseTrace
       attr_accessor guardrail: Types::GuardrailTraceAssessment
       SENSITIVE: []
+    end
+
+    class DocumentBlock
+      attr_accessor format: ("pdf" | "csv" | "doc" | "docx" | "xls" | "xlsx" | "html" | "txt" | "md")
+      attr_accessor name: ::String
+      attr_accessor source: Types::DocumentSource
+      SENSITIVE: []
+    end
+
+    class DocumentSource
+      attr_accessor bytes: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Bytes < DocumentSource
+      end
+      class Unknown < DocumentSource
+      end
     end
 
     class GuardrailAssessment
@@ -489,6 +510,7 @@ module Aws::BedrockRuntime
       attr_accessor json: untyped
       attr_accessor text: ::String
       attr_accessor image: Types::ImageBlock
+      attr_accessor document: Types::DocumentBlock
       attr_accessor unknown: untyped
       SENSITIVE: []
 
@@ -497,6 +519,8 @@ module Aws::BedrockRuntime
       class Text < ToolResultContentBlock
       end
       class Image < ToolResultContentBlock
+      end
+      class Document < ToolResultContentBlock
       end
       class Unknown < ToolResultContentBlock
       end

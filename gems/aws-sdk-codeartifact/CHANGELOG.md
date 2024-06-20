@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.44.0 (2024-06-20)
+------------------
+
+* Feature - Add support for the Cargo package format.
+
 1.43.0 (2024-06-05)
 ------------------
 

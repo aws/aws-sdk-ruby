@@ -551,6 +551,13 @@ module Aws::BedrockRuntime
     #                 bytes: "data",
     #               },
     #             },
+    #             document: {
+    #               format: "pdf", # required, accepts pdf, csv, doc, docx, xls, xlsx, html, txt, md
+    #               name: "DocumentBlockNameString", # required
+    #               source: { # required
+    #                 bytes: "data",
+    #               },
+    #             },
     #             tool_use: {
     #               tool_use_id: "ToolUseId", # required
     #               name: "ToolName", # required
@@ -566,6 +573,13 @@ module Aws::BedrockRuntime
     #                   text: "String",
     #                   image: {
     #                     format: "png", # required, accepts png, jpeg, gif, webp
+    #                     source: { # required
+    #                       bytes: "data",
+    #                     },
+    #                   },
+    #                   document: {
+    #                     format: "pdf", # required, accepts pdf, csv, doc, docx, xls, xlsx, html, txt, md
+    #                     name: "DocumentBlockNameString", # required
     #                     source: { # required
     #                       bytes: "data",
     #                     },
@@ -639,6 +653,9 @@ module Aws::BedrockRuntime
     #   resp.output.message.content[0].text #=> String
     #   resp.output.message.content[0].image.format #=> String, one of "png", "jpeg", "gif", "webp"
     #   resp.output.message.content[0].image.source.bytes #=> String
+    #   resp.output.message.content[0].document.format #=> String, one of "pdf", "csv", "doc", "docx", "xls", "xlsx", "html", "txt", "md"
+    #   resp.output.message.content[0].document.name #=> String
+    #   resp.output.message.content[0].document.source.bytes #=> String
     #   resp.output.message.content[0].tool_use.tool_use_id #=> String
     #   resp.output.message.content[0].tool_use.name #=> String
     #   resp.output.message.content[0].tool_result.tool_use_id #=> String
@@ -646,6 +663,9 @@ module Aws::BedrockRuntime
     #   resp.output.message.content[0].tool_result.content[0].text #=> String
     #   resp.output.message.content[0].tool_result.content[0].image.format #=> String, one of "png", "jpeg", "gif", "webp"
     #   resp.output.message.content[0].tool_result.content[0].image.source.bytes #=> String
+    #   resp.output.message.content[0].tool_result.content[0].document.format #=> String, one of "pdf", "csv", "doc", "docx", "xls", "xlsx", "html", "txt", "md"
+    #   resp.output.message.content[0].tool_result.content[0].document.name #=> String
+    #   resp.output.message.content[0].tool_result.content[0].document.source.bytes #=> String
     #   resp.output.message.content[0].tool_result.status #=> String, one of "success", "error"
     #   resp.output.message.content[0].guard_content.text.text #=> String
     #   resp.stop_reason #=> String, one of "end_turn", "tool_use", "max_tokens", "stop_sequence", "guardrail_intervened", "content_filtered"
@@ -1005,6 +1025,13 @@ module Aws::BedrockRuntime
     #                 bytes: "data",
     #               },
     #             },
+    #             document: {
+    #               format: "pdf", # required, accepts pdf, csv, doc, docx, xls, xlsx, html, txt, md
+    #               name: "DocumentBlockNameString", # required
+    #               source: { # required
+    #                 bytes: "data",
+    #               },
+    #             },
     #             tool_use: {
     #               tool_use_id: "ToolUseId", # required
     #               name: "ToolName", # required
@@ -1020,6 +1047,13 @@ module Aws::BedrockRuntime
     #                   text: "String",
     #                   image: {
     #                     format: "png", # required, accepts png, jpeg, gif, webp
+    #                     source: { # required
+    #                       bytes: "data",
+    #                     },
+    #                   },
+    #                   document: {
+    #                     format: "pdf", # required, accepts pdf, csv, doc, docx, xls, xlsx, html, txt, md
+    #                     name: "DocumentBlockNameString", # required
     #                     source: { # required
     #                       bytes: "data",
     #                     },
@@ -1619,7 +1653,7 @@ module Aws::BedrockRuntime
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-bedrockruntime'
-      context[:gem_version] = '1.11.0'
+      context[:gem_version] = '1.12.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

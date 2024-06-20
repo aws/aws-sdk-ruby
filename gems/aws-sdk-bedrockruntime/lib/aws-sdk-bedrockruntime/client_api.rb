@@ -42,6 +42,11 @@ module Aws::BedrockRuntime
     ConverseStreamTrace = Shapes::StructureShape.new(name: 'ConverseStreamTrace')
     ConverseTrace = Shapes::StructureShape.new(name: 'ConverseTrace')
     Document = Shapes::DocumentShape.new(name: 'Document', document: true)
+    DocumentBlock = Shapes::StructureShape.new(name: 'DocumentBlock')
+    DocumentBlockNameString = Shapes::StringShape.new(name: 'DocumentBlockNameString')
+    DocumentFormat = Shapes::StringShape.new(name: 'DocumentFormat')
+    DocumentSource = Shapes::UnionShape.new(name: 'DocumentSource')
+    DocumentSourceBytesBlob = Shapes::BlobShape.new(name: 'DocumentSourceBytesBlob')
     GuardrailAssessment = Shapes::StructureShape.new(name: 'GuardrailAssessment')
     GuardrailAssessmentList = Shapes::ListShape.new(name: 'GuardrailAssessmentList')
     GuardrailAssessmentListMap = Shapes::MapShape.new(name: 'GuardrailAssessmentListMap')
@@ -153,12 +158,14 @@ module Aws::BedrockRuntime
 
     ContentBlock.add_member(:text, Shapes::ShapeRef.new(shape: String, location_name: "text"))
     ContentBlock.add_member(:image, Shapes::ShapeRef.new(shape: ImageBlock, location_name: "image"))
+    ContentBlock.add_member(:document, Shapes::ShapeRef.new(shape: DocumentBlock, location_name: "document"))
     ContentBlock.add_member(:tool_use, Shapes::ShapeRef.new(shape: ToolUseBlock, location_name: "toolUse"))
     ContentBlock.add_member(:tool_result, Shapes::ShapeRef.new(shape: ToolResultBlock, location_name: "toolResult"))
     ContentBlock.add_member(:guard_content, Shapes::ShapeRef.new(shape: GuardrailConverseContentBlock, location_name: "guardContent"))
     ContentBlock.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     ContentBlock.add_member_subclass(:text, Types::ContentBlock::Text)
     ContentBlock.add_member_subclass(:image, Types::ContentBlock::Image)
+    ContentBlock.add_member_subclass(:document, Types::ContentBlock::Document)
     ContentBlock.add_member_subclass(:tool_use, Types::ContentBlock::ToolUse)
     ContentBlock.add_member_subclass(:tool_result, Types::ContentBlock::ToolResult)
     ContentBlock.add_member_subclass(:guard_content, Types::ContentBlock::GuardContent)
@@ -263,6 +270,17 @@ module Aws::BedrockRuntime
 
     ConverseTrace.add_member(:guardrail, Shapes::ShapeRef.new(shape: GuardrailTraceAssessment, location_name: "guardrail"))
     ConverseTrace.struct_class = Types::ConverseTrace
+
+    DocumentBlock.add_member(:format, Shapes::ShapeRef.new(shape: DocumentFormat, required: true, location_name: "format"))
+    DocumentBlock.add_member(:name, Shapes::ShapeRef.new(shape: DocumentBlockNameString, required: true, location_name: "name"))
+    DocumentBlock.add_member(:source, Shapes::ShapeRef.new(shape: DocumentSource, required: true, location_name: "source"))
+    DocumentBlock.struct_class = Types::DocumentBlock
+
+    DocumentSource.add_member(:bytes, Shapes::ShapeRef.new(shape: DocumentSourceBytesBlob, location_name: "bytes"))
+    DocumentSource.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    DocumentSource.add_member_subclass(:bytes, Types::DocumentSource::Bytes)
+    DocumentSource.add_member_subclass(:unknown, Types::DocumentSource::Unknown)
+    DocumentSource.struct_class = Types::DocumentSource
 
     GuardrailAssessment.add_member(:topic_policy, Shapes::ShapeRef.new(shape: GuardrailTopicPolicyAssessment, location_name: "topicPolicy"))
     GuardrailAssessment.add_member(:content_policy, Shapes::ShapeRef.new(shape: GuardrailContentPolicyAssessment, location_name: "contentPolicy"))
@@ -519,10 +537,12 @@ module Aws::BedrockRuntime
     ToolResultContentBlock.add_member(:json, Shapes::ShapeRef.new(shape: Document, location_name: "json"))
     ToolResultContentBlock.add_member(:text, Shapes::ShapeRef.new(shape: String, location_name: "text"))
     ToolResultContentBlock.add_member(:image, Shapes::ShapeRef.new(shape: ImageBlock, location_name: "image"))
+    ToolResultContentBlock.add_member(:document, Shapes::ShapeRef.new(shape: DocumentBlock, location_name: "document"))
     ToolResultContentBlock.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     ToolResultContentBlock.add_member_subclass(:json, Types::ToolResultContentBlock::Json)
     ToolResultContentBlock.add_member_subclass(:text, Types::ToolResultContentBlock::Text)
     ToolResultContentBlock.add_member_subclass(:image, Types::ToolResultContentBlock::Image)
+    ToolResultContentBlock.add_member_subclass(:document, Types::ToolResultContentBlock::Document)
     ToolResultContentBlock.add_member_subclass(:unknown, Types::ToolResultContentBlock::Unknown)
     ToolResultContentBlock.struct_class = Types::ToolResultContentBlock
 

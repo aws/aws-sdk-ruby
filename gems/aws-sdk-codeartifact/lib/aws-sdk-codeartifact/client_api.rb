@@ -1040,9 +1040,11 @@ module Aws::CodeArtifact
 
       api.metadata = {
         "apiVersion" => "2018-09-22",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "codeartifact",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceFullName" => "CodeArtifact",
         "serviceId" => "codeartifact",
         "signatureVersion" => "v4",

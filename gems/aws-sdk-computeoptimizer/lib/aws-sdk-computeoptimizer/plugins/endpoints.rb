@@ -74,6 +74,8 @@ module Aws::ComputeOptimizer
             Aws::ComputeOptimizer::Endpoints::ExportLambdaFunctionRecommendations.build(context)
           when :export_license_recommendations
             Aws::ComputeOptimizer::Endpoints::ExportLicenseRecommendations.build(context)
+          when :export_rds_database_recommendations
+            Aws::ComputeOptimizer::Endpoints::ExportRDSDatabaseRecommendations.build(context)
           when :get_auto_scaling_group_recommendations
             Aws::ComputeOptimizer::Endpoints::GetAutoScalingGroupRecommendations.build(context)
           when :get_ebs_volume_recommendations
@@ -96,6 +98,10 @@ module Aws::ComputeOptimizer
             Aws::ComputeOptimizer::Endpoints::GetLambdaFunctionRecommendations.build(context)
           when :get_license_recommendations
             Aws::ComputeOptimizer::Endpoints::GetLicenseRecommendations.build(context)
+          when :get_rds_database_recommendation_projected_metrics
+            Aws::ComputeOptimizer::Endpoints::GetRDSDatabaseRecommendationProjectedMetrics.build(context)
+          when :get_rds_database_recommendations
+            Aws::ComputeOptimizer::Endpoints::GetRDSDatabaseRecommendations.build(context)
           when :get_recommendation_preferences
             Aws::ComputeOptimizer::Endpoints::GetRecommendationPreferences.build(context)
           when :get_recommendation_summaries

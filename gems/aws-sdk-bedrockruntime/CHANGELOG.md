@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.12.0 (2024-06-20)
+------------------
+
+* Feature - This release adds document support to Converse and ConverseStream APIs
+
 1.11.0 (2024-06-18)
 ------------------
 

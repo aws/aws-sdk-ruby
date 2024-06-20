@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.180.0 (2024-06-20)
+------------------
+
+* Feature - Fix Glue paginators for Jobs, JobRuns, Triggers, Blueprints and Workflows.
+
 1.179.0 (2024-06-17)
 ------------------
 

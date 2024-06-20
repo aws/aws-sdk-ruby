@@ -112,6 +112,8 @@ module Aws::SageMaker
             Aws::SageMaker::Endpoints::CreateFlowDefinition.build(context)
           when :create_hub
             Aws::SageMaker::Endpoints::CreateHub.build(context)
+          when :create_hub_content_reference
+            Aws::SageMaker::Endpoints::CreateHubContentReference.build(context)
           when :create_human_task_ui
             Aws::SageMaker::Endpoints::CreateHumanTaskUi.build(context)
           when :create_hyper_parameter_tuning_job
@@ -226,6 +228,8 @@ module Aws::SageMaker
             Aws::SageMaker::Endpoints::DeleteHub.build(context)
           when :delete_hub_content
             Aws::SageMaker::Endpoints::DeleteHubContent.build(context)
+          when :delete_hub_content_reference
+            Aws::SageMaker::Endpoints::DeleteHubContentReference.build(context)
           when :delete_human_task_ui
             Aws::SageMaker::Endpoints::DeleteHumanTaskUi.build(context)
           when :delete_hyper_parameter_tuning_job

@@ -22,6 +22,29 @@ module Aws::IVSRealTime
       include Aws::Structure
     end
 
+    # Object specifying an auto-participant-recording configuration.
+    #
+    # @!attribute [rw] storage_configuration_arn
+    #   ARN of the StorageConfiguration resource to use for auto participant
+    #   recording. Default: "" (empty string, no storage configuration is
+    #   specified). Individual participant recording cannot be started
+    #   unless a storage configuration is specified, when a Stage is created
+    #   or updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] media_types
+    #   Types of media to be recorded. Default: `AUDIO_VIDEO`.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/AutoParticipantRecordingConfiguration AWS API Documentation
+    #
+    class AutoParticipantRecordingConfiguration < Struct.new(
+      :storage_configuration_arn,
+      :media_types)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Object specifying a channel as a destination.
     #
     # @!attribute [rw] channel_arn
@@ -50,32 +73,22 @@ module Aws::IVSRealTime
     #   ARN of the Composition resource.
     #   @return [String]
     #
-    # @!attribute [rw] destinations
-    #   Array of Destination objects. A Composition can contain either one
-    #   destination (`channel` or `s3`) or two (one `channel` and one `s3`).
-    #   @return [Array<Types::Destination>]
+    # @!attribute [rw] stage_arn
+    #   ARN of the stage used as input
+    #   @return [String]
     #
-    # @!attribute [rw] end_time
-    #   UTC time of the Composition end. This is an ISO 8601 timestamp;
-    #   *note that this is returned as a string*.
-    #   @return [Time]
+    # @!attribute [rw] state
+    #   State of the Composition.
+    #   @return [String]
     #
     # @!attribute [rw] layout
     #   Layout object to configure composition parameters.
     #   @return [Types::LayoutConfiguration]
     #
-    # @!attribute [rw] stage_arn
-    #   ARN of the stage used as input
-    #   @return [String]
-    #
-    # @!attribute [rw] start_time
-    #   UTC time of the Composition start. This is an ISO 8601 timestamp;
-    #   *note that this is returned as a string*.
-    #   @return [Time]
-    #
-    # @!attribute [rw] state
-    #   State of the Composition.
-    #   @return [String]
+    # @!attribute [rw] destinations
+    #   Array of Destination objects. A Composition can contain either one
+    #   destination (`channel` or `s3`) or two (one `channel` and one `s3`).
+    #   @return [Array<Types::Destination>]
     #
     # @!attribute [rw] tags
     #   Tags attached to the resource. Array of maps, each of the form
@@ -89,17 +102,27 @@ module Aws::IVSRealTime
     #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] start_time
+    #   UTC time of the Composition start. This is an ISO 8601 timestamp;
+    #   *note that this is returned as a string*.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   UTC time of the Composition end. This is an ISO 8601 timestamp;
+    #   *note that this is returned as a string*.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/Composition AWS API Documentation
     #
     class Composition < Struct.new(
       :arn,
-      :destinations,
-      :end_time,
-      :layout,
       :stage_arn,
-      :start_time,
       :state,
-      :tags)
+      :layout,
+      :destinations,
+      :tags,
+      :start_time,
+      :end_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -110,23 +133,13 @@ module Aws::IVSRealTime
     #   ARN of the Composition resource.
     #   @return [String]
     #
-    # @!attribute [rw] destinations
-    #   Array of Destination objects.
-    #   @return [Array<Types::DestinationSummary>]
-    #
-    # @!attribute [rw] end_time
-    #   UTC time of the Composition end. This is an ISO 8601 timestamp;
-    #   *note that this is returned as a string*.
-    #   @return [Time]
-    #
     # @!attribute [rw] stage_arn
     #   ARN of the attached stage.
     #   @return [String]
     #
-    # @!attribute [rw] start_time
-    #   UTC time of the Composition start. This is an ISO 8601 timestamp;
-    #   *note that this is returned as a string*.
-    #   @return [Time]
+    # @!attribute [rw] destinations
+    #   Array of Destination objects.
+    #   @return [Array<Types::DestinationSummary>]
     #
     # @!attribute [rw] state
     #   State of the Composition resource.
@@ -144,16 +157,26 @@ module Aws::IVSRealTime
     #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] start_time
+    #   UTC time of the Composition start. This is an ISO 8601 timestamp;
+    #   *note that this is returned as a string*.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   UTC time of the Composition end. This is an ISO 8601 timestamp;
+    #   *note that this is returned as a string*.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/CompositionSummary AWS API Documentation
     #
     class CompositionSummary < Struct.new(
       :arn,
-      :destinations,
-      :end_time,
       :stage_arn,
-      :start_time,
+      :destinations,
       :state,
-      :tags)
+      :tags,
+      :start_time,
+      :end_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -174,6 +197,11 @@ module Aws::IVSRealTime
     #   Optional name to identify the resource.
     #   @return [String]
     #
+    # @!attribute [rw] video
+    #   Video configuration. Default: video resolution 1280x720, bitrate
+    #   2500 kbps, 30 fps.
+    #   @return [Types::Video]
+    #
     # @!attribute [rw] tags
     #   Tags attached to the resource. Array of maps, each of the form
     #   `string:string (key:value)`. See [Tagging AWS Resources][1] for
@@ -186,17 +214,12 @@ module Aws::IVSRealTime
     #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
     #   @return [Hash<String,String>]
     #
-    # @!attribute [rw] video
-    #   Video configuration. Default: video resolution 1280x720, bitrate
-    #   2500 kbps, 30 fps.
-    #   @return [Types::Video]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/CreateEncoderConfigurationRequest AWS API Documentation
     #
     class CreateEncoderConfigurationRequest < Struct.new(
       :name,
-      :tags,
-      :video)
+      :video,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -213,6 +236,22 @@ module Aws::IVSRealTime
       include Aws::Structure
     end
 
+    # @!attribute [rw] stage_arn
+    #   ARN of the stage to which this token is scoped.
+    #   @return [String]
+    #
+    # @!attribute [rw] duration
+    #   Duration (in minutes), after which the token expires. Default: 720
+    #   (12 hours).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] user_id
+    #   Name that can be specified to help identify the token. This can be
+    #   any UTF-8 encoded text. *This field is exposed to all stage
+    #   participants and should not be used for personally identifying,
+    #   confidential, or sensitive information.*
+    #   @return [String]
+    #
     # @!attribute [rw] attributes
     #   Application-provided attributes to encode into the token and attach
     #   to a stage. Map keys and values can contain UTF-8 encoded text. The
@@ -226,30 +265,14 @@ module Aws::IVSRealTime
     #   stage. Default: `PUBLISH, SUBSCRIBE`.
     #   @return [Array<String>]
     #
-    # @!attribute [rw] duration
-    #   Duration (in minutes), after which the token expires. Default: 720
-    #   (12 hours).
-    #   @return [Integer]
-    #
-    # @!attribute [rw] stage_arn
-    #   ARN of the stage to which this token is scoped.
-    #   @return [String]
-    #
-    # @!attribute [rw] user_id
-    #   Name that can be specified to help identify the token. This can be
-    #   any UTF-8 encoded text. *This field is exposed to all stage
-    #   participants and should not be used for personally identifying,
-    #   confidential, or sensitive information.*
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/CreateParticipantTokenRequest AWS API Documentation
     #
     class CreateParticipantTokenRequest < Struct.new(
-      :attributes,
-      :capabilities,
-      :duration,
       :stage_arn,
-      :user_id)
+      :duration,
+      :user_id,
+      :attributes,
+      :capabilities)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -287,30 +310,36 @@ module Aws::IVSRealTime
     #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] auto_participant_recording_configuration
+    #   Auto participant recording configuration object attached to the
+    #   stage.
+    #   @return [Types::AutoParticipantRecordingConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/CreateStageRequest AWS API Documentation
     #
     class CreateStageRequest < Struct.new(
       :name,
       :participant_token_configurations,
-      :tags)
+      :tags,
+      :auto_participant_recording_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
 
+    # @!attribute [rw] stage
+    #   The stage that was created.
+    #   @return [Types::Stage]
+    #
     # @!attribute [rw] participant_tokens
     #   Participant tokens attached to the stage. These correspond to the
     #   `participants` in the request.
     #   @return [Array<Types::ParticipantToken>]
     #
-    # @!attribute [rw] stage
-    #   The stage that was created.
-    #   @return [Types::Stage]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/CreateStageResponse AWS API Documentation
     #
     class CreateStageResponse < Struct.new(
-      :participant_tokens,
-      :stage)
+      :stage,
+      :participant_tokens)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -408,6 +437,24 @@ module Aws::IVSRealTime
 
     # Object specifying the status of a Destination.
     #
+    # @!attribute [rw] id
+    #   Unique identifier for this destination, assigned by IVS.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   State of the Composition Destination.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   UTC time of the destination start. This is an ISO 8601 timestamp;
+    #   *note that this is returned as a string*.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   UTC time of the destination end. This is an ISO 8601 timestamp;
+    #   *note that this is returned as a string*.
+    #   @return [Time]
+    #
     # @!attribute [rw] configuration
     #   Configuration used to create this destination.
     #   @return [Types::DestinationConfiguration]
@@ -416,47 +463,29 @@ module Aws::IVSRealTime
     #   Optional details regarding the status of the destination.
     #   @return [Types::DestinationDetail]
     #
-    # @!attribute [rw] end_time
-    #   UTC time of the destination end. This is an ISO 8601 timestamp;
-    #   *note that this is returned as a string*.
-    #   @return [Time]
-    #
-    # @!attribute [rw] id
-    #   Unique identifier for this destination, assigned by IVS.
-    #   @return [String]
-    #
-    # @!attribute [rw] start_time
-    #   UTC time of the destination start. This is an ISO 8601 timestamp;
-    #   *note that this is returned as a string*.
-    #   @return [Time]
-    #
-    # @!attribute [rw] state
-    #   State of the Composition Destination.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/Destination AWS API Documentation
     #
     class Destination < Struct.new(
-      :configuration,
-      :detail,
-      :end_time,
       :id,
+      :state,
       :start_time,
-      :state)
+      :end_time,
+      :configuration,
+      :detail)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # Complex data type that defines destination-configuration objects.
     #
+    # @!attribute [rw] name
+    #   Name that can be specified to help identify the destination.
+    #   @return [String]
+    #
     # @!attribute [rw] channel
     #   An IVS channel to be used for broadcasting, for server-side
     #   composition. Either a `channel` or an `s3` must be specified.
     #   @return [Types::ChannelDestinationConfiguration]
-    #
-    # @!attribute [rw] name
-    #   Name that can be specified to help identify the destination.
-    #   @return [String]
     #
     # @!attribute [rw] s3
     #   An S3 storage configuration to be used for recording video data.
@@ -466,8 +495,8 @@ module Aws::IVSRealTime
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/DestinationConfiguration AWS API Documentation
     #
     class DestinationConfiguration < Struct.new(
-      :channel,
       :name,
+      :channel,
       :s3)
       SENSITIVE = []
       include Aws::Structure
@@ -489,13 +518,12 @@ module Aws::IVSRealTime
 
     # Summary information about a Destination.
     #
-    # @!attribute [rw] end_time
-    #   UTC time of the destination end. This is an ISO 8601 timestamp;
-    #   *note that this is returned as a string*.
-    #   @return [Time]
-    #
     # @!attribute [rw] id
     #   Unique identifier for this destination, assigned by IVS.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   State of the Composition Destination.
     #   @return [String]
     #
     # @!attribute [rw] start_time
@@ -503,21 +531,26 @@ module Aws::IVSRealTime
     #   *note that this is returned as a string*.
     #   @return [Time]
     #
-    # @!attribute [rw] state
-    #   State of the Composition Destination.
-    #   @return [String]
+    # @!attribute [rw] end_time
+    #   UTC time of the destination end. This is an ISO 8601 timestamp;
+    #   *note that this is returned as a string*.
+    #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/DestinationSummary AWS API Documentation
     #
     class DestinationSummary < Struct.new(
-      :end_time,
       :id,
+      :state,
       :start_time,
-      :state)
+      :end_time)
       SENSITIVE = []
       include Aws::Structure
     end
 
+    # @!attribute [rw] stage_arn
+    #   ARN of the stage to which the participant is attached.
+    #   @return [String]
+    #
     # @!attribute [rw] participant_id
     #   Identifier of the participant to be disconnected. This is assigned
     #   by IVS and returned by CreateParticipantToken.
@@ -527,16 +560,12 @@ module Aws::IVSRealTime
     #   Description of why this participant is being disconnected.
     #   @return [String]
     #
-    # @!attribute [rw] stage_arn
-    #   ARN of the stage to which the participant is attached.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/DisconnectParticipantRequest AWS API Documentation
     #
     class DisconnectParticipantRequest < Struct.new(
+      :stage_arn,
       :participant_id,
-      :reason,
-      :stage_arn)
+      :reason)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -555,6 +584,11 @@ module Aws::IVSRealTime
     #   Optional name to identify the resource.
     #   @return [String]
     #
+    # @!attribute [rw] video
+    #   Video configuration. Default: video resolution 1280x720, bitrate
+    #   2500 kbps, 30 fps
+    #   @return [Types::Video]
+    #
     # @!attribute [rw] tags
     #   Tags attached to the resource. Array of maps, each of the form
     #   `string:string (key:value)`. See [Tagging AWS Resources][1] for
@@ -567,18 +601,13 @@ module Aws::IVSRealTime
     #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
     #   @return [Hash<String,String>]
     #
-    # @!attribute [rw] video
-    #   Video configuration. Default: video resolution 1280x720, bitrate
-    #   2500 kbps, 30 fps
-    #   @return [Types::Video]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/EncoderConfiguration AWS API Documentation
     #
     class EncoderConfiguration < Struct.new(
       :arn,
       :name,
-      :tags,
-      :video)
+      :video,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -617,6 +646,26 @@ module Aws::IVSRealTime
 
     # An occurrence during a stage session.
     #
+    # @!attribute [rw] name
+    #   The name of the event.
+    #   @return [String]
+    #
+    # @!attribute [rw] participant_id
+    #   Unique identifier for the participant who triggered the event. This
+    #   is assigned by IVS.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_time
+    #   ISO 8601 timestamp (returned as a string) for when the event
+    #   occurred.
+    #   @return [Time]
+    #
+    # @!attribute [rw] remote_participant_id
+    #   Unique identifier for the remote participant. For a subscribe event,
+    #   this is the publisher. For a publish or join event, this is null.
+    #   This is assigned by IVS.
+    #   @return [String]
+    #
     # @!attribute [rw] error_code
     #   If the event is an error event, the error code is provided to give
     #   insight into the specific error that occurred. If the event is not
@@ -635,34 +684,14 @@ module Aws::IVSRealTime
     #   [1]: https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/service-quotas.html
     #   @return [String]
     #
-    # @!attribute [rw] event_time
-    #   ISO 8601 timestamp (returned as a string) for when the event
-    #   occurred.
-    #   @return [Time]
-    #
-    # @!attribute [rw] name
-    #   The name of the event.
-    #   @return [String]
-    #
-    # @!attribute [rw] participant_id
-    #   Unique identifier for the participant who triggered the event. This
-    #   is assigned by IVS.
-    #   @return [String]
-    #
-    # @!attribute [rw] remote_participant_id
-    #   Unique identifier for the remote participant. For a subscribe event,
-    #   this is the publisher. For a publish or join event, this is null.
-    #   This is assigned by IVS.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/Event AWS API Documentation
     #
     class Event < Struct.new(
-      :error_code,
-      :event_time,
       :name,
       :participant_id,
-      :remote_participant_id)
+      :event_time,
+      :remote_participant_id,
+      :error_code)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -715,25 +744,25 @@ module Aws::IVSRealTime
       include Aws::Structure
     end
 
-    # @!attribute [rw] participant_id
-    #   Unique identifier for the participant. This is assigned by IVS and
-    #   returned by CreateParticipantToken.
+    # @!attribute [rw] stage_arn
+    #   Stage ARN.
     #   @return [String]
     #
     # @!attribute [rw] session_id
     #   ID of a session within the stage.
     #   @return [String]
     #
-    # @!attribute [rw] stage_arn
-    #   Stage ARN.
+    # @!attribute [rw] participant_id
+    #   Unique identifier for the participant. This is assigned by IVS and
+    #   returned by CreateParticipantToken.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/GetParticipantRequest AWS API Documentation
     #
     class GetParticipantRequest < Struct.new(
-      :participant_id,
+      :stage_arn,
       :session_id,
-      :stage_arn)
+      :participant_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -774,19 +803,19 @@ module Aws::IVSRealTime
       include Aws::Structure
     end
 
-    # @!attribute [rw] session_id
-    #   ID of a session within the stage.
-    #   @return [String]
-    #
     # @!attribute [rw] stage_arn
     #   ARN of the stage for which the information is to be retrieved.
+    #   @return [String]
+    #
+    # @!attribute [rw] session_id
+    #   ID of a session within the stage.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/GetStageSessionRequest AWS API Documentation
     #
     class GetStageSessionRequest < Struct.new(
-      :session_id,
-      :stage_arn)
+      :stage_arn,
+      :session_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -840,11 +869,6 @@ module Aws::IVSRealTime
     #   ParticipantTokenConfiguration is placed in the featured slot.
     #   @return [String]
     #
-    # @!attribute [rw] grid_gap
-    #   Specifies the spacing between participant tiles in pixels. Default:
-    #   `2`.
-    #   @return [Integer]
-    #
     # @!attribute [rw] omit_stopped_video
     #   Determines whether to omit participants with stopped video in the
     #   composition. Default: `false`.
@@ -860,14 +884,19 @@ module Aws::IVSRealTime
     #   the grid and to `CONTAIN` fill mode for featured participants.
     #   @return [String]
     #
+    # @!attribute [rw] grid_gap
+    #   Specifies the spacing between participant tiles in pixels. Default:
+    #   `2`.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/GridConfiguration AWS API Documentation
     #
     class GridConfiguration < Struct.new(
       :featured_participant_attribute,
-      :grid_gap,
       :omit_stopped_video,
       :video_aspect_ratio,
-      :video_fill_mode)
+      :video_fill_mode,
+      :grid_gap)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -904,31 +933,31 @@ module Aws::IVSRealTime
       include Aws::Structure
     end
 
-    # @!attribute [rw] filter_by_encoder_configuration_arn
-    #   Filters the Composition list to match the specified
-    #   EncoderConfiguration attached to at least one of its output.
-    #   @return [String]
-    #
     # @!attribute [rw] filter_by_stage_arn
     #   Filters the Composition list to match the specified Stage ARN.
     #   @return [String]
     #
-    # @!attribute [rw] max_results
-    #   Maximum number of results to return. Default: 100.
-    #   @return [Integer]
+    # @!attribute [rw] filter_by_encoder_configuration_arn
+    #   Filters the Composition list to match the specified
+    #   EncoderConfiguration attached to at least one of its output.
+    #   @return [String]
     #
     # @!attribute [rw] next_token
     #   The first Composition to retrieve. This is used for pagination; see
     #   the `nextToken` response field.
     #   @return [String]
     #
+    # @!attribute [rw] max_results
+    #   Maximum number of results to return. Default: 100.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/ListCompositionsRequest AWS API Documentation
     #
     class ListCompositionsRequest < Struct.new(
-      :filter_by_encoder_configuration_arn,
       :filter_by_stage_arn,
-      :max_results,
-      :next_token)
+      :filter_by_encoder_configuration_arn,
+      :next_token,
+      :max_results)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -951,20 +980,20 @@ module Aws::IVSRealTime
       include Aws::Structure
     end
 
-    # @!attribute [rw] max_results
-    #   Maximum number of results to return. Default: 100.
-    #   @return [Integer]
-    #
     # @!attribute [rw] next_token
     #   The first encoder configuration to retrieve. This is used for
     #   pagination; see the `nextToken` response field.
     #   @return [String]
     #
+    # @!attribute [rw] max_results
+    #   Maximum number of results to return. Default: 100.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/ListEncoderConfigurationsRequest AWS API Documentation
     #
     class ListEncoderConfigurationsRequest < Struct.new(
-      :max_results,
-      :next_token)
+      :next_token,
+      :max_results)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -988,13 +1017,12 @@ module Aws::IVSRealTime
       include Aws::Structure
     end
 
-    # @!attribute [rw] max_results
-    #   Maximum number of results to return. Default: 50.
-    #   @return [Integer]
+    # @!attribute [rw] stage_arn
+    #   Stage ARN.
+    #   @return [String]
     #
-    # @!attribute [rw] next_token
-    #   The first participant event to retrieve. This is used for
-    #   pagination; see the `nextToken` response field.
+    # @!attribute [rw] session_id
+    #   ID of a session within the stage.
     #   @return [String]
     #
     # @!attribute [rw] participant_id
@@ -1002,22 +1030,23 @@ module Aws::IVSRealTime
     #   returned by CreateParticipantToken.
     #   @return [String]
     #
-    # @!attribute [rw] session_id
-    #   ID of a session within the stage.
+    # @!attribute [rw] next_token
+    #   The first participant event to retrieve. This is used for
+    #   pagination; see the `nextToken` response field.
     #   @return [String]
     #
-    # @!attribute [rw] stage_arn
-    #   Stage ARN.
-    #   @return [String]
+    # @!attribute [rw] max_results
+    #   Maximum number of results to return. Default: 50.
+    #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/ListParticipantEventsRequest AWS API Documentation
     #
     class ListParticipantEventsRequest < Struct.new(
-      :max_results,
-      :next_token,
-      :participant_id,
+      :stage_arn,
       :session_id,
-      :stage_arn)
+      :participant_id,
+      :next_token,
+      :max_results)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1040,185 +1069,195 @@ module Aws::IVSRealTime
       include Aws::Structure
     end
 
-    # @!attribute [rw] filter_by_published
-    #   Filters the response list to only show participants who published
-    #   during the stage session. Only one of `filterByUserId`,
-    #   `filterByPublished`, or `filterByState` can be provided per request.
-    #   @return [Boolean]
-    #
-    # @!attribute [rw] filter_by_state
-    #   Filters the response list to only show participants in the specified
-    #   state. Only one of `filterByUserId`, `filterByPublished`, or
-    #   `filterByState` can be provided per request.
-    #   @return [String]
-    #
-    # @!attribute [rw] filter_by_user_id
-    #   Filters the response list to match the specified user ID. Only one
-    #   of `filterByUserId`, `filterByPublished`, or `filterByState` can be
-    #   provided per request. A `userId` is a customer-assigned name to help
-    #   identify the token; this can be used to link a participant to a user
-    #   in the customer’s own systems.
-    #   @return [String]
-    #
-    # @!attribute [rw] max_results
-    #   Maximum number of results to return. Default: 50.
-    #   @return [Integer]
-    #
-    # @!attribute [rw] next_token
-    #   The first participant to retrieve. This is used for pagination; see
-    #   the `nextToken` response field.
+    # @!attribute [rw] stage_arn
+    #   Stage ARN.
     #   @return [String]
     #
     # @!attribute [rw] session_id
     #   ID of the session within the stage.
     #   @return [String]
     #
-    # @!attribute [rw] stage_arn
-    #   Stage ARN.
+    # @!attribute [rw] filter_by_user_id
+    #   Filters the response list to match the specified user ID. Only one
+    #   of `filterByUserId`, `filterByPublished`, `filterByState`, or
+    #   `filterByRecordingState` can be provided per request. A `userId` is
+    #   a customer-assigned name to help identify the token; this can be
+    #   used to link a participant to a user in the customer’s own systems.
+    #   @return [String]
+    #
+    # @!attribute [rw] filter_by_published
+    #   Filters the response list to only show participants who published
+    #   during the stage session. Only one of `filterByUserId`,
+    #   `filterByPublished`, `filterByState`, or `filterByRecordingState`
+    #   can be provided per request.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] filter_by_state
+    #   Filters the response list to only show participants in the specified
+    #   state. Only one of `filterByUserId`, `filterByPublished`,
+    #   `filterByState`, or `filterByRecordingState` can be provided per
+    #   request.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The first participant to retrieve. This is used for pagination; see
+    #   the `nextToken` response field.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Maximum number of results to return. Default: 50.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] filter_by_recording_state
+    #   Filters the response list to only show participants with the
+    #   specified recording state. Only one of `filterByUserId`,
+    #   `filterByPublished`, `filterByState`, or `filterByRecordingState`
+    #   can be provided per request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/ListParticipantsRequest AWS API Documentation
     #
     class ListParticipantsRequest < Struct.new(
+      :stage_arn,
+      :session_id,
+      :filter_by_user_id,
       :filter_by_published,
       :filter_by_state,
-      :filter_by_user_id,
-      :max_results,
       :next_token,
-      :session_id,
-      :stage_arn)
+      :max_results,
+      :filter_by_recording_state)
       SENSITIVE = []
       include Aws::Structure
     end
 
+    # @!attribute [rw] participants
+    #   List of the matching participants (summary information only).
+    #   @return [Array<Types::ParticipantSummary>]
+    #
     # @!attribute [rw] next_token
     #   If there are more participants than `maxResults`, use `nextToken` in
     #   the request to get the next set.
     #   @return [String]
     #
-    # @!attribute [rw] participants
-    #   List of the matching participants (summary information only).
-    #   @return [Array<Types::ParticipantSummary>]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/ListParticipantsResponse AWS API Documentation
     #
     class ListParticipantsResponse < Struct.new(
-      :next_token,
-      :participants)
+      :participants,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # @!attribute [rw] max_results
-    #   Maximum number of results to return. Default: 50.
-    #   @return [Integer]
+    # @!attribute [rw] stage_arn
+    #   Stage ARN.
+    #   @return [String]
     #
     # @!attribute [rw] next_token
     #   The first stage session to retrieve. This is used for pagination;
     #   see the `nextToken` response field.
     #   @return [String]
     #
-    # @!attribute [rw] stage_arn
-    #   Stage ARN.
-    #   @return [String]
+    # @!attribute [rw] max_results
+    #   Maximum number of results to return. Default: 50.
+    #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/ListStageSessionsRequest AWS API Documentation
     #
     class ListStageSessionsRequest < Struct.new(
-      :max_results,
+      :stage_arn,
       :next_token,
-      :stage_arn)
+      :max_results)
       SENSITIVE = []
       include Aws::Structure
     end
 
+    # @!attribute [rw] stage_sessions
+    #   List of matching stage sessions.
+    #   @return [Array<Types::StageSessionSummary>]
+    #
     # @!attribute [rw] next_token
     #   If there are more stage sessions than `maxResults`, use `nextToken`
     #   in the request to get the next set.
     #   @return [String]
     #
-    # @!attribute [rw] stage_sessions
-    #   List of matching stage sessions.
-    #   @return [Array<Types::StageSessionSummary>]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/ListStageSessionsResponse AWS API Documentation
     #
     class ListStageSessionsResponse < Struct.new(
-      :next_token,
-      :stage_sessions)
+      :stage_sessions,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # @!attribute [rw] max_results
-    #   Maximum number of results to return. Default: 50.
-    #   @return [Integer]
-    #
     # @!attribute [rw] next_token
     #   The first stage to retrieve. This is used for pagination; see the
     #   `nextToken` response field.
     #   @return [String]
     #
+    # @!attribute [rw] max_results
+    #   Maximum number of results to return. Default: 50.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/ListStagesRequest AWS API Documentation
     #
     class ListStagesRequest < Struct.new(
-      :max_results,
-      :next_token)
+      :next_token,
+      :max_results)
       SENSITIVE = []
       include Aws::Structure
     end
 
+    # @!attribute [rw] stages
+    #   List of the matching stages (summary information only).
+    #   @return [Array<Types::StageSummary>]
+    #
     # @!attribute [rw] next_token
     #   If there are more stages than `maxResults`, use `nextToken` in the
     #   request to get the next set.
     #   @return [String]
     #
-    # @!attribute [rw] stages
-    #   List of the matching stages (summary information only).
-    #   @return [Array<Types::StageSummary>]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/ListStagesResponse AWS API Documentation
     #
     class ListStagesResponse < Struct.new(
-      :next_token,
-      :stages)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] max_results
-    #   Maximum number of storage configurations to return. Default: your
-    #   service quota or 100, whichever is smaller.
-    #   @return [Integer]
-    #
-    # @!attribute [rw] next_token
-    #   The first storage configuration to retrieve. This is used for
-    #   pagination; see the `nextToken` response field.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/ListStorageConfigurationsRequest AWS API Documentation
-    #
-    class ListStorageConfigurationsRequest < Struct.new(
-      :max_results,
+      :stages,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # @!attribute [rw] next_token
-    #   If there are more storage configurations than `maxResults`, use
-    #   `nextToken` in the request to get the next set.
+    #   The first storage configuration to retrieve. This is used for
+    #   pagination; see the `nextToken` response field.
     #   @return [String]
     #
+    # @!attribute [rw] max_results
+    #   Maximum number of storage configurations to return. Default: your
+    #   service quota or 100, whichever is smaller.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/ListStorageConfigurationsRequest AWS API Documentation
+    #
+    class ListStorageConfigurationsRequest < Struct.new(
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] storage_configurations
     #   List of the matching storage configurations.
     #   @return [Array<Types::StorageConfigurationSummary>]
     #
+    # @!attribute [rw] next_token
+    #   If there are more storage configurations than `maxResults`, use
+    #   `nextToken` in the request to get the next set.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/ListStorageConfigurationsResponse AWS API Documentation
     #
     class ListStorageConfigurationsResponse < Struct.new(
-      :next_token,
-      :storage_configurations)
+      :storage_configurations,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1251,6 +1290,28 @@ module Aws::IVSRealTime
 
     # Object describing a participant that has joined a stage.
     #
+    # @!attribute [rw] participant_id
+    #   Unique identifier for this participant, assigned by IVS.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_id
+    #   Customer-assigned name to help identify the token; this can be used
+    #   to link a participant to a user in the customer’s own systems. This
+    #   can be any UTF-8 encoded text. *This field is exposed to all stage
+    #   participants and should not be used for personally identifying,
+    #   confidential, or sensitive information*.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   Whether the participant is connected to or disconnected from the
+    #   stage.
+    #   @return [String]
+    #
+    # @!attribute [rw] first_join_time
+    #   ISO 8601 timestamp (returned as a string) when the participant first
+    #   joined the stage session.
+    #   @return [Time]
+    #
     # @!attribute [rw] attributes
     #   Application-provided attributes to encode into the token and attach
     #   to a stage. Map keys and values can contain UTF-8 encoded text. The
@@ -1259,18 +1320,9 @@ module Aws::IVSRealTime
     #   identifying, confidential, or sensitive information*.
     #   @return [Hash<String,String>]
     #
-    # @!attribute [rw] browser_name
-    #   The participant’s browser.
-    #   @return [String]
-    #
-    # @!attribute [rw] browser_version
-    #   The participant’s browser version.
-    #   @return [String]
-    #
-    # @!attribute [rw] first_join_time
-    #   ISO 8601 timestamp (returned as a string) when the participant first
-    #   joined the stage session.
-    #   @return [Time]
+    # @!attribute [rw] published
+    #   Whether the participant ever published to the stage session.
+    #   @return [Boolean]
     #
     # @!attribute [rw] isp_name
     #   The participant’s Internet Service Provider.
@@ -1284,68 +1336,60 @@ module Aws::IVSRealTime
     #   The participant’s operating system version.
     #   @return [String]
     #
-    # @!attribute [rw] participant_id
-    #   Unique identifier for this participant, assigned by IVS.
+    # @!attribute [rw] browser_name
+    #   The participant’s browser.
     #   @return [String]
     #
-    # @!attribute [rw] published
-    #   Whether the participant ever published to the stage session.
-    #   @return [Boolean]
+    # @!attribute [rw] browser_version
+    #   The participant’s browser version.
+    #   @return [String]
     #
     # @!attribute [rw] sdk_version
     #   The participant’s SDK version.
     #   @return [String]
     #
-    # @!attribute [rw] state
-    #   Whether the participant is connected to or disconnected from the
-    #   stage.
+    # @!attribute [rw] recording_s3_bucket_name
+    #   Name of the S3 bucket to where the participant is being recorded, if
+    #   individual participant recording is enabled, or "" (empty string),
+    #   if recording is not enabled.
     #   @return [String]
     #
-    # @!attribute [rw] user_id
-    #   Customer-assigned name to help identify the token; this can be used
-    #   to link a participant to a user in the customer’s own systems. This
-    #   can be any UTF-8 encoded text. *This field is exposed to all stage
-    #   participants and should not be used for personally identifying,
-    #   confidential, or sensitive information*.
+    # @!attribute [rw] recording_s3_prefix
+    #   S3 prefix of the S3 bucket to where the participant is being
+    #   recorded, if individual participant recording is enabled, or ""
+    #   (empty string), if recording is not enabled.
+    #   @return [String]
+    #
+    # @!attribute [rw] recording_state
+    #   Participant’s recording state.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/Participant AWS API Documentation
     #
     class Participant < Struct.new(
-      :attributes,
-      :browser_name,
-      :browser_version,
+      :participant_id,
+      :user_id,
+      :state,
       :first_join_time,
+      :attributes,
+      :published,
       :isp_name,
       :os_name,
       :os_version,
-      :participant_id,
-      :published,
+      :browser_name,
+      :browser_version,
       :sdk_version,
-      :state,
-      :user_id)
+      :recording_s3_bucket_name,
+      :recording_s3_prefix,
+      :recording_state)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # Summary object describing a participant that has joined a stage.
     #
-    # @!attribute [rw] first_join_time
-    #   ISO 8601 timestamp (returned as a string) when the participant first
-    #   joined the stage session.
-    #   @return [Time]
-    #
     # @!attribute [rw] participant_id
     #   Unique identifier for this participant, assigned by IVS.
-    #   @return [String]
-    #
-    # @!attribute [rw] published
-    #   Whether the participant ever published to the stage session.
-    #   @return [Boolean]
-    #
-    # @!attribute [rw] state
-    #   Whether the participant is connected to or disconnected from the
-    #   stage.
     #   @return [String]
     #
     # @!attribute [rw] user_id
@@ -1356,14 +1400,33 @@ module Aws::IVSRealTime
     #   confidential, or sensitive information*.
     #   @return [String]
     #
+    # @!attribute [rw] state
+    #   Whether the participant is connected to or disconnected from the
+    #   stage.
+    #   @return [String]
+    #
+    # @!attribute [rw] first_join_time
+    #   ISO 8601 timestamp (returned as a string) when the participant first
+    #   joined the stage session.
+    #   @return [Time]
+    #
+    # @!attribute [rw] published
+    #   Whether the participant ever published to the stage session.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] recording_state
+    #   Participant’s recording state.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/ParticipantSummary AWS API Documentation
     #
     class ParticipantSummary < Struct.new(
-      :first_join_time,
       :participant_id,
-      :published,
+      :user_id,
       :state,
-      :user_id)
+      :first_join_time,
+      :published,
+      :recording_state)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1373,28 +1436,6 @@ module Aws::IVSRealTime
     # **Important**: Treat tokens as opaque; i.e., do not build
     # functionality based on token contents. The format of tokens could
     # change in the future.
-    #
-    # @!attribute [rw] attributes
-    #   Application-provided attributes to encode into the token and attach
-    #   to a stage. *This field is exposed to all stage participants and
-    #   should not be used for personally identifying, confidential, or
-    #   sensitive information.*
-    #   @return [Hash<String,String>]
-    #
-    # @!attribute [rw] capabilities
-    #   Set of capabilities that the user is allowed to perform in the
-    #   stage.
-    #   @return [Array<String>]
-    #
-    # @!attribute [rw] duration
-    #   Duration (in minutes), after which the participant token expires.
-    #   Default: 720 (12 hours).
-    #   @return [Integer]
-    #
-    # @!attribute [rw] expiration_time
-    #   ISO 8601 timestamp (returned as a string) for when this token
-    #   expires.
-    #   @return [Time]
     #
     # @!attribute [rw] participant_id
     #   Unique identifier for this participant token, assigned by IVS.
@@ -1412,21 +1453,56 @@ module Aws::IVSRealTime
     #   confidential, or sensitive information.*
     #   @return [String]
     #
+    # @!attribute [rw] attributes
+    #   Application-provided attributes to encode into the token and attach
+    #   to a stage. *This field is exposed to all stage participants and
+    #   should not be used for personally identifying, confidential, or
+    #   sensitive information.*
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] duration
+    #   Duration (in minutes), after which the participant token expires.
+    #   Default: 720 (12 hours).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] capabilities
+    #   Set of capabilities that the user is allowed to perform in the
+    #   stage.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] expiration_time
+    #   ISO 8601 timestamp (returned as a string) for when this token
+    #   expires.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/ParticipantToken AWS API Documentation
     #
     class ParticipantToken < Struct.new(
-      :attributes,
-      :capabilities,
-      :duration,
-      :expiration_time,
       :participant_id,
       :token,
-      :user_id)
+      :user_id,
+      :attributes,
+      :duration,
+      :capabilities,
+      :expiration_time)
       SENSITIVE = [:token]
       include Aws::Structure
     end
 
     # Object specifying a participant token configuration in a stage.
+    #
+    # @!attribute [rw] duration
+    #   Duration (in minutes), after which the corresponding participant
+    #   token expires. Default: 720 (12 hours).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] user_id
+    #   Customer-assigned name to help identify the token; this can be used
+    #   to link a participant to a user in the customer’s own systems. This
+    #   can be any UTF-8 encoded text. *This field is exposed to all stage
+    #   participants and should not be used for personally identifying,
+    #   confidential, or sensitive information.*
+    #   @return [String]
     #
     # @!attribute [rw] attributes
     #   Application-provided attributes to encode into the corresponding
@@ -1442,26 +1518,13 @@ module Aws::IVSRealTime
     #   stage.
     #   @return [Array<String>]
     #
-    # @!attribute [rw] duration
-    #   Duration (in minutes), after which the corresponding participant
-    #   token expires. Default: 720 (12 hours).
-    #   @return [Integer]
-    #
-    # @!attribute [rw] user_id
-    #   Customer-assigned name to help identify the token; this can be used
-    #   to link a participant to a user in the customer’s own systems. This
-    #   can be any UTF-8 encoded text. *This field is exposed to all stage
-    #   participants and should not be used for personally identifying,
-    #   confidential, or sensitive information.*
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/ParticipantTokenConfiguration AWS API Documentation
     #
     class ParticipantTokenConfiguration < Struct.new(
-      :attributes,
-      :capabilities,
       :duration,
-      :user_id)
+      :user_id,
+      :attributes,
+      :capabilities)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1491,30 +1554,19 @@ module Aws::IVSRealTime
     #   ParticipantTokenConfiguration is placed in the featured slot.
     #   @return [String]
     #
-    # @!attribute [rw] grid_gap
-    #   Specifies the spacing between participant tiles in pixels. Default:
-    #   `0`.
-    #   @return [Integer]
-    #
     # @!attribute [rw] omit_stopped_video
     #   Determines whether to omit participants with stopped video in the
     #   composition. Default: `false`.
     #   @return [Boolean]
     #
-    # @!attribute [rw] pip_behavior
-    #   Defines PiP behavior when all participants have left. Default:
-    #   `STATIC`.
+    # @!attribute [rw] video_fill_mode
+    #   Defines how video fits within the participant tile. Default:
+    #   `COVER`.
     #   @return [String]
     #
-    # @!attribute [rw] pip_height
-    #   Specifies the height of the PiP window in pixels. When this is not
-    #   set explicitly, `pipHeight`’s value will be based on the size of the
-    #   composition and the aspect ratio of the participant’s video.
-    #   @return [Integer]
-    #
-    # @!attribute [rw] pip_offset
-    #   Sets the PiP window’s offset position in pixels from the closest
-    #   edges determined by `PipPosition`. Default: `0`.
+    # @!attribute [rw] grid_gap
+    #   Specifies the spacing between participant tiles in pixels. Default:
+    #   `0`.
     #   @return [Integer]
     #
     # @!attribute [rw] pip_participant_attribute
@@ -1522,6 +1574,16 @@ module Aws::IVSRealTime
     #   `"true"` (as a string value) in ParticipantTokenConfiguration is
     #   placed in the PiP slot.
     #   @return [String]
+    #
+    # @!attribute [rw] pip_behavior
+    #   Defines PiP behavior when all participants have left. Default:
+    #   `STATIC`.
+    #   @return [String]
+    #
+    # @!attribute [rw] pip_offset
+    #   Sets the PiP window’s offset position in pixels from the closest
+    #   edges determined by `PipPosition`. Default: `0`.
+    #   @return [Integer]
     #
     # @!attribute [rw] pip_position
     #   Determines the corner position of the PiP window. Default:
@@ -1534,24 +1596,25 @@ module Aws::IVSRealTime
     #   composition and the aspect ratio of the participant’s video.
     #   @return [Integer]
     #
-    # @!attribute [rw] video_fill_mode
-    #   Defines how video fits within the participant tile. Default:
-    #   `COVER`.
-    #   @return [String]
+    # @!attribute [rw] pip_height
+    #   Specifies the height of the PiP window in pixels. When this is not
+    #   set explicitly, `pipHeight`’s value will be based on the size of the
+    #   composition and the aspect ratio of the participant’s video.
+    #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/PipConfiguration AWS API Documentation
     #
     class PipConfiguration < Struct.new(
       :featured_participant_attribute,
-      :grid_gap,
       :omit_stopped_video,
-      :pip_behavior,
-      :pip_height,
-      :pip_offset,
+      :video_fill_mode,
+      :grid_gap,
       :pip_participant_attribute,
+      :pip_behavior,
+      :pip_offset,
       :pip_position,
       :pip_width,
-      :video_fill_mode)
+      :pip_height)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1585,6 +1648,11 @@ module Aws::IVSRealTime
     # A complex type that describes an S3 location where recorded videos
     # will be stored.
     #
+    # @!attribute [rw] storage_configuration_arn
+    #   ARN of the StorageConfiguration where recorded videos will be
+    #   stored.
+    #   @return [String]
+    #
     # @!attribute [rw] encoder_configuration_arns
     #   ARNs of the EncoderConfiguration resource. The encoder configuration
     #   and stage resources must be in the same AWS account and region.
@@ -1596,17 +1664,12 @@ module Aws::IVSRealTime
     #   the recording format for storing a recording in Amazon S3.
     #   @return [Types::RecordingConfiguration]
     #
-    # @!attribute [rw] storage_configuration_arn
-    #   ARN of the StorageConfiguration where recorded videos will be
-    #   stored.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/S3DestinationConfiguration AWS API Documentation
     #
     class S3DestinationConfiguration < Struct.new(
+      :storage_configuration_arn,
       :encoder_configuration_arns,
-      :recording_configuration,
-      :storage_configuration_arn)
+      :recording_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1656,16 +1719,16 @@ module Aws::IVSRealTime
 
     # Object specifying a stage.
     #
-    # @!attribute [rw] active_session_id
-    #   ID of the active session within the stage.
-    #   @return [String]
-    #
     # @!attribute [rw] arn
     #   Stage ARN.
     #   @return [String]
     #
     # @!attribute [rw] name
     #   Stage name.
+    #   @return [String]
+    #
+    # @!attribute [rw] active_session_id
+    #   ID of the active session within the stage.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -1680,13 +1743,19 @@ module Aws::IVSRealTime
     #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] auto_participant_recording_configuration
+    #   Auto-participant-recording configuration object attached to the
+    #   stage.
+    #   @return [Types::AutoParticipantRecordingConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/Stage AWS API Documentation
     #
     class Stage < Struct.new(
-      :active_session_id,
       :arn,
       :name,
-      :tags)
+      :active_session_id,
+      :tags,
+      :auto_participant_recording_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1697,11 +1766,6 @@ module Aws::IVSRealTime
     # shorter periods of time (i.e., a session), which is helpful when
     # stages are used over long periods of time.
     #
-    # @!attribute [rw] end_time
-    #   ISO 8601 timestamp (returned as a string) when the stage session
-    #   ended. This is null if the stage is active.
-    #   @return [Time]
-    #
     # @!attribute [rw] session_id
     #   ID of the session within the stage.
     #   @return [String]
@@ -1711,23 +1775,23 @@ module Aws::IVSRealTime
     #   began.
     #   @return [Time]
     #
+    # @!attribute [rw] end_time
+    #   ISO 8601 timestamp (returned as a string) when the stage session
+    #   ended. This is null if the stage is active.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/StageSession AWS API Documentation
     #
     class StageSession < Struct.new(
-      :end_time,
       :session_id,
-      :start_time)
+      :start_time,
+      :end_time)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # Summary information about a stage session.
     #
-    # @!attribute [rw] end_time
-    #   ISO 8601 timestamp (returned as a string) when the stage session
-    #   ended. This is null if the stage is active.
-    #   @return [Time]
-    #
     # @!attribute [rw] session_id
     #   ID of the session within the stage.
     #   @return [String]
@@ -1737,21 +1801,22 @@ module Aws::IVSRealTime
     #   began.
     #   @return [Time]
     #
+    # @!attribute [rw] end_time
+    #   ISO 8601 timestamp (returned as a string) when the stage session
+    #   ended. This is null if the stage is active.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/StageSessionSummary AWS API Documentation
     #
     class StageSessionSummary < Struct.new(
-      :end_time,
       :session_id,
-      :start_time)
+      :start_time,
+      :end_time)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # Summary information about a stage.
-    #
-    # @!attribute [rw] active_session_id
-    #   ID of the active session within the stage.
-    #   @return [String]
     #
     # @!attribute [rw] arn
     #   Stage ARN.
@@ -1759,6 +1824,10 @@ module Aws::IVSRealTime
     #
     # @!attribute [rw] name
     #   Stage name.
+    #   @return [String]
+    #
+    # @!attribute [rw] active_session_id
+    #   ID of the active session within the stage.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -1776,17 +1845,17 @@ module Aws::IVSRealTime
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/StageSummary AWS API Documentation
     #
     class StageSummary < Struct.new(
-      :active_session_id,
       :arn,
       :name,
+      :active_session_id,
       :tags)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # @!attribute [rw] destinations
-    #   Array of destination configuration.
-    #   @return [Array<Types::DestinationConfiguration>]
+    # @!attribute [rw] stage_arn
+    #   ARN of the stage to be used for compositing.
+    #   @return [String]
     #
     # @!attribute [rw] idempotency_token
     #   Idempotency token.
@@ -1799,9 +1868,9 @@ module Aws::IVSRealTime
     #   Layout object to configure composition parameters.
     #   @return [Types::LayoutConfiguration]
     #
-    # @!attribute [rw] stage_arn
-    #   ARN of the stage to be used for compositing.
-    #   @return [String]
+    # @!attribute [rw] destinations
+    #   Array of destination configuration.
+    #   @return [Array<Types::DestinationConfiguration>]
     #
     # @!attribute [rw] tags
     #   Tags attached to the resource. Array of maps, each of the form
@@ -1818,10 +1887,10 @@ module Aws::IVSRealTime
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/StartCompositionRequest AWS API Documentation
     #
     class StartCompositionRequest < Struct.new(
-      :destinations,
+      :stage_arn,
       :idempotency_token,
       :layout,
-      :stage_arn,
+      :destinations,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -1998,11 +2067,18 @@ module Aws::IVSRealTime
     #   Name of the stage to be updated.
     #   @return [String]
     #
+    # @!attribute [rw] auto_participant_recording_configuration
+    #   Auto-participant-recording configuration object to attach to the
+    #   stage. Auto-participant-recording configuration cannot be updated
+    #   while recording is active.
+    #   @return [Types::AutoParticipantRecordingConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/UpdateStageRequest AWS API Documentation
     #
     class UpdateStageRequest < Struct.new(
       :arn,
-      :name)
+      :name,
+      :auto_participant_recording_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2034,13 +2110,11 @@ module Aws::IVSRealTime
 
     # Settings for video.
     #
-    # @!attribute [rw] bitrate
-    #   Bitrate for generated output, in bps. Default: 2500000.
+    # @!attribute [rw] width
+    #   Video-resolution width. Note that the maximum value is determined by
+    #   `width` times `height`, such that the maximum total pixels is
+    #   2073600 (1920x1080 or 1080x1920). Default: 1280.
     #   @return [Integer]
-    #
-    # @!attribute [rw] framerate
-    #   Video frame rate, in fps. Default: 30.
-    #   @return [Float]
     #
     # @!attribute [rw] height
     #   Video-resolution height. Note that the maximum value is determined
@@ -2048,19 +2122,21 @@ module Aws::IVSRealTime
     #   2073600 (1920x1080 or 1080x1920). Default: 720.
     #   @return [Integer]
     #
-    # @!attribute [rw] width
-    #   Video-resolution width. Note that the maximum value is determined by
-    #   `width` times `height`, such that the maximum total pixels is
-    #   2073600 (1920x1080 or 1080x1920). Default: 1280.
+    # @!attribute [rw] framerate
+    #   Video frame rate, in fps. Default: 30.
+    #   @return [Float]
+    #
+    # @!attribute [rw] bitrate
+    #   Bitrate for generated output, in bps. Default: 2500000.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/Video AWS API Documentation
     #
     class Video < Struct.new(
-      :bitrate,
-      :framerate,
+      :width,
       :height,
-      :width)
+      :framerate,
+      :bitrate)
       SENSITIVE = []
       include Aws::Structure
     end

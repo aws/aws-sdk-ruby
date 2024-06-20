@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+1.62.1 (2024-06-20)
+------------------
+
 * Issue - Require `account_id` to be non-empty and set it to the default.
 
 1.62.0 (2024-06-05)

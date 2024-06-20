@@ -60,6 +60,10 @@ module Aws::BedrockRuntime
     #    </note>
     #   @return [Types::ImageBlock]
     #
+    # @!attribute [rw] document
+    #   A document to include in the message.
+    #   @return [Types::DocumentBlock]
+    #
     # @!attribute [rw] tool_use
     #   Information about a tool use request from a model.
     #   @return [Types::ToolUseBlock]
@@ -82,6 +86,7 @@ module Aws::BedrockRuntime
     class ContentBlock < Struct.new(
       :text,
       :image,
+      :document,
       :tool_use,
       :tool_result,
       :guard_content,
@@ -92,6 +97,7 @@ module Aws::BedrockRuntime
 
       class Text < ContentBlock; end
       class Image < ContentBlock; end
+      class Document < ContentBlock; end
       class ToolUse < ContentBlock; end
       class ToolResult < ContentBlock; end
       class GuardContent < ContentBlock; end
@@ -562,6 +568,68 @@ module Aws::BedrockRuntime
       :guardrail)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # A document to include in a message when sending a [Converse][1] or
+    # [ConverseStream][2] request. You can include up to 5 documents in a
+    # request. The maximum document size is 50 MB.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html
+    # [2]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_ConverseStream.html
+    #
+    # @!attribute [rw] format
+    #   The format of a document, or its extension.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   A name for the document.
+    #   @return [String]
+    #
+    # @!attribute [rw] source
+    #   Contains the content of the document.
+    #   @return [Types::DocumentSource]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/DocumentBlock AWS API Documentation
+    #
+    class DocumentBlock < Struct.new(
+      :format,
+      :name,
+      :source)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the content of the document included in a message when
+    # sending a [Converse][1] or [ConverseStream][2] request or in the
+    # response.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html
+    # [2]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_ConverseStream.html
+    #
+    # @note DocumentSource is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note DocumentSource is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of DocumentSource corresponding to the set member.
+    #
+    # @!attribute [rw] bytes
+    #   A base64-encoded string of a UTF-8 encoded file, that is the
+    #   document to include in the message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/DocumentSource AWS API Documentation
+    #
+    class DocumentSource < Struct.new(
+      :bytes,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Bytes < DocumentSource; end
+      class Unknown < DocumentSource; end
     end
 
     # A behavior assessment of the guardrail policies used in a call to the
@@ -1704,12 +1772,17 @@ module Aws::BedrockRuntime
     #    </note>
     #   @return [Types::ImageBlock]
     #
+    # @!attribute [rw] document
+    #   A tool result that is a document.
+    #   @return [Types::DocumentBlock]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/ToolResultContentBlock AWS API Documentation
     #
     class ToolResultContentBlock < Struct.new(
       :json,
       :text,
       :image,
+      :document,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -1718,6 +1791,7 @@ module Aws::BedrockRuntime
       class Json < ToolResultContentBlock; end
       class Text < ToolResultContentBlock; end
       class Image < ToolResultContentBlock; end
+      class Document < ToolResultContentBlock; end
       class Unknown < ToolResultContentBlock; end
     end
 

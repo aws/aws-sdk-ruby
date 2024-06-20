@@ -6916,6 +6916,7 @@ module Aws::SecurityHub
 
       api.metadata = {
         "apiVersion" => "2018-10-26",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "securityhub",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",

@@ -1238,6 +1238,21 @@ module Aws::SageMaker
       SENSITIVE: []
     end
 
+    class CreateHubContentReferenceRequest
+      attr_accessor hub_name: ::String
+      attr_accessor sage_maker_public_hub_content_arn: ::String
+      attr_accessor hub_content_name: ::String
+      attr_accessor min_version: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateHubContentReferenceResponse
+      attr_accessor hub_arn: ::String
+      attr_accessor hub_content_arn: ::String
+      SENSITIVE: []
+    end
+
     class CreateHubRequest
       attr_accessor hub_name: ::String
       attr_accessor hub_description: ::String
@@ -2157,9 +2172,16 @@ module Aws::SageMaker
     class DeleteFlowDefinitionResponse < Aws::EmptyStructure
     end
 
+    class DeleteHubContentReferenceRequest
+      attr_accessor hub_name: ::String
+      attr_accessor hub_content_type: ("Model" | "Notebook" | "ModelReference")
+      attr_accessor hub_content_name: ::String
+      SENSITIVE: []
+    end
+
     class DeleteHubContentRequest
       attr_accessor hub_name: ::String
-      attr_accessor hub_content_type: ("Model" | "Notebook")
+      attr_accessor hub_content_type: ("Model" | "Notebook" | "ModelReference")
       attr_accessor hub_content_name: ::String
       attr_accessor hub_content_version: ::String
       SENSITIVE: []
@@ -2924,7 +2946,7 @@ module Aws::SageMaker
 
     class DescribeHubContentRequest
       attr_accessor hub_name: ::String
-      attr_accessor hub_content_type: ("Model" | "Notebook")
+      attr_accessor hub_content_type: ("Model" | "Notebook" | "ModelReference")
       attr_accessor hub_content_name: ::String
       attr_accessor hub_content_version: ::String
       SENSITIVE: []
@@ -2934,7 +2956,7 @@ module Aws::SageMaker
       attr_accessor hub_content_name: ::String
       attr_accessor hub_content_arn: ::String
       attr_accessor hub_content_version: ::String
-      attr_accessor hub_content_type: ("Model" | "Notebook")
+      attr_accessor hub_content_type: ("Model" | "Notebook" | "ModelReference")
       attr_accessor document_schema_version: ::String
       attr_accessor hub_name: ::String
       attr_accessor hub_arn: ::String
@@ -2942,6 +2964,9 @@ module Aws::SageMaker
       attr_accessor hub_content_description: ::String
       attr_accessor hub_content_markdown: ::String
       attr_accessor hub_content_document: ::String
+      attr_accessor sage_maker_public_hub_content_arn: ::String
+      attr_accessor reference_min_version: ::String
+      attr_accessor support_status: ("Supported" | "Deprecated")
       attr_accessor hub_content_search_keywords: ::Array[::String]
       attr_accessor hub_content_dependencies: ::Array[Types::HubContentDependency]
       attr_accessor hub_content_status: ("Available" | "Importing" | "Deleting" | "ImportFailed" | "DeleteFailed")
@@ -4405,14 +4430,17 @@ module Aws::SageMaker
     class HubContentInfo
       attr_accessor hub_content_name: ::String
       attr_accessor hub_content_arn: ::String
+      attr_accessor sage_maker_public_hub_content_arn: ::String
       attr_accessor hub_content_version: ::String
-      attr_accessor hub_content_type: ("Model" | "Notebook")
+      attr_accessor hub_content_type: ("Model" | "Notebook" | "ModelReference")
       attr_accessor document_schema_version: ::String
       attr_accessor hub_content_display_name: ::String
       attr_accessor hub_content_description: ::String
+      attr_accessor support_status: ("Supported" | "Deprecated")
       attr_accessor hub_content_search_keywords: ::Array[::String]
       attr_accessor hub_content_status: ("Available" | "Importing" | "Deleting" | "ImportFailed" | "DeleteFailed")
       attr_accessor creation_time: ::Time
+      attr_accessor original_creation_time: ::Time
       SENSITIVE: []
     end
 
@@ -4697,7 +4725,7 @@ module Aws::SageMaker
     class ImportHubContentRequest
       attr_accessor hub_content_name: ::String
       attr_accessor hub_content_version: ::String
-      attr_accessor hub_content_type: ("Model" | "Notebook")
+      attr_accessor hub_content_type: ("Model" | "Notebook" | "ModelReference")
       attr_accessor document_schema_version: ::String
       attr_accessor hub_name: ::String
       attr_accessor hub_content_display_name: ::String
@@ -4811,6 +4839,11 @@ module Aws::SageMaker
       attr_accessor completion_time: ::Time
       attr_accessor last_modified_time: ::Time
       attr_accessor role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class InferenceHubAccessConfig
+      attr_accessor hub_content_arn: ::String
       SENSITIVE: []
     end
 
@@ -5518,7 +5551,7 @@ module Aws::SageMaker
 
     class ListHubContentVersionsRequest
       attr_accessor hub_name: ::String
-      attr_accessor hub_content_type: ("Model" | "Notebook")
+      attr_accessor hub_content_type: ("Model" | "Notebook" | "ModelReference")
       attr_accessor hub_content_name: ::String
       attr_accessor min_version: ::String
       attr_accessor max_schema_version: ::String
@@ -5539,7 +5572,7 @@ module Aws::SageMaker
 
     class ListHubContentsRequest
       attr_accessor hub_name: ::String
-      attr_accessor hub_content_type: ("Model" | "Notebook")
+      attr_accessor hub_content_type: ("Model" | "Notebook" | "ModelReference")
       attr_accessor name_contains: ::String
       attr_accessor max_schema_version: ::String
       attr_accessor creation_time_before: ::Time
@@ -8078,6 +8111,7 @@ module Aws::SageMaker
       attr_accessor s3_data_type: ("S3Prefix" | "S3Object")
       attr_accessor compression_type: ("None" | "Gzip")
       attr_accessor model_access_config: Types::ModelAccessConfig
+      attr_accessor hub_access_config: Types::InferenceHubAccessConfig
       SENSITIVE: []
     end
 

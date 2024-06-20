@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.58.0 (2024-06-20)
+------------------
+
+* Feature - This release enables AWS Compute Optimizer to analyze and generate optimization recommendations for Amazon RDS MySQL and RDS PostgreSQL.
+
 1.57.0 (2024-06-05)
 ------------------
 

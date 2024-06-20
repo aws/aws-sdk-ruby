@@ -75,8 +75,8 @@ module Aws
 
       interface _GetPreferencesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetPreferencesResponse]
-        def member_account_discount_visibility: () -> ("All" | "None")
         def savings_estimation_mode: () -> ("BeforeDiscounts" | "AfterDiscounts")
+        def member_account_discount_visibility: () -> ("All" | "None")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CostOptimizationHub/Client.html#get_preferences-instance_method
       def get_preferences: (
@@ -85,28 +85,28 @@ module Aws
 
       interface _GetRecommendationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetRecommendationResponse]
-        def account_id: () -> ::String
-        def action_type: () -> ("Rightsize" | "Stop" | "Upgrade" | "PurchaseSavingsPlans" | "PurchaseReservedInstances" | "MigrateToGraviton")
-        def cost_calculation_lookback_period_in_days: () -> ::Integer
-        def currency_code: () -> ::String
-        def current_resource_details: () -> Types::ResourceDetails
-        def current_resource_type: () -> ("Ec2Instance" | "LambdaFunction" | "EbsVolume" | "EcsService" | "Ec2AutoScalingGroup" | "Ec2InstanceSavingsPlans" | "ComputeSavingsPlans" | "SageMakerSavingsPlans" | "Ec2ReservedInstances" | "RdsReservedInstances" | "OpenSearchReservedInstances" | "RedshiftReservedInstances" | "ElastiCacheReservedInstances")
-        def estimated_monthly_cost: () -> ::Float
-        def estimated_monthly_savings: () -> ::Float
-        def estimated_savings_over_cost_calculation_lookback_period: () -> ::Float
-        def estimated_savings_percentage: () -> ::Float
-        def implementation_effort: () -> ("VeryLow" | "Low" | "Medium" | "High" | "VeryHigh")
-        def last_refresh_timestamp: () -> ::Time
         def recommendation_id: () -> ::String
-        def recommendation_lookback_period_in_days: () -> ::Integer
-        def recommended_resource_details: () -> Types::ResourceDetails
-        def recommended_resource_type: () -> ("Ec2Instance" | "LambdaFunction" | "EbsVolume" | "EcsService" | "Ec2AutoScalingGroup" | "Ec2InstanceSavingsPlans" | "ComputeSavingsPlans" | "SageMakerSavingsPlans" | "Ec2ReservedInstances" | "RdsReservedInstances" | "OpenSearchReservedInstances" | "RedshiftReservedInstances" | "ElastiCacheReservedInstances")
-        def region: () -> ::String
-        def resource_arn: () -> ::String
         def resource_id: () -> ::String
-        def restart_needed: () -> bool
-        def rollback_possible: () -> bool
+        def resource_arn: () -> ::String
+        def account_id: () -> ::String
+        def currency_code: () -> ::String
+        def recommendation_lookback_period_in_days: () -> ::Integer
+        def cost_calculation_lookback_period_in_days: () -> ::Integer
+        def estimated_savings_percentage: () -> ::Float
+        def estimated_savings_over_cost_calculation_lookback_period: () -> ::Float
+        def current_resource_type: () -> ("Ec2Instance" | "LambdaFunction" | "EbsVolume" | "EcsService" | "Ec2AutoScalingGroup" | "Ec2InstanceSavingsPlans" | "ComputeSavingsPlans" | "SageMakerSavingsPlans" | "Ec2ReservedInstances" | "RdsReservedInstances" | "OpenSearchReservedInstances" | "RedshiftReservedInstances" | "ElastiCacheReservedInstances" | "RdsDbInstanceStorage" | "RdsDbInstance")
+        def recommended_resource_type: () -> ("Ec2Instance" | "LambdaFunction" | "EbsVolume" | "EcsService" | "Ec2AutoScalingGroup" | "Ec2InstanceSavingsPlans" | "ComputeSavingsPlans" | "SageMakerSavingsPlans" | "Ec2ReservedInstances" | "RdsReservedInstances" | "OpenSearchReservedInstances" | "RedshiftReservedInstances" | "ElastiCacheReservedInstances" | "RdsDbInstanceStorage" | "RdsDbInstance")
+        def region: () -> ::String
         def source: () -> ("ComputeOptimizer" | "CostExplorer")
+        def last_refresh_timestamp: () -> ::Time
+        def estimated_monthly_savings: () -> ::Float
+        def estimated_monthly_cost: () -> ::Float
+        def implementation_effort: () -> ("VeryLow" | "Low" | "Medium" | "High" | "VeryHigh")
+        def restart_needed: () -> bool
+        def action_type: () -> ("Rightsize" | "Stop" | "Upgrade" | "PurchaseSavingsPlans" | "PurchaseReservedInstances" | "MigrateToGraviton")
+        def rollback_possible: () -> bool
+        def current_resource_details: () -> Types::ResourceDetails
+        def recommended_resource_details: () -> Types::ResourceDetails
         def tags: () -> ::Array[Types::Tag]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CostOptimizationHub/Client.html#get_recommendation-instance_method
@@ -117,46 +117,46 @@ module Aws
 
       interface _ListEnrollmentStatusesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListEnrollmentStatusesResponse]
-        def include_member_accounts: () -> bool
         def items: () -> ::Array[Types::AccountEnrollmentStatus]
+        def include_member_accounts: () -> bool
         def next_token: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CostOptimizationHub/Client.html#list_enrollment_statuses-instance_method
       def list_enrollment_statuses: (
-                                      ?account_id: ::String,
                                       ?include_organization_info: bool,
-                                      ?max_results: ::Integer,
-                                      ?next_token: ::String
+                                      ?account_id: ::String,
+                                      ?next_token: ::String,
+                                      ?max_results: ::Integer
                                     ) -> _ListEnrollmentStatusesResponseSuccess
                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListEnrollmentStatusesResponseSuccess
 
       interface _ListRecommendationSummariesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListRecommendationSummariesResponse]
-        def currency_code: () -> ::String
         def estimated_total_deduped_savings: () -> ::Float
-        def group_by: () -> ::String
         def items: () -> ::Array[Types::RecommendationSummary]
+        def group_by: () -> ::String
+        def currency_code: () -> ::String
         def next_token: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CostOptimizationHub/Client.html#list_recommendation_summaries-instance_method
       def list_recommendation_summaries: (
                                            ?filter: {
-                                             account_ids: Array[::String]?,
-                                             action_types: Array[("Rightsize" | "Stop" | "Upgrade" | "PurchaseSavingsPlans" | "PurchaseReservedInstances" | "MigrateToGraviton")]?,
-                                             implementation_efforts: Array[("VeryLow" | "Low" | "Medium" | "High" | "VeryHigh")]?,
-                                             recommendation_ids: Array[::String]?,
-                                             regions: Array[::String]?,
-                                             resource_arns: Array[::String]?,
-                                             resource_ids: Array[::String]?,
-                                             resource_types: Array[("Ec2Instance" | "LambdaFunction" | "EbsVolume" | "EcsService" | "Ec2AutoScalingGroup" | "Ec2InstanceSavingsPlans" | "ComputeSavingsPlans" | "SageMakerSavingsPlans" | "Ec2ReservedInstances" | "RdsReservedInstances" | "OpenSearchReservedInstances" | "RedshiftReservedInstances" | "ElastiCacheReservedInstances")]?,
                                              restart_needed: bool?,
                                              rollback_possible: bool?,
+                                             implementation_efforts: Array[("VeryLow" | "Low" | "Medium" | "High" | "VeryHigh")]?,
+                                             account_ids: Array[::String]?,
+                                             regions: Array[::String]?,
+                                             resource_types: Array[("Ec2Instance" | "LambdaFunction" | "EbsVolume" | "EcsService" | "Ec2AutoScalingGroup" | "Ec2InstanceSavingsPlans" | "ComputeSavingsPlans" | "SageMakerSavingsPlans" | "Ec2ReservedInstances" | "RdsReservedInstances" | "OpenSearchReservedInstances" | "RedshiftReservedInstances" | "ElastiCacheReservedInstances" | "RdsDbInstanceStorage" | "RdsDbInstance")]?,
+                                             action_types: Array[("Rightsize" | "Stop" | "Upgrade" | "PurchaseSavingsPlans" | "PurchaseReservedInstances" | "MigrateToGraviton")]?,
                                              tags: Array[
                                                {
                                                  key: ::String?,
                                                  value: ::String?
                                                },
-                                             ]?
+                                             ]?,
+                                             resource_ids: Array[::String]?,
+                                             resource_arns: Array[::String]?,
+                                             recommendation_ids: Array[::String]?
                                            },
                                            group_by: ::String,
                                            ?max_results: ::Integer,
@@ -172,30 +172,30 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CostOptimizationHub/Client.html#list_recommendations-instance_method
       def list_recommendations: (
                                   ?filter: {
-                                    account_ids: Array[::String]?,
-                                    action_types: Array[("Rightsize" | "Stop" | "Upgrade" | "PurchaseSavingsPlans" | "PurchaseReservedInstances" | "MigrateToGraviton")]?,
-                                    implementation_efforts: Array[("VeryLow" | "Low" | "Medium" | "High" | "VeryHigh")]?,
-                                    recommendation_ids: Array[::String]?,
-                                    regions: Array[::String]?,
-                                    resource_arns: Array[::String]?,
-                                    resource_ids: Array[::String]?,
-                                    resource_types: Array[("Ec2Instance" | "LambdaFunction" | "EbsVolume" | "EcsService" | "Ec2AutoScalingGroup" | "Ec2InstanceSavingsPlans" | "ComputeSavingsPlans" | "SageMakerSavingsPlans" | "Ec2ReservedInstances" | "RdsReservedInstances" | "OpenSearchReservedInstances" | "RedshiftReservedInstances" | "ElastiCacheReservedInstances")]?,
                                     restart_needed: bool?,
                                     rollback_possible: bool?,
+                                    implementation_efforts: Array[("VeryLow" | "Low" | "Medium" | "High" | "VeryHigh")]?,
+                                    account_ids: Array[::String]?,
+                                    regions: Array[::String]?,
+                                    resource_types: Array[("Ec2Instance" | "LambdaFunction" | "EbsVolume" | "EcsService" | "Ec2AutoScalingGroup" | "Ec2InstanceSavingsPlans" | "ComputeSavingsPlans" | "SageMakerSavingsPlans" | "Ec2ReservedInstances" | "RdsReservedInstances" | "OpenSearchReservedInstances" | "RedshiftReservedInstances" | "ElastiCacheReservedInstances" | "RdsDbInstanceStorage" | "RdsDbInstance")]?,
+                                    action_types: Array[("Rightsize" | "Stop" | "Upgrade" | "PurchaseSavingsPlans" | "PurchaseReservedInstances" | "MigrateToGraviton")]?,
                                     tags: Array[
                                       {
                                         key: ::String?,
                                         value: ::String?
                                       },
-                                    ]?
+                                    ]?,
+                                    resource_ids: Array[::String]?,
+                                    resource_arns: Array[::String]?,
+                                    recommendation_ids: Array[::String]?
                                   },
-                                  ?include_all_recommendations: bool,
-                                  ?max_results: ::Integer,
-                                  ?next_token: ::String,
                                   ?order_by: {
                                     dimension: ::String?,
                                     order: ("Asc" | "Desc")?
-                                  }
+                                  },
+                                  ?include_all_recommendations: bool,
+                                  ?max_results: ::Integer,
+                                  ?next_token: ::String
                                 ) -> _ListRecommendationsResponseSuccess
                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRecommendationsResponseSuccess
 
@@ -205,20 +205,20 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CostOptimizationHub/Client.html#update_enrollment_status-instance_method
       def update_enrollment_status: (
-                                      ?include_member_accounts: bool,
-                                      status: ("Active" | "Inactive")
+                                      status: ("Active" | "Inactive"),
+                                      ?include_member_accounts: bool
                                     ) -> _UpdateEnrollmentStatusResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateEnrollmentStatusResponseSuccess
 
       interface _UpdatePreferencesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdatePreferencesResponse]
-        def member_account_discount_visibility: () -> ("All" | "None")
         def savings_estimation_mode: () -> ("BeforeDiscounts" | "AfterDiscounts")
+        def member_account_discount_visibility: () -> ("All" | "None")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CostOptimizationHub/Client.html#update_preferences-instance_method
       def update_preferences: (
-                                ?member_account_discount_visibility: ("All" | "None"),
-                                ?savings_estimation_mode: ("BeforeDiscounts" | "AfterDiscounts")
+                                ?savings_estimation_mode: ("BeforeDiscounts" | "AfterDiscounts"),
+                                ?member_account_discount_visibility: ("All" | "None")
                               ) -> _UpdatePreferencesResponseSuccess
                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdatePreferencesResponseSuccess
     end

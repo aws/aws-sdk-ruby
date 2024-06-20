@@ -96,7 +96,7 @@ module Aws
                                    ?domain_owner: ::String,
                                    source_repository: ::String,
                                    destination_repository: ::String,
-                                   format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "ruby" | "swift"),
+                                   format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "ruby" | "swift" | "cargo"),
                                    ?namespace: ::String,
                                    package: ::String,
                                    ?versions: Array[::String],
@@ -199,7 +199,7 @@ module Aws
                             domain: ::String,
                             ?domain_owner: ::String,
                             repository: ::String,
-                            format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "ruby" | "swift"),
+                            format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "ruby" | "swift" | "cargo"),
                             ?namespace: ::String,
                             package: ::String
                           ) -> _DeletePackageResponseSuccess
@@ -227,7 +227,7 @@ module Aws
                                      domain: ::String,
                                      ?domain_owner: ::String,
                                      repository: ::String,
-                                     format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "ruby" | "swift"),
+                                     format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "ruby" | "swift" | "cargo"),
                                      ?namespace: ::String,
                                      package: ::String,
                                      versions: Array[::String],
@@ -280,7 +280,7 @@ module Aws
                               domain: ::String,
                               ?domain_owner: ::String,
                               repository: ::String,
-                              format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "ruby" | "swift"),
+                              format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "ruby" | "swift" | "cargo"),
                               ?namespace: ::String,
                               package: ::String
                             ) -> _DescribePackageResponseSuccess
@@ -307,7 +307,7 @@ module Aws
                                       domain: ::String,
                                       ?domain_owner: ::String,
                                       repository: ::String,
-                                      format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "ruby" | "swift"),
+                                      format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "ruby" | "swift" | "cargo"),
                                       ?namespace: ::String,
                                       package: ::String,
                                       package_version: ::String
@@ -349,7 +349,7 @@ module Aws
                                       domain: ::String,
                                       ?domain_owner: ::String,
                                       repository: ::String,
-                                      format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "ruby" | "swift"),
+                                      format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "ruby" | "swift" | "cargo"),
                                       ?namespace: ::String,
                                       package: ::String,
                                       versions: Array[::String],
@@ -367,7 +367,7 @@ module Aws
       def get_associated_package_group: (
                                           domain: ::String,
                                           ?domain_owner: ::String,
-                                          format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "ruby" | "swift"),
+                                          format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "ruby" | "swift" | "cargo"),
                                           ?namespace: ::String,
                                           package: ::String
                                         ) -> _GetAssociatedPackageGroupResponseSuccess
@@ -409,7 +409,7 @@ module Aws
                                        domain: ::String,
                                        ?domain_owner: ::String,
                                        repository: ::String,
-                                       format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "ruby" | "swift"),
+                                       format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "ruby" | "swift" | "cargo"),
                                        ?namespace: ::String,
                                        package: ::String,
                                        package_version: ::String,
@@ -420,7 +420,7 @@ module Aws
 
       interface _GetPackageVersionReadmeResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetPackageVersionReadmeResult]
-        def format: () -> ("npm" | "pypi" | "maven" | "nuget" | "generic" | "ruby" | "swift")
+        def format: () -> ("npm" | "pypi" | "maven" | "nuget" | "generic" | "ruby" | "swift" | "cargo")
         def namespace: () -> ::String
         def package: () -> ::String
         def version: () -> ::String
@@ -432,7 +432,7 @@ module Aws
                                         domain: ::String,
                                         ?domain_owner: ::String,
                                         repository: ::String,
-                                        format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "ruby" | "swift"),
+                                        format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "ruby" | "swift" | "cargo"),
                                         ?namespace: ::String,
                                         package: ::String,
                                         package_version: ::String
@@ -448,7 +448,7 @@ module Aws
                                      domain: ::String,
                                      ?domain_owner: ::String,
                                      repository: ::String,
-                                     format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "ruby" | "swift")
+                                     format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "ruby" | "swift" | "cargo")
                                    ) -> _GetRepositoryEndpointResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRepositoryEndpointResponseSuccess
 
@@ -525,7 +525,7 @@ module Aws
 
       interface _ListPackageVersionAssetsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListPackageVersionAssetsResult]
-        def format: () -> ("npm" | "pypi" | "maven" | "nuget" | "generic" | "ruby" | "swift")
+        def format: () -> ("npm" | "pypi" | "maven" | "nuget" | "generic" | "ruby" | "swift" | "cargo")
         def namespace: () -> ::String
         def package: () -> ::String
         def version: () -> ::String
@@ -538,7 +538,7 @@ module Aws
                                          domain: ::String,
                                          ?domain_owner: ::String,
                                          repository: ::String,
-                                         format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "ruby" | "swift"),
+                                         format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "ruby" | "swift" | "cargo"),
                                          ?namespace: ::String,
                                          package: ::String,
                                          package_version: ::String,
@@ -549,7 +549,7 @@ module Aws
 
       interface _ListPackageVersionDependenciesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListPackageVersionDependenciesResult]
-        def format: () -> ("npm" | "pypi" | "maven" | "nuget" | "generic" | "ruby" | "swift")
+        def format: () -> ("npm" | "pypi" | "maven" | "nuget" | "generic" | "ruby" | "swift" | "cargo")
         def namespace: () -> ::String
         def package: () -> ::String
         def version: () -> ::String
@@ -562,7 +562,7 @@ module Aws
                                                domain: ::String,
                                                ?domain_owner: ::String,
                                                repository: ::String,
-                                               format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "ruby" | "swift"),
+                                               format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "ruby" | "swift" | "cargo"),
                                                ?namespace: ::String,
                                                package: ::String,
                                                package_version: ::String,
@@ -573,7 +573,7 @@ module Aws
       interface _ListPackageVersionsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListPackageVersionsResult]
         def default_display_version: () -> ::String
-        def format: () -> ("npm" | "pypi" | "maven" | "nuget" | "generic" | "ruby" | "swift")
+        def format: () -> ("npm" | "pypi" | "maven" | "nuget" | "generic" | "ruby" | "swift" | "cargo")
         def namespace: () -> ::String
         def package: () -> ::String
         def versions: () -> ::Array[Types::PackageVersionSummary]
@@ -584,7 +584,7 @@ module Aws
                                    domain: ::String,
                                    ?domain_owner: ::String,
                                    repository: ::String,
-                                   format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "ruby" | "swift"),
+                                   format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "ruby" | "swift" | "cargo"),
                                    ?namespace: ::String,
                                    package: ::String,
                                    ?status: ("Published" | "Unfinished" | "Unlisted" | "Archived" | "Disposed" | "Deleted"),
@@ -605,7 +605,7 @@ module Aws
                            domain: ::String,
                            ?domain_owner: ::String,
                            repository: ::String,
-                           ?format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "ruby" | "swift"),
+                           ?format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "ruby" | "swift" | "cargo"),
                            ?namespace: ::String,
                            ?package_prefix: ::String,
                            ?max_results: ::Integer,
@@ -671,7 +671,7 @@ module Aws
 
       interface _PublishPackageVersionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::PublishPackageVersionResult]
-        def format: () -> ("npm" | "pypi" | "maven" | "nuget" | "generic" | "ruby" | "swift")
+        def format: () -> ("npm" | "pypi" | "maven" | "nuget" | "generic" | "ruby" | "swift" | "cargo")
         def namespace: () -> ::String
         def package: () -> ::String
         def version: () -> ::String
@@ -684,7 +684,7 @@ module Aws
                                      domain: ::String,
                                      ?domain_owner: ::String,
                                      repository: ::String,
-                                     format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "ruby" | "swift"),
+                                     format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "ruby" | "swift" | "cargo"),
                                      ?namespace: ::String,
                                      package: ::String,
                                      package_version: ::String,
@@ -717,7 +717,7 @@ module Aws
                                               domain: ::String,
                                               ?domain_owner: ::String,
                                               repository: ::String,
-                                              format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "ruby" | "swift"),
+                                              format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "ruby" | "swift" | "cargo"),
                                               ?namespace: ::String,
                                               package: ::String,
                                               restrictions: {
@@ -816,7 +816,7 @@ module Aws
                                             domain: ::String,
                                             ?domain_owner: ::String,
                                             repository: ::String,
-                                            format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "ruby" | "swift"),
+                                            format: ("npm" | "pypi" | "maven" | "nuget" | "generic" | "ruby" | "swift" | "cargo"),
                                             ?namespace: ::String,
                                             package: ::String,
                                             versions: Array[::String],

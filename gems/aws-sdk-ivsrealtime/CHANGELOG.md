@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.20.0 (2024-06-20)
+------------------
+
+* Feature - IVS Real-Time now offers customers the ability to record individual stage participants to S3.
+
 1.19.0 (2024-06-05)
 ------------------
 

@@ -16,6 +16,7 @@ require_relative 'aws-sdk-costoptimizationhub/client_api'
 require_relative 'aws-sdk-costoptimizationhub/plugins/endpoints.rb'
 require_relative 'aws-sdk-costoptimizationhub/client'
 require_relative 'aws-sdk-costoptimizationhub/errors'
+require_relative 'aws-sdk-costoptimizationhub/waiters'
 require_relative 'aws-sdk-costoptimizationhub/resource'
 require_relative 'aws-sdk-costoptimizationhub/endpoint_parameters'
 require_relative 'aws-sdk-costoptimizationhub/endpoint_provider'
@@ -52,6 +53,6 @@ require_relative 'aws-sdk-costoptimizationhub/customizations'
 # @!group service
 module Aws::CostOptimizationHub
 
-  GEM_VERSION = '1.6.0'
+  GEM_VERSION = '1.7.0'
 
 end

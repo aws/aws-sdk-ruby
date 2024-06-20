@@ -18,6 +18,7 @@ module Aws::ComputeOptimizer
     AccountEnrollmentStatuses = Shapes::ListShape.new(name: 'AccountEnrollmentStatuses')
     AccountId = Shapes::StringShape.new(name: 'AccountId')
     AccountIds = Shapes::ListShape.new(name: 'AccountIds')
+    AllocatedStorage = Shapes::IntegerShape.new(name: 'AllocatedStorage')
     AutoScalingConfiguration = Shapes::StringShape.new(name: 'AutoScalingConfiguration')
     AutoScalingGroupArn = Shapes::StringShape.new(name: 'AutoScalingGroupArn')
     AutoScalingGroupArns = Shapes::ListShape.new(name: 'AutoScalingGroupArns')
@@ -40,6 +41,7 @@ module Aws::ComputeOptimizer
     CpuVendorArchitectures = Shapes::ListShape.new(name: 'CpuVendorArchitectures')
     CreationTimestamp = Shapes::TimestampShape.new(name: 'CreationTimestamp')
     Currency = Shapes::StringShape.new(name: 'Currency')
+    CurrentDBInstanceClass = Shapes::StringShape.new(name: 'CurrentDBInstanceClass')
     CurrentInstanceType = Shapes::StringShape.new(name: 'CurrentInstanceType')
     CurrentPerformanceRisk = Shapes::StringShape.new(name: 'CurrentPerformanceRisk')
     CurrentPerformanceRiskRatings = Shapes::StructureShape.new(name: 'CurrentPerformanceRiskRatings')
@@ -47,6 +49,8 @@ module Aws::ComputeOptimizer
     CustomizableMetricName = Shapes::StringShape.new(name: 'CustomizableMetricName')
     CustomizableMetricParameters = Shapes::StructureShape.new(name: 'CustomizableMetricParameters')
     CustomizableMetricThreshold = Shapes::StringShape.new(name: 'CustomizableMetricThreshold')
+    DBInstanceClass = Shapes::StringShape.new(name: 'DBInstanceClass')
+    DBStorageConfiguration = Shapes::StructureShape.new(name: 'DBStorageConfiguration')
     DeleteRecommendationPreferencesRequest = Shapes::StructureShape.new(name: 'DeleteRecommendationPreferencesRequest')
     DeleteRecommendationPreferencesResponse = Shapes::StructureShape.new(name: 'DeleteRecommendationPreferencesResponse')
     DescribeRecommendationExportJobsRequest = Shapes::StructureShape.new(name: 'DescribeRecommendationExportJobsRequest')
@@ -96,6 +100,8 @@ module Aws::ComputeOptimizer
     EffectivePreferredResource = Shapes::StructureShape.new(name: 'EffectivePreferredResource')
     EffectivePreferredResources = Shapes::ListShape.new(name: 'EffectivePreferredResources')
     EffectiveRecommendationPreferences = Shapes::StructureShape.new(name: 'EffectiveRecommendationPreferences')
+    Engine = Shapes::StringShape.new(name: 'Engine')
+    EngineVersion = Shapes::StringShape.new(name: 'EngineVersion')
     EnhancedInfrastructureMetrics = Shapes::StringShape.new(name: 'EnhancedInfrastructureMetrics')
     EnrollmentFilter = Shapes::StructureShape.new(name: 'EnrollmentFilter')
     EnrollmentFilterName = Shapes::StringShape.new(name: 'EnrollmentFilterName')
@@ -115,6 +121,8 @@ module Aws::ComputeOptimizer
     ExportLambdaFunctionRecommendationsResponse = Shapes::StructureShape.new(name: 'ExportLambdaFunctionRecommendationsResponse')
     ExportLicenseRecommendationsRequest = Shapes::StructureShape.new(name: 'ExportLicenseRecommendationsRequest')
     ExportLicenseRecommendationsResponse = Shapes::StructureShape.new(name: 'ExportLicenseRecommendationsResponse')
+    ExportRDSDatabaseRecommendationsRequest = Shapes::StructureShape.new(name: 'ExportRDSDatabaseRecommendationsRequest')
+    ExportRDSDatabaseRecommendationsResponse = Shapes::StructureShape.new(name: 'ExportRDSDatabaseRecommendationsResponse')
     ExportableAutoScalingGroupField = Shapes::StringShape.new(name: 'ExportableAutoScalingGroupField')
     ExportableAutoScalingGroupFields = Shapes::ListShape.new(name: 'ExportableAutoScalingGroupFields')
     ExportableECSServiceField = Shapes::StringShape.new(name: 'ExportableECSServiceField')
@@ -125,6 +133,8 @@ module Aws::ComputeOptimizer
     ExportableLambdaFunctionFields = Shapes::ListShape.new(name: 'ExportableLambdaFunctionFields')
     ExportableLicenseField = Shapes::StringShape.new(name: 'ExportableLicenseField')
     ExportableLicenseFields = Shapes::ListShape.new(name: 'ExportableLicenseFields')
+    ExportableRDSDBField = Shapes::StringShape.new(name: 'ExportableRDSDBField')
+    ExportableRDSDBFields = Shapes::ListShape.new(name: 'ExportableRDSDBFields')
     ExportableVolumeField = Shapes::StringShape.new(name: 'ExportableVolumeField')
     ExportableVolumeFields = Shapes::ListShape.new(name: 'ExportableVolumeFields')
     ExternalMetricStatus = Shapes::StructureShape.new(name: 'ExternalMetricStatus')
@@ -166,6 +176,10 @@ module Aws::ComputeOptimizer
     GetLambdaFunctionRecommendationsResponse = Shapes::StructureShape.new(name: 'GetLambdaFunctionRecommendationsResponse')
     GetLicenseRecommendationsRequest = Shapes::StructureShape.new(name: 'GetLicenseRecommendationsRequest')
     GetLicenseRecommendationsResponse = Shapes::StructureShape.new(name: 'GetLicenseRecommendationsResponse')
+    GetRDSDatabaseRecommendationProjectedMetricsRequest = Shapes::StructureShape.new(name: 'GetRDSDatabaseRecommendationProjectedMetricsRequest')
+    GetRDSDatabaseRecommendationProjectedMetricsResponse = Shapes::StructureShape.new(name: 'GetRDSDatabaseRecommendationProjectedMetricsResponse')
+    GetRDSDatabaseRecommendationsRequest = Shapes::StructureShape.new(name: 'GetRDSDatabaseRecommendationsRequest')
+    GetRDSDatabaseRecommendationsResponse = Shapes::StructureShape.new(name: 'GetRDSDatabaseRecommendationsResponse')
     GetRecommendationError = Shapes::StructureShape.new(name: 'GetRecommendationError')
     GetRecommendationErrors = Shapes::ListShape.new(name: 'GetRecommendationErrors')
     GetRecommendationPreferencesRequest = Shapes::StructureShape.new(name: 'GetRecommendationPreferencesRequest')
@@ -179,6 +193,7 @@ module Aws::ComputeOptimizer
     Gpus = Shapes::ListShape.new(name: 'Gpus')
     High = Shapes::IntegerShape.new(name: 'High')
     Identifier = Shapes::StringShape.new(name: 'Identifier')
+    Idle = Shapes::StringShape.new(name: 'Idle')
     IncludeMemberAccounts = Shapes::BooleanShape.new(name: 'IncludeMemberAccounts')
     InferredWorkloadSaving = Shapes::StructureShape.new(name: 'InferredWorkloadSaving')
     InferredWorkloadSavings = Shapes::ListShape.new(name: 'InferredWorkloadSavings')
@@ -274,8 +289,11 @@ module Aws::ComputeOptimizer
     MissingAuthenticationToken = Shapes::StructureShape.new(name: 'MissingAuthenticationToken')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     NullableCpu = Shapes::IntegerShape.new(name: 'NullableCpu')
+    NullableIOPS = Shapes::IntegerShape.new(name: 'NullableIOPS')
+    NullableMaxAllocatedStorage = Shapes::IntegerShape.new(name: 'NullableMaxAllocatedStorage')
     NullableMemory = Shapes::IntegerShape.new(name: 'NullableMemory')
     NullableMemoryReservation = Shapes::IntegerShape.new(name: 'NullableMemoryReservation')
+    NullableStorageThroughput = Shapes::IntegerShape.new(name: 'NullableStorageThroughput')
     NumberOfCores = Shapes::IntegerShape.new(name: 'NumberOfCores')
     NumberOfInvocations = Shapes::IntegerShape.new(name: 'NumberOfInvocations')
     NumberOfMemberAccountsOptedIn = Shapes::IntegerShape.new(name: 'NumberOfMemberAccountsOptedIn')
@@ -295,6 +313,37 @@ module Aws::ComputeOptimizer
     ProjectedUtilizationMetrics = Shapes::ListShape.new(name: 'ProjectedUtilizationMetrics')
     PutRecommendationPreferencesRequest = Shapes::StructureShape.new(name: 'PutRecommendationPreferencesRequest')
     PutRecommendationPreferencesResponse = Shapes::StructureShape.new(name: 'PutRecommendationPreferencesResponse')
+    RDSDBInstanceRecommendationOption = Shapes::StructureShape.new(name: 'RDSDBInstanceRecommendationOption')
+    RDSDBInstanceRecommendationOptions = Shapes::ListShape.new(name: 'RDSDBInstanceRecommendationOptions')
+    RDSDBMetricName = Shapes::StringShape.new(name: 'RDSDBMetricName')
+    RDSDBMetricStatistic = Shapes::StringShape.new(name: 'RDSDBMetricStatistic')
+    RDSDBProjectedUtilizationMetrics = Shapes::ListShape.new(name: 'RDSDBProjectedUtilizationMetrics')
+    RDSDBRecommendation = Shapes::StructureShape.new(name: 'RDSDBRecommendation')
+    RDSDBRecommendationFilter = Shapes::StructureShape.new(name: 'RDSDBRecommendationFilter')
+    RDSDBRecommendationFilterName = Shapes::StringShape.new(name: 'RDSDBRecommendationFilterName')
+    RDSDBRecommendationFilters = Shapes::ListShape.new(name: 'RDSDBRecommendationFilters')
+    RDSDBRecommendations = Shapes::ListShape.new(name: 'RDSDBRecommendations')
+    RDSDBStorageRecommendationOption = Shapes::StructureShape.new(name: 'RDSDBStorageRecommendationOption')
+    RDSDBStorageRecommendationOptions = Shapes::ListShape.new(name: 'RDSDBStorageRecommendationOptions')
+    RDSDBUtilizationMetric = Shapes::StructureShape.new(name: 'RDSDBUtilizationMetric')
+    RDSDBUtilizationMetrics = Shapes::ListShape.new(name: 'RDSDBUtilizationMetrics')
+    RDSDatabaseProjectedMetric = Shapes::StructureShape.new(name: 'RDSDatabaseProjectedMetric')
+    RDSDatabaseProjectedMetrics = Shapes::ListShape.new(name: 'RDSDatabaseProjectedMetrics')
+    RDSDatabaseRecommendedOptionProjectedMetric = Shapes::StructureShape.new(name: 'RDSDatabaseRecommendedOptionProjectedMetric')
+    RDSDatabaseRecommendedOptionProjectedMetrics = Shapes::ListShape.new(name: 'RDSDatabaseRecommendedOptionProjectedMetrics')
+    RDSEffectiveRecommendationPreferences = Shapes::StructureShape.new(name: 'RDSEffectiveRecommendationPreferences')
+    RDSInstanceEstimatedMonthlySavings = Shapes::StructureShape.new(name: 'RDSInstanceEstimatedMonthlySavings')
+    RDSInstanceFinding = Shapes::StringShape.new(name: 'RDSInstanceFinding')
+    RDSInstanceFindingReasonCode = Shapes::StringShape.new(name: 'RDSInstanceFindingReasonCode')
+    RDSInstanceFindingReasonCodes = Shapes::ListShape.new(name: 'RDSInstanceFindingReasonCodes')
+    RDSInstanceSavingsOpportunityAfterDiscounts = Shapes::StructureShape.new(name: 'RDSInstanceSavingsOpportunityAfterDiscounts')
+    RDSSavingsEstimationMode = Shapes::StructureShape.new(name: 'RDSSavingsEstimationMode')
+    RDSSavingsEstimationModeSource = Shapes::StringShape.new(name: 'RDSSavingsEstimationModeSource')
+    RDSStorageEstimatedMonthlySavings = Shapes::StructureShape.new(name: 'RDSStorageEstimatedMonthlySavings')
+    RDSStorageFinding = Shapes::StringShape.new(name: 'RDSStorageFinding')
+    RDSStorageFindingReasonCode = Shapes::StringShape.new(name: 'RDSStorageFindingReasonCode')
+    RDSStorageFindingReasonCodes = Shapes::ListShape.new(name: 'RDSStorageFindingReasonCodes')
+    RDSStorageSavingsOpportunityAfterDiscounts = Shapes::StructureShape.new(name: 'RDSStorageSavingsOpportunityAfterDiscounts')
     Rank = Shapes::IntegerShape.new(name: 'Rank')
     ReasonCodeSummaries = Shapes::ListShape.new(name: 'ReasonCodeSummaries')
     ReasonCodeSummary = Shapes::StructureShape.new(name: 'ReasonCodeSummary')
@@ -312,6 +361,7 @@ module Aws::ComputeOptimizer
     RecommendationSources = Shapes::ListShape.new(name: 'RecommendationSources')
     RecommendationSummaries = Shapes::ListShape.new(name: 'RecommendationSummaries')
     RecommendationSummary = Shapes::StructureShape.new(name: 'RecommendationSummary')
+    RecommendedDBInstanceClass = Shapes::StringShape.new(name: 'RecommendedDBInstanceClass')
     RecommendedInstanceType = Shapes::StringShape.new(name: 'RecommendedInstanceType')
     RecommendedOptionProjectedMetric = Shapes::StructureShape.new(name: 'RecommendedOptionProjectedMetric')
     RecommendedOptionProjectedMetrics = Shapes::ListShape.new(name: 'RecommendedOptionProjectedMetrics')
@@ -334,6 +384,7 @@ module Aws::ComputeOptimizer
     ServiceUnavailableException = Shapes::StructureShape.new(name: 'ServiceUnavailableException')
     Status = Shapes::StringShape.new(name: 'Status')
     StatusReason = Shapes::StringShape.new(name: 'StatusReason')
+    StorageType = Shapes::StringShape.new(name: 'StorageType')
     Summaries = Shapes::ListShape.new(name: 'Summaries')
     Summary = Shapes::StructureShape.new(name: 'Summary')
     SummaryValue = Shapes::FloatShape.new(name: 'SummaryValue')
@@ -400,22 +451,22 @@ module Aws::ComputeOptimizer
     AutoScalingGroupRecommendation.add_member(:utilization_metrics, Shapes::ShapeRef.new(shape: UtilizationMetrics, location_name: "utilizationMetrics"))
     AutoScalingGroupRecommendation.add_member(:look_back_period_in_days, Shapes::ShapeRef.new(shape: LookBackPeriodInDays, location_name: "lookBackPeriodInDays"))
     AutoScalingGroupRecommendation.add_member(:current_configuration, Shapes::ShapeRef.new(shape: AutoScalingGroupConfiguration, location_name: "currentConfiguration"))
+    AutoScalingGroupRecommendation.add_member(:current_instance_gpu_info, Shapes::ShapeRef.new(shape: GpuInfo, location_name: "currentInstanceGpuInfo"))
     AutoScalingGroupRecommendation.add_member(:recommendation_options, Shapes::ShapeRef.new(shape: AutoScalingGroupRecommendationOptions, location_name: "recommendationOptions"))
     AutoScalingGroupRecommendation.add_member(:last_refresh_timestamp, Shapes::ShapeRef.new(shape: LastRefreshTimestamp, location_name: "lastRefreshTimestamp"))
     AutoScalingGroupRecommendation.add_member(:current_performance_risk, Shapes::ShapeRef.new(shape: CurrentPerformanceRisk, location_name: "currentPerformanceRisk"))
     AutoScalingGroupRecommendation.add_member(:effective_recommendation_preferences, Shapes::ShapeRef.new(shape: EffectiveRecommendationPreferences, location_name: "effectiveRecommendationPreferences"))
     AutoScalingGroupRecommendation.add_member(:inferred_workload_types, Shapes::ShapeRef.new(shape: InferredWorkloadTypes, location_name: "inferredWorkloadTypes"))
-    AutoScalingGroupRecommendation.add_member(:current_instance_gpu_info, Shapes::ShapeRef.new(shape: GpuInfo, location_name: "currentInstanceGpuInfo"))
     AutoScalingGroupRecommendation.struct_class = Types::AutoScalingGroupRecommendation
 
     AutoScalingGroupRecommendationOption.add_member(:configuration, Shapes::ShapeRef.new(shape: AutoScalingGroupConfiguration, location_name: "configuration"))
+    AutoScalingGroupRecommendationOption.add_member(:instance_gpu_info, Shapes::ShapeRef.new(shape: GpuInfo, location_name: "instanceGpuInfo"))
     AutoScalingGroupRecommendationOption.add_member(:projected_utilization_metrics, Shapes::ShapeRef.new(shape: ProjectedUtilizationMetrics, location_name: "projectedUtilizationMetrics"))
     AutoScalingGroupRecommendationOption.add_member(:performance_risk, Shapes::ShapeRef.new(shape: PerformanceRisk, location_name: "performanceRisk"))
     AutoScalingGroupRecommendationOption.add_member(:rank, Shapes::ShapeRef.new(shape: Rank, location_name: "rank"))
     AutoScalingGroupRecommendationOption.add_member(:savings_opportunity, Shapes::ShapeRef.new(shape: SavingsOpportunity, location_name: "savingsOpportunity"))
-    AutoScalingGroupRecommendationOption.add_member(:migration_effort, Shapes::ShapeRef.new(shape: MigrationEffort, location_name: "migrationEffort"))
-    AutoScalingGroupRecommendationOption.add_member(:instance_gpu_info, Shapes::ShapeRef.new(shape: GpuInfo, location_name: "instanceGpuInfo"))
     AutoScalingGroupRecommendationOption.add_member(:savings_opportunity_after_discounts, Shapes::ShapeRef.new(shape: AutoScalingGroupSavingsOpportunityAfterDiscounts, location_name: "savingsOpportunityAfterDiscounts"))
+    AutoScalingGroupRecommendationOption.add_member(:migration_effort, Shapes::ShapeRef.new(shape: MigrationEffort, location_name: "migrationEffort"))
     AutoScalingGroupRecommendationOption.struct_class = Types::AutoScalingGroupRecommendationOption
 
     AutoScalingGroupRecommendationOptions.member = Shapes::ShapeRef.new(shape: AutoScalingGroupRecommendationOption)
@@ -451,6 +502,13 @@ module Aws::ComputeOptimizer
     CustomizableMetricParameters.add_member(:threshold, Shapes::ShapeRef.new(shape: CustomizableMetricThreshold, location_name: "threshold"))
     CustomizableMetricParameters.add_member(:headroom, Shapes::ShapeRef.new(shape: CustomizableMetricHeadroom, location_name: "headroom"))
     CustomizableMetricParameters.struct_class = Types::CustomizableMetricParameters
+
+    DBStorageConfiguration.add_member(:storage_type, Shapes::ShapeRef.new(shape: StorageType, location_name: "storageType"))
+    DBStorageConfiguration.add_member(:allocated_storage, Shapes::ShapeRef.new(shape: AllocatedStorage, location_name: "allocatedStorage"))
+    DBStorageConfiguration.add_member(:iops, Shapes::ShapeRef.new(shape: NullableIOPS, location_name: "iops"))
+    DBStorageConfiguration.add_member(:max_allocated_storage, Shapes::ShapeRef.new(shape: NullableMaxAllocatedStorage, location_name: "maxAllocatedStorage"))
+    DBStorageConfiguration.add_member(:storage_throughput, Shapes::ShapeRef.new(shape: NullableStorageThroughput, location_name: "storageThroughput"))
+    DBStorageConfiguration.struct_class = Types::DBStorageConfiguration
 
     DeleteRecommendationPreferencesRequest.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, required: true, location_name: "resourceType"))
     DeleteRecommendationPreferencesRequest.add_member(:scope, Shapes::ShapeRef.new(shape: Scope, location_name: "scope"))
@@ -537,8 +595,8 @@ module Aws::ComputeOptimizer
     ECSServiceRecommendation.add_member(:finding_reason_codes, Shapes::ShapeRef.new(shape: ECSServiceRecommendationFindingReasonCodes, location_name: "findingReasonCodes"))
     ECSServiceRecommendation.add_member(:service_recommendation_options, Shapes::ShapeRef.new(shape: ECSServiceRecommendationOptions, location_name: "serviceRecommendationOptions"))
     ECSServiceRecommendation.add_member(:current_performance_risk, Shapes::ShapeRef.new(shape: CurrentPerformanceRisk, location_name: "currentPerformanceRisk"))
-    ECSServiceRecommendation.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     ECSServiceRecommendation.add_member(:effective_recommendation_preferences, Shapes::ShapeRef.new(shape: ECSEffectiveRecommendationPreferences, location_name: "effectiveRecommendationPreferences"))
+    ECSServiceRecommendation.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     ECSServiceRecommendation.struct_class = Types::ECSServiceRecommendation
 
     ECSServiceRecommendationFilter.add_member(:name, Shapes::ShapeRef.new(shape: ECSServiceRecommendationFilterName, location_name: "name"))
@@ -552,9 +610,9 @@ module Aws::ComputeOptimizer
     ECSServiceRecommendationOption.add_member(:memory, Shapes::ShapeRef.new(shape: NullableMemory, location_name: "memory"))
     ECSServiceRecommendationOption.add_member(:cpu, Shapes::ShapeRef.new(shape: NullableCpu, location_name: "cpu"))
     ECSServiceRecommendationOption.add_member(:savings_opportunity, Shapes::ShapeRef.new(shape: SavingsOpportunity, location_name: "savingsOpportunity"))
+    ECSServiceRecommendationOption.add_member(:savings_opportunity_after_discounts, Shapes::ShapeRef.new(shape: ECSSavingsOpportunityAfterDiscounts, location_name: "savingsOpportunityAfterDiscounts"))
     ECSServiceRecommendationOption.add_member(:projected_utilization_metrics, Shapes::ShapeRef.new(shape: ECSServiceProjectedUtilizationMetrics, location_name: "projectedUtilizationMetrics"))
     ECSServiceRecommendationOption.add_member(:container_recommendations, Shapes::ShapeRef.new(shape: ContainerRecommendations, location_name: "containerRecommendations"))
-    ECSServiceRecommendationOption.add_member(:savings_opportunity_after_discounts, Shapes::ShapeRef.new(shape: ECSSavingsOpportunityAfterDiscounts, location_name: "savingsOpportunityAfterDiscounts"))
     ECSServiceRecommendationOption.struct_class = Types::ECSServiceRecommendationOption
 
     ECSServiceRecommendationOptions.member = Shapes::ShapeRef.new(shape: ECSServiceRecommendationOption)
@@ -680,6 +738,19 @@ module Aws::ComputeOptimizer
     ExportLicenseRecommendationsResponse.add_member(:s3_destination, Shapes::ShapeRef.new(shape: S3Destination, location_name: "s3Destination"))
     ExportLicenseRecommendationsResponse.struct_class = Types::ExportLicenseRecommendationsResponse
 
+    ExportRDSDatabaseRecommendationsRequest.add_member(:account_ids, Shapes::ShapeRef.new(shape: AccountIds, location_name: "accountIds"))
+    ExportRDSDatabaseRecommendationsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: RDSDBRecommendationFilters, location_name: "filters"))
+    ExportRDSDatabaseRecommendationsRequest.add_member(:fields_to_export, Shapes::ShapeRef.new(shape: ExportableRDSDBFields, location_name: "fieldsToExport"))
+    ExportRDSDatabaseRecommendationsRequest.add_member(:s3_destination_config, Shapes::ShapeRef.new(shape: S3DestinationConfig, required: true, location_name: "s3DestinationConfig"))
+    ExportRDSDatabaseRecommendationsRequest.add_member(:file_format, Shapes::ShapeRef.new(shape: FileFormat, location_name: "fileFormat"))
+    ExportRDSDatabaseRecommendationsRequest.add_member(:include_member_accounts, Shapes::ShapeRef.new(shape: IncludeMemberAccounts, location_name: "includeMemberAccounts"))
+    ExportRDSDatabaseRecommendationsRequest.add_member(:recommendation_preferences, Shapes::ShapeRef.new(shape: RecommendationPreferences, location_name: "recommendationPreferences"))
+    ExportRDSDatabaseRecommendationsRequest.struct_class = Types::ExportRDSDatabaseRecommendationsRequest
+
+    ExportRDSDatabaseRecommendationsResponse.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "jobId"))
+    ExportRDSDatabaseRecommendationsResponse.add_member(:s3_destination, Shapes::ShapeRef.new(shape: S3Destination, location_name: "s3Destination"))
+    ExportRDSDatabaseRecommendationsResponse.struct_class = Types::ExportRDSDatabaseRecommendationsResponse
+
     ExportableAutoScalingGroupFields.member = Shapes::ShapeRef.new(shape: ExportableAutoScalingGroupField)
 
     ExportableECSServiceFields.member = Shapes::ShapeRef.new(shape: ExportableECSServiceField)
@@ -689,6 +760,8 @@ module Aws::ComputeOptimizer
     ExportableLambdaFunctionFields.member = Shapes::ShapeRef.new(shape: ExportableLambdaFunctionField)
 
     ExportableLicenseFields.member = Shapes::ShapeRef.new(shape: ExportableLicenseField)
+
+    ExportableRDSDBFields.member = Shapes::ShapeRef.new(shape: ExportableRDSDBField)
 
     ExportableVolumeFields.member = Shapes::ShapeRef.new(shape: ExportableVolumeField)
 
@@ -831,6 +904,30 @@ module Aws::ComputeOptimizer
     GetLicenseRecommendationsResponse.add_member(:errors, Shapes::ShapeRef.new(shape: GetRecommendationErrors, location_name: "errors"))
     GetLicenseRecommendationsResponse.struct_class = Types::GetLicenseRecommendationsResponse
 
+    GetRDSDatabaseRecommendationProjectedMetricsRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "resourceArn"))
+    GetRDSDatabaseRecommendationProjectedMetricsRequest.add_member(:stat, Shapes::ShapeRef.new(shape: MetricStatistic, required: true, location_name: "stat"))
+    GetRDSDatabaseRecommendationProjectedMetricsRequest.add_member(:period, Shapes::ShapeRef.new(shape: Period, required: true, location_name: "period"))
+    GetRDSDatabaseRecommendationProjectedMetricsRequest.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "startTime"))
+    GetRDSDatabaseRecommendationProjectedMetricsRequest.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "endTime"))
+    GetRDSDatabaseRecommendationProjectedMetricsRequest.add_member(:recommendation_preferences, Shapes::ShapeRef.new(shape: RecommendationPreferences, location_name: "recommendationPreferences"))
+    GetRDSDatabaseRecommendationProjectedMetricsRequest.struct_class = Types::GetRDSDatabaseRecommendationProjectedMetricsRequest
+
+    GetRDSDatabaseRecommendationProjectedMetricsResponse.add_member(:recommended_option_projected_metrics, Shapes::ShapeRef.new(shape: RDSDatabaseRecommendedOptionProjectedMetrics, location_name: "recommendedOptionProjectedMetrics"))
+    GetRDSDatabaseRecommendationProjectedMetricsResponse.struct_class = Types::GetRDSDatabaseRecommendationProjectedMetricsResponse
+
+    GetRDSDatabaseRecommendationsRequest.add_member(:resource_arns, Shapes::ShapeRef.new(shape: ResourceArns, location_name: "resourceArns"))
+    GetRDSDatabaseRecommendationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    GetRDSDatabaseRecommendationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    GetRDSDatabaseRecommendationsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: RDSDBRecommendationFilters, location_name: "filters"))
+    GetRDSDatabaseRecommendationsRequest.add_member(:account_ids, Shapes::ShapeRef.new(shape: AccountIds, location_name: "accountIds"))
+    GetRDSDatabaseRecommendationsRequest.add_member(:recommendation_preferences, Shapes::ShapeRef.new(shape: RecommendationPreferences, location_name: "recommendationPreferences"))
+    GetRDSDatabaseRecommendationsRequest.struct_class = Types::GetRDSDatabaseRecommendationsRequest
+
+    GetRDSDatabaseRecommendationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    GetRDSDatabaseRecommendationsResponse.add_member(:rds_db_recommendations, Shapes::ShapeRef.new(shape: RDSDBRecommendations, location_name: "rdsDBRecommendations"))
+    GetRDSDatabaseRecommendationsResponse.add_member(:errors, Shapes::ShapeRef.new(shape: GetRecommendationErrors, location_name: "errors"))
+    GetRDSDatabaseRecommendationsResponse.struct_class = Types::GetRDSDatabaseRecommendationsResponse
+
     GetRecommendationError.add_member(:identifier, Shapes::ShapeRef.new(shape: Identifier, location_name: "identifier"))
     GetRecommendationError.add_member(:code, Shapes::ShapeRef.new(shape: Code, location_name: "code"))
     GetRecommendationError.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "message"))
@@ -904,14 +1001,14 @@ module Aws::ComputeOptimizer
     InstanceRecommendationFindingReasonCodes.member = Shapes::ShapeRef.new(shape: InstanceRecommendationFindingReasonCode)
 
     InstanceRecommendationOption.add_member(:instance_type, Shapes::ShapeRef.new(shape: InstanceType, location_name: "instanceType"))
+    InstanceRecommendationOption.add_member(:instance_gpu_info, Shapes::ShapeRef.new(shape: GpuInfo, location_name: "instanceGpuInfo"))
     InstanceRecommendationOption.add_member(:projected_utilization_metrics, Shapes::ShapeRef.new(shape: ProjectedUtilizationMetrics, location_name: "projectedUtilizationMetrics"))
     InstanceRecommendationOption.add_member(:platform_differences, Shapes::ShapeRef.new(shape: PlatformDifferences, location_name: "platformDifferences"))
     InstanceRecommendationOption.add_member(:performance_risk, Shapes::ShapeRef.new(shape: PerformanceRisk, location_name: "performanceRisk"))
     InstanceRecommendationOption.add_member(:rank, Shapes::ShapeRef.new(shape: Rank, location_name: "rank"))
     InstanceRecommendationOption.add_member(:savings_opportunity, Shapes::ShapeRef.new(shape: SavingsOpportunity, location_name: "savingsOpportunity"))
-    InstanceRecommendationOption.add_member(:migration_effort, Shapes::ShapeRef.new(shape: MigrationEffort, location_name: "migrationEffort"))
-    InstanceRecommendationOption.add_member(:instance_gpu_info, Shapes::ShapeRef.new(shape: GpuInfo, location_name: "instanceGpuInfo"))
     InstanceRecommendationOption.add_member(:savings_opportunity_after_discounts, Shapes::ShapeRef.new(shape: InstanceSavingsOpportunityAfterDiscounts, location_name: "savingsOpportunityAfterDiscounts"))
+    InstanceRecommendationOption.add_member(:migration_effort, Shapes::ShapeRef.new(shape: MigrationEffort, location_name: "migrationEffort"))
     InstanceRecommendationOption.struct_class = Types::InstanceRecommendationOption
 
     InstanceRecommendations.member = Shapes::ShapeRef.new(shape: InstanceRecommendation)
@@ -972,8 +1069,8 @@ module Aws::ComputeOptimizer
     LambdaFunctionRecommendation.add_member(:finding_reason_codes, Shapes::ShapeRef.new(shape: LambdaFunctionRecommendationFindingReasonCodes, location_name: "findingReasonCodes"))
     LambdaFunctionRecommendation.add_member(:memory_size_recommendation_options, Shapes::ShapeRef.new(shape: LambdaFunctionMemoryRecommendationOptions, location_name: "memorySizeRecommendationOptions"))
     LambdaFunctionRecommendation.add_member(:current_performance_risk, Shapes::ShapeRef.new(shape: CurrentPerformanceRisk, location_name: "currentPerformanceRisk"))
-    LambdaFunctionRecommendation.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     LambdaFunctionRecommendation.add_member(:effective_recommendation_preferences, Shapes::ShapeRef.new(shape: LambdaEffectiveRecommendationPreferences, location_name: "effectiveRecommendationPreferences"))
+    LambdaFunctionRecommendation.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     LambdaFunctionRecommendation.struct_class = Types::LambdaFunctionRecommendation
 
     LambdaFunctionRecommendationFilter.add_member(:name, Shapes::ShapeRef.new(shape: LambdaFunctionRecommendationFilterName, location_name: "name"))
@@ -1093,6 +1190,104 @@ module Aws::ComputeOptimizer
     PutRecommendationPreferencesRequest.struct_class = Types::PutRecommendationPreferencesRequest
 
     PutRecommendationPreferencesResponse.struct_class = Types::PutRecommendationPreferencesResponse
+
+    RDSDBInstanceRecommendationOption.add_member(:db_instance_class, Shapes::ShapeRef.new(shape: DBInstanceClass, location_name: "dbInstanceClass"))
+    RDSDBInstanceRecommendationOption.add_member(:projected_utilization_metrics, Shapes::ShapeRef.new(shape: RDSDBProjectedUtilizationMetrics, location_name: "projectedUtilizationMetrics"))
+    RDSDBInstanceRecommendationOption.add_member(:performance_risk, Shapes::ShapeRef.new(shape: PerformanceRisk, location_name: "performanceRisk"))
+    RDSDBInstanceRecommendationOption.add_member(:rank, Shapes::ShapeRef.new(shape: Rank, location_name: "rank"))
+    RDSDBInstanceRecommendationOption.add_member(:savings_opportunity, Shapes::ShapeRef.new(shape: SavingsOpportunity, location_name: "savingsOpportunity"))
+    RDSDBInstanceRecommendationOption.add_member(:savings_opportunity_after_discounts, Shapes::ShapeRef.new(shape: RDSInstanceSavingsOpportunityAfterDiscounts, location_name: "savingsOpportunityAfterDiscounts"))
+    RDSDBInstanceRecommendationOption.struct_class = Types::RDSDBInstanceRecommendationOption
+
+    RDSDBInstanceRecommendationOptions.member = Shapes::ShapeRef.new(shape: RDSDBInstanceRecommendationOption)
+
+    RDSDBProjectedUtilizationMetrics.member = Shapes::ShapeRef.new(shape: RDSDBUtilizationMetric)
+
+    RDSDBRecommendation.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "resourceArn"))
+    RDSDBRecommendation.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "accountId"))
+    RDSDBRecommendation.add_member(:engine, Shapes::ShapeRef.new(shape: Engine, location_name: "engine"))
+    RDSDBRecommendation.add_member(:engine_version, Shapes::ShapeRef.new(shape: EngineVersion, location_name: "engineVersion"))
+    RDSDBRecommendation.add_member(:current_db_instance_class, Shapes::ShapeRef.new(shape: CurrentDBInstanceClass, location_name: "currentDBInstanceClass"))
+    RDSDBRecommendation.add_member(:current_storage_configuration, Shapes::ShapeRef.new(shape: DBStorageConfiguration, location_name: "currentStorageConfiguration"))
+    RDSDBRecommendation.add_member(:idle, Shapes::ShapeRef.new(shape: Idle, location_name: "idle"))
+    RDSDBRecommendation.add_member(:instance_finding, Shapes::ShapeRef.new(shape: RDSInstanceFinding, location_name: "instanceFinding"))
+    RDSDBRecommendation.add_member(:storage_finding, Shapes::ShapeRef.new(shape: RDSStorageFinding, location_name: "storageFinding"))
+    RDSDBRecommendation.add_member(:instance_finding_reason_codes, Shapes::ShapeRef.new(shape: RDSInstanceFindingReasonCodes, location_name: "instanceFindingReasonCodes"))
+    RDSDBRecommendation.add_member(:storage_finding_reason_codes, Shapes::ShapeRef.new(shape: RDSStorageFindingReasonCodes, location_name: "storageFindingReasonCodes"))
+    RDSDBRecommendation.add_member(:instance_recommendation_options, Shapes::ShapeRef.new(shape: RDSDBInstanceRecommendationOptions, location_name: "instanceRecommendationOptions"))
+    RDSDBRecommendation.add_member(:storage_recommendation_options, Shapes::ShapeRef.new(shape: RDSDBStorageRecommendationOptions, location_name: "storageRecommendationOptions"))
+    RDSDBRecommendation.add_member(:utilization_metrics, Shapes::ShapeRef.new(shape: RDSDBUtilizationMetrics, location_name: "utilizationMetrics"))
+    RDSDBRecommendation.add_member(:effective_recommendation_preferences, Shapes::ShapeRef.new(shape: RDSEffectiveRecommendationPreferences, location_name: "effectiveRecommendationPreferences"))
+    RDSDBRecommendation.add_member(:lookback_period_in_days, Shapes::ShapeRef.new(shape: LookBackPeriodInDays, location_name: "lookbackPeriodInDays"))
+    RDSDBRecommendation.add_member(:last_refresh_timestamp, Shapes::ShapeRef.new(shape: LastRefreshTimestamp, location_name: "lastRefreshTimestamp"))
+    RDSDBRecommendation.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    RDSDBRecommendation.struct_class = Types::RDSDBRecommendation
+
+    RDSDBRecommendationFilter.add_member(:name, Shapes::ShapeRef.new(shape: RDSDBRecommendationFilterName, location_name: "name"))
+    RDSDBRecommendationFilter.add_member(:values, Shapes::ShapeRef.new(shape: FilterValues, location_name: "values"))
+    RDSDBRecommendationFilter.struct_class = Types::RDSDBRecommendationFilter
+
+    RDSDBRecommendationFilters.member = Shapes::ShapeRef.new(shape: RDSDBRecommendationFilter)
+
+    RDSDBRecommendations.member = Shapes::ShapeRef.new(shape: RDSDBRecommendation)
+
+    RDSDBStorageRecommendationOption.add_member(:storage_configuration, Shapes::ShapeRef.new(shape: DBStorageConfiguration, location_name: "storageConfiguration"))
+    RDSDBStorageRecommendationOption.add_member(:rank, Shapes::ShapeRef.new(shape: Rank, location_name: "rank"))
+    RDSDBStorageRecommendationOption.add_member(:savings_opportunity, Shapes::ShapeRef.new(shape: SavingsOpportunity, location_name: "savingsOpportunity"))
+    RDSDBStorageRecommendationOption.add_member(:savings_opportunity_after_discounts, Shapes::ShapeRef.new(shape: RDSStorageSavingsOpportunityAfterDiscounts, location_name: "savingsOpportunityAfterDiscounts"))
+    RDSDBStorageRecommendationOption.struct_class = Types::RDSDBStorageRecommendationOption
+
+    RDSDBStorageRecommendationOptions.member = Shapes::ShapeRef.new(shape: RDSDBStorageRecommendationOption)
+
+    RDSDBUtilizationMetric.add_member(:name, Shapes::ShapeRef.new(shape: RDSDBMetricName, location_name: "name"))
+    RDSDBUtilizationMetric.add_member(:statistic, Shapes::ShapeRef.new(shape: RDSDBMetricStatistic, location_name: "statistic"))
+    RDSDBUtilizationMetric.add_member(:value, Shapes::ShapeRef.new(shape: MetricValue, location_name: "value"))
+    RDSDBUtilizationMetric.struct_class = Types::RDSDBUtilizationMetric
+
+    RDSDBUtilizationMetrics.member = Shapes::ShapeRef.new(shape: RDSDBUtilizationMetric)
+
+    RDSDatabaseProjectedMetric.add_member(:name, Shapes::ShapeRef.new(shape: RDSDBMetricName, location_name: "name"))
+    RDSDatabaseProjectedMetric.add_member(:timestamps, Shapes::ShapeRef.new(shape: Timestamps, location_name: "timestamps"))
+    RDSDatabaseProjectedMetric.add_member(:values, Shapes::ShapeRef.new(shape: MetricValues, location_name: "values"))
+    RDSDatabaseProjectedMetric.struct_class = Types::RDSDatabaseProjectedMetric
+
+    RDSDatabaseProjectedMetrics.member = Shapes::ShapeRef.new(shape: RDSDatabaseProjectedMetric)
+
+    RDSDatabaseRecommendedOptionProjectedMetric.add_member(:recommended_db_instance_class, Shapes::ShapeRef.new(shape: RecommendedDBInstanceClass, location_name: "recommendedDBInstanceClass"))
+    RDSDatabaseRecommendedOptionProjectedMetric.add_member(:rank, Shapes::ShapeRef.new(shape: Rank, location_name: "rank"))
+    RDSDatabaseRecommendedOptionProjectedMetric.add_member(:projected_metrics, Shapes::ShapeRef.new(shape: RDSDatabaseProjectedMetrics, location_name: "projectedMetrics"))
+    RDSDatabaseRecommendedOptionProjectedMetric.struct_class = Types::RDSDatabaseRecommendedOptionProjectedMetric
+
+    RDSDatabaseRecommendedOptionProjectedMetrics.member = Shapes::ShapeRef.new(shape: RDSDatabaseRecommendedOptionProjectedMetric)
+
+    RDSEffectiveRecommendationPreferences.add_member(:cpu_vendor_architectures, Shapes::ShapeRef.new(shape: CpuVendorArchitectures, location_name: "cpuVendorArchitectures"))
+    RDSEffectiveRecommendationPreferences.add_member(:enhanced_infrastructure_metrics, Shapes::ShapeRef.new(shape: EnhancedInfrastructureMetrics, location_name: "enhancedInfrastructureMetrics"))
+    RDSEffectiveRecommendationPreferences.add_member(:look_back_period, Shapes::ShapeRef.new(shape: LookBackPeriodPreference, location_name: "lookBackPeriod"))
+    RDSEffectiveRecommendationPreferences.add_member(:savings_estimation_mode, Shapes::ShapeRef.new(shape: RDSSavingsEstimationMode, location_name: "savingsEstimationMode"))
+    RDSEffectiveRecommendationPreferences.struct_class = Types::RDSEffectiveRecommendationPreferences
+
+    RDSInstanceEstimatedMonthlySavings.add_member(:currency, Shapes::ShapeRef.new(shape: Currency, location_name: "currency"))
+    RDSInstanceEstimatedMonthlySavings.add_member(:value, Shapes::ShapeRef.new(shape: Value, location_name: "value"))
+    RDSInstanceEstimatedMonthlySavings.struct_class = Types::RDSInstanceEstimatedMonthlySavings
+
+    RDSInstanceFindingReasonCodes.member = Shapes::ShapeRef.new(shape: RDSInstanceFindingReasonCode)
+
+    RDSInstanceSavingsOpportunityAfterDiscounts.add_member(:savings_opportunity_percentage, Shapes::ShapeRef.new(shape: SavingsOpportunityPercentage, location_name: "savingsOpportunityPercentage"))
+    RDSInstanceSavingsOpportunityAfterDiscounts.add_member(:estimated_monthly_savings, Shapes::ShapeRef.new(shape: RDSInstanceEstimatedMonthlySavings, location_name: "estimatedMonthlySavings"))
+    RDSInstanceSavingsOpportunityAfterDiscounts.struct_class = Types::RDSInstanceSavingsOpportunityAfterDiscounts
+
+    RDSSavingsEstimationMode.add_member(:source, Shapes::ShapeRef.new(shape: RDSSavingsEstimationModeSource, location_name: "source"))
+    RDSSavingsEstimationMode.struct_class = Types::RDSSavingsEstimationMode
+
+    RDSStorageEstimatedMonthlySavings.add_member(:currency, Shapes::ShapeRef.new(shape: Currency, location_name: "currency"))
+    RDSStorageEstimatedMonthlySavings.add_member(:value, Shapes::ShapeRef.new(shape: Value, location_name: "value"))
+    RDSStorageEstimatedMonthlySavings.struct_class = Types::RDSStorageEstimatedMonthlySavings
+
+    RDSStorageFindingReasonCodes.member = Shapes::ShapeRef.new(shape: RDSStorageFindingReasonCode)
+
+    RDSStorageSavingsOpportunityAfterDiscounts.add_member(:savings_opportunity_percentage, Shapes::ShapeRef.new(shape: SavingsOpportunityPercentage, location_name: "savingsOpportunityPercentage"))
+    RDSStorageSavingsOpportunityAfterDiscounts.add_member(:estimated_monthly_savings, Shapes::ShapeRef.new(shape: RDSStorageEstimatedMonthlySavings, location_name: "estimatedMonthlySavings"))
+    RDSStorageSavingsOpportunityAfterDiscounts.struct_class = Types::RDSStorageSavingsOpportunityAfterDiscounts
 
     ReasonCodeSummaries.member = Shapes::ShapeRef.new(shape: ReasonCodeSummary)
 
@@ -1247,8 +1442,8 @@ module Aws::ComputeOptimizer
     VolumeRecommendation.add_member(:volume_recommendation_options, Shapes::ShapeRef.new(shape: VolumeRecommendationOptions, location_name: "volumeRecommendationOptions"))
     VolumeRecommendation.add_member(:last_refresh_timestamp, Shapes::ShapeRef.new(shape: LastRefreshTimestamp, location_name: "lastRefreshTimestamp"))
     VolumeRecommendation.add_member(:current_performance_risk, Shapes::ShapeRef.new(shape: CurrentPerformanceRisk, location_name: "currentPerformanceRisk"))
-    VolumeRecommendation.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     VolumeRecommendation.add_member(:effective_recommendation_preferences, Shapes::ShapeRef.new(shape: EBSEffectiveRecommendationPreferences, location_name: "effectiveRecommendationPreferences"))
+    VolumeRecommendation.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     VolumeRecommendation.struct_class = Types::VolumeRecommendation
 
     VolumeRecommendationOption.add_member(:configuration, Shapes::ShapeRef.new(shape: VolumeConfiguration, location_name: "configuration"))
@@ -1270,9 +1465,11 @@ module Aws::ComputeOptimizer
 
       api.metadata = {
         "apiVersion" => "2019-11-01",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "compute-optimizer",
         "jsonVersion" => "1.0",
         "protocol" => "json",
+        "protocols" => ["json"],
         "serviceFullName" => "AWS Compute Optimizer",
         "serviceId" => "Compute Optimizer",
         "signatureVersion" => "v4",
@@ -1405,6 +1602,22 @@ module Aws::ComputeOptimizer
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ExportLicenseRecommendationsRequest)
         o.output = Shapes::ShapeRef.new(shape: ExportLicenseRecommendationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: OptInRequiredException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: MissingAuthenticationToken)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+      end)
+
+      api.add_operation(:export_rds_database_recommendations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ExportRDSDatabaseRecommendations"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ExportRDSDatabaseRecommendationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ExportRDSDatabaseRecommendationsResponse)
         o.errors << Shapes::ShapeRef.new(shape: OptInRequiredException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
@@ -1589,6 +1802,38 @@ module Aws::ComputeOptimizer
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: GetLicenseRecommendationsRequest)
         o.output = Shapes::ShapeRef.new(shape: GetLicenseRecommendationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: OptInRequiredException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: MissingAuthenticationToken)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:get_rds_database_recommendation_projected_metrics, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetRDSDatabaseRecommendationProjectedMetrics"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetRDSDatabaseRecommendationProjectedMetricsRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetRDSDatabaseRecommendationProjectedMetricsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: OptInRequiredException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: MissingAuthenticationToken)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:get_rds_database_recommendations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetRDSDatabaseRecommendations"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetRDSDatabaseRecommendationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetRDSDatabaseRecommendationsResponse)
         o.errors << Shapes::ShapeRef.new(shape: OptInRequiredException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)

@@ -124,6 +124,20 @@ module Aws::ComputeOptimizer
       end
     end
 
+    class ExportRDSDatabaseRecommendations
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::ComputeOptimizer::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class GetAutoScalingGroupRecommendations
       def self.build(context)
         unless context.config.regional_endpoint
@@ -265,6 +279,34 @@ module Aws::ComputeOptimizer
     end
 
     class GetLicenseRecommendations
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::ComputeOptimizer::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class GetRDSDatabaseRecommendationProjectedMetrics
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::ComputeOptimizer::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class GetRDSDatabaseRecommendations
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s

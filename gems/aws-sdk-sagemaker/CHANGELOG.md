@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.248.0 (2024-06-20)
+------------------
+
+* Feature - Adds support for model references in Hub service, and adds support for cross-account access of Hubs
+
 1.247.0 (2024-06-18)
 ------------------
 
