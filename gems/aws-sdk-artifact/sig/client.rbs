@@ -118,8 +118,8 @@ module Aws
 
       interface _ListReportsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListReportsResponse]
-        def next_token: () -> ::String
         def reports: () -> ::Array[Types::ReportSummary]
+        def next_token: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Artifact/Client.html#list_reports-instance_method
       def list_reports: (

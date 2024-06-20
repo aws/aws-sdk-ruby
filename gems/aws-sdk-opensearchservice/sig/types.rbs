@@ -69,6 +69,7 @@ module Aws::OpenSearchService
       attr_accessor enabled: bool
       attr_accessor internal_user_database_enabled: bool
       attr_accessor saml_options: Types::SAMLOptionsOutput
+      attr_accessor jwt_options: Types::JWTOptionsOutput
       attr_accessor anonymous_auth_disable_date: ::Time
       attr_accessor anonymous_auth_enabled: bool
       SENSITIVE: []
@@ -79,6 +80,7 @@ module Aws::OpenSearchService
       attr_accessor internal_user_database_enabled: bool
       attr_accessor master_user_options: Types::MasterUserOptions
       attr_accessor saml_options: Types::SAMLOptionsInput
+      attr_accessor jwt_options: Types::JWTOptionsInput
       attr_accessor anonymous_auth_enabled: bool
       SENSITIVE: []
     end
@@ -992,6 +994,22 @@ module Aws::OpenSearchService
     end
 
     class InvalidTypeException < Aws::EmptyStructure
+    end
+
+    class JWTOptionsInput
+      attr_accessor enabled: bool
+      attr_accessor subject_key: ::String
+      attr_accessor roles_key: ::String
+      attr_accessor public_key: ::String
+      SENSITIVE: []
+    end
+
+    class JWTOptionsOutput
+      attr_accessor enabled: bool
+      attr_accessor subject_key: ::String
+      attr_accessor roles_key: ::String
+      attr_accessor public_key: ::String
+      SENSITIVE: []
     end
 
     class LimitExceededException < Aws::EmptyStructure

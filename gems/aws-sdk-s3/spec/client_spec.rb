@@ -492,7 +492,7 @@ BODY
         it 'uses path style addressing for DNS incompatible bucket names' do
           client = Client.new(stub_responses: true)
           resp = client.head_bucket(bucket: 'Bucket123')
-          expect(resp.context.http_request.endpoint.path).to eq('/Bucket123/')
+          expect(resp.context.http_request.endpoint.path).to eq('/Bucket123')
         end
       end
 

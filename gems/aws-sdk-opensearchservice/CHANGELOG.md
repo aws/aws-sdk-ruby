@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.44.0 (2024-06-19)
+------------------
+
+* Feature - This release enables customers to use JSON Web Tokens (JWT) for authentication on their Amazon OpenSearch Service domains.
+
 1.43.0 (2024-06-05)
 ------------------
 

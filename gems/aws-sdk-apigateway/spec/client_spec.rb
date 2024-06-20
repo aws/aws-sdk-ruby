@@ -6,7 +6,7 @@ module Aws
   module APIGateway
     describe Client do
 
-      let(:client) { Client.new(stub_responses:true) }
+      let(:client) { Client.new(stub_responses: true) }
 
       it 'supports maps for querystrings' do
         resp = client.get_sdk({
@@ -21,9 +21,7 @@ module Aws
         })
 
         expect(resp.context.http_request.endpoint.to_s).to match(/\?abc=xyz&key=value&string=string$/)
-
       end
-
     end
   end
 end

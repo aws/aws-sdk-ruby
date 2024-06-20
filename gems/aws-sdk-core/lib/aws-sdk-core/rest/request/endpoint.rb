@@ -30,7 +30,9 @@ module Aws
         private
 
         def apply_path_params(uri, params)
-          path = uri.path.sub(%r{/$}, '') + @path_pattern.split('?')[0]
+          path = uri.path.sub(%r{/$}, '')
+          # handle trailing slash
+          path += @path_pattern.split('?')[0] if path.empty? || @path_pattern != '/'
           uri.path = path.gsub(/{.+?}/) do |placeholder|
             param_value_for_placeholder(placeholder, params)
           end
