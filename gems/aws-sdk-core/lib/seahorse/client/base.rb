@@ -237,33 +237,3 @@ module Seahorse
     end
   end
 end
-
-class TestPlugin < Seahorse::Client::Plugin
-  option(:new_config, 'new_value')
-
-  def before_initialize(client_class, options)
-    puts "before initialize with: #{client_class} and #{options}"
-  end
-
-  def after_initialize(client)
-    puts "after initialize with: #{client}"
-  end
-
-  def add_handlers(handlers, config)
-    puts "add handlers method!"
-    handlers.add(Handler, step: :initialize)
-  end
-
-  def add_options(config)
-    puts "add options method!"
-    config.add_option(:another_new_config, 'another_new_value')
-    super
-  end
-
-  class Handler < Seahorse::Client::Handler
-    def call(context)
-      puts "I was invoked! with #{context.config.new_config} and #{context.config.another_new_config}"
-      @handler.call(context)
-    end
-  end
-end
