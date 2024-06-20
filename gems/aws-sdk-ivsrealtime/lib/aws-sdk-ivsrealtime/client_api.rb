@@ -15,6 +15,8 @@ module Aws::IVSRealTime
 
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     AttributeKey = Shapes::StringShape.new(name: 'AttributeKey')
+    AutoParticipantRecordingConfiguration = Shapes::StructureShape.new(name: 'AutoParticipantRecordingConfiguration')
+    AutoParticipantRecordingStorageConfigurationArn = Shapes::StringShape.new(name: 'AutoParticipantRecordingStorageConfigurationArn')
     Bitrate = Shapes::IntegerShape.new(name: 'Bitrate')
     ChannelArn = Shapes::StringShape.new(name: 'ChannelArn')
     ChannelDestinationConfiguration = Shapes::StructureShape.new(name: 'ChannelDestinationConfiguration')
@@ -109,6 +111,12 @@ module Aws::IVSRealTime
     ParticipantClientAttribute = Shapes::StringShape.new(name: 'ParticipantClientAttribute')
     ParticipantId = Shapes::StringShape.new(name: 'ParticipantId')
     ParticipantList = Shapes::ListShape.new(name: 'ParticipantList')
+    ParticipantRecordingFilterByRecordingState = Shapes::StringShape.new(name: 'ParticipantRecordingFilterByRecordingState')
+    ParticipantRecordingMediaType = Shapes::StringShape.new(name: 'ParticipantRecordingMediaType')
+    ParticipantRecordingMediaTypeList = Shapes::ListShape.new(name: 'ParticipantRecordingMediaTypeList')
+    ParticipantRecordingS3BucketName = Shapes::StringShape.new(name: 'ParticipantRecordingS3BucketName')
+    ParticipantRecordingS3Prefix = Shapes::StringShape.new(name: 'ParticipantRecordingS3Prefix')
+    ParticipantRecordingState = Shapes::StringShape.new(name: 'ParticipantRecordingState')
     ParticipantState = Shapes::StringShape.new(name: 'ParticipantState')
     ParticipantSummary = Shapes::StructureShape.new(name: 'ParticipantSummary')
     ParticipantToken = Shapes::StructureShape.new(name: 'ParticipantToken')
@@ -181,27 +189,31 @@ module Aws::IVSRealTime
     AccessDeniedException.add_member(:exception_message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "exceptionMessage"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
 
+    AutoParticipantRecordingConfiguration.add_member(:storage_configuration_arn, Shapes::ShapeRef.new(shape: AutoParticipantRecordingStorageConfigurationArn, required: true, location_name: "storageConfigurationArn"))
+    AutoParticipantRecordingConfiguration.add_member(:media_types, Shapes::ShapeRef.new(shape: ParticipantRecordingMediaTypeList, location_name: "mediaTypes"))
+    AutoParticipantRecordingConfiguration.struct_class = Types::AutoParticipantRecordingConfiguration
+
     ChannelDestinationConfiguration.add_member(:channel_arn, Shapes::ShapeRef.new(shape: ChannelArn, required: true, location_name: "channelArn"))
     ChannelDestinationConfiguration.add_member(:encoder_configuration_arn, Shapes::ShapeRef.new(shape: EncoderConfigurationArn, location_name: "encoderConfigurationArn"))
     ChannelDestinationConfiguration.struct_class = Types::ChannelDestinationConfiguration
 
     Composition.add_member(:arn, Shapes::ShapeRef.new(shape: CompositionArn, required: true, location_name: "arn"))
-    Composition.add_member(:destinations, Shapes::ShapeRef.new(shape: DestinationList, required: true, location_name: "destinations"))
-    Composition.add_member(:end_time, Shapes::ShapeRef.new(shape: Time, location_name: "endTime"))
-    Composition.add_member(:layout, Shapes::ShapeRef.new(shape: LayoutConfiguration, required: true, location_name: "layout"))
     Composition.add_member(:stage_arn, Shapes::ShapeRef.new(shape: StageArn, required: true, location_name: "stageArn"))
-    Composition.add_member(:start_time, Shapes::ShapeRef.new(shape: Time, location_name: "startTime"))
     Composition.add_member(:state, Shapes::ShapeRef.new(shape: CompositionState, required: true, location_name: "state"))
+    Composition.add_member(:layout, Shapes::ShapeRef.new(shape: LayoutConfiguration, required: true, location_name: "layout"))
+    Composition.add_member(:destinations, Shapes::ShapeRef.new(shape: DestinationList, required: true, location_name: "destinations"))
     Composition.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    Composition.add_member(:start_time, Shapes::ShapeRef.new(shape: Time, location_name: "startTime"))
+    Composition.add_member(:end_time, Shapes::ShapeRef.new(shape: Time, location_name: "endTime"))
     Composition.struct_class = Types::Composition
 
     CompositionSummary.add_member(:arn, Shapes::ShapeRef.new(shape: CompositionArn, required: true, location_name: "arn"))
-    CompositionSummary.add_member(:destinations, Shapes::ShapeRef.new(shape: DestinationSummaryList, required: true, location_name: "destinations"))
-    CompositionSummary.add_member(:end_time, Shapes::ShapeRef.new(shape: Time, location_name: "endTime"))
     CompositionSummary.add_member(:stage_arn, Shapes::ShapeRef.new(shape: StageArn, required: true, location_name: "stageArn"))
-    CompositionSummary.add_member(:start_time, Shapes::ShapeRef.new(shape: Time, location_name: "startTime"))
+    CompositionSummary.add_member(:destinations, Shapes::ShapeRef.new(shape: DestinationSummaryList, required: true, location_name: "destinations"))
     CompositionSummary.add_member(:state, Shapes::ShapeRef.new(shape: CompositionState, required: true, location_name: "state"))
     CompositionSummary.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    CompositionSummary.add_member(:start_time, Shapes::ShapeRef.new(shape: Time, location_name: "startTime"))
+    CompositionSummary.add_member(:end_time, Shapes::ShapeRef.new(shape: Time, location_name: "endTime"))
     CompositionSummary.struct_class = Types::CompositionSummary
 
     CompositionSummaryList.member = Shapes::ShapeRef.new(shape: CompositionSummary)
@@ -210,18 +222,18 @@ module Aws::IVSRealTime
     ConflictException.struct_class = Types::ConflictException
 
     CreateEncoderConfigurationRequest.add_member(:name, Shapes::ShapeRef.new(shape: EncoderConfigurationName, location_name: "name"))
-    CreateEncoderConfigurationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateEncoderConfigurationRequest.add_member(:video, Shapes::ShapeRef.new(shape: Video, location_name: "video"))
+    CreateEncoderConfigurationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateEncoderConfigurationRequest.struct_class = Types::CreateEncoderConfigurationRequest
 
     CreateEncoderConfigurationResponse.add_member(:encoder_configuration, Shapes::ShapeRef.new(shape: EncoderConfiguration, location_name: "encoderConfiguration"))
     CreateEncoderConfigurationResponse.struct_class = Types::CreateEncoderConfigurationResponse
 
+    CreateParticipantTokenRequest.add_member(:stage_arn, Shapes::ShapeRef.new(shape: StageArn, required: true, location_name: "stageArn"))
+    CreateParticipantTokenRequest.add_member(:duration, Shapes::ShapeRef.new(shape: ParticipantTokenDurationMinutes, location_name: "duration"))
+    CreateParticipantTokenRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: ParticipantTokenUserId, location_name: "userId"))
     CreateParticipantTokenRequest.add_member(:attributes, Shapes::ShapeRef.new(shape: ParticipantTokenAttributes, location_name: "attributes"))
     CreateParticipantTokenRequest.add_member(:capabilities, Shapes::ShapeRef.new(shape: ParticipantTokenCapabilities, location_name: "capabilities"))
-    CreateParticipantTokenRequest.add_member(:duration, Shapes::ShapeRef.new(shape: ParticipantTokenDurationMinutes, location_name: "duration"))
-    CreateParticipantTokenRequest.add_member(:stage_arn, Shapes::ShapeRef.new(shape: StageArn, required: true, location_name: "stageArn"))
-    CreateParticipantTokenRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: ParticipantTokenUserId, location_name: "userId"))
     CreateParticipantTokenRequest.struct_class = Types::CreateParticipantTokenRequest
 
     CreateParticipantTokenResponse.add_member(:participant_token, Shapes::ShapeRef.new(shape: ParticipantToken, location_name: "participantToken"))
@@ -230,10 +242,11 @@ module Aws::IVSRealTime
     CreateStageRequest.add_member(:name, Shapes::ShapeRef.new(shape: StageName, location_name: "name"))
     CreateStageRequest.add_member(:participant_token_configurations, Shapes::ShapeRef.new(shape: ParticipantTokenConfigurations, location_name: "participantTokenConfigurations"))
     CreateStageRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    CreateStageRequest.add_member(:auto_participant_recording_configuration, Shapes::ShapeRef.new(shape: AutoParticipantRecordingConfiguration, location_name: "autoParticipantRecordingConfiguration"))
     CreateStageRequest.struct_class = Types::CreateStageRequest
 
-    CreateStageResponse.add_member(:participant_tokens, Shapes::ShapeRef.new(shape: ParticipantTokenList, location_name: "participantTokens"))
     CreateStageResponse.add_member(:stage, Shapes::ShapeRef.new(shape: Stage, location_name: "stage"))
+    CreateStageResponse.add_member(:participant_tokens, Shapes::ShapeRef.new(shape: ParticipantTokenList, location_name: "participantTokens"))
     CreateStageResponse.struct_class = Types::CreateStageResponse
 
     CreateStorageConfigurationRequest.add_member(:name, Shapes::ShapeRef.new(shape: StorageConfigurationName, location_name: "name"))
@@ -259,16 +272,16 @@ module Aws::IVSRealTime
 
     DeleteStorageConfigurationResponse.struct_class = Types::DeleteStorageConfigurationResponse
 
+    Destination.add_member(:id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "id"))
+    Destination.add_member(:state, Shapes::ShapeRef.new(shape: DestinationState, required: true, location_name: "state"))
+    Destination.add_member(:start_time, Shapes::ShapeRef.new(shape: Time, location_name: "startTime"))
+    Destination.add_member(:end_time, Shapes::ShapeRef.new(shape: Time, location_name: "endTime"))
     Destination.add_member(:configuration, Shapes::ShapeRef.new(shape: DestinationConfiguration, required: true, location_name: "configuration"))
     Destination.add_member(:detail, Shapes::ShapeRef.new(shape: DestinationDetail, location_name: "detail"))
-    Destination.add_member(:end_time, Shapes::ShapeRef.new(shape: Time, location_name: "endTime"))
-    Destination.add_member(:id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "id"))
-    Destination.add_member(:start_time, Shapes::ShapeRef.new(shape: Time, location_name: "startTime"))
-    Destination.add_member(:state, Shapes::ShapeRef.new(shape: DestinationState, required: true, location_name: "state"))
     Destination.struct_class = Types::Destination
 
-    DestinationConfiguration.add_member(:channel, Shapes::ShapeRef.new(shape: ChannelDestinationConfiguration, location_name: "channel"))
     DestinationConfiguration.add_member(:name, Shapes::ShapeRef.new(shape: DestinationConfigurationName, location_name: "name"))
+    DestinationConfiguration.add_member(:channel, Shapes::ShapeRef.new(shape: ChannelDestinationConfiguration, location_name: "channel"))
     DestinationConfiguration.add_member(:s3, Shapes::ShapeRef.new(shape: S3DestinationConfiguration, location_name: "s3"))
     DestinationConfiguration.struct_class = Types::DestinationConfiguration
 
@@ -279,25 +292,25 @@ module Aws::IVSRealTime
 
     DestinationList.member = Shapes::ShapeRef.new(shape: Destination)
 
-    DestinationSummary.add_member(:end_time, Shapes::ShapeRef.new(shape: Time, location_name: "endTime"))
     DestinationSummary.add_member(:id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "id"))
-    DestinationSummary.add_member(:start_time, Shapes::ShapeRef.new(shape: Time, location_name: "startTime"))
     DestinationSummary.add_member(:state, Shapes::ShapeRef.new(shape: DestinationState, required: true, location_name: "state"))
+    DestinationSummary.add_member(:start_time, Shapes::ShapeRef.new(shape: Time, location_name: "startTime"))
+    DestinationSummary.add_member(:end_time, Shapes::ShapeRef.new(shape: Time, location_name: "endTime"))
     DestinationSummary.struct_class = Types::DestinationSummary
 
     DestinationSummaryList.member = Shapes::ShapeRef.new(shape: DestinationSummary)
 
+    DisconnectParticipantRequest.add_member(:stage_arn, Shapes::ShapeRef.new(shape: StageArn, required: true, location_name: "stageArn"))
     DisconnectParticipantRequest.add_member(:participant_id, Shapes::ShapeRef.new(shape: ParticipantTokenId, required: true, location_name: "participantId"))
     DisconnectParticipantRequest.add_member(:reason, Shapes::ShapeRef.new(shape: DisconnectParticipantReason, location_name: "reason"))
-    DisconnectParticipantRequest.add_member(:stage_arn, Shapes::ShapeRef.new(shape: StageArn, required: true, location_name: "stageArn"))
     DisconnectParticipantRequest.struct_class = Types::DisconnectParticipantRequest
 
     DisconnectParticipantResponse.struct_class = Types::DisconnectParticipantResponse
 
     EncoderConfiguration.add_member(:arn, Shapes::ShapeRef.new(shape: EncoderConfigurationArn, required: true, location_name: "arn"))
     EncoderConfiguration.add_member(:name, Shapes::ShapeRef.new(shape: EncoderConfigurationName, location_name: "name"))
-    EncoderConfiguration.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     EncoderConfiguration.add_member(:video, Shapes::ShapeRef.new(shape: Video, location_name: "video"))
+    EncoderConfiguration.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     EncoderConfiguration.struct_class = Types::EncoderConfiguration
 
     EncoderConfigurationArnList.member = Shapes::ShapeRef.new(shape: EncoderConfigurationArn)
@@ -309,11 +322,11 @@ module Aws::IVSRealTime
 
     EncoderConfigurationSummaryList.member = Shapes::ShapeRef.new(shape: EncoderConfigurationSummary)
 
-    Event.add_member(:error_code, Shapes::ShapeRef.new(shape: EventErrorCode, location_name: "errorCode"))
-    Event.add_member(:event_time, Shapes::ShapeRef.new(shape: Time, location_name: "eventTime"))
     Event.add_member(:name, Shapes::ShapeRef.new(shape: EventName, location_name: "name"))
     Event.add_member(:participant_id, Shapes::ShapeRef.new(shape: ParticipantId, location_name: "participantId"))
+    Event.add_member(:event_time, Shapes::ShapeRef.new(shape: Time, location_name: "eventTime"))
     Event.add_member(:remote_participant_id, Shapes::ShapeRef.new(shape: ParticipantId, location_name: "remoteParticipantId"))
+    Event.add_member(:error_code, Shapes::ShapeRef.new(shape: EventErrorCode, location_name: "errorCode"))
     Event.struct_class = Types::Event
 
     EventList.member = Shapes::ShapeRef.new(shape: Event)
@@ -330,9 +343,9 @@ module Aws::IVSRealTime
     GetEncoderConfigurationResponse.add_member(:encoder_configuration, Shapes::ShapeRef.new(shape: EncoderConfiguration, location_name: "encoderConfiguration"))
     GetEncoderConfigurationResponse.struct_class = Types::GetEncoderConfigurationResponse
 
-    GetParticipantRequest.add_member(:participant_id, Shapes::ShapeRef.new(shape: ParticipantId, required: true, location_name: "participantId"))
-    GetParticipantRequest.add_member(:session_id, Shapes::ShapeRef.new(shape: StageSessionId, required: true, location_name: "sessionId"))
     GetParticipantRequest.add_member(:stage_arn, Shapes::ShapeRef.new(shape: StageArn, required: true, location_name: "stageArn"))
+    GetParticipantRequest.add_member(:session_id, Shapes::ShapeRef.new(shape: StageSessionId, required: true, location_name: "sessionId"))
+    GetParticipantRequest.add_member(:participant_id, Shapes::ShapeRef.new(shape: ParticipantId, required: true, location_name: "participantId"))
     GetParticipantRequest.struct_class = Types::GetParticipantRequest
 
     GetParticipantResponse.add_member(:participant, Shapes::ShapeRef.new(shape: Participant, location_name: "participant"))
@@ -344,8 +357,8 @@ module Aws::IVSRealTime
     GetStageResponse.add_member(:stage, Shapes::ShapeRef.new(shape: Stage, location_name: "stage"))
     GetStageResponse.struct_class = Types::GetStageResponse
 
-    GetStageSessionRequest.add_member(:session_id, Shapes::ShapeRef.new(shape: StageSessionId, required: true, location_name: "sessionId"))
     GetStageSessionRequest.add_member(:stage_arn, Shapes::ShapeRef.new(shape: StageArn, required: true, location_name: "stageArn"))
+    GetStageSessionRequest.add_member(:session_id, Shapes::ShapeRef.new(shape: StageSessionId, required: true, location_name: "sessionId"))
     GetStageSessionRequest.struct_class = Types::GetStageSessionRequest
 
     GetStageSessionResponse.add_member(:stage_session, Shapes::ShapeRef.new(shape: StageSession, location_name: "stageSession"))
@@ -358,10 +371,10 @@ module Aws::IVSRealTime
     GetStorageConfigurationResponse.struct_class = Types::GetStorageConfigurationResponse
 
     GridConfiguration.add_member(:featured_participant_attribute, Shapes::ShapeRef.new(shape: AttributeKey, location_name: "featuredParticipantAttribute"))
-    GridConfiguration.add_member(:grid_gap, Shapes::ShapeRef.new(shape: GridGap, location_name: "gridGap"))
     GridConfiguration.add_member(:omit_stopped_video, Shapes::ShapeRef.new(shape: OmitStoppedVideo, location_name: "omitStoppedVideo"))
     GridConfiguration.add_member(:video_aspect_ratio, Shapes::ShapeRef.new(shape: VideoAspectRatio, location_name: "videoAspectRatio"))
     GridConfiguration.add_member(:video_fill_mode, Shapes::ShapeRef.new(shape: VideoFillMode, location_name: "videoFillMode"))
+    GridConfiguration.add_member(:grid_gap, Shapes::ShapeRef.new(shape: GridGap, location_name: "gridGap"))
     GridConfiguration.struct_class = Types::GridConfiguration
 
     InternalServerException.add_member(:exception_message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "exceptionMessage"))
@@ -371,71 +384,72 @@ module Aws::IVSRealTime
     LayoutConfiguration.add_member(:pip, Shapes::ShapeRef.new(shape: PipConfiguration, location_name: "pip"))
     LayoutConfiguration.struct_class = Types::LayoutConfiguration
 
-    ListCompositionsRequest.add_member(:filter_by_encoder_configuration_arn, Shapes::ShapeRef.new(shape: EncoderConfigurationArn, location_name: "filterByEncoderConfigurationArn"))
     ListCompositionsRequest.add_member(:filter_by_stage_arn, Shapes::ShapeRef.new(shape: StageArn, location_name: "filterByStageArn"))
-    ListCompositionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxCompositionResults, location_name: "maxResults"))
+    ListCompositionsRequest.add_member(:filter_by_encoder_configuration_arn, Shapes::ShapeRef.new(shape: EncoderConfigurationArn, location_name: "filterByEncoderConfigurationArn"))
     ListCompositionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListCompositionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxCompositionResults, location_name: "maxResults"))
     ListCompositionsRequest.struct_class = Types::ListCompositionsRequest
 
     ListCompositionsResponse.add_member(:compositions, Shapes::ShapeRef.new(shape: CompositionSummaryList, required: true, location_name: "compositions"))
     ListCompositionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListCompositionsResponse.struct_class = Types::ListCompositionsResponse
 
-    ListEncoderConfigurationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxEncoderConfigurationResults, location_name: "maxResults"))
     ListEncoderConfigurationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListEncoderConfigurationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxEncoderConfigurationResults, location_name: "maxResults"))
     ListEncoderConfigurationsRequest.struct_class = Types::ListEncoderConfigurationsRequest
 
     ListEncoderConfigurationsResponse.add_member(:encoder_configurations, Shapes::ShapeRef.new(shape: EncoderConfigurationSummaryList, required: true, location_name: "encoderConfigurations"))
     ListEncoderConfigurationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListEncoderConfigurationsResponse.struct_class = Types::ListEncoderConfigurationsResponse
 
-    ListParticipantEventsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxParticipantEventResults, location_name: "maxResults"))
-    ListParticipantEventsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
-    ListParticipantEventsRequest.add_member(:participant_id, Shapes::ShapeRef.new(shape: ParticipantId, required: true, location_name: "participantId"))
-    ListParticipantEventsRequest.add_member(:session_id, Shapes::ShapeRef.new(shape: StageSessionId, required: true, location_name: "sessionId"))
     ListParticipantEventsRequest.add_member(:stage_arn, Shapes::ShapeRef.new(shape: StageArn, required: true, location_name: "stageArn"))
+    ListParticipantEventsRequest.add_member(:session_id, Shapes::ShapeRef.new(shape: StageSessionId, required: true, location_name: "sessionId"))
+    ListParticipantEventsRequest.add_member(:participant_id, Shapes::ShapeRef.new(shape: ParticipantId, required: true, location_name: "participantId"))
+    ListParticipantEventsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListParticipantEventsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxParticipantEventResults, location_name: "maxResults"))
     ListParticipantEventsRequest.struct_class = Types::ListParticipantEventsRequest
 
     ListParticipantEventsResponse.add_member(:events, Shapes::ShapeRef.new(shape: EventList, required: true, location_name: "events"))
     ListParticipantEventsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListParticipantEventsResponse.struct_class = Types::ListParticipantEventsResponse
 
+    ListParticipantsRequest.add_member(:stage_arn, Shapes::ShapeRef.new(shape: StageArn, required: true, location_name: "stageArn"))
+    ListParticipantsRequest.add_member(:session_id, Shapes::ShapeRef.new(shape: StageSessionId, required: true, location_name: "sessionId"))
+    ListParticipantsRequest.add_member(:filter_by_user_id, Shapes::ShapeRef.new(shape: UserId, location_name: "filterByUserId"))
     ListParticipantsRequest.add_member(:filter_by_published, Shapes::ShapeRef.new(shape: Published, location_name: "filterByPublished"))
     ListParticipantsRequest.add_member(:filter_by_state, Shapes::ShapeRef.new(shape: ParticipantState, location_name: "filterByState"))
-    ListParticipantsRequest.add_member(:filter_by_user_id, Shapes::ShapeRef.new(shape: UserId, location_name: "filterByUserId"))
-    ListParticipantsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxParticipantResults, location_name: "maxResults"))
     ListParticipantsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
-    ListParticipantsRequest.add_member(:session_id, Shapes::ShapeRef.new(shape: StageSessionId, required: true, location_name: "sessionId"))
-    ListParticipantsRequest.add_member(:stage_arn, Shapes::ShapeRef.new(shape: StageArn, required: true, location_name: "stageArn"))
+    ListParticipantsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxParticipantResults, location_name: "maxResults"))
+    ListParticipantsRequest.add_member(:filter_by_recording_state, Shapes::ShapeRef.new(shape: ParticipantRecordingFilterByRecordingState, location_name: "filterByRecordingState"))
     ListParticipantsRequest.struct_class = Types::ListParticipantsRequest
 
-    ListParticipantsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListParticipantsResponse.add_member(:participants, Shapes::ShapeRef.new(shape: ParticipantList, required: true, location_name: "participants"))
+    ListParticipantsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListParticipantsResponse.struct_class = Types::ListParticipantsResponse
 
-    ListStageSessionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxStageSessionResults, location_name: "maxResults"))
-    ListStageSessionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListStageSessionsRequest.add_member(:stage_arn, Shapes::ShapeRef.new(shape: StageArn, required: true, location_name: "stageArn"))
+    ListStageSessionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListStageSessionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxStageSessionResults, location_name: "maxResults"))
     ListStageSessionsRequest.struct_class = Types::ListStageSessionsRequest
 
-    ListStageSessionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListStageSessionsResponse.add_member(:stage_sessions, Shapes::ShapeRef.new(shape: StageSessionList, required: true, location_name: "stageSessions"))
+    ListStageSessionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListStageSessionsResponse.struct_class = Types::ListStageSessionsResponse
 
-    ListStagesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxStageResults, location_name: "maxResults"))
     ListStagesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListStagesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxStageResults, location_name: "maxResults"))
     ListStagesRequest.struct_class = Types::ListStagesRequest
 
-    ListStagesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListStagesResponse.add_member(:stages, Shapes::ShapeRef.new(shape: StageSummaryList, required: true, location_name: "stages"))
+    ListStagesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListStagesResponse.struct_class = Types::ListStagesResponse
 
-    ListStorageConfigurationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxStorageConfigurationResults, location_name: "maxResults"))
     ListStorageConfigurationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListStorageConfigurationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxStorageConfigurationResults, location_name: "maxResults"))
     ListStorageConfigurationsRequest.struct_class = Types::ListStorageConfigurationsRequest
 
-    ListStorageConfigurationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListStorageConfigurationsResponse.add_member(:storage_configurations, Shapes::ShapeRef.new(shape: StorageConfigurationSummaryList, required: true, location_name: "storageConfigurations"))
+    ListStorageConfigurationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListStorageConfigurationsResponse.struct_class = Types::ListStorageConfigurationsResponse
 
     ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location: "uri", location_name: "resourceArn"))
@@ -444,18 +458,21 @@ module Aws::IVSRealTime
     ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, required: true, location_name: "tags"))
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
 
-    Participant.add_member(:attributes, Shapes::ShapeRef.new(shape: ParticipantAttributes, location_name: "attributes"))
-    Participant.add_member(:browser_name, Shapes::ShapeRef.new(shape: ParticipantClientAttribute, location_name: "browserName"))
-    Participant.add_member(:browser_version, Shapes::ShapeRef.new(shape: ParticipantClientAttribute, location_name: "browserVersion"))
+    Participant.add_member(:participant_id, Shapes::ShapeRef.new(shape: ParticipantId, location_name: "participantId"))
+    Participant.add_member(:user_id, Shapes::ShapeRef.new(shape: UserId, location_name: "userId"))
+    Participant.add_member(:state, Shapes::ShapeRef.new(shape: ParticipantState, location_name: "state"))
     Participant.add_member(:first_join_time, Shapes::ShapeRef.new(shape: Time, location_name: "firstJoinTime"))
+    Participant.add_member(:attributes, Shapes::ShapeRef.new(shape: ParticipantAttributes, location_name: "attributes"))
+    Participant.add_member(:published, Shapes::ShapeRef.new(shape: Published, location_name: "published"))
     Participant.add_member(:isp_name, Shapes::ShapeRef.new(shape: ParticipantClientAttribute, location_name: "ispName"))
     Participant.add_member(:os_name, Shapes::ShapeRef.new(shape: ParticipantClientAttribute, location_name: "osName"))
     Participant.add_member(:os_version, Shapes::ShapeRef.new(shape: ParticipantClientAttribute, location_name: "osVersion"))
-    Participant.add_member(:participant_id, Shapes::ShapeRef.new(shape: ParticipantId, location_name: "participantId"))
-    Participant.add_member(:published, Shapes::ShapeRef.new(shape: Published, location_name: "published"))
+    Participant.add_member(:browser_name, Shapes::ShapeRef.new(shape: ParticipantClientAttribute, location_name: "browserName"))
+    Participant.add_member(:browser_version, Shapes::ShapeRef.new(shape: ParticipantClientAttribute, location_name: "browserVersion"))
     Participant.add_member(:sdk_version, Shapes::ShapeRef.new(shape: ParticipantClientAttribute, location_name: "sdkVersion"))
-    Participant.add_member(:state, Shapes::ShapeRef.new(shape: ParticipantState, location_name: "state"))
-    Participant.add_member(:user_id, Shapes::ShapeRef.new(shape: UserId, location_name: "userId"))
+    Participant.add_member(:recording_s3_bucket_name, Shapes::ShapeRef.new(shape: ParticipantRecordingS3BucketName, location_name: "recordingS3BucketName"))
+    Participant.add_member(:recording_s3_prefix, Shapes::ShapeRef.new(shape: ParticipantRecordingS3Prefix, location_name: "recordingS3Prefix"))
+    Participant.add_member(:recording_state, Shapes::ShapeRef.new(shape: ParticipantRecordingState, location_name: "recordingState"))
     Participant.struct_class = Types::Participant
 
     ParticipantAttributes.key = Shapes::ShapeRef.new(shape: String)
@@ -463,20 +480,23 @@ module Aws::IVSRealTime
 
     ParticipantList.member = Shapes::ShapeRef.new(shape: ParticipantSummary)
 
-    ParticipantSummary.add_member(:first_join_time, Shapes::ShapeRef.new(shape: Time, location_name: "firstJoinTime"))
+    ParticipantRecordingMediaTypeList.member = Shapes::ShapeRef.new(shape: ParticipantRecordingMediaType)
+
     ParticipantSummary.add_member(:participant_id, Shapes::ShapeRef.new(shape: ParticipantId, location_name: "participantId"))
-    ParticipantSummary.add_member(:published, Shapes::ShapeRef.new(shape: Published, location_name: "published"))
-    ParticipantSummary.add_member(:state, Shapes::ShapeRef.new(shape: ParticipantState, location_name: "state"))
     ParticipantSummary.add_member(:user_id, Shapes::ShapeRef.new(shape: UserId, location_name: "userId"))
+    ParticipantSummary.add_member(:state, Shapes::ShapeRef.new(shape: ParticipantState, location_name: "state"))
+    ParticipantSummary.add_member(:first_join_time, Shapes::ShapeRef.new(shape: Time, location_name: "firstJoinTime"))
+    ParticipantSummary.add_member(:published, Shapes::ShapeRef.new(shape: Published, location_name: "published"))
+    ParticipantSummary.add_member(:recording_state, Shapes::ShapeRef.new(shape: ParticipantRecordingState, location_name: "recordingState"))
     ParticipantSummary.struct_class = Types::ParticipantSummary
 
-    ParticipantToken.add_member(:attributes, Shapes::ShapeRef.new(shape: ParticipantTokenAttributes, location_name: "attributes"))
-    ParticipantToken.add_member(:capabilities, Shapes::ShapeRef.new(shape: ParticipantTokenCapabilities, location_name: "capabilities"))
-    ParticipantToken.add_member(:duration, Shapes::ShapeRef.new(shape: ParticipantTokenDurationMinutes, location_name: "duration"))
-    ParticipantToken.add_member(:expiration_time, Shapes::ShapeRef.new(shape: ParticipantTokenExpirationTime, location_name: "expirationTime"))
     ParticipantToken.add_member(:participant_id, Shapes::ShapeRef.new(shape: ParticipantTokenId, location_name: "participantId"))
     ParticipantToken.add_member(:token, Shapes::ShapeRef.new(shape: ParticipantTokenString, location_name: "token"))
     ParticipantToken.add_member(:user_id, Shapes::ShapeRef.new(shape: ParticipantTokenUserId, location_name: "userId"))
+    ParticipantToken.add_member(:attributes, Shapes::ShapeRef.new(shape: ParticipantTokenAttributes, location_name: "attributes"))
+    ParticipantToken.add_member(:duration, Shapes::ShapeRef.new(shape: ParticipantTokenDurationMinutes, location_name: "duration"))
+    ParticipantToken.add_member(:capabilities, Shapes::ShapeRef.new(shape: ParticipantTokenCapabilities, location_name: "capabilities"))
+    ParticipantToken.add_member(:expiration_time, Shapes::ShapeRef.new(shape: ParticipantTokenExpirationTime, location_name: "expirationTime"))
     ParticipantToken.struct_class = Types::ParticipantToken
 
     ParticipantTokenAttributes.key = Shapes::ShapeRef.new(shape: String)
@@ -484,10 +504,10 @@ module Aws::IVSRealTime
 
     ParticipantTokenCapabilities.member = Shapes::ShapeRef.new(shape: ParticipantTokenCapability)
 
-    ParticipantTokenConfiguration.add_member(:attributes, Shapes::ShapeRef.new(shape: ParticipantTokenAttributes, location_name: "attributes"))
-    ParticipantTokenConfiguration.add_member(:capabilities, Shapes::ShapeRef.new(shape: ParticipantTokenCapabilities, location_name: "capabilities"))
     ParticipantTokenConfiguration.add_member(:duration, Shapes::ShapeRef.new(shape: ParticipantTokenDurationMinutes, location_name: "duration"))
     ParticipantTokenConfiguration.add_member(:user_id, Shapes::ShapeRef.new(shape: ParticipantTokenUserId, location_name: "userId"))
+    ParticipantTokenConfiguration.add_member(:attributes, Shapes::ShapeRef.new(shape: ParticipantTokenAttributes, location_name: "attributes"))
+    ParticipantTokenConfiguration.add_member(:capabilities, Shapes::ShapeRef.new(shape: ParticipantTokenCapabilities, location_name: "capabilities"))
     ParticipantTokenConfiguration.struct_class = Types::ParticipantTokenConfiguration
 
     ParticipantTokenConfigurations.member = Shapes::ShapeRef.new(shape: ParticipantTokenConfiguration)
@@ -498,15 +518,15 @@ module Aws::IVSRealTime
     PendingVerification.struct_class = Types::PendingVerification
 
     PipConfiguration.add_member(:featured_participant_attribute, Shapes::ShapeRef.new(shape: AttributeKey, location_name: "featuredParticipantAttribute"))
-    PipConfiguration.add_member(:grid_gap, Shapes::ShapeRef.new(shape: GridGap, location_name: "gridGap"))
     PipConfiguration.add_member(:omit_stopped_video, Shapes::ShapeRef.new(shape: OmitStoppedVideo, location_name: "omitStoppedVideo"))
-    PipConfiguration.add_member(:pip_behavior, Shapes::ShapeRef.new(shape: PipBehavior, location_name: "pipBehavior"))
-    PipConfiguration.add_member(:pip_height, Shapes::ShapeRef.new(shape: PipHeight, location_name: "pipHeight"))
-    PipConfiguration.add_member(:pip_offset, Shapes::ShapeRef.new(shape: PipOffset, location_name: "pipOffset"))
+    PipConfiguration.add_member(:video_fill_mode, Shapes::ShapeRef.new(shape: VideoFillMode, location_name: "videoFillMode"))
+    PipConfiguration.add_member(:grid_gap, Shapes::ShapeRef.new(shape: GridGap, location_name: "gridGap"))
     PipConfiguration.add_member(:pip_participant_attribute, Shapes::ShapeRef.new(shape: AttributeKey, location_name: "pipParticipantAttribute"))
+    PipConfiguration.add_member(:pip_behavior, Shapes::ShapeRef.new(shape: PipBehavior, location_name: "pipBehavior"))
+    PipConfiguration.add_member(:pip_offset, Shapes::ShapeRef.new(shape: PipOffset, location_name: "pipOffset"))
     PipConfiguration.add_member(:pip_position, Shapes::ShapeRef.new(shape: PipPosition, location_name: "pipPosition"))
     PipConfiguration.add_member(:pip_width, Shapes::ShapeRef.new(shape: PipWidth, location_name: "pipWidth"))
-    PipConfiguration.add_member(:video_fill_mode, Shapes::ShapeRef.new(shape: VideoFillMode, location_name: "videoFillMode"))
+    PipConfiguration.add_member(:pip_height, Shapes::ShapeRef.new(shape: PipHeight, location_name: "pipHeight"))
     PipConfiguration.struct_class = Types::PipConfiguration
 
     RecordingConfiguration.add_member(:format, Shapes::ShapeRef.new(shape: RecordingConfigurationFormat, location_name: "format"))
@@ -515,9 +535,9 @@ module Aws::IVSRealTime
     ResourceNotFoundException.add_member(:exception_message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "exceptionMessage"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
+    S3DestinationConfiguration.add_member(:storage_configuration_arn, Shapes::ShapeRef.new(shape: StorageConfigurationArn, required: true, location_name: "storageConfigurationArn"))
     S3DestinationConfiguration.add_member(:encoder_configuration_arns, Shapes::ShapeRef.new(shape: EncoderConfigurationArnList, required: true, location_name: "encoderConfigurationArns"))
     S3DestinationConfiguration.add_member(:recording_configuration, Shapes::ShapeRef.new(shape: RecordingConfiguration, location_name: "recordingConfiguration"))
-    S3DestinationConfiguration.add_member(:storage_configuration_arn, Shapes::ShapeRef.new(shape: StorageConfigurationArn, required: true, location_name: "storageConfigurationArn"))
     S3DestinationConfiguration.struct_class = Types::S3DestinationConfiguration
 
     S3Detail.add_member(:recording_prefix, Shapes::ShapeRef.new(shape: String, required: true, location_name: "recordingPrefix"))
@@ -529,36 +549,37 @@ module Aws::IVSRealTime
     ServiceQuotaExceededException.add_member(:exception_message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "exceptionMessage"))
     ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
 
-    Stage.add_member(:active_session_id, Shapes::ShapeRef.new(shape: StageSessionId, location_name: "activeSessionId"))
     Stage.add_member(:arn, Shapes::ShapeRef.new(shape: StageArn, required: true, location_name: "arn"))
     Stage.add_member(:name, Shapes::ShapeRef.new(shape: StageName, location_name: "name"))
+    Stage.add_member(:active_session_id, Shapes::ShapeRef.new(shape: StageSessionId, location_name: "activeSessionId"))
     Stage.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    Stage.add_member(:auto_participant_recording_configuration, Shapes::ShapeRef.new(shape: AutoParticipantRecordingConfiguration, location_name: "autoParticipantRecordingConfiguration"))
     Stage.struct_class = Types::Stage
 
-    StageSession.add_member(:end_time, Shapes::ShapeRef.new(shape: Time, location_name: "endTime"))
     StageSession.add_member(:session_id, Shapes::ShapeRef.new(shape: StageSessionId, location_name: "sessionId"))
     StageSession.add_member(:start_time, Shapes::ShapeRef.new(shape: Time, location_name: "startTime"))
+    StageSession.add_member(:end_time, Shapes::ShapeRef.new(shape: Time, location_name: "endTime"))
     StageSession.struct_class = Types::StageSession
 
     StageSessionList.member = Shapes::ShapeRef.new(shape: StageSessionSummary)
 
-    StageSessionSummary.add_member(:end_time, Shapes::ShapeRef.new(shape: Time, location_name: "endTime"))
     StageSessionSummary.add_member(:session_id, Shapes::ShapeRef.new(shape: StageSessionId, location_name: "sessionId"))
     StageSessionSummary.add_member(:start_time, Shapes::ShapeRef.new(shape: Time, location_name: "startTime"))
+    StageSessionSummary.add_member(:end_time, Shapes::ShapeRef.new(shape: Time, location_name: "endTime"))
     StageSessionSummary.struct_class = Types::StageSessionSummary
 
-    StageSummary.add_member(:active_session_id, Shapes::ShapeRef.new(shape: StageSessionId, location_name: "activeSessionId"))
     StageSummary.add_member(:arn, Shapes::ShapeRef.new(shape: StageArn, required: true, location_name: "arn"))
     StageSummary.add_member(:name, Shapes::ShapeRef.new(shape: StageName, location_name: "name"))
+    StageSummary.add_member(:active_session_id, Shapes::ShapeRef.new(shape: StageSessionId, location_name: "activeSessionId"))
     StageSummary.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     StageSummary.struct_class = Types::StageSummary
 
     StageSummaryList.member = Shapes::ShapeRef.new(shape: StageSummary)
 
-    StartCompositionRequest.add_member(:destinations, Shapes::ShapeRef.new(shape: DestinationConfigurationList, required: true, location_name: "destinations"))
+    StartCompositionRequest.add_member(:stage_arn, Shapes::ShapeRef.new(shape: StageArn, required: true, location_name: "stageArn"))
     StartCompositionRequest.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: CompositionClientToken, location_name: "idempotencyToken", metadata: {"idempotencyToken"=>true}))
     StartCompositionRequest.add_member(:layout, Shapes::ShapeRef.new(shape: LayoutConfiguration, location_name: "layout"))
-    StartCompositionRequest.add_member(:stage_arn, Shapes::ShapeRef.new(shape: StageArn, required: true, location_name: "stageArn"))
+    StartCompositionRequest.add_member(:destinations, Shapes::ShapeRef.new(shape: DestinationConfigurationList, required: true, location_name: "destinations"))
     StartCompositionRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     StartCompositionRequest.struct_class = Types::StartCompositionRequest
 
@@ -603,6 +624,7 @@ module Aws::IVSRealTime
 
     UpdateStageRequest.add_member(:arn, Shapes::ShapeRef.new(shape: StageArn, required: true, location_name: "arn"))
     UpdateStageRequest.add_member(:name, Shapes::ShapeRef.new(shape: StageName, location_name: "name"))
+    UpdateStageRequest.add_member(:auto_participant_recording_configuration, Shapes::ShapeRef.new(shape: AutoParticipantRecordingConfiguration, location_name: "autoParticipantRecordingConfiguration"))
     UpdateStageRequest.struct_class = Types::UpdateStageRequest
 
     UpdateStageResponse.add_member(:stage, Shapes::ShapeRef.new(shape: Stage, location_name: "stage"))
@@ -611,10 +633,10 @@ module Aws::IVSRealTime
     ValidationException.add_member(:exception_message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "exceptionMessage"))
     ValidationException.struct_class = Types::ValidationException
 
-    Video.add_member(:bitrate, Shapes::ShapeRef.new(shape: Bitrate, location_name: "bitrate"))
-    Video.add_member(:framerate, Shapes::ShapeRef.new(shape: Framerate, location_name: "framerate"))
-    Video.add_member(:height, Shapes::ShapeRef.new(shape: Height, location_name: "height"))
     Video.add_member(:width, Shapes::ShapeRef.new(shape: Width, location_name: "width"))
+    Video.add_member(:height, Shapes::ShapeRef.new(shape: Height, location_name: "height"))
+    Video.add_member(:framerate, Shapes::ShapeRef.new(shape: Framerate, location_name: "framerate"))
+    Video.add_member(:bitrate, Shapes::ShapeRef.new(shape: Bitrate, location_name: "bitrate"))
     Video.struct_class = Types::Video
 
 

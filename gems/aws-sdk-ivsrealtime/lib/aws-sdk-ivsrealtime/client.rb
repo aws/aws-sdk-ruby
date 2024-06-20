@@ -418,6 +418,10 @@ module Aws::IVSRealTime
     # @option params [String] :name
     #   Optional name to identify the resource.
     #
+    # @option params [Types::Video] :video
+    #   Video configuration. Default: video resolution 1280x720, bitrate 2500
+    #   kbps, 30 fps.
+    #
     # @option params [Hash<String,String>] :tags
     #   Tags attached to the resource. Array of maps, each of the form
     #   `string:string (key:value)`. See [Tagging AWS Resources][1] for
@@ -429,10 +433,6 @@ module Aws::IVSRealTime
     #
     #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
     #
-    # @option params [Types::Video] :video
-    #   Video configuration. Default: video resolution 1280x720, bitrate 2500
-    #   kbps, 30 fps.
-    #
     # @return [Types::CreateEncoderConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateEncoderConfigurationResponse#encoder_configuration #encoder_configuration} => Types::EncoderConfiguration
@@ -441,14 +441,14 @@ module Aws::IVSRealTime
     #
     #   resp = client.create_encoder_configuration({
     #     name: "EncoderConfigurationName",
+    #     video: {
+    #       width: 1,
+    #       height: 1,
+    #       framerate: 1.0,
+    #       bitrate: 1,
+    #     },
     #     tags: {
     #       "TagKey" => "TagValue",
-    #     },
-    #     video: {
-    #       bitrate: 1,
-    #       framerate: 1.0,
-    #       height: 1,
-    #       width: 1,
     #     },
     #   })
     #
@@ -456,12 +456,12 @@ module Aws::IVSRealTime
     #
     #   resp.encoder_configuration.arn #=> String
     #   resp.encoder_configuration.name #=> String
+    #   resp.encoder_configuration.video.width #=> Integer
+    #   resp.encoder_configuration.video.height #=> Integer
+    #   resp.encoder_configuration.video.framerate #=> Float
+    #   resp.encoder_configuration.video.bitrate #=> Integer
     #   resp.encoder_configuration.tags #=> Hash
     #   resp.encoder_configuration.tags["TagKey"] #=> String
-    #   resp.encoder_configuration.video.bitrate #=> Integer
-    #   resp.encoder_configuration.video.framerate #=> Float
-    #   resp.encoder_configuration.video.height #=> Integer
-    #   resp.encoder_configuration.video.width #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/CreateEncoderConfiguration AWS API Documentation
     #
@@ -479,6 +479,19 @@ module Aws::IVSRealTime
     # Encryption keys are owned by Amazon IVS and never used directly by
     # your application.
     #
+    # @option params [required, String] :stage_arn
+    #   ARN of the stage to which this token is scoped.
+    #
+    # @option params [Integer] :duration
+    #   Duration (in minutes), after which the token expires. Default: 720 (12
+    #   hours).
+    #
+    # @option params [String] :user_id
+    #   Name that can be specified to help identify the token. This can be any
+    #   UTF-8 encoded text. *This field is exposed to all stage participants
+    #   and should not be used for personally identifying, confidential, or
+    #   sensitive information.*
+    #
     # @option params [Hash<String,String>] :attributes
     #   Application-provided attributes to encode into the token and attach to
     #   a stage. Map keys and values can contain UTF-8 encoded text. The
@@ -490,19 +503,6 @@ module Aws::IVSRealTime
     #   Set of capabilities that the user is allowed to perform in the stage.
     #   Default: `PUBLISH, SUBSCRIBE`.
     #
-    # @option params [Integer] :duration
-    #   Duration (in minutes), after which the token expires. Default: 720 (12
-    #   hours).
-    #
-    # @option params [required, String] :stage_arn
-    #   ARN of the stage to which this token is scoped.
-    #
-    # @option params [String] :user_id
-    #   Name that can be specified to help identify the token. This can be any
-    #   UTF-8 encoded text. *This field is exposed to all stage participants
-    #   and should not be used for personally identifying, confidential, or
-    #   sensitive information.*
-    #
     # @return [Types::CreateParticipantTokenResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateParticipantTokenResponse#participant_token #participant_token} => Types::ParticipantToken
@@ -510,26 +510,26 @@ module Aws::IVSRealTime
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_participant_token({
+    #     stage_arn: "StageArn", # required
+    #     duration: 1,
+    #     user_id: "ParticipantTokenUserId",
     #     attributes: {
     #       "String" => "String",
     #     },
     #     capabilities: ["PUBLISH"], # accepts PUBLISH, SUBSCRIBE
-    #     duration: 1,
-    #     stage_arn: "StageArn", # required
-    #     user_id: "ParticipantTokenUserId",
     #   })
     #
     # @example Response structure
     #
-    #   resp.participant_token.attributes #=> Hash
-    #   resp.participant_token.attributes["String"] #=> String
-    #   resp.participant_token.capabilities #=> Array
-    #   resp.participant_token.capabilities[0] #=> String, one of "PUBLISH", "SUBSCRIBE"
-    #   resp.participant_token.duration #=> Integer
-    #   resp.participant_token.expiration_time #=> Time
     #   resp.participant_token.participant_id #=> String
     #   resp.participant_token.token #=> String
     #   resp.participant_token.user_id #=> String
+    #   resp.participant_token.attributes #=> Hash
+    #   resp.participant_token.attributes["String"] #=> String
+    #   resp.participant_token.duration #=> Integer
+    #   resp.participant_token.capabilities #=> Array
+    #   resp.participant_token.capabilities[0] #=> String, one of "PUBLISH", "SUBSCRIBE"
+    #   resp.participant_token.expiration_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/CreateParticipantToken AWS API Documentation
     #
@@ -560,10 +560,13 @@ module Aws::IVSRealTime
     #
     #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
     #
+    # @option params [Types::AutoParticipantRecordingConfiguration] :auto_participant_recording_configuration
+    #   Auto participant recording configuration object attached to the stage.
+    #
     # @return [Types::CreateStageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::CreateStageResponse#participant_tokens #participant_tokens} => Array&lt;Types::ParticipantToken&gt;
     #   * {Types::CreateStageResponse#stage #stage} => Types::Stage
+    #   * {Types::CreateStageResponse#participant_tokens #participant_tokens} => Array&lt;Types::ParticipantToken&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -571,36 +574,43 @@ module Aws::IVSRealTime
     #     name: "StageName",
     #     participant_token_configurations: [
     #       {
+    #         duration: 1,
+    #         user_id: "ParticipantTokenUserId",
     #         attributes: {
     #           "String" => "String",
     #         },
     #         capabilities: ["PUBLISH"], # accepts PUBLISH, SUBSCRIBE
-    #         duration: 1,
-    #         user_id: "ParticipantTokenUserId",
     #       },
     #     ],
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
+    #     auto_participant_recording_configuration: {
+    #       storage_configuration_arn: "AutoParticipantRecordingStorageConfigurationArn", # required
+    #       media_types: ["AUDIO_VIDEO"], # accepts AUDIO_VIDEO, AUDIO_ONLY
+    #     },
     #   })
     #
     # @example Response structure
     #
+    #   resp.stage.arn #=> String
+    #   resp.stage.name #=> String
+    #   resp.stage.active_session_id #=> String
+    #   resp.stage.tags #=> Hash
+    #   resp.stage.tags["TagKey"] #=> String
+    #   resp.stage.auto_participant_recording_configuration.storage_configuration_arn #=> String
+    #   resp.stage.auto_participant_recording_configuration.media_types #=> Array
+    #   resp.stage.auto_participant_recording_configuration.media_types[0] #=> String, one of "AUDIO_VIDEO", "AUDIO_ONLY"
     #   resp.participant_tokens #=> Array
-    #   resp.participant_tokens[0].attributes #=> Hash
-    #   resp.participant_tokens[0].attributes["String"] #=> String
-    #   resp.participant_tokens[0].capabilities #=> Array
-    #   resp.participant_tokens[0].capabilities[0] #=> String, one of "PUBLISH", "SUBSCRIBE"
-    #   resp.participant_tokens[0].duration #=> Integer
-    #   resp.participant_tokens[0].expiration_time #=> Time
     #   resp.participant_tokens[0].participant_id #=> String
     #   resp.participant_tokens[0].token #=> String
     #   resp.participant_tokens[0].user_id #=> String
-    #   resp.stage.active_session_id #=> String
-    #   resp.stage.arn #=> String
-    #   resp.stage.name #=> String
-    #   resp.stage.tags #=> Hash
-    #   resp.stage.tags["TagKey"] #=> String
+    #   resp.participant_tokens[0].attributes #=> Hash
+    #   resp.participant_tokens[0].attributes["String"] #=> String
+    #   resp.participant_tokens[0].duration #=> Integer
+    #   resp.participant_tokens[0].capabilities #=> Array
+    #   resp.participant_tokens[0].capabilities[0] #=> String, one of "PUBLISH", "SUBSCRIBE"
+    #   resp.participant_tokens[0].expiration_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/CreateStage AWS API Documentation
     #
@@ -744,6 +754,9 @@ module Aws::IVSRealTime
     # Disconnects a specified participant and revokes the participant
     # permanently from a specified stage.
     #
+    # @option params [required, String] :stage_arn
+    #   ARN of the stage to which the participant is attached.
+    #
     # @option params [required, String] :participant_id
     #   Identifier of the participant to be disconnected. This is assigned by
     #   IVS and returned by CreateParticipantToken.
@@ -751,17 +764,14 @@ module Aws::IVSRealTime
     # @option params [String] :reason
     #   Description of why this participant is being disconnected.
     #
-    # @option params [required, String] :stage_arn
-    #   ARN of the stage to which the participant is attached.
-    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.disconnect_participant({
+    #     stage_arn: "StageArn", # required
     #     participant_id: "ParticipantTokenId", # required
     #     reason: "DisconnectParticipantReason",
-    #     stage_arn: "StageArn", # required
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/DisconnectParticipant AWS API Documentation
@@ -791,40 +801,40 @@ module Aws::IVSRealTime
     # @example Response structure
     #
     #   resp.composition.arn #=> String
-    #   resp.composition.destinations #=> Array
-    #   resp.composition.destinations[0].configuration.channel.channel_arn #=> String
-    #   resp.composition.destinations[0].configuration.channel.encoder_configuration_arn #=> String
-    #   resp.composition.destinations[0].configuration.name #=> String
-    #   resp.composition.destinations[0].configuration.s3.encoder_configuration_arns #=> Array
-    #   resp.composition.destinations[0].configuration.s3.encoder_configuration_arns[0] #=> String
-    #   resp.composition.destinations[0].configuration.s3.recording_configuration.format #=> String, one of "HLS"
-    #   resp.composition.destinations[0].configuration.s3.storage_configuration_arn #=> String
-    #   resp.composition.destinations[0].detail.s3.recording_prefix #=> String
-    #   resp.composition.destinations[0].end_time #=> Time
-    #   resp.composition.destinations[0].id #=> String
-    #   resp.composition.destinations[0].start_time #=> Time
-    #   resp.composition.destinations[0].state #=> String, one of "STARTING", "ACTIVE", "STOPPING", "RECONNECTING", "FAILED", "STOPPED"
-    #   resp.composition.end_time #=> Time
+    #   resp.composition.stage_arn #=> String
+    #   resp.composition.state #=> String, one of "STARTING", "ACTIVE", "STOPPING", "FAILED", "STOPPED"
     #   resp.composition.layout.grid.featured_participant_attribute #=> String
-    #   resp.composition.layout.grid.grid_gap #=> Integer
     #   resp.composition.layout.grid.omit_stopped_video #=> Boolean
     #   resp.composition.layout.grid.video_aspect_ratio #=> String, one of "AUTO", "VIDEO", "SQUARE", "PORTRAIT"
     #   resp.composition.layout.grid.video_fill_mode #=> String, one of "FILL", "COVER", "CONTAIN"
+    #   resp.composition.layout.grid.grid_gap #=> Integer
     #   resp.composition.layout.pip.featured_participant_attribute #=> String
-    #   resp.composition.layout.pip.grid_gap #=> Integer
     #   resp.composition.layout.pip.omit_stopped_video #=> Boolean
-    #   resp.composition.layout.pip.pip_behavior #=> String, one of "STATIC", "DYNAMIC"
-    #   resp.composition.layout.pip.pip_height #=> Integer
-    #   resp.composition.layout.pip.pip_offset #=> Integer
+    #   resp.composition.layout.pip.video_fill_mode #=> String, one of "FILL", "COVER", "CONTAIN"
+    #   resp.composition.layout.pip.grid_gap #=> Integer
     #   resp.composition.layout.pip.pip_participant_attribute #=> String
+    #   resp.composition.layout.pip.pip_behavior #=> String, one of "STATIC", "DYNAMIC"
+    #   resp.composition.layout.pip.pip_offset #=> Integer
     #   resp.composition.layout.pip.pip_position #=> String, one of "TOP_LEFT", "TOP_RIGHT", "BOTTOM_LEFT", "BOTTOM_RIGHT"
     #   resp.composition.layout.pip.pip_width #=> Integer
-    #   resp.composition.layout.pip.video_fill_mode #=> String, one of "FILL", "COVER", "CONTAIN"
-    #   resp.composition.stage_arn #=> String
-    #   resp.composition.start_time #=> Time
-    #   resp.composition.state #=> String, one of "STARTING", "ACTIVE", "STOPPING", "FAILED", "STOPPED"
+    #   resp.composition.layout.pip.pip_height #=> Integer
+    #   resp.composition.destinations #=> Array
+    #   resp.composition.destinations[0].id #=> String
+    #   resp.composition.destinations[0].state #=> String, one of "STARTING", "ACTIVE", "STOPPING", "RECONNECTING", "FAILED", "STOPPED"
+    #   resp.composition.destinations[0].start_time #=> Time
+    #   resp.composition.destinations[0].end_time #=> Time
+    #   resp.composition.destinations[0].configuration.name #=> String
+    #   resp.composition.destinations[0].configuration.channel.channel_arn #=> String
+    #   resp.composition.destinations[0].configuration.channel.encoder_configuration_arn #=> String
+    #   resp.composition.destinations[0].configuration.s3.storage_configuration_arn #=> String
+    #   resp.composition.destinations[0].configuration.s3.encoder_configuration_arns #=> Array
+    #   resp.composition.destinations[0].configuration.s3.encoder_configuration_arns[0] #=> String
+    #   resp.composition.destinations[0].configuration.s3.recording_configuration.format #=> String, one of "HLS"
+    #   resp.composition.destinations[0].detail.s3.recording_prefix #=> String
     #   resp.composition.tags #=> Hash
     #   resp.composition.tags["TagKey"] #=> String
+    #   resp.composition.start_time #=> Time
+    #   resp.composition.end_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/GetComposition AWS API Documentation
     #
@@ -854,12 +864,12 @@ module Aws::IVSRealTime
     #
     #   resp.encoder_configuration.arn #=> String
     #   resp.encoder_configuration.name #=> String
+    #   resp.encoder_configuration.video.width #=> Integer
+    #   resp.encoder_configuration.video.height #=> Integer
+    #   resp.encoder_configuration.video.framerate #=> Float
+    #   resp.encoder_configuration.video.bitrate #=> Integer
     #   resp.encoder_configuration.tags #=> Hash
     #   resp.encoder_configuration.tags["TagKey"] #=> String
-    #   resp.encoder_configuration.video.bitrate #=> Integer
-    #   resp.encoder_configuration.video.framerate #=> Float
-    #   resp.encoder_configuration.video.height #=> Integer
-    #   resp.encoder_configuration.video.width #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/GetEncoderConfiguration AWS API Documentation
     #
@@ -872,15 +882,15 @@ module Aws::IVSRealTime
 
     # Gets information about the specified participant token.
     #
-    # @option params [required, String] :participant_id
-    #   Unique identifier for the participant. This is assigned by IVS and
-    #   returned by CreateParticipantToken.
+    # @option params [required, String] :stage_arn
+    #   Stage ARN.
     #
     # @option params [required, String] :session_id
     #   ID of a session within the stage.
     #
-    # @option params [required, String] :stage_arn
-    #   Stage ARN.
+    # @option params [required, String] :participant_id
+    #   Unique identifier for the participant. This is assigned by IVS and
+    #   returned by CreateParticipantToken.
     #
     # @return [Types::GetParticipantResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -889,26 +899,29 @@ module Aws::IVSRealTime
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_participant({
-    #     participant_id: "ParticipantId", # required
-    #     session_id: "StageSessionId", # required
     #     stage_arn: "StageArn", # required
+    #     session_id: "StageSessionId", # required
+    #     participant_id: "ParticipantId", # required
     #   })
     #
     # @example Response structure
     #
+    #   resp.participant.participant_id #=> String
+    #   resp.participant.user_id #=> String
+    #   resp.participant.state #=> String, one of "CONNECTED", "DISCONNECTED"
+    #   resp.participant.first_join_time #=> Time
     #   resp.participant.attributes #=> Hash
     #   resp.participant.attributes["String"] #=> String
-    #   resp.participant.browser_name #=> String
-    #   resp.participant.browser_version #=> String
-    #   resp.participant.first_join_time #=> Time
+    #   resp.participant.published #=> Boolean
     #   resp.participant.isp_name #=> String
     #   resp.participant.os_name #=> String
     #   resp.participant.os_version #=> String
-    #   resp.participant.participant_id #=> String
-    #   resp.participant.published #=> Boolean
+    #   resp.participant.browser_name #=> String
+    #   resp.participant.browser_version #=> String
     #   resp.participant.sdk_version #=> String
-    #   resp.participant.state #=> String, one of "CONNECTED", "DISCONNECTED"
-    #   resp.participant.user_id #=> String
+    #   resp.participant.recording_s3_bucket_name #=> String
+    #   resp.participant.recording_s3_prefix #=> String
+    #   resp.participant.recording_state #=> String, one of "STARTING", "ACTIVE", "STOPPING", "STOPPED", "FAILED", "DISABLED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/GetParticipant AWS API Documentation
     #
@@ -936,11 +949,14 @@ module Aws::IVSRealTime
     #
     # @example Response structure
     #
-    #   resp.stage.active_session_id #=> String
     #   resp.stage.arn #=> String
     #   resp.stage.name #=> String
+    #   resp.stage.active_session_id #=> String
     #   resp.stage.tags #=> Hash
     #   resp.stage.tags["TagKey"] #=> String
+    #   resp.stage.auto_participant_recording_configuration.storage_configuration_arn #=> String
+    #   resp.stage.auto_participant_recording_configuration.media_types #=> Array
+    #   resp.stage.auto_participant_recording_configuration.media_types[0] #=> String, one of "AUDIO_VIDEO", "AUDIO_ONLY"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/GetStage AWS API Documentation
     #
@@ -953,11 +969,11 @@ module Aws::IVSRealTime
 
     # Gets information for the specified stage session.
     #
-    # @option params [required, String] :session_id
-    #   ID of a session within the stage.
-    #
     # @option params [required, String] :stage_arn
     #   ARN of the stage for which the information is to be retrieved.
+    #
+    # @option params [required, String] :session_id
+    #   ID of a session within the stage.
     #
     # @return [Types::GetStageSessionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -966,15 +982,15 @@ module Aws::IVSRealTime
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_stage_session({
-    #     session_id: "StageSessionId", # required
     #     stage_arn: "StageArn", # required
+    #     session_id: "StageSessionId", # required
     #   })
     #
     # @example Response structure
     #
-    #   resp.stage_session.end_time #=> Time
     #   resp.stage_session.session_id #=> String
     #   resp.stage_session.start_time #=> Time
+    #   resp.stage_session.end_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/GetStageSession AWS API Documentation
     #
@@ -1020,19 +1036,19 @@ module Aws::IVSRealTime
     # Gets summary information about all Compositions in your account, in
     # the AWS region where the API request is processed.
     #
+    # @option params [String] :filter_by_stage_arn
+    #   Filters the Composition list to match the specified Stage ARN.
+    #
     # @option params [String] :filter_by_encoder_configuration_arn
     #   Filters the Composition list to match the specified
     #   EncoderConfiguration attached to at least one of its output.
     #
-    # @option params [String] :filter_by_stage_arn
-    #   Filters the Composition list to match the specified Stage ARN.
-    #
-    # @option params [Integer] :max_results
-    #   Maximum number of results to return. Default: 100.
-    #
     # @option params [String] :next_token
     #   The first Composition to retrieve. This is used for pagination; see
     #   the `nextToken` response field.
+    #
+    # @option params [Integer] :max_results
+    #   Maximum number of results to return. Default: 100.
     #
     # @return [Types::ListCompositionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1044,27 +1060,27 @@ module Aws::IVSRealTime
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_compositions({
-    #     filter_by_encoder_configuration_arn: "EncoderConfigurationArn",
     #     filter_by_stage_arn: "StageArn",
-    #     max_results: 1,
+    #     filter_by_encoder_configuration_arn: "EncoderConfigurationArn",
     #     next_token: "PaginationToken",
+    #     max_results: 1,
     #   })
     #
     # @example Response structure
     #
     #   resp.compositions #=> Array
     #   resp.compositions[0].arn #=> String
-    #   resp.compositions[0].destinations #=> Array
-    #   resp.compositions[0].destinations[0].end_time #=> Time
-    #   resp.compositions[0].destinations[0].id #=> String
-    #   resp.compositions[0].destinations[0].start_time #=> Time
-    #   resp.compositions[0].destinations[0].state #=> String, one of "STARTING", "ACTIVE", "STOPPING", "RECONNECTING", "FAILED", "STOPPED"
-    #   resp.compositions[0].end_time #=> Time
     #   resp.compositions[0].stage_arn #=> String
-    #   resp.compositions[0].start_time #=> Time
+    #   resp.compositions[0].destinations #=> Array
+    #   resp.compositions[0].destinations[0].id #=> String
+    #   resp.compositions[0].destinations[0].state #=> String, one of "STARTING", "ACTIVE", "STOPPING", "RECONNECTING", "FAILED", "STOPPED"
+    #   resp.compositions[0].destinations[0].start_time #=> Time
+    #   resp.compositions[0].destinations[0].end_time #=> Time
     #   resp.compositions[0].state #=> String, one of "STARTING", "ACTIVE", "STOPPING", "FAILED", "STOPPED"
     #   resp.compositions[0].tags #=> Hash
     #   resp.compositions[0].tags["TagKey"] #=> String
+    #   resp.compositions[0].start_time #=> Time
+    #   resp.compositions[0].end_time #=> Time
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/ListCompositions AWS API Documentation
@@ -1079,12 +1095,12 @@ module Aws::IVSRealTime
     # Gets summary information about all EncoderConfigurations in your
     # account, in the AWS region where the API request is processed.
     #
-    # @option params [Integer] :max_results
-    #   Maximum number of results to return. Default: 100.
-    #
     # @option params [String] :next_token
     #   The first encoder configuration to retrieve. This is used for
     #   pagination; see the `nextToken` response field.
+    #
+    # @option params [Integer] :max_results
+    #   Maximum number of results to return. Default: 100.
     #
     # @return [Types::ListEncoderConfigurationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1096,8 +1112,8 @@ module Aws::IVSRealTime
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_encoder_configurations({
-    #     max_results: 1,
     #     next_token: "PaginationToken",
+    #     max_results: 1,
     #   })
     #
     # @example Response structure
@@ -1121,22 +1137,22 @@ module Aws::IVSRealTime
     # Lists events for a specified participant that occurred during a
     # specified stage session.
     #
-    # @option params [Integer] :max_results
-    #   Maximum number of results to return. Default: 50.
+    # @option params [required, String] :stage_arn
+    #   Stage ARN.
     #
-    # @option params [String] :next_token
-    #   The first participant event to retrieve. This is used for pagination;
-    #   see the `nextToken` response field.
+    # @option params [required, String] :session_id
+    #   ID of a session within the stage.
     #
     # @option params [required, String] :participant_id
     #   Unique identifier for this participant. This is assigned by IVS and
     #   returned by CreateParticipantToken.
     #
-    # @option params [required, String] :session_id
-    #   ID of a session within the stage.
+    # @option params [String] :next_token
+    #   The first participant event to retrieve. This is used for pagination;
+    #   see the `nextToken` response field.
     #
-    # @option params [required, String] :stage_arn
-    #   Stage ARN.
+    # @option params [Integer] :max_results
+    #   Maximum number of results to return. Default: 50.
     #
     # @return [Types::ListParticipantEventsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1148,21 +1164,21 @@ module Aws::IVSRealTime
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_participant_events({
-    #     max_results: 1,
-    #     next_token: "PaginationToken",
-    #     participant_id: "ParticipantId", # required
-    #     session_id: "StageSessionId", # required
     #     stage_arn: "StageArn", # required
+    #     session_id: "StageSessionId", # required
+    #     participant_id: "ParticipantId", # required
+    #     next_token: "PaginationToken",
+    #     max_results: 1,
     #   })
     #
     # @example Response structure
     #
     #   resp.events #=> Array
-    #   resp.events[0].error_code #=> String, one of "INSUFFICIENT_CAPABILITIES", "QUOTA_EXCEEDED", "PUBLISHER_NOT_FOUND"
-    #   resp.events[0].event_time #=> Time
     #   resp.events[0].name #=> String, one of "JOINED", "LEFT", "PUBLISH_STARTED", "PUBLISH_STOPPED", "SUBSCRIBE_STARTED", "SUBSCRIBE_STOPPED", "PUBLISH_ERROR", "SUBSCRIBE_ERROR", "JOIN_ERROR"
     #   resp.events[0].participant_id #=> String
+    #   resp.events[0].event_time #=> Time
     #   resp.events[0].remote_participant_id #=> String
+    #   resp.events[0].error_code #=> String, one of "INSUFFICIENT_CAPABILITIES", "QUOTA_EXCEEDED", "PUBLISHER_NOT_FOUND"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/ListParticipantEvents AWS API Documentation
@@ -1176,64 +1192,74 @@ module Aws::IVSRealTime
 
     # Lists all participants in a specified stage session.
     #
-    # @option params [Boolean] :filter_by_published
-    #   Filters the response list to only show participants who published
-    #   during the stage session. Only one of `filterByUserId`,
-    #   `filterByPublished`, or `filterByState` can be provided per request.
+    # @option params [required, String] :stage_arn
+    #   Stage ARN.
     #
-    # @option params [String] :filter_by_state
-    #   Filters the response list to only show participants in the specified
-    #   state. Only one of `filterByUserId`, `filterByPublished`, or
-    #   `filterByState` can be provided per request.
+    # @option params [required, String] :session_id
+    #   ID of the session within the stage.
     #
     # @option params [String] :filter_by_user_id
     #   Filters the response list to match the specified user ID. Only one of
-    #   `filterByUserId`, `filterByPublished`, or `filterByState` can be
-    #   provided per request. A `userId` is a customer-assigned name to help
-    #   identify the token; this can be used to link a participant to a user
-    #   in the customer’s own systems.
+    #   `filterByUserId`, `filterByPublished`, `filterByState`, or
+    #   `filterByRecordingState` can be provided per request. A `userId` is a
+    #   customer-assigned name to help identify the token; this can be used to
+    #   link a participant to a user in the customer’s own systems.
     #
-    # @option params [Integer] :max_results
-    #   Maximum number of results to return. Default: 50.
+    # @option params [Boolean] :filter_by_published
+    #   Filters the response list to only show participants who published
+    #   during the stage session. Only one of `filterByUserId`,
+    #   `filterByPublished`, `filterByState`, or `filterByRecordingState` can
+    #   be provided per request.
+    #
+    # @option params [String] :filter_by_state
+    #   Filters the response list to only show participants in the specified
+    #   state. Only one of `filterByUserId`, `filterByPublished`,
+    #   `filterByState`, or `filterByRecordingState` can be provided per
+    #   request.
     #
     # @option params [String] :next_token
     #   The first participant to retrieve. This is used for pagination; see
     #   the `nextToken` response field.
     #
-    # @option params [required, String] :session_id
-    #   ID of the session within the stage.
+    # @option params [Integer] :max_results
+    #   Maximum number of results to return. Default: 50.
     #
-    # @option params [required, String] :stage_arn
-    #   Stage ARN.
+    # @option params [String] :filter_by_recording_state
+    #   Filters the response list to only show participants with the specified
+    #   recording state. Only one of `filterByUserId`, `filterByPublished`,
+    #   `filterByState`, or `filterByRecordingState` can be provided per
+    #   request.
     #
     # @return [Types::ListParticipantsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::ListParticipantsResponse#next_token #next_token} => String
     #   * {Types::ListParticipantsResponse#participants #participants} => Array&lt;Types::ParticipantSummary&gt;
+    #   * {Types::ListParticipantsResponse#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_participants({
+    #     stage_arn: "StageArn", # required
+    #     session_id: "StageSessionId", # required
+    #     filter_by_user_id: "UserId",
     #     filter_by_published: false,
     #     filter_by_state: "CONNECTED", # accepts CONNECTED, DISCONNECTED
-    #     filter_by_user_id: "UserId",
-    #     max_results: 1,
     #     next_token: "PaginationToken",
-    #     session_id: "StageSessionId", # required
-    #     stage_arn: "StageArn", # required
+    #     max_results: 1,
+    #     filter_by_recording_state: "STARTING", # accepts STARTING, ACTIVE, STOPPING, STOPPED, FAILED
     #   })
     #
     # @example Response structure
     #
-    #   resp.next_token #=> String
     #   resp.participants #=> Array
-    #   resp.participants[0].first_join_time #=> Time
     #   resp.participants[0].participant_id #=> String
-    #   resp.participants[0].published #=> Boolean
-    #   resp.participants[0].state #=> String, one of "CONNECTED", "DISCONNECTED"
     #   resp.participants[0].user_id #=> String
+    #   resp.participants[0].state #=> String, one of "CONNECTED", "DISCONNECTED"
+    #   resp.participants[0].first_join_time #=> Time
+    #   resp.participants[0].published #=> Boolean
+    #   resp.participants[0].recording_state #=> String, one of "STARTING", "ACTIVE", "STOPPING", "STOPPED", "FAILED", "DISABLED"
+    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/ListParticipants AWS API Documentation
     #
@@ -1246,38 +1272,38 @@ module Aws::IVSRealTime
 
     # Gets all sessions for a specified stage.
     #
-    # @option params [Integer] :max_results
-    #   Maximum number of results to return. Default: 50.
+    # @option params [required, String] :stage_arn
+    #   Stage ARN.
     #
     # @option params [String] :next_token
     #   The first stage session to retrieve. This is used for pagination; see
     #   the `nextToken` response field.
     #
-    # @option params [required, String] :stage_arn
-    #   Stage ARN.
+    # @option params [Integer] :max_results
+    #   Maximum number of results to return. Default: 50.
     #
     # @return [Types::ListStageSessionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::ListStageSessionsResponse#next_token #next_token} => String
     #   * {Types::ListStageSessionsResponse#stage_sessions #stage_sessions} => Array&lt;Types::StageSessionSummary&gt;
+    #   * {Types::ListStageSessionsResponse#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_stage_sessions({
-    #     max_results: 1,
-    #     next_token: "PaginationToken",
     #     stage_arn: "StageArn", # required
+    #     next_token: "PaginationToken",
+    #     max_results: 1,
     #   })
     #
     # @example Response structure
     #
-    #   resp.next_token #=> String
     #   resp.stage_sessions #=> Array
-    #   resp.stage_sessions[0].end_time #=> Time
     #   resp.stage_sessions[0].session_id #=> String
     #   resp.stage_sessions[0].start_time #=> Time
+    #   resp.stage_sessions[0].end_time #=> Time
+    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/ListStageSessions AWS API Documentation
     #
@@ -1291,36 +1317,36 @@ module Aws::IVSRealTime
     # Gets summary information about all stages in your account, in the AWS
     # region where the API request is processed.
     #
-    # @option params [Integer] :max_results
-    #   Maximum number of results to return. Default: 50.
-    #
     # @option params [String] :next_token
     #   The first stage to retrieve. This is used for pagination; see the
     #   `nextToken` response field.
     #
+    # @option params [Integer] :max_results
+    #   Maximum number of results to return. Default: 50.
+    #
     # @return [Types::ListStagesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::ListStagesResponse#next_token #next_token} => String
     #   * {Types::ListStagesResponse#stages #stages} => Array&lt;Types::StageSummary&gt;
+    #   * {Types::ListStagesResponse#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_stages({
-    #     max_results: 1,
     #     next_token: "PaginationToken",
+    #     max_results: 1,
     #   })
     #
     # @example Response structure
     #
-    #   resp.next_token #=> String
     #   resp.stages #=> Array
-    #   resp.stages[0].active_session_id #=> String
     #   resp.stages[0].arn #=> String
     #   resp.stages[0].name #=> String
+    #   resp.stages[0].active_session_id #=> String
     #   resp.stages[0].tags #=> Hash
     #   resp.stages[0].tags["TagKey"] #=> String
+    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/ListStages AWS API Documentation
     #
@@ -1334,37 +1360,37 @@ module Aws::IVSRealTime
     # Gets summary information about all storage configurations in your
     # account, in the AWS region where the API request is processed.
     #
-    # @option params [Integer] :max_results
-    #   Maximum number of storage configurations to return. Default: your
-    #   service quota or 100, whichever is smaller.
-    #
     # @option params [String] :next_token
     #   The first storage configuration to retrieve. This is used for
     #   pagination; see the `nextToken` response field.
     #
+    # @option params [Integer] :max_results
+    #   Maximum number of storage configurations to return. Default: your
+    #   service quota or 100, whichever is smaller.
+    #
     # @return [Types::ListStorageConfigurationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::ListStorageConfigurationsResponse#next_token #next_token} => String
     #   * {Types::ListStorageConfigurationsResponse#storage_configurations #storage_configurations} => Array&lt;Types::StorageConfigurationSummary&gt;
+    #   * {Types::ListStorageConfigurationsResponse#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_storage_configurations({
-    #     max_results: 1,
     #     next_token: "PaginationToken",
+    #     max_results: 1,
     #   })
     #
     # @example Response structure
     #
-    #   resp.next_token #=> String
     #   resp.storage_configurations #=> Array
     #   resp.storage_configurations[0].arn #=> String
     #   resp.storage_configurations[0].name #=> String
     #   resp.storage_configurations[0].s3.bucket_name #=> String
     #   resp.storage_configurations[0].tags #=> Hash
     #   resp.storage_configurations[0].tags["TagKey"] #=> String
+    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/ListStorageConfigurations AWS API Documentation
     #
@@ -1424,8 +1450,8 @@ module Aws::IVSRealTime
     # * When broadcasting is disconnected and all attempts to reconnect are
     #   exhausted.
     #
-    # @option params [required, Array<Types::DestinationConfiguration>] :destinations
-    #   Array of destination configuration.
+    # @option params [required, String] :stage_arn
+    #   ARN of the stage to be used for compositing.
     #
     # @option params [String] :idempotency_token
     #   Idempotency token.
@@ -1436,8 +1462,8 @@ module Aws::IVSRealTime
     # @option params [Types::LayoutConfiguration] :layout
     #   Layout object to configure composition parameters.
     #
-    # @option params [required, String] :stage_arn
-    #   ARN of the stage to be used for compositing.
+    # @option params [required, Array<Types::DestinationConfiguration>] :destinations
+    #   Array of destination configuration.
     #
     # @option params [Hash<String,String>] :tags
     #   Tags attached to the resource. Array of maps, each of the form
@@ -1457,45 +1483,45 @@ module Aws::IVSRealTime
     # @example Request syntax with placeholder values
     #
     #   resp = client.start_composition({
-    #     destinations: [ # required
-    #       {
-    #         channel: {
-    #           channel_arn: "ChannelArn", # required
-    #           encoder_configuration_arn: "EncoderConfigurationArn",
-    #         },
-    #         name: "DestinationConfigurationName",
-    #         s3: {
-    #           encoder_configuration_arns: ["EncoderConfigurationArn"], # required
-    #           recording_configuration: {
-    #             format: "HLS", # accepts HLS
-    #           },
-    #           storage_configuration_arn: "StorageConfigurationArn", # required
-    #         },
-    #       },
-    #     ],
+    #     stage_arn: "StageArn", # required
     #     idempotency_token: "CompositionClientToken",
     #     layout: {
     #       grid: {
     #         featured_participant_attribute: "AttributeKey",
-    #         grid_gap: 1,
     #         omit_stopped_video: false,
     #         video_aspect_ratio: "AUTO", # accepts AUTO, VIDEO, SQUARE, PORTRAIT
     #         video_fill_mode: "FILL", # accepts FILL, COVER, CONTAIN
+    #         grid_gap: 1,
     #       },
     #       pip: {
     #         featured_participant_attribute: "AttributeKey",
-    #         grid_gap: 1,
     #         omit_stopped_video: false,
-    #         pip_behavior: "STATIC", # accepts STATIC, DYNAMIC
-    #         pip_height: 1,
-    #         pip_offset: 1,
+    #         video_fill_mode: "FILL", # accepts FILL, COVER, CONTAIN
+    #         grid_gap: 1,
     #         pip_participant_attribute: "AttributeKey",
+    #         pip_behavior: "STATIC", # accepts STATIC, DYNAMIC
+    #         pip_offset: 1,
     #         pip_position: "TOP_LEFT", # accepts TOP_LEFT, TOP_RIGHT, BOTTOM_LEFT, BOTTOM_RIGHT
     #         pip_width: 1,
-    #         video_fill_mode: "FILL", # accepts FILL, COVER, CONTAIN
+    #         pip_height: 1,
     #       },
     #     },
-    #     stage_arn: "StageArn", # required
+    #     destinations: [ # required
+    #       {
+    #         name: "DestinationConfigurationName",
+    #         channel: {
+    #           channel_arn: "ChannelArn", # required
+    #           encoder_configuration_arn: "EncoderConfigurationArn",
+    #         },
+    #         s3: {
+    #           storage_configuration_arn: "StorageConfigurationArn", # required
+    #           encoder_configuration_arns: ["EncoderConfigurationArn"], # required
+    #           recording_configuration: {
+    #             format: "HLS", # accepts HLS
+    #           },
+    #         },
+    #       },
+    #     ],
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
@@ -1504,40 +1530,40 @@ module Aws::IVSRealTime
     # @example Response structure
     #
     #   resp.composition.arn #=> String
-    #   resp.composition.destinations #=> Array
-    #   resp.composition.destinations[0].configuration.channel.channel_arn #=> String
-    #   resp.composition.destinations[0].configuration.channel.encoder_configuration_arn #=> String
-    #   resp.composition.destinations[0].configuration.name #=> String
-    #   resp.composition.destinations[0].configuration.s3.encoder_configuration_arns #=> Array
-    #   resp.composition.destinations[0].configuration.s3.encoder_configuration_arns[0] #=> String
-    #   resp.composition.destinations[0].configuration.s3.recording_configuration.format #=> String, one of "HLS"
-    #   resp.composition.destinations[0].configuration.s3.storage_configuration_arn #=> String
-    #   resp.composition.destinations[0].detail.s3.recording_prefix #=> String
-    #   resp.composition.destinations[0].end_time #=> Time
-    #   resp.composition.destinations[0].id #=> String
-    #   resp.composition.destinations[0].start_time #=> Time
-    #   resp.composition.destinations[0].state #=> String, one of "STARTING", "ACTIVE", "STOPPING", "RECONNECTING", "FAILED", "STOPPED"
-    #   resp.composition.end_time #=> Time
+    #   resp.composition.stage_arn #=> String
+    #   resp.composition.state #=> String, one of "STARTING", "ACTIVE", "STOPPING", "FAILED", "STOPPED"
     #   resp.composition.layout.grid.featured_participant_attribute #=> String
-    #   resp.composition.layout.grid.grid_gap #=> Integer
     #   resp.composition.layout.grid.omit_stopped_video #=> Boolean
     #   resp.composition.layout.grid.video_aspect_ratio #=> String, one of "AUTO", "VIDEO", "SQUARE", "PORTRAIT"
     #   resp.composition.layout.grid.video_fill_mode #=> String, one of "FILL", "COVER", "CONTAIN"
+    #   resp.composition.layout.grid.grid_gap #=> Integer
     #   resp.composition.layout.pip.featured_participant_attribute #=> String
-    #   resp.composition.layout.pip.grid_gap #=> Integer
     #   resp.composition.layout.pip.omit_stopped_video #=> Boolean
-    #   resp.composition.layout.pip.pip_behavior #=> String, one of "STATIC", "DYNAMIC"
-    #   resp.composition.layout.pip.pip_height #=> Integer
-    #   resp.composition.layout.pip.pip_offset #=> Integer
+    #   resp.composition.layout.pip.video_fill_mode #=> String, one of "FILL", "COVER", "CONTAIN"
+    #   resp.composition.layout.pip.grid_gap #=> Integer
     #   resp.composition.layout.pip.pip_participant_attribute #=> String
+    #   resp.composition.layout.pip.pip_behavior #=> String, one of "STATIC", "DYNAMIC"
+    #   resp.composition.layout.pip.pip_offset #=> Integer
     #   resp.composition.layout.pip.pip_position #=> String, one of "TOP_LEFT", "TOP_RIGHT", "BOTTOM_LEFT", "BOTTOM_RIGHT"
     #   resp.composition.layout.pip.pip_width #=> Integer
-    #   resp.composition.layout.pip.video_fill_mode #=> String, one of "FILL", "COVER", "CONTAIN"
-    #   resp.composition.stage_arn #=> String
-    #   resp.composition.start_time #=> Time
-    #   resp.composition.state #=> String, one of "STARTING", "ACTIVE", "STOPPING", "FAILED", "STOPPED"
+    #   resp.composition.layout.pip.pip_height #=> Integer
+    #   resp.composition.destinations #=> Array
+    #   resp.composition.destinations[0].id #=> String
+    #   resp.composition.destinations[0].state #=> String, one of "STARTING", "ACTIVE", "STOPPING", "RECONNECTING", "FAILED", "STOPPED"
+    #   resp.composition.destinations[0].start_time #=> Time
+    #   resp.composition.destinations[0].end_time #=> Time
+    #   resp.composition.destinations[0].configuration.name #=> String
+    #   resp.composition.destinations[0].configuration.channel.channel_arn #=> String
+    #   resp.composition.destinations[0].configuration.channel.encoder_configuration_arn #=> String
+    #   resp.composition.destinations[0].configuration.s3.storage_configuration_arn #=> String
+    #   resp.composition.destinations[0].configuration.s3.encoder_configuration_arns #=> Array
+    #   resp.composition.destinations[0].configuration.s3.encoder_configuration_arns[0] #=> String
+    #   resp.composition.destinations[0].configuration.s3.recording_configuration.format #=> String, one of "HLS"
+    #   resp.composition.destinations[0].detail.s3.recording_prefix #=> String
     #   resp.composition.tags #=> Hash
     #   resp.composition.tags["TagKey"] #=> String
+    #   resp.composition.start_time #=> Time
+    #   resp.composition.end_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/StartComposition AWS API Documentation
     #
@@ -1649,6 +1675,11 @@ module Aws::IVSRealTime
     # @option params [String] :name
     #   Name of the stage to be updated.
     #
+    # @option params [Types::AutoParticipantRecordingConfiguration] :auto_participant_recording_configuration
+    #   Auto-participant-recording configuration object to attach to the
+    #   stage. Auto-participant-recording configuration cannot be updated
+    #   while recording is active.
+    #
     # @return [Types::UpdateStageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateStageResponse#stage #stage} => Types::Stage
@@ -1658,15 +1689,22 @@ module Aws::IVSRealTime
     #   resp = client.update_stage({
     #     arn: "StageArn", # required
     #     name: "StageName",
+    #     auto_participant_recording_configuration: {
+    #       storage_configuration_arn: "AutoParticipantRecordingStorageConfigurationArn", # required
+    #       media_types: ["AUDIO_VIDEO"], # accepts AUDIO_VIDEO, AUDIO_ONLY
+    #     },
     #   })
     #
     # @example Response structure
     #
-    #   resp.stage.active_session_id #=> String
     #   resp.stage.arn #=> String
     #   resp.stage.name #=> String
+    #   resp.stage.active_session_id #=> String
     #   resp.stage.tags #=> Hash
     #   resp.stage.tags["TagKey"] #=> String
+    #   resp.stage.auto_participant_recording_configuration.storage_configuration_arn #=> String
+    #   resp.stage.auto_participant_recording_configuration.media_types #=> Array
+    #   resp.stage.auto_participant_recording_configuration.media_types[0] #=> String, one of "AUDIO_VIDEO", "AUDIO_ONLY"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-realtime-2020-07-14/UpdateStage AWS API Documentation
     #
@@ -1690,7 +1728,7 @@ module Aws::IVSRealTime
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ivsrealtime'
-      context[:gem_version] = '1.19.0'
+      context[:gem_version] = '1.20.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

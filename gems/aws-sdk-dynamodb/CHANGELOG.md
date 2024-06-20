@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.113.0 (2024-06-20)
+------------------
+
+* Feature - Doc-only update for DynamoDB. Fixed Important note in 6 Global table APIs - CreateGlobalTable, DescribeGlobalTable, DescribeGlobalTableSettings, ListGlobalTables, UpdateGlobalTable, and UpdateGlobalTableSettings.
+
 1.112.0 (2024-06-05)
 ------------------
 

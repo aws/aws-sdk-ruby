@@ -26,6 +26,7 @@ module Aws::CostOptimizationHub
     ComputeSavingsPlans = Shapes::StructureShape.new(name: 'ComputeSavingsPlans')
     ComputeSavingsPlansConfiguration = Shapes::StructureShape.new(name: 'ComputeSavingsPlansConfiguration')
     Datetime = Shapes::TimestampShape.new(name: 'Datetime')
+    DbInstanceConfiguration = Shapes::StructureShape.new(name: 'DbInstanceConfiguration')
     Double = Shapes::FloatShape.new(name: 'Double')
     EbsVolume = Shapes::StructureShape.new(name: 'EbsVolume')
     EbsVolumeConfiguration = Shapes::StructureShape.new(name: 'EbsVolumeConfiguration')
@@ -70,6 +71,10 @@ module Aws::CostOptimizationHub
     Order = Shapes::StringShape.new(name: 'Order')
     OrderBy = Shapes::StructureShape.new(name: 'OrderBy')
     PrimitiveBoolean = Shapes::BooleanShape.new(name: 'PrimitiveBoolean')
+    RdsDbInstance = Shapes::StructureShape.new(name: 'RdsDbInstance')
+    RdsDbInstanceConfiguration = Shapes::StructureShape.new(name: 'RdsDbInstanceConfiguration')
+    RdsDbInstanceStorage = Shapes::StructureShape.new(name: 'RdsDbInstanceStorage')
+    RdsDbInstanceStorageConfiguration = Shapes::StructureShape.new(name: 'RdsDbInstanceStorageConfiguration')
     RdsReservedInstances = Shapes::StructureShape.new(name: 'RdsReservedInstances')
     RdsReservedInstancesConfiguration = Shapes::StructureShape.new(name: 'RdsReservedInstancesConfiguration')
     Recommendation = Shapes::StructureShape.new(name: 'Recommendation')
@@ -117,9 +122,9 @@ module Aws::CostOptimizationHub
     AccessDeniedException.struct_class = Types::AccessDeniedException
 
     AccountEnrollmentStatus.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "accountId"))
-    AccountEnrollmentStatus.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdTimestamp"))
-    AccountEnrollmentStatus.add_member(:last_updated_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdatedTimestamp"))
     AccountEnrollmentStatus.add_member(:status, Shapes::ShapeRef.new(shape: EnrollmentStatus, location_name: "status"))
+    AccountEnrollmentStatus.add_member(:last_updated_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdatedTimestamp"))
+    AccountEnrollmentStatus.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdTimestamp"))
     AccountEnrollmentStatus.struct_class = Types::AccountEnrollmentStatus
 
     AccountEnrollmentStatuses.member = Shapes::ShapeRef.new(shape: AccountEnrollmentStatus)
@@ -132,10 +137,10 @@ module Aws::CostOptimizationHub
     BlockStoragePerformanceConfiguration.add_member(:throughput, Shapes::ShapeRef.new(shape: Double, location_name: "throughput"))
     BlockStoragePerformanceConfiguration.struct_class = Types::BlockStoragePerformanceConfiguration
 
-    ComputeConfiguration.add_member(:architecture, Shapes::ShapeRef.new(shape: String, location_name: "architecture"))
-    ComputeConfiguration.add_member(:memory_size_in_mb, Shapes::ShapeRef.new(shape: Integer, location_name: "memorySizeInMB"))
-    ComputeConfiguration.add_member(:platform, Shapes::ShapeRef.new(shape: String, location_name: "platform"))
     ComputeConfiguration.add_member(:v_cpu, Shapes::ShapeRef.new(shape: Double, location_name: "vCpu"))
+    ComputeConfiguration.add_member(:memory_size_in_mb, Shapes::ShapeRef.new(shape: Integer, location_name: "memorySizeInMB"))
+    ComputeConfiguration.add_member(:architecture, Shapes::ShapeRef.new(shape: String, location_name: "architecture"))
+    ComputeConfiguration.add_member(:platform, Shapes::ShapeRef.new(shape: String, location_name: "platform"))
     ComputeConfiguration.struct_class = Types::ComputeConfiguration
 
     ComputeSavingsPlans.add_member(:configuration, Shapes::ShapeRef.new(shape: ComputeSavingsPlansConfiguration, location_name: "configuration"))
@@ -143,18 +148,21 @@ module Aws::CostOptimizationHub
     ComputeSavingsPlans.struct_class = Types::ComputeSavingsPlans
 
     ComputeSavingsPlansConfiguration.add_member(:account_scope, Shapes::ShapeRef.new(shape: String, location_name: "accountScope"))
-    ComputeSavingsPlansConfiguration.add_member(:hourly_commitment, Shapes::ShapeRef.new(shape: String, location_name: "hourlyCommitment"))
-    ComputeSavingsPlansConfiguration.add_member(:payment_option, Shapes::ShapeRef.new(shape: String, location_name: "paymentOption"))
     ComputeSavingsPlansConfiguration.add_member(:term, Shapes::ShapeRef.new(shape: String, location_name: "term"))
+    ComputeSavingsPlansConfiguration.add_member(:payment_option, Shapes::ShapeRef.new(shape: String, location_name: "paymentOption"))
+    ComputeSavingsPlansConfiguration.add_member(:hourly_commitment, Shapes::ShapeRef.new(shape: String, location_name: "hourlyCommitment"))
     ComputeSavingsPlansConfiguration.struct_class = Types::ComputeSavingsPlansConfiguration
+
+    DbInstanceConfiguration.add_member(:db_instance_class, Shapes::ShapeRef.new(shape: String, location_name: "dbInstanceClass"))
+    DbInstanceConfiguration.struct_class = Types::DbInstanceConfiguration
 
     EbsVolume.add_member(:configuration, Shapes::ShapeRef.new(shape: EbsVolumeConfiguration, location_name: "configuration"))
     EbsVolume.add_member(:cost_calculation, Shapes::ShapeRef.new(shape: ResourceCostCalculation, location_name: "costCalculation"))
     EbsVolume.struct_class = Types::EbsVolume
 
-    EbsVolumeConfiguration.add_member(:attachment_state, Shapes::ShapeRef.new(shape: String, location_name: "attachmentState"))
-    EbsVolumeConfiguration.add_member(:performance, Shapes::ShapeRef.new(shape: BlockStoragePerformanceConfiguration, location_name: "performance"))
     EbsVolumeConfiguration.add_member(:storage, Shapes::ShapeRef.new(shape: StorageConfiguration, location_name: "storage"))
+    EbsVolumeConfiguration.add_member(:performance, Shapes::ShapeRef.new(shape: BlockStoragePerformanceConfiguration, location_name: "performance"))
+    EbsVolumeConfiguration.add_member(:attachment_state, Shapes::ShapeRef.new(shape: String, location_name: "attachmentState"))
     EbsVolumeConfiguration.struct_class = Types::EbsVolumeConfiguration
 
     Ec2AutoScalingGroup.add_member(:configuration, Shapes::ShapeRef.new(shape: Ec2AutoScalingGroupConfiguration, location_name: "configuration"))
@@ -176,11 +184,11 @@ module Aws::CostOptimizationHub
     Ec2InstanceSavingsPlans.struct_class = Types::Ec2InstanceSavingsPlans
 
     Ec2InstanceSavingsPlansConfiguration.add_member(:account_scope, Shapes::ShapeRef.new(shape: String, location_name: "accountScope"))
+    Ec2InstanceSavingsPlansConfiguration.add_member(:term, Shapes::ShapeRef.new(shape: String, location_name: "term"))
+    Ec2InstanceSavingsPlansConfiguration.add_member(:payment_option, Shapes::ShapeRef.new(shape: String, location_name: "paymentOption"))
     Ec2InstanceSavingsPlansConfiguration.add_member(:hourly_commitment, Shapes::ShapeRef.new(shape: String, location_name: "hourlyCommitment"))
     Ec2InstanceSavingsPlansConfiguration.add_member(:instance_family, Shapes::ShapeRef.new(shape: String, location_name: "instanceFamily"))
-    Ec2InstanceSavingsPlansConfiguration.add_member(:payment_option, Shapes::ShapeRef.new(shape: String, location_name: "paymentOption"))
     Ec2InstanceSavingsPlansConfiguration.add_member(:savings_plans_region, Shapes::ShapeRef.new(shape: String, location_name: "savingsPlansRegion"))
-    Ec2InstanceSavingsPlansConfiguration.add_member(:term, Shapes::ShapeRef.new(shape: String, location_name: "term"))
     Ec2InstanceSavingsPlansConfiguration.struct_class = Types::Ec2InstanceSavingsPlansConfiguration
 
     Ec2ReservedInstances.add_member(:configuration, Shapes::ShapeRef.new(shape: Ec2ReservedInstancesConfiguration, location_name: "configuration"))
@@ -188,21 +196,21 @@ module Aws::CostOptimizationHub
     Ec2ReservedInstances.struct_class = Types::Ec2ReservedInstances
 
     Ec2ReservedInstancesConfiguration.add_member(:account_scope, Shapes::ShapeRef.new(shape: String, location_name: "accountScope"))
-    Ec2ReservedInstancesConfiguration.add_member(:current_generation, Shapes::ShapeRef.new(shape: String, location_name: "currentGeneration"))
-    Ec2ReservedInstancesConfiguration.add_member(:instance_family, Shapes::ShapeRef.new(shape: String, location_name: "instanceFamily"))
-    Ec2ReservedInstancesConfiguration.add_member(:instance_type, Shapes::ShapeRef.new(shape: String, location_name: "instanceType"))
-    Ec2ReservedInstancesConfiguration.add_member(:monthly_recurring_cost, Shapes::ShapeRef.new(shape: String, location_name: "monthlyRecurringCost"))
+    Ec2ReservedInstancesConfiguration.add_member(:service, Shapes::ShapeRef.new(shape: String, location_name: "service"))
     Ec2ReservedInstancesConfiguration.add_member(:normalized_units_to_purchase, Shapes::ShapeRef.new(shape: String, location_name: "normalizedUnitsToPurchase"))
+    Ec2ReservedInstancesConfiguration.add_member(:term, Shapes::ShapeRef.new(shape: String, location_name: "term"))
+    Ec2ReservedInstancesConfiguration.add_member(:payment_option, Shapes::ShapeRef.new(shape: String, location_name: "paymentOption"))
     Ec2ReservedInstancesConfiguration.add_member(:number_of_instances_to_purchase, Shapes::ShapeRef.new(shape: String, location_name: "numberOfInstancesToPurchase"))
     Ec2ReservedInstancesConfiguration.add_member(:offering_class, Shapes::ShapeRef.new(shape: String, location_name: "offeringClass"))
-    Ec2ReservedInstancesConfiguration.add_member(:payment_option, Shapes::ShapeRef.new(shape: String, location_name: "paymentOption"))
-    Ec2ReservedInstancesConfiguration.add_member(:platform, Shapes::ShapeRef.new(shape: String, location_name: "platform"))
+    Ec2ReservedInstancesConfiguration.add_member(:instance_family, Shapes::ShapeRef.new(shape: String, location_name: "instanceFamily"))
+    Ec2ReservedInstancesConfiguration.add_member(:instance_type, Shapes::ShapeRef.new(shape: String, location_name: "instanceType"))
     Ec2ReservedInstancesConfiguration.add_member(:reserved_instances_region, Shapes::ShapeRef.new(shape: String, location_name: "reservedInstancesRegion"))
-    Ec2ReservedInstancesConfiguration.add_member(:service, Shapes::ShapeRef.new(shape: String, location_name: "service"))
-    Ec2ReservedInstancesConfiguration.add_member(:size_flex_eligible, Shapes::ShapeRef.new(shape: Boolean, location_name: "sizeFlexEligible"))
+    Ec2ReservedInstancesConfiguration.add_member(:current_generation, Shapes::ShapeRef.new(shape: String, location_name: "currentGeneration"))
+    Ec2ReservedInstancesConfiguration.add_member(:platform, Shapes::ShapeRef.new(shape: String, location_name: "platform"))
     Ec2ReservedInstancesConfiguration.add_member(:tenancy, Shapes::ShapeRef.new(shape: String, location_name: "tenancy"))
-    Ec2ReservedInstancesConfiguration.add_member(:term, Shapes::ShapeRef.new(shape: String, location_name: "term"))
+    Ec2ReservedInstancesConfiguration.add_member(:size_flex_eligible, Shapes::ShapeRef.new(shape: Boolean, location_name: "sizeFlexEligible"))
     Ec2ReservedInstancesConfiguration.add_member(:upfront_cost, Shapes::ShapeRef.new(shape: String, location_name: "upfrontCost"))
+    Ec2ReservedInstancesConfiguration.add_member(:monthly_recurring_cost, Shapes::ShapeRef.new(shape: String, location_name: "monthlyRecurringCost"))
     Ec2ReservedInstancesConfiguration.struct_class = Types::Ec2ReservedInstancesConfiguration
 
     EcsService.add_member(:configuration, Shapes::ShapeRef.new(shape: EcsServiceConfiguration, location_name: "configuration"))
@@ -217,69 +225,69 @@ module Aws::CostOptimizationHub
     ElastiCacheReservedInstances.struct_class = Types::ElastiCacheReservedInstances
 
     ElastiCacheReservedInstancesConfiguration.add_member(:account_scope, Shapes::ShapeRef.new(shape: String, location_name: "accountScope"))
-    ElastiCacheReservedInstancesConfiguration.add_member(:current_generation, Shapes::ShapeRef.new(shape: String, location_name: "currentGeneration"))
+    ElastiCacheReservedInstancesConfiguration.add_member(:service, Shapes::ShapeRef.new(shape: String, location_name: "service"))
+    ElastiCacheReservedInstancesConfiguration.add_member(:normalized_units_to_purchase, Shapes::ShapeRef.new(shape: String, location_name: "normalizedUnitsToPurchase"))
+    ElastiCacheReservedInstancesConfiguration.add_member(:term, Shapes::ShapeRef.new(shape: String, location_name: "term"))
+    ElastiCacheReservedInstancesConfiguration.add_member(:payment_option, Shapes::ShapeRef.new(shape: String, location_name: "paymentOption"))
+    ElastiCacheReservedInstancesConfiguration.add_member(:number_of_instances_to_purchase, Shapes::ShapeRef.new(shape: String, location_name: "numberOfInstancesToPurchase"))
     ElastiCacheReservedInstancesConfiguration.add_member(:instance_family, Shapes::ShapeRef.new(shape: String, location_name: "instanceFamily"))
     ElastiCacheReservedInstancesConfiguration.add_member(:instance_type, Shapes::ShapeRef.new(shape: String, location_name: "instanceType"))
-    ElastiCacheReservedInstancesConfiguration.add_member(:monthly_recurring_cost, Shapes::ShapeRef.new(shape: String, location_name: "monthlyRecurringCost"))
-    ElastiCacheReservedInstancesConfiguration.add_member(:normalized_units_to_purchase, Shapes::ShapeRef.new(shape: String, location_name: "normalizedUnitsToPurchase"))
-    ElastiCacheReservedInstancesConfiguration.add_member(:number_of_instances_to_purchase, Shapes::ShapeRef.new(shape: String, location_name: "numberOfInstancesToPurchase"))
-    ElastiCacheReservedInstancesConfiguration.add_member(:payment_option, Shapes::ShapeRef.new(shape: String, location_name: "paymentOption"))
     ElastiCacheReservedInstancesConfiguration.add_member(:reserved_instances_region, Shapes::ShapeRef.new(shape: String, location_name: "reservedInstancesRegion"))
-    ElastiCacheReservedInstancesConfiguration.add_member(:service, Shapes::ShapeRef.new(shape: String, location_name: "service"))
+    ElastiCacheReservedInstancesConfiguration.add_member(:current_generation, Shapes::ShapeRef.new(shape: String, location_name: "currentGeneration"))
     ElastiCacheReservedInstancesConfiguration.add_member(:size_flex_eligible, Shapes::ShapeRef.new(shape: Boolean, location_name: "sizeFlexEligible"))
-    ElastiCacheReservedInstancesConfiguration.add_member(:term, Shapes::ShapeRef.new(shape: String, location_name: "term"))
     ElastiCacheReservedInstancesConfiguration.add_member(:upfront_cost, Shapes::ShapeRef.new(shape: String, location_name: "upfrontCost"))
+    ElastiCacheReservedInstancesConfiguration.add_member(:monthly_recurring_cost, Shapes::ShapeRef.new(shape: String, location_name: "monthlyRecurringCost"))
     ElastiCacheReservedInstancesConfiguration.struct_class = Types::ElastiCacheReservedInstancesConfiguration
 
-    EstimatedDiscounts.add_member(:other_discount, Shapes::ShapeRef.new(shape: Double, location_name: "otherDiscount"))
-    EstimatedDiscounts.add_member(:reserved_instances_discount, Shapes::ShapeRef.new(shape: Double, location_name: "reservedInstancesDiscount"))
     EstimatedDiscounts.add_member(:savings_plans_discount, Shapes::ShapeRef.new(shape: Double, location_name: "savingsPlansDiscount"))
+    EstimatedDiscounts.add_member(:reserved_instances_discount, Shapes::ShapeRef.new(shape: Double, location_name: "reservedInstancesDiscount"))
+    EstimatedDiscounts.add_member(:other_discount, Shapes::ShapeRef.new(shape: Double, location_name: "otherDiscount"))
     EstimatedDiscounts.struct_class = Types::EstimatedDiscounts
 
-    Filter.add_member(:account_ids, Shapes::ShapeRef.new(shape: AccountIdList, location_name: "accountIds"))
-    Filter.add_member(:action_types, Shapes::ShapeRef.new(shape: ActionTypeList, location_name: "actionTypes"))
-    Filter.add_member(:implementation_efforts, Shapes::ShapeRef.new(shape: ImplementationEffortList, location_name: "implementationEfforts"))
-    Filter.add_member(:recommendation_ids, Shapes::ShapeRef.new(shape: RecommendationIdList, location_name: "recommendationIds"))
-    Filter.add_member(:regions, Shapes::ShapeRef.new(shape: RegionList, location_name: "regions"))
-    Filter.add_member(:resource_arns, Shapes::ShapeRef.new(shape: ResourceArnList, location_name: "resourceArns"))
-    Filter.add_member(:resource_ids, Shapes::ShapeRef.new(shape: ResourceIdList, location_name: "resourceIds"))
-    Filter.add_member(:resource_types, Shapes::ShapeRef.new(shape: ResourceTypeList, location_name: "resourceTypes"))
     Filter.add_member(:restart_needed, Shapes::ShapeRef.new(shape: Boolean, location_name: "restartNeeded"))
     Filter.add_member(:rollback_possible, Shapes::ShapeRef.new(shape: Boolean, location_name: "rollbackPossible"))
+    Filter.add_member(:implementation_efforts, Shapes::ShapeRef.new(shape: ImplementationEffortList, location_name: "implementationEfforts"))
+    Filter.add_member(:account_ids, Shapes::ShapeRef.new(shape: AccountIdList, location_name: "accountIds"))
+    Filter.add_member(:regions, Shapes::ShapeRef.new(shape: RegionList, location_name: "regions"))
+    Filter.add_member(:resource_types, Shapes::ShapeRef.new(shape: ResourceTypeList, location_name: "resourceTypes"))
+    Filter.add_member(:action_types, Shapes::ShapeRef.new(shape: ActionTypeList, location_name: "actionTypes"))
     Filter.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
+    Filter.add_member(:resource_ids, Shapes::ShapeRef.new(shape: ResourceIdList, location_name: "resourceIds"))
+    Filter.add_member(:resource_arns, Shapes::ShapeRef.new(shape: ResourceArnList, location_name: "resourceArns"))
+    Filter.add_member(:recommendation_ids, Shapes::ShapeRef.new(shape: RecommendationIdList, location_name: "recommendationIds"))
     Filter.struct_class = Types::Filter
 
     GetPreferencesRequest.struct_class = Types::GetPreferencesRequest
 
-    GetPreferencesResponse.add_member(:member_account_discount_visibility, Shapes::ShapeRef.new(shape: MemberAccountDiscountVisibility, location_name: "memberAccountDiscountVisibility"))
     GetPreferencesResponse.add_member(:savings_estimation_mode, Shapes::ShapeRef.new(shape: SavingsEstimationMode, location_name: "savingsEstimationMode"))
+    GetPreferencesResponse.add_member(:member_account_discount_visibility, Shapes::ShapeRef.new(shape: MemberAccountDiscountVisibility, location_name: "memberAccountDiscountVisibility"))
     GetPreferencesResponse.struct_class = Types::GetPreferencesResponse
 
     GetRecommendationRequest.add_member(:recommendation_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "recommendationId"))
     GetRecommendationRequest.struct_class = Types::GetRecommendationRequest
 
-    GetRecommendationResponse.add_member(:account_id, Shapes::ShapeRef.new(shape: String, location_name: "accountId"))
-    GetRecommendationResponse.add_member(:action_type, Shapes::ShapeRef.new(shape: ActionType, location_name: "actionType"))
-    GetRecommendationResponse.add_member(:cost_calculation_lookback_period_in_days, Shapes::ShapeRef.new(shape: Integer, location_name: "costCalculationLookbackPeriodInDays"))
-    GetRecommendationResponse.add_member(:currency_code, Shapes::ShapeRef.new(shape: String, location_name: "currencyCode"))
-    GetRecommendationResponse.add_member(:current_resource_details, Shapes::ShapeRef.new(shape: ResourceDetails, location_name: "currentResourceDetails"))
-    GetRecommendationResponse.add_member(:current_resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "currentResourceType"))
-    GetRecommendationResponse.add_member(:estimated_monthly_cost, Shapes::ShapeRef.new(shape: Double, location_name: "estimatedMonthlyCost"))
-    GetRecommendationResponse.add_member(:estimated_monthly_savings, Shapes::ShapeRef.new(shape: Double, location_name: "estimatedMonthlySavings"))
-    GetRecommendationResponse.add_member(:estimated_savings_over_cost_calculation_lookback_period, Shapes::ShapeRef.new(shape: Double, location_name: "estimatedSavingsOverCostCalculationLookbackPeriod"))
-    GetRecommendationResponse.add_member(:estimated_savings_percentage, Shapes::ShapeRef.new(shape: Double, location_name: "estimatedSavingsPercentage"))
-    GetRecommendationResponse.add_member(:implementation_effort, Shapes::ShapeRef.new(shape: ImplementationEffort, location_name: "implementationEffort"))
-    GetRecommendationResponse.add_member(:last_refresh_timestamp, Shapes::ShapeRef.new(shape: Datetime, location_name: "lastRefreshTimestamp"))
     GetRecommendationResponse.add_member(:recommendation_id, Shapes::ShapeRef.new(shape: String, location_name: "recommendationId"))
+    GetRecommendationResponse.add_member(:resource_id, Shapes::ShapeRef.new(shape: String, location_name: "resourceId"))
+    GetRecommendationResponse.add_member(:resource_arn, Shapes::ShapeRef.new(shape: String, location_name: "resourceArn"))
+    GetRecommendationResponse.add_member(:account_id, Shapes::ShapeRef.new(shape: String, location_name: "accountId"))
+    GetRecommendationResponse.add_member(:currency_code, Shapes::ShapeRef.new(shape: String, location_name: "currencyCode"))
     GetRecommendationResponse.add_member(:recommendation_lookback_period_in_days, Shapes::ShapeRef.new(shape: Integer, location_name: "recommendationLookbackPeriodInDays"))
-    GetRecommendationResponse.add_member(:recommended_resource_details, Shapes::ShapeRef.new(shape: ResourceDetails, location_name: "recommendedResourceDetails"))
+    GetRecommendationResponse.add_member(:cost_calculation_lookback_period_in_days, Shapes::ShapeRef.new(shape: Integer, location_name: "costCalculationLookbackPeriodInDays"))
+    GetRecommendationResponse.add_member(:estimated_savings_percentage, Shapes::ShapeRef.new(shape: Double, location_name: "estimatedSavingsPercentage"))
+    GetRecommendationResponse.add_member(:estimated_savings_over_cost_calculation_lookback_period, Shapes::ShapeRef.new(shape: Double, location_name: "estimatedSavingsOverCostCalculationLookbackPeriod"))
+    GetRecommendationResponse.add_member(:current_resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "currentResourceType"))
     GetRecommendationResponse.add_member(:recommended_resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "recommendedResourceType"))
     GetRecommendationResponse.add_member(:region, Shapes::ShapeRef.new(shape: String, location_name: "region"))
-    GetRecommendationResponse.add_member(:resource_arn, Shapes::ShapeRef.new(shape: String, location_name: "resourceArn"))
-    GetRecommendationResponse.add_member(:resource_id, Shapes::ShapeRef.new(shape: String, location_name: "resourceId"))
-    GetRecommendationResponse.add_member(:restart_needed, Shapes::ShapeRef.new(shape: Boolean, location_name: "restartNeeded"))
-    GetRecommendationResponse.add_member(:rollback_possible, Shapes::ShapeRef.new(shape: Boolean, location_name: "rollbackPossible"))
     GetRecommendationResponse.add_member(:source, Shapes::ShapeRef.new(shape: Source, location_name: "source"))
+    GetRecommendationResponse.add_member(:last_refresh_timestamp, Shapes::ShapeRef.new(shape: Datetime, location_name: "lastRefreshTimestamp"))
+    GetRecommendationResponse.add_member(:estimated_monthly_savings, Shapes::ShapeRef.new(shape: Double, location_name: "estimatedMonthlySavings"))
+    GetRecommendationResponse.add_member(:estimated_monthly_cost, Shapes::ShapeRef.new(shape: Double, location_name: "estimatedMonthlyCost"))
+    GetRecommendationResponse.add_member(:implementation_effort, Shapes::ShapeRef.new(shape: ImplementationEffort, location_name: "implementationEffort"))
+    GetRecommendationResponse.add_member(:restart_needed, Shapes::ShapeRef.new(shape: Boolean, location_name: "restartNeeded"))
+    GetRecommendationResponse.add_member(:action_type, Shapes::ShapeRef.new(shape: ActionType, location_name: "actionType"))
+    GetRecommendationResponse.add_member(:rollback_possible, Shapes::ShapeRef.new(shape: Boolean, location_name: "rollbackPossible"))
+    GetRecommendationResponse.add_member(:current_resource_details, Shapes::ShapeRef.new(shape: ResourceDetails, location_name: "currentResourceDetails"))
+    GetRecommendationResponse.add_member(:recommended_resource_details, Shapes::ShapeRef.new(shape: ResourceDetails, location_name: "recommendedResourceDetails"))
     GetRecommendationResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     GetRecommendationResponse.struct_class = Types::GetRecommendationResponse
 
@@ -298,14 +306,14 @@ module Aws::CostOptimizationHub
     LambdaFunctionConfiguration.add_member(:compute, Shapes::ShapeRef.new(shape: ComputeConfiguration, location_name: "compute"))
     LambdaFunctionConfiguration.struct_class = Types::LambdaFunctionConfiguration
 
-    ListEnrollmentStatusesRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "accountId"))
     ListEnrollmentStatusesRequest.add_member(:include_organization_info, Shapes::ShapeRef.new(shape: PrimitiveBoolean, location_name: "includeOrganizationInfo"))
-    ListEnrollmentStatusesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    ListEnrollmentStatusesRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "accountId"))
     ListEnrollmentStatusesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListEnrollmentStatusesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
     ListEnrollmentStatusesRequest.struct_class = Types::ListEnrollmentStatusesRequest
 
-    ListEnrollmentStatusesResponse.add_member(:include_member_accounts, Shapes::ShapeRef.new(shape: Boolean, location_name: "includeMemberAccounts"))
     ListEnrollmentStatusesResponse.add_member(:items, Shapes::ShapeRef.new(shape: AccountEnrollmentStatuses, location_name: "items"))
+    ListEnrollmentStatusesResponse.add_member(:include_member_accounts, Shapes::ShapeRef.new(shape: Boolean, location_name: "includeMemberAccounts"))
     ListEnrollmentStatusesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     ListEnrollmentStatusesResponse.struct_class = Types::ListEnrollmentStatusesResponse
 
@@ -315,18 +323,18 @@ module Aws::CostOptimizationHub
     ListRecommendationSummariesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     ListRecommendationSummariesRequest.struct_class = Types::ListRecommendationSummariesRequest
 
-    ListRecommendationSummariesResponse.add_member(:currency_code, Shapes::ShapeRef.new(shape: String, location_name: "currencyCode"))
     ListRecommendationSummariesResponse.add_member(:estimated_total_deduped_savings, Shapes::ShapeRef.new(shape: Double, location_name: "estimatedTotalDedupedSavings"))
-    ListRecommendationSummariesResponse.add_member(:group_by, Shapes::ShapeRef.new(shape: String, location_name: "groupBy"))
     ListRecommendationSummariesResponse.add_member(:items, Shapes::ShapeRef.new(shape: RecommendationSummariesList, location_name: "items"))
+    ListRecommendationSummariesResponse.add_member(:group_by, Shapes::ShapeRef.new(shape: String, location_name: "groupBy"))
+    ListRecommendationSummariesResponse.add_member(:currency_code, Shapes::ShapeRef.new(shape: String, location_name: "currencyCode"))
     ListRecommendationSummariesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     ListRecommendationSummariesResponse.struct_class = Types::ListRecommendationSummariesResponse
 
     ListRecommendationsRequest.add_member(:filter, Shapes::ShapeRef.new(shape: Filter, location_name: "filter"))
+    ListRecommendationsRequest.add_member(:order_by, Shapes::ShapeRef.new(shape: OrderBy, location_name: "orderBy"))
     ListRecommendationsRequest.add_member(:include_all_recommendations, Shapes::ShapeRef.new(shape: PrimitiveBoolean, location_name: "includeAllRecommendations"))
     ListRecommendationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListRecommendationsRequestMaxResultsInteger, location_name: "maxResults"))
     ListRecommendationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
-    ListRecommendationsRequest.add_member(:order_by, Shapes::ShapeRef.new(shape: OrderBy, location_name: "orderBy"))
     ListRecommendationsRequest.struct_class = Types::ListRecommendationsRequest
 
     ListRecommendationsResponse.add_member(:items, Shapes::ShapeRef.new(shape: RecommendationList, location_name: "items"))
@@ -338,65 +346,82 @@ module Aws::CostOptimizationHub
     OpenSearchReservedInstances.struct_class = Types::OpenSearchReservedInstances
 
     OpenSearchReservedInstancesConfiguration.add_member(:account_scope, Shapes::ShapeRef.new(shape: String, location_name: "accountScope"))
-    OpenSearchReservedInstancesConfiguration.add_member(:current_generation, Shapes::ShapeRef.new(shape: String, location_name: "currentGeneration"))
-    OpenSearchReservedInstancesConfiguration.add_member(:instance_type, Shapes::ShapeRef.new(shape: String, location_name: "instanceType"))
-    OpenSearchReservedInstancesConfiguration.add_member(:monthly_recurring_cost, Shapes::ShapeRef.new(shape: String, location_name: "monthlyRecurringCost"))
-    OpenSearchReservedInstancesConfiguration.add_member(:normalized_units_to_purchase, Shapes::ShapeRef.new(shape: String, location_name: "normalizedUnitsToPurchase"))
-    OpenSearchReservedInstancesConfiguration.add_member(:number_of_instances_to_purchase, Shapes::ShapeRef.new(shape: String, location_name: "numberOfInstancesToPurchase"))
-    OpenSearchReservedInstancesConfiguration.add_member(:payment_option, Shapes::ShapeRef.new(shape: String, location_name: "paymentOption"))
-    OpenSearchReservedInstancesConfiguration.add_member(:reserved_instances_region, Shapes::ShapeRef.new(shape: String, location_name: "reservedInstancesRegion"))
     OpenSearchReservedInstancesConfiguration.add_member(:service, Shapes::ShapeRef.new(shape: String, location_name: "service"))
-    OpenSearchReservedInstancesConfiguration.add_member(:size_flex_eligible, Shapes::ShapeRef.new(shape: Boolean, location_name: "sizeFlexEligible"))
+    OpenSearchReservedInstancesConfiguration.add_member(:normalized_units_to_purchase, Shapes::ShapeRef.new(shape: String, location_name: "normalizedUnitsToPurchase"))
     OpenSearchReservedInstancesConfiguration.add_member(:term, Shapes::ShapeRef.new(shape: String, location_name: "term"))
+    OpenSearchReservedInstancesConfiguration.add_member(:payment_option, Shapes::ShapeRef.new(shape: String, location_name: "paymentOption"))
+    OpenSearchReservedInstancesConfiguration.add_member(:number_of_instances_to_purchase, Shapes::ShapeRef.new(shape: String, location_name: "numberOfInstancesToPurchase"))
+    OpenSearchReservedInstancesConfiguration.add_member(:instance_type, Shapes::ShapeRef.new(shape: String, location_name: "instanceType"))
+    OpenSearchReservedInstancesConfiguration.add_member(:reserved_instances_region, Shapes::ShapeRef.new(shape: String, location_name: "reservedInstancesRegion"))
+    OpenSearchReservedInstancesConfiguration.add_member(:current_generation, Shapes::ShapeRef.new(shape: String, location_name: "currentGeneration"))
+    OpenSearchReservedInstancesConfiguration.add_member(:size_flex_eligible, Shapes::ShapeRef.new(shape: Boolean, location_name: "sizeFlexEligible"))
     OpenSearchReservedInstancesConfiguration.add_member(:upfront_cost, Shapes::ShapeRef.new(shape: String, location_name: "upfrontCost"))
+    OpenSearchReservedInstancesConfiguration.add_member(:monthly_recurring_cost, Shapes::ShapeRef.new(shape: String, location_name: "monthlyRecurringCost"))
     OpenSearchReservedInstancesConfiguration.struct_class = Types::OpenSearchReservedInstancesConfiguration
 
     OrderBy.add_member(:dimension, Shapes::ShapeRef.new(shape: String, location_name: "dimension"))
     OrderBy.add_member(:order, Shapes::ShapeRef.new(shape: Order, location_name: "order"))
     OrderBy.struct_class = Types::OrderBy
 
+    RdsDbInstance.add_member(:configuration, Shapes::ShapeRef.new(shape: RdsDbInstanceConfiguration, location_name: "configuration"))
+    RdsDbInstance.add_member(:cost_calculation, Shapes::ShapeRef.new(shape: ResourceCostCalculation, location_name: "costCalculation"))
+    RdsDbInstance.struct_class = Types::RdsDbInstance
+
+    RdsDbInstanceConfiguration.add_member(:instance, Shapes::ShapeRef.new(shape: DbInstanceConfiguration, location_name: "instance"))
+    RdsDbInstanceConfiguration.struct_class = Types::RdsDbInstanceConfiguration
+
+    RdsDbInstanceStorage.add_member(:configuration, Shapes::ShapeRef.new(shape: RdsDbInstanceStorageConfiguration, location_name: "configuration"))
+    RdsDbInstanceStorage.add_member(:cost_calculation, Shapes::ShapeRef.new(shape: ResourceCostCalculation, location_name: "costCalculation"))
+    RdsDbInstanceStorage.struct_class = Types::RdsDbInstanceStorage
+
+    RdsDbInstanceStorageConfiguration.add_member(:storage_type, Shapes::ShapeRef.new(shape: String, location_name: "storageType"))
+    RdsDbInstanceStorageConfiguration.add_member(:allocated_storage_in_gb, Shapes::ShapeRef.new(shape: Double, location_name: "allocatedStorageInGb"))
+    RdsDbInstanceStorageConfiguration.add_member(:iops, Shapes::ShapeRef.new(shape: Double, location_name: "iops"))
+    RdsDbInstanceStorageConfiguration.add_member(:storage_throughput, Shapes::ShapeRef.new(shape: Double, location_name: "storageThroughput"))
+    RdsDbInstanceStorageConfiguration.struct_class = Types::RdsDbInstanceStorageConfiguration
+
     RdsReservedInstances.add_member(:configuration, Shapes::ShapeRef.new(shape: RdsReservedInstancesConfiguration, location_name: "configuration"))
     RdsReservedInstances.add_member(:cost_calculation, Shapes::ShapeRef.new(shape: ReservedInstancesCostCalculation, location_name: "costCalculation"))
     RdsReservedInstances.struct_class = Types::RdsReservedInstances
 
     RdsReservedInstancesConfiguration.add_member(:account_scope, Shapes::ShapeRef.new(shape: String, location_name: "accountScope"))
+    RdsReservedInstancesConfiguration.add_member(:service, Shapes::ShapeRef.new(shape: String, location_name: "service"))
+    RdsReservedInstancesConfiguration.add_member(:normalized_units_to_purchase, Shapes::ShapeRef.new(shape: String, location_name: "normalizedUnitsToPurchase"))
+    RdsReservedInstancesConfiguration.add_member(:term, Shapes::ShapeRef.new(shape: String, location_name: "term"))
+    RdsReservedInstancesConfiguration.add_member(:payment_option, Shapes::ShapeRef.new(shape: String, location_name: "paymentOption"))
+    RdsReservedInstancesConfiguration.add_member(:number_of_instances_to_purchase, Shapes::ShapeRef.new(shape: String, location_name: "numberOfInstancesToPurchase"))
+    RdsReservedInstancesConfiguration.add_member(:instance_family, Shapes::ShapeRef.new(shape: String, location_name: "instanceFamily"))
+    RdsReservedInstancesConfiguration.add_member(:instance_type, Shapes::ShapeRef.new(shape: String, location_name: "instanceType"))
+    RdsReservedInstancesConfiguration.add_member(:reserved_instances_region, Shapes::ShapeRef.new(shape: String, location_name: "reservedInstancesRegion"))
+    RdsReservedInstancesConfiguration.add_member(:size_flex_eligible, Shapes::ShapeRef.new(shape: Boolean, location_name: "sizeFlexEligible"))
     RdsReservedInstancesConfiguration.add_member(:current_generation, Shapes::ShapeRef.new(shape: String, location_name: "currentGeneration"))
+    RdsReservedInstancesConfiguration.add_member(:upfront_cost, Shapes::ShapeRef.new(shape: String, location_name: "upfrontCost"))
+    RdsReservedInstancesConfiguration.add_member(:monthly_recurring_cost, Shapes::ShapeRef.new(shape: String, location_name: "monthlyRecurringCost"))
+    RdsReservedInstancesConfiguration.add_member(:license_model, Shapes::ShapeRef.new(shape: String, location_name: "licenseModel"))
     RdsReservedInstancesConfiguration.add_member(:database_edition, Shapes::ShapeRef.new(shape: String, location_name: "databaseEdition"))
     RdsReservedInstancesConfiguration.add_member(:database_engine, Shapes::ShapeRef.new(shape: String, location_name: "databaseEngine"))
     RdsReservedInstancesConfiguration.add_member(:deployment_option, Shapes::ShapeRef.new(shape: String, location_name: "deploymentOption"))
-    RdsReservedInstancesConfiguration.add_member(:instance_family, Shapes::ShapeRef.new(shape: String, location_name: "instanceFamily"))
-    RdsReservedInstancesConfiguration.add_member(:instance_type, Shapes::ShapeRef.new(shape: String, location_name: "instanceType"))
-    RdsReservedInstancesConfiguration.add_member(:license_model, Shapes::ShapeRef.new(shape: String, location_name: "licenseModel"))
-    RdsReservedInstancesConfiguration.add_member(:monthly_recurring_cost, Shapes::ShapeRef.new(shape: String, location_name: "monthlyRecurringCost"))
-    RdsReservedInstancesConfiguration.add_member(:normalized_units_to_purchase, Shapes::ShapeRef.new(shape: String, location_name: "normalizedUnitsToPurchase"))
-    RdsReservedInstancesConfiguration.add_member(:number_of_instances_to_purchase, Shapes::ShapeRef.new(shape: String, location_name: "numberOfInstancesToPurchase"))
-    RdsReservedInstancesConfiguration.add_member(:payment_option, Shapes::ShapeRef.new(shape: String, location_name: "paymentOption"))
-    RdsReservedInstancesConfiguration.add_member(:reserved_instances_region, Shapes::ShapeRef.new(shape: String, location_name: "reservedInstancesRegion"))
-    RdsReservedInstancesConfiguration.add_member(:service, Shapes::ShapeRef.new(shape: String, location_name: "service"))
-    RdsReservedInstancesConfiguration.add_member(:size_flex_eligible, Shapes::ShapeRef.new(shape: Boolean, location_name: "sizeFlexEligible"))
-    RdsReservedInstancesConfiguration.add_member(:term, Shapes::ShapeRef.new(shape: String, location_name: "term"))
-    RdsReservedInstancesConfiguration.add_member(:upfront_cost, Shapes::ShapeRef.new(shape: String, location_name: "upfrontCost"))
     RdsReservedInstancesConfiguration.struct_class = Types::RdsReservedInstancesConfiguration
 
+    Recommendation.add_member(:recommendation_id, Shapes::ShapeRef.new(shape: String, location_name: "recommendationId"))
     Recommendation.add_member(:account_id, Shapes::ShapeRef.new(shape: String, location_name: "accountId"))
-    Recommendation.add_member(:action_type, Shapes::ShapeRef.new(shape: String, location_name: "actionType"))
-    Recommendation.add_member(:currency_code, Shapes::ShapeRef.new(shape: String, location_name: "currencyCode"))
-    Recommendation.add_member(:current_resource_summary, Shapes::ShapeRef.new(shape: String, location_name: "currentResourceSummary"))
+    Recommendation.add_member(:region, Shapes::ShapeRef.new(shape: String, location_name: "region"))
+    Recommendation.add_member(:resource_id, Shapes::ShapeRef.new(shape: String, location_name: "resourceId"))
+    Recommendation.add_member(:resource_arn, Shapes::ShapeRef.new(shape: String, location_name: "resourceArn"))
     Recommendation.add_member(:current_resource_type, Shapes::ShapeRef.new(shape: String, location_name: "currentResourceType"))
-    Recommendation.add_member(:estimated_monthly_cost, Shapes::ShapeRef.new(shape: Double, location_name: "estimatedMonthlyCost"))
+    Recommendation.add_member(:recommended_resource_type, Shapes::ShapeRef.new(shape: String, location_name: "recommendedResourceType"))
     Recommendation.add_member(:estimated_monthly_savings, Shapes::ShapeRef.new(shape: Double, location_name: "estimatedMonthlySavings"))
     Recommendation.add_member(:estimated_savings_percentage, Shapes::ShapeRef.new(shape: Double, location_name: "estimatedSavingsPercentage"))
+    Recommendation.add_member(:estimated_monthly_cost, Shapes::ShapeRef.new(shape: Double, location_name: "estimatedMonthlyCost"))
+    Recommendation.add_member(:currency_code, Shapes::ShapeRef.new(shape: String, location_name: "currencyCode"))
     Recommendation.add_member(:implementation_effort, Shapes::ShapeRef.new(shape: String, location_name: "implementationEffort"))
-    Recommendation.add_member(:last_refresh_timestamp, Shapes::ShapeRef.new(shape: Datetime, location_name: "lastRefreshTimestamp"))
-    Recommendation.add_member(:recommendation_id, Shapes::ShapeRef.new(shape: String, location_name: "recommendationId"))
-    Recommendation.add_member(:recommendation_lookback_period_in_days, Shapes::ShapeRef.new(shape: Integer, location_name: "recommendationLookbackPeriodInDays"))
-    Recommendation.add_member(:recommended_resource_summary, Shapes::ShapeRef.new(shape: String, location_name: "recommendedResourceSummary"))
-    Recommendation.add_member(:recommended_resource_type, Shapes::ShapeRef.new(shape: String, location_name: "recommendedResourceType"))
-    Recommendation.add_member(:region, Shapes::ShapeRef.new(shape: String, location_name: "region"))
-    Recommendation.add_member(:resource_arn, Shapes::ShapeRef.new(shape: String, location_name: "resourceArn"))
-    Recommendation.add_member(:resource_id, Shapes::ShapeRef.new(shape: String, location_name: "resourceId"))
     Recommendation.add_member(:restart_needed, Shapes::ShapeRef.new(shape: Boolean, location_name: "restartNeeded"))
+    Recommendation.add_member(:action_type, Shapes::ShapeRef.new(shape: String, location_name: "actionType"))
     Recommendation.add_member(:rollback_possible, Shapes::ShapeRef.new(shape: Boolean, location_name: "rollbackPossible"))
+    Recommendation.add_member(:current_resource_summary, Shapes::ShapeRef.new(shape: String, location_name: "currentResourceSummary"))
+    Recommendation.add_member(:recommended_resource_summary, Shapes::ShapeRef.new(shape: String, location_name: "recommendedResourceSummary"))
+    Recommendation.add_member(:last_refresh_timestamp, Shapes::ShapeRef.new(shape: Datetime, location_name: "lastRefreshTimestamp"))
+    Recommendation.add_member(:recommendation_lookback_period_in_days, Shapes::ShapeRef.new(shape: Integer, location_name: "recommendationLookbackPeriodInDays"))
     Recommendation.add_member(:source, Shapes::ShapeRef.new(shape: Source, location_name: "source"))
     Recommendation.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     Recommendation.struct_class = Types::Recommendation
@@ -407,8 +432,8 @@ module Aws::CostOptimizationHub
 
     RecommendationSummariesList.member = Shapes::ShapeRef.new(shape: RecommendationSummary)
 
-    RecommendationSummary.add_member(:estimated_monthly_savings, Shapes::ShapeRef.new(shape: Double, location_name: "estimatedMonthlySavings"))
     RecommendationSummary.add_member(:group, Shapes::ShapeRef.new(shape: String, location_name: "group"))
+    RecommendationSummary.add_member(:estimated_monthly_savings, Shapes::ShapeRef.new(shape: Double, location_name: "estimatedMonthlySavings"))
     RecommendationSummary.add_member(:recommendation_count, Shapes::ShapeRef.new(shape: Integer, location_name: "recommendationCount"))
     RecommendationSummary.struct_class = Types::RecommendationSummary
 
@@ -417,18 +442,18 @@ module Aws::CostOptimizationHub
     RedshiftReservedInstances.struct_class = Types::RedshiftReservedInstances
 
     RedshiftReservedInstancesConfiguration.add_member(:account_scope, Shapes::ShapeRef.new(shape: String, location_name: "accountScope"))
-    RedshiftReservedInstancesConfiguration.add_member(:current_generation, Shapes::ShapeRef.new(shape: String, location_name: "currentGeneration"))
+    RedshiftReservedInstancesConfiguration.add_member(:service, Shapes::ShapeRef.new(shape: String, location_name: "service"))
+    RedshiftReservedInstancesConfiguration.add_member(:normalized_units_to_purchase, Shapes::ShapeRef.new(shape: String, location_name: "normalizedUnitsToPurchase"))
+    RedshiftReservedInstancesConfiguration.add_member(:term, Shapes::ShapeRef.new(shape: String, location_name: "term"))
+    RedshiftReservedInstancesConfiguration.add_member(:payment_option, Shapes::ShapeRef.new(shape: String, location_name: "paymentOption"))
+    RedshiftReservedInstancesConfiguration.add_member(:number_of_instances_to_purchase, Shapes::ShapeRef.new(shape: String, location_name: "numberOfInstancesToPurchase"))
     RedshiftReservedInstancesConfiguration.add_member(:instance_family, Shapes::ShapeRef.new(shape: String, location_name: "instanceFamily"))
     RedshiftReservedInstancesConfiguration.add_member(:instance_type, Shapes::ShapeRef.new(shape: String, location_name: "instanceType"))
-    RedshiftReservedInstancesConfiguration.add_member(:monthly_recurring_cost, Shapes::ShapeRef.new(shape: String, location_name: "monthlyRecurringCost"))
-    RedshiftReservedInstancesConfiguration.add_member(:normalized_units_to_purchase, Shapes::ShapeRef.new(shape: String, location_name: "normalizedUnitsToPurchase"))
-    RedshiftReservedInstancesConfiguration.add_member(:number_of_instances_to_purchase, Shapes::ShapeRef.new(shape: String, location_name: "numberOfInstancesToPurchase"))
-    RedshiftReservedInstancesConfiguration.add_member(:payment_option, Shapes::ShapeRef.new(shape: String, location_name: "paymentOption"))
     RedshiftReservedInstancesConfiguration.add_member(:reserved_instances_region, Shapes::ShapeRef.new(shape: String, location_name: "reservedInstancesRegion"))
-    RedshiftReservedInstancesConfiguration.add_member(:service, Shapes::ShapeRef.new(shape: String, location_name: "service"))
     RedshiftReservedInstancesConfiguration.add_member(:size_flex_eligible, Shapes::ShapeRef.new(shape: Boolean, location_name: "sizeFlexEligible"))
-    RedshiftReservedInstancesConfiguration.add_member(:term, Shapes::ShapeRef.new(shape: String, location_name: "term"))
+    RedshiftReservedInstancesConfiguration.add_member(:current_generation, Shapes::ShapeRef.new(shape: String, location_name: "currentGeneration"))
     RedshiftReservedInstancesConfiguration.add_member(:upfront_cost, Shapes::ShapeRef.new(shape: String, location_name: "upfrontCost"))
+    RedshiftReservedInstancesConfiguration.add_member(:monthly_recurring_cost, Shapes::ShapeRef.new(shape: String, location_name: "monthlyRecurringCost"))
     RedshiftReservedInstancesConfiguration.struct_class = Types::RedshiftReservedInstancesConfiguration
 
     RegionList.member = Shapes::ShapeRef.new(shape: String)
@@ -436,45 +461,49 @@ module Aws::CostOptimizationHub
     ReservedInstancesCostCalculation.add_member(:pricing, Shapes::ShapeRef.new(shape: ReservedInstancesPricing, location_name: "pricing"))
     ReservedInstancesCostCalculation.struct_class = Types::ReservedInstancesCostCalculation
 
-    ReservedInstancesPricing.add_member(:estimated_monthly_amortized_reservation_cost, Shapes::ShapeRef.new(shape: Double, location_name: "estimatedMonthlyAmortizedReservationCost"))
     ReservedInstancesPricing.add_member(:estimated_on_demand_cost, Shapes::ShapeRef.new(shape: Double, location_name: "estimatedOnDemandCost"))
     ReservedInstancesPricing.add_member(:monthly_reservation_eligible_cost, Shapes::ShapeRef.new(shape: Double, location_name: "monthlyReservationEligibleCost"))
     ReservedInstancesPricing.add_member(:savings_percentage, Shapes::ShapeRef.new(shape: Double, location_name: "savingsPercentage"))
+    ReservedInstancesPricing.add_member(:estimated_monthly_amortized_reservation_cost, Shapes::ShapeRef.new(shape: Double, location_name: "estimatedMonthlyAmortizedReservationCost"))
     ReservedInstancesPricing.struct_class = Types::ReservedInstancesPricing
 
     ResourceArnList.member = Shapes::ShapeRef.new(shape: String)
 
-    ResourceCostCalculation.add_member(:pricing, Shapes::ShapeRef.new(shape: ResourcePricing, location_name: "pricing"))
     ResourceCostCalculation.add_member(:usages, Shapes::ShapeRef.new(shape: UsageList, location_name: "usages"))
+    ResourceCostCalculation.add_member(:pricing, Shapes::ShapeRef.new(shape: ResourcePricing, location_name: "pricing"))
     ResourceCostCalculation.struct_class = Types::ResourceCostCalculation
 
-    ResourceDetails.add_member(:compute_savings_plans, Shapes::ShapeRef.new(shape: ComputeSavingsPlans, location_name: "computeSavingsPlans"))
+    ResourceDetails.add_member(:lambda_function, Shapes::ShapeRef.new(shape: LambdaFunction, location_name: "lambdaFunction"))
+    ResourceDetails.add_member(:ecs_service, Shapes::ShapeRef.new(shape: EcsService, location_name: "ecsService"))
+    ResourceDetails.add_member(:ec2_instance, Shapes::ShapeRef.new(shape: Ec2Instance, location_name: "ec2Instance"))
     ResourceDetails.add_member(:ebs_volume, Shapes::ShapeRef.new(shape: EbsVolume, location_name: "ebsVolume"))
     ResourceDetails.add_member(:ec2_auto_scaling_group, Shapes::ShapeRef.new(shape: Ec2AutoScalingGroup, location_name: "ec2AutoScalingGroup"))
-    ResourceDetails.add_member(:ec2_instance, Shapes::ShapeRef.new(shape: Ec2Instance, location_name: "ec2Instance"))
-    ResourceDetails.add_member(:ec2_instance_savings_plans, Shapes::ShapeRef.new(shape: Ec2InstanceSavingsPlans, location_name: "ec2InstanceSavingsPlans"))
     ResourceDetails.add_member(:ec2_reserved_instances, Shapes::ShapeRef.new(shape: Ec2ReservedInstances, location_name: "ec2ReservedInstances"))
-    ResourceDetails.add_member(:ecs_service, Shapes::ShapeRef.new(shape: EcsService, location_name: "ecsService"))
-    ResourceDetails.add_member(:elasti_cache_reserved_instances, Shapes::ShapeRef.new(shape: ElastiCacheReservedInstances, location_name: "elastiCacheReservedInstances"))
-    ResourceDetails.add_member(:lambda_function, Shapes::ShapeRef.new(shape: LambdaFunction, location_name: "lambdaFunction"))
-    ResourceDetails.add_member(:open_search_reserved_instances, Shapes::ShapeRef.new(shape: OpenSearchReservedInstances, location_name: "openSearchReservedInstances"))
     ResourceDetails.add_member(:rds_reserved_instances, Shapes::ShapeRef.new(shape: RdsReservedInstances, location_name: "rdsReservedInstances"))
+    ResourceDetails.add_member(:elasti_cache_reserved_instances, Shapes::ShapeRef.new(shape: ElastiCacheReservedInstances, location_name: "elastiCacheReservedInstances"))
+    ResourceDetails.add_member(:open_search_reserved_instances, Shapes::ShapeRef.new(shape: OpenSearchReservedInstances, location_name: "openSearchReservedInstances"))
     ResourceDetails.add_member(:redshift_reserved_instances, Shapes::ShapeRef.new(shape: RedshiftReservedInstances, location_name: "redshiftReservedInstances"))
+    ResourceDetails.add_member(:ec2_instance_savings_plans, Shapes::ShapeRef.new(shape: Ec2InstanceSavingsPlans, location_name: "ec2InstanceSavingsPlans"))
+    ResourceDetails.add_member(:compute_savings_plans, Shapes::ShapeRef.new(shape: ComputeSavingsPlans, location_name: "computeSavingsPlans"))
     ResourceDetails.add_member(:sage_maker_savings_plans, Shapes::ShapeRef.new(shape: SageMakerSavingsPlans, location_name: "sageMakerSavingsPlans"))
+    ResourceDetails.add_member(:rds_db_instance, Shapes::ShapeRef.new(shape: RdsDbInstance, location_name: "rdsDbInstance"))
+    ResourceDetails.add_member(:rds_db_instance_storage, Shapes::ShapeRef.new(shape: RdsDbInstanceStorage, location_name: "rdsDbInstanceStorage"))
     ResourceDetails.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
-    ResourceDetails.add_member_subclass(:compute_savings_plans, Types::ResourceDetails::ComputeSavingsPlans)
+    ResourceDetails.add_member_subclass(:lambda_function, Types::ResourceDetails::LambdaFunction)
+    ResourceDetails.add_member_subclass(:ecs_service, Types::ResourceDetails::EcsService)
+    ResourceDetails.add_member_subclass(:ec2_instance, Types::ResourceDetails::Ec2Instance)
     ResourceDetails.add_member_subclass(:ebs_volume, Types::ResourceDetails::EbsVolume)
     ResourceDetails.add_member_subclass(:ec2_auto_scaling_group, Types::ResourceDetails::Ec2AutoScalingGroup)
-    ResourceDetails.add_member_subclass(:ec2_instance, Types::ResourceDetails::Ec2Instance)
-    ResourceDetails.add_member_subclass(:ec2_instance_savings_plans, Types::ResourceDetails::Ec2InstanceSavingsPlans)
     ResourceDetails.add_member_subclass(:ec2_reserved_instances, Types::ResourceDetails::Ec2ReservedInstances)
-    ResourceDetails.add_member_subclass(:ecs_service, Types::ResourceDetails::EcsService)
-    ResourceDetails.add_member_subclass(:elasti_cache_reserved_instances, Types::ResourceDetails::ElastiCacheReservedInstances)
-    ResourceDetails.add_member_subclass(:lambda_function, Types::ResourceDetails::LambdaFunction)
-    ResourceDetails.add_member_subclass(:open_search_reserved_instances, Types::ResourceDetails::OpenSearchReservedInstances)
     ResourceDetails.add_member_subclass(:rds_reserved_instances, Types::ResourceDetails::RdsReservedInstances)
+    ResourceDetails.add_member_subclass(:elasti_cache_reserved_instances, Types::ResourceDetails::ElastiCacheReservedInstances)
+    ResourceDetails.add_member_subclass(:open_search_reserved_instances, Types::ResourceDetails::OpenSearchReservedInstances)
     ResourceDetails.add_member_subclass(:redshift_reserved_instances, Types::ResourceDetails::RedshiftReservedInstances)
+    ResourceDetails.add_member_subclass(:ec2_instance_savings_plans, Types::ResourceDetails::Ec2InstanceSavingsPlans)
+    ResourceDetails.add_member_subclass(:compute_savings_plans, Types::ResourceDetails::ComputeSavingsPlans)
     ResourceDetails.add_member_subclass(:sage_maker_savings_plans, Types::ResourceDetails::SageMakerSavingsPlans)
+    ResourceDetails.add_member_subclass(:rds_db_instance, Types::ResourceDetails::RdsDbInstance)
+    ResourceDetails.add_member_subclass(:rds_db_instance_storage, Types::ResourceDetails::RdsDbInstanceStorage)
     ResourceDetails.add_member_subclass(:unknown, Types::ResourceDetails::Unknown)
     ResourceDetails.struct_class = Types::ResourceDetails
 
@@ -484,10 +513,10 @@ module Aws::CostOptimizationHub
     ResourceNotFoundException.add_member(:resource_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "resourceId"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
-    ResourcePricing.add_member(:estimated_cost_after_discounts, Shapes::ShapeRef.new(shape: Double, location_name: "estimatedCostAfterDiscounts"))
     ResourcePricing.add_member(:estimated_cost_before_discounts, Shapes::ShapeRef.new(shape: Double, location_name: "estimatedCostBeforeDiscounts"))
-    ResourcePricing.add_member(:estimated_discounts, Shapes::ShapeRef.new(shape: EstimatedDiscounts, location_name: "estimatedDiscounts"))
     ResourcePricing.add_member(:estimated_net_unused_amortized_commitments, Shapes::ShapeRef.new(shape: Double, location_name: "estimatedNetUnusedAmortizedCommitments"))
+    ResourcePricing.add_member(:estimated_discounts, Shapes::ShapeRef.new(shape: EstimatedDiscounts, location_name: "estimatedDiscounts"))
+    ResourcePricing.add_member(:estimated_cost_after_discounts, Shapes::ShapeRef.new(shape: Double, location_name: "estimatedCostAfterDiscounts"))
     ResourcePricing.struct_class = Types::ResourcePricing
 
     ResourceTypeList.member = Shapes::ShapeRef.new(shape: ResourceType)
@@ -497,22 +526,22 @@ module Aws::CostOptimizationHub
     SageMakerSavingsPlans.struct_class = Types::SageMakerSavingsPlans
 
     SageMakerSavingsPlansConfiguration.add_member(:account_scope, Shapes::ShapeRef.new(shape: String, location_name: "accountScope"))
-    SageMakerSavingsPlansConfiguration.add_member(:hourly_commitment, Shapes::ShapeRef.new(shape: String, location_name: "hourlyCommitment"))
-    SageMakerSavingsPlansConfiguration.add_member(:payment_option, Shapes::ShapeRef.new(shape: String, location_name: "paymentOption"))
     SageMakerSavingsPlansConfiguration.add_member(:term, Shapes::ShapeRef.new(shape: String, location_name: "term"))
+    SageMakerSavingsPlansConfiguration.add_member(:payment_option, Shapes::ShapeRef.new(shape: String, location_name: "paymentOption"))
+    SageMakerSavingsPlansConfiguration.add_member(:hourly_commitment, Shapes::ShapeRef.new(shape: String, location_name: "hourlyCommitment"))
     SageMakerSavingsPlansConfiguration.struct_class = Types::SageMakerSavingsPlansConfiguration
 
     SavingsPlansCostCalculation.add_member(:pricing, Shapes::ShapeRef.new(shape: SavingsPlansPricing, location_name: "pricing"))
     SavingsPlansCostCalculation.struct_class = Types::SavingsPlansCostCalculation
 
-    SavingsPlansPricing.add_member(:estimated_monthly_commitment, Shapes::ShapeRef.new(shape: Double, location_name: "estimatedMonthlyCommitment"))
-    SavingsPlansPricing.add_member(:estimated_on_demand_cost, Shapes::ShapeRef.new(shape: Double, location_name: "estimatedOnDemandCost"))
     SavingsPlansPricing.add_member(:monthly_savings_plans_eligible_cost, Shapes::ShapeRef.new(shape: Double, location_name: "monthlySavingsPlansEligibleCost"))
+    SavingsPlansPricing.add_member(:estimated_monthly_commitment, Shapes::ShapeRef.new(shape: Double, location_name: "estimatedMonthlyCommitment"))
     SavingsPlansPricing.add_member(:savings_percentage, Shapes::ShapeRef.new(shape: Double, location_name: "savingsPercentage"))
+    SavingsPlansPricing.add_member(:estimated_on_demand_cost, Shapes::ShapeRef.new(shape: Double, location_name: "estimatedOnDemandCost"))
     SavingsPlansPricing.struct_class = Types::SavingsPlansPricing
 
-    StorageConfiguration.add_member(:size_in_gb, Shapes::ShapeRef.new(shape: Double, location_name: "sizeInGb"))
     StorageConfiguration.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "type"))
+    StorageConfiguration.add_member(:size_in_gb, Shapes::ShapeRef.new(shape: Double, location_name: "sizeInGb"))
     StorageConfiguration.struct_class = Types::StorageConfiguration
 
     Tag.add_member(:key, Shapes::ShapeRef.new(shape: String, location_name: "key"))
@@ -524,33 +553,33 @@ module Aws::CostOptimizationHub
     ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     ThrottlingException.struct_class = Types::ThrottlingException
 
-    UpdateEnrollmentStatusRequest.add_member(:include_member_accounts, Shapes::ShapeRef.new(shape: Boolean, location_name: "includeMemberAccounts"))
     UpdateEnrollmentStatusRequest.add_member(:status, Shapes::ShapeRef.new(shape: EnrollmentStatus, required: true, location_name: "status"))
+    UpdateEnrollmentStatusRequest.add_member(:include_member_accounts, Shapes::ShapeRef.new(shape: Boolean, location_name: "includeMemberAccounts"))
     UpdateEnrollmentStatusRequest.struct_class = Types::UpdateEnrollmentStatusRequest
 
     UpdateEnrollmentStatusResponse.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "status"))
     UpdateEnrollmentStatusResponse.struct_class = Types::UpdateEnrollmentStatusResponse
 
-    UpdatePreferencesRequest.add_member(:member_account_discount_visibility, Shapes::ShapeRef.new(shape: MemberAccountDiscountVisibility, location_name: "memberAccountDiscountVisibility"))
     UpdatePreferencesRequest.add_member(:savings_estimation_mode, Shapes::ShapeRef.new(shape: SavingsEstimationMode, location_name: "savingsEstimationMode"))
+    UpdatePreferencesRequest.add_member(:member_account_discount_visibility, Shapes::ShapeRef.new(shape: MemberAccountDiscountVisibility, location_name: "memberAccountDiscountVisibility"))
     UpdatePreferencesRequest.struct_class = Types::UpdatePreferencesRequest
 
-    UpdatePreferencesResponse.add_member(:member_account_discount_visibility, Shapes::ShapeRef.new(shape: MemberAccountDiscountVisibility, location_name: "memberAccountDiscountVisibility"))
     UpdatePreferencesResponse.add_member(:savings_estimation_mode, Shapes::ShapeRef.new(shape: SavingsEstimationMode, location_name: "savingsEstimationMode"))
+    UpdatePreferencesResponse.add_member(:member_account_discount_visibility, Shapes::ShapeRef.new(shape: MemberAccountDiscountVisibility, location_name: "memberAccountDiscountVisibility"))
     UpdatePreferencesResponse.struct_class = Types::UpdatePreferencesResponse
 
+    Usage.add_member(:usage_type, Shapes::ShapeRef.new(shape: String, location_name: "usageType"))
+    Usage.add_member(:usage_amount, Shapes::ShapeRef.new(shape: Double, location_name: "usageAmount"))
     Usage.add_member(:operation, Shapes::ShapeRef.new(shape: String, location_name: "operation"))
     Usage.add_member(:product_code, Shapes::ShapeRef.new(shape: String, location_name: "productCode"))
     Usage.add_member(:unit, Shapes::ShapeRef.new(shape: String, location_name: "unit"))
-    Usage.add_member(:usage_amount, Shapes::ShapeRef.new(shape: Double, location_name: "usageAmount"))
-    Usage.add_member(:usage_type, Shapes::ShapeRef.new(shape: String, location_name: "usageType"))
     Usage.struct_class = Types::Usage
 
     UsageList.member = Shapes::ShapeRef.new(shape: Usage)
 
-    ValidationException.add_member(:fields, Shapes::ShapeRef.new(shape: ValidationExceptionDetails, location_name: "fields"))
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ValidationException.add_member(:reason, Shapes::ShapeRef.new(shape: ValidationExceptionReason, location_name: "reason"))
+    ValidationException.add_member(:fields, Shapes::ShapeRef.new(shape: ValidationExceptionDetails, location_name: "fields"))
     ValidationException.struct_class = Types::ValidationException
 
     ValidationExceptionDetail.add_member(:field_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "fieldName"))
@@ -567,9 +596,11 @@ module Aws::CostOptimizationHub
 
       api.metadata = {
         "apiVersion" => "2022-07-26",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "cost-optimization-hub",
         "jsonVersion" => "1.0",
         "protocol" => "json",
+        "protocols" => ["json"],
         "serviceFullName" => "Cost Optimization Hub",
         "serviceId" => "Cost Optimization Hub",
         "signatureVersion" => "v4",

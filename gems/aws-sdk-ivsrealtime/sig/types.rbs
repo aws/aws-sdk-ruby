@@ -13,6 +13,12 @@ module Aws::IVSRealTime
       SENSITIVE: []
     end
 
+    class AutoParticipantRecordingConfiguration
+      attr_accessor storage_configuration_arn: ::String
+      attr_accessor media_types: ::Array[("AUDIO_VIDEO" | "AUDIO_ONLY")]
+      SENSITIVE: []
+    end
+
     class ChannelDestinationConfiguration
       attr_accessor channel_arn: ::String
       attr_accessor encoder_configuration_arn: ::String
@@ -21,24 +27,24 @@ module Aws::IVSRealTime
 
     class Composition
       attr_accessor arn: ::String
-      attr_accessor destinations: ::Array[Types::Destination]
-      attr_accessor end_time: ::Time
-      attr_accessor layout: Types::LayoutConfiguration
       attr_accessor stage_arn: ::String
-      attr_accessor start_time: ::Time
       attr_accessor state: ("STARTING" | "ACTIVE" | "STOPPING" | "FAILED" | "STOPPED")
+      attr_accessor layout: Types::LayoutConfiguration
+      attr_accessor destinations: ::Array[Types::Destination]
       attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
       SENSITIVE: []
     end
 
     class CompositionSummary
       attr_accessor arn: ::String
-      attr_accessor destinations: ::Array[Types::DestinationSummary]
-      attr_accessor end_time: ::Time
       attr_accessor stage_arn: ::String
-      attr_accessor start_time: ::Time
+      attr_accessor destinations: ::Array[Types::DestinationSummary]
       attr_accessor state: ("STARTING" | "ACTIVE" | "STOPPING" | "FAILED" | "STOPPED")
       attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
       SENSITIVE: []
     end
 
@@ -49,8 +55,8 @@ module Aws::IVSRealTime
 
     class CreateEncoderConfigurationRequest
       attr_accessor name: ::String
-      attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor video: Types::Video
+      attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
 
@@ -60,11 +66,11 @@ module Aws::IVSRealTime
     end
 
     class CreateParticipantTokenRequest
+      attr_accessor stage_arn: ::String
+      attr_accessor duration: ::Integer
+      attr_accessor user_id: ::String
       attr_accessor attributes: ::Hash[::String, ::String]
       attr_accessor capabilities: ::Array[("PUBLISH" | "SUBSCRIBE")]
-      attr_accessor duration: ::Integer
-      attr_accessor stage_arn: ::String
-      attr_accessor user_id: ::String
       SENSITIVE: []
     end
 
@@ -77,12 +83,13 @@ module Aws::IVSRealTime
       attr_accessor name: ::String
       attr_accessor participant_token_configurations: ::Array[Types::ParticipantTokenConfiguration]
       attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor auto_participant_recording_configuration: Types::AutoParticipantRecordingConfiguration
       SENSITIVE: []
     end
 
     class CreateStageResponse
-      attr_accessor participant_tokens: ::Array[Types::ParticipantToken]
       attr_accessor stage: Types::Stage
+      attr_accessor participant_tokens: ::Array[Types::ParticipantToken]
       SENSITIVE: []
     end
 
@@ -123,18 +130,18 @@ module Aws::IVSRealTime
     end
 
     class Destination
+      attr_accessor id: ::String
+      attr_accessor state: ("STARTING" | "ACTIVE" | "STOPPING" | "RECONNECTING" | "FAILED" | "STOPPED")
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
       attr_accessor configuration: Types::DestinationConfiguration
       attr_accessor detail: Types::DestinationDetail
-      attr_accessor end_time: ::Time
-      attr_accessor id: ::String
-      attr_accessor start_time: ::Time
-      attr_accessor state: ("STARTING" | "ACTIVE" | "STOPPING" | "RECONNECTING" | "FAILED" | "STOPPED")
       SENSITIVE: []
     end
 
     class DestinationConfiguration
-      attr_accessor channel: Types::ChannelDestinationConfiguration
       attr_accessor name: ::String
+      attr_accessor channel: Types::ChannelDestinationConfiguration
       attr_accessor s3: Types::S3DestinationConfiguration
       SENSITIVE: []
     end
@@ -145,17 +152,17 @@ module Aws::IVSRealTime
     end
 
     class DestinationSummary
-      attr_accessor end_time: ::Time
       attr_accessor id: ::String
-      attr_accessor start_time: ::Time
       attr_accessor state: ("STARTING" | "ACTIVE" | "STOPPING" | "RECONNECTING" | "FAILED" | "STOPPED")
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
       SENSITIVE: []
     end
 
     class DisconnectParticipantRequest
+      attr_accessor stage_arn: ::String
       attr_accessor participant_id: ::String
       attr_accessor reason: ::String
-      attr_accessor stage_arn: ::String
       SENSITIVE: []
     end
 
@@ -165,8 +172,8 @@ module Aws::IVSRealTime
     class EncoderConfiguration
       attr_accessor arn: ::String
       attr_accessor name: ::String
-      attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor video: Types::Video
+      attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
 
@@ -178,11 +185,11 @@ module Aws::IVSRealTime
     end
 
     class Event
-      attr_accessor error_code: ("INSUFFICIENT_CAPABILITIES" | "QUOTA_EXCEEDED" | "PUBLISHER_NOT_FOUND")
-      attr_accessor event_time: ::Time
       attr_accessor name: ("JOINED" | "LEFT" | "PUBLISH_STARTED" | "PUBLISH_STOPPED" | "SUBSCRIBE_STARTED" | "SUBSCRIBE_STOPPED" | "PUBLISH_ERROR" | "SUBSCRIBE_ERROR" | "JOIN_ERROR")
       attr_accessor participant_id: ::String
+      attr_accessor event_time: ::Time
       attr_accessor remote_participant_id: ::String
+      attr_accessor error_code: ("INSUFFICIENT_CAPABILITIES" | "QUOTA_EXCEEDED" | "PUBLISHER_NOT_FOUND")
       SENSITIVE: []
     end
 
@@ -207,9 +214,9 @@ module Aws::IVSRealTime
     end
 
     class GetParticipantRequest
-      attr_accessor participant_id: ::String
-      attr_accessor session_id: ::String
       attr_accessor stage_arn: ::String
+      attr_accessor session_id: ::String
+      attr_accessor participant_id: ::String
       SENSITIVE: []
     end
 
@@ -229,8 +236,8 @@ module Aws::IVSRealTime
     end
 
     class GetStageSessionRequest
-      attr_accessor session_id: ::String
       attr_accessor stage_arn: ::String
+      attr_accessor session_id: ::String
       SENSITIVE: []
     end
 
@@ -251,10 +258,10 @@ module Aws::IVSRealTime
 
     class GridConfiguration
       attr_accessor featured_participant_attribute: ::String
-      attr_accessor grid_gap: ::Integer
       attr_accessor omit_stopped_video: bool
       attr_accessor video_aspect_ratio: ("AUTO" | "VIDEO" | "SQUARE" | "PORTRAIT")
       attr_accessor video_fill_mode: ("FILL" | "COVER" | "CONTAIN")
+      attr_accessor grid_gap: ::Integer
       SENSITIVE: []
     end
 
@@ -270,10 +277,10 @@ module Aws::IVSRealTime
     end
 
     class ListCompositionsRequest
-      attr_accessor filter_by_encoder_configuration_arn: ::String
       attr_accessor filter_by_stage_arn: ::String
-      attr_accessor max_results: ::Integer
+      attr_accessor filter_by_encoder_configuration_arn: ::String
       attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
       SENSITIVE: []
     end
 
@@ -284,8 +291,8 @@ module Aws::IVSRealTime
     end
 
     class ListEncoderConfigurationsRequest
-      attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
       SENSITIVE: []
     end
 
@@ -296,11 +303,11 @@ module Aws::IVSRealTime
     end
 
     class ListParticipantEventsRequest
-      attr_accessor max_results: ::Integer
-      attr_accessor next_token: ::String
-      attr_accessor participant_id: ::String
-      attr_accessor session_id: ::String
       attr_accessor stage_arn: ::String
+      attr_accessor session_id: ::String
+      attr_accessor participant_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
       SENSITIVE: []
     end
 
@@ -311,56 +318,57 @@ module Aws::IVSRealTime
     end
 
     class ListParticipantsRequest
+      attr_accessor stage_arn: ::String
+      attr_accessor session_id: ::String
+      attr_accessor filter_by_user_id: ::String
       attr_accessor filter_by_published: bool
       attr_accessor filter_by_state: ("CONNECTED" | "DISCONNECTED")
-      attr_accessor filter_by_user_id: ::String
-      attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
-      attr_accessor session_id: ::String
-      attr_accessor stage_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor filter_by_recording_state: ("STARTING" | "ACTIVE" | "STOPPING" | "STOPPED" | "FAILED")
       SENSITIVE: []
     end
 
     class ListParticipantsResponse
-      attr_accessor next_token: ::String
       attr_accessor participants: ::Array[Types::ParticipantSummary]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
     class ListStageSessionsRequest
-      attr_accessor max_results: ::Integer
-      attr_accessor next_token: ::String
       attr_accessor stage_arn: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
       SENSITIVE: []
     end
 
     class ListStageSessionsResponse
-      attr_accessor next_token: ::String
       attr_accessor stage_sessions: ::Array[Types::StageSessionSummary]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
     class ListStagesRequest
-      attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
       SENSITIVE: []
     end
 
     class ListStagesResponse
-      attr_accessor next_token: ::String
       attr_accessor stages: ::Array[Types::StageSummary]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
     class ListStorageConfigurationsRequest
-      attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
       SENSITIVE: []
     end
 
     class ListStorageConfigurationsResponse
-      attr_accessor next_token: ::String
       attr_accessor storage_configurations: ::Array[Types::StorageConfigurationSummary]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
@@ -375,46 +383,50 @@ module Aws::IVSRealTime
     end
 
     class Participant
-      attr_accessor attributes: ::Hash[::String, ::String]
-      attr_accessor browser_name: ::String
-      attr_accessor browser_version: ::String
+      attr_accessor participant_id: ::String
+      attr_accessor user_id: ::String
+      attr_accessor state: ("CONNECTED" | "DISCONNECTED")
       attr_accessor first_join_time: ::Time
+      attr_accessor attributes: ::Hash[::String, ::String]
+      attr_accessor published: bool
       attr_accessor isp_name: ::String
       attr_accessor os_name: ::String
       attr_accessor os_version: ::String
-      attr_accessor participant_id: ::String
-      attr_accessor published: bool
+      attr_accessor browser_name: ::String
+      attr_accessor browser_version: ::String
       attr_accessor sdk_version: ::String
-      attr_accessor state: ("CONNECTED" | "DISCONNECTED")
-      attr_accessor user_id: ::String
+      attr_accessor recording_s3_bucket_name: ::String
+      attr_accessor recording_s3_prefix: ::String
+      attr_accessor recording_state: ("STARTING" | "ACTIVE" | "STOPPING" | "STOPPED" | "FAILED" | "DISABLED")
       SENSITIVE: []
     end
 
     class ParticipantSummary
-      attr_accessor first_join_time: ::Time
       attr_accessor participant_id: ::String
-      attr_accessor published: bool
-      attr_accessor state: ("CONNECTED" | "DISCONNECTED")
       attr_accessor user_id: ::String
+      attr_accessor state: ("CONNECTED" | "DISCONNECTED")
+      attr_accessor first_join_time: ::Time
+      attr_accessor published: bool
+      attr_accessor recording_state: ("STARTING" | "ACTIVE" | "STOPPING" | "STOPPED" | "FAILED" | "DISABLED")
       SENSITIVE: []
     end
 
     class ParticipantToken
-      attr_accessor attributes: ::Hash[::String, ::String]
-      attr_accessor capabilities: ::Array[("PUBLISH" | "SUBSCRIBE")]
-      attr_accessor duration: ::Integer
-      attr_accessor expiration_time: ::Time
       attr_accessor participant_id: ::String
       attr_accessor token: ::String
       attr_accessor user_id: ::String
+      attr_accessor attributes: ::Hash[::String, ::String]
+      attr_accessor duration: ::Integer
+      attr_accessor capabilities: ::Array[("PUBLISH" | "SUBSCRIBE")]
+      attr_accessor expiration_time: ::Time
       SENSITIVE: [:token]
     end
 
     class ParticipantTokenConfiguration
-      attr_accessor attributes: ::Hash[::String, ::String]
-      attr_accessor capabilities: ::Array[("PUBLISH" | "SUBSCRIBE")]
       attr_accessor duration: ::Integer
       attr_accessor user_id: ::String
+      attr_accessor attributes: ::Hash[::String, ::String]
+      attr_accessor capabilities: ::Array[("PUBLISH" | "SUBSCRIBE")]
       SENSITIVE: []
     end
 
@@ -425,15 +437,15 @@ module Aws::IVSRealTime
 
     class PipConfiguration
       attr_accessor featured_participant_attribute: ::String
-      attr_accessor grid_gap: ::Integer
       attr_accessor omit_stopped_video: bool
-      attr_accessor pip_behavior: ("STATIC" | "DYNAMIC")
-      attr_accessor pip_height: ::Integer
-      attr_accessor pip_offset: ::Integer
+      attr_accessor video_fill_mode: ("FILL" | "COVER" | "CONTAIN")
+      attr_accessor grid_gap: ::Integer
       attr_accessor pip_participant_attribute: ::String
+      attr_accessor pip_behavior: ("STATIC" | "DYNAMIC")
+      attr_accessor pip_offset: ::Integer
       attr_accessor pip_position: ("TOP_LEFT" | "TOP_RIGHT" | "BOTTOM_LEFT" | "BOTTOM_RIGHT")
       attr_accessor pip_width: ::Integer
-      attr_accessor video_fill_mode: ("FILL" | "COVER" | "CONTAIN")
+      attr_accessor pip_height: ::Integer
       SENSITIVE: []
     end
 
@@ -448,9 +460,9 @@ module Aws::IVSRealTime
     end
 
     class S3DestinationConfiguration
+      attr_accessor storage_configuration_arn: ::String
       attr_accessor encoder_configuration_arns: ::Array[::String]
       attr_accessor recording_configuration: Types::RecordingConfiguration
-      attr_accessor storage_configuration_arn: ::String
       SENSITIVE: []
     end
 
@@ -470,40 +482,41 @@ module Aws::IVSRealTime
     end
 
     class Stage
-      attr_accessor active_session_id: ::String
       attr_accessor arn: ::String
       attr_accessor name: ::String
+      attr_accessor active_session_id: ::String
       attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor auto_participant_recording_configuration: Types::AutoParticipantRecordingConfiguration
       SENSITIVE: []
     end
 
     class StageSession
-      attr_accessor end_time: ::Time
       attr_accessor session_id: ::String
       attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
       SENSITIVE: []
     end
 
     class StageSessionSummary
-      attr_accessor end_time: ::Time
       attr_accessor session_id: ::String
       attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
       SENSITIVE: []
     end
 
     class StageSummary
-      attr_accessor active_session_id: ::String
       attr_accessor arn: ::String
       attr_accessor name: ::String
+      attr_accessor active_session_id: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
 
     class StartCompositionRequest
-      attr_accessor destinations: ::Array[Types::DestinationConfiguration]
+      attr_accessor stage_arn: ::String
       attr_accessor idempotency_token: ::String
       attr_accessor layout: Types::LayoutConfiguration
-      attr_accessor stage_arn: ::String
+      attr_accessor destinations: ::Array[Types::DestinationConfiguration]
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
@@ -558,6 +571,7 @@ module Aws::IVSRealTime
     class UpdateStageRequest
       attr_accessor arn: ::String
       attr_accessor name: ::String
+      attr_accessor auto_participant_recording_configuration: Types::AutoParticipantRecordingConfiguration
       SENSITIVE: []
     end
 
@@ -572,10 +586,10 @@ module Aws::IVSRealTime
     end
 
     class Video
-      attr_accessor bitrate: ::Integer
-      attr_accessor framerate: ::Float
-      attr_accessor height: ::Integer
       attr_accessor width: ::Integer
+      attr_accessor height: ::Integer
+      attr_accessor framerate: ::Float
+      attr_accessor bitrate: ::Integer
       SENSITIVE: []
     end
   end

@@ -114,11 +114,6 @@ module Aws::CostOptimizationHub
       end
 
       # @return [String]
-      def fields
-        @data[:fields]
-      end
-
-      # @return [String]
       def message
         @message || @data[:message]
       end
@@ -126,6 +121,11 @@ module Aws::CostOptimizationHub
       # @return [String]
       def reason
         @data[:reason]
+      end
+
+      # @return [String]
+      def fields
+        @data[:fields]
       end
     end
 

@@ -82,6 +82,10 @@ module Aws::CodeArtifact
     #     repository.
     #
     #   * `public:maven-clojars` - for the Clojars repository.
+    #
+    #   * `public:ruby-gems-org` - for RubyGems.org.
+    #
+    #   * `public:crates-io` - for Crates.io.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeartifact-2018-09-22/AssociateExternalConnectionRequest AWS API Documentation
@@ -124,7 +128,7 @@ module Aws::CodeArtifact
     #
     #   * The namespace of a generic package is its `namespace`.
     #
-    #   * Python, NuGet, and Ruby package versions do not contain a
+    #   * Python, NuGet, Ruby, and Cargo package versions do not contain a
     #     corresponding component, package versions of those formats do not
     #     have a namespace.
     #   @return [String]
@@ -226,7 +230,7 @@ module Aws::CodeArtifact
     #
     #   * The namespace of a generic package is its `namespace`.
     #
-    #   * Python, NuGet, and Ruby package versions do not contain a
+    #   * Python, NuGet, Ruby, and Cargo package versions do not contain a
     #     corresponding component, package versions of those formats do not
     #     have a namespace.
     #   @return [String]
@@ -637,7 +641,7 @@ module Aws::CodeArtifact
     #
     #   * The namespace of a generic package is its `namespace`.
     #
-    #   * Python, NuGet, and Ruby package versions do not contain a
+    #   * Python, NuGet, Ruby, and Cargo package versions do not contain a
     #     corresponding component, package versions of those formats do not
     #     have a namespace.
     #   @return [String]
@@ -711,7 +715,7 @@ module Aws::CodeArtifact
     #
     #   * The namespace of a generic package is its `namespace`.
     #
-    #   * Python, NuGet, and Ruby package versions do not contain a
+    #   * Python, NuGet, Ruby, and Cargo package versions do not contain a
     #     corresponding component, package versions of those formats do not
     #     have a namespace.
     #   @return [String]
@@ -967,7 +971,7 @@ module Aws::CodeArtifact
     #
     #   * The namespace of a generic package is its `namespace`.
     #
-    #   * Python, NuGet, and Ruby package versions do not contain a
+    #   * Python, NuGet, Ruby, and Cargo package versions do not contain a
     #     corresponding component, package versions of those formats do not
     #     have a namespace.
     #   @return [String]
@@ -1046,7 +1050,7 @@ module Aws::CodeArtifact
     #
     #   * The namespace of a generic package is its `namespace`.
     #
-    #   * Python, NuGet, and Ruby package versions do not contain a
+    #   * Python, NuGet, Ruby, and Cargo package versions do not contain a
     #     corresponding component, package versions of those formats do not
     #     have a namespace.
     #   @return [String]
@@ -1211,7 +1215,7 @@ module Aws::CodeArtifact
     #
     #   * The namespace of a generic package is its `namespace`.
     #
-    #   * Python, NuGet, and Ruby package versions do not contain a
+    #   * Python, NuGet, Ruby, and Cargo package versions do not contain a
     #     corresponding component, package versions of those formats do not
     #     have a namespace.
     #   @return [String]
@@ -1455,7 +1459,7 @@ module Aws::CodeArtifact
     #
     #   * The namespace of a generic package is its `namespace`.
     #
-    #   * Python, NuGet, and Ruby package versions do not contain a
+    #   * Python, NuGet, Ruby, and Cargo package versions do not contain a
     #     corresponding component, package versions of those formats do not
     #     have a namespace.
     #   @return [String]
@@ -1613,7 +1617,7 @@ module Aws::CodeArtifact
     #
     #   * The namespace of a generic package is its `namespace`.
     #
-    #   * Python, NuGet, and Ruby package versions do not contain a
+    #   * Python, NuGet, Ruby, and Cargo package versions do not contain a
     #     corresponding component, package versions of those formats do not
     #     have a namespace.
     #   @return [String]
@@ -1721,7 +1725,7 @@ module Aws::CodeArtifact
     #
     #   * The namespace of a generic package is its `namespace`.
     #
-    #   * Python, NuGet, and Ruby package versions do not contain a
+    #   * Python, NuGet, Ruby, and Cargo package versions do not contain a
     #     corresponding component, package versions of those formats do not
     #     have a namespace.
     #   @return [String]
@@ -1764,7 +1768,7 @@ module Aws::CodeArtifact
     #
     #   * The namespace of a generic package is its `namespace`.
     #
-    #   * Python, NuGet, and Ruby package versions do not contain a
+    #   * Python, NuGet, Ruby, and Cargo package versions do not contain a
     #     corresponding component, package versions of those formats do not
     #     have a namespace.
     #   @return [String]
@@ -2176,7 +2180,7 @@ module Aws::CodeArtifact
     #
     #   * The namespace of a generic package is its `namespace`.
     #
-    #   * Python, NuGet, and Ruby package versions do not contain a
+    #   * Python, NuGet, Ruby, and Cargo package versions do not contain a
     #     corresponding component, package versions of those formats do not
     #     have a namespace.
     #   @return [String]
@@ -2232,7 +2236,7 @@ module Aws::CodeArtifact
     #
     #   * The namespace of a generic package is its `namespace`.
     #
-    #   * Python, NuGet, and Ruby package versions do not contain a
+    #   * Python, NuGet, Ruby, and Cargo package versions do not contain a
     #     corresponding component, package versions of those formats do not
     #     have a namespace.
     #   @return [String]
@@ -2306,21 +2310,17 @@ module Aws::CodeArtifact
     #
     #    * Maven
     #
-    #   * Swift
-    #
-    #   * generic
+    #   ^
     #
     #    </note>
     #
     #   * The namespace of a Maven package version is its `groupId`.
     #
-    #   * The namespace of an npm or Swift package version is its `scope`.
+    #   * The namespace of an npm package version is its `scope`.
     #
-    #   * The namespace of a generic package is its `namespace`.
-    #
-    #   * Python, NuGet, and Ruby package versions do not contain a
-    #     corresponding component, package versions of those formats do not
-    #     have a namespace.
+    #   * Python and NuGet package versions do not contain a corresponding
+    #     component, package versions of those formats do not have a
+    #     namespace.
     #   @return [String]
     #
     # @!attribute [rw] package
@@ -2362,15 +2362,22 @@ module Aws::CodeArtifact
     #   dependencies. The package component that specifies its namespace
     #   depends on its type. For example:
     #
+    #   <note markdown="1"> The namespace is required when listing dependencies from package
+    #   versions of the following formats:
+    #
+    #    * Maven
+    #
+    #   ^
+    #
+    #    </note>
+    #
     #   * The namespace of a Maven package version is its `groupId`.
     #
-    #   * The namespace of an npm or Swift package version is its `scope`.
+    #   * The namespace of an npm package version is its `scope`.
     #
-    #   * The namespace of a generic package is its `namespace`.
-    #
-    #   * Python, NuGet, and Ruby package versions do not contain a
-    #     corresponding component, package versions of those formats do not
-    #     have a namespace.
+    #   * Python and NuGet package versions do not contain a corresponding
+    #     component, package versions of those formats do not have a
+    #     namespace.
     #   @return [String]
     #
     # @!attribute [rw] package
@@ -2455,7 +2462,7 @@ module Aws::CodeArtifact
     #
     #   * The namespace of a generic package is its `namespace`.
     #
-    #   * Python, NuGet, and Ruby package versions do not contain a
+    #   * Python, NuGet, Ruby, and Cargo package versions do not contain a
     #     corresponding component, package versions of those formats do not
     #     have a namespace.
     #   @return [String]
@@ -2533,7 +2540,7 @@ module Aws::CodeArtifact
     #
     #   * The namespace of a generic package is its `namespace`.
     #
-    #   * Python, NuGet, and Ruby package versions do not contain a
+    #   * Python, NuGet, Ruby, and Cargo package versions do not contain a
     #     corresponding component, package versions of those formats do not
     #     have a namespace.
     #   @return [String]
@@ -2601,7 +2608,7 @@ module Aws::CodeArtifact
     #
     #   * The namespace of a generic package is its `namespace`.
     #
-    #   * Python, NuGet, and Ruby package versions do not contain a
+    #   * Python, NuGet, Ruby, and Cargo package versions do not contain a
     #     corresponding component, package versions of those formats do not
     #     have a namespace.
     #   @return [String]
@@ -2883,7 +2890,7 @@ module Aws::CodeArtifact
     #
     #   * The namespace of a generic package is its `namespace`.
     #
-    #   * Python, NuGet, and Ruby package versions do not contain a
+    #   * Python, NuGet, Ruby, and Cargo package versions do not contain a
     #     corresponding component, package versions of those formats do not
     #     have a namespace.
     #   @return [String]
@@ -2946,7 +2953,7 @@ module Aws::CodeArtifact
     #
     #   * The namespace of a generic package is its `namespace`.
     #
-    #   * Python, NuGet, and Ruby package versions do not contain a
+    #   * Python, NuGet, Ruby, and Cargo package versions do not contain a
     #     corresponding component, package versions of those formats do not
     #     have a namespace.
     #   @return [String]
@@ -3238,7 +3245,7 @@ module Aws::CodeArtifact
     #
     #   * The namespace of a generic package is its `namespace`.
     #
-    #   * Python, NuGet, and Ruby package versions do not contain a
+    #   * Python, NuGet, Ruby, and Cargo package versions do not contain a
     #     corresponding component, package versions of those formats do not
     #     have a namespace.
     #   @return [String]
@@ -3285,7 +3292,7 @@ module Aws::CodeArtifact
     #
     #   * The namespace of a generic package is its `namespace`.
     #
-    #   * Python, NuGet, and Ruby package versions do not contain a
+    #   * Python, NuGet, Ruby, and Cargo package versions do not contain a
     #     corresponding component, package versions of those formats do not
     #     have a namespace.
     #   @return [String]
@@ -3678,7 +3685,7 @@ module Aws::CodeArtifact
     #
     #   * The namespace of a generic package is its `namespace`.
     #
-    #   * Python, NuGet, and Ruby package versions do not contain a
+    #   * Python, NuGet, Ruby, and Cargo package versions do not contain a
     #     corresponding component, package versions of those formats do not
     #     have a namespace.
     #   @return [String]
@@ -4262,7 +4269,7 @@ module Aws::CodeArtifact
     #
     #   * The namespace of a generic package is its `namespace`.
     #
-    #   * Python, NuGet, and Ruby package versions do not contain a
+    #   * Python, NuGet, Ruby, and Cargo package versions do not contain a
     #     corresponding component, package versions of those formats do not
     #     have a namespace.
     #   @return [String]

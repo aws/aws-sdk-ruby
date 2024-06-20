@@ -3,6 +3,11 @@ Unreleased Changes
 
 * Feature - Support `:plugins` option on all Clients or using `Aws.config[:plugins]`.
 
+3.197.2 (2024-06-20)
+------------------
+
+* Issue - fix issue in Endpoint `attr` matcher when path is only an array index.
+
 * Issue - Fix trailing slash in endpoint URLs for rest-json and rest-xml services.
 
 3.197.1 (2024-06-19)

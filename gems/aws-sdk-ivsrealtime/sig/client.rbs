@@ -79,13 +79,13 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVSRealTime/Client.html#create_encoder_configuration-instance_method
       def create_encoder_configuration: (
                                           ?name: ::String,
-                                          ?tags: Hash[::String, ::String],
                                           ?video: {
-                                            bitrate: ::Integer?,
-                                            framerate: ::Float?,
+                                            width: ::Integer?,
                                             height: ::Integer?,
-                                            width: ::Integer?
-                                          }
+                                            framerate: ::Float?,
+                                            bitrate: ::Integer?
+                                          },
+                                          ?tags: Hash[::String, ::String]
                                         ) -> _CreateEncoderConfigurationResponseSuccess
                                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateEncoderConfigurationResponseSuccess
 
@@ -95,31 +95,35 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVSRealTime/Client.html#create_participant_token-instance_method
       def create_participant_token: (
-                                      ?attributes: Hash[::String, ::String],
-                                      ?capabilities: Array[("PUBLISH" | "SUBSCRIBE")],
-                                      ?duration: ::Integer,
                                       stage_arn: ::String,
-                                      ?user_id: ::String
+                                      ?duration: ::Integer,
+                                      ?user_id: ::String,
+                                      ?attributes: Hash[::String, ::String],
+                                      ?capabilities: Array[("PUBLISH" | "SUBSCRIBE")]
                                     ) -> _CreateParticipantTokenResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateParticipantTokenResponseSuccess
 
       interface _CreateStageResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateStageResponse]
-        def participant_tokens: () -> ::Array[Types::ParticipantToken]
         def stage: () -> Types::Stage
+        def participant_tokens: () -> ::Array[Types::ParticipantToken]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVSRealTime/Client.html#create_stage-instance_method
       def create_stage: (
                           ?name: ::String,
                           ?participant_token_configurations: Array[
                             {
-                              attributes: Hash[::String, ::String]?,
-                              capabilities: Array[("PUBLISH" | "SUBSCRIBE")]?,
                               duration: ::Integer?,
-                              user_id: ::String?
+                              user_id: ::String?,
+                              attributes: Hash[::String, ::String]?,
+                              capabilities: Array[("PUBLISH" | "SUBSCRIBE")]?
                             },
                           ],
-                          ?tags: Hash[::String, ::String]
+                          ?tags: Hash[::String, ::String],
+                          ?auto_participant_recording_configuration: {
+                            storage_configuration_arn: ::String,
+                            media_types: Array[("AUDIO_VIDEO" | "AUDIO_ONLY")]?
+                          }
                         ) -> _CreateStageResponseSuccess
                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateStageResponseSuccess
 
@@ -169,9 +173,9 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVSRealTime/Client.html#disconnect_participant-instance_method
       def disconnect_participant: (
+                                    stage_arn: ::String,
                                     participant_id: ::String,
-                                    ?reason: ::String,
-                                    stage_arn: ::String
+                                    ?reason: ::String
                                   ) -> _DisconnectParticipantResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisconnectParticipantResponseSuccess
 
@@ -201,9 +205,9 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVSRealTime/Client.html#get_participant-instance_method
       def get_participant: (
-                             participant_id: ::String,
+                             stage_arn: ::String,
                              session_id: ::String,
-                             stage_arn: ::String
+                             participant_id: ::String
                            ) -> _GetParticipantResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetParticipantResponseSuccess
 
@@ -223,8 +227,8 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVSRealTime/Client.html#get_stage_session-instance_method
       def get_stage_session: (
-                               session_id: ::String,
-                               stage_arn: ::String
+                               stage_arn: ::String,
+                               session_id: ::String
                              ) -> _GetStageSessionResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetStageSessionResponseSuccess
 
@@ -245,10 +249,10 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVSRealTime/Client.html#list_compositions-instance_method
       def list_compositions: (
-                               ?filter_by_encoder_configuration_arn: ::String,
                                ?filter_by_stage_arn: ::String,
-                               ?max_results: ::Integer,
-                               ?next_token: ::String
+                               ?filter_by_encoder_configuration_arn: ::String,
+                               ?next_token: ::String,
+                               ?max_results: ::Integer
                              ) -> _ListCompositionsResponseSuccess
                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCompositionsResponseSuccess
 
@@ -259,8 +263,8 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVSRealTime/Client.html#list_encoder_configurations-instance_method
       def list_encoder_configurations: (
-                                         ?max_results: ::Integer,
-                                         ?next_token: ::String
+                                         ?next_token: ::String,
+                                         ?max_results: ::Integer
                                        ) -> _ListEncoderConfigurationsResponseSuccess
                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListEncoderConfigurationsResponseSuccess
 
@@ -271,65 +275,66 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVSRealTime/Client.html#list_participant_events-instance_method
       def list_participant_events: (
-                                     ?max_results: ::Integer,
-                                     ?next_token: ::String,
-                                     participant_id: ::String,
+                                     stage_arn: ::String,
                                      session_id: ::String,
-                                     stage_arn: ::String
+                                     participant_id: ::String,
+                                     ?next_token: ::String,
+                                     ?max_results: ::Integer
                                    ) -> _ListParticipantEventsResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListParticipantEventsResponseSuccess
 
       interface _ListParticipantsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListParticipantsResponse]
-        def next_token: () -> ::String
         def participants: () -> ::Array[Types::ParticipantSummary]
+        def next_token: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVSRealTime/Client.html#list_participants-instance_method
       def list_participants: (
+                               stage_arn: ::String,
+                               session_id: ::String,
+                               ?filter_by_user_id: ::String,
                                ?filter_by_published: bool,
                                ?filter_by_state: ("CONNECTED" | "DISCONNECTED"),
-                               ?filter_by_user_id: ::String,
-                               ?max_results: ::Integer,
                                ?next_token: ::String,
-                               session_id: ::String,
-                               stage_arn: ::String
+                               ?max_results: ::Integer,
+                               ?filter_by_recording_state: ("STARTING" | "ACTIVE" | "STOPPING" | "STOPPED" | "FAILED")
                              ) -> _ListParticipantsResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListParticipantsResponseSuccess
 
       interface _ListStageSessionsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListStageSessionsResponse]
-        def next_token: () -> ::String
         def stage_sessions: () -> ::Array[Types::StageSessionSummary]
+        def next_token: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVSRealTime/Client.html#list_stage_sessions-instance_method
       def list_stage_sessions: (
-                                 ?max_results: ::Integer,
+                                 stage_arn: ::String,
                                  ?next_token: ::String,
-                                 stage_arn: ::String
+                                 ?max_results: ::Integer
                                ) -> _ListStageSessionsResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListStageSessionsResponseSuccess
 
       interface _ListStagesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListStagesResponse]
-        def next_token: () -> ::String
         def stages: () -> ::Array[Types::StageSummary]
+        def next_token: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVSRealTime/Client.html#list_stages-instance_method
       def list_stages: (
-                         ?max_results: ::Integer,
-                         ?next_token: ::String
+                         ?next_token: ::String,
+                         ?max_results: ::Integer
                        ) -> _ListStagesResponseSuccess
                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListStagesResponseSuccess
 
       interface _ListStorageConfigurationsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListStorageConfigurationsResponse]
-        def next_token: () -> ::String
         def storage_configurations: () -> ::Array[Types::StorageConfigurationSummary]
+        def next_token: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVSRealTime/Client.html#list_storage_configurations-instance_method
       def list_storage_configurations: (
-                                         ?max_results: ::Integer,
-                                         ?next_token: ::String
+                                         ?next_token: ::String,
+                                         ?max_results: ::Integer
                                        ) -> _ListStorageConfigurationsResponseSuccess
                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListStorageConfigurationsResponseSuccess
 
@@ -349,45 +354,45 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVSRealTime/Client.html#start_composition-instance_method
       def start_composition: (
-                               destinations: Array[
-                                 {
-                                   channel: {
-                                     channel_arn: ::String,
-                                     encoder_configuration_arn: ::String?
-                                   }?,
-                                   name: ::String?,
-                                   s3: {
-                                     encoder_configuration_arns: Array[::String],
-                                     recording_configuration: {
-                                       format: ("HLS")?
-                                     }?,
-                                     storage_configuration_arn: ::String
-                                   }?
-                                 },
-                               ],
+                               stage_arn: ::String,
                                ?idempotency_token: ::String,
                                ?layout: {
                                  grid: {
                                    featured_participant_attribute: ::String?,
-                                   grid_gap: ::Integer?,
                                    omit_stopped_video: bool?,
                                    video_aspect_ratio: ("AUTO" | "VIDEO" | "SQUARE" | "PORTRAIT")?,
-                                   video_fill_mode: ("FILL" | "COVER" | "CONTAIN")?
+                                   video_fill_mode: ("FILL" | "COVER" | "CONTAIN")?,
+                                   grid_gap: ::Integer?
                                  }?,
                                  pip: {
                                    featured_participant_attribute: ::String?,
-                                   grid_gap: ::Integer?,
                                    omit_stopped_video: bool?,
-                                   pip_behavior: ("STATIC" | "DYNAMIC")?,
-                                   pip_height: ::Integer?,
-                                   pip_offset: ::Integer?,
+                                   video_fill_mode: ("FILL" | "COVER" | "CONTAIN")?,
+                                   grid_gap: ::Integer?,
                                    pip_participant_attribute: ::String?,
+                                   pip_behavior: ("STATIC" | "DYNAMIC")?,
+                                   pip_offset: ::Integer?,
                                    pip_position: ("TOP_LEFT" | "TOP_RIGHT" | "BOTTOM_LEFT" | "BOTTOM_RIGHT")?,
                                    pip_width: ::Integer?,
-                                   video_fill_mode: ("FILL" | "COVER" | "CONTAIN")?
+                                   pip_height: ::Integer?
                                  }?
                                },
-                               stage_arn: ::String,
+                               destinations: Array[
+                                 {
+                                   name: ::String?,
+                                   channel: {
+                                     channel_arn: ::String,
+                                     encoder_configuration_arn: ::String?
+                                   }?,
+                                   s3: {
+                                     storage_configuration_arn: ::String,
+                                     encoder_configuration_arns: Array[::String],
+                                     recording_configuration: {
+                                       format: ("HLS")?
+                                     }?
+                                   }?
+                                 },
+                               ],
                                ?tags: Hash[::String, ::String]
                              ) -> _StartCompositionResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartCompositionResponseSuccess
@@ -428,7 +433,11 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVSRealTime/Client.html#update_stage-instance_method
       def update_stage: (
                           arn: ::String,
-                          ?name: ::String
+                          ?name: ::String,
+                          ?auto_participant_recording_configuration: {
+                            storage_configuration_arn: ::String,
+                            media_types: Array[("AUDIO_VIDEO" | "AUDIO_ONLY")]?
+                          }
                         ) -> _UpdateStageResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateStageResponseSuccess
     end

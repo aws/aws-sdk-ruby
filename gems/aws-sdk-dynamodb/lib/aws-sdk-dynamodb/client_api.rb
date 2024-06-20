@@ -1962,6 +1962,7 @@ module Aws::DynamoDB
 
       api.metadata = {
         "apiVersion" => "2012-08-10",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "dynamodb",
         "jsonVersion" => "1.0",
         "protocol" => "json",

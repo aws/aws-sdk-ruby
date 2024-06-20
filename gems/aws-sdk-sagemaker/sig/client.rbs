@@ -234,6 +234,9 @@ module Aws
                                         compression_type: ("None" | "Gzip"),
                                         model_access_config: {
                                           accept_eula: bool
+                                        }?,
+                                        hub_access_config: {
+                                          hub_content_arn: ::String
                                         }?
                                       }?
                                     }?,
@@ -1641,6 +1644,26 @@ module Aws
                       ) -> _CreateHubResponseSuccess
                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateHubResponseSuccess
 
+      interface _CreateHubContentReferenceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateHubContentReferenceResponse]
+        def hub_arn: () -> ::String
+        def hub_content_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#create_hub_content_reference-instance_method
+      def create_hub_content_reference: (
+                                          hub_name: ::String,
+                                          sage_maker_public_hub_content_arn: ::String,
+                                          ?hub_content_name: ::String,
+                                          ?min_version: ::String,
+                                          ?tags: Array[
+                                            {
+                                              key: ::String,
+                                              value: ::String
+                                            },
+                                          ]
+                                        ) -> _CreateHubContentReferenceResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateHubContentReferenceResponseSuccess
+
       interface _CreateHumanTaskUiResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateHumanTaskUiResponse]
         def human_task_ui_arn: () -> ::String
@@ -2368,6 +2391,9 @@ module Aws
                                 compression_type: ("None" | "Gzip"),
                                 model_access_config: {
                                   accept_eula: bool
+                                }?,
+                                hub_access_config: {
+                                  hub_content_arn: ::String
                                 }?
                               }?
                             }?,
@@ -2397,6 +2423,9 @@ module Aws
                                   compression_type: ("None" | "Gzip"),
                                   model_access_config: {
                                     accept_eula: bool
+                                  }?,
+                                  hub_access_config: {
+                                    hub_content_arn: ::String
                                   }?
                                 }?
                               }?,
@@ -2682,6 +2711,9 @@ module Aws
                                             compression_type: ("None" | "Gzip"),
                                             model_access_config: {
                                               accept_eula: bool
+                                            }?,
+                                            hub_access_config: {
+                                              hub_content_arn: ::String
                                             }?
                                           }?
                                         }?,
@@ -2752,6 +2784,9 @@ module Aws
                                             compression_type: ("None" | "Gzip"),
                                             model_access_config: {
                                               accept_eula: bool
+                                            }?,
+                                            hub_access_config: {
+                                              hub_content_arn: ::String
                                             }?
                                           }?
                                         }?,
@@ -2900,6 +2935,9 @@ module Aws
                                               compression_type: ("None" | "Gzip"),
                                               model_access_config: {
                                                 accept_eula: bool
+                                              }?,
+                                              hub_access_config: {
+                                                hub_content_arn: ::String
                                               }?
                                             }?
                                           }?,
@@ -4262,11 +4300,19 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#delete_hub_content-instance_method
       def delete_hub_content: (
                                 hub_name: ::String,
-                                hub_content_type: ("Model" | "Notebook"),
+                                hub_content_type: ("Model" | "Notebook" | "ModelReference"),
                                 hub_content_name: ::String,
                                 hub_content_version: ::String
                               ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#delete_hub_content_reference-instance_method
+      def delete_hub_content_reference: (
+                                          hub_name: ::String,
+                                          hub_content_type: ("Model" | "Notebook" | "ModelReference"),
+                                          hub_content_name: ::String
+                                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
       interface _DeleteHumanTaskUiResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteHumanTaskUiResponse]
@@ -5027,7 +5073,7 @@ module Aws
         def hub_content_name: () -> ::String
         def hub_content_arn: () -> ::String
         def hub_content_version: () -> ::String
-        def hub_content_type: () -> ("Model" | "Notebook")
+        def hub_content_type: () -> ("Model" | "Notebook" | "ModelReference")
         def document_schema_version: () -> ::String
         def hub_name: () -> ::String
         def hub_arn: () -> ::String
@@ -5035,6 +5081,9 @@ module Aws
         def hub_content_description: () -> ::String
         def hub_content_markdown: () -> ::String
         def hub_content_document: () -> ::String
+        def sage_maker_public_hub_content_arn: () -> ::String
+        def reference_min_version: () -> ::String
+        def support_status: () -> ("Supported" | "Deprecated")
         def hub_content_search_keywords: () -> ::Array[::String]
         def hub_content_dependencies: () -> ::Array[Types::HubContentDependency]
         def hub_content_status: () -> ("Available" | "Importing" | "Deleting" | "ImportFailed" | "DeleteFailed")
@@ -5044,7 +5093,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#describe_hub_content-instance_method
       def describe_hub_content: (
                                   hub_name: ::String,
-                                  hub_content_type: ("Model" | "Notebook"),
+                                  hub_content_type: ("Model" | "Notebook" | "ModelReference"),
                                   hub_content_name: ::String,
                                   ?hub_content_version: ::String
                                 ) -> _DescribeHubContentResponseSuccess
@@ -5953,7 +6002,7 @@ module Aws
       def import_hub_content: (
                                 hub_content_name: ::String,
                                 ?hub_content_version: ::String,
-                                hub_content_type: ("Model" | "Notebook"),
+                                hub_content_type: ("Model" | "Notebook" | "ModelReference"),
                                 document_schema_version: ::String,
                                 hub_name: ::String,
                                 ?hub_content_display_name: ::String,
@@ -6424,7 +6473,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#list_hub_content_versions-instance_method
       def list_hub_content_versions: (
                                        hub_name: ::String,
-                                       hub_content_type: ("Model" | "Notebook"),
+                                       hub_content_type: ("Model" | "Notebook" | "ModelReference"),
                                        hub_content_name: ::String,
                                        ?min_version: ::String,
                                        ?max_schema_version: ::String,
@@ -6445,7 +6494,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#list_hub_contents-instance_method
       def list_hub_contents: (
                                hub_name: ::String,
-                               hub_content_type: ("Model" | "Notebook"),
+                               hub_content_type: ("Model" | "Notebook" | "ModelReference"),
                                ?name_contains: ::String,
                                ?max_schema_version: ::String,
                                ?creation_time_before: ::Time,
@@ -8456,6 +8505,9 @@ module Aws
                                               compression_type: ("None" | "Gzip"),
                                               model_access_config: {
                                                 accept_eula: bool
+                                              }?,
+                                              hub_access_config: {
+                                                hub_content_arn: ::String
                                               }?
                                             }?
                                           }?,
@@ -8494,6 +8546,9 @@ module Aws
                                             compression_type: ("None" | "Gzip"),
                                             model_access_config: {
                                               accept_eula: bool
+                                            }?,
+                                            hub_access_config: {
+                                              hub_content_arn: ::String
                                             }?
                                           }?
                                         }?,

@@ -6683,6 +6683,55 @@ module Aws::SageMaker
     end
 
     # @!attribute [rw] hub_name
+    #   The name of the hub to add the hub content reference to.
+    #   @return [String]
+    #
+    # @!attribute [rw] sage_maker_public_hub_content_arn
+    #   The ARN of the public hub content to reference.
+    #   @return [String]
+    #
+    # @!attribute [rw] hub_content_name
+    #   The name of the hub content to reference.
+    #   @return [String]
+    #
+    # @!attribute [rw] min_version
+    #   The minimum version of the hub content to reference.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Any tags associated with the hub content to reference.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateHubContentReferenceRequest AWS API Documentation
+    #
+    class CreateHubContentReferenceRequest < Struct.new(
+      :hub_name,
+      :sage_maker_public_hub_content_arn,
+      :hub_content_name,
+      :min_version,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] hub_arn
+    #   The ARN of the hub that the hub content reference was added to.
+    #   @return [String]
+    #
+    # @!attribute [rw] hub_content_arn
+    #   The ARN of the hub content.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateHubContentReferenceResponse AWS API Documentation
+    #
+    class CreateHubContentReferenceResponse < Struct.new(
+      :hub_arn,
+      :hub_content_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] hub_name
     #   The name of the hub to create.
     #   @return [String]
     #
@@ -10998,6 +11047,28 @@ module Aws::SageMaker
     class DeleteFlowDefinitionResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] hub_name
+    #   The name of the hub to delete the hub content reference from.
+    #   @return [String]
+    #
+    # @!attribute [rw] hub_content_type
+    #   The type of hub content to delete.
+    #   @return [String]
+    #
+    # @!attribute [rw] hub_content_name
+    #   The name of the hub content to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteHubContentReferenceRequest AWS API Documentation
+    #
+    class DeleteHubContentReferenceRequest < Struct.new(
+      :hub_name,
+      :hub_content_type,
+      :hub_content_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] hub_name
     #   The name of the hub that you want to delete content in.
     #   @return [String]
     #
@@ -14004,6 +14075,18 @@ module Aws::SageMaker
     #   content such as type, associated containers, scripts, and more.
     #   @return [String]
     #
+    # @!attribute [rw] sage_maker_public_hub_content_arn
+    #   The ARN of the public hub content.
+    #   @return [String]
+    #
+    # @!attribute [rw] reference_min_version
+    #   The minimum version of the hub content.
+    #   @return [String]
+    #
+    # @!attribute [rw] support_status
+    #   The support status of the hub content.
+    #   @return [String]
+    #
     # @!attribute [rw] hub_content_search_keywords
     #   The searchable keywords for the hub content.
     #   @return [Array<String>]
@@ -14039,6 +14122,9 @@ module Aws::SageMaker
       :hub_content_description,
       :hub_content_markdown,
       :hub_content_document,
+      :sage_maker_public_hub_content_arn,
+      :reference_min_version,
+      :support_status,
       :hub_content_search_keywords,
       :hub_content_dependencies,
       :hub_content_status,
@@ -20633,6 +20719,10 @@ module Aws::SageMaker
     #   The Amazon Resource Name (ARN) of the hub content.
     #   @return [String]
     #
+    # @!attribute [rw] sage_maker_public_hub_content_arn
+    #   The ARN of the public hub content.
+    #   @return [String]
+    #
     # @!attribute [rw] hub_content_version
     #   The version of the hub content.
     #   @return [String]
@@ -20653,6 +20743,10 @@ module Aws::SageMaker
     #   A description of the hub content.
     #   @return [String]
     #
+    # @!attribute [rw] support_status
+    #   The support status of the hub content.
+    #   @return [String]
+    #
     # @!attribute [rw] hub_content_search_keywords
     #   The searchable keywords for the hub content.
     #   @return [Array<String>]
@@ -20665,19 +20759,27 @@ module Aws::SageMaker
     #   The date and time that the hub content was created.
     #   @return [Time]
     #
+    # @!attribute [rw] original_creation_time
+    #   The date and time when the hub content was originally created,
+    #   before any updates or revisions.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/HubContentInfo AWS API Documentation
     #
     class HubContentInfo < Struct.new(
       :hub_content_name,
       :hub_content_arn,
+      :sage_maker_public_hub_content_arn,
       :hub_content_version,
       :hub_content_type,
       :document_schema_version,
       :hub_content_display_name,
       :hub_content_description,
+      :support_status,
       :hub_content_search_keywords,
       :hub_content_status,
-      :creation_time)
+      :creation_time,
+      :original_creation_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -23753,6 +23855,21 @@ module Aws::SageMaker
       :completion_time,
       :last_modified_time,
       :role_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration information specifying which hub contents have
+    # accessible deployment options.
+    #
+    # @!attribute [rw] hub_content_arn
+    #   The ARN of the hub content for which deployment access is allowed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/InferenceHubAccessConfig AWS API Documentation
+    #
+    class InferenceHubAccessConfig < Struct.new(
+      :hub_content_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -38831,13 +38948,18 @@ module Aws::SageMaker
     #   acceptable for your use case before downloading or using a model.
     #   @return [Types::ModelAccessConfig]
     #
+    # @!attribute [rw] hub_access_config
+    #   Configuration information for hub access.
+    #   @return [Types::InferenceHubAccessConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/S3ModelDataSource AWS API Documentation
     #
     class S3ModelDataSource < Struct.new(
       :s3_uri,
       :s3_data_type,
       :compression_type,
-      :model_access_config)
+      :model_access_config,
+      :hub_access_config)
       SENSITIVE = []
       include Aws::Structure
     end

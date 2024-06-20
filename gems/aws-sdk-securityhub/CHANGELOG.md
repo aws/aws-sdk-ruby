@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.110.0 (2024-06-20)
+------------------
+
+* Feature - Documentation updates for Security Hub
+
 1.109.0 (2024-06-05)
 ------------------
 

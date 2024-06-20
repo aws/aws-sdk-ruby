@@ -99,6 +99,13 @@ module Aws
                                   bytes: ::String?
                                 }
                               }?,
+                              document: {
+                                format: ("pdf" | "csv" | "doc" | "docx" | "xls" | "xlsx" | "html" | "txt" | "md"),
+                                name: ::String,
+                                source: {
+                                  bytes: ::String?
+                                }
+                              }?,
                               tool_use: {
                                 tool_use_id: ::String,
                                 name: ::String,
@@ -114,6 +121,13 @@ module Aws
                                     text: ::String?,
                                     image: {
                                       format: ("png" | "jpeg" | "gif" | "webp"),
+                                      source: {
+                                        bytes: ::String?
+                                      }
+                                    }?,
+                                    document: {
+                                      format: ("pdf" | "csv" | "doc" | "docx" | "xls" | "xlsx" | "html" | "txt" | "md"),
+                                      name: ::String,
                                       source: {
                                         bytes: ::String?
                                       }
@@ -200,6 +214,13 @@ module Aws
                                          bytes: ::String?
                                        }
                                      }?,
+                                     document: {
+                                       format: ("pdf" | "csv" | "doc" | "docx" | "xls" | "xlsx" | "html" | "txt" | "md"),
+                                       name: ::String,
+                                       source: {
+                                         bytes: ::String?
+                                       }
+                                     }?,
                                      tool_use: {
                                        tool_use_id: ::String,
                                        name: ::String,
@@ -215,6 +236,13 @@ module Aws
                                            text: ::String?,
                                            image: {
                                              format: ("png" | "jpeg" | "gif" | "webp"),
+                                             source: {
+                                               bytes: ::String?
+                                             }
+                                           }?,
+                                           document: {
+                                             format: ("pdf" | "csv" | "doc" | "docx" | "xls" | "xlsx" | "html" | "txt" | "md"),
+                                             name: ::String,
                                              source: {
                                                bytes: ::String?
                                              }
