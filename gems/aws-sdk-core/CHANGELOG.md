@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - fix issue in Endpoint `attr` matcher when path is only an array index.
+
 * Issue - Fix trailing slash in endpoint URLs for rest-json and rest-xml services.
 
 3.197.1 (2024-06-19)

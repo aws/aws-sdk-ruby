@@ -59,15 +59,18 @@ module AwsSdkCodeGenerator
         # @return [Boolean]
         attr_reader :required
 
-        # @return [String,Boolean]
-        attr_reader :default
+        # @return [String,Boolean,Array]
+        def default
+          case @default
+          when String
+            "\"#{@default}\""
+          else
+            @default.to_s
+          end
+        end
 
         def default?
           !@default.nil?
-        end
-
-        def boolean_default?
-          default? && (@default == true || @default == false)
         end
 
         def underscore_name

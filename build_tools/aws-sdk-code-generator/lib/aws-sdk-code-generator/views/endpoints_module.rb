@@ -94,6 +94,7 @@ module AwsSdkCodeGenerator
       # Most to least
       # staticContextParams
       # contextParam
+      # operationContextParams
       # clientContextParams
       # Built-In Bindings
       # Built-in binding default values
@@ -103,6 +104,9 @@ module AwsSdkCodeGenerator
         ]
         value, source = [
           context_param_value(operation, param_name), 'contextParam'
+        ] unless value
+        value, source = [
+          operation_context_param_value(operation, param_name), 'operationContextParam'
         ] unless value
         value, source = [
           client_context_param_value(param_name, param_data),
@@ -166,6 +170,16 @@ module AwsSdkCodeGenerator
             break "context.params[:#{Underscore.underscore(member_name)}]"
           end
         end
+      end
+
+      def operation_context_param_value(operation, param_name)
+        return nil unless operation['input']
+
+        binding = operation.fetch('operationContextParams', {})[param_name]
+
+        return nil unless binding
+
+        "JMESPath.search(\"#{Underscore.underscore_jmespath(binding['path'])}\", context.params)"
       end
 
       def static_context_param(operation, param_name)
