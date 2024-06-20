@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Support `:plugins` option on all Clients or using `Aws.config[:plugins]`.
+
 3.197.2 (2024-06-20)
 ------------------
 

@@ -43,7 +43,7 @@ module Aws
     # @api private
     class GlobalConfiguration < Seahorse::Client::Plugin
 
-      @identifiers = Set.new()
+      @identifiers = Set.new
 
       # @api private
       def before_initialize(client_class, options)
@@ -55,17 +55,18 @@ module Aws
       private
 
       def apply_service_defaults(client_class, options)
-        if defaults = Aws.config[client_class.identifier]
-          defaults.each do |option_name, default|
-            options[option_name] = default unless options.key?(option_name)
-          end
+        return unless (defaults = Aws.config[client_class.identifier])
+
+        defaults.each do |option_name, default|
+          options[option_name] = default unless options.key?(option_name)
         end
       end
 
-      def apply_aws_defaults(client_class, options)
+      def apply_aws_defaults(_client_class, options)
         Aws.config.each do |option_name, default|
           next if self.class.identifiers.include?(option_name)
           next if options.key?(option_name)
+
           options[option_name] = default
         end
       end
@@ -80,9 +81,7 @@ module Aws
 
         # @return [Set<String>]
         # @api private
-        def identifiers
-          @identifiers
-        end
+        attr_reader :identifiers
 
       end
     end
