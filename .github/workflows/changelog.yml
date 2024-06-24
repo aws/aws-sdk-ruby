@@ -6,16 +6,17 @@ on:
 jobs:
   changelog_comment_pr:
     runs-on: ubuntu-latest
-    name: Comment when Changelog is missing
+    name: Comment when CHANGELOG entry is missing
     steps:
-      - id: file_changes
-        uses: trilom/file-changes-action@v1
+      - name: Get changed files
+        id: changed-files
+        uses: tj-actions/changed-files@v44
         with:
           githubToken: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Comment PR
-        if: ${{!contains(steps.file_changes.outputs.files_modified, 'gems/aws-sdk-core/CHANGELOG.md')}}
+      - name: Comment on PR
+        if: ${{!contains(steps.changed-files.outputs.all_changed_files, 'gems/aws-sdk-core/CHANGELOG.md')}}
         uses: thollander/actions-comment-pull-request@main
         with:
-          message: 'You have made a change to core without a corresponding change to the CHANGELOG.md.  This change will not result in a new version and will not published unless an entry is added to CHANGELOG.md'
+          message: 'You have made a change to core without a corresponding change to the CHANGELOG.md. This change will not result in a new version and will not published unless an entry is added to CHANGELOG.md.'
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
