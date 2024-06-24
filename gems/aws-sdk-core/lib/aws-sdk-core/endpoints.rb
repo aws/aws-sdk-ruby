@@ -19,7 +19,7 @@ require 'aws-sigv4'
 module Aws
   # @api private
   module Endpoints
-    supported_auth_traits = %w[aws.auth#sigv4 smithy.api#httpBearerAuth smithy.auth#noAuth]
+    supported_auth_traits = %w[aws.auth#sigv4 smithy.api#httpBearerAuth smithy.api#noAuth]
     supported_auth_traits += ['aws.auth#sigv4a'] if Aws::Sigv4::Signer.use_crt?
     SUPPORTED_AUTH_TRAITS = supported_auth_traits.freeze
 
@@ -73,7 +73,7 @@ module Aws
             merge_signing_defaults(auth_scheme, context.config)
           when 'smithy.api#httpBearerAuth'
             { 'name' => 'bearer' }
-          when 'smithy.auth#noAuth'
+          when 'smithy.api#noAuth'
             { 'name' => 'none' }
           else
             raise 'No supported auth trait for this endpoint.'

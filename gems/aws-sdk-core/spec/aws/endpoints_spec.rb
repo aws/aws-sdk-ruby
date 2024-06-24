@@ -169,7 +169,7 @@ module Aws
           end
 
           context 'none defaults' do
-            let(:auth) { ['smithy.auth#noAuth'] }
+            let(:auth) { ['smithy.api#noAuth'] }
 
             it 'does not sign' do
               expect_auth({ 'name' => 'none' })
@@ -194,7 +194,7 @@ module Aws
           end
 
           context 'operation precedence' do
-            let(:operation_auth) { ['smithy.auth#noAuth'] }
+            let(:operation_auth) { ['smithy.api#noAuth'] }
             let(:auth) { ['aws.auth#sigv4'] }
 
             it 'prefers operation auth over service auth' do
