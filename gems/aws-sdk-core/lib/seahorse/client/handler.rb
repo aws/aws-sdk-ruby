@@ -15,7 +15,7 @@ module Seahorse
       attr_accessor :handler
 
       # @param [RequestContext] context
-      # @return [Response]
+      # @return [Seahorse::Response]
       def call(context)
         @handler.call(context)
       end

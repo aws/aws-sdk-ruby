@@ -59,6 +59,6 @@ require_relative 'aws-sdk-glacier/customizations'
 # @!group service
 module Aws::Glacier
 
-  GEM_VERSION = '1.62.1'
+  GEM_VERSION = '1.63.0'
 
 end

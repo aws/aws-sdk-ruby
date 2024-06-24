@@ -2,7 +2,8 @@
   {
     "description": "Test cases for Scalar eventheader members",
     "metadata": {
-      "protocol": "json"
+      "protocol": "json",
+      "jsonVersion": "1.1"
     },
     "shapes": {
       "OutputShape": {
@@ -115,7 +116,8 @@
   {
     "description": "Test cases for String eventpayload member",
     "metadata": {
-      "protocol": "json"
+      "protocol": "json",
+      "jsonVersion": "1.1"
     },
     "shapes": {
       "OutputShape": {
@@ -183,7 +185,8 @@
   {
     "description": "Test cases for Blob eventpayload members",
     "metadata": {
-      "protocol": "json"
+      "protocol": "json",
+      "jsonVersion": "1.1"
     },
     "shapes": {
       "OutputShape": {
@@ -251,7 +254,8 @@
   {
     "description": "Test cases for Structure eventpayload members",
     "metadata": {
-      "protocol": "json"
+      "protocol": "json",
+      "jsonVersion": "1.1"
     },
     "shapes": {
       "OutputShape": {
@@ -333,7 +337,8 @@
   {
     "description": "Test cases for Events with explicit eventheader and implicit eventpayloads",
     "metadata": {
-      "protocol": "json"
+      "protocol": "json",
+      "jsonVersion": "1.1"
     },
     "shapes": {
       "OutputShape": {

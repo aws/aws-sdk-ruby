@@ -86,6 +86,11 @@ module Aws::CloudSearchDomain
 
     # @overload initialize(options)
     #   @param [Hash] options
+    #
+    #   @option options [Array<Seahorse::Client::Plugin>] :plugins ([]])
+    #     A list of plugins to apply to the client. Each plugin is either a
+    #     class name or an instance of a plugin class.
+    #
     #   @option options [required, Aws::CredentialProvider] :credentials
     #     Your AWS credentials. This can be an instance of any one of the
     #     following classes:
@@ -244,7 +249,6 @@ module Aws::CloudSearchDomain
     #       throttling.  This is a provisional mode that may change behavior
     #       in the future.
     #
-    #
     #   @option options [String] :sdk_ua_app_id
     #     A unique and opaque application ID that is appended to the
     #     User-Agent header as app/sdk_ua_app_id. It should have a
@@ -295,7 +299,6 @@ module Aws::CloudSearchDomain
     #         'http://example.com'
     #         'https://example.com'
     #         'http://example.com:123'
-    #
     #
     #   @option options [Float] :http_continue_timeout (1)
     #     The number of seconds to wait for a 100-continue response before sending the
@@ -962,7 +965,7 @@ module Aws::CloudSearchDomain
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudsearchdomain'
-      context[:gem_version] = '1.43.0'
+      context[:gem_version] = '1.44.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

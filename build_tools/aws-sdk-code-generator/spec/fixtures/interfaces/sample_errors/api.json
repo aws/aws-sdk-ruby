@@ -1,7 +1,7 @@
 {
   "metadata": {
-    "endpointPrefix": "svcname",
-    "serviceId": "sample_errors_svc",
+    "endpointPrefix": "svc",
+    "serviceId": "sample_svc",
     "protocol": "rest-json"
   },
   "operations": {

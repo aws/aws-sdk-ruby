@@ -63,19 +63,23 @@ require_relative 'aws-sdk-core/stubbing/xml_error'
 
 # stubbing protocols
 
-require_relative 'aws-sdk-core/stubbing/protocols/ec2'
 require_relative 'aws-sdk-core/stubbing/protocols/json'
-require_relative 'aws-sdk-core/stubbing/protocols/query'
 require_relative 'aws-sdk-core/stubbing/protocols/rest'
 require_relative 'aws-sdk-core/stubbing/protocols/rest_json'
 require_relative 'aws-sdk-core/stubbing/protocols/rest_xml'
+require_relative 'aws-sdk-core/stubbing/protocols/query'
+require_relative 'aws-sdk-core/stubbing/protocols/ec2'
+require_relative 'aws-sdk-core/stubbing/protocols/rpc_v2'
 require_relative 'aws-sdk-core/stubbing/protocols/api_gateway'
 
 # protocols
 
+require_relative 'aws-sdk-core/error_handler'
 require_relative 'aws-sdk-core/rest'
 require_relative 'aws-sdk-core/xml'
 require_relative 'aws-sdk-core/json'
+require_relative 'aws-sdk-core/query'
+require_relative 'aws-sdk-core/rpc_v2'
 
 # event stream
 

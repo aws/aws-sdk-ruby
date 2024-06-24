@@ -53,6 +53,6 @@ require_relative 'aws-sdk-apptest/customizations'
 # @!group service
 module Aws::AppTest
 
-  GEM_VERSION = '1.0.0'
+  GEM_VERSION = '1.1.0'
 
 end

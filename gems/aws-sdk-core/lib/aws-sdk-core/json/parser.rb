@@ -17,6 +17,8 @@ module Aws
 
       # @param [String<JSON>] json
       def parse(json, target = nil)
+        json = '{}' if json.empty?
+
         parse_ref(@rules, Json.load(json), target)
       end
 

@@ -9,13 +9,13 @@ gem 'aws-crt' if ENV['CRT']
 gem 'http-2'
 gem 'jmespath'
 
-# json and xml parsers
+# protocol parsers
 gem 'json'
 gem 'nokogiri', '>= 1.6.8.1'
 gem 'oga'
 gem 'rexml', '= 3.2.6' # Temporary Workaround (https://github.com/ruby/rexml/issues/131)
 
-# These json and xml parsers do not have java gems
+# These protocol parsers do not have java gems
 unless defined?(JRUBY_VERSION)
   gem 'libxml-ruby'
   gem 'oj'

@@ -5,7 +5,6 @@ module Aws
   module Xml
     # A SAX-style XML parser that uses a shape context to handle types.
     class Parser
-
       # @param [Seahorse::Model::ShapeRef] rules
       def initialize(rules, options = {})
         @rules = rules
@@ -47,8 +46,7 @@ module Aws
         #   * :libxml
         #   * :nokogiri
         #   * :rexml
-        #
-        def engine= engine
+        def engine=(engine)
           @engine = Class === engine ? engine : load_engine(engine)
         end
 
@@ -60,7 +58,6 @@ module Aws
         #   * {LibxmlEngine}
         #   * {NokogiriEngine}
         #   * {RexmlEngine}
-        #
         def engine
           set_default_engine unless @engine
           @engine
@@ -80,7 +77,7 @@ module Aws
         private
 
         def load_engine(name)
-          require "aws-sdk-core/xml/parser/engines/#{name}"
+          require "aws-sdk-core/xml/parser/#{name}_engine"
           const_name = name[0].upcase + name[1..-1] + 'Engine'
           const_get(const_name)
         end
@@ -94,7 +91,6 @@ module Aws
       end
 
       set_default_engine
-
     end
   end
 end

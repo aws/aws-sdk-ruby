@@ -105,6 +105,7 @@ module Aws
               'apiVersion' => '2018-11-07',
               'awsQueryCompatible' => {},
               'protocol' => 'json',
+              'jsonVersion' => '1.1',
               'endpointPrefix' => 'svc',
               'signatureVersion' => 'v4',
               'errorPrefix' => 'Prefix' # service customization needs to set this

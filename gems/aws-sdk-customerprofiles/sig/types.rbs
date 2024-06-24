@@ -610,6 +610,8 @@ module Aws::CustomerProfiles
       attr_accessor encryption_key: ::String
       attr_accessor allow_profile_creation: bool
       attr_accessor source_last_updated_timestamp_format: ::String
+      attr_accessor max_available_profile_object_count: ::Integer
+      attr_accessor max_profile_object_count: ::Integer
       attr_accessor fields: ::Hash[::String, Types::ObjectTypeField]
       attr_accessor keys: ::Hash[::String, ::Array[Types::ObjectTypeKey]]
       attr_accessor created_at: ::Time
@@ -865,6 +867,8 @@ module Aws::CustomerProfiles
       attr_accessor description: ::String
       attr_accessor created_at: ::Time
       attr_accessor last_updated_at: ::Time
+      attr_accessor max_profile_object_count: ::Integer
+      attr_accessor max_available_profile_object_count: ::Integer
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
@@ -1112,6 +1116,7 @@ module Aws::CustomerProfiles
       attr_accessor encryption_key: ::String
       attr_accessor allow_profile_creation: bool
       attr_accessor source_last_updated_timestamp_format: ::String
+      attr_accessor max_profile_object_count: ::Integer
       attr_accessor fields: ::Hash[::String, Types::ObjectTypeField]
       attr_accessor keys: ::Hash[::String, ::Array[Types::ObjectTypeKey]]
       attr_accessor tags: ::Hash[::String, ::String]
@@ -1126,6 +1131,8 @@ module Aws::CustomerProfiles
       attr_accessor encryption_key: ::String
       attr_accessor allow_profile_creation: bool
       attr_accessor source_last_updated_timestamp_format: ::String
+      attr_accessor max_profile_object_count: ::Integer
+      attr_accessor max_available_profile_object_count: ::Integer
       attr_accessor fields: ::Hash[::String, Types::ObjectTypeField]
       attr_accessor keys: ::Hash[::String, ::Array[Types::ObjectTypeKey]]
       attr_accessor created_at: ::Time

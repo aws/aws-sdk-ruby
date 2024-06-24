@@ -3,6 +3,7 @@
   "metadata":{
     "endpointPrefix":"svc",
     "protocol":"json",
+    "jsonVersion":"1.1",
     "signatureVersion":"v4"
   },
   "operations":{

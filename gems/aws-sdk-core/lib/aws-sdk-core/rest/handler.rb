@@ -7,10 +7,9 @@ module Aws
 
       def call(context)
         Rest::Request::Builder.new.apply(context)
-        resp = @handler.call(context)
-        resp.on(200..299) { |response| Response::Parser.new.apply(response) }
-        resp.on(200..599) { |response| apply_request_id(context) }
-        resp
+        response = @handler.call(context)
+        response.on(200..299) { |resp| Response::Parser.new.apply(resp) }
+        response.on(200..599) { |_resp| apply_request_id(context) }
       end
 
       private

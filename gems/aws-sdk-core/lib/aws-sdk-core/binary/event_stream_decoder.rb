@@ -47,6 +47,7 @@ module Aws
         when 'rest-xml' then Aws::Xml::Parser
         when 'rest-json' then Aws::Json::Parser
         when 'json' then Aws::Json::Parser
+        when 'smithy-rpc-v2-cbor' then Aws::RpcV2::Parser
         else raise "unsupported protocol #{protocol} for event stream"
         end
       end

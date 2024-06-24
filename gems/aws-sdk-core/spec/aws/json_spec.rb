@@ -4,52 +4,56 @@ require_relative '../spec_helper'
 
 module Aws
   describe Json do
-    describe '.load' do
-      subject(:load) { described_class.load(raw_json) }
+    [:oj, :json].each do |engine|
+      describe("ENGINE: #{engine}") do
 
-      shared_examples 'loads JSON correctly' do
-        let(:raw_json) { '{ "foo": "bar" }' }
-
-        it 'returns a hash with the JSON' do
-          expect(subject).to eq('foo' => 'bar')
+        begin
+          Json.engine = engine
+        rescue LoadError
+          next
         end
 
-        context 'not JSON' do
-          # OJ gem raises EncodingError in this case
-          # OJ can also raise JSON::ParserError if using Oj.mimic_JSON
-          let(:raw_json) { '<ServiceUnavailableException/>' }
+        let(:raw_json) { '{"foo":"bar"}' }
 
-          it 'raises a ParseError' do
-            expect { subject }.to raise_error(Aws::Json::ParseError)
+        describe '.load' do
+          it 'returns a hash with the JSON' do
+            expect(subject.load(raw_json)).to eq('foo' => 'bar')
+          end
+
+          context 'not JSON' do
+            # OJ gem raises EncodingError in this case
+            # OJ can also raise JSON::ParserError if using Oj.mimic_JSON
+            let(:raw_json) { '<ServiceUnavailableException/>' }
+
+            it 'raises a ParseError' do
+              expect { subject.load(raw_json) }
+                .to raise_error(Aws::Json::ParseError)
+            end
+          end
+
+          context 'invalid JSON' do
+            let(:raw_json) { '{ "steve": }' }
+
+            it 'raises a ParseError' do
+              expect { subject.load(raw_json) }
+                .to raise_error(Aws::Json::ParseError)
+            end
           end
         end
 
-        context 'invalid JSON' do
-          let(:raw_json) { '{ "steve": }' }
-
-          it 'raises a ParseError' do
-            expect { subject }.to raise_error(Aws::Json::ParseError)
-          end
-        end
-      end
-
-      if defined?(Oj)
-        context 'when using oj gem' do
-          it 'uses the oj engine adapter' do
-            expect(Aws::Json::ENGINE).to be(Aws::Json::OjEngine)
+        describe '.dump' do
+          it 'returns a JSON string' do
+            expect(subject.dump('foo' => 'bar')).to eq(raw_json)
           end
 
-          include_examples 'loads JSON correctly'
-        end
-      end
+          it 'returns null for nil' do
+            expect(subject.dump(nil)).to eq('null')
+          end
 
-      context 'when using bundled json' do
-        before do
-          engine = Aws::Json::JSONEngine
-          stub_const('Aws::Json::ENGINE', engine)
+          it 'returns empty string for an empty string' do
+            expect(subject.dump('')).to eq('""')
+          end
         end
-
-        include_examples 'loads JSON correctly'
       end
     end
   end

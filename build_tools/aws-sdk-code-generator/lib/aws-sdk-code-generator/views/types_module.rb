@@ -34,7 +34,7 @@ module AwsSdkCodeGenerator
             # exceptions will not have the event trait.
             shape['members'].each do |name, ref|
               if !!@service.api['shapes'][ref['shape']]['exception']
-                @service.api['shapes'][ref['shape']]['exception_event'] = true
+                @service.api['shapes'][ref['shape']]['exceptionEvent'] = true
               end
             end
           end
@@ -92,7 +92,7 @@ module AwsSdkCodeGenerator
             sensitive: sensitive
           )
         end
-        if shape['event'] || shape['exception_event']
+        if shape['event'] || shape['exceptionEvent']
           members << StructMember.new(member_name: 'event_type')
         end
         members
@@ -180,7 +180,7 @@ module AwsSdkCodeGenerator
 
       def see_also_tag(shape_name)
         uid = @api['metadata']['uid']
-        if @api['metadata']['protocol'] != 'api-gateway' && Crosslink.taggable?(uid)
+        if @service.protocol != 'api-gateway' && Crosslink.taggable?(uid)
           Crosslink.tag_string(uid, shape_name)
         end
       end
