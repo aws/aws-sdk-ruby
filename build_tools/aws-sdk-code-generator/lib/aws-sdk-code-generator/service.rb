@@ -2,12 +2,26 @@
 
 module AwsSdkCodeGenerator
   class Service
+    # Ordered priority list of supported protocols
+    # api-gateway is a special case and is always first.
+    SUPPORTED_PROTOCOLS = %w[
+      api-gateway
+      smithy-rpc-v2-cbor
+      json_1.0
+      json_1.1
+      rest-json
+      rest-xml
+      query
+      ec2
+    ]
 
     # @param [Hash] options
-    # @option options [required, String] :gem_version Gem version, e.g. "1.0.0".
     # @option options [required, String] :name The service name, e.g. "S3"
     # @option options [String] :module_name The service module name, defaults
     #   to "Aws::#{name}", e.g. "Aws::S3".
+    # @option options [String] :gem_name The gem name, defaults to
+    #  "aws-sdk-#{name}", e.g. "aws-sdk-s3".
+    # @option options [required, String] :gem_version Gem version, e.g. "1.0.0".
     # @option options [required, Hash, String] :api
     # @option options [Hash, String] :docs
     # @option options [Hash, String] :paginators
@@ -21,44 +35,48 @@ module AwsSdkCodeGenerator
     # @option options [Hash] :add_plugins ({})
     # @option options [Hash] :remove_plugins ([])
     # @option options [Boolean] :deprecated (false)
+    # @option options [String] :default_endpoint (nil)
+    # @option options [String] :endpoints_key (nil)
     def initialize(options)
       @name = options.fetch(:name)
       @identifier = name.downcase
       @module_name = options[:module_name] || "Aws::#{name}"
       @gem_name = options[:gem_name] || "aws-sdk-#{identifier}"
       @gem_version = options.fetch(:gem_version)
+
       @api = load_json(options.fetch(:api))
-      unless @api['metadata']['protocol'] == 'api-gateway'
-        # Dont reply on API Gateway doc.json
+
+      # computed attributes
+      metadata = @api.fetch('metadata')
+      @protocol = select_protocol(metadata)
+      @protocol_settings = metadata['protocolSettings'] || {}
+      @api_version = metadata['apiVersion']
+      @signature_version = metadata['signatureVersion']
+      @full_name = metadata['serviceFullName']
+      @short_name = metadata['serviceAbbreviation'] || @full_name
+
+      # Dont reply on API Gateway doc.json
+      unless @protocol == 'api-gateway'
         ApplyDocs.new(@api).apply(load_json(options[:docs]))
       end
       @paginators = load_json(options[:paginators])
       @waiters = load_json(options[:waiters])
       @resources = load_json(options[:resources])
       @examples = load_json(options[:examples])
-      @smoke_tests = load_json(options[:smoke_tests])
       unless options[:legacy_endpoints]
         @endpoint_rules = load_json(options[:endpoint_rules])
         @endpoint_tests = load_json(options[:endpoint_tests])
       end
+      @smoke_tests = load_json(options[:smoke_tests])
+
       @gem_dependencies = options[:gem_dependencies] || {}
       @add_plugins = options[:add_plugins] || {}
       @remove_plugins = options[:remove_plugins] || []
-      @endpoints_key = options.fetch(:endpoints_key, nil)
-      # APIG custom service only
-      @default_endpoint = options[:default_endpoint]
-
-      # computed attributes
-      @protocol = api.fetch('metadata').fetch('protocol')
-      @protocol_settings = api.fetch('metadata')['protocolSettings'] || {}
-      @api_version = api.fetch('metadata')['apiVersion']
-      @signature_version = api.fetch('metadata')['signatureVersion']
-      @full_name = api.fetch('metadata')['serviceFullName']
-      @short_name = api.fetch('metadata')['serviceAbbreviation'] || @full_name
-      @require_endpoint_discovery = api.fetch('operations', []).any? do |_, o|
-        o['endpointdiscovery'] && o['endpointdiscovery']['required']
-      end
       @deprecated = options[:deprecated] || false
+      @default_endpoint = options[:default_endpoint] # APIG custom service only
+      @endpoints_key = options.fetch(:endpoints_key, nil)
+
+      @require_endpoint_discovery = endpoint_discovery_required?
     end
 
     # @return [String] The service name, e.g. "S3"
@@ -129,6 +147,9 @@ module AwsSdkCodeGenerator
     # @return [String] The service protocol, e.g. "json", "query", etc.
     attr_reader :protocol
 
+    # @return [Array<String>] The list of supported protocols
+    attr_reader :protocols
+
     # @return [Hash] The service protocol settings
     attr_reader :protocol_settings
 
@@ -173,6 +194,29 @@ module AwsSdkCodeGenerator
     end
 
     private
+
+    def select_protocol(metadata)
+      protocols = metadata.fetch('protocols', [metadata['protocol']])
+      protocol = SUPPORTED_PROTOCOLS.find do |supported_protocol|
+        if %w[json_1.0 json_1.1].include?(supported_protocol)
+          supported_protocol, version = supported_protocol.split('_')
+        end
+
+        if protocols.include?(supported_protocol) &&
+           (version.nil? || version == metadata['jsonVersion'])
+          return supported_protocol
+        end
+      end
+      return protocol if protocol
+
+      raise "unsupported protocols `#{protocols.join(', ')}'"
+    end
+
+    def endpoint_discovery_required?
+      @api.fetch('operations', []).any? do |_, o|
+        o['endpointdiscovery'] && o['endpointdiscovery']['required']
+      end
+    end
 
     def load_json(value)
       case value

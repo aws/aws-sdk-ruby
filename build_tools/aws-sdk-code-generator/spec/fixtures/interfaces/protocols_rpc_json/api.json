@@ -1,0 +1,18 @@
+{
+  "metadata": {
+    "endpointPrefix": "svc",
+    "serviceId": "sample_svc",
+    "protocols": ["smithy-rpc-v2-cbor", "json"],
+    "jsonVersion": "1.0",
+    "protocol": ["fake"]
+  },
+  "operations": {
+    "Operation": {
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      }
+    }
+  },
+  "shapes": {}
+}

@@ -6,7 +6,7 @@ module Aws
   describe DefaultsModeConfigResolver do
     let(:test_case_defaults) do
       dir = File.expand_path('../../fixtures/defaults', __FILE__)
-      Json.load_file("#{dir}/default-resolution.json")
+      JSON.load_file("#{dir}/default-resolution.json")
     end
 
     let(:defaults_mode) { 'standard' }

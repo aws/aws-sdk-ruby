@@ -15,7 +15,7 @@ module Aws
         # If similarly named file doesn't exist in valid-rules, just skip
         next unless File.exist?(valid_rules_path)
 
-        rule_set_json = Aws::Json.load_file(valid_rules_path)
+        rule_set_json = JSON.load_file(valid_rules_path)
         sample_module = ApiHelper.sample_service(endpoint_rules: rule_set_json)
 
         provider_class = sample_module.const_get(:EndpointProvider)
@@ -23,7 +23,7 @@ module Aws
 
         params_class = sample_module.const_get(:EndpointParameters)
 
-        test_cases = Aws::Json.load_file(path)
+        test_cases = JSON.load_file(path)
         test_cases['testCases'].each do |test_case|
           it "passes: '#{test_case['documentation']}' from #{file_name}" do
             # convert params to symbol keys and values

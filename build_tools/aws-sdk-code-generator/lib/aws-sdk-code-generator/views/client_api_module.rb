@@ -27,25 +27,26 @@ module AwsSdkCodeGenerator
       SHAPE_KEYS = {
         # keep
         'flattened' => true,
-        'timestampFormat' => true, # glacier api customization
+        'timestampFormat' => true,
         'xmlNamespace' => true,
-        'streaming' => true, # transfer-encoding
-        'requiresLength' => true, # transfer-encoding
-        'union' => false, # should remain false
+        'streaming' => true,
+        'requiresLength' => true,
+        'union' => false, # handled separately - should remain false
         'document' => true,
         'jsonvalue' => true,
-        'error' => true, # parsing customized error code in query protocol
-        'locationName' => true, # to recognize xmlName defined on shape
+        'error' => true,
+        'locationName' => true,
+        # ignore
         # event stream modeling
         'event' => false,
         'eventstream' => false,
         'eventheader' => false,
         'eventpayload' => false,
-        # ignore
+        'exceptionEvent' => false, # internal, exceptions cannot be events
+        # other
         'synthetic' => false,
         'box' => false,
         'fault' => false,
-        'exception_event' => false, # internal, exceptions cannot be events
         'deprecated' => false,
         'deprecatedMessage' => false,
         'type' => false,
@@ -68,7 +69,7 @@ module AwsSdkCodeGenerator
       }
 
       METADATA_KEYS = {
-        # keep all
+        # keep
         'endpointPrefix' => true,
         'signatureVersion' => true,
         'auth' => true,
@@ -79,18 +80,18 @@ module AwsSdkCodeGenerator
         'targetPrefix' => true,
         'jsonVersion' => true,
         'errorPrefix' => true,
-        'timestampFormat' => true, # glacier api customization
+        'timestampFormat' => true,
         'xmlNamespace' => true,
-        'protocolSettings' => {}, # current unused unless for h2 exclude
+        'protocolSettings' => {},
         'serviceId' => true,
         'apiVersion' => true,
         'checksumFormat' => true,
         'globalEndpoint' => true,
         'serviceAbbreviation' => true,
         'uid' => true,
-        'awsQueryCompatible' => true, # AwsQuery migration
+        'awsQueryCompatible' => true,
         # ignore
-        'ripServiceName' => true
+        'ripServiceName' => false
       }
 
       # @option options [required, Service] :service

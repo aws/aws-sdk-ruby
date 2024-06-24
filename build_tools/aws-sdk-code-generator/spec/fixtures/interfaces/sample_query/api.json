@@ -1,7 +1,7 @@
 {
   "metadata": {
-    "endpointPrefix": "svcname",
-    "serviceId": "sample_query_svc",
+    "endpointPrefix": "svc",
+    "serviceId": "sample_svc",
     "protocol": "query"
   },
   "operations": {

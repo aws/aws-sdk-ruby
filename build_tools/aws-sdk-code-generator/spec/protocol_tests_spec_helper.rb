@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require 'rexml/document'
-require 'rspec/expectations'
 
 # This module contains helpers relating to protocol-tests
 module ProtocolTestsHelper
@@ -11,10 +10,22 @@ module ProtocolTestsHelper
       @ignore_list ||= JSON.parse(File.read(PROTOCOL_TESTS_IGNORE_LIST_PATH))
     end
 
-    def skip_test_if_ignored(protocol, test_id, test_type, it)
-      if ignore_result = check_ignore_list(protocol, test_id, test_type)
-        it.skip(ignore_result[test_id])
-      end
+    # The format for the ignore list:
+    #   "protocol" : {
+    #     "input" : {},
+    #     "output" : {
+    #       "SomeTestId": {
+    #         "description": "Description",
+    #         "engines": ["engine"]
+    #       }
+    #     }
+    #   },
+    def skip_test_if_ignored(protocol, test_type, test_id, engine, it)
+      ignored = check_ignore_list(protocol, test_type, test_id, engine)
+      return unless ignored
+
+      test_id, description = ignored
+      it.skip("Engine: #{engine} ID: #{test_id} - #{description}")
     end
 
     # sets up paths for each protocol and its file paths
@@ -80,6 +91,36 @@ module ProtocolTestsHelper
         credentials: Aws::Credentials.new('akid', 'secret'),
         retry_limit: 0
       )
+    end
+
+    def engines_for(protocol)
+      case protocol
+      when /json/, /api-gateway/
+        [:oj, :json]
+      when /xml/, /ec2/, /query/
+        [:ox, :nokogiri, :rexml, :libxml, :oga]
+      when /smithy-rpc-v2-cbor/
+        [:cbor]
+      else
+        raise "unsupported protocol: #{protocol}"
+      end
+    end
+
+    def set_engine(context, protocol, engine)
+      adapter_class =
+        case protocol
+        when /json/, /api-gateway/
+          Aws::Json
+        when /xml/, /ec2/, /query/
+          Aws::Xml::Parser
+        when /smithy-rpc-v2-cbor/
+          Aws::Cbor
+        else
+          raise "unsupported protocol: #{protocol}"
+        end
+      adapter_class.engine = engine
+    rescue LoadError
+      context.skip "Skipping tests for missing engine: #{engine}"
     end
 
     # formats response data
@@ -152,11 +193,19 @@ module ProtocolTestsHelper
 
     private
 
-    def check_ignore_list(protocol, test_id, test_type)
+    def check_ignore_list(protocol, test_type, test_id, engine)
       return nil if protocol.include?('extras')
 
-      filtered_ignore_list = ignore_list[protocol]
-      filtered_ignore_list[test_type].find { |i| i.key?(test_id) }
+      test = ignore_list
+        .fetch(protocol, {})
+        .fetch(test_type, {})
+      return unless test.key?(test_id)
+
+      test = test[test_id]
+      if (test.key?('engines') && test['engines'].include?(engine.to_s)) ||
+         !test.key?('engines')
+        [test_id, test['description']]
+      end
     end
 
   end
@@ -223,17 +272,17 @@ module ProtocolTestsHelper
       def match_req_body(suite, test_case, http_req, it)
         protocol = suite['metadata']['protocol']
         if (expected_body = test_case['serialized']['body'])
-          body = http_req.body_contents
+          request_body = http_req.body_contents
           case protocol
           when 'query', 'ec2'
-            body = body.split('&').sort.join('&')
+            request_body = request_body.split('&').sort.join('&')
             expected_body = expected_body.split('&').sort.join('&')
           when 'json'
-            body = Aws::Json.load(body)
+            request_body = Aws::Json.load(request_body)
             expected_body = Aws::Json.load(expected_body)
           when 'rest-json'
-            if body[0] == '{'
-              body = Aws::Json.load(body)
+            if request_body[0] == '{'
+              request_body = Aws::Json.load(request_body)
               expected_body =
                 case expected_body
                   # to handle empty body, sourced from protocol-tests
@@ -244,24 +293,27 @@ module ProtocolTestsHelper
                   end
             end
           when 'rest-xml'
-            body = normalize_xml(body)
+            request_body = normalize_xml(request_body)
             expected_body = normalize_xml(expected_body)
           when 'api-gateway'
-            if body[0] == '{'
-              body = Aws::Json.load(body)
+            if request_body[0] == '{'
+              request_body = Aws::Json.load(request_body)
               expected_body = Aws::Json.load(expected_body)
             end
+          when 'smithy-rpc-v2-cbor'
+            request_body = Aws::Cbor.decode(request_body)
+            expected_body = Aws::Cbor.decode(Base64.decode64(expected_body))
           else raise "unsupported protocol: `#{protocol}`"
           end
-          it.expect(body).to it.eq(expected_body)
+          assert(it, request_body, expected_body)
         end
       end
 
-      def match_resp_data(test_case, resp, it)
-        data = ProtocolTestsHelper.data_to_hash(resp.data)
+      def match_resp_data(test_case, http_resp, it)
+        response_data = ProtocolTestsHelper.data_to_hash(http_resp.data)
         expected_data =
           if error_case?(test_case)
-            error_shape = resp.context.operation.errors.find do |err|
+            error_shape = http_resp.context.operation.errors.find do |err|
               err.shape.name == test_case['errorCode']
             end
             raise "Unable to find #{test_case['errorCode']} in error shapes" if error_shape.nil?
@@ -272,12 +324,12 @@ module ProtocolTestsHelper
             )
           else
             ProtocolTestsHelper.format_data(
-              resp.context.operation.output,
+              http_resp.context.operation.output,
               test_case['result'] || {}
             )
           end
         if test_case['response']['eventstream']
-          data.each do |member_name, value|
+          response_data.each do |member_name, value|
             if value.respond_to?(:each)
               # event stream member
               value.each do |event_struct|
@@ -292,11 +344,33 @@ module ProtocolTestsHelper
             end
           end
         else
-          it.expect(data).to it.eq(expected_data)
+          assert(it, response_data, expected_data)
         end
       end
 
       private
+
+      def assert(it, actual, expected)
+        case actual
+        when Hash
+          actual.each do |key, value|
+            it.expect(actual).not_to it.include(key) unless expected.key?(key)
+
+            assert(it, value, expected[key])
+          end
+        when Array
+          actual.each_with_index do |value, index|
+            assert(it, value, expected[index])
+          end
+        when Float
+          return if actual.nan? && expected.nan?
+          return if actual.infinite? && expected.infinite?
+
+          it.expect(actual).to it.be_within(0.0001).of(expected)
+        else
+          it.expect(actual).to it.eq(expected)
+        end
+      end
 
       def normalize_headers(hash)
         hash.each.with_object({}) do |(k, v), headers|

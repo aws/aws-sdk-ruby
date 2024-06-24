@@ -5,6 +5,8 @@ module Aws
     module Protocols
       class ApiGateway < Seahorse::Client::Plugin
 
+        option(:protocol, 'api-gateway')
+
         class ContentTypeHandler < Seahorse::Client::Handler
           def call(context)
             body = context.http_request.body
@@ -22,8 +24,8 @@ module Aws
         handler(Rest::Handler)
         handler(ContentTypeHandler, priority: 30)
         handler(Json::ErrorHandler, step: :sign)
-      end
 
+      end
     end
   end
 end

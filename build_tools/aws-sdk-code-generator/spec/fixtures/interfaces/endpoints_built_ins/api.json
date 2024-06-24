@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "endpointPrefix": "svcname",
+    "endpointPrefix": "svc",
     "serviceId": "sample_svc",
     "protocol": "rest-json"
   },

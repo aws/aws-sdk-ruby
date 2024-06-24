@@ -27,13 +27,13 @@ module Aws
       # @return [Seahorse::Client::Response]
       def call(context)
         build_request(context)
-        @handler.call(context).on_success do |response|
-          response.error = nil
+        @handler.call(context).on_success do |resp|
+          resp.error = nil
           parsed = parse_xml(context)
           if parsed.nil? || parsed == EmptyStructure
-            response.data = EmptyStructure.new
+            resp.data = EmptyStructure.new
           else
-            response.data = parsed
+            resp.data = parsed
           end
         end
       end

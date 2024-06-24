@@ -1,0 +1,17 @@
+{
+  "metadata": {
+    "endpointPrefix": "svc",
+    "serviceId": "sample_svc",
+    "protocols": ["fake"],
+    "jsonVersion": "1.0"
+  },
+  "operations": {
+    "Operation": {
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      }
+    }
+  },
+  "shapes": {}
+}

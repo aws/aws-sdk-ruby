@@ -8,8 +8,8 @@ module Aws
 
       dir = File.expand_path('../../fixtures/waiters', __FILE__)
       WaiterTest = ApiHelper.sample_service(
-        api: Json.load_file("#{dir}/api.json"),
-        waiters: Json.load_file("#{dir}/waiters.json")
+        api: JSON.load_file("#{dir}/api.json"),
+        waiters: JSON.load_file("#{dir}/waiters.json")
       )
 
       let(:client) {

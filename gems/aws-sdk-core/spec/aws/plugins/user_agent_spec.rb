@@ -90,7 +90,7 @@ module Aws
       end
 
       context 'test runner' do
-        tests = Json.load_file(
+        tests = JSON.load_file(
           File.join(File.dirname(__FILE__), 'user_agent_tests.json')
         )
 

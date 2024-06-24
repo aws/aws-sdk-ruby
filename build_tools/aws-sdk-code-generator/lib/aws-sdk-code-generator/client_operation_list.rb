@@ -9,6 +9,7 @@ module AwsSdkCodeGenerator
       api = options.fetch(:api)
       examples = options.fetch(:examples, {})
       module_name = options.fetch(:module_name)
+      protocol = options.fetch(:protocol)
       protocol_settings = options.fetch(:protocol_settings, {})
       client_examples = options.fetch(:client_examples, {})
       paginators = options.fetch(:paginators, {})
@@ -41,6 +42,7 @@ module AwsSdkCodeGenerator
                   method_name: method_name,
                   operation: operation,
                   api: api,
+                  protocol: protocol,
                   examples: examples,
                   client_examples: client_examples[method_name] || [],
                   async_client: true
@@ -60,6 +62,7 @@ module AwsSdkCodeGenerator
                 method_name: method_name,
                 operation: operation,
                 api: api,
+                protocol: protocol,
                 examples: examples,
                 client_examples: client_examples[method_name] || [],
                 async_client: false
@@ -80,6 +83,7 @@ module AwsSdkCodeGenerator
               method_name: method_name,
               operation: operation,
               api: api,
+              protocol: protocol,
               examples: examples,
               client_examples: client_examples[method_name] || [],
               async_client: false,

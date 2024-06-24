@@ -16,6 +16,7 @@ module AwsSdkCodeGenerator
       @method_name = options.fetch(:method_name)
       @operation = options.fetch(:operation)
       @api = options.fetch(:api)
+      @protocol = options.fetch(:protocol)
       @client_examples = options.fetch(:client_examples, [])
       @examples = options.fetch(:examples)
       @module_name = options.fetch(:module_name)
@@ -279,7 +280,7 @@ module AwsSdkCodeGenerator
 
     def see_also_tag(operation, api)
       uid = api['metadata']['uid']
-      if api['metadata']['protocol'] != 'api-gateway' && Crosslink.taggable?(uid)
+      if @protocol != 'api-gateway' && Crosslink.taggable?(uid)
         "# " + Crosslink.tag_string(uid, operation)
       end
     end
