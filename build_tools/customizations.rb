@@ -231,7 +231,7 @@ module BuildTools
     api('STS') do |api|
       operations = %w(AssumeRoleWithSAML AssumeRoleWithWebIdentity)
       operations.each do |operation|
-        api['operations'][operation]['authtype'] = 'none'
+        api['operations'][operation]['auth'] = ['smithy.api#noAuth']
       end
     end
   end

@@ -19,7 +19,6 @@ Unreleased Changes
 * Feature - Updated Aws::SSOOIDC::Client with the latest API changes.
 
 * Feature - Updated Aws::SSO::Client with the latest API changes.
->>>>>>> version-3
 
 * Feature - Support `:plugins` option on all Clients or using `Aws.config[:plugins]`.
 
