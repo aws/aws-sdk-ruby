@@ -53,6 +53,6 @@ require_relative 'aws-sdk-pcaconnectorscep/customizations'
 # @!group service
 module Aws::PcaConnectorScep
 
-  GEM_VERSION = '1.0.0'
+  GEM_VERSION = '1.1.0'
 
 end

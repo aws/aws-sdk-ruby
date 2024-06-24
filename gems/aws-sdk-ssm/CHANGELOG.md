@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.171.0 (2024-06-24)
+------------------
+
+* Feature - Add sensitive trait to SSM IPAddress property for CloudTrail redaction
+
 1.170.0 (2024-06-05)
 ------------------
 

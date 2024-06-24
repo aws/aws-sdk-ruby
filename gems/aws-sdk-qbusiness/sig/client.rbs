@@ -366,6 +366,9 @@ module Aws
                                 ?client_token: ::String,
                                 ?attachments_configuration: {
                                   attachments_control_mode: ("ENABLED" | "DISABLED")
+                                },
+                                ?q_apps_configuration: {
+                                  q_apps_control_mode: ("ENABLED" | "DISABLED")
                                 }
                               ) -> _CreateApplicationResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateApplicationResponseSuccess
@@ -727,6 +730,7 @@ module Aws
         def created_at: () -> ::Time
         def updated_at: () -> ::Time
         def attachments_configuration: () -> Types::AppliedAttachmentsConfiguration
+        def q_apps_configuration: () -> Types::QAppsConfiguration
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QBusiness/Client.html#get_application-instance_method
       def get_application: (
@@ -1157,6 +1161,9 @@ module Aws
                                 ?role_arn: ::String,
                                 ?attachments_configuration: {
                                   attachments_control_mode: ("ENABLED" | "DISABLED")
+                                },
+                                ?q_apps_configuration: {
+                                  q_apps_control_mode: ("ENABLED" | "DISABLED")
                                 }
                               ) -> _UpdateApplicationResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateApplicationResponseSuccess

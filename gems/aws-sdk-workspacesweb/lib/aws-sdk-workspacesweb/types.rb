@@ -579,6 +579,11 @@ module Aws::WorkSpacesWeb
     #   The ARN of the web portal.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The tags to add to the identity provider resource. A tag is a
+    #   key-value pair.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-web-2020-07-08/CreateIdentityProviderRequest AWS API Documentation
     #
     class CreateIdentityProviderRequest < Struct.new(
@@ -586,7 +591,8 @@ module Aws::WorkSpacesWeb
       :identity_provider_details,
       :identity_provider_name,
       :identity_provider_type,
-      :portal_arn)
+      :portal_arn,
+      :tags)
       SENSITIVE = [:identity_provider_details, :identity_provider_name]
       include Aws::Structure
     end
@@ -639,7 +645,7 @@ module Aws::WorkSpacesWeb
     #   @return [Array<Types::IpRule>]
     #
     # @!attribute [rw] tags
-    #   The tags to add to the browser settings resource. A tag is a
+    #   The tags to add to the IP access settings resource. A tag is a
     #   key-value pair.
     #   @return [Array<Types::Tag>]
     #
@@ -944,6 +950,11 @@ module Aws::WorkSpacesWeb
     #   the user settings.
     #   @return [String]
     #
+    # @!attribute [rw] deep_link_allowed
+    #   Specifies whether the user can use deep links that open
+    #   automatically when connecting to a session.
+    #   @return [String]
+    #
     # @!attribute [rw] disconnect_timeout_in_minutes
     #   The amount of time that a streaming session remains active after
     #   users disconnect.
@@ -987,6 +998,7 @@ module Aws::WorkSpacesWeb
       :cookie_synchronization_configuration,
       :copy_allowed,
       :customer_managed_key,
+      :deep_link_allowed,
       :disconnect_timeout_in_minutes,
       :download_allowed,
       :idle_disconnect_timeout_in_minutes,
@@ -3053,6 +3065,11 @@ module Aws::WorkSpacesWeb
     #   to the local device.
     #   @return [String]
     #
+    # @!attribute [rw] deep_link_allowed
+    #   Specifies whether the user can use deep links that open
+    #   automatically when connecting to a session.
+    #   @return [String]
+    #
     # @!attribute [rw] disconnect_timeout_in_minutes
     #   The amount of time that a streaming session remains active after
     #   users disconnect.
@@ -3093,6 +3110,7 @@ module Aws::WorkSpacesWeb
       :client_token,
       :cookie_synchronization_configuration,
       :copy_allowed,
+      :deep_link_allowed,
       :disconnect_timeout_in_minutes,
       :download_allowed,
       :idle_disconnect_timeout_in_minutes,
@@ -3190,6 +3208,11 @@ module Aws::WorkSpacesWeb
     #   the user settings.
     #   @return [String]
     #
+    # @!attribute [rw] deep_link_allowed
+    #   Specifies whether the user can use deep links that open
+    #   automatically when connecting to a session.
+    #   @return [String]
+    #
     # @!attribute [rw] disconnect_timeout_in_minutes
     #   The amount of time that a streaming session remains active after
     #   users disconnect.
@@ -3232,6 +3255,7 @@ module Aws::WorkSpacesWeb
       :cookie_synchronization_configuration,
       :copy_allowed,
       :customer_managed_key,
+      :deep_link_allowed,
       :disconnect_timeout_in_minutes,
       :download_allowed,
       :idle_disconnect_timeout_in_minutes,
@@ -3254,6 +3278,11 @@ module Aws::WorkSpacesWeb
     # @!attribute [rw] copy_allowed
     #   Specifies whether the user can copy text from the streaming session
     #   to the local device.
+    #   @return [String]
+    #
+    # @!attribute [rw] deep_link_allowed
+    #   Specifies whether the user can use deep links that open
+    #   automatically when connecting to a session.
     #   @return [String]
     #
     # @!attribute [rw] disconnect_timeout_in_minutes
@@ -3295,6 +3324,7 @@ module Aws::WorkSpacesWeb
     class UserSettingsSummary < Struct.new(
       :cookie_synchronization_configuration,
       :copy_allowed,
+      :deep_link_allowed,
       :disconnect_timeout_in_minutes,
       :download_allowed,
       :idle_disconnect_timeout_in_minutes,

@@ -313,6 +313,8 @@ module Aws::QBusiness
     PutFeedbackRequest = Shapes::StructureShape.new(name: 'PutFeedbackRequest')
     PutGroupRequest = Shapes::StructureShape.new(name: 'PutGroupRequest')
     PutGroupResponse = Shapes::StructureShape.new(name: 'PutGroupResponse')
+    QAppsConfiguration = Shapes::StructureShape.new(name: 'QAppsConfiguration')
+    QAppsControlMode = Shapes::StringShape.new(name: 'QAppsControlMode')
     ReadAccessType = Shapes::StringShape.new(name: 'ReadAccessType')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResponseScope = Shapes::StringShape.new(name: 'ResponseScope')
@@ -679,6 +681,7 @@ module Aws::QBusiness
     CreateApplicationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateApplicationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     CreateApplicationRequest.add_member(:attachments_configuration, Shapes::ShapeRef.new(shape: AttachmentsConfiguration, location_name: "attachmentsConfiguration"))
+    CreateApplicationRequest.add_member(:q_apps_configuration, Shapes::ShapeRef.new(shape: QAppsConfiguration, location_name: "qAppsConfiguration"))
     CreateApplicationRequest.struct_class = Types::CreateApplicationRequest
 
     CreateApplicationResponse.add_member(:application_id, Shapes::ShapeRef.new(shape: ApplicationId, location_name: "applicationId"))
@@ -1010,6 +1013,7 @@ module Aws::QBusiness
     GetApplicationResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "updatedAt"))
     GetApplicationResponse.add_member(:error, Shapes::ShapeRef.new(shape: ErrorDetail, location_name: "error"))
     GetApplicationResponse.add_member(:attachments_configuration, Shapes::ShapeRef.new(shape: AppliedAttachmentsConfiguration, location_name: "attachmentsConfiguration"))
+    GetApplicationResponse.add_member(:q_apps_configuration, Shapes::ShapeRef.new(shape: QAppsConfiguration, location_name: "qAppsConfiguration"))
     GetApplicationResponse.struct_class = Types::GetApplicationResponse
 
     GetChatControlsConfigurationRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: ApplicationId, required: true, location: "uri", location_name: "applicationId"))
@@ -1422,6 +1426,9 @@ module Aws::QBusiness
 
     PutGroupResponse.struct_class = Types::PutGroupResponse
 
+    QAppsConfiguration.add_member(:q_apps_control_mode, Shapes::ShapeRef.new(shape: QAppsControlMode, required: true, location_name: "qAppsControlMode"))
+    QAppsConfiguration.struct_class = Types::QAppsConfiguration
+
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, required: true, location_name: "message"))
     ResourceNotFoundException.add_member(:resource_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "resourceId"))
     ResourceNotFoundException.add_member(:resource_type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "resourceType"))
@@ -1574,6 +1581,7 @@ module Aws::QBusiness
     UpdateApplicationRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     UpdateApplicationRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "roleArn"))
     UpdateApplicationRequest.add_member(:attachments_configuration, Shapes::ShapeRef.new(shape: AttachmentsConfiguration, location_name: "attachmentsConfiguration"))
+    UpdateApplicationRequest.add_member(:q_apps_configuration, Shapes::ShapeRef.new(shape: QAppsConfiguration, location_name: "qAppsConfiguration"))
     UpdateApplicationRequest.struct_class = Types::UpdateApplicationRequest
 
     UpdateApplicationResponse.struct_class = Types::UpdateApplicationResponse
@@ -1705,6 +1713,7 @@ module Aws::QBusiness
 
       api.metadata = {
         "apiVersion" => "2023-11-27",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "qbusiness",
         "protocol" => "rest-json",
         "protocolSettings" => {"h2"=>"eventstream"},

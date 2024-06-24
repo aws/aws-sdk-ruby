@@ -52,6 +52,6 @@ require_relative 'aws-sdk-kinesisanalytics/customizations'
 # @!group service
 module Aws::KinesisAnalytics
 
-  GEM_VERSION = '1.55.0'
+  GEM_VERSION = '1.56.0'
 
 end

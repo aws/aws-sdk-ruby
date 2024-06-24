@@ -2053,7 +2053,7 @@ module Aws::SSM
       attr_accessor association_overview: Types::InstanceAggregatedAssociationOverview
       attr_accessor source_id: ::String
       attr_accessor source_type: ("AWS::EC2::Instance" | "AWS::IoT::Thing" | "AWS::SSM::ManagedInstance")
-      SENSITIVE: []
+      SENSITIVE: [:ip_address]
     end
 
     class InstanceInformationFilter
@@ -2128,7 +2128,7 @@ module Aws::SSM
       attr_accessor association_overview: Types::InstanceAggregatedAssociationOverview
       attr_accessor source_id: ::String
       attr_accessor source_type: ("AWS::EC2::Instance" | "AWS::IoT::Thing" | "AWS::SSM::ManagedInstance")
-      SENSITIVE: []
+      SENSITIVE: [:ip_address]
     end
 
     class InstancePropertyFilter

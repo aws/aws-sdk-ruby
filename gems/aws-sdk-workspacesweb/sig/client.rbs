@@ -173,7 +173,13 @@ module Aws
                                       identity_provider_details: Hash[::String, ::String],
                                       identity_provider_name: ::String,
                                       identity_provider_type: ("SAML" | "Facebook" | "Google" | "LoginWithAmazon" | "SignInWithApple" | "OIDC"),
-                                      portal_arn: ::String
+                                      portal_arn: ::String,
+                                      ?tags: Array[
+                                        {
+                                          key: ::String,
+                                          value: ::String
+                                        },
+                                      ]
                                     ) -> _CreateIdentityProviderResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateIdentityProviderResponseSuccess
 
@@ -305,6 +311,7 @@ module Aws
                                   },
                                   copy_allowed: ("Disabled" | "Enabled"),
                                   ?customer_managed_key: ::String,
+                                  ?deep_link_allowed: ("Disabled" | "Enabled"),
                                   ?disconnect_timeout_in_minutes: ::Integer,
                                   download_allowed: ("Disabled" | "Enabled"),
                                   ?idle_disconnect_timeout_in_minutes: ::Integer,
@@ -818,6 +825,7 @@ module Aws
                                     ]?
                                   },
                                   ?copy_allowed: ("Disabled" | "Enabled"),
+                                  ?deep_link_allowed: ("Disabled" | "Enabled"),
                                   ?disconnect_timeout_in_minutes: ::Integer,
                                   ?download_allowed: ("Disabled" | "Enabled"),
                                   ?idle_disconnect_timeout_in_minutes: ::Integer,

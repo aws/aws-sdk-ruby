@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.462.0 (2024-06-24)
+------------------
+
+* Feature - Fix EC2 multi-protocol info in models.
+
 1.461.0 (2024-06-14)
 ------------------
 

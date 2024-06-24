@@ -53,6 +53,6 @@ require_relative 'aws-sdk-iottwinmaker/customizations'
 # @!group service
 module Aws::IoTTwinMaker
 
-  GEM_VERSION = '1.25.0'
+  GEM_VERSION = '1.26.0'
 
 end

@@ -4831,6 +4831,7 @@ module Aws::SSM
 
       api.metadata = {
         "apiVersion" => "2014-11-06",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "ssm",
         "jsonVersion" => "1.1",
         "protocol" => "json",

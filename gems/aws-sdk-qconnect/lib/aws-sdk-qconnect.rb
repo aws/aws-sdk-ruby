@@ -52,6 +52,6 @@ require_relative 'aws-sdk-qconnect/customizations'
 # @!group service
 module Aws::QConnect
 
-  GEM_VERSION = '1.9.0'
+  GEM_VERSION = '1.10.0'
 
 end

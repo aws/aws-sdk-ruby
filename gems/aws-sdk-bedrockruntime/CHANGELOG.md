@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.13.0 (2024-06-24)
+------------------
+
+* Feature - Increases Converse API's document name length
+
 1.12.0 (2024-06-20)
 ------------------
 
